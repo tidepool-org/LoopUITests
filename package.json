@@ -1,0 +1,21 @@
+{
+  "name": "LoopUITests",
+  "version": "1.0.0",
+  "devDependencies": {
+    "detox": "^14.8.5",
+    "jest": "^24.9.0"
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "build/Loop.app",
+        "build": "source build_app.sh",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone 11 Pro"
+        }
+      }
+    },
+    "test-runner": "jest"
+  }
+}
