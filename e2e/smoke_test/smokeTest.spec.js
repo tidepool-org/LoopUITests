@@ -20,6 +20,7 @@ describe('smoke test', () => {
         });
         it('should configure simulator CGM', async () => {
             await loop_setup.addSimulatorCGMModel(loop_setup.CGMSimulatorModel.Constant, ['100']);
+            await loop_setup.addSimulatorCGMEffect(loop_setup.CGMSimulatorEffects.GlucoseNoise);
         });
     });
 });

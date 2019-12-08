@@ -172,7 +172,7 @@ const setup = {
     /**
     * @param {CGMSimulatorEffects} effect e.g. GlucoseNoise
     */
-    async simulatorCGMEffect(effect) {
+    async addSimulatorCGMEffect(effect) {
         await match.accessibilityButtonBarButton('Settings').tap();
         //TODO assuming the second item as pump 'simulator' is first
         await match.accessibilityLabelText('Simulator').atIndex(1).tap();
@@ -181,12 +181,23 @@ const setup = {
         switch (effect) {
             case this.CGMSimulatorEffects.GlucoseNoise:
                 await element(by.type('LoopKitUI.PaddedTextField')).clearText();
+                //mg/dl
                 await element(by.type('LoopKitUI.PaddedTextField')).typeText('100');
-                await match.accessibilityBackButton('Back').tap();
+                //TODO: accessibility
+                await element(by.label('Back').and(by.type('_UIButtonBarButton'))).tap();
+                break;
+            case this.CGMSimulatorEffects.RandomError:
+                await element(by.type('LoopKitUI.PaddedTextField')).clearText();
+                //percent
+                await element(by.type('LoopKitUI.PaddedTextField')).typeText('10');
+                //TODO: accessibility
+                await element(by.label('Back').and(by.type('_UIButtonBarButton'))).tap();
                 break;
             default:
                 break;
         }
+         //TODO: multiple done buttons
+        await match.accessibilityButtonBarButton('Done').atIndex(0).tap();
         await match.accessibilityButtonBarButton('Done').tap();
     },
     /**
