@@ -1,7 +1,9 @@
 
 
+# build output for Loop.app
 build/
 
-
-# Dependency directories
 node_modules/
+
+# test artifacts
+artifacts/
