@@ -1,5 +1,8 @@
 # LoopUITests
-Loop end-to-end automated tests
+Loop end-to-end automated tests using `detox`
+
+ - [Detox Framework](https://github.com/wix/Detox)
+ - [Background reading](https://hackernoon.com/detox-gray-box-end-to-end-testing-framework-for-mobile-apps-196ccd9564ce)
 
 
 ## Build
