@@ -1,10 +1,10 @@
-const {setup, assert, match} = require('../../src/loopUI');
+const { setup, assert, match } = require('../../src/loopUI');
 
 describe('smoke test', () => {
     beforeAll(async () => {
         await setup.lauchLoop();
     });
-    describe.skip('simulators', () => {
+    describe('simulators', () => {
         it('should set closed loop', async () => {
             await setup.setClosedLoop();
         });
@@ -25,7 +25,7 @@ describe('smoke test', () => {
     });
     describe('charts', () => {
         it('should have Active Carbohydrates section', async () => {
-            await assert.isAccessibilityText('Active Carbohydrates');
+            assert.isAccessibilityText('Active Carbohydrates');
         });
         it('should be able to drill into Active Carbohydrates section', async () => {
             await match.accessibilityText('Active Carbohydrates').tap();
@@ -33,15 +33,15 @@ describe('smoke test', () => {
             await match.accessibilityBackButton('Status').tap();
         });
         it('should have Active Insulin section', async () => {
-            await assert.isAccessibilityText('Active Insulin');
+            assert.isAccessibilityText('Active Insulin');
         });
         it('should have Insulin Delivery section', async () => {
-            await assert.isAccessibilityText('Insulin Delivery');
+            assert.isAccessibilityText('Insulin Delivery');
         });
         it('should have Glucose section', async () => {
-            await assert.isAccessibilityText('Glucose');
+            assert.isAccessibilityText('Glucose');
         });
-        it('should be able to drill into Glucose section', async () => {
+        it.skip('should be able to drill into Glucose section', async () => {
             await match.accessibilityText('Glucose').tap();
             await device.takeScreenshot('Glucose');
             await match.accessibilityBackButton('Status').tap();
@@ -49,13 +49,19 @@ describe('smoke test', () => {
     });
     describe('menu', () => {
         it('should include Add Meal option', async () => {
-            await assert.isAccessibilityButton('Add Meal');
+            assert.isAccessibilityButton('Add Meal');
         });
-        it('should include Bolus option', async () => {
-            await assert.isAccessibilityButton('Bolus');
+        it('should be able to add a meal', async () => {
+            await setup.addMeal('45');
+        });
+        it.skip('should include Bolus option', async () => {
+            assert.isAccessibilityButton('Bolus');
+        });
+        it.skip('should be to bolus a meal', async () => {
+            await setup.addBolus(5);
         });
         it('should include Settings option', async () => {
-            await assert.isAccessibilityButton('Settings');
+            assert.isAccessibilityButton('Settings');
         });
     });
 });

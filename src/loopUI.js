@@ -234,6 +234,29 @@ const setup = {
         await match.accessibilityButtonBarButton('Done').atIndex(0).tap();
         await match.accessibilityButtonBarButton('Done').tap();
     },
+    /**
+     * @summary add a meal entry
+     * @param {string} carbs
+     */
+    async addMeal(carbs) {
+        await match.accessibilityButton('Add Meal').tap();
+        assert.isAccessibilityText('Add Carb Entry');
+        //assert.isAccessibilityText('Amount Consumed');
+        await element(by.type('LoopKitUI.PaddedTextField')).clearText();
+        await element(by.type('LoopKitUI.PaddedTextField')).typeText(carbs);
+        await match.accessibilityButtonBarButton('Save').tap();
+    },
+    /**
+     * @summary add a bolus
+     * @param {string} units
+     */
+    async addBolus(units) {
+        await match.accessibilityButton('Bolus').tap();
+        assert.isAccessibilityText('Bolus');
+        await element(by.type('LoopKitUI.PaddedTextField')).clearText();
+        await element(by.type('LoopKitUI.PaddedTextField')).typeText(units);
+        await match.accessibilityButton('Deliver').tap();
+    },
     async removeSimulatorPump() {
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityLabelText('Simulator').tap();
