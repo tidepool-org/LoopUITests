@@ -5,7 +5,7 @@ const assert = {
      * @param {string} label
      * @returns {Detox.Expect}
      */
-    isAccessibilityButton(label) {
+    async isAccessibilityButton(label) {
         return expect(match.accessibilityButton(label)).toExist() || expect(match.accessibilityBackButton(label)).toExist() || expect(match.accessibilityButtonBarButton(label)).toExist();
     },
     /**
@@ -21,6 +21,13 @@ const assert = {
      */
     isAccessibilitySelected(label) {
         return expect(element(by.label(label).and(by.traits(['selected'])))).toExist();
+    },
+    /**
+     * @param {string} label
+     * @returns {Detox.Expect}
+     */
+    isAccessibilityHeader(label) {
+        return expect(element(by.label(label).and(by.traits(['header'])))).toExist();
     },
 };
 
@@ -240,10 +247,10 @@ const setup = {
      */
     async addMeal(carbs) {
         await match.accessibilityButton('Add Meal').tap();
-        assert.isAccessibilityText('Add Carb Entry');
+        await assert.isAccessibilityHeader('Add Carb Entry');
         //assert.isAccessibilityText('Amount Consumed');
-        await element(by.type('LoopKitUI.PaddedTextField')).clearText();
-        await element(by.type('LoopKitUI.PaddedTextField')).typeText(carbs);
+        await element(by.type('UITextField')).clearText();
+        await element(by.type('UITextField')).typeText(carbs);
         await match.accessibilityButtonBarButton('Save').tap();
     },
     /**
@@ -252,10 +259,10 @@ const setup = {
      */
     async addBolus(units) {
         await match.accessibilityButton('Bolus').tap();
-        assert.isAccessibilityText('Bolus');
-        await element(by.type('LoopKitUI.PaddedTextField')).clearText();
-        await element(by.type('LoopKitUI.PaddedTextField')).typeText(units);
-        await match.accessibilityButton('Deliver').tap();
+        //assert.isAccessibilityHeader('Bolus');
+        //await element(by.type('UITextField')).clearText();
+        //await element(by.type('UITextField')).typeText(units);
+        await match.accessibilityButtonBarButton('Cancel').tap();
     },
     async removeSimulatorPump() {
         await match.accessibilityButtonBarButton('Settings').tap();
