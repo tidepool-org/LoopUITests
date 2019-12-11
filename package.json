@@ -8,7 +8,7 @@
   "detox": {
     "configurations": {
       "ios.sim.debug": {
-        "binaryPath": "build/Loop.app",
+        "binaryPath": "build/Debug-iphonesimulator/Loop.app",
         "build": "make debug-build",
         "type": "ios.simulator",
         "device": {
@@ -16,7 +16,7 @@
         }
       },
       "ios.sim.release":{
-        "binaryPath": "build/Loop.app",
+        "binaryPath": "build/Release-iphonesimulator/Loop.app",
         "build": "make release-build",
         "type": "ios.simulator",
         "device": {

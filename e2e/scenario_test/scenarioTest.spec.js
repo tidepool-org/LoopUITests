@@ -4,7 +4,7 @@ describe('scenario test', () => {
     beforeAll(async () => {
         await loop_setup.lauchLoop();
     });
-    describe('simulators setup', () => {
+    describe('setup', () => {
         it('should set closed loop', async () => {
             await loop_setup.setClosedLoop();
         });
