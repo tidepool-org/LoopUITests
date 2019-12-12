@@ -1,10 +1,6 @@
 language: objective-c
 osx_image: xcode11
 
-branches:
-  only:
-  - master
-
 env:
   global:
   - NODE_VERSION=stable
@@ -21,5 +17,7 @@ install:
 - npm install -g detox-cli
 
 script:
-- detox build --configuration ios.sim.release
-- detox test --configuration ios.sim.release --cleanup
+  - pushd $TRAVIS_BUILD_DIR
+  - detox build --configuration ios.sim.release
+  - detox test --configuration ios.sim.release --cleanup
+  - popd
