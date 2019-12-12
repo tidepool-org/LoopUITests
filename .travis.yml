@@ -5,5 +5,4 @@ install:
   - bash ./scripts/install.sh
 
 script:
-  - detox build --configuration ios.sim.release
-  #- detox test --configuration ios.sim.release --cleanup
+  - bash ./scripts/build_test_loop.sh
