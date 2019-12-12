@@ -16,6 +16,8 @@ install:
 
 - npm install -g detox-cli
 
+before_script: cd $TRAVIS_BUILD_DIR
+
 script:
-  - cd $TRAVIS_BUILD_DIR && detox build --configuration ios.sim.release
-  - cd $TRAVIS_BUILD_DIR && detox test --configuration ios.sim.release --cleanup
+  - detox build --configuration ios.sim.release
+  - detox test --configuration ios.sim.release --cleanup
