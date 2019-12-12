@@ -12,5 +12,6 @@ nvm install $NODE_VERSION
 nvm use $NODE_VERSION
 nvm alias default $NODE_VERSION
 npm install -g detox-cli
+npm install
 
 

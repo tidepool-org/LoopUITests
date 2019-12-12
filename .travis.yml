@@ -1,13 +1,24 @@
-language: node_js
-node_js: 8
+language: objective-c
+osx_image: xcode11
 
 install:
   - bash ./scripts/install.sh
 
-matrix:
-  include:
-  - language: objective-c
-    os: osx
-    osx_image: xcode11
-    script:
-    - bash ./scripts/build_test_loop.sh
+script:
+  - bash ./scripts/build_test_loop.sh
+
+
+
+# language: node_js
+# node_js: 8
+
+# install:
+#   - bash ./scripts/install.sh
+
+# matrix:
+#   include:
+#   - language: objective-c
+#     os: osx
+#     osx_image: xcode11
+#     script:
+#     - bash ./scripts/build_test_loop.sh
