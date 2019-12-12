@@ -2,7 +2,7 @@ language: objective-c
 osx_image: xcode11
 
 install:
-  - ./scripts/install.sh
+  - bash ./scripts/install.sh
 
 script:
-  - ./scripts/build_test_loop.sh $TRAVIS_BUILD_DIR
+  - bash ./scripts/build_test_loop.sh $TRAVIS_BUILD_DIR
