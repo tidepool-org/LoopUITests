@@ -11,7 +11,7 @@ export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 nvm install $NODE_VERSION
 nvm use $NODE_VERSION
 nvm alias default $NODE_VERSION
-npm install -g detox-cli
-npm install
+npm install -g detox-cli >/dev/null 2>&1
+npm install >/dev/null 2>&1
 
 
