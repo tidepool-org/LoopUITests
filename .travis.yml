@@ -5,22 +5,6 @@ install:
   - bash ./scripts/install.sh
 
 script:
-  - bash ./scripts/build_test_loop.sh
-  #- ./node_modules/.bin/detox build --configuration ios.sim.release
-  #- detox test --configuration ios.sim.release --cleanup
-
-
-
-# language: node_js
-# node_js: 8
-
-# install:
-#   - bash ./scripts/install.sh
-
-# matrix:
-#   include:
-#   - language: objective-c
-#     os: osx
-#     osx_image: xcode11
-#     script:
-#     - bash ./scripts/build_test_loop.sh
+  - bash ./scripts/build_loop.dev.sh
+  #TODO: require critial alerts to be by-passed for loop for tests to run on simulator
+  #- ./node_modules/.bin/detox test --configuration ios.sim.release --cleanup
