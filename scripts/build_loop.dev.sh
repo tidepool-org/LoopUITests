@@ -26,4 +26,5 @@ cd  build
 git clone --branch="$branch" --recurse-submodules https://github.com/tidepool-org/LoopWorkspace >"$buildLog"
 cp $(pwd)/../scripts/Loop.test.entitlements ./LoopWorkspace/Loop/Loop/Loop.entitlements
 
-xcodebuild -workspace ./LoopWorkspace/Loop.xcworkspace -scheme 'Loop (Workspace)' -configuration "$buildType" -destination 'name=iPhone 11 Pro' build SYMROOT="$(pwd)" >"$buildLog"
+# Change ?? -destination 'name=iPhone 8'
+xcodebuild -workspace ./LoopWorkspace/Loop.xcworkspace -scheme 'Tidepool Loop' -configuration "$buildType" -destination 'name=iPhone 11 Pro' build SYMROOT="$(pwd)" >"$buildLog"
