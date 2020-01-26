@@ -20,11 +20,10 @@ echo "Building as $buildType build"
 echo "Build logs at $buildLog"
 echo "Build branch $branch"
 
-
-#rm -rf build
-#mkdir build
-#cp $(pwd)/scripts/LoopTestOverride.xcconfig ./build/LoopTestOverride.xcconfig
-cp $(pwd)/scripts/Loop.test.entitlements ./build/LoopWorkspace/Loop/Loop/Loop.entitlements
+rm -rf build
+mkdir build
 cd  build
-# git clone --branch="$branch" --recurse-submodules https://github.com/tidepool-org/LoopWorkspace >"$buildLog"
-xcodebuild -workspace ./LoopWorkspace/Loop.xcworkspace -scheme 'Loop (Workspace)' -configuration "$buildType" -xcconfig LoopTestOverride.xcconfig -destination 'name=iPhone 11 Pro' build SYMROOT="$(pwd)" >"$buildLog"
+git clone --branch="$branch" --recurse-submodules https://github.com/tidepool-org/LoopWorkspace >"$buildLog"
+cp $(pwd)/../scripts/Loop.test.entitlements ./LoopWorkspace/Loop/Loop/Loop.entitlements
+
+xcodebuild -workspace ./LoopWorkspace/Loop.xcworkspace -scheme 'Loop (Workspace)' -configuration "$buildType" -destination 'name=iPhone 11 Pro' build SYMROOT="$(pwd)" >"$buildLog"

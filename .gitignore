@@ -1,9 +1,5 @@
-
-
 # build output for Loop.app
 build/
-
 node_modules/
-
 # test artifacts
 artifacts/
