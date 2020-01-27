@@ -2,6 +2,7 @@
 
 buildType="Debug"
 buildLog="/dev/null 2>&1"
+
 branch="dev"
 
 if [ "$1" != "" ]; then
@@ -9,12 +10,14 @@ if [ "$1" != "" ]; then
 fi
 
 if [ "$2" != "" ]; then
-    buildLog="$2"
+    branch="$2"
 fi
 
 if [ "$3" != "" ]; then
-    branch="$3"
+    buildLog="$3"
 fi
+
+
 
 echo "Building as $buildType build"
 echo "Build logs at $buildLog"
@@ -24,7 +27,7 @@ rm -rf build
 mkdir build
 cd  build
 git clone --branch="$branch" --recurse-submodules https://github.com/tidepool-org/LoopWorkspace >"$buildLog"
-cp $(pwd)/../scripts/Loop.test.entitlements ./LoopWorkspace/Loop/Loop/Loop.entitlements
+cp "$(pwd)"/../scripts/Loop.test.entitlements "$(pwd)"/LoopWorkspace/Loop/Loop/Loop.entitlements
 
 # Change ?? -destination 'name=iPhone 8'
-xcodebuild -workspace ./LoopWorkspace/Loop.xcworkspace -scheme 'Tidepool Loop' -configuration "$buildType" -destination 'name=iPhone 11 Pro' build SYMROOT="$(pwd)" >"$buildLog"
+xcodebuild -workspace ./LoopWorkspace/Loop.xcworkspace -scheme 'Tidepool Loop' -configuration "$buildType" -destination 'name=iPhone 8' build SYMROOT="$(pwd)" >"$buildLog"
