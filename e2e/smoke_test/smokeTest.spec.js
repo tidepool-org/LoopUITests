@@ -29,7 +29,8 @@ describe('smoke test', () => {
         });
         it('should be able to drill into Active Carbohydrates section', async () => {
             await match.accessibilityText('Active Carbohydrates').tap();
-            await assert.isAccessibilityHeader('Carbohydrates');
+            //await assert.isAccessibilityHeader('Carbohydrates');
+            await assert.isAccessibilityHeader('CaRbs'); //intended to fail tests
             //await device.takeScreenshot('Active Carbohydrates');
             await match.accessibilityBackButton('Status').tap();
         });
