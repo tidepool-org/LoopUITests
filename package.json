@@ -9,7 +9,7 @@
     "configurations": {
       "ios.sim.debug": {
         "binaryPath": "build/Debug-iphonesimulator/Loop.app",
-        "build": "source ./scripts/build_loop.sh",
+        "build": "make debug-build",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11 Pro"
