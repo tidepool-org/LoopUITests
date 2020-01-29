@@ -7,7 +7,8 @@ Loop end-to-end automated tests using `detox`
 
 ## Build
 
-`detox build`
+- `detox build -c ios.sim.debug`
+- `detox build -c ios.sim.release`
 
 ## Test
 

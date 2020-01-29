@@ -9,7 +9,7 @@
     "configurations": {
       "ios.sim.debug": {
         "binaryPath": "build/Debug-iphonesimulator/Loop.app",
-        "build": "make debug-build",
+        "build": "source ./scripts/build_loop.sh Debug uitest-travis-build debug_build_log.txt",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11 Pro"
@@ -17,7 +17,7 @@
       },
       "ios.sim.release":{
         "binaryPath": "build/Release-iphonesimulator/Loop.app",
-        "build": "make release-build",
+        "build": "source ./scripts/build_loop.sh Release uitest-travis-build release_build_log.txt",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11 Pro"
