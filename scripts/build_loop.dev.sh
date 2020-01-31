@@ -26,8 +26,8 @@ echo "Build branch $branch"
 rm -rf build
 mkdir build
 cd  build
-git clone --branch="$branch" --recurse-submodules https://github.com/tidepool-org/LoopWorkspace >"$buildLog"
+git clone --branch="$branch" --recurse-submodules git@github.com:tidepool-org/LoopWorkspace.git >"$buildLog"
 cp "$(pwd)"/../scripts/Loop.test.entitlements "$(pwd)"/LoopWorkspace/Loop/Loop/Loop.entitlements
 
 # Change ?? -destination 'name=iPhone 8'
-xcodebuild -workspace ./LoopWorkspace/Loop.xcworkspace -scheme 'Tidepool Loop' -configuration "$buildType" -destination 'name=iPhone 8' build SYMROOT="$(pwd)" >"$buildLog"
+xcodebuild -workspace ./LoopWorkspace/Loop.xcworkspace -scheme 'Tidepool Loop' -configuration "$buildType" -destination 'name=iPhone 11 Pro' build SYMROOT="$(pwd)" >"$buildLog"
