@@ -3,6 +3,7 @@ const loop_setup = require('../../src/loopUI').setup;
 describe('scenario test', () => {
     beforeAll(async () => {
         await loop_setup.lauchLoop();
+        await loop_setup.loadScenarios(device.id);
     });
     describe('setup', () => {
         it('should add simulator pump', async () => {
@@ -12,7 +13,7 @@ describe('scenario test', () => {
             await loop_setup.addSimulatorCGM();
         });
         it('should show scenarios when shaken', async()=>{
-            device.shake();
+            await device.shake();
         });
     });
 });

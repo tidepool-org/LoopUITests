@@ -1,4 +1,5 @@
 const element = require('detox').element;
+const spawn = require('child_process').spawn;
 
 const assert = {
     /**
@@ -126,6 +127,29 @@ const setup = {
             permissions: { notifications: 'YES', health: 'YES' },
         });
     },
+    async loadScenarios(deviceId) {
+        spawn(__dirname + '/../scripts/load_scenarios.sh', [deviceId]);
+
+
+        // let data = "";
+        // for await (const chunk of command.stdout) {
+        //     console.log('stdout chunk: ' + chunk);
+        //     data += chunk;
+        // }
+        // let error = "";
+        // for await (const chunk of command.stderr) {
+        //     console.error('stderr chunk: ' + chunk);
+        //     error += chunk;
+        // }
+        // const exitCode = await new Promise((resolve, reject) => {
+        //     child.on('close', resolve);
+        // });
+
+        // if (exitCode) {
+        //     throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+        // }
+        // return data;
+    },
     async setClosedLoop() {
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityButton('Closed Loop').tap();
@@ -203,7 +227,7 @@ const setup = {
             default:
                 break;
         }
-         //TODO: multiple done buttons
+        //TODO: multiple done buttons
         await match.accessibilityButtonBarButton('Done').atIndex(0).tap();
         await match.accessibilityButtonBarButton('Done').tap();
     },

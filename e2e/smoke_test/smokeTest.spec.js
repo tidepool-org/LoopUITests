@@ -23,7 +23,7 @@ describe('smoke test', () => {
             await setup.addSimulatorCGMEffect(setup.CGMSimulatorEffects.GlucoseNoise);
         });
     });
-    describe('charts', () => {
+    describe.skip('charts', () => {
         it('should have Active Carbohydrates section', async () => {
             assert.isAccessibilityText('Active Carbohydrates');
         });
