@@ -2,10 +2,12 @@ const { setup, assert, match } = require('../../src/loopUI');
 
 describe('smoke test', () => {
     beforeAll(async () => {
+        console.log('smoke test setup');
         await setup.lauchLoop();
     });
     describe('simulators', () => {
         it('should set closed loop', async () => {
+            console.log('smoke test simulators ...');
             await setup.setClosedLoop();
         });
         it('should add simulator pump', async () => {

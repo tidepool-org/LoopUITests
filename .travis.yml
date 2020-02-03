@@ -1,9 +1,9 @@
 language: objective-c
 osx_image: xcode11
 
-install:
-  - bash ./scripts/install.sh
+# install:
+#   - bash ./scripts/install.sh
 
-script:
-  - bash ./scripts/build_loop.dev.sh Debug uitest-travis-build build_log.txt
-  - ./node_modules/.bin/detox e2e/smoke_test -c ios.sim.debug --headless --cleanup
+# script:
+#   - bash ./scripts/build_loop.dev.sh Debug uitest-travis-build build_log.txt
+#   - ./node_modules/.bin/detox e2e/smoke_test -c ios.sim.debug --cleanup
