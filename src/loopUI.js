@@ -129,12 +129,11 @@ const setup = {
     },
     async loadScenarios(deviceId) {
         const loadScenariosShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
-        loadScenariosShellScript.stdout.on('data', (data) => {
-            console.log('success: ',data);
+        loadScenariosShellScript.stdout.on('data', () => {
             return null;
         });
         loadScenariosShellScript.stderr.on('data', (data) => {
-            console.error('error: ',data);
+            throw Error(data);
         });
     },
     async setClosedLoop() {
