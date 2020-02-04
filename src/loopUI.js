@@ -1,5 +1,5 @@
 const element = require('detox').element;
-const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
 
 const assert = {
     /**
@@ -128,27 +128,14 @@ const setup = {
         });
     },
     async loadScenarios(deviceId) {
-        spawn(__dirname + '/../scripts/load_scenarios.sh', [deviceId]);
-
-
-        // let data = "";
-        // for await (const chunk of command.stdout) {
-        //     console.log('stdout chunk: ' + chunk);
-        //     data += chunk;
-        // }
-        // let error = "";
-        // for await (const chunk of command.stderr) {
-        //     console.error('stderr chunk: ' + chunk);
-        //     error += chunk;
-        // }
-        // const exitCode = await new Promise((resolve, reject) => {
-        //     child.on('close', resolve);
-        // });
-
-        // if (exitCode) {
-        //     throw new Error(`subprocess error exit ${exitCode}, ${error}`);
-        // }
-        // return data;
+        const loadScenariosShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
+        loadScenariosShellScript.stdout.on('data', (data) => {
+            console.log('success: ',data);
+            return null;
+        });
+        loadScenariosShellScript.stderr.on('data', (data) => {
+            console.error('error: ',data);
+        });
     },
     async setClosedLoop() {
         await match.accessibilityButtonBarButton('Settings').tap();
