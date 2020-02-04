@@ -1,6 +1,15 @@
 {
   "name": "LoopUITests",
   "version": "1.0.0",
+  "scripts": {
+    "test": "jest",
+    "e2e:test": "detox test e2e/smoke_test -c ios.sim.release",
+    "scenarios:test": "detox test e2e/scenario_test -c ios.sim.release",
+    "build": "detox build -c ios.sim.release",
+    "e2e:ci": "npm run build && npm run e2e:test -- --cleanup",
+    "scenarios:ci": "npm run build && npm run scenarios:test -- --cleanup",
+    "lint": "eslint ."
+  },
   "devDependencies": {
     "detox": "^14.8.5",
     "jest": "^24.9.0"
@@ -9,7 +18,7 @@
     "configurations": {
       "ios.sim.debug": {
         "binaryPath": "build/Debug-iphonesimulator/Loop.app",
-        "build": "source ./scripts/build_loop.sh Debug uitest-travis-build debug_build_log.txt",
+        "build": "source ./scripts/build_loop.dev.sh Debug uitest-travis-build debug_build_log.txt",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11 Pro"
@@ -17,7 +26,7 @@
       },
       "ios.sim.release":{
         "binaryPath": "build/Release-iphonesimulator/Loop.app",
-        "build": "source ./scripts/build_loop.sh Release uitest-travis-build release_build_log.txt",
+        "build": "source ./scripts/build_loop.dev.sh Release uitest-travis-build release_build_log.txt",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11 Pro"

@@ -1,4 +1,5 @@
 const element = require('detox').element;
+const exec = require('child_process').exec;
 
 const assert = {
     /**
@@ -126,6 +127,15 @@ const setup = {
             permissions: { notifications: 'YES', health: 'YES' },
         });
     },
+    async loadScenarios(deviceId) {
+        const loadScenariosShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
+        loadScenariosShellScript.stdout.on('data', () => {
+            return null;
+        });
+        loadScenariosShellScript.stderr.on('data', (data) => {
+            throw Error(data);
+        });
+    },
     async setClosedLoop() {
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityButton('Closed Loop').tap();
@@ -203,7 +213,7 @@ const setup = {
             default:
                 break;
         }
-         //TODO: multiple done buttons
+        //TODO: multiple done buttons
         await match.accessibilityButtonBarButton('Done').atIndex(0).tap();
         await match.accessibilityButtonBarButton('Done').tap();
     },

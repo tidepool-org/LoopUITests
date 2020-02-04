@@ -1,25 +1,37 @@
-const loop_setup = require('../../src/loopUI').setup;
+const { setup, match } = require('../../src/loopUI');
 
 describe('scenario test', () => {
     beforeAll(async () => {
-        await loop_setup.lauchLoop();
+        await setup.lauchLoop();
+        await setup.loadScenarios(device.id);
     });
     describe('setup', () => {
-        it('should set closed loop', async () => {
-            await loop_setup.setClosedLoop();
-        });
         it('should add simulator pump', async () => {
-            await loop_setup.addSimulatorPump();
-        });
-        it('should configure simulator pump', async () => {
-            await loop_setup.simulatorPumpBasalSettings('0.1 U/hr');
-            await loop_setup.simulatorPumpDeliveryLimitsSettings('1.0', '10.0');
+            await setup.addSimulatorPump();
         });
         it('should add simulator CGM', async () => {
-            await loop_setup.addSimulatorCGM();
+            await setup.addSimulatorCGM();
         });
-        it('should configure simulator CGM', async () => {
-            await loop_setup.addSimulatorCGMModel(loop_setup.CGMSimulatorModel.Constant, ['100']);
+        it('should show scenarios when shaken', async()=>{
+            await device.shake();
+        });
+        it('shows default Sine Curve scenario', async()=>{
+            await expect(match.accessibilityLabelText('Sine Curve')).toExist();
+        });
+        it('canel out of scenarios', async()=>{
+            await match.accessibilityButtonBarButton('Cancel').tap();
+        });
+    });
+    describe('Sine Curve', () => {
+        it('should show Sine Curve scenario when shaken', async()=>{
+            await device.shake();
+            await expect(match.accessibilityLabelText('Sine Curve')).toExist();
+        });
+        it('select scenario', async()=>{
+            await match.accessibilityLabelText('Sine Curve').tap();
+        });
+        it('Load scenario', async()=>{
+            await match.accessibilityButtonBarButton('Load').tap();
         });
     });
 });
