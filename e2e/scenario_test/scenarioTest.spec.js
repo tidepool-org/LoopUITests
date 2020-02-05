@@ -1,17 +1,13 @@
-const { setup, match } = require('../../src/loopUI');
+const { setup,  match } = require('../../src/index');
 
 describe('scenario test', () => {
     beforeAll(async () => {
-        await setup.lauchLoop();
+        await setup.launchLoop();
         await setup.loadScenarios(device.id);
+        await setup.simulatorPump.add();
+        await setup.cgm.add();
     });
     describe('setup', () => {
-        it('should add simulator pump', async () => {
-            await setup.addSimulatorPump();
-        });
-        it('should add simulator CGM', async () => {
-            await setup.addSimulatorCGM();
-        });
         it('should show scenarios when shaken', async()=>{
             await device.shake();
         });
