@@ -1,36 +1,5 @@
 const element = require('detox').element;
 
-const assert = {
-    /**
-     * @param {string} label
-     * @returns {Detox.Expect}
-     */
-    async isAccessibilityButton(label) {
-        return expect(match.accessibilityButton(label)).toExist() || expect(match.accessibilityBackButton(label)).toExist() || expect(match.accessibilityButtonBarButton(label)).toExist();
-    },
-    /**
-     * @param {string} text
-     * @returns {Detox.Expect}
-     */
-    isAccessibilityText(text) {
-        return expect(match.accessibilityLabelText(text)).toExist() || expect(match.accessibilityText(text)).toBeVisible()
-    },
-    /**
-     * @param {string} label
-     * @returns {Detox.Expect}
-     */
-    isAccessibilitySelected(label) {
-        return expect(element(by.label(label).and(by.traits(['selected'])))).toExist();
-    },
-    /**
-     * @param {string} label
-     * @returns {Detox.Expect}
-     */
-    isAccessibilityHeader(label) {
-        return expect(element(by.label(label).and(by.traits(['header'])))).toExist();
-    },
-};
-
 const match = {
     /**
      * @param {string} label
@@ -51,7 +20,6 @@ const match = {
         }
         return element(by.label(label).and(by.traits(accessibilityTraits).and(by.type('_UIButtonBarButton'))));
     },
-
     /**
      * @summary get a text field element
      * @returns {Detox.Element}
@@ -110,7 +78,4 @@ const match = {
     },
 };
 
-module.exports = {
-    match,
-    assert
-};
+module.exports = match;

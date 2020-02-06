@@ -1,4 +1,4 @@
-const { setup, assert, match } = require('../../src/index');
+const { setup, assert, match, pump, cgm } = require('../../src/index');
 
 describe('smoke test', () => {
     beforeAll(async () => {
@@ -11,18 +11,18 @@ describe('smoke test', () => {
             await setup.setClosedLoop();
         });
         it('should add simulator pump', async () => {
-            await setup.simulatorPump.add();
+            await pump.add();
         });
         it('should configure simulator pump', async () => {
-            await setup.simulatorPump.setBasal('0.1 U/hr');
-            await setup.simulatorPump.setDeliveryLimits('1.0', '10.0');
+            await pump.setBasal('0.1 U/hr');
+            await pump.setDeliveryLimits('1.0', '10.0');
         });
         it('should add simulator CGM', async () => {
-            await setup.cgm.add();
+            await cgm.add();
         });
         it.skip('should configure simulator CGM', async () => {
-            await setup.cgm.setModel(setup.cgm.simulatorModel.Constant, ['100']);
-            await setup.cgm.setEffect(setup.cgm.simulatorEffects.GlucoseNoise);
+            await cgm.setModel(setup.cgm.simulatorModel.Constant, ['100']);
+            await cgm.setEffect(setup.cgm.simulatorEffects.GlucoseNoise);
         });
     });
     describe.skip('charts', () => {

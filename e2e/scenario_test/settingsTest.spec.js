@@ -1,11 +1,11 @@
-const { setup,  match } = require('../../src/index');
+const { setup, match, pump, cgm } = require('../../src/index');
 
 describe('settings test', () => {
     beforeAll(async () => {
         await setup.launchLoop();
-        await setup.cgm.add();
-        await setup.simulatorPump.add();
         await setup.loadScenarios(device.id);
+        await cgm.add();
+        await pump.add();
         await setup.loadScenario('Flat cgm');
     });
     describe('Does not add correction range', () => {
@@ -13,7 +13,7 @@ describe('settings test', () => {
             await match.accessibilityButtonBarButton('Settings').tap();
             await expect(element(by.text('Correction Range'))).toExist();
             await element(by.text('Correction Range')).tap();
-            await expect(match.accessibilityButtonBarButton('Edit',false)).toExist();
+            await expect(match.accessibilityButtonBarButton('Edit', false)).toExist();
             await match.accessibilityBackButton('Settings').tap();
             await match.accessibilityButtonBarButton('Done').tap();
         });
@@ -39,7 +39,7 @@ describe('settings test', () => {
             await match.accessibilityButtonBarButton('Settings').tap();
             await expect(element(by.text('Basal Rates'))).toExist();
             await element(by.text('Basal Rates')).tap();
-            await expect(match.accessibilityButtonBarButton('Edit',false)).toExist();
+            await expect(match.accessibilityButtonBarButton('Edit', false)).toExist();
             await match.accessibilityBackButton('Settings').tap();
             await match.accessibilityButtonBarButton('Done').tap();
         });

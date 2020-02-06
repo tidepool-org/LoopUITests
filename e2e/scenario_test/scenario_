@@ -1,11 +1,11 @@
-const { setup,  match } = require('../../src/index');
+const { setup,  match, pump, cgm } = require('../../src/index');
 
 describe('scenario test', () => {
     beforeAll(async () => {
         await setup.launchLoop();
         await setup.loadScenarios(device.id);
-        await setup.simulatorPump.add();
-        await setup.cgm.add();
+        await pump.add();
+        await cgm.add();
     });
     describe('setup', () => {
         it('should show scenarios when shaken', async()=>{
