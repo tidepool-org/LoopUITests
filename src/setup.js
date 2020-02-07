@@ -56,17 +56,6 @@ const setup = {
         await element(by.type('UITextField')).typeText(carbs);
         await match.accessibilityButtonBarButton('Save').tap();
     },
-    /**
-     * @summary add a bolus
-     * @param {string} units
-     */
-    async addBolus(units) {
-        await match.accessibilityButton('Bolus').tap();
-        //assert.isAccessibilityHeader('Bolus');
-        //await element(by.type('UITextField')).clearText();
-        //await element(by.type('UITextField')).typeText(units);
-        await match.accessibilityButtonBarButton('Cancel').tap();
-    },
 };
 
 module.exports = setup;

@@ -67,7 +67,7 @@ const match = {
      * @returns {Detox.Element} accessibilityHeaderText
      */
     accessibilityHeaderText(text) {
-        return element(by.text(text).and(by.traits(['text']).and(by.traits(['header']))));
+        return element(by.label(text).and(by.traits(['text']).and(by.traits(['header']))));
     },
     /**
      * @param {string} text

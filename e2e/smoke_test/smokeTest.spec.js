@@ -21,8 +21,8 @@ describe('smoke test', () => {
             await cgm.add();
         });
         it.skip('should configure simulator CGM', async () => {
-            await cgm.setModel(setup.cgm.simulatorModel.Constant, ['100']);
-            await cgm.setEffect(setup.cgm.simulatorEffects.GlucoseNoise);
+            await cgm.setModel(cgm.simulatorModel.Constant, ['100']);
+            await cgm.setEffect(cgm.simulatorEffects.GlucoseNoise);
         });
     });
     describe.skip('charts', () => {
