@@ -1,9 +1,9 @@
-const { setup, assert, match } = require('../../src/loopUI');
+const { setup, assert, match, pump, cgm } = require('../../src/index');
 
 describe('smoke test', () => {
     beforeAll(async () => {
         console.log('smoke test setup');
-        await setup.lauchLoop();
+        await setup.launchLoop();
     });
     describe('simulators', () => {
         it('should set closed loop', async () => {
@@ -11,18 +11,18 @@ describe('smoke test', () => {
             await setup.setClosedLoop();
         });
         it('should add simulator pump', async () => {
-            await setup.addSimulatorPump();
+            await pump.add();
         });
         it('should configure simulator pump', async () => {
-            await setup.simulatorPumpBasalSettings('0.1 U/hr');
-            await setup.simulatorPumpDeliveryLimitsSettings('1.0', '10.0');
+            await pump.setBasal('0.1 U/hr');
+            await pump.setDeliveryLimits('1.0', '10.0');
         });
         it('should add simulator CGM', async () => {
-            await setup.addSimulatorCGM();
+            await cgm.add();
         });
         it.skip('should configure simulator CGM', async () => {
-            await setup.addSimulatorCGMModel(setup.CGMSimulatorModel.Constant, ['100']);
-            await setup.addSimulatorCGMEffect(setup.CGMSimulatorEffects.GlucoseNoise);
+            await cgm.setModel(cgm.simulatorModel.Constant, ['100']);
+            await cgm.setEffect(cgm.simulatorEffects.GlucoseNoise);
         });
     });
     describe.skip('charts', () => {
