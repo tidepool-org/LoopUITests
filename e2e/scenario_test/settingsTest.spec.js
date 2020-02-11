@@ -8,16 +8,16 @@ describe('Pump Settings', () => {
         await pump.add();
         await setup.loadScenario('Flat cgm');
     });
-    // afterAll(async () => {
-    //     await cgm.remove();
-    //     await pump.remove();
-    // });
+    afterAll(async () => {
+        await cgm.remove();
+        await pump.remove();
+    });
     describe('Closed loop is not allowed', () => {
         describe('When correction range is not set', () => {
-            // afterAll(async () => {
-            //     await cgm.removeData();
-            //     await pump.removeData();
-            // });
+            afterAll(async () => {
+                await cgm.removeData();
+                await pump.removeData();
+            });
             it('should not have correction range set', async () => {
                 await pump.checkCorrectionRange(false);
             });
@@ -42,8 +42,12 @@ describe('Pump Settings', () => {
             it('should toggle on closed loop', async () => {
                 await setup.setClosedLoop();
             });
-            it('should not allow closed loop mode', async () => {
+            it('should not be in closed loop mode', async () => {
                 await expect(element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView')))).toExist();
+            });
+            it('should show configuration error that indicates why not in closed loop mode', async () => {
+                await element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView'))).tap();
+                await match.accessibilityLabelText('Configuration Error: Check Settings');
             });
         });
     });
