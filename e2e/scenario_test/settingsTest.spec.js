@@ -47,7 +47,8 @@ describe('Pump Settings', () => {
             });
             it('should show configuration error that indicates why not in closed loop mode', async () => {
                 await element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView'))).tap();
-                await match.accessibilityLabelText('Configuration Error: Check Settings');
+                await expect(match.accessibilityLabelText('Configuration Error: Check Settings')).toExist();
+                await match.accessibilityButton('OK').tap();
             });
         });
     });

@@ -1,7 +1,6 @@
 const element = require('detox').element;
 const exec = require('child_process').exec;
 const match = require('./match');
-const assert = require('./assert');
 
 const setup = {
     /**
@@ -36,6 +35,7 @@ const setup = {
     async setClosedLoop() {
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityButton('Closed Loop').tap();
+        //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
             await expect(match.accessibilityButton('Closed Loop')).toHaveValue('1');
             console.log('all good');
@@ -52,7 +52,7 @@ const setup = {
      */
     async addMeal(carbs) {
         await match.accessibilityButton('Add Meal').tap();
-        await assert.isAccessibilityHeader('Add Carb Entry');
+        await expect(match.accessibilityHeader('Add Carb Entry')).toExist();
         await element(by.type('UITextField')).clearText();
         await element(by.type('UITextField')).typeText(carbs);
         await match.accessibilityButtonBarButton('Save').tap();
@@ -63,7 +63,7 @@ const setup = {
      */
     async checkCarbs(carbs) {
         await match.accessibilityText('Active Carbohydrates').tap();
-        await assert.isAccessibilityHeader('Carbohydrates');
+        await expect(match.accessibilityHeader('Carbohydrates')).toExist();
         //TODO: just checking an instance exits, need to find exact one
         await expect(element(by.label(`${carbs} g`)).atIndex(0)).toExist();
         await device.takeScreenshot(`Check carbs ${carbs} g`);
