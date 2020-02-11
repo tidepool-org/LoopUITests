@@ -1,4 +1,4 @@
-const { setup, pump, cgm } = require('../../src/index');
+const { setup, pump, cgm, match } = require('../../src/index');
 
 describe('Pump Settings', () => {
     beforeAll(async () => {
@@ -8,16 +8,16 @@ describe('Pump Settings', () => {
         await pump.add();
         await setup.loadScenario('Flat cgm');
     });
-    afterAll(async () => {
-        await cgm.remove();
-        await pump.remove();
-    });
+    // afterAll(async () => {
+    //     await cgm.remove();
+    //     await pump.remove();
+    // });
     describe('Closed loop is not allowed', () => {
         describe('When correction range is not set', () => {
-            afterAll(async () => {
-                await cgm.removeData();
-                await pump.removeData();
-            });
+            // afterAll(async () => {
+            //     await cgm.removeData();
+            //     await pump.removeData();
+            // });
             it('should not have correction range set', async () => {
                 await pump.checkCorrectionRange(false);
             });
@@ -42,7 +42,8 @@ describe('Pump Settings', () => {
             it('should toggle on closed loop', async () => {
                 await setup.setClosedLoop();
             });
-            it.skip('should not allow closed loop mode', async () => {
+            it('should not allow closed loop mode', async () => {
+                await expect(element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView')))).toExist();
             });
         });
     });
