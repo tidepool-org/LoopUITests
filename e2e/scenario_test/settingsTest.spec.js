@@ -1,4 +1,4 @@
-const { setup, match, pump, cgm } = require('../../src/index');
+const { setup, pump, cgm } = require('../../src/index');
 
 describe('Pump Settings', () => {
     beforeAll(async () => {
@@ -8,8 +8,16 @@ describe('Pump Settings', () => {
         await pump.add();
         await setup.loadScenario('Flat cgm');
     });
+    afterAll(async () => {
+        await cgm.remove();
+        await pump.remove();
+    });
     describe('Closed loop is not allowed', () => {
         describe('When correction range is not set', () => {
+            afterAll(async () => {
+                await cgm.removeData();
+                await pump.removeData();
+            });
             it('should not have correction range set', async () => {
                 await pump.checkCorrectionRange(false);
             });
@@ -31,8 +39,10 @@ describe('Pump Settings', () => {
             it('should set insulin sensitivites set', async () => {
                 await pump.setInsulinSensitivities('500');
             });
-            it('should not allow closed loop mode', async () => {
+            it('should toggle on closed loop', async () => {
                 await setup.setClosedLoop();
+            });
+            it.skip('should not allow closed loop mode', async () => {
             });
         });
     });
