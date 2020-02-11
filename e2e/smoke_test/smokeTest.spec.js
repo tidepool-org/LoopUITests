@@ -1,71 +1,149 @@
-const { setup, assert, match, pump, cgm } = require('../../src/index');
+const { setup, match, pump, cgm } = require('../../src/index');
 
 describe('smoke test', () => {
     beforeAll(async () => {
-        console.log('smoke test setup');
         await setup.launchLoop();
     });
-    describe('simulators', () => {
-        it('should set closed loop', async () => {
-            console.log('smoke test simulators ...');
-            await setup.setClosedLoop();
+    describe('menu', () => {
+        it('has Add Meal option', async () => {
+            await expect(match.accessibilityButton('Add Meal')).toExist();
         });
-        it('should add simulator pump', async () => {
-            await pump.add();
+        it('has Bolus option', async () => {
+            await expect(match.accessibilityButton('Bolus')).toExist();
         });
-        it('should configure simulator pump', async () => {
-            await pump.setBasal('0.1 U/hr');
-            await pump.setDeliveryLimits('1.0', '10.0');
+        it('has Settings option', async () => {
+            await expect(match.accessibilityButton('Settings')).toExist();
         });
-        it('should add simulator CGM', async () => {
+    });
+    describe('settings', () => {
+        beforeAll(async () => {
+            await match.accessibilityButtonBarButton('Settings').tap();
+        });
+        it('has closed loop', async () => {
+            await expect(match.accessibilityLabelText('Closed Loop')).toExist();
+        });
+        it('has issue report', async () => {
+            await expect(match.accessibilityLabelText('Issue Report')).toExist();
+        });
+        it('has add pump', async () => {
+            await expect(match.accessibilityLabelText('Add Pump')).toExist();
+        });
+        it('has add cgm', async () => {
+            await expect(match.accessibilityLabelText('Add CGM')).toExist();
+        });
+        it('has correction range', async () => {
+            await expect(match.accessibilityLabelText('Correction Range')).toExist();
+        });
+        it('has suspend threshold', async () => {
+            await expect(match.accessibilityLabelText('Suspend Threshold')).toExist();
+        });
+        it('has basal rates', async () => {
+            await expect(match.accessibilityLabelText('Basal Rates')).toExist();
+        });
+        it('has delivery limits', async () => {
+            await expect(match.accessibilityLabelText('Delivery Limits')).toExist();
+        });
+        it('has insulin model', async () => {
+            await expect(match.accessibilityLabelText('Insulin Model')).toExist();
+        });
+        it('swipe up settings screen', async () => {
+            await element(by.text('Carb Ratios')).swipe('up', 'fast');
+        });
+        it('has carb ratios', async () => {
+            await expect(match.accessibilityLabelText('Carb Ratios')).toExist()
+        });
+        it('has insulin sensitivities', async () => {
+            await expect(match.accessibilityLabelText('Insulin Sensitivities')).toExist()
+        });
+        it('has add service', async () => {
+            await expect(match.accessibilityLabelText('Add Service')).toExist()
+        });
+        afterAll(async () => {
+            await match.accessibilityButtonBarButton('Done').tap();
+        });
+    });
+    describe('charts', () => {
+        it('has Active Carbohydrates section', async () => {
+            await expect(match.accessibilityLabelText('Active Carbohydrates')).toExist();
+        });
+        it('has Active Insulin section', async () => {
+            await expect(match.accessibilityLabelText('Active Insulin')).toExist();
+        });
+        it('has Insulin Delivery section', async () => {
+            await expect(match.accessibilityLabelText('Insulin Delivery')).toExist();
+        });
+        it('has Glucose section', async () => {
+            await expect(match.accessibilityLabelText('Glucose')).toExist();
+        });
+    });
+    describe('cgm', () => {
+        it('can be added', async () => {
             await cgm.add();
         });
-        it.skip('should configure simulator CGM', async () => {
-            await cgm.setModel(cgm.simulatorModel.Constant, ['100']);
+        it('can configure simulator model', async () => {
+            await cgm.setModel(cgm.simulatorModel.Constant, ['114']);
+        });
+        it('can configure simulator effect', async () => {
             await cgm.setEffect(cgm.simulatorEffects.GlucoseNoise);
         });
-    });
-    describe.skip('charts', () => {
-        it('should have Active Carbohydrates section', async () => {
-            assert.isAccessibilityText('Active Carbohydrates');
+        it('can remove data', async () => {
+            await cgm.removeData();
         });
-        it('should be able to drill into Active Carbohydrates section', async () => {
-            await match.accessibilityText('Active Carbohydrates').tap();
-            await assert.isAccessibilityHeader('Carbohydrates');
-            //await device.takeScreenshot('Active Carbohydrates');
-            await match.accessibilityBackButton('Status').tap();
-        });
-        it('should have Active Insulin section', async () => {
-            await assert.isAccessibilityText('Active Insulin');
-        });
-        it('should have Insulin Delivery section', async () => {
-            await assert.isAccessibilityText('Insulin Delivery');
-        });
-        it('should have Glucose section', async () => {
-            await assert.isAccessibilityText('Glucose');
-        });
-        it('should be able to drill into Glucose section', async () => {
-            await match.accessibilityText('Glucose').tap();
-            await assert.isAccessibilityHeader('Predicted Glucose');
-            //await device.takeScreenshot('Glucose');
-            await match.accessibilityBackButton('Status').tap();
+        it('can be removed', async () => {
+            await cgm.remove();
         });
     });
-    describe.skip('menu items', () => {
-        it('should include Add Meal option', async () => {
-            await assert.isAccessibilityButton('Add Meal');
+    describe('pump', () => {
+        it('can be added', async () => {
+            await pump.add();
         });
-        it('should be able to add a meal', async () => {
-            await setup.addMeal('5');
+        describe('settings', () => {
+            it('set suspend threshold', async () => {
+                await pump.setSuspend('65');
+            });
+            it('set basal rates', async () => {
+                await pump.setBasalRates('0.1');
+            });
+            it('set delivery limits', async () => {
+                await pump.setDeliveryLimits('0.5', '10.0');
+            });
+            it('set insulin model', async () => {
+                await pump.setInsulinModel(pump.insulinModel.RapidAdults);
+            });
+            it('set carb ratios', async () => {
+                await pump.setCarbRatios('8');
+            });
+            it('set insulin sensitivites', async () => {
+                await pump.setInsulinSensitivities('500');
+            });
+            it.skip('set correction range', async () => {
+                //TODO: unable to set this as we can't easily find sepcific values
+                await pump.setCorrectionRange2({ range: { min: '179', max: '180' } });
+            });
         });
-        it('should include Bolus option', async () => {
-            assert.isAccessibilityButton('Bolus');
+        describe.skip('deliver', () => {
+            it('bolus', async () => {
+                //unable at the moment to add bolus
+                await pump.bolus('3.5');
+                await device.takeScreenshot('deliver bolus');
+            });
         });
-        it.skip('should be to do a bolus', async () => {
-            await setup.addBolus('1');
+        describe('cleanup', () => {
+            it('can remove data', async () => {
+                await pump.removeData();
+            });
+            it('can be removed', async () => {
+                await pump.remove();
+            });
         });
-        it('should include Settings option', async () => {
-            assert.isAccessibilityButton('Settings');
+    });
+    describe('carbs', () => {
+        it('can be added', async () => {
+            await setup.addMeal('40');
+            await device.takeScreenshot('carbs added');
+        });
+        it('can be viewed in the Active Carbohydrates section', async () => {
+            await setup.checkCarbs('40');
         });
     });
 });

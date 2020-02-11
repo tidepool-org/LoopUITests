@@ -31,8 +31,21 @@ const pump = {
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityLabelText('Simulator').tap();
         match.accessibilityHeaderText('Pump Settings');
-        await match.accessibilityButton('Delete Pump').tap();
-        await match.accessibilityButton('Delete Pump').tap();
+        //TODO static text and not a button?
+        await match.accessibilityLabelText('Delete Pump').tap();
+        await match.accessibilityLabelText('Delete Pump').atIndex(1).tap();
+        await match.accessibilityButtonBarButton('Done').atIndex(1).tap();
+    },
+    /**
+     * @name pump.removeData
+     * @summary remove the simulator pump data for loop
+     */
+    async removeData() {
+        await match.accessibilityButtonBarButton('Settings').tap();
+        await element(by.text('Carb Ratios')).swipe('up', 'fast');
+        //TODO static text and not a button?
+        await match.accessibilityLabelText('Delete Pump Data').atIndex(0).tap();
+        await match.accessibilityLabelText('Delete Pump Data').atIndex(1).tap();
         await match.accessibilityButtonBarButton('Done').tap();
     },
     /**
@@ -40,7 +53,7 @@ const pump = {
      * @param {string} [basalUnitsPerHour] e.g. '0.1'
     */
     async setBasalRates(basalUnitsPerHour) {
-        const unitsSuffix =  'U/hr';
+        const unitsSuffix = 'U/hr';
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityText('Basal Rates').tap();
         await expect(match.accessibilityHeader('Basal Rates')).toExist();
@@ -94,6 +107,7 @@ const pump = {
     async setDeliveryLimits(maxBasalRate, maxBolus) {
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityText('Delivery Limits').tap();
+        //TODO: using atIndex, need a better way to select these
         await element(by.type('LoopKitUI.PaddedTextField')).atIndex(0).clearText();
         await element(by.type('LoopKitUI.PaddedTextField')).atIndex(0).typeText(maxBasalRate);
         await element(by.type('LoopKitUI.PaddedTextField')).atIndex(0).tapReturnKey();
@@ -123,9 +137,14 @@ const pump = {
      */
     async bolus(units) {
         await match.accessibilityButton('Bolus').tap();
+        //TODO: why can't we match on label? by.label('Bolus Amount')
         await element(by.type('UITextField')).clearText();
         await element(by.type('UITextField')).typeText(units);
-        await match.accessibilityButtonBarButton('Cancel').tap();
+        await element(by.type('UIButton').and(by.label('Deliver')).and(by.traits(['button']))).tap();
+        //TODO: can't interact with auth screen as long time pause before ready
+        await waitFor(element(by.type('UITextField'))).toExist().withTimeout(1400);
+        await element(by.type('UITextField')).typeText('fake_pw');
+        await element(by.type('UITextField')).tapReturnKey();
     },
     /**
      * @name pump.setInsulinModel
@@ -151,14 +170,64 @@ const pump = {
     },
     /**
      * @name pump.setCorrectionRange
-     * @param {insulinModel} model e.g. 'Walsh'
+     * @param {corrections} corrections e.g. { range: { min: '80', max: '150' } });
+     * corrections:{
+     *    range:{ min: string, max: string,},
+     *     preMeal:{min: string, max: string},
+     *     workout:{min: string, max: string}
+     * },
      */
-    async setCorrectionRange(model) {
+    async setCorrectionRange2(corrections) {
+        console.log('corrections: ', corrections);
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityText('Correction Range').tap();
-        await match.accessibilityText(model.name).tap();
+        await match.accessibilityButtonBarButton('Add').tap();
+
+        //TODO: atIndex!! need a better way
+        await match.accessibilityLabelText('12:00 AM').atIndex(0).tap();
+        await match.accessibilityLabelText(`${corrections.range.max}`).atIndex(1).tap();
+        //
+        await match.accessibilityLabelText(`${corrections.range.min}`).atIndex(4).tap();
+        await match.accessibilityLabelText('Save').tap();
         await match.accessibilityBackButton('Settings').tap();
         await match.accessibilityButtonBarButton('Done').tap();
+    },
+    /**
+     * @name pump.setCorrectionRange
+     * @param {corrections} corrections e.g. { range: { min: '80', max: '150' } });
+     */
+    async setCorrectionRange(corrections) {
+        await match.accessibilityButtonBarButton('Settings').tap();
+        await match.accessibilityText('Correction Range').tap();
+        await match.accessibilityButtonBarButton('Add').tap();
+
+        console.log('corrections: ', corrections);
+
+        // if (corrections.range){
+        //     console.log('corrections: ',corrections);
+        // }
+
+        //adjustable
+        //UIAccessibilityPickerComponent
+        //
+        await match.accessibilityLabelText('12:00 AM');
+        //await match.accessibilityLabelText('min').atIndex(1).tap();
+        //await expect(element(by.label('min'))).toBeVisible();
+        //await element(by.label('min')).setColumnToValue(1,"70");
+        //await element(by.label('max')).setColumnToValue(1,"160");
+
+
+        //await element(by.type('UIPickerTableView').withDescendant(by.type('UILabel').and(by.label('180')))).atIndex(0).tap();
+        await element(by.type('UILabel').and(by.label('180')).withAncestor(by.type('UIPickerTableView'))).atIndex(0).tap();
+
+        // await element(by.label('min').and(by.traits(['text']).and(by.type('UILabel')))).atIndex(0).tap();
+        //await match.accessibilityLabelText('min').tap();
+
+        // await match.accessibilityText('max').tap();
+
+        // await match.accessibilityText(model.name).tap();
+        // await match.accessibilityBackButton('Settings').tap();
+        // await match.accessibilityButtonBarButton('Done').tap();
     },
     /**
      * @name pump.checkCorrectionRange

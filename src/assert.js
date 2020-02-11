@@ -13,21 +13,21 @@ const assert = {
      * @param {string} text
      * @returns {Detox.Expect}
      */
-    isAccessibilityText(text) {
+    async isAccessibilityText(text) {
         return expect(match.accessibilityLabelText(text)).toExist() || expect(match.accessibilityText(text)).toBeVisible()
     },
     /**
      * @param {string} label
      * @returns {Detox.Expect}
      */
-    isAccessibilitySelected(label) {
+    async isAccessibilitySelected(label) {
         return expect(element(by.label(label).and(by.traits(['selected'])))).toExist();
     },
     /**
      * @param {string} label
      * @returns {Detox.Expect}
      */
-    isAccessibilityHeader(label) {
+    async isAccessibilityHeader(label) {
         return expect(element(by.label(label).and(by.traits(['header'])))).toExist();
     },
 };

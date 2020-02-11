@@ -95,8 +95,17 @@ const cgm = {
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityLabelText('Simulator').tap();
         match.accessibilityHeaderText('CGM Settings');
-        await match.accessibilityButton('Delete CGM').tap();
-        await match.accessibilityButton('Delete CGM').tap();
+        //TODO static text and not a button?
+        await match.accessibilityLabelText('Delete CGM').tap();
+        await match.accessibilityLabelText('Delete CGM').atIndex(1).tap();
+        await match.accessibilityButtonBarButton('Done').tap();
+    },
+    async removeData() {
+        await match.accessibilityButtonBarButton('Settings').tap();
+        await element(by.text('Carb Ratios')).swipe('up', 'fast');
+        //TODO static text and not a button?
+        await match.accessibilityLabelText('Delete CGM Data').atIndex(0).tap();
+        await match.accessibilityLabelText('Delete CGM Data').atIndex(1).tap();
         await match.accessibilityButtonBarButton('Done').tap();
     }
 };
