@@ -29,3 +29,6 @@ All tests
 `detox test e2e/smoke_test -c ios.sim.debug 2>&1 | tee ./artifacts/test_output.txt`
 
  - then you can search in `./artifacts/test_output.txt` file for test output including errors or mismatches
+
+## Updates
+`detox clean-framework-cache && detox build-framework-cache`

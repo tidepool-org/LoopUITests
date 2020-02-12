@@ -1,4 +1,4 @@
-const { setup, match, pump, cgm } = require('../../src/index');
+const { setup, pump, cgm } = require('../../src/index');
 
 describe('Pump Settings', () => {
     beforeAll(async () => {

@@ -1,7 +1,6 @@
 const element = require('detox').element;
 const exec = require('child_process').exec;
 const match = require('./match');
-const assert = require('./assert');
 
 const setup = {
     /**
@@ -45,29 +44,6 @@ const setup = {
             await expect(match.accessibilityButton('Closed Loop')).toHaveValue('1');
         }
         await match.accessibilityButtonBarButton('Done').tap();
-    },
-    /**
-     * @summary add a meal entry
-     * @param {string} carbs
-     */
-    async addMeal(carbs) {
-        await match.accessibilityButton('Add Meal').tap();
-        await assert.isAccessibilityHeader('Add Carb Entry');
-        await element(by.type('UITextField')).clearText();
-        await element(by.type('UITextField')).typeText(carbs);
-        await match.accessibilityButtonBarButton('Save').tap();
-    },
-    /**
-     * @summary add a meal entry
-     * @param {string} carbs
-     */
-    async checkCarbs(carbs) {
-        await match.accessibilityText('Active Carbohydrates').tap();
-        await assert.isAccessibilityHeader('Carbohydrates');
-        //TODO: just checking an instance exits, need to find exact one
-        await expect(element(by.label(`${carbs} g`)).atIndex(0)).toExist();
-        await device.takeScreenshot(`Check carbs ${carbs} g`);
-        await match.accessibilityBackButton('Status').tap();
     },
 };
 
