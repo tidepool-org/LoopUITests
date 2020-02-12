@@ -24,7 +24,7 @@
           "type": "iPhone 11 Pro"
         }
       },
-      "ios.sim.release":{
+      "ios.sim.release": {
         "binaryPath": "build/Release-iphonesimulator/Loop.app",
         "build": "source ./scripts/build_loop.dev.sh Release dev release_build_log.txt",
         "type": "ios.simulator",
