@@ -21,10 +21,10 @@ const match = {
         return element(by.label(label).and(by.traits(accessibilityTraits).and(by.type('_UIButtonBarButton'))));
     },
     /**
-     * @summary get a text field element
+     * @summary get a LoopKitUI.PaddedTextField element
      * @returns {Detox.Element}
      */
-    textField() {
+    loopTextField() {
         return element(by.type('LoopKitUI.PaddedTextField'));
     },
     /**
@@ -75,6 +75,9 @@ const match = {
      */
     accessibilityHeader(text) {
         return element(by.text(text).and(by.traits(['header'])));
+    },
+    uiTextField(){
+        return element(by.type('UITextField'));
     },
 };
 

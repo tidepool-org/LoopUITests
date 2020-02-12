@@ -37,18 +37,18 @@ const cgm = {
         await match.accessibilityLabelText(effect.name).tap();
         switch (effect) {
             case this.simulatorEffects.GlucoseNoise:
-                await element(by.type('LoopKitUI.PaddedTextField')).clearText();
+                await match.loopTextField().clearText();
                 //mg/dl
-                await element(by.type('LoopKitUI.PaddedTextField')).typeText('100');
+                await match.loopTextField().typeText('100');
                 //TODO: accessibility
-                await element(by.label('Back').and(by.type('_UIButtonBarButton'))).tap();
+                await match.buttonBarButton('Back').tap();
                 break;
             case this.simulatorEffects.RandomError:
-                await element(by.type('LoopKitUI.PaddedTextField')).clearText();
+                await match.loopTextField().clearText();
                 //percent
-                await element(by.type('LoopKitUI.PaddedTextField')).typeText('10');
+                await match.loopTextField().typeText('10');
                 //TODO: accessibility
-                await element(by.label('Back').and(by.type('_UIButtonBarButton'))).tap();
+                await match.buttonBarButton('Back').tap();
                 break;
             default:
                 break;
@@ -69,18 +69,18 @@ const cgm = {
         await match.accessibilityLabelText(model.name).tap();
         switch (model) {
             case this.simulatorModel.Constant:
-                await element(by.type('LoopKitUI.PaddedTextField')).clearText();
-                await element(by.type('LoopKitUI.PaddedTextField')).typeText(bgValues[0]);
+                await match.loopTextField().clearText();
+                await match.loopTextField().typeText(bgValues[0]);
                 await match.accessibilityBackButton('CGM Settings').tap();
                 break;
             case this.simulatorModel.SineCurve:
                 await match.accessibilityLabelText('Base Glucose').tap();
-                await element(by.type('LoopKitUI.PaddedTextField')).clearText();
-                await element(by.type('LoopKitUI.PaddedTextField')).typeText(bgValues[0]);
+                await match.loopTextField().clearText();
+                await match.loopTextField().typeText(bgValues[0]);
                 await match.accessibilityBackButton('Sine Curve').tap();
                 await match.accessibilityLabelText('Amplitude').tap();
-                await element(by.type('LoopKitUI.PaddedTextField')).clearText();
-                await element(by.type('LoopKitUI.PaddedTextField')).typeText(bgValues[1]);
+                await match.loopTextField().clearText();
+                await match.loopTextField().typeText(bgValues[1]);
                 await match.accessibilityBackButton('Sine Curve').tap();
                 await match.accessibilityBackButton('CGM Settings').tap();
                 break;
