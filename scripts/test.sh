@@ -70,4 +70,4 @@ info "Checking simulators..."
 xcrun simctl list
 
 info "Running detox smoke tests with configuration '${CONFIGURATION}'..."
-detox test e2e/smoke_test --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --cleanup
+detox test e2e/smoke_test --configuration "${CONFIGURATION}" --loglevel trace --record-logs failing --cleanup
