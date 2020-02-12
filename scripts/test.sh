@@ -40,19 +40,34 @@ fi
 
 cd "${TEST_DIRECTORY}"
 
+info "Checking git commits..."
+git log HEAD...dev
+
 info "Checking node version..."
 node --version
 
 if [ ! -d "node_modules" ]; then
   info "Installing node dependencies..."
   npm install
+  npm list
 fi
 
 info "Updating PATH..."
 export PATH="${PWD}/bin:${PWD}/node_modules/.bin:${PATH}"
+echo "PATH=${PATH}"
 
 info "Creating build symlink to '${BUILD_ROOT}'..."
-ln -sf "${BUILD_ROOT}" build
+ln -sfv "${BUILD_ROOT}" build
+
+info "Dumping environment variables..."
+set
+
+info "Checking locations..."
+which detox
+which applesimutils
+
+info "Checking simulators..."
+xcrun simctl list
 
 info "Running detox smoke tests with configuration '${CONFIGURATION}'..."
 detox test e2e/smoke_test --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --cleanup
