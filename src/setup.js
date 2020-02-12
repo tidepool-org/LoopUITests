@@ -46,29 +46,6 @@ const setup = {
         }
         await match.accessibilityButtonBarButton('Done').tap();
     },
-    /**
-     * @summary add a meal entry
-     * @param {string} carbs
-     */
-    async addMeal(carbs) {
-        await match.accessibilityButton('Add Meal').tap();
-        await expect(match.accessibilityHeader('Add Carb Entry')).toExist();
-        await element(by.type('UITextField')).clearText();
-        await element(by.type('UITextField')).typeText(carbs);
-        await match.accessibilityButtonBarButton('Save').tap();
-    },
-    /**
-     * @summary add a meal entry
-     * @param {string} carbs
-     */
-    async checkCarbs(carbs) {
-        await match.accessibilityText('Active Carbohydrates').tap();
-        await expect(match.accessibilityHeader('Carbohydrates')).toExist();
-        //TODO: just checking an instance exits, need to find exact one
-        await expect(element(by.label(`${carbs} g`)).atIndex(0)).toExist();
-        await device.takeScreenshot(`Check carbs ${carbs} g`);
-        await match.accessibilityBackButton('Status').tap();
-    },
 };
 
 module.exports = setup;

@@ -20,6 +20,7 @@ const pump = {
         await match.accessibilityButtonBarButton('Settings').tap();
         await element(by.text('Add Pump').and(by.type('UILabel'))).tap();
         match.accessibilityHeaderText('Pump Settings');
+        await match.accessibilityButton('Simulator').tap();
         await match.accessibilityButton('Continue').tap();
         await match.accessibilityButtonBarButton('Done').tap();
     },

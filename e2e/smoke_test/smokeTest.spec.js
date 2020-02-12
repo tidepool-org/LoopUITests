@@ -1,4 +1,4 @@
-const { setup, match, pump, cgm } = require('../../src/index');
+const { setup, match, pump, cgm, carbs } = require('../../src/index');
 
 describe('smoke test', () => {
     beforeAll(async () => {
@@ -138,12 +138,13 @@ describe('smoke test', () => {
         });
     });
     describe('carbs', () => {
+        let carbsAmount = '40';
         it('can be added', async () => {
-            await setup.addMeal('40');
-            await device.takeScreenshot('carbs added');
+            await carbs.add(carbsAmount);
+            await device.takeScreenshot(`${carbsAmount} g carbs added`);
         });
-        it('can be viewed in the Active Carbohydrates section', async () => {
-            await setup.checkCarbs('40');
+        it.skip('can be viewed in the Active Carbohydrates section', async () => {
+            await carbs.check(carbsAmount);
         });
     });
 });
