@@ -19,7 +19,7 @@ const cgm = {
         GlucoseNoise: { value: 0, name: "Glucose Noise" },
         RandomHighOutlier: { value: 1, name: "Random High Outlier" },
         RandomLowOutlier: { value: 2, name: "Random Low Outlier" },
-        RandomError: { value: 2, name: "Random Error" }
+        RandomError: { value: 3, name: "Random Error" }
     },
     async add() {
         await match.accessibilityButtonBarButton('Settings').tap();
