@@ -40,6 +40,9 @@ fi
 
 cd "${TEST_DIRECTORY}"
 
+info "Checking node version..."
+node --version
+
 if [ ! -d "node_modules" ]; then
   info "Installing node dependencies..."
   npm install
