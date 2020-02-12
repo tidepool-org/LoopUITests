@@ -18,7 +18,8 @@ const pump = {
      */
     async add() {
         await match.accessibilityButtonBarButton('Settings').tap();
-        await element(by.text('Add Pump').and(by.type('UILabel'))).tap();
+        await match.uiLabel('Add Pump').tap();
+        match.accessibilityHeaderText('Pump Settings');
         await match.accessibilityButton('Simulator').tap();
         await match.accessibilityButton('Continue').tap();
         await match.accessibilityButtonBarButton('Done').tap();
@@ -30,6 +31,7 @@ const pump = {
     async remove() {
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityLabelText('Simulator').tap();
+        match.accessibilityHeaderText('Pump Settings');
         //TODO static text and not a button?
         await match.accessibilityLabelText('Delete Pump').tap();
         await match.accessibilityLabelText('Delete Pump').atIndex(1).tap();
@@ -41,7 +43,7 @@ const pump = {
      */
     async removeData() {
         await match.accessibilityButtonBarButton('Settings').tap();
-        await match.accessibilityLabelText('Carb Ratios').swipe('up', 'fast');
+        await element(by.text('Carb Ratios')).swipe('up', 'fast');
         //TODO static text and not a button?
         await match.accessibilityLabelText('Delete Pump Data').atIndex(0).tap();
         await match.accessibilityLabelText('Delete Pump Data').atIndex(1).tap();
@@ -82,7 +84,7 @@ const pump = {
     async setSuspend(threshold) {
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityText('Suspend Threshold').tap();
-        await match.loopTextField().atIndex(0).typeText(threshold);
+        await match.uiEditableTextField().atIndex(0).typeText(threshold);
         await match.accessibilityBackButton('Settings').tap();
         await match.accessibilityButtonBarButton('Done').tap();
     },
@@ -94,7 +96,7 @@ const pump = {
     async checkSuspend(threshold) {
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityText('Suspend Threshold').tap();
-        await expect(match.loopTextField().atIndex(0)).toHaveText(threshold);
+        await expect(match.uiEditableTextField().atIndex(0)).toHaveText(threshold);
         await match.accessibilityBackButton('Settings').tap();
         await match.accessibilityButtonBarButton('Done').tap();
     },
@@ -107,12 +109,12 @@ const pump = {
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityText('Delivery Limits').tap();
         //TODO: using atIndex, need a better way to select these
-        await match.loopTextField().atIndex(0).clearText();
-        await match.loopTextField().atIndex(0).typeText(maxBasalRate);
-        await match.loopTextField().atIndex(0).tapReturnKey();
-        await match.loopTextField().atIndex(1).clearText();
-        await match.loopTextField().atIndex(1).typeText(maxBolus);
-        await match.loopTextField().atIndex(1).tapReturnKey();
+        await match.uiEditableTextField().atIndex(0).clearText();
+        await match.uiEditableTextField().atIndex(0).typeText(maxBasalRate);
+        await match.uiEditableTextField().atIndex(0).tapReturnKey();
+        await match.uiEditableTextField().atIndex(1).clearText();
+        await match.uiEditableTextField().atIndex(1).typeText(maxBolus);
+        await match.uiEditableTextField().atIndex(1).tapReturnKey();
         await match.accessibilityLabelText('Save to simulator').tap();
         await match.accessibilityBackButton('Settings').tap();
         await match.accessibilityButtonBarButton('Done').tap();
@@ -125,8 +127,8 @@ const pump = {
     async checkDeliveryLimits(maxBasalRate, maxBolus) {
         await match.accessibilityButtonBarButton('Settings').tap();
         await match.accessibilityText('Delivery Limits').tap();
-        await expect(match.loopTextField().atIndex(0)).toHaveText(maxBasalRate);
-        await expect(match.loopTextField().atIndex(1)).toHaveText(maxBolus);
+        await expect(match.uiEditableTextField().atIndex(0)).toHaveText(maxBasalRate);
+        await expect(match.uiEditableTextField().atIndex(1)).toHaveText(maxBolus);
         await match.accessibilityBackButton('Settings').tap();
         await match.accessibilityButtonBarButton('Done').tap();
     },
@@ -137,13 +139,13 @@ const pump = {
     async bolus(units) {
         await match.accessibilityButton('Bolus').tap();
         //TODO: why can't we match on label? by.label('Bolus Amount')
-        await match.uiTextField().clearText();
-        await match.uiTextField().typeText(units);
+        await element(by.type('UITextField')).clearText();
+        await element(by.type('UITextField')).typeText(units);
         await element(by.type('UIButton').and(by.label('Deliver')).and(by.traits(['button']))).tap();
         //TODO: can't interact with auth screen as long time pause before ready
-        await waitFor(match.uiTextField()).toExist().withTimeout(1400);
-        await match.uiTextField().typeText('fake_pw');
-        await match.uiTextField().tapReturnKey();
+        await waitFor(element(by.type('UITextField'))).toExist().withTimeout(1400);
+        await element(by.type('UITextField')).typeText('fake_pw');
+        await element(by.type('UITextField')).tapReturnKey();
     },
     /**
      * @name pump.setInsulinModel
@@ -209,7 +211,8 @@ const pump = {
         //adjustable
         //UIAccessibilityPickerComponent
         //
-        await expect(match.accessibilityLabelText('12:00 AM')).toExist();
+        await match.accessibilityLabelText('12:00 AM');
+
         //await match.accessibilityLabelText('min').atIndex(1).tap();
         //await expect(element(by.label('min'))).toBeVisible();
         //await element(by.label('min')).setColumnToValue(1,"70");
@@ -246,11 +249,11 @@ const pump = {
      */
     async setCarbRatios(ratio) {
         await match.accessibilityButtonBarButton('Settings').tap();
-        await expect(match.accessibilityLabelText('Carb Ratios')).toExist();
-        await match.accessibilityLabelText('Carb Ratios').tap();
+        await expect(element(by.text('Carb Ratios'))).toExist();
+        await element(by.text('Carb Ratios')).tap();
         await match.accessibilityButtonBarButton('Add').tap();
-        await match.uiTextField().clearText();
-        await match.uiTextField().typeText(ratio);
+        await element(by.type('UITextField')).clearText();
+        await element(by.type('UITextField')).typeText(ratio);
         await match.accessibilityBackButton('Settings').tap();
         await match.accessibilityButtonBarButton('Done').tap();
     },
@@ -262,7 +265,7 @@ const pump = {
         const unitsSuffix = 'mg/dL/U';
         await match.accessibilityButtonBarButton('Settings').tap();
         //need to scroll to section
-        await match.accessibilityLabelText('Carb Ratios').swipe('up', 'fast');
+        await element(by.text('Carb Ratios')).swipe('up', 'fast');
         await match.accessibilityLabelText('Insulin Sensitivities').tap();
         await match.accessibilityButtonBarButton('Add').tap();
         //TODO: why are there two??

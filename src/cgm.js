@@ -23,13 +23,13 @@ const cgm = {
     },
     async add() {
         await match.accessibilityButtonBarButton('Settings').tap();
-        if (element(by.text('Add CGM').and(by.type('UILabel')))) {
-            await element(by.text('Add CGM').and(by.type('UILabel'))).atIndex(0).tap();
-            await match.accessibilityButton('Simulator').tap();
-        }
+        await expect(match.uiLabel('Add CGM')).toExist();
+        await match.uiLabel('Add CGM').atIndex(0).tap();
+        await match.accessibilityButton('Simulator').tap();
         await match.accessibilityButtonBarButton('Done').tap();
     },
     async setEffect(effect) {
+
         await match.accessibilityButtonBarButton('Settings').tap();
         //TODO assuming the second item as pump 'simulator' is first
         await match.accessibilityLabelText('Simulator').atIndex(1).tap();
@@ -37,18 +37,18 @@ const cgm = {
         await match.accessibilityLabelText(effect.name).tap();
         switch (effect) {
             case this.simulatorEffects.GlucoseNoise:
-                await match.loopTextField().clearText();
+                await match.uiEditableTextField().clearText();
                 //mg/dl
-                await match.loopTextField().typeText('100');
+                await match.uiEditableTextField().typeText('100');
                 //TODO: accessibility
-                await match.buttonBarButton('Back').tap();
+                await element(by.label('Back').and(by.type('_UIButtonBarButton'))).tap();
                 break;
             case this.simulatorEffects.RandomError:
-                await match.loopTextField().clearText();
+                await match.uiEditableTextField().clearText();
                 //percent
-                await match.loopTextField().typeText('10');
+                await match.uiEditableTextField().typeText('10');
                 //TODO: accessibility
-                await match.buttonBarButton('Back').tap();
+                await element(by.label('Back').and(by.type('_UIButtonBarButton'))).tap();
                 break;
             default:
                 break;
@@ -69,18 +69,18 @@ const cgm = {
         await match.accessibilityLabelText(model.name).tap();
         switch (model) {
             case this.simulatorModel.Constant:
-                await match.loopTextField().clearText();
-                await match.loopTextField().typeText(bgValues[0]);
+                await match.uiEditableTextField().clearText();
+                await match.uiEditableTextField().typeText(bgValues[0]);
                 await match.accessibilityBackButton('CGM Settings').tap();
                 break;
             case this.simulatorModel.SineCurve:
                 await match.accessibilityLabelText('Base Glucose').tap();
-                await match.loopTextField().clearText();
-                await match.loopTextField().typeText(bgValues[0]);
+                await match.uiEditableTextField().clearText();
+                await match.uiEditableTextField().typeText(bgValues[0]);
                 await match.accessibilityBackButton('Sine Curve').tap();
                 await match.accessibilityLabelText('Amplitude').tap();
-                await match.loopTextField().clearText();
-                await match.loopTextField().typeText(bgValues[1]);
+                await match.uiEditableTextField().clearText();
+                await match.uiEditableTextField().typeText(bgValues[1]);
                 await match.accessibilityBackButton('Sine Curve').tap();
                 await match.accessibilityBackButton('CGM Settings').tap();
                 break;
