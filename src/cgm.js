@@ -98,6 +98,7 @@ const cgm = {
         //TODO static text and not a button?
         await match.accessibilityLabelText('Delete CGM').tap();
         await match.accessibilityLabelText('Delete CGM').atIndex(1).tap();
+        await waitFor(element(by.text('Add CGM').and(by.type('UILabel')))).toExist().withTimeout(2000);
         await match.accessibilityButtonBarButton('Done').tap();
     },
     async removeData() {
