@@ -44,6 +44,22 @@ const setup = {
         }
         await match.accessible.ButtonBarButton('Done').tap();
     },
+    /**
+     * @name unsetClosedLoop
+     * @summary turn off closed loop mode
+     */
+    async unsetClosedLoop() {
+        await match.accessible.ButtonBarButton('Settings').tap();
+        await match.accessible.Button('Closed Loop').tap();
+        //NOTE: not elegant but try catch approach is used by others in detox tests
+        try {
+            await expect(match.accessible.Button('Closed Loop')).toHaveValue('0');
+        } catch (err) {
+            await match.accessible.Button('Closed Loop').tap();
+            await expect(match.accessible.Button('Closed Loop')).toHaveValue('0');
+        }
+        await match.accessible.ButtonBarButton('Done').tap();
+    },
 };
 
 module.exports = setup;

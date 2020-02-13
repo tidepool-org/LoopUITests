@@ -99,26 +99,26 @@ describe('smoke test', () => {
         });
         describe('settings', () => {
             it('set suspend threshold', async () => {
-                await pump.setSuspend('65');
+                await pump.settings.Suspend('65');
             });
             it('set basal rates', async () => {
-                await pump.setBasalRates('0.1');
+                await pump.settings.BasalRates('0.1');
             });
             it('set delivery limits', async () => {
-                await pump.setDeliveryLimits('0.5', '10.0');
+                await pump.settings.DeliveryLimits('0.5', '10.0');
             });
             it('set insulin model', async () => {
-                await pump.setInsulinModel(pump.insulinModel.RapidAdults);
+                await pump.settings.InsulinModel(pump.insulinModel.RapidAdults);
             });
             it('set carb ratios', async () => {
-                await pump.setCarbRatios('8');
+                await pump.settings.CarbRatios('8');
             });
             it('set insulin sensitivites', async () => {
-                await pump.setInsulinSensitivities('500');
+                await pump.settings.InsulinSensitivities('500');
             });
             it.skip('set correction range', async () => {
                 //TODO: unable to set this as we can't easily find sepcific values
-                await pump.setCorrectionRange2({ range: { min: '179', max: '180' } });
+                await pump.settings.CorrectionRange({ range: { min: '179', max: '180' } });
             });
         });
         describe.skip('deliver', () => {
