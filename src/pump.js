@@ -171,12 +171,17 @@ const pump = {
             await match.accessible.Text('Correction Range').tap();
             await match.accessible.ButtonBarButton('Add').tap();
 
-            //TODO: atIndex!! need a better way
-            await match.accessible.Label('12:00 AM').atIndex(0).tap();
-            await match.accessible.Label(`${corrections.range.max}`).atIndex(1).tap();
-            //
-            await match.accessible.Label(`${corrections.range.min}`).atIndex(4).tap();
-            await match.accessible.Label('Save').tap();
+            if (corrections.range){
+                console.log('corrections.range: ',corrections.range);
+                //TODO: atIndex!! need a better way
+                // await match.accessible.Label('12:00 AM').atIndex(0).tap();
+                // await match.accessible.Label(`${corrections.range.max}`).atIndex(1).tap();
+                // await match.accessible.Label(`${corrections.range.min}`).atIndex(0).tap();
+                // await match.accessible.Label('Save').tap();
+            }
+            if (corrections.preMeal){
+                console.log('corrections.preMeal: ',corrections.preMeal);
+            }
             await match.accessible.BackButton('Settings').tap();
             await match.accessible.ButtonBarButton('Done').tap();
         },
