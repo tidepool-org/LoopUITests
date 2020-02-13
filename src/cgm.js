@@ -23,13 +23,11 @@ const cgm = {
     },
     async add() {
         await match.accessible.ButtonBarButton('Settings').tap();
-        await expect(match.accessible.UILabel('Add CGM')).toExist();
-        await match.accessible.UILabel('Add CGM').atIndex(0).tap();
+        await match.accessible.UILabel('Add CGM').tap();
         await match.accessible.Button('Simulator').tap();
         await match.accessible.ButtonBarButton('Done').tap();
     },
     async setEffect(effect) {
-
         await match.accessible.ButtonBarButton('Settings').tap();
         //TODO assuming the second item as pump 'simulator' is first
         await match.accessible.Label('Simulator').atIndex(1).tap();
@@ -98,7 +96,7 @@ const cgm = {
     },
     async removeData() {
         await match.accessible.ButtonBarButton('Settings').tap();
-        await element(by.text('Carb Ratios')).swipe('up', 'fast');
+        await match.accessible.UILabel('Carb Ratios').swipe('up', 'fast');
         //TODO static text and not a button?
         await match.accessible.Label('Delete CGM Data').atIndex(0).tap();
         await match.accessible.Label('Delete CGM Data').atIndex(1).tap();

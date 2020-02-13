@@ -35,7 +35,8 @@ const pump = {
         //TODO static text and not a button?
         await match.accessible.Label('Delete Pump').tap();
         await match.accessible.Label('Delete Pump').atIndex(1).tap();
-        await match.accessible.ButtonBarButton('Done').atIndex(1).tap();
+        await waitFor(match.accessible.Label('Add Pump')).toExist().withTimeout(2000);
+        await match.accessible.ButtonBarButton('Done').tap();
     },
     /**
      * @name pump.removeData
@@ -43,7 +44,7 @@ const pump = {
      */
     async removeData() {
         await match.accessible.ButtonBarButton('Settings').tap();
-        await element(by.text('Carb Ratios')).swipe('up', 'fast');
+        await match.accessible.UILabel('Carb Ratios').swipe('up', 'fast');
         //TODO static text and not a button?
         await match.accessible.Label('Delete Pump Data').atIndex(0).tap();
         await match.accessible.Label('Delete Pump Data').atIndex(1).tap();
@@ -237,8 +238,8 @@ const pump = {
      */
     async checkCorrectionRange(isSet) {
         await match.accessible.ButtonBarButton('Settings').tap();
-        await expect(element(by.text('Correction Range'))).toExist();
-        await element(by.text('Correction Range')).tap();
+        await expect(match.accessible.UILabel('Correction Range')).toExist();
+        await match.accessible.UILabel('Correction Range').tap();
         await expect(match.accessible.ButtonBarButton('Edit', isSet)).toExist();
         await match.accessible.BackButton('Settings').tap();
         await match.accessible.ButtonBarButton('Done').tap();
@@ -249,8 +250,8 @@ const pump = {
      */
     async setCarbRatios(ratio) {
         await match.accessible.ButtonBarButton('Settings').tap();
-        await expect(element(by.text('Carb Ratios'))).toExist();
-        await element(by.text('Carb Ratios')).tap();
+        await expect(match.accessible.UILabel('Carb Ratios')).toExist();
+        await match.accessible.UILabel('Carb Ratios').tap();
         await match.accessible.ButtonBarButton('Add').tap();
         await element(by.type('UITextField')).clearText();
         await element(by.type('UITextField')).typeText(ratio);
@@ -265,7 +266,7 @@ const pump = {
         const unitsSuffix = 'mg/dL/U';
         await match.accessible.ButtonBarButton('Settings').tap();
         //need to scroll to section
-        await element(by.text('Carb Ratios')).swipe('up', 'fast');
+        await match.accessible.UILabel('Carb Ratios').swipe('up', 'fast');
         await match.accessible.Label('Insulin Sensitivities').tap();
         await match.accessible.ButtonBarButton('Add').tap();
         //TODO: why are there two??
