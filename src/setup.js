@@ -24,27 +24,27 @@ const setup = {
     },
     async loadScenario(scenarioName) {
         await device.shake();
-        await expect(match.accessibilityLabelText(scenarioName)).toExist();
-        await match.accessibilityLabelText(scenarioName).tap();
-        await match.accessibilityButtonBarButton('Load').tap();
+        await expect(match.accessible.Label(scenarioName)).toExist();
+        await match.accessible.Label(scenarioName).tap();
+        await match.accessible.ButtonBarButton('Load').tap();
     },
     /**
      * @name setClosedLoop
      * @summary if not already in closed loop mode we will turn it on
      */
     async setClosedLoop() {
-        await match.accessibilityButtonBarButton('Settings').tap();
-        await match.accessibilityButton('Closed Loop').tap();
+        await match.accessible.ButtonBarButton('Settings').tap();
+        await match.accessible.Button('Closed Loop').tap();
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
-            await expect(match.accessibilityButton('Closed Loop')).toHaveValue('1');
+            await expect(match.accessible.Button('Closed Loop')).toHaveValue('1');
             console.log('all good');
         } catch (err) {
             console.log('hmmm failed ..');
-            await match.accessibilityButton('Closed Loop').tap();
-            await expect(match.accessibilityButton('Closed Loop')).toHaveValue('1');
+            await match.accessible.Button('Closed Loop').tap();
+            await expect(match.accessible.Button('Closed Loop')).toHaveValue('1');
         }
-        await match.accessibilityButtonBarButton('Done').tap();
+        await match.accessible.ButtonBarButton('Done').tap();
     },
 };
 

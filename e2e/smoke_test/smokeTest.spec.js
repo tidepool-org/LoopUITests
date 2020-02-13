@@ -6,74 +6,74 @@ describe('smoke test', () => {
     });
     describe('menu', () => {
         it('has Add Meal option', async () => {
-            await expect(match.accessibilityButton('Add Meal')).toExist();
+            await expect(match.accessible.Button('Add Meal')).toExist();
         });
         it('has Bolus option', async () => {
-            await expect(match.accessibilityButton('Bolus')).toExist();
+            await expect(match.accessible.Button('Bolus')).toExist();
         });
         it('has Settings option', async () => {
-            await expect(match.accessibilityButton('Settings')).toExist();
+            await expect(match.accessible.Button('Settings')).toExist();
         });
     });
     describe('settings', () => {
         beforeAll(async () => {
-            await match.accessibilityButtonBarButton('Settings').tap();
+            await match.accessible.ButtonBarButton('Settings').tap();
         });
         it('has closed loop', async () => {
-            await expect(match.accessibilityLabelText('Closed Loop')).toExist();
+            await expect(match.accessible.Label('Closed Loop')).toExist();
         });
         it('has issue report', async () => {
-            await expect(match.accessibilityLabelText('Issue Report')).toExist();
+            await expect(match.accessible.Label('Issue Report')).toExist();
         });
         it('has add pump', async () => {
-            await expect(match.accessibilityLabelText('Add Pump')).toExist();
+            await expect(match.accessible.Label('Add Pump')).toExist();
         });
         it('has add cgm', async () => {
-            await expect(match.accessibilityLabelText('Add CGM')).toExist();
+            await expect(match.accessible.Label('Add CGM')).toExist();
         });
         it('has correction range', async () => {
-            await expect(match.accessibilityLabelText('Correction Range')).toExist();
+            await expect(match.accessible.Label('Correction Range')).toExist();
         });
         it('has suspend threshold', async () => {
-            await expect(match.accessibilityLabelText('Suspend Threshold')).toExist();
+            await expect(match.accessible.Label('Suspend Threshold')).toExist();
         });
         it('has basal rates', async () => {
-            await expect(match.accessibilityLabelText('Basal Rates')).toExist();
+            await expect(match.accessible.Label('Basal Rates')).toExist();
         });
         it('has delivery limits', async () => {
-            await expect(match.accessibilityLabelText('Delivery Limits')).toExist();
+            await expect(match.accessible.Label('Delivery Limits')).toExist();
         });
         it('has insulin model', async () => {
-            await expect(match.accessibilityLabelText('Insulin Model')).toExist();
+            await expect(match.accessible.Label('Insulin Model')).toExist();
         });
         it('swipe up settings screen', async () => {
             await element(by.text('Carb Ratios')).swipe('up', 'fast');
         });
         it('has carb ratios', async () => {
-            await expect(match.accessibilityLabelText('Carb Ratios')).toExist()
+            await expect(match.accessible.Label('Carb Ratios')).toExist()
         });
         it('has insulin sensitivities', async () => {
-            await expect(match.accessibilityLabelText('Insulin Sensitivities')).toExist()
+            await expect(match.accessible.Label('Insulin Sensitivities')).toExist()
         });
         it('has add service', async () => {
-            await expect(match.accessibilityLabelText('Add Service')).toExist()
+            await expect(match.accessible.Label('Add Service')).toExist()
         });
         afterAll(async () => {
-            await match.accessibilityButtonBarButton('Done').tap();
+            await match.accessible.ButtonBarButton('Done').tap();
         });
     });
     describe('charts', () => {
         it('has Active Carbohydrates section', async () => {
-            await expect(match.accessibilityLabelText('Active Carbohydrates')).toExist();
+            await expect(match.accessible.Label('Active Carbohydrates')).toExist();
         });
         it('has Active Insulin section', async () => {
-            await expect(match.accessibilityLabelText('Active Insulin')).toExist();
+            await expect(match.accessible.Label('Active Insulin')).toExist();
         });
         it('has Insulin Delivery section', async () => {
-            await expect(match.accessibilityLabelText('Insulin Delivery')).toExist();
+            await expect(match.accessible.Label('Insulin Delivery')).toExist();
         });
         it('has Glucose section', async () => {
-            await expect(match.accessibilityLabelText('Glucose')).toExist();
+            await expect(match.accessible.Label('Glucose')).toExist();
         });
     });
     describe('cgm', () => {

@@ -12,22 +12,22 @@ describe('scenario test', () => {
             await device.shake();
         });
         it('shows default Sine Curve scenario', async()=>{
-            await expect(match.accessibilityLabelText('Sine Curve')).toExist();
+            await expect(match.accessible.Label('Sine Curve')).toExist();
         });
         it('canel out of scenarios', async()=>{
-            await match.accessibilityButtonBarButton('Cancel').tap();
+            await match.accessible.ButtonBarButton('Cancel').tap();
         });
     });
     describe('Sine Curve', () => {
         it('should show Sine Curve scenario when shaken', async()=>{
             await device.shake();
-            await expect(match.accessibilityLabelText('Sine Curve')).toExist();
+            await expect(match.accessible.Label('Sine Curve')).toExist();
         });
         it('select scenario', async()=>{
-            await match.accessibilityLabelText('Sine Curve').tap();
+            await match.accessible.Label('Sine Curve').tap();
         });
         it('Load scenario', async()=>{
-            await match.accessibilityButtonBarButton('Load').tap();
+            await match.accessible.ButtonBarButton('Load').tap();
         });
     });
 });

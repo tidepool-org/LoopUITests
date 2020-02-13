@@ -8,13 +8,13 @@ const carbs = {
      * @param {string} carbsAmount
      */
     async add(carbsAmount) {
-        await match.accessibilityButton('Add Meal').tap();
-        await expect(match.accessibilityHeader('Add Carb Entry')).toExist();
+        await match.accessible.Button('Add Meal').tap();
+        await expect(match.accessible.Header('Add Carb Entry')).toExist();
         //TODO: we need a better way to find this
         await element(by.type('UITextField')).clearText();
         await element(by.type('UITextField')).typeText(carbsAmount);
-        await match.accessibilityButtonBarButton('Continue').tap();
-        await match.accessibilityButton('Save without Bolusing').tap();
+        await match.accessible.ButtonBarButton('Continue').tap();
+        await match.accessible.Button('Save without Bolusing').tap();
     },
     /**
      * @name carbs.check
@@ -22,11 +22,11 @@ const carbs = {
      * @param {string} carbsAmount
      */
     async check(carbsAmount) {
-        await match.accessibilityText('Active Carbohydrates').tap();
-        await expcect(match.accessibilityHeader('Carbohydrates')).toExist();
+        await match.accessible.Text('Active Carbohydrates').tap();
+        await expcect(match.accessible.Header('Carbohydrates')).toExist();
         //TODO: just checking an instance exits, need to find exact one
         await expect(element(by.label(`${carbsAmount} g`)).atIndex(0)).toExist();
-        await match.accessibilityBackButton('Status').tap();
+        await match.accessible.BackButton('Status').tap();
     },
 };
 

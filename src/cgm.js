@@ -22,91 +22,91 @@ const cgm = {
         RandomError: { value: 3, name: "Random Error" }
     },
     async add() {
-        await match.accessibilityButtonBarButton('Settings').tap();
-        await expect(match.uiLabel('Add CGM')).toExist();
-        await match.uiLabel('Add CGM').atIndex(0).tap();
-        await match.accessibilityButton('Simulator').tap();
-        await match.accessibilityButtonBarButton('Done').tap();
+        await match.accessible.ButtonBarButton('Settings').tap();
+        await expect(match.accessible.UILabel('Add CGM')).toExist();
+        await match.accessible.UILabel('Add CGM').atIndex(0).tap();
+        await match.accessible.Button('Simulator').tap();
+        await match.accessible.ButtonBarButton('Done').tap();
     },
     async setEffect(effect) {
 
-        await match.accessibilityButtonBarButton('Settings').tap();
+        await match.accessible.ButtonBarButton('Settings').tap();
         //TODO assuming the second item as pump 'simulator' is first
-        await match.accessibilityLabelText('Simulator').atIndex(1).tap();
-        match.accessibilityHeaderText('CGM Settings');
-        await match.accessibilityLabelText(effect.name).tap();
+        await match.accessible.Label('Simulator').atIndex(1).tap();
+        match.accessible.HeaderText('CGM Settings');
+        await match.accessible.Label(effect.name).tap();
         switch (effect) {
             case this.simulatorEffects.GlucoseNoise:
                 await match.uiEditableTextField().clearText();
                 //mg/dl
                 await match.uiEditableTextField().typeText('100');
                 //TODO: accessibility
-                await element(by.label('Back').and(by.type('_UIButtonBarButton'))).tap();
+                await match.buttonBarButton('Back').tap();
                 break;
             case this.simulatorEffects.RandomError:
                 await match.uiEditableTextField().clearText();
                 //percent
                 await match.uiEditableTextField().typeText('10');
                 //TODO: accessibility
-                await element(by.label('Back').and(by.type('_UIButtonBarButton'))).tap();
+                await match.buttonBarButton('Back').tap();
                 break;
             default:
                 break;
         }
         //TODO: multiple done buttons
-        await match.accessibilityButtonBarButton('Done').atIndex(0).tap();
-        await match.accessibilityButtonBarButton('Done').tap();
+        await match.accessible.ButtonBarButton('Done').atIndex(0).tap();
+        await match.accessible.ButtonBarButton('Done').tap();
     },
     /**
     * @param {simulatorModel} model e.g. Constant
     * @param {Array} bgValues e.g. [100, 50]
     */
     async setModel(model, bgValues) {
-        await match.accessibilityButtonBarButton('Settings').tap();
+        await match.accessible.ButtonBarButton('Settings').tap();
         //TODO assuming the second item as pump 'simulator' is first
-        await match.accessibilityLabelText('Simulator').atIndex(1).tap();
-        match.accessibilityHeaderText('CGM Settings');
-        await match.accessibilityLabelText(model.name).tap();
+        await match.accessible.Label('Simulator').atIndex(1).tap();
+        match.accessible.HeaderText('CGM Settings');
+        await match.accessible.Label(model.name).tap();
         switch (model) {
             case this.simulatorModel.Constant:
                 await match.uiEditableTextField().clearText();
                 await match.uiEditableTextField().typeText(bgValues[0]);
-                await match.accessibilityBackButton('CGM Settings').tap();
+                await match.accessible.BackButton('CGM Settings').tap();
                 break;
             case this.simulatorModel.SineCurve:
-                await match.accessibilityLabelText('Base Glucose').tap();
+                await match.accessible.Label('Base Glucose').tap();
                 await match.uiEditableTextField().clearText();
                 await match.uiEditableTextField().typeText(bgValues[0]);
-                await match.accessibilityBackButton('Sine Curve').tap();
-                await match.accessibilityLabelText('Amplitude').tap();
+                await match.accessible.BackButton('Sine Curve').tap();
+                await match.accessible.Label('Amplitude').tap();
                 await match.uiEditableTextField().clearText();
                 await match.uiEditableTextField().typeText(bgValues[1]);
-                await match.accessibilityBackButton('Sine Curve').tap();
-                await match.accessibilityBackButton('CGM Settings').tap();
+                await match.accessible.BackButton('Sine Curve').tap();
+                await match.accessible.BackButton('CGM Settings').tap();
                 break;
             default:
                 break;
         }
         //TODO: multiple done buttons
-        await match.accessibilityButtonBarButton('Done').atIndex(0).tap();
-        await match.accessibilityButtonBarButton('Done').tap();
+        await match.accessible.ButtonBarButton('Done').atIndex(0).tap();
+        await match.accessible.ButtonBarButton('Done').tap();
     },
     async remove() {
-        await match.accessibilityButtonBarButton('Settings').tap();
-        await match.accessibilityLabelText('Simulator').tap();
-        match.accessibilityHeaderText('CGM Settings');
+        await match.accessible.ButtonBarButton('Settings').tap();
+        await match.accessible.Label('Simulator').tap();
+        match.accessible.HeaderText('CGM Settings');
         //TODO static text and not a button?
-        await match.accessibilityLabelText('Delete CGM').tap();
-        await match.accessibilityLabelText('Delete CGM').atIndex(1).tap();
-        await match.accessibilityButtonBarButton('Done').tap();
+        await match.accessible.Label('Delete CGM').tap();
+        await match.accessible.Label('Delete CGM').atIndex(1).tap();
+        await match.accessible.ButtonBarButton('Done').tap();
     },
     async removeData() {
-        await match.accessibilityButtonBarButton('Settings').tap();
+        await match.accessible.ButtonBarButton('Settings').tap();
         await element(by.text('Carb Ratios')).swipe('up', 'fast');
         //TODO static text and not a button?
-        await match.accessibilityLabelText('Delete CGM Data').atIndex(0).tap();
-        await match.accessibilityLabelText('Delete CGM Data').atIndex(1).tap();
-        await match.accessibilityButtonBarButton('Done').tap();
+        await match.accessible.Label('Delete CGM Data').atIndex(0).tap();
+        await match.accessible.Label('Delete CGM Data').atIndex(1).tap();
+        await match.accessible.ButtonBarButton('Done').tap();
     }
 };
 
