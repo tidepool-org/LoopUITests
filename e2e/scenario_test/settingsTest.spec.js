@@ -51,6 +51,44 @@ describe('Pump Settings', () => {
                 await match.accessible.Button('OK').tap();
             });
         });
+        describe('When basal rate is not set', () => {
+            afterAll(async () => {
+                await cgm.removeData();
+                await pump.removeData();
+            });
+            it('should NOT set the basal rates', async () => {
+                await pump.settings.CheckBasalRates();
+            });
+            it.skip('should have correction range set', async () => {
+                await pump.settings.CheckCorrectionRange(false);
+            });
+            it('should set the suspend threshold', async () => {
+                await pump.settings.Suspend('130');
+            });
+            it('should set the delivery limits', async () => {
+                await pump.settings.DeliveryLimits('0.5', '10.0');
+            });
+            it('should set the insulin model', async () => {
+                await pump.settings.InsulinModel(pump.insulinModel.RapidAdults);
+            });
+            it('should set the carb ratios', async () => {
+                await pump.settings.CarbRatios('8');
+            });
+            it('should set insulin sensitivites set', async () => {
+                await pump.settings.InsulinSensitivities('500');
+            });
+            it('should toggle on closed loop', async () => {
+                await setup.setClosedLoop();
+            });
+            it('should not be in closed loop mode', async () => {
+                await expect(element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView')))).toExist();
+            });
+            it('should show configuration error that indicates why not in closed loop mode', async () => {
+                await element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView'))).tap();
+                await expect(match.accessible.Label('Configuration Error: Check Settings')).toExist();
+                await match.accessible.Button('OK').tap();
+            });
+        });
     });
 });
 
