@@ -91,9 +91,9 @@ const cgm = {
         await match.accessible.ButtonBarButton('Settings').tap();
         await match.accessible.Label('Simulator').tap();
         match.accessible.HeaderText('CGM Settings');
-        //TODO static text and not a button?
         await match.accessible.Label('Delete CGM').tap();
         await match.accessible.Label('Delete CGM').atIndex(1).tap();
+        await waitFor(match.accessible.Label('Add CGM')).toExist().withTimeout(2000);
         await match.accessible.ButtonBarButton('Done').tap();
     },
     async removeData() {
