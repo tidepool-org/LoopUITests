@@ -38,9 +38,7 @@ const setup = {
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
             await expect(match.accessible.Button('Closed Loop')).toHaveValue('1');
-            console.log('all good');
         } catch (err) {
-            console.log('hmmm failed ..');
             await match.accessible.Button('Closed Loop').tap();
             await expect(match.accessible.Button('Closed Loop')).toHaveValue('1');
         }

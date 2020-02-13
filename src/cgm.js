@@ -38,16 +38,12 @@ const cgm = {
         switch (effect) {
             case this.simulatorEffects.GlucoseNoise:
                 await match.uiEditableTextField().clearText();
-                //mg/dl
                 await match.uiEditableTextField().typeText('100');
-                //TODO: accessibility
                 await match.buttonBarButton('Back').tap();
                 break;
             case this.simulatorEffects.RandomError:
                 await match.uiEditableTextField().clearText();
-                //percent
                 await match.uiEditableTextField().typeText('10');
-                //TODO: accessibility
                 await match.buttonBarButton('Back').tap();
                 break;
             default:
