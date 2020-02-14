@@ -1,13 +1,16 @@
 const element = require('detox').element;
 
 const match = {
+    /**
+     * @summary items that have accessibility traits applied to them
+     */
     accessible: {
         /**
          * @param {string} label
-         * @returns {Detox.Element} accessibilityButtonBarButton
+         * @returns {Detox.Element} ButtonBarButton
          */
         ButtonBarButton(label) {
-            return accessibilityButtonBarButton(label, true);
+            return ButtonBarButton(label, true);
         },
         /**
          *
@@ -72,17 +75,18 @@ const match = {
         },
     },
     /**
-     * @summary get a text field element
-     * @returns {Detox.Element}
+     * @summary get a non accessible UIEditableTextField
+     * @returns {Detox.Element} UIEditableTextField
      */
-    uiEditableTextField() {
+    UIEditableTextField() {
         return element(by.type('LoopKitUI.PaddedTextField'));
     },
     /**
+     * @summary returns none accessible ButtonBarButton
      * @param {string} label
-     * @returns {Detox.Element} buttonBarButton
+     * @returns {Detox.Element} ButtonBarButton
      */
-    buttonBarButton(label) {
+    ButtonBarButton(label) {
         return element(by.label(label).and(by.type('_UIButtonBarButton')));
     },
 };

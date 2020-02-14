@@ -1,8 +1,8 @@
-const { setup, match, pump, cgm, carbs } = require('../../src/index');
+const { setup, match, pump, cgm, carbs, settings } = require('../../src/index');
 
 describe('smoke test', () => {
     beforeAll(async () => {
-        await setup.launchLoop();
+        await setup.LaunchLoop();
     });
     describe('menu', () => {
         it('has Add Meal option', async () => {
@@ -78,73 +78,73 @@ describe('smoke test', () => {
     });
     describe('cgm', () => {
         it('can be added', async () => {
-            await cgm.add();
+            await cgm.Add();
         });
         it('can configure simulator model', async () => {
-            await cgm.setModel(cgm.simulatorModel.Constant, ['114']);
+            await cgm.Model(cgm.Models.Constant, ['114']);
         });
         it('can configure simulator effect', async () => {
-            await cgm.setEffect(cgm.simulatorEffects.GlucoseNoise);
+            await cgm.Effect(cgm.Effects.GlucoseNoise);
         });
         it('can remove data', async () => {
-            await cgm.removeData();
+            await cgm.RemoveData();
         });
         it('can be removed', async () => {
-            await cgm.remove();
+            await cgm.Remove();
         });
     });
     describe('pump', () => {
         it('can be added', async () => {
-            await pump.add();
+            await pump.Add();
         });
         describe('settings', () => {
             it('set suspend threshold', async () => {
-                await pump.settings.Suspend('65');
+                await settings.Suspend('65');
             });
             it('set basal rates', async () => {
-                await pump.settings.BasalRates('0.1');
+                await settings.BasalRates('0.1');
             });
             it('set delivery limits', async () => {
-                await pump.settings.DeliveryLimits('0.5', '10.0');
+                await settings.DeliveryLimits('0.5', '10.0');
             });
             it('set insulin model', async () => {
-                await pump.settings.InsulinModel(pump.insulinModel.RapidAdults);
+                await settings.InsulinModel(settings.InsulinModels.RapidAdults);
             });
             it('set carb ratios', async () => {
-                await pump.settings.CarbRatios('8');
+                await settings.CarbRatios('8');
             });
             it('set insulin sensitivites', async () => {
-                await pump.settings.InsulinSensitivities('500');
+                await settings.InsulinSensitivities('500');
             });
             it.skip('set correction range', async () => {
                 //TODO: unable to set this as we can't easily find sepcific values
-                await pump.settings.CorrectionRange({ range: { min: '179', max: '180' } });
+                await settings.CorrectionRange({ range: { min: '179', max: '180' } });
             });
         });
         describe.skip('deliver', () => {
             it('bolus', async () => {
                 //unable at the moment to add bolus
-                await pump.bolus('3.5');
+                await pump.Bolus('3.5');
                 await device.takeScreenshot('deliver bolus');
             });
         });
         describe('cleanup', () => {
             it('can remove data', async () => {
-                await pump.removeData();
+                await pump.RemoveData();
             });
             it('can be removed', async () => {
-                await pump.remove();
+                await pump.Remove();
             });
         });
     });
     describe('carbs', () => {
         let carbsAmount = '40';
         it('can be added', async () => {
-            await carbs.add(carbsAmount);
+            await carbs.Add(carbsAmount);
             await device.takeScreenshot(`${carbsAmount} g carbs added`);
         });
         it.skip('can be viewed in the Active Carbohydrates section', async () => {
-            await carbs.check(carbsAmount);
+            await carbs.Check(carbsAmount);
         });
     });
 });
