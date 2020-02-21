@@ -39,9 +39,9 @@ describe('Pump Settings', () => {
             it('should not be in closed loop mode', async () => {
                 await expect(element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView')))).toExist();
             });
-            it.skip('should show configuration error that indicates why not in closed loop mode', async () => {
+            it('should show configuration error that indicates why not in closed loop mode', async () => {
                 await element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView'))).tap();
-                await expect(match.accessible.Label('Configuration Error: Check Settings')).toExist();
+                await waitFor(match.accessible.AlertLabel('Configuration Error: Check Settings')).toExist().withTimeout(2000);
                 await match.accessible.Button('OK').tap();
             });
         });
