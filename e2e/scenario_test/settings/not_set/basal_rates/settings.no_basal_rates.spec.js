@@ -8,17 +8,17 @@ describe('Pump Settings', () => {
         await pump.Add();
     });
     describe('Closed loop is not allowed', () => {
-        describe('When suspend threshold is not set', () => {
+        describe('When basal rates are not set', () => {
             beforeAll(async () => {
                 await setup.LoadScenario('flat_cgm');
             });
             it('should NOT set the suspend threshold', async () => {
-                await settings.CheckSuspend('');
+                await settings.Suspend('65');
             });
             it('should have correction range set', async () => {
                 await settings.CorrectionRanges([{time: '12:00 AM', min:'179',max:'180'}]);
             });
-            it('should set the basal rates', async () => {
+            it.skip('should set the basal rates', async () => {
                 await settings.BasalRates('0.1');
             });
             it('should set the delivery limits', async () => {
@@ -39,9 +39,9 @@ describe('Pump Settings', () => {
             it('should not be in closed loop mode', async () => {
                 await expect(element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView')))).toExist();
             });
-            it.skip('should show configuration error that indicates why not in closed loop mode', async () => {
+            it('should show error that indicates why not in closed loop mode', async () => {
                 await element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView'))).tap();
-                await expect(match.accessible.Label('Configuration Error: Check Settings')).toExist();
+                await waitFor(match.accessible.AlertLabel('Missing Data: Insulin Effects')).toExist().withTimeout(2000);
                 await match.accessible.Button('OK').tap();
             });
 
