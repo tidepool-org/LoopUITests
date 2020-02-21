@@ -74,7 +74,7 @@ const match = {
             return element(by.text(text).and(by.traits(['text'])));
         },
         /*
-        * @summary returns Picker item for given label and index
+        * @summary returns Picker item(s) for given label and index
         * @param {Integer} index
         * @param {string} label
         * @returns {Detox.Element}

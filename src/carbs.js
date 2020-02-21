@@ -3,11 +3,11 @@ const match = require('./match');
 
 const carbs = {
     /**
-     * @name carbs.add
+     * @name carbs.Add
      * @summary add a meal entry
      * @param {string} carbsAmount
      */
-    async add(carbsAmount) {
+    async Add(carbsAmount) {
         await match.accessible.Button('Add Meal').tap();
         await expect(match.accessible.Header('Add Carb Entry')).toExist();
         //TODO: we need a better way to find this
@@ -17,11 +17,11 @@ const carbs = {
         await match.accessible.Button('Save without Bolusing').tap();
     },
     /**
-     * @name carbs.check
+     * @name carbs.Check
      * @summary add a meal entry
      * @param {string} carbsAmount
      */
-    async check(carbsAmount) {
+    async Check(carbsAmount) {
         await match.accessible.Text('Active Carbohydrates').tap();
         await expcect(match.accessible.Header('Carbohydrates')).toExist();
         //TODO: just checking an instance exits, need to find exact one

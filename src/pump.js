@@ -1,6 +1,9 @@
 const element = require('detox').element;
 const match = require('./match');
 
+/**
+ * @summary represents the pump simulator
+ */
 const pump = {
     settings: {
         /**
@@ -187,20 +190,10 @@ const pump = {
         },
     },
     /**
-     * @name insulinModel
-     * @summary insulin activity model
-     */
-    insulinModel: {
-        Walsh: { value: 0, name: "Walsh" },
-        RapidAdults: { value: 1, name: "Rapid-Acting – Adults" },
-        RapidChildren: { value: 2, name: "Rapid-Acting – Children" },
-        Fiasp: { value: 3, name: "Fiasp" }
-    },
-    /**
-     * @name pump.add
+     * @name pump.Add
      * @summary add the simulator pump for loop
      */
-    async add() {
+    async Add() {
         await match.accessible.ButtonBarButton('Settings').tap();
         await match.accessible.UILabel('Add Pump').tap();
         match.accessible.HeaderText('Pump Settings');
@@ -212,7 +205,7 @@ const pump = {
      * @name pump.remove
      * @summary remove the simulator pump for loop
      */
-    async remove() {
+    async Remove() {
         await match.accessible.ButtonBarButton('Settings').tap();
         await match.accessible.Label('Simulator').tap();
         match.accessible.HeaderText('Pump Settings');
@@ -223,10 +216,10 @@ const pump = {
         await match.accessible.ButtonBarButton('Done').tap();
     },
     /**
-     * @name pump.removeData
+     * @name pump.RemoveData
      * @summary remove the simulator pump data for loop
      */
-    async removeData() {
+    async RemoveData() {
         await match.accessible.ButtonBarButton('Settings').tap();
         await match.accessible.UILabel('Carb Ratios').swipe('up', 'fast');
         //TODO static text and not a button?
@@ -239,7 +232,7 @@ const pump = {
      * @summary add a bolus
      * @param {string} units
      */
-    async bolus(units) {
+    async Bolus(units) {
         await match.accessible.Button('Bolus').tap();
         //TODO: why can't we match on label? by.label('Bolus Amount')
         await element(by.type('UITextField')).clearText();
