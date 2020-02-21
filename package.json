@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest",
-    "e2e:test": "detox test e2e/smoke_test -c ios.sim.release",
-    "scenarios:test": "detox test e2e/scenario_test -c ios.sim.release",
-    "build": "detox build -c ios.sim.release",
+    "e2e:test": "detox test e2e/smoke_test -c ios.sim.debug",
+    "scenarios:test": "detox test e2e/scenario_test -c ios.sim.debug",
+    "build": "detox build -c ios.sim.debug",
     "e2e:ci": "npm run build && npm run e2e:test -- --cleanup",
     "scenarios:ci": "npm run build && npm run scenarios:test -- --cleanup",
     "lint": "eslint ."

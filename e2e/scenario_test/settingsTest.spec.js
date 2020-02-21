@@ -1,38 +1,54 @@
-const { setup, pump, cgm } = require('../../src/index');
+const { setup, pump, cgm, match, settings } = require('../../src/index');
 
 describe('Pump Settings', () => {
     beforeAll(async () => {
-        await setup.launchLoop();
-        await setup.loadScenarios(device.id);
-        await cgm.add();
-        await pump.add();
-        await setup.loadScenario('Flat cgm');
+        await setup.LaunchLoop();
+        await setup.LoadScenarios(device.id);
+        await cgm.Add();
+        await pump.Add();
+        await setup.LoadScenario('flat_cgm');
+    });
+    afterAll(async () => {
+        await cgm.Remove();
+        await pump.Remove();
     });
     describe('Closed loop is not allowed', () => {
         describe('When correction range is not set', () => {
+            afterAll(async () => {
+                await cgm.RemoveData();
+                await pump.RemoveData();
+            });
             it('should not have correction range set', async () => {
-                await pump.checkCorrectionRange(false);
+                await settings.CheckCorrectionRange(false);
             });
             it('should set the suspend threshold', async () => {
-                await pump.setSuspend('130');
+                await settings.Suspend('130');
             });
             it('should set the basal rates', async () => {
-                await pump.setBasalRates('0.1');
+                await settings.BasalRates('0.1');
             });
             it('should set the delivery limits', async () => {
-                await pump.setDeliveryLimits('0.5', '10.0');
+                await settings.DeliveryLimits('0.5', '10.0');
             });
             it('should set the insulin model', async () => {
-                await pump.setInsulinModel(pump.insulinModel.RapidAdults);
+                await settings.InsulinModel(settings.InsulinModels.RapidAdults);
             });
             it('should set the carb ratios', async () => {
-                await pump.setCarbRatios('8');
+                await settings.CarbRatios('8');
             });
             it('should set insulin sensitivites set', async () => {
-                await pump.setInsulinSensitivities('500');
+                await settings.InsulinSensitivities('500');
             });
-            it('should not allow closed loop mode', async () => {
-                await setup.setClosedLoop();
+            it('should toggle on closed loop', async () => {
+                await settings.ClosedLoop();
+            });
+            it('should not be in closed loop mode', async () => {
+                await expect(element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView')))).toExist();
+            });
+            it('should show configuration error that indicates why not in closed loop mode', async () => {
+                await element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView'))).tap();
+                await expect(match.accessible.Label('Configuration Error: Check Settings')).toExist();
+                await match.accessible.Button('OK').tap();
             });
         });
     });

@@ -4,16 +4,21 @@ const match = require('./match');
 
 const setup = {
     /**
-     * @name launchLoop
-     * @summary will lauch loop app with permissons for notifications and health enabled
+     * @name LaunchLoop
+     * @summary will launch the loop app with permissons for notifications and health enabled
      */
-    async launchLoop() {
+    async LaunchLoop() {
         await device.launchApp({
             newInstance: true,
             permissions: { notifications: 'YES', health: 'YES' },
         });
     },
-    async loadScenarios(deviceId) {
+    /**
+     * @name LoadScenarios
+     * @param {string} deviceId
+     * @summary will load all available scenarios for the given deviceId
+     */
+    async LoadScenarios(deviceId) {
         const loadScenariosShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
         loadScenariosShellScript.stdout.on('data', () => {
             return null;
@@ -22,28 +27,16 @@ const setup = {
             throw Error(data);
         });
     },
-    async loadScenario(scenarioName) {
-        await device.shake();
-        await expect(match.accessibilityLabelText(scenarioName)).toExist();
-        await match.accessibilityLabelText(scenarioName).tap();
-        await match.accessibilityButtonBarButton('Load').tap();
-    },
     /**
-     * @name setClosedLoop
-     * @summary if not already in closed loop mode we will turn it on
+     * @name LoadScenario
+     * @param {string} scenarioName
+     * @summary will select and load the given scenario
      */
-    async setClosedLoop() {
-        await match.accessibilityButtonBarButton('Settings').tap();
-        await match.accessibilityButton('Closed Loop').tap();
-        try {
-            await expect(match.accessibilityButton('Closed Loop')).toHaveValue('1');
-            console.log('all good');
-        } catch (err) {
-            console.log('hmmm failed ..');
-            await match.accessibilityButton('Closed Loop').tap();
-            await expect(match.accessibilityButton('Closed Loop')).toHaveValue('1');
-        }
-        await match.accessibilityButtonBarButton('Done').tap();
+    async LoadScenario(scenarioName) {
+        await device.shake();
+        await expect(match.accessible.Label(scenarioName)).toExist();
+        await match.accessible.Label(scenarioName).tap();
+        await match.accessible.ButtonBarButton('Load').tap();
     },
 };
 
