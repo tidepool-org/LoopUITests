@@ -82,6 +82,9 @@ const match = {
         PickerItem(index, label) {
             return element(by.type('UILabel').and(by.label(label).and(by.traits(['text']))).withAncestor(by.type('UIPickerTableViewTitledCell'))).atIndex(index);
         },
+        AlertLabel(label){
+            return element(by.label(label).and(by.traits(['text'])).withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView')));
+        },
     },
     /**
      * @summary get a non accessible UIEditableTextField
