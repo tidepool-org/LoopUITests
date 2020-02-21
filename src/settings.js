@@ -1,20 +1,6 @@
 const element = require('detox').element;
 const match = require('./match');
 
-
-async function setGlucoseCorrectionRange(range, index) {
-    const CorrectionRangePickerColumns = {
-        Units: 5,
-        MaximumValue: 4,
-        Separator: 3,
-        MinimumValue: 2,
-        Time: 1,
-    };
-    await match.accessible.Label(`${range.time}`).atIndex(0).tap();
-    await match.PickerItem(index, `${range.max}`).tap(); //sets max
-    await match.PickerItem(index, `${range.min}`).atIndex(CorrectionRangePickerColumns.MinimumValue).tap();
-}
-
 const settings = {
     /**
      * @name InsulinModels
@@ -25,34 +11,6 @@ const settings = {
         RapidAdults: { value: 1, name: "Rapid-Acting – Adults" },
         RapidChildren: { value: 2, name: "Rapid-Acting – Children" },
         Fiasp: { value: 3, name: "Fiasp" }
-    },
-    // /**
-    //  * @name CorrectionRangePickerColumns
-    //  * @summary columns in correction range picker
-    //  */
-    // CorrectionRangePickerColumns: {
-    //     Units: 1,
-    //     MaximumValue: 2,
-    //     Separator: 3,
-    //     MinimumValue: 4,
-    //     Time: 5,
-
-    //     // Time: 0,
-    //     // MinimumValue:1 ,
-    //     // Separator: 2,
-    //     // MaximumValue: 3,
-    //     // Units: 4,
-    // },
-    /**
-     * @name GlucoseRangeOverridePickerColumns
-     * @summary columns in override correction range picker
-     */
-    GlucoseRangeOverridePickerColumns: {
-        Label: 0,
-        MinimumValue: 1,
-        Separator: 2,
-        MaximumValue: 3,
-        Units: 4,
     },
     /**
      * @name settings.BasalRates
@@ -229,8 +187,8 @@ const settings = {
             for (let index = 0; index < ranges.length; index++) {
                 const range = ranges[index];
                 await match.accessible.Label(`${range.time}`).atIndex(0).tap();
-                await match.PickerItem(pickerItemIndex, `${range.max}`).tap();
-                await match.PickerItem(pickerItemIndex, `${range.min}`).atIndex(correctionRangePickerColumns.MinimumValue).tap();
+                await match.accessible.PickerItem(pickerItemIndex, `${range.max}`).tap();
+                await match.accessible.PickerItem(pickerItemIndex, `${range.min}`).atIndex(correctionRangePickerColumns.MinimumValue).tap();
                 pickerItemIndex++;
             }
         }
@@ -240,7 +198,7 @@ const settings = {
     },
     /**
      * @name settings.CorrectionRangeOverride
-     * @param {object} override e.g. { min: '80', max: '150' });
+     * @param {object} override e.g. { min: '80', max: '150' };
      */
     async PreMealCorrectionRange(override) {
         const glucoseRangeOverridePickerColumns = {
@@ -254,8 +212,8 @@ const settings = {
         await match.accessible.Text('Correction Range').tap();
         if (override) {
             await match.accessible.Label('Pre-Meal').tap();
-            await match.PickerItem(2, `${override.max}`).tap(); //sets max
-            await match.PickerItem(2, `${override.min}`).atIndex(glucoseRangeOverridePickerColumns.MinimumValue).tap(); //sets min
+            await match.accessible.PickerItem(2, `${override.max}`).tap(); //sets max
+            await match.accessible.PickerItem(2, `${override.min}`).atIndex(glucoseRangeOverridePickerColumns.MinimumValue).tap(); //sets min
         }
         await match.accessible.Label('Save').tap();
         await match.accessible.BackButton('Settings').tap();

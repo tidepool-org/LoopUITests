@@ -7,19 +7,10 @@ describe('Pump Settings', () => {
         await cgm.Add();
         await pump.Add();
     });
-
-    afterAll(async () => {
-        await cgm.Remove();
-        await pump.Remove();
-    });
     describe('Closed loop is not allowed', () => {
         describe('When correction range is not set', () => {
             beforeAll(async () => {
                 await setup.LoadScenario('flat_cgm');
-            });
-            afterAll(async () => {
-                await cgm.RemoveData();
-                await pump.RemoveData();
             });
             it('should not have correction range set', async () => {
                 await settings.CheckCorrectionRange(false);

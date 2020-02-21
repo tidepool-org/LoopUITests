@@ -74,15 +74,14 @@ const match = {
             return element(by.text(text).and(by.traits(['text'])));
         },
         /*
-    * @summary returns Picker item for given label and index
-    * @param {Integer} index
-    * @param {string} label
-    * @returns {Detox.Element}
-    */
-   PickerItem(index) {
-    return element(by.type('UIAccessibilityPickerComponent')).atIndex(index);
-    //return element(by.type('UIAccessibilityPickerComponent').and(by.label(label).and(by.traits(['adjustable'])))).atIndex(index);
-}
+        * @summary returns Picker item for given label and index
+        * @param {Integer} index
+        * @param {string} label
+        * @returns {Detox.Element}
+        */
+        PickerItem(index, label) {
+            return element(by.type('UILabel').and(by.label(label).and(by.traits(['text']))).withAncestor(by.type('UIPickerTableViewTitledCell'))).atIndex(index);
+        },
     },
     /**
      * @summary get a non accessible UIEditableTextField
@@ -99,24 +98,6 @@ const match = {
     ButtonBarButton(label) {
         return element(by.label(label).and(by.type('_UIButtonBarButton')));
     },
-    /**
-     * @summary returns any Glucose Range Picker
-     * @param {Integer} index
-     * @returns {Detox.Element}
-     */
-    GlucoseRangePicker(index) {
-        //return element(by.type('LoopKitUI.GlucoseRangeTableViewCell')).atIndex(index);
-        return element(by.type('UIPickerView').withAncestor(by.type('LoopKitUI.GlucoseRangeTableViewCell'))).atIndex(index);
-    },
-    /*
-    * @summary returns Picker item for given label and index
-    * @param {Integer} index
-    * @param {string} label
-    * @returns {Detox.Element}
-    */
-   PickerItem(index, label) {
-       return element(by.type('UILabel').and(by.label(label)).withAncestor(by.type('UIPickerTableViewTitledCell'))).atIndex(index);
-   },
 };
 
 module.exports = match;
