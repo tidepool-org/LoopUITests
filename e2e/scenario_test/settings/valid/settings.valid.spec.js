@@ -39,7 +39,8 @@ describe('Pump Settings', () => {
             it('should not be in closed loop mode yet', async () => {
                 await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
             });
-            it('should show no alert when tapping loop icon', async () => {
+            it.skip('should show no alert when tapping loop icon', async () => {
+                //TODO: need a valid way to assert we are in closed loop mode
                 await match.loop.Icon().tap();
             });
         });
