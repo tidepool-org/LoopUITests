@@ -37,10 +37,10 @@ describe('Pump Settings', () => {
                 await settings.ClosedLoop();
             });
             it('should not be in closed loop mode yet', async () => {
-                await expect(element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView')))).toExist();
+                await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
             });
-            it.skip('should show configuration error that indicates why not in closed loop mode', async () => {
-                await element(by.type('LoopUI.LoopCompletionHUDView')).tap();
+            it('should show no alert when tapping loop icon', async () => {
+                await match.loop.Icon().tap();
             });
         });
     });

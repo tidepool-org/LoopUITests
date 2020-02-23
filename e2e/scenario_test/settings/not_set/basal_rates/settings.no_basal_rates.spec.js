@@ -37,10 +37,10 @@ describe('Pump Settings', () => {
                 await settings.ClosedLoop();
             });
             it('should not be in closed loop mode', async () => {
-                await expect(element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView')))).toExist();
+                await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
             });
             it('should show error that indicates why not in closed loop mode', async () => {
-                await element(by.label('Waiting for first run').and(by.type('LoopUI.LoopCompletionHUDView'))).tap();
+                await match.loop.Icon().tap();
                 await waitFor(match.accessible.AlertLabel('Missing Data: Insulin Effects')).toExist().withTimeout(2000);
                 await match.accessible.Button('OK').tap();
             });
