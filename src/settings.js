@@ -3,10 +3,10 @@ const match = require('./match');
 
 const settings = {
     /**
-     * @name InsulinModels
      * @summary insulin activity model
+     * @example settings.InsulinModel.Fiasp
      */
-    InsulinModels: {
+    InsulinModel: {
         Walsh: { value: 0, name: "Walsh" },
         RapidAdults: { value: 1, name: "Rapid-Acting – Adults" },
         RapidChildren: { value: 2, name: "Rapid-Acting – Children" },
@@ -14,130 +14,71 @@ const settings = {
         NotSet: { value: 4, name: "" }
     },
     /**
-     * @name settings.BasalRates
-     * @param {string} [basalUnitsPerHour] e.g. '0.1'
+     * @summary basal rates to be set. NOTE: it is assumed that the rates are given in order of time
+     * @param {Array} rates [{time:'12:00 AM', unitsPerHour:'0.1'}]
+     * @example await settings.BasalRates([{time:'12:00 AM', unitsPerHour:'0.1'},{time:'12:30 AM', unitsPerHour:'0.3'}])
      */
-    async BasalRates(basalUnitsPerHour) {
-        if (basalUnitsPerHour) {
-            const unitsSuffix = 'U/hr';
-            await match.accessible.ButtonBarButton('Settings').tap();
-            await match.accessible.Text('Basal Rates').tap();
-            await expect(match.accessible.Header('Basal Rates')).toExist();
-            await match.accessible.ButtonBarButton('Add').tap();
-            await match.accessible.Label(`0 ${unitsSuffix}`).atIndex(0).tap();
-            await match.accessible.Label(`${basalUnitsPerHour} ${unitsSuffix}`).tap();
-            await match.accessible.Label('Save to simulator').tap();
-            await match.accessible.BackButton('Settings').tap();
-            await match.accessible.ButtonBarButton('Done').tap();
-        }
-    },
-    /**
-     * @name settings.CheckBasalRates
-     * @param {string} [basalUnitsPerHour] e.g. '0.1 U/hr'
-    */
-    async CheckBasalRates(basalUnitsPerHour) {
+    async BasalRates(rates) {
+        const unitsSuffix = 'U/hr';
         await match.accessible.ButtonBarButton('Settings').tap();
         await match.accessible.Text('Basal Rates').tap();
         await expect(match.accessible.Header('Basal Rates')).toExist();
-        //TODO check the rate
+
+        for (let index = 0; index < rates.length; index++) {
+            const rate = rates[index];
+            await match.accessible.ButtonBarButton('Add').tap();
+            if (index == 0) {
+                await match.accessible.Label(`0 ${unitsSuffix}`).atIndex(0).tap();
+            } else {
+                await match.accessible.Label(`${rates[index - 1].unitsPerHour} ${unitsSuffix}`).atIndex(0).tap();
+            }
+            await match.accessible.Label(`${rate.unitsPerHour} ${unitsSuffix}`).tap();
+            await match.accessible.Label(`${rate.time}`);
+        }
+
+        await match.accessible.Label('Save to simulator').tap();
         await match.accessible.BackButton('Settings').tap();
         await match.accessible.ButtonBarButton('Done').tap();
     },
     /**
-     * @name settings.Suspend
+     * @name settings.SuspendThreshold
      * @summary set the suspend threshold in mg/dL
      * @param {string} threshold e.g. '150'
      */
-    async Suspend(threshold) {
-        if (threshold) {
-            await match.accessible.ButtonBarButton('Settings').tap();
-            await match.accessible.Text('Suspend Threshold').tap();
-            await match.UIEditableTextField().typeText(threshold);
-            await expect(match.UIEditableTextField()).toHaveText(threshold);
-            await match.accessible.BackButton('Settings').tap();
-            await match.accessible.ButtonBarButton('Done').tap();
-        }
-    },
-    /**
-     * @name settings.CheckSuspend
-     * @summary check the suspend threshold in mg/dL
-     * @param {string} threshold e.g. '150'
-     */
-    async CheckSuspend(threshold) {
+    async SuspendThreshold(threshold) {
         await match.accessible.ButtonBarButton('Settings').tap();
         await match.accessible.Text('Suspend Threshold').tap();
+        await match.UIEditableTextField().typeText(threshold);
         await expect(match.UIEditableTextField()).toHaveText(threshold);
         await match.accessible.BackButton('Settings').tap();
         await match.accessible.ButtonBarButton('Done').tap();
     },
     /**
-     * @param {string} maxBasalRate e.g. '1.0'
-     * @param {string} maxBolus e.g. '10.0'
-     * @example await settings.DeliveryLimits('1.2','11.0')
+     * @param {object} { maxBasalRate string, maxBolus string }
+     * @example await settings.DeliveryLimits({maxBasalRate:'1.0', maxBolus:'10.0'})
      */
-    async DeliveryLimits(maxBasalRate, maxBolus) {
-        const limits = {
-            maxBasalRateField: 0,
-            maxBolusField: 1,
-        };
-        if (maxBasalRate || maxBolus) {
-            await match.accessible.ButtonBarButton('Settings').tap();
-            await match.accessible.Text('Delivery Limits').tap();
-            if (maxBasalRate) {
-                await match.UIEditableTextField().atIndex(limits.maxBasalRateField).clearText();
-                await match.UIEditableTextField().atIndex(limits.maxBasalRateField).typeText(maxBasalRate);
-                await match.UIEditableTextField().atIndex(limits.maxBasalRateField).tapReturnKey();
-            }
-            if (maxBolus) {
-                await match.UIEditableTextField().atIndex(limits.maxBolusField).clearText();
-                await match.UIEditableTextField().atIndex(limits.maxBolusField).typeText(maxBolus);
-                await match.UIEditableTextField().atIndex(limits.maxBolusField).tapReturnKey();
-            }
-            await expect(match.UIEditableTextField().atIndex(limits.maxBasalRateField)).toHaveText(maxBasalRate);
-            await expect(match.UIEditableTextField().atIndex(limits.maxBolusField)).toHaveText(maxBolus);
-            await match.accessible.Label('Save to simulator').tap();
-            await match.accessible.BackButton('Settings').tap();
-            await match.accessible.ButtonBarButton('Done').tap();
-        }
-    },
-    /**
-     * @name settings.CheckDeliveryLimits
-     * @param {string} maxBasalRate e.g. '1.0'
-     * @param {string} maxBolus e.g. '10.0'
-     */
-    async CheckDeliveryLimits(maxBasalRate, maxBolus) {
-        const limits = {
-            maxBasalRateField: 0,
-            maxBolusField: 1,
-        };
+    async DeliveryLimits(limits) {
         await match.accessible.ButtonBarButton('Settings').tap();
         await match.accessible.Text('Delivery Limits').tap();
-        await expect(match.UIEditableTextField().atIndex(limits.maxBasalRateField)).toHaveText(maxBasalRate);
-        await expect(match.UIEditableTextField().atIndex(limits.maxBolusField)).toHaveText(maxBolus);
+        //TODO: using atIndex, need a better way to select these
+        await match.UIEditableTextField().atIndex(0).clearText();
+        await match.UIEditableTextField().atIndex(0).typeText(limits.maxBasalRate);
+        await match.UIEditableTextField().atIndex(0).tapReturnKey();
+        await expect(match.UIEditableTextField().atIndex(0)).toHaveText(limits.maxBasalRate);
+        await match.UIEditableTextField().atIndex(1).clearText();
+        await match.UIEditableTextField().atIndex(1).typeText(limits.maxBolus);
+        await match.UIEditableTextField().atIndex(1).tapReturnKey();
+        await expect(match.UIEditableTextField().atIndex(1)).toHaveText(limits.maxBolus);
+        await match.accessible.Label('Save to simulator').tap();
         await match.accessible.BackButton('Settings').tap();
         await match.accessible.ButtonBarButton('Done').tap();
     },
     /**
      * @name settings.InsulinModel
-     * @param {InsulinModels} model e.g. 'Walsh'
+     * @param {InsulinModel} model e.g. 'Walsh'
+     * @example await settings.SelectInsulinModel(settings.InsulinModel.Fiasp)
      */
-    async InsulinModel(model) {
-        if (model) {
-            if (model.name == this.InsulinModels.NotSet) {
-                return;
-            }
-            await match.accessible.ButtonBarButton('Settings').tap();
-            await match.accessible.Text('Insulin Model').tap();
-            await match.accessible.Text(model.name).tap();
-            await match.accessible.BackButton('Settings').tap();
-            await match.accessible.ButtonBarButton('Done').tap();
-        }
-    },
-    /**
-     * @name settings.CheckInsulinModels
-     * @param {InsulinModels} model e.g. 'Walsh'
-     */
-    async CheckInsulinModels(model) {
+    async SelectInsulinModel(model) {
         await match.accessible.ButtonBarButton('Settings').tap();
         await match.accessible.Text('Insulin Model').tap();
         await match.accessible.Text(model.name).tap();
@@ -145,64 +86,63 @@ const settings = {
         await match.accessible.ButtonBarButton('Done').tap();
     },
     /**
-     * @name settings.CarbRatios
-     * @param {string} ratio
-     */
-    async CarbRatios(ratio) {
-        if (ratio) {
-            await match.accessible.ButtonBarButton('Settings').tap();
-            await expect(match.accessible.UILabel('Carb Ratios')).toExist();
-            await match.accessible.UILabel('Carb Ratios').tap();
-            await match.accessible.ButtonBarButton('Add').tap();
-            await element(by.type('UITextField')).clearText();
-            await element(by.type('UITextField')).typeText(ratio);
-            await expect(element(by.type('UITextField'))).toHaveText(ratio);
-            await match.accessible.BackButton('Settings').tap();
-            await match.accessible.ButtonBarButton('Done').tap();
-        }
-    },
-    /**
-     * @name settings.InsulinSensitivities
-     * @param {string} sensitivites
-     */
-    async InsulinSensitivities(sensitivity) {
-        if (sensitivity) {
-            const unitsSuffix = 'mg/dL/U';
-            await match.accessible.ButtonBarButton('Settings').tap();
-            //need to scroll to section
-            await match.accessible.UILabel('Carb Ratios').swipe('up', 'fast');
-            await match.accessible.Label('Insulin Sensitivities').tap();
-            await match.accessible.ButtonBarButton('Add').tap();
-            //TODO: why are there two??
-            await match.accessible.Label(`${sensitivity} ${unitsSuffix}`).atIndex(1).tap();
-            await match.accessible.Label('Save').tap();
-            await match.accessible.BackButton('Settings').tap();
-            await match.accessible.ButtonBarButton('Done').tap();
-        }
-    },
-    /**
-     * @name settings.CheckCorrectionRange
-     * @param {boolean} isSet
-     */
-    async CheckCorrectionRange(isSet) {
+    * @summary ratios be set. NOTE: it is assumed that the ratios are given in order of time
+    * @param {Array} ratios [{time:'12:00 AM', carbGramsPerInsulinUnit:'8'}]
+    * @example await settings.CarbRatios([{time:'12:00 AM', carbGramsPerInsulinUnit:'8'},{time:'12:30 AM', carbGramsPerInsulinUnit:'7'}])
+    */
+    async CarbRatios(ratios) {
         await match.accessible.ButtonBarButton('Settings').tap();
-        await expect(match.accessible.UILabel('Correction Range')).toExist();
-        await match.accessible.UILabel('Correction Range').tap();
-        await expect(match.accessible.ButtonBarButton('Edit', isSet)).toExist();
+        await expect(match.accessible.UILabel('Carb Ratios')).toExist();
+        await match.accessible.UILabel('Carb Ratios').tap();
+
+        for (let index = 0; index < ratios.length; index++) {
+            const ratio = ratios[index];
+            await match.accessible.ButtonBarButton('Add').tap();
+            if (index == 0) {
+                await element(by.type('UITextField')).clearText();
+                await element(by.type('UITextField')).typeText(ratio.carbGramsPerInsulinUnit);
+                await expect(element(by.type('UITextField'))).toHaveText(ratio.carbGramsPerInsulinUnit);
+            } else {
+                await element(by.type('UITextField').atIndex(index)).clearText();
+                await element(by.type('UITextField').atIndex(index)).typeText(ratio.carbGramsPerInsulinUnit);
+                await expect(element(by.type('UITextField').atIndex(index))).toHaveText(ratio.carbGramsPerInsulinUnit);
+            }
+        }
         await match.accessible.BackButton('Settings').tap();
         await match.accessible.ButtonBarButton('Done').tap();
     },
     /**
-     * @name settings.CorrectionRanges
+    * @summary Sensitivities be set. NOTE: it is assumed that the Sensitivities are given in order of time
+    * @param {Array} sensitivities [{time:'12:00 AM', bgValuePerInsulinUnit:'500'}]
+    * @example await settings.InsulinSensitivities([{time:'12:00 AM', bgValuePerInsulinUnit:'500'},{time:'12:30 AM', bgValuePerInsulinUnit:'499'}])
+    */
+    async InsulinSensitivities(sensitivities) {
+        const unitsSuffix = 'mg/dL/U';
+        await match.accessible.ButtonBarButton('Settings').tap();
+        //need to scroll to section
+        await match.accessible.UILabel('Carb Ratios').swipe('up', 'fast');
+        await match.accessible.Label('Insulin Sensitivities').tap();
+        for (let index = 0; index < sensitivities.length; index++) {
+            const sensitivity = sensitivities[index];
+            await match.accessible.ButtonBarButton('Add').tap();
+            await match.accessible.Label(`${sensitivity.bgValuePerInsulinUnit} ${unitsSuffix}`).atIndex(1).tap();
+        }
+        await match.accessible.Label('Save').tap();
+        await match.accessible.BackButton('Settings').tap();
+        await match.accessible.ButtonBarButton('Done').tap();
+    },
+    /**
+     * @summary correct ranges to be set. NOTE: it is assumed that the ranges are given in order of time
      * @param {object} ranges e.g. [{ time: '12:00 AM', min: '80', max: '150' }];
+     * @example await settings.CorrectionRanges([{ time: '12:00 AM', min: '80', max: '150' },{ time: '12:30 AM', min: '80', max: '130' }])
      */
     async CorrectionRanges(ranges) {
         const correctionRangePickerColumns = {
-            Units: 5,
-            MaximumValue: 4,
-            Separator: 3,
-            MinimumValue: 2,
             Time: 1,
+            MinimumValue: 2,
+            Separator: 3,
+            MaximumValue: 4,
+            Units: 5,
         };
         if (ranges) {
             await match.accessible.ButtonBarButton('Settings').tap();
@@ -224,8 +164,8 @@ const settings = {
         }
     },
     /**
-     * @name settings.CorrectionRangeOverride
-     * @param {object} preMeal e.g. { min: '80', max: '150' };
+     * @param {object} override e.g. { min: '80', max: '150' };
+     * @example await settings.PreMealCorrectionRange({ min: '80', max: '150' })
      */
     async PreMealCorrectionRange(preMeal) {
         const glucosePreMealOverridePickerColumns = {

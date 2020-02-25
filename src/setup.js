@@ -14,16 +14,16 @@ const setup = {
         });
     },
     /**
-     * @name LoadScenarios
+     * @name LoadDeviceScenariosFromDisk
      * @param {string} deviceId
      * @summary will load all available scenarios for the given deviceId
      */
-    async LoadScenarios(deviceId) {
-        const loadScenariosShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
-        loadScenariosShellScript.stdout.on('data', () => {
+    async LoadDeviceScenariosFromDisk(deviceId) {
+        const LoadDeviceScenariosFromDiskShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
+        LoadDeviceScenariosFromDiskShellScript.stdout.on('data', () => {
             return null;
         });
-        loadScenariosShellScript.stderr.on('data', (data) => {
+        LoadDeviceScenariosFromDiskShellScript.stderr.on('data', (data) => {
             throw Error(data);
         });
     },

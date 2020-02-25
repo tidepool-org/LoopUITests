@@ -25,10 +25,10 @@ const cgm = {
         RandomError: { value: 3, name: "Random Error" }
     },
     /**
-     * @name cgm.Add
+     * @name cgm.AddSimulator
      * @summary add the cgm simulator
      */
-    async Add() {
+    async AddSimulator() {
         await match.accessible.ButtonBarButton('Settings').tap();
         await match.accessible.UILabel('Add CGM').tap();
         await match.accessible.Button('Simulator').tap();

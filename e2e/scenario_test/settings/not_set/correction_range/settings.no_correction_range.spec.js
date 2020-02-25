@@ -3,9 +3,9 @@ const { setup, pump, cgm, match, settings } = require('../../../../../src/index'
 describe('Pump Settings', () => {
     beforeAll(async () => {
         await setup.LaunchLoop();
-        await setup.LoadScenarios(device.id);
-        await cgm.Add();
-        await pump.Add();
+        await setup.LoadDeviceScenariosFromDisk(device.id);
+        await cgm.AddSimulator();
+        await pump.AddSimulator();
     });
     describe('Closed loop is not allowed', () => {
         describe('When correction range is not set', () => {
