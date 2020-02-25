@@ -78,7 +78,7 @@ describe('smoke test', () => {
     });
     describe('cgm', () => {
         it('can be added', async () => {
-            await cgm.Add();
+            await cgm.AddSimulator();
         });
         it('can configure simulator model', async () => {
             await cgm.Model(cgm.Models.Constant, ['114']);
@@ -95,33 +95,33 @@ describe('smoke test', () => {
     });
     describe('pump', () => {
         it('can be added', async () => {
-            await pump.Add();
+            await pump.AddSimulator();
         });
         describe('settings', () => {
             it('set suspend threshold', async () => {
-                await settings.Suspend('65');
+                await settings.SuspendThreshold('65');
             });
             it('set basal rates', async () => {
-                await settings.BasalRates('0.1');
+                await settings.BasalRates([{time:'12:00 AM', unitsPerHour:'0.1'}]);
             });
             it('set delivery limits', async () => {
-                await settings.DeliveryLimits('0.5', '10.0');
+                await settings.DeliveryLimits({maxBasalRate:'0.5', maxBolus:'10.0'});
             });
             it('set insulin model', async () => {
-                await settings.InsulinModel(settings.InsulinModels.RapidAdults);
+                await settings.SelectInsulinModel(settings.InsulinModel.RapidAdults);
             });
             it('set carb ratios', async () => {
-                await settings.CarbRatios('8');
+                await settings.CarbRatios([{time:'12:00 AM', carbGramsPerInsulinUnit:'8'}]);
             });
             it('set insulin sensitivites', async () => {
-                await settings.InsulinSensitivities('500');
+                await settings.InsulinSensitivities([{time:'12:00 AM', bgValuePerInsulinUnit:'500'}]);
             });
             it('set correction range', async () => {
                 await settings.CorrectionRanges([{ time: '12:00 AM',min: '179', max: '180' }]);
             });
         });
-        describe.skip('deliver', () => {
-            it('bolus', async () => {
+        describe('deliver', () => {
+            it.skip('bolus', async () => {
                 //TODO: unable at the moment to add bolus
                 await pump.Bolus('3.5');
                 await device.takeScreenshot('deliver bolus');

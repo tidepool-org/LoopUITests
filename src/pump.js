@@ -6,10 +6,10 @@ const match = require('./match');
  */
 const pump = {
     /**
-     * @name pump.Add
+     * @name pump.AddSimulator
      * @summary add the simulator pump for loop
      */
-    async Add() {
+    async AddSimulator() {
         await match.accessible.ButtonBarButton('Settings').tap();
         await match.accessible.UILabel('Add Pump').tap();
         match.accessible.HeaderText('Pump Settings');
