@@ -223,66 +223,53 @@ const settings = {
          * @summary
          */
         DeliveryLimits: { maxBolus: '10.0', maxBasalRate: '3.0' },
-        BasalRates: { units: '0.1' },
+        BasalRates: [{ time: '12:00 AM', unitsPerHour: '0.1' }],
         SuspendThreshold: { threshold: '75' },
         InsulinModel: { value: 2, name: "Rapid-Acting – Children" },
-        CarbRatios: { ratio: '8' },
-        InsulinSensitivities: { sensitivity: '500' },
+        CarbRatios: [{ time: '12:00 AM', carbGramsPerInsulinUnit: '8' }],
+        InsulinSensitivities: [{ time: '12:00 AM', bgValuePerInsulinUnit: '500' }],
         CorrectionRanges: [{ time: '12:00 AM', min: '179', max: '180' }],
         PreMealCorrectionRange: { min: '179', max: '180' },
     },
     /**
-     * @summary Settings that are availabe to be set
+     * @summary filter out settings defaults for those that you don't want to apply
+     * @param {Array} fields
+     * @example settings.Filter(['BasalRates','InsulinSensitivities'])
+     * @returns filtered Defaults set
      */
-    Setting: {
-        BasalRates: "BasalRates",
-        DeliveryLimits: "DeliveryLimits",
-        Suspend: "Suspend",
-        InsulinModel: "InsulinModel",
-        CarbRatios: "CarbRatios",
-        InsulinSensitivities: "InsulinSensitivities",
-        CorrectionRanges: "CorrectionRanges"
+    Filter(fields) {
+        const filtered = this.Defaults;
+        for (const field of fields) {
+            delete filtered[field];
+        }
+        return filtered;
     },
     /**
      * @summary helper function to set seetings by applying the {settings.Defaults}
-     * @param  {Setting[]} doNotSet list of settings that will not be applied
-     * @example await settings.ApplyUsingDefaults(settings.Setting.Suspend)
+     * @param  {Defaults} defaults list of settings that will not be applied
+     * @example await settings.Apply(settings.Defaults)
      */
-    async ApplyUsingDefaults(...doNotSet) {
-        if (doNotSet.includes(this.Setting.BasalRates)) {
-            await this.BasalRates('');
-        } else {
-            await this.BasalRates(this.Defaults.BasalRates.units);
+    async Apply(values) {
+        if (values.BasalRates) {
+            await this.BasalRates(values.BasalRates);
         }
-        if (doNotSet.includes(this.Setting.DeliveryLimits)) {
-            await this.DeliveryLimits('', '');
-        } else {
-            await this.DeliveryLimits(this.Defaults.DeliveryLimits.maxBasalRate, this.Defaults.DeliveryLimits.maxBolus);
+        if (values.DeliveryLimits) {
+            await this.DeliveryLimits(values.DeliveryLimits);
         }
-        if (doNotSet.includes(this.Setting.Suspend)) {
-            await this.Suspend('');
-        } else {
-            await this.Suspend(this.Defaults.SuspendThreshold.threshold);
+        if (values.SuspendThreshold) {
+            await this.SuspendThreshold(values.SuspendThreshold.threshold);
         }
-        if (doNotSet.includes(this.Setting.InsulinModel)) {
-            await this.InsulinModel(this.InsulinModels.NotSet);
-        } else {
-            await this.InsulinModel(this.Defaults.InsulinModel);
+        if (values.InsulinModel) {
+            await this.SelectInsulinModel(values.InsulinModel);
         }
-        if (doNotSet.includes(this.Setting.CarbRatios)) {
-            await this.CarbRatios('');
-        } else {
-            await this.CarbRatios(this.Defaults.CarbRatios.ratio);
+        if (values.CarbRatios) {
+            await this.CarbRatios(values.CarbRatios);
         }
-        if (doNotSet.includes(this.Setting.InsulinSensitivities)) {
-            await this.InsulinSensitivities('');
-        } else {
-            await this.InsulinSensitivities(this.Defaults.InsulinSensitivities.sensitivity);
+        if (values.InsulinSensitivities) {
+            await this.InsulinSensitivities(values.InsulinSensitivities);
         }
-        if (doNotSet.includes(this.Setting.CorrectionRanges)) {
-            await this.CorrectionRanges([]);
-        } else {
-            await this.CorrectionRanges(this.Defaults.CorrectionRanges);
+        if (values.CorrectionRanges) {
+            await this.CorrectionRanges(values.CorrectionRanges);
         }
     },
 };
