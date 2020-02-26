@@ -10,19 +10,19 @@ const cgm = {
      * @summary CGM model that can be applied to the simulator
      */
     Models: {
-        Constant: { value: 0, name: "Constant" },
-        SineCurve: { value: 1, name: "Sine Curve" },
-        None: { value: 2, name: "No Data" }
+        Constant: { value: 0, name: 'Constant' },
+        SineCurve: { value: 1, name: 'Sine Curve' },
+        None: { value: 2, name: 'No Data' }
     },
     /**
      * @name cgm.Effects
      * @summary CGM effects that can be applied to the simulator
      */
     Effects: {
-        GlucoseNoise: { value: 0, name: "Glucose Noise" },
-        RandomHighOutlier: { value: 1, name: "Random High Outlier" },
-        RandomLowOutlier: { value: 2, name: "Random Low Outlier" },
-        RandomError: { value: 3, name: "Random Error" }
+        GlucoseNoise: { value: 0, name: 'Glucose Noise' },
+        RandomHighOutlier: { value: 1, name: 'Random High Outlier' },
+        RandomLowOutlier: { value: 2, name: 'Random Low Outlier' },
+        RandomError: { value: 3, name: 'Random Error' }
     },
     /**
      * @name cgm.AddSimulator
