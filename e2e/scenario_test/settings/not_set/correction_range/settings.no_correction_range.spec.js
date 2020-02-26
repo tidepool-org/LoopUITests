@@ -12,11 +12,8 @@ describe('Pump Settings', () => {
             beforeAll(async () => {
                 await setup.LoadScenario('flat_cgm');
             });
-            it('should set all apart from the correction range', async () => {
+            it('should set all apart from the correction range ', async () => {
                 await settings.Apply(settings.Filter(['CorrectionRanges']));
-            });
-            it('should toggle on closed loop', async () => {
-                await settings.ClosedLoop();
             });
             it('should not be in closed loop mode', async () => {
                 await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');

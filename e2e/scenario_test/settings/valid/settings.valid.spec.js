@@ -15,9 +15,6 @@ describe('Pump Settings', () => {
             it('enable all settings', async () => {
                 await settings.Apply(settings.Defaults);
             });
-            it('should toggle on closed loop', async () => {
-                await settings.ClosedLoop();
-            });
             it('should not be in closed loop mode yet', async () => {
                 await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
             });

@@ -15,9 +15,6 @@ describe('Pump Settings', () => {
             it('should set all apart from the basal rates ', async () => {
                 await settings.Apply(settings.Filter(['BasalRates']));
             });
-            it('should toggle on closed loop', async () => {
-                await settings.ClosedLoop();
-            });
             it('should not be in closed loop mode', async () => {
                 await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
             });
