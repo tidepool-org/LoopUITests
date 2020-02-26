@@ -81,10 +81,10 @@ describe('smoke test', () => {
             await cgm.AddSimulator();
         });
         it('can configure simulator model', async () => {
-            await cgm.Model(cgm.Models.Constant, ['114']);
+            await cgm.ApplyModel(cgm.Model.Constant, ['114']);
         });
         it('can configure simulator effect', async () => {
-            await cgm.Effect(cgm.Effects.GlucoseNoise);
+            await cgm.ApplyEffect(cgm.Effect.GlucoseNoise);
         });
         it('can remove data', async () => {
             await cgm.RemoveData();
@@ -108,7 +108,7 @@ describe('smoke test', () => {
                 await settings.DeliveryLimits({maxBasalRate:'0.5', maxBolus:'10.0'});
             });
             it('set insulin model', async () => {
-                await settings.SelectInsulinModel(settings.InsulinModel.RapidAdults);
+                await settings.SelectInsulinApplyModel(settings.InsulinModel.RapidAdults);
             });
             it('set carb ratios', async () => {
                 await settings.CarbRatios([{time:'12:00 AM', carbGramsPerInsulinUnit:'8'}]);

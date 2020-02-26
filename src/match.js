@@ -40,6 +40,14 @@ const match = {
         },
         /**
          * @param {string} label
+         * @returns {Detox.Element} accessibilityBackButton
+         * @example await match.SwipeButton('some label').tap();
+         */
+        SwipeButton(label) {
+            return element(by.label(label).and(by.traits(['button']).and(by.type('UISwipeActionStandardButton'))));
+        },
+        /**
+         * @param {string} label
          * @returns {Detox.Element} accessibilityLabelText
          */
         Label(label) {
@@ -163,6 +171,13 @@ const match = {
      */
     UIEditableTextField() {
         return element(by.type('LoopKitUI.PaddedTextField'));
+    },
+    /**
+     * @summary get a non accessible UIEditableTextField
+     * @returns {Detox.Element} UIEditableTextField
+     */
+    UITextField() {
+        return element(by.type('UITextField'));
     },
     /**
      * @summary returns none accessible ButtonBarButton

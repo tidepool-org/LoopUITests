@@ -11,8 +11,8 @@ const carbs = {
         await match.accessible.Button('Add Meal').tap();
         await expect(match.accessible.Header('Add Carb Entry')).toExist();
         //TODO: we need a better way to find this
-        await element(by.type('UITextField')).clearText();
-        await element(by.type('UITextField')).typeText(carbsAmount);
+        await match.UITextField().clearText();
+        await match.UITextField().typeText(carbsAmount);
         await match.accessible.ButtonBarButton('Continue').tap();
         await match.accessible.Button('Save without Bolusing').tap();
     },

@@ -6,19 +6,19 @@ const match = require('./match');
  */
 const cgm = {
     /**
-     * @name cgm.Models
+     * @name cgm.Model
      * @summary CGM model that can be applied to the simulator
      */
-    Models: {
+    Model: {
         Constant: { value: 0, name: 'Constant' },
         SineCurve: { value: 1, name: 'Sine Curve' },
         None: { value: 2, name: 'No Data' }
     },
     /**
-     * @name cgm.Effects
-     * @summary CGM effects that can be applied to the simulator
+     * @name cgm.Effect
+     * @summary CGM Effect that can be applied to the simulator
      */
-    Effects: {
+    Effect: {
         GlucoseNoise: { value: 0, name: 'Glucose Noise' },
         RandomHighOutlier: { value: 1, name: 'Random High Outlier' },
         RandomLowOutlier: { value: 2, name: 'Random Low Outlier' },
@@ -37,21 +37,21 @@ const cgm = {
     /**
      * @name cgm.Effect
      * @summary set the cgm simulator effect
-     * @param {Effects} effect
+     * @param {Effect} effect
      */
-    async Effect(effect) {
+    async ApplyEffect(effect) {
         await match.accessible.ButtonBarButton('Settings').tap();
         //TODO assuming the second item as pump 'simulator' is first
         await match.accessible.Label('Simulator').atIndex(1).tap();
         match.accessible.HeaderText('CGM Settings');
         await match.accessible.Label(effect.name).tap();
         switch (effect) {
-            case this.Effects.GlucoseNoise:
+            case this.Effect.GlucoseNoise:
                 await match.UIEditableTextField().clearText();
                 await match.UIEditableTextField().typeText('100');
                 await match.ButtonBarButton('Back').tap();
                 break;
-            case this.Effects.RandomError:
+            case this.Effect.RandomError:
                 await match.UIEditableTextField().clearText();
                 await match.UIEditableTextField().typeText('10');
                 await match.ButtonBarButton('Back').tap();
@@ -67,19 +67,19 @@ const cgm = {
     * @param {Model} model e.g. Constant
     * @param {Array} bgValues e.g. [100, 50]
     */
-    async Model(model, bgValues) {
+    async ApplyModel(model, bgValues) {
         await match.accessible.ButtonBarButton('Settings').tap();
         //TODO assuming the second item as pump 'simulator' is first
         await match.accessible.Label('Simulator').atIndex(1).tap();
         match.accessible.HeaderText('CGM Settings');
         await match.accessible.Label(model.name).tap();
         switch (model) {
-            case this.Models.Constant:
+            case this.Model.Constant:
                 await match.UIEditableTextField().clearText();
                 await match.UIEditableTextField().typeText(bgValues[0]);
                 await match.accessible.BackButton('CGM Settings').tap();
                 break;
-            case this.Models.SineCurve:
+            case this.Model.SineCurve:
                 await match.accessible.Label('Base Glucose').tap();
                 await match.UIEditableTextField().clearText();
                 await match.UIEditableTextField().typeText(bgValues[0]);

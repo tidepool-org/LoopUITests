@@ -4,4 +4,5 @@
 
 ## Scenarios
 
-- `./scenarios/Sine Curve.json` a default generated script
+- `./scenarios/sine_curve.json` a default generated script
+- `./scenarios/flat_cgm.json` flat cgm trace, no insulin or carb events

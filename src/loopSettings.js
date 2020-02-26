@@ -10,11 +10,15 @@ const loopSettings = {
      * @example await settings.ConfiguredLoop({scenario:'flat_cgm', settings: settings.Defaults})
      */
     async Configure(config) {
-        await setup.LoadDeviceScenariosFromDisk(device.id);
+        if (config.scenario) {
+            await setup.LoadDeviceScenariosFromDisk(device.id);
+        }
         await cgm.AddSimulator();
         await pump.AddSimulator();
-        await setup.LoadScenario(config.scenario);
         await settings.Apply(config.settings);
+        if (config.scenario) {
+            await setup.LoadScenario(config.scenario);
+        }
     },
 };
 

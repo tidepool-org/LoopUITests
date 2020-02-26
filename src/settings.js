@@ -1,12 +1,13 @@
 const element = require('detox').element;
 const match = require('./match');
+const cgm = require('./cgm');
 
 async function goToSettingsScreen() {
     await match.accessible.ButtonBarButton('Settings').tap();
     await waitFor(match.accessible.Header('Settings')).toExist().withTimeout(2000);
 }
 
-async function exitCurrentSetting(){
+async function exitCurrentSetting() {
     await match.accessible.BackButton('Settings').tap();
     await waitFor(match.accessible.Header('Settings')).toExist().withTimeout(2000);
 }
@@ -15,12 +16,12 @@ async function returnToHomeScreen() {
     await match.accessible.ButtonBarButton('Done').tap();
 }
 
-async function swipeSettingsScreenDown(){
+async function swipeSettingsScreenDown() {
     await match.accessible.HeaderLabel('SERVICES').swipe('down', 'fast');
     await waitFor(match.accessible.HeaderLabel('PUMP')).toExist().withTimeout(2000);
 }
 
-async function swipeSettingsScreenUp(){
+async function swipeSettingsScreenUp() {
     await match.accessible.HeaderLabel('CONFIGURATION').swipe('up', 'fast');
     await waitFor(match.accessible.HeaderLabel('SERVICES')).toExist().withTimeout(2000);
 }
@@ -31,6 +32,13 @@ async function swipeSettingsScreenUp(){
 let startedFromHomeScreen = true;
 
 const settings = {
+    /**
+     * @param {string} bgValue
+     * @example await settings.CGMSimulatorConstantBloodGlugose('112');
+     */
+    async CGMSimulatorConstantBloodGlugose(bgValue){
+        await cgm.ApplyModel(cgm.Model.Constant,[bgValue]);
+    },
     /**
      * @summary insulin activity model
      * @example settings.InsulinModel.Fiasp
@@ -49,7 +57,7 @@ const settings = {
      */
     async BasalRates(rates) {
         const unitsSuffix = 'U/hr';
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await goToSettingsScreen();
         }
         await match.accessible.Text('Basal Rates').tap();
@@ -70,7 +78,7 @@ const settings = {
         await match.accessible.Label('Save to simulator').tap();
         await exitCurrentSetting();
 
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await returnToHomeScreen();
         }
     },
@@ -80,7 +88,7 @@ const settings = {
      * @param {string} threshold e.g. '150'
      */
     async SuspendThreshold(threshold) {
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await goToSettingsScreen();
         }
 
@@ -89,7 +97,7 @@ const settings = {
         await expect(match.UIEditableTextField()).toHaveText(threshold);
         await exitCurrentSetting();
 
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await returnToHomeScreen();
         }
     },
@@ -98,7 +106,7 @@ const settings = {
      * @example await settings.DeliveryLimits({maxBasalRate:'1.0', maxBolus:'10.0'})
      */
     async DeliveryLimits(limits) {
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await goToSettingsScreen();
         }
 
@@ -115,17 +123,17 @@ const settings = {
         await match.accessible.Label('Save to simulator').tap();
         await exitCurrentSetting();
 
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await returnToHomeScreen();
         }
     },
     /**
      * @name settings.InsulinModel
      * @param {InsulinModel} model e.g. 'Walsh'
-     * @example await settings.SelectInsulinModel(settings.InsulinModel.Fiasp)
+     * @example await settings.SelectInsulinApplyModel(settings.InsulinModel.Fiasp)
      */
-    async SelectInsulinModel(model) {
-        if (startedFromHomeScreen){
+    async SelectInsulinApplyModel(model) {
+        if (startedFromHomeScreen) {
             await goToSettingsScreen();
         }
 
@@ -133,7 +141,7 @@ const settings = {
         await match.accessible.Text(model.name).tap();
         await exitCurrentSetting();
 
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await returnToHomeScreen();
         }
     },
@@ -143,7 +151,7 @@ const settings = {
     * @example await settings.CarbRatios([{time:'12:00 AM', carbGramsPerInsulinUnit:'8'},{time:'12:30 AM', carbGramsPerInsulinUnit:'7'}])
     */
     async CarbRatios(ratios) {
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await goToSettingsScreen();
         }
         await expect(match.accessible.UILabel('Carb Ratios')).toExist();
@@ -153,9 +161,9 @@ const settings = {
             const ratio = ratios[index];
             await match.accessible.ButtonBarButton('Add').tap();
             if (index == 0) {
-                await element(by.type('UITextField')).clearText();
-                await element(by.type('UITextField')).typeText(ratio.carbGramsPerInsulinUnit);
-                await expect(element(by.type('UITextField'))).toHaveText(ratio.carbGramsPerInsulinUnit);
+                await match.UITextField().clearText();
+                await match.UITextField().typeText(ratio.carbGramsPerInsulinUnit);
+                await expect(match.UITextField()).toHaveText(ratio.carbGramsPerInsulinUnit);
             } else {
                 await element(by.type('UITextField').atIndex(index)).clearText();
                 await element(by.type('UITextField').atIndex(index)).typeText(ratio.carbGramsPerInsulinUnit);
@@ -163,7 +171,7 @@ const settings = {
             }
         }
         await exitCurrentSetting();
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await returnToHomeScreen();
         }
     },
@@ -173,7 +181,7 @@ const settings = {
     * @example await settings.InsulinSensitivities([{time:'12:00 AM', bgValuePerInsulinUnit:'500'},{time:'12:30 AM', bgValuePerInsulinUnit:'499'}])
     */
     async InsulinSensitivities(sensitivities) {
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await goToSettingsScreen();
         }
         await swipeSettingsScreenUp();
@@ -187,7 +195,7 @@ const settings = {
         }
         await match.accessible.Label('Save').tap();
         await exitCurrentSetting();
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await returnToHomeScreen();
         } else {
             await swipeSettingsScreenDown();
@@ -199,7 +207,7 @@ const settings = {
      * @example await settings.CorrectionRanges([{ time: '12:00 AM', min: '80', max: '150' },{ time: '12:30 AM', min: '80', max: '130' }])
      */
     async CorrectionRanges(ranges) {
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await goToSettingsScreen();
         }
         const correctionRangePickerColumns = {
@@ -209,30 +217,30 @@ const settings = {
             MaximumValue: 4,
             Units: 5,
         };
-            await match.accessible.Text('Correction Range').tap();
-            await match.accessible.ButtonBarButton('Add').tap();
+        await match.accessible.Text('Correction Range').tap();
+        await match.accessible.ButtonBarButton('Add').tap();
 
-            let pickerItemIndex = 1;
-            for (let index = 0; index < ranges.length; index++) {
-                const range = ranges[index];
-                await match.accessible.Label(`${range.time}`).atIndex(0).tap();
-                await match.accessible.PickerItem(pickerItemIndex, `${range.max}`).tap();
-                await match.accessible.PickerItem(pickerItemIndex, `${range.min}`).atIndex(correctionRangePickerColumns.MinimumValue).tap();
-                pickerItemIndex++;
-            }
+        let pickerItemIndex = 1;
+        for (let index = 0; index < ranges.length; index++) {
+            const range = ranges[index];
+            await match.accessible.Label(`${range.time}`).atIndex(0).tap();
+            await match.accessible.PickerItem(pickerItemIndex, `${range.max}`).tap();
+            await match.accessible.PickerItem(pickerItemIndex, `${range.min}`).atIndex(correctionRangePickerColumns.MinimumValue).tap();
+            pickerItemIndex++;
+        }
 
-            await match.accessible.Label('Save').tap();
-            await exitCurrentSetting();
-            if (startedFromHomeScreen){
-                await returnToHomeScreen();
-            }
+        await match.accessible.Label('Save').tap();
+        await exitCurrentSetting();
+        if (startedFromHomeScreen) {
+            await returnToHomeScreen();
+        }
     },
     /**
      * @param {object} override e.g. { min: '80', max: '150' };
      * @example await settings.PreMealCorrectionRange({ min: '80', max: '150' })
      */
     async PreMealCorrectionRange(preMeal) {
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await goToSettingsScreen();
         }
         const glucosePreMealOverridePickerColumns = {
@@ -250,7 +258,7 @@ const settings = {
         }
         await match.accessible.Label('Save').tap();
         await exitCurrentSetting();
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await returnToHomeScreen();
         }
     },
@@ -259,7 +267,7 @@ const settings = {
      * @summary turn on closed loop mode
      */
     async ClosedLoop() {
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await goToSettingsScreen();
         }
         await match.accessible.Button('Closed Loop').tap();
@@ -270,7 +278,7 @@ const settings = {
             await match.accessible.Button('Closed Loop').tap();
             await expect(match.accessible.Button('Closed Loop')).toHaveValue('1');
         }
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await returnToHomeScreen();
         }
     },
@@ -279,7 +287,7 @@ const settings = {
      * @summary set to open loop mode
      */
     async OpenLoop() {
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await goToSettingsScreen();
         }
         await match.accessible.Button('Closed Loop').tap();
@@ -290,7 +298,7 @@ const settings = {
             await match.accessible.Button('Closed Loop').tap();
             await expect(match.accessible.Button('Closed Loop')).toHaveValue('0');
         }
-        if (startedFromHomeScreen){
+        if (startedFromHomeScreen) {
             await returnToHomeScreen();
         }
     },
@@ -336,16 +344,16 @@ const settings = {
          */
         ClosedLoop: true,
     },
-    Type:{
-        BasalRates:'BasalRates',
-        CarbRatios:'CarbRatios',
-        DeliveryLimits:'DeliveryLimits',
-        SelectInsulinModel:'SelectInsulinModel',
-        SuspendThreshold:'SuspendThreshold',
-        InsulinSensitivities:'InsulinSensitivities',
-        CorrectionRanges:'CorrectionRanges',
-        PreMealCorrectionRange:'PreMealCorrectionRange',
-        ClosedLoop:'ClosedLoop',
+    Type: {
+        BasalRates: 'BasalRates',
+        CarbRatios: 'CarbRatios',
+        DeliveryLimits: 'DeliveryLimits',
+        SelectInsulinModel: 'SelectInsulinModel',
+        SuspendThreshold: 'SuspendThreshold',
+        InsulinSensitivities: 'InsulinSensitivities',
+        CorrectionRanges: 'CorrectionRanges',
+        PreMealCorrectionRange: 'PreMealCorrectionRange',
+        ClosedLoop: 'ClosedLoop',
     },
     /**
      * @summary filter out settings defaults for those that you don't want to apply
@@ -354,10 +362,12 @@ const settings = {
      * @example settings.Filter(settings.Defaults, [settings.Types.BasalRates])
      * @returns filtered Defaults set
      */
-    Filter(values,types) {
+    Filter(values, types) {
         const filtered = values;
-        for (const type of types) {
-            delete filtered[type];
+        if (types) {
+            for (const type of types) {
+                delete filtered[type];
+            }
         }
         return filtered;
     },
@@ -379,7 +389,7 @@ const settings = {
             await this.SuspendThreshold(values.SuspendThreshold.threshold);
         }
         if (values.SelectInsulinModel) {
-            await this.SelectInsulinModel(values.SelectInsulinModel);
+            await this.SelectInsulinApplyModel(values.SelectInsulinModel);
         }
         if (values.CarbRatios) {
             await this.CarbRatios(values.CarbRatios);

@@ -51,13 +51,13 @@ const pump = {
     async Bolus(units) {
         await match.accessible.Button('Bolus').tap();
         //TODO: why can't we match on label? by.label('Bolus Amount')
-        await element(by.type('UITextField')).clearText();
-        await element(by.type('UITextField')).typeText(units);
+        await match.UITextField().clearText();
+        await match.UITextField().typeText(units);
         await element(by.type('UIButton').and(by.label('Deliver')).and(by.traits(['button']))).tap();
         //TODO: can't interact with auth screen as long time pause before ready
-        await waitFor(element(by.type('UITextField'))).toExist().withTimeout(2000);
-        await element(by.type('UITextField')).typeText('fake_pw');
-        await element(by.type('UITextField')).tapReturnKey();
+        await waitFor(match.UITextField()).toExist().withTimeout(2000);
+        await match.UITextField().typeText('fake_pw');
+        await match.UITextField().tapReturnKey();
     },
 };
 
