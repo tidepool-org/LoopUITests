@@ -5,23 +5,20 @@ describe('Pump Settings', () => {
         await setup.LaunchLoop();
     });
     describe('Closed loop is not allowed', () => {
-        it('should configure loop for test', async () => {
+        it('should configure loop without applying basal rates', async () => {
             let config = {
                 scenario: 'flat_cgm',
-                settings: settings.Filter(settings.Defaults,[settings.Type.BasalRates])
+                settings: settings.Filter(settings.Defaults, [settings.Type.BasalRates])
             };
             await loopSettings.Configure(config);
         });
-        describe('When basal rates are not set', () => {
-            it('should not be in closed loop mode', async () => {
-                await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
-            });
-            it('should show error that indicates why not in closed loop mode', async () => {
-                await match.loop.Icon().tap();
-                await waitFor(match.accessible.AlertLabel('Missing Data: Insulin Effects')).toExist().withTimeout(2000);
-                await match.accessible.Button('OK').tap();
-            });
-
+        it('should not be in closed loop mode', async () => {
+            await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
+        });
+        it('should show error that indicates why not in closed loop mode', async () => {
+            await match.loop.Icon().tap();
+            await waitFor(match.accessible.AlertLabel('Missing Data: Insulin Effects')).toExist().withTimeout(2000);
+            await match.accessible.Button('OK').tap();
         });
     });
 });
