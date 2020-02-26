@@ -1,20 +1,18 @@
-const { setup, pump, cgm, match, settings } = require('../../../../../src/index');
+const { setup, match, settings, loopSettings} = require('../../../../../src/index');
 
 describe('Pump Settings', () => {
     beforeAll(async () => {
         await setup.LaunchLoop();
-        await setup.LoadDeviceScenariosFromDisk(device.id);
-        await cgm.AddSimulator();
-        await pump.AddSimulator();
     });
     describe('Closed loop is not allowed', () => {
+        it('should configure loop for test', async () => {
+            let config = {
+                scenario: 'flat_cgm',
+                settings: settings.Filter(settings.Defaults,[settings.Type.DeliveryLimits])
+            };
+            await loopSettings.Configure(config);
+        });
         describe('When delivery limits are not set', () => {
-            beforeAll(async () => {
-                await setup.LoadScenario('flat_cgm');
-            });
-            it('should set all apart from delivery limits', async () => {
-                await settings.Apply(settings.Filter(['DeliveryLimits']));
-            });
             it('should not be in closed loop mode', async () => {
                 await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
             });

@@ -1,21 +1,19 @@
-const { setup, pump, cgm, match, settings } = require('../../../../../src/index');
+const { setup, match, settings,loopSettings } = require('../../../../../src/index');
 
 describe.skip('Pump Settings', () => {
     beforeAll(async () => {
         await setup.LaunchLoop();
-        await setup.LoadScenarios(device.id);
-        await cgm.Add();
-        await pump.Add();
     });
     //The Pump simulator means we can't set delivary limits independant of each other yet
     describe('Closed loop is not allowed', () => {
+        it('should configure loop for test', async () => {
+            let config = {
+                scenario: 'flat_cgm',
+                settings: settings.Filter(settings.DeliveryLimits)
+            };
+            await loopSettings.Configure(config);
+        });
         describe('When delivery limits are not set', () => {
-            beforeAll(async () => {
-                await setup.LoadScenario('flat_cgm');
-            });
-            it('should set all apart from max basal rate delivery limit', async () => {
-                await settings.Apply(settings.Filter(['DeliveryLimits']));
-            });
             it('should not be in closed loop mode', async () => {
                 await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
             });

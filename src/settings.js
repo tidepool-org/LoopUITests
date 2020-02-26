@@ -1,7 +1,6 @@
 const element = require('detox').element;
 const match = require('./match');
 
-
 async function goToSettingsScreen() {
     await match.accessible.ButtonBarButton('Settings').tap();
     await waitFor(match.accessible.Header('Settings')).toExist().withTimeout(2000);
@@ -37,11 +36,11 @@ const settings = {
      * @example settings.InsulinModel.Fiasp
      */
     InsulinModel: {
-        Walsh: { value: 0, name: "Walsh" },
-        RapidAdults: { value: 1, name: "Rapid-Acting – Adults" },
-        RapidChildren: { value: 2, name: "Rapid-Acting – Children" },
-        Fiasp: { value: 3, name: "Fiasp" },
-        NotSet: { value: 4, name: "" }
+        Walsh: { value: 0, name: 'Walsh' },
+        RapidAdults: { value: 1, name: 'Rapid-Acting – Adults' },
+        RapidChildren: { value: 2, name: 'Rapid-Acting – Children' },
+        Fiasp: { value: 3, name: 'Fiasp' },
+        NotSet: { value: 4, name: '' }
     },
     /**
      * @summary basal rates to be set. NOTE: it is assumed that the rates are given in order of time
@@ -313,9 +312,9 @@ const settings = {
          */
         SuspendThreshold: { threshold: '75' },
         /**
-         * @summary InsulinModel: { value: 2, name: "Rapid-Acting – Children" }
+         * @summary SelectInsulinModel: { value: 2, name: 'Rapid-Acting – Children' }
          */
-        InsulinModel: { value: 2, name: "Rapid-Acting – Children" },
+        SelectInsulinModel: { value: 2, name: 'Rapid-Acting – Children' },
         /**
          * @summary CarbRatios: [{ time: '12:00 AM', carbGramsPerInsulinUnit: '8' }]
          */
@@ -337,22 +336,34 @@ const settings = {
          */
         ClosedLoop: true,
     },
+    Type:{
+        BasalRates:'BasalRates',
+        CarbRatios:'CarbRatios',
+        DeliveryLimits:'DeliveryLimits',
+        SelectInsulinModel:'SelectInsulinModel',
+        SuspendThreshold:'SuspendThreshold',
+        InsulinSensitivities:'InsulinSensitivities',
+        CorrectionRanges:'CorrectionRanges',
+        PreMealCorrectionRange:'PreMealCorrectionRange',
+        ClosedLoop:'ClosedLoop',
+    },
     /**
      * @summary filter out settings defaults for those that you don't want to apply
-     * @param {Array} fields
-     * @example settings.Filter(['BasalRates','InsulinSensitivities'])
+     * @param {object} values
+     * @param {Array} types
+     * @example settings.Filter(settings.Defaults, [settings.Types.BasalRates])
      * @returns filtered Defaults set
      */
-    Filter(fields) {
-        const filtered = this.Defaults;
-        for (const field of fields) {
-            delete filtered[field];
+    Filter(values,types) {
+        const filtered = values;
+        for (const type of types) {
+            delete filtered[type];
         }
         return filtered;
     },
     /**
      * @summary helper function to set seetings by applying the {settings.Defaults}
-     * @param  {Defaults} defaults list of settings that will not be applied
+     * @param  {Defaults} values list of settings that will not be applied
      * @example await settings.Apply(settings.Defaults)
      */
     async Apply(values) {
@@ -367,8 +378,8 @@ const settings = {
         if (values.SuspendThreshold) {
             await this.SuspendThreshold(values.SuspendThreshold.threshold);
         }
-        if (values.InsulinModel) {
-            await this.SelectInsulinModel(values.InsulinModel);
+        if (values.SelectInsulinModel) {
+            await this.SelectInsulinModel(values.SelectInsulinModel);
         }
         if (values.CarbRatios) {
             await this.CarbRatios(values.CarbRatios);

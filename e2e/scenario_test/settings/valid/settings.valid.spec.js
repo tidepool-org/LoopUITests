@@ -1,19 +1,17 @@
-const { setup, pump, cgm, match, settings } = require('../../../../src/index');
+const { setup, match, settings, loopSettings} = require('../../../../src/index');
 
 describe('Pump Settings', () => {
     beforeAll(async () => {
         await setup.LaunchLoop();
-        await setup.LoadDeviceScenariosFromDisk(device.id);
-        await cgm.AddSimulator();
-        await pump.AddSimulator();
     });
     describe('Closed loop allowed', () => {
         describe('When all settings enabled', () => {
-            beforeAll(async () => {
-                await setup.LoadScenario('flat_cgm');
-            });
-            it('enable all settings', async () => {
-                await settings.Apply(settings.Defaults);
+            it('should configure loop for test', async () => {
+                let config = {
+                    scenario: 'flat_cgm',
+                    settings: settings.Filter(settings.Defaults)
+                };
+                await loopSettings.Configure(config);
             });
             it('should not be in closed loop mode yet', async () => {
                 await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
