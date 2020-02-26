@@ -81,7 +81,6 @@ const settings = {
      * @param {string} threshold e.g. '150'
      */
     async SuspendThreshold(threshold) {
-        console.log('SuspendThreshold.startedFromHomeScreen? ',startedFromHomeScreen);
         if (startedFromHomeScreen){
             await goToSettingsScreen();
         }
