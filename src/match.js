@@ -122,7 +122,7 @@ const match = {
          * @example await expect(match.loop.CompletionInfo()).toHaveLabel('50%')
          */
         CompletionInfo() {
-            return element(by.type('UILabel').and(by.traits(['text']))).withAncestor(by.type('LoopUI.LoopCompletionHUDView'));
+            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopUI.LoopCompletionHUDView')));
         },
         /**
         * @summary returns elements that relate to pump battery info
@@ -131,7 +131,7 @@ const match = {
         * @example await match.loop.BatteryLevelInfo()
         */
         BatteryLevelInfo() {
-            return element(by.type('UILabel').and(by.traits(['text']))).withAncestor(by.type('LoopKitUI.BatteryLevelHUDView'));
+            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopKitUI.BatteryLevelHUDView')));
         },
         /**
          * @summary returns elements that relate to pump reservoir info
@@ -141,7 +141,7 @@ const match = {
          * @example await match.loop.ReservoirVolumeInfo()
          */
         ReservoirVolumeInfo() {
-            return element(by.type('UILabel').and(by.traits(['text']))).withAncestor(by.type('LoopKitUI.ReservoirVolumeHUDView'));
+            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopKitUI.ReservoirVolumeHUDView')));
         },
         /**
          * @summary returns elements that relate to basal rate info
@@ -151,7 +151,7 @@ const match = {
          * @example await match.loop.BasalRateInfo()
          */
         BasalRateInfo() {
-            return element(by.type('UILabel').and(by.traits(['text']))).withAncestor(by.type('LoopUI.BasalRateHUDView'));
+            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopUI.BasalRateHUDView')));
         },
         /**
          * @summary returns elements that relate to blood glucose info
@@ -162,7 +162,7 @@ const match = {
          * @example await match.loop.GlucoseInfo()
          */
         GlucoseInfo() {
-            return element(by.type('UILabel').and(by.traits(['text']))).withAncestor(by.type('LoopUI.GlucoseHUDView'));
+            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopUI.GlucoseHUDView')));
         },
     },
     /**

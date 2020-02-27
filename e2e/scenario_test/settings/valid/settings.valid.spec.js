@@ -14,14 +14,11 @@ describe('Pump Settings', () => {
         });
         it('should advance the scenario so we are looping', async () => {
             await setup.AdvanceScenario(config.scenario,'1');
+            await waitFor(match.accessible.ButtonBarButton('Settings')).toExist().withTimeout(2000);
         });
-        it('should not be in closed loop mode yet', async () => {
-            await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
-        });
-        it('should show no alert when tapping loop icon', async () => {
-            //TODO: need a valid way to assert we are in closed loop mode
-            await waitFor(match.loop.Icon()).toBeVisible().withTimeout(2000);
-            await match.loop.Icon().tap();
-        });
+        // it('should show no alert when tapping loop icon', async () => {
+        //     await waitFor(match.accessible.AlertLabel('Missing Data: Insulin Effects')).toExist().withTimeout(2000);
+        //     await waitFor(element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopUI.LoopCompletionHUDView')))).toHaveLabel('0 min ago').withTimeout(2000);
+        // });
     });
 });

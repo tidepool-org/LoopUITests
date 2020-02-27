@@ -49,8 +49,7 @@ const setup = {
         await match.accessible.Label(scenarioName).swipe('left');
         await match.accessible.SwipeButton('Advance ⏭').tap();
         await match.UITextField().typeText(cycles);
-        await match.UITextField().tapReturnKey();
-        await match.accessible.ButtonBarButton('Load').tap();
+        await match.accessible.Button('OK').tap();
     },
 };
 
