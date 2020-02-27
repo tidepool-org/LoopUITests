@@ -16,6 +16,7 @@ describe('Pump Settings', () => {
             await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
         });
         it('should show configuration error that indicates why not in closed loop mode', async () => {
+            await waitFor(match.loop.Icon()).toBeVisible().withTimeout(2000);
             await match.loop.Icon().tap();
             await waitFor(match.accessible.AlertLabel('Configuration Error: Check Settings')).toExist().withTimeout(2000);
             await match.accessible.Button('OK').tap();
