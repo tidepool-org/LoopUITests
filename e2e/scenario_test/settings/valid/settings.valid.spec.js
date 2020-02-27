@@ -17,6 +17,7 @@ describe('Pump Settings', () => {
         });
         it.skip('should show no alert when tapping loop icon', async () => {
             //TODO: need a valid way to assert we are in closed loop mode
+            await waitFor(match.loop.Icon()).toBeVisible().withTimeout(2000);
             await match.loop.Icon().tap();
         });
     });

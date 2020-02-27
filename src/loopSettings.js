@@ -1,6 +1,4 @@
 const settings = require('./settings');
-const cgm = require('./cgm');
-const pump = require('./pump');
 const setup = require('./setup');
 
 const loopSettings = {
@@ -11,8 +9,8 @@ const loopSettings = {
      */
     async Configure(config) {
         await setup.LoadDeviceScenariosFromDisk(device.id);
-        await cgm.AddSimulator();
-        await pump.AddSimulator();
+        await settings.CGMSimulator();
+        await settings.PumpSimulator();
         await setup.LoadScenario(config.scenario);
         await settings.Apply(config.settings);
     },

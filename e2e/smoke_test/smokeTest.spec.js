@@ -99,7 +99,7 @@ describe('smoke test', () => {
         });
         describe('settings', () => {
             it('set suspend threshold', async () => {
-                await settings.SuspendThreshold('65');
+                await settings.SuspendThreshold({value:'65'});
             });
             it('set basal rates', async () => {
                 await settings.BasalRates([{time:'12:00 AM', unitsPerHour:'0.1'}]);
@@ -108,7 +108,7 @@ describe('smoke test', () => {
                 await settings.DeliveryLimits({maxBasalRate:'0.5', maxBolus:'10.0'});
             });
             it('set insulin model', async () => {
-                await settings.SelectInsulinModel(settings.InsulinModel.RapidAdults);
+                await settings.ApplyInsulinModel(settings.InsulinModel.RapidAdults);
             });
             it('set carb ratios', async () => {
                 await settings.CarbRatios([{time:'12:00 AM', carbGramsPerInsulinUnit:'8'}]);
