@@ -61,6 +61,13 @@ const match = {
         },
         /**
          * @param {string} label
+         * @returns {Detox.Element} accessibilityHeader
+         */
+        HeaderLabel(label) {
+            return element(by.label(label).and(by.traits(['header'])));
+        },
+        /**
+         * @param {string} label
          * @returns {Detox.Element} labeled element
          */
         UILabel(label) {

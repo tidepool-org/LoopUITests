@@ -55,7 +55,7 @@ const pump = {
         await element(by.type('UITextField')).typeText(units);
         await element(by.type('UIButton').and(by.label('Deliver')).and(by.traits(['button']))).tap();
         //TODO: can't interact with auth screen as long time pause before ready
-        await waitFor(element(by.type('UITextField'))).toExist().withTimeout(1400);
+        await waitFor(element(by.type('UITextField'))).toExist().withTimeout(2000);
         await element(by.type('UITextField')).typeText('fake_pw');
         await element(by.type('UITextField')).tapReturnKey();
     },

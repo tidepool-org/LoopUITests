@@ -1,4 +1,3 @@
-const element = require('detox').element;
 const exec = require('child_process').exec;
 const match = require('./match');
 
