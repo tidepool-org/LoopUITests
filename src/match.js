@@ -90,13 +90,27 @@ const match = {
         },
         /**
          * @summary returns Picker item(s) for given label and index
-         * @param {Integer} index
-         * @param {string} label
+         * @param {Integer} pickerNumber
+         * @param {string} itemLabel
          * @returns {Detox.Element}
          */
-        PickerItem(index, label) {
-            return element(by.type('UILabel').and(by.label(label).and(by.traits(['text']))).withAncestor(by.type('UIPickerTableViewTitledCell'))).atIndex(index);
+        PickerItem(pickerNumber, itemLabel) {
+            return element(
+                by.type('UILabel')
+                    .and(by.label(itemLabel)
+                        .and(by.traits(['text'])))
+                    .withAncestor(
+                        by.type('UIPickerTableViewTitledCell')
+                            .withAncestor(
+                                by.type('UIPickerColumnView')
+                                    .withAncestor(
+                                        by.type('UIPickerView')
+                                    )
+                            )
+                    )).atIndex(pickerNumber);
         },
+
+
         /**
          * @summary returns alert items based on the given label
          * @param {string} label

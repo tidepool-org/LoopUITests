@@ -225,23 +225,26 @@ const settings = {
             if (startedFromHomeScreen) {
                 await goToSettingsScreen();
             }
-            const correctionRangePickerColumns = {
-                Time: 1,
-                MinimumValue: 2,
-                Separator: 3,
-                MaximumValue: 4,
-                Units: 5,
-            };
             await match.accessible.Text('Correction Range').tap();
             await match.accessible.ButtonBarButton('Add').tap();
 
-            let pickerItemIndex = 1;
+            let correctionRangePickerIndex = 0;
             for (let index = 0; index < ranges.length; index++) {
                 const range = ranges[index];
-                await match.accessible.Label(`${range.time}`).atIndex(0).tap();
-                await match.accessible.PickerItem(pickerItemIndex, `${range.max}`).tap();
-                await match.accessible.PickerItem(pickerItemIndex, `${range.min}`).atIndex(correctionRangePickerColumns.MinimumValue).tap();
-                pickerItemIndex++;
+                await match.accessible.Label(`${range.time}`).atIndex(correctionRangePickerIndex).tap();
+                for (let currentMax = 180;  currentMax >= range.max; currentMax--) {
+                    await match.accessible.PickerItem(1,`${currentMax}`).tap();
+                }
+                for (let currentMin = range.max;  currentMin >= range.min; currentMin--) {
+                    if (currentMin == range.max){
+                        await match.accessible.PickerItem(4,`${currentMin}`).tap();
+                    }else if(currentMin == (range.max-1))
+                        await match.accessible.PickerItem(2,`${currentMin}`).tap();
+                    else{
+                        await match.accessible.PickerItem(1,`${currentMin}`).tap();
+                    }
+                }
+                correctionRangePickerIndex++;
             }
 
             await match.accessible.Label('Save').tap();
@@ -377,13 +380,13 @@ const settings = {
          */
         InsulinSensitivities: [{ time: '12:00 AM', bgValuePerInsulinUnit: '500' }],
         /**
-         * @summary  CorrectionRanges: [{ time: '12:00 AM', min: '179', max: '180' }]
+         * @summary  CorrectionRanges: [{ time: '12:00 AM', min: '130', max: '140' }]
          */
-        CorrectionRanges: [{ time: '12:00 AM', min: '179', max: '180' }],
+        CorrectionRanges: [{ time: '12:00 AM', min: '130', max: '140' }],
         /**
          * @summary  PreMealCorrectionRange: { min: '179', max: '180' }
          */
-        PreMealCorrectionRange: { min: '179', max: '180' },
+        PreMealCorrectionRange: { min: '80', max: '180' },
         /**
          *  @summary  ClosedLoop: true
          */
