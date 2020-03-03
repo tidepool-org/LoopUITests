@@ -3,17 +3,15 @@ const match = require('./match');
 
 const setup = {
     /**
-     * @name LaunchLoop
      * @summary will launch the loop app with permissons for notifications and health enabled
      */
     async LaunchLoop() {
         await device.launchApp({
-            newInstance: true,
+            //newInstance: true,
             permissions: { notifications: 'YES', health: 'YES' },
         });
     },
     /**
-     * @name LoadDeviceScenariosFromDisk
      * @param {string} deviceId
      * @summary will load all available scenarios for the given deviceId
      */

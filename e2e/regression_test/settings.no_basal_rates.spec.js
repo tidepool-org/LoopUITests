@@ -4,9 +4,6 @@ describe('Closed loop is not allowed when settings', () => {
     beforeAll(async () => {
         await setup.LaunchLoop();
     });
-    // afterAll(async () => {
-    //     await device.uninstallApp();
-    // });
     it('are not applied for basal rates', async () => {
         let config = {
             scenario: 'flat_cgm_trace',
