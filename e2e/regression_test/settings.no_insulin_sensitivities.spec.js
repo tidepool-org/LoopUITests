@@ -1,4 +1,4 @@
-const { setup, match, settings, loopSettings } = require('../../src/index');
+const { setup, match, loopSettings, FilterSettings, SettingDefault, SettingType } = require('../../src/index');
 
 describe('Closed loop is not allowed when settings', () => {
     beforeAll(async () => {
@@ -7,7 +7,7 @@ describe('Closed loop is not allowed when settings', () => {
     it('are not applied for insulin sensitivities', async () => {
         let config = {
             scenario: 'flat_cgm_trace',
-            settings: settings.Filter(settings.Defaults, [settings.Type.InsulinSensitivities])
+            settings: FilterSettings(SettingDefault, [SettingType.InsulinSensitivities])
         };
         await loopSettings.Configure(config);
     });
@@ -17,7 +17,7 @@ describe('Closed loop is not allowed when settings', () => {
     it('should show configuration error that indicates why not in closed loop mode', async () => {
         await waitFor(match.loop.Icon()).toBeVisible().withTimeout(2000);
         await match.loop.Icon().tap();
-        await waitFor(match.accessible.AlertLabel('Configuration Error: Check Settings')).toExist().withTimeout(2000);
+        await waitFor(match.accessible.AlertLabel('Missing Data: Carb Effects')).toExist().withTimeout(2000);
         await match.accessible.Button('OK').tap();
     });
 });

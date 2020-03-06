@@ -3,8 +3,11 @@ const pump = require('./pump');
 const match = require('./match');
 const carbs = require('./carbs');
 const cgm = require('./cgm');
-const settings = require('./settings');
 const loopSettings = require('./loopSettings');
+
+const { Settings, SettingDefault, SettingType, InsulinModel, FilterSettings } = require('./settings');
+
+
 
 module.exports = {
     pump,
@@ -12,6 +15,6 @@ module.exports = {
     setup,
     cgm,
     carbs,
-    settings,
-    loopSettings
+    loopSettings,
+    Settings, SettingDefault, SettingType, InsulinModel, FilterSettings
 };

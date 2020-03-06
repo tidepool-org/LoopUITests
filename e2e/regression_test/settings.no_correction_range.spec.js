@@ -1,4 +1,4 @@
-const { setup, match, settings, loopSettings } = require('../../src/index');
+const { setup, match, loopSettings,FilterSettings, SettingDefault, SettingType } = require('../../src/index');
 
 describe('Closed loop is not allowed when settings', () => {
     beforeAll(async () => {
@@ -7,7 +7,7 @@ describe('Closed loop is not allowed when settings', () => {
     it('are not applied for correction ranges', async () => {
         let config = {
             scenario: 'flat_cgm_trace',
-            settings: settings.Filter(settings.Defaults, [settings.Type.CorrectionRanges])
+            settings: FilterSettings(SettingDefault, [SettingType.CorrectionRanges])
         };
         await loopSettings.Configure(config);
     });

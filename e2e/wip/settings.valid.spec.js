@@ -1,15 +1,12 @@
-const { setup, match, settings, loopSettings } = require('../../src/index');
+const { setup, match, loopSettings, SettingDefault } = require('../../src/index');
 
 describe('Closed loop is allowed when', () => {
     beforeAll(async () => {
         await setup.LaunchLoop();
     });
-    afterAll(async () => {
-        await device.uninstallApp();
-    });
     let config = {
         scenario: 'flat_cgm_trace',
-        settings: settings.Defaults,
+        settings: SettingDefault,
     };
     it('we apply all settings', async () => {
         await loopSettings.Configure(config);
