@@ -32,6 +32,13 @@ const match = {
             return element(by.label(label).and(by.traits(['button'])));
         },
         /**
+         * @param {string} theId
+         * @returns {Detox.Element}
+         */
+        Id(theId){
+            return element(by.id(theId));
+        },
+        /**
          * @param {string} label
          * @returns {Detox.Element} accessibilityBackButton
          */
