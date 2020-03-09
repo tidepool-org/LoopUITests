@@ -32,11 +32,26 @@ const match = {
             return element(by.label(label).and(by.traits(['button'])));
         },
         /**
+         * @param {string} theId
+         * @returns {Detox.Element}
+         */
+        Id(theId){
+            return element(by.id(theId));
+        },
+        /**
          * @param {string} label
          * @returns {Detox.Element} accessibilityBackButton
          */
         BackButton(label) {
             return element(by.label(label).and(by.traits(['button']).and(by.type('UIAccessibilityBackButtonElement'))));
+        },
+        /**
+         * @param {string} label
+         * @returns {Detox.Element} accessibilityBackButton
+         * @example await match.SwipeButton('some label').tap();
+         */
+        SwipeButton(label) {
+            return element(by.label(label).and(by.traits(['button']).and(by.type('UISwipeActionStandardButton'))));
         },
         /**
          * @param {string} label
@@ -82,13 +97,27 @@ const match = {
         },
         /**
          * @summary returns Picker item(s) for given label and index
-         * @param {Integer} index
-         * @param {string} label
+         * @param {Integer} pickerNumber
+         * @param {string} itemLabel
          * @returns {Detox.Element}
          */
-        PickerItem(index, label) {
-            return element(by.type('UILabel').and(by.label(label).and(by.traits(['text']))).withAncestor(by.type('UIPickerTableViewTitledCell'))).atIndex(index);
+        PickerItem(pickerNumber, itemLabel) {
+            return element(
+                by.type('UILabel')
+                    .and(by.label(itemLabel)
+                        .and(by.traits(['text'])))
+                    .withAncestor(
+                        by.type('UIPickerTableViewTitledCell')
+                            .withAncestor(
+                                by.type('UIPickerColumnView')
+                                    .withAncestor(
+                                        by.type('UIPickerView')
+                                    )
+                            )
+                    )).atIndex(pickerNumber);
         },
+
+
         /**
          * @summary returns alert items based on the given label
          * @param {string} label
@@ -114,7 +143,7 @@ const match = {
          * @example await expect(match.loop.CompletionInfo()).toHaveLabel('50%')
          */
         CompletionInfo() {
-            return element(by.type('UILabel').and(by.traits(['text']))).withAncestor(by.type('LoopUI.LoopCompletionHUDView'));
+            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopUI.LoopCompletionHUDView')));
         },
         /**
         * @summary returns elements that relate to pump battery info
@@ -123,7 +152,7 @@ const match = {
         * @example await match.loop.BatteryLevelInfo()
         */
         BatteryLevelInfo() {
-            return element(by.type('UILabel').and(by.traits(['text']))).withAncestor(by.type('LoopKitUI.BatteryLevelHUDView'));
+            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopKitUI.BatteryLevelHUDView')));
         },
         /**
          * @summary returns elements that relate to pump reservoir info
@@ -133,7 +162,7 @@ const match = {
          * @example await match.loop.ReservoirVolumeInfo()
          */
         ReservoirVolumeInfo() {
-            return element(by.type('UILabel').and(by.traits(['text']))).withAncestor(by.type('LoopKitUI.ReservoirVolumeHUDView'));
+            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopKitUI.ReservoirVolumeHUDView')));
         },
         /**
          * @summary returns elements that relate to basal rate info
@@ -143,7 +172,7 @@ const match = {
          * @example await match.loop.BasalRateInfo()
          */
         BasalRateInfo() {
-            return element(by.type('UILabel').and(by.traits(['text']))).withAncestor(by.type('LoopUI.BasalRateHUDView'));
+            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopUI.BasalRateHUDView')));
         },
         /**
          * @summary returns elements that relate to blood glucose info
@@ -154,7 +183,7 @@ const match = {
          * @example await match.loop.GlucoseInfo()
          */
         GlucoseInfo() {
-            return element(by.type('UILabel').and(by.traits(['text']))).withAncestor(by.type('LoopUI.GlucoseHUDView'));
+            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopUI.GlucoseHUDView')));
         },
     },
     /**
@@ -163,6 +192,13 @@ const match = {
      */
     UIEditableTextField() {
         return element(by.type('LoopKitUI.PaddedTextField'));
+    },
+    /**
+     * @summary get a non accessible UIEditableTextField
+     * @returns {Detox.Element} UIEditableTextField
+     */
+    UITextField() {
+        return element(by.type('UITextField'));
     },
     /**
      * @summary returns none accessible ButtonBarButton

@@ -20,9 +20,9 @@ All tests
 
 `detox test e2e/smoke_test -c ios.sim.debug`
 
-### Scenario test
+### Regression test
 
-`detox test e2e/scenario_test -c ios.sim.debug`
+`detox test e2e/regression_test -c ios.sim.debug`
 
 ## Debugging
 

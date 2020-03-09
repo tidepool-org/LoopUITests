@@ -17,4 +17,4 @@ echo "app ID $applicationId"
 
 cd $workingDir
 
-cp "$(pwd)"/e2e/scenario_test/scenarios/*  $appDir/$applicationId/Documents/scenarios/
+cp "$(pwd)"/scenarios/*  $appDir/$applicationId/Documents/scenarios/

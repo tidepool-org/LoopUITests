@@ -1,17 +1,18 @@
 const setup = require('./setup');
-const pump = require('./pump');
 const match = require('./match');
-const carbs = require('./carbs');
-const cgm = require('./cgm');
-const settings = require('./settings');
 const loopSettings = require('./loopSettings');
 
+const { Carbs } = require('./carbs');
+const { Overrides } = require('./overrides');
+const { Bolus } = require('./bolus');
+const { Settings, SettingDefault, SettingType, InsulinModel, FilterSettings, CGMModel, CGMEffect } = require('./settings');
+
 module.exports = {
-    pump,
     match,
     setup,
-    cgm,
-    carbs,
-    settings,
-    loopSettings
+    Carbs,
+    Overrides,
+    Bolus,
+    loopSettings,
+    Settings, SettingDefault, SettingType, InsulinModel, FilterSettings, CGMModel, CGMEffect,
 };
