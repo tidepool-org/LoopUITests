@@ -111,7 +111,6 @@ var FilterSettings = function (values, types) {
     const filtered = values;
     if (types) {
         for (const type of types) {
-            console.log("remove: ", type);
             delete filtered[type];
         }
     }
@@ -176,7 +175,6 @@ class Settings {
      * @example await settings.Apply(SettingDefault)
      */
     async Apply(values) {
-        console.log('Apply: ', values);
         if (values.AddCGMSimulator) {
             await this.AddCGMSimulator();
         }
