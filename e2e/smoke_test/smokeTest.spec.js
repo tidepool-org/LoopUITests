@@ -1,29 +1,41 @@
-const { setup, match, Carbs, Bolus, Overrides, Settings, SettingDefault, CGMModel, CGMEffect } = require('../../src/index');
+const { setup, Carbs, Status, Bolus, Overrides, Settings, SettingDefault, CGMModel, CGMEffect } = require('../../src/index');
 
 describe('smoke test', () => {
     var settings;
     var carbs;
     var bolus;
     var overrides;
+    var status;
     beforeAll(async () => {
         await setup.LaunchLoop();
         settings = new Settings();
         carbs = new Carbs();
         bolus = new Bolus();
         overrides = new Overrides();
+        status = new Status();
     });
-    describe('main screen', () => {
+    describe('status screen', () => {
         it('has Active Carbohydrates section', async () => {
-            await expect(match.accessible.Label('Active Carbohydrates')).toExist();
+            await status.OpenActiveCarbohydratesChart();
+            await status.CloseChart();
         });
         it('has Active Insulin section', async () => {
-            await expect(match.accessible.Label('Active Insulin')).toExist();
+            await status.OpenActiveInsulinChart();
+            await status.CloseChart();
         });
         it('has Insulin Delivery section', async () => {
-            await expect(match.accessible.Label('Insulin Delivery')).toExist();
+            await status.OpenInsulinDeliveryChart();
+            await status.CloseChart();
         });
         it('has Glucose section', async () => {
-            await expect(match.accessible.Label('Glucose')).toExist();
+            await status.OpenGlucoseChart();
+            await status.CloseChart();
+        });
+        it('has Loop icon', async () => {
+            await status.ExpectLoopNotYetRun();
+        });
+        it('has Loop icon has alert when not setup', async () => {
+            await status.ExpectLoopStatusAlert('Missing Data: Glucose Data Not Available');
         });
     });
     describe('settings', () => {
