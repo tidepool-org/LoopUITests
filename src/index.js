@@ -1,18 +1,18 @@
 const setup = require('./setup');
-const match = require('./match');
 const loopSettings = require('./loopSettings');
 
-const { Carbs } = require('./carbs');
-const { Overrides } = require('./overrides');
-const { Bolus } = require('./bolus');
-const { Settings, SettingDefault, SettingType, InsulinModel, FilterSettings, CGMModel, CGMEffect } = require('./settings');
+const { CarbEntryScreen } = require('./carbEntryScreen');
+const { OverridesScreen } = require('./overridesScreen');
+const { BolusScreen } = require('./bolusScreen');
+const { HomeScreen } = require('./homeScreen');
+const { SettingsScreen, SettingDefault, SettingType, InsulinModel, FilterSettings, CGMModel, CGMEffect } = require('./settingsScreen');
 
 module.exports = {
-    match,
     setup,
-    Carbs,
-    Overrides,
-    Bolus,
+    CarbEntryScreen,
+    OverridesScreen,
+    BolusScreen,
+    HomeScreen,
     loopSettings,
-    Settings, SettingDefault, SettingType, InsulinModel, FilterSettings, CGMModel, CGMEffect,
+    SettingsScreen, SettingDefault, SettingType, InsulinModel, FilterSettings, CGMModel, CGMEffect,
 };

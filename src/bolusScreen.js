@@ -1,7 +1,7 @@
 const match = require('./match');
 const { Label, BolusLabel } = require('./labels');
 
-class Bolus {
+class BolusScreen {
     /**
      * @example await bolus.Open();
      */
@@ -42,4 +42,4 @@ class Bolus {
 
 };
 
-module.exports = { Bolus };
+module.exports = { BolusScreen };

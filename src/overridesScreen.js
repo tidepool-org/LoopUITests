@@ -1,7 +1,7 @@
 const match = require('./match');
 const { Label, TempOverrideLabel } = require('./labels');
 
-class Overrides {
+class OverridesScreen {
     /**
      * @example await overrides.Open();
      */
@@ -19,4 +19,4 @@ class Overrides {
     }
 }
 
-module.exports = { Overrides };
+module.exports = { OverridesScreen };

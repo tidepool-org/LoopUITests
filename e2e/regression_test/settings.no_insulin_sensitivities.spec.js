@@ -1,8 +1,10 @@
-const { setup, match, loopSettings, FilterSettings, SettingDefault, SettingType } = require('../../src/index');
+const { setup, loopSettings, HomeScreen, FilterSettings, SettingDefault, SettingType } = require('../../src/index');
 
 describe('Closed loop is not allowed when settings', () => {
+    var home;
     beforeAll(async () => {
         await setup.LaunchLoop();
+        home = new HomeScreen();
     });
     it('are not applied for insulin sensitivities', async () => {
         let config = {
@@ -12,13 +14,10 @@ describe('Closed loop is not allowed when settings', () => {
         await loopSettings.Configure(config);
     });
     it('should not be in closed loop mode', async () => {
-        await expect(match.loop.Icon()).toHaveLabel('Waiting for first run');
+        await home.ExpectLoopNotYetRun();
     });
-    it('should show configuration error that indicates why not in closed loop mode', async () => {
-        await waitFor(match.loop.Icon()).toBeVisible().withTimeout(2000);
-        await match.loop.Icon().tap();
-        await waitFor(match.accessible.AlertLabel('Missing Data: Carb Effects')).toExist().withTimeout(2000);
-        await match.accessible.Button('OK').tap();
+    it('should show error that indicates why not in closed loop mode', async () => {
+        await home.ExpectLoophomeAlert('Missing Data: Carb Effects');
     });
 });
 

@@ -1,7 +1,7 @@
 const match = require('./match');
 const { Label, CarbsLabel } = require('./labels');
 
-class Carbs {
+class CarbEntryScreen {
     /**
      * @example await carbs.Open();
      */
@@ -56,4 +56,4 @@ class Carbs {
     }
 }
 
-module.exports = { Carbs };
+module.exports = { CarbEntryScreen };

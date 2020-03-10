@@ -1,29 +1,41 @@
-const { setup, match, Carbs, Bolus, Overrides, Settings, SettingDefault, CGMModel, CGMEffect } = require('../../src/index');
+const { setup, CarbEntryScreen, HomeScreen, BolusScreen, OverridesScreen, SettingsScreen, SettingDefault, CGMModel, CGMEffect } = require('../../src/index');
 
 describe('smoke test', () => {
     var settings;
-    var carbs;
+    var carbEntry;
     var bolus;
     var overrides;
+    var home;
     beforeAll(async () => {
         await setup.LaunchLoop();
-        settings = new Settings();
-        carbs = new Carbs();
-        bolus = new Bolus();
-        overrides = new Overrides();
+        settings = new SettingsScreen();
+        carbEntry = new CarbEntryScreen();
+        bolus = new BolusScreen();
+        overrides = new OverridesScreen();
+        home = new HomeScreen();
     });
-    describe('main screen', () => {
+    describe('home screen', () => {
         it('has Active Carbohydrates section', async () => {
-            await expect(match.accessible.Label('Active Carbohydrates')).toExist();
+            await home.OpenActiveCarbohydratesChart();
+            await home.CloseChart();
         });
         it('has Active Insulin section', async () => {
-            await expect(match.accessible.Label('Active Insulin')).toExist();
+            await home.OpenActiveInsulinChart();
+            await home.CloseChart();
         });
         it('has Insulin Delivery section', async () => {
-            await expect(match.accessible.Label('Insulin Delivery')).toExist();
+            await home.OpenInsulinDeliveryChart();
+            await home.CloseChart();
         });
         it('has Glucose section', async () => {
-            await expect(match.accessible.Label('Glucose')).toExist();
+            await home.OpenGlucoseChart();
+            await home.CloseChart();
+        });
+        it('has Loop icon', async () => {
+            await home.ExpectLoopNotYetRun();
+        });
+        it('has Loop icon has alert when not setup', async () => {
+            await home.ExpectLoopStatusAlert('Missing Data: Glucose Data Not Available');
         });
     });
     describe('settings', () => {
@@ -83,22 +95,22 @@ describe('smoke test', () => {
             });
         });
     });
-    describe('carbs', () => {
+    describe('carb entry', () => {
         it('can be opened', async () => {
-            await carbs.Open();
+            await carbEntry.Open();
         });
         it('can be canecled', async () => {
-            await carbs.Cancel();
+            await carbEntry.Cancel();
         });
         it('can be set and saved without a bolus', async () => {
-            await carbs.Open();
-            await carbs.SetCarbs('30');
-            await carbs.SaveWithoutBolus();
+            await carbEntry.Open();
+            await carbEntry.SetCarbs('30');
+            await carbEntry.SaveWithoutBolus();
         });
         it('can be set and canceled', async () => {
-            await carbs.Open();
-            await carbs.SetCarbs('20');
-            await carbs.Cancel();
+            await carbEntry.Open();
+            await carbEntry.SetCarbs('20');
+            await carbEntry.Cancel();
         });
     });
     describe('bolus', () => {

@@ -5,7 +5,17 @@ var Label = {
     Save: 'Save',
     Back: 'Back',
     Add: 'Add',
-    Edit: 'Edit'
+    Edit: 'Edit',
+    Status: 'Status',
+    OK: 'OK',
+};
+
+var HomeLabel = {
+    ActiveCarbohydrates: 'Active Carbohydrates',
+    ActiveInsulin: 'Active Insulin',
+    InsulinDelivery: 'Insulin Delivery',
+    Glucose: 'Glucose',
+    LoopWaitingForFirstRun: 'Waiting for first run'
 };
 
 var CarbsLabel = {
@@ -31,8 +41,8 @@ var SettingsLabel = {
     Settings: 'Settings',
     Configuration: 'CONFIGURATION',
     Services: 'SERVICES',
-    ContinuousGlucoseMonitor:'CONTINUOUS GLUCOSE MONITOR',
-    Pump:'PUMP',
+    ContinuousGlucoseMonitor: 'CONTINUOUS GLUCOSE MONITOR',
+    Pump: 'PUMP',
     AddService: 'Add Service',
     Simulator: 'Simulator',
     IssueReport: 'Issue Report',
@@ -59,5 +69,6 @@ module.exports = {
     CarbsLabel,
     BolusLabel,
     SettingsLabel,
-    TempOverrideLabel
+    TempOverrideLabel,
+    HomeLabel
 };

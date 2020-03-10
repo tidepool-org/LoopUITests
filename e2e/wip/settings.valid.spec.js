@@ -1,4 +1,4 @@
-const { setup, match, loopSettings, SettingDefault } = require('../../src/index');
+const { setup, loopSettings, SettingDefault } = require('../../src/index');
 
 describe('Closed loop is allowed when', () => {
     beforeAll(async () => {
@@ -13,7 +13,6 @@ describe('Closed loop is allowed when', () => {
     });
     it('should advance the scenario so we are looping', async () => {
         await setup.AdvanceScenario(config.scenario, '1');
-        await waitFor(match.accessible.ButtonBarButton('Settings')).toExist().withTimeout(2000);
     });
     // TODO: investigate detox crash after the data has been advanced to a 'looping' state
     // it('should show no alert when tapping loop icon', async () => {
