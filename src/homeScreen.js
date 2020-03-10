@@ -1,24 +1,24 @@
 const match = require('./match');
-const { Label, StatusLabel } = require('./labels');
+const { Label, HomeLabel } = require('./labels');
 
-class Status {
+class HomeScreen {
     async OpenActiveCarbohydratesChart() {
-        await match.accessible.Label(StatusLabel.ActiveCarbohydrates).tap();
+        await match.accessible.Label(HomeLabel.ActiveCarbohydrates).tap();
     }
     async OpenActiveInsulinChart() {
-        await match.accessible.Label(StatusLabel.ActiveInsulin).tap();
+        await match.accessible.Label(HomeLabel.ActiveInsulin).tap();
     }
     async OpenInsulinDeliveryChart() {
-        await match.accessible.Label(StatusLabel.InsulinDelivery).tap();
+        await match.accessible.Label(HomeLabel.InsulinDelivery).tap();
     }
     async OpenGlucoseChart() {
-        await match.accessible.Label(StatusLabel.ActiveCarbohydrates).tap();
+        await match.accessible.Label(HomeLabel.ActiveCarbohydrates).tap();
     }
     async CloseChart() {
         await match.accessible.BackButton(Label.Status).tap();
     }
     async ExpectLoopNotYetRun() {
-        await expect(match.loop.Icon()).toHaveLabel(StatusLabel.LoopWaitingForFirstRun);
+        await expect(match.loop.Icon()).toHaveLabel(HomeLabel.LoopWaitingForFirstRun);
     }
     async TapLoopIcon() {
         await waitFor(match.loop.Icon()).toBeVisible().withTimeout(2000);
@@ -31,4 +31,4 @@ class Status {
     }
 }
 
-module.exports = { Status };
+module.exports = { HomeScreen };

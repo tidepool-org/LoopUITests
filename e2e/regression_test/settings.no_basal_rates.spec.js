@@ -1,10 +1,10 @@
-const { setup, loopSettings, Status, FilterSettings, SettingDefault, SettingType } = require('../../src/index');
+const { setup, loopSettings, HomeScreen, FilterSettings, SettingDefault, SettingType } = require('../../src/index');
 
 describe('Closed loop is not allowed when settings', () => {
-    var status;
+    var home;
     beforeAll(async () => {
         await setup.LaunchLoop();
-        status = new Status();
+        home = new HomeScreen();
     });
     it('are not applied for basal rates', async () => {
         let config = {
@@ -14,10 +14,10 @@ describe('Closed loop is not allowed when settings', () => {
         await loopSettings.Configure(config);
     });
     it('should not be in closed loop mode', async () => {
-        await status.ExpectLoopNotYetRun();
+        await home.ExpectLoopNotYetRun();
     });
     it('should show error that indicates why not in closed loop mode', async () => {
-        await status.ExpectLoopStatusAlert('Missing Data: Insulin Effects');
+        await home.ExpectLoopStatusAlert('Missing Data: Insulin Effects');
     });
 });
 

@@ -1,5 +1,5 @@
 const setup = require('./setup');
-const { Settings } = require('./settings');
+const { SettingsScreen } = require('./settingsScreen');
 
 
 const loopSettings = {
@@ -9,17 +9,17 @@ const loopSettings = {
      * @example await settings.ConfiguredLoop({scenario:'flat_cgm', settings: SettingDefault})
      */
     async Configure(config) {
-        let settings = new Settings();
+        let settingsScreen = new SettingsScreen();
         await setup.LoadDeviceScenariosFromDisk(device.id);
-        await settings.Open();
-        await settings.Apply(config.settings);
-        await settings.Close();
+        await settingsScreen.Open();
+        await settingsScreen.Apply(config.settings);
+        await settingsScreen.Close();
         if (config.scenario) {
             //must load from the home screen
-           await setup.LoadScenario(config.scenario);
-           await settings.Open();
-           await settings.Close();
-       }
+            await setup.LoadScenario(config.scenario);
+            await settingsScreen.Open();
+            await settingsScreen.Close();
+        }
     },
 };
 

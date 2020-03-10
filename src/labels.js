@@ -10,7 +10,7 @@ var Label = {
     OK: 'OK',
 };
 
-var StatusLabel = {
+var HomeLabel = {
     ActiveCarbohydrates: 'Active Carbohydrates',
     ActiveInsulin: 'Active Insulin',
     InsulinDelivery: 'Insulin Delivery',
@@ -70,5 +70,5 @@ module.exports = {
     BolusLabel,
     SettingsLabel,
     TempOverrideLabel,
-    StatusLabel
+    HomeLabel
 };

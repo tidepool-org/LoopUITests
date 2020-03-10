@@ -117,7 +117,7 @@ var FilterSettings = function (values, types) {
     return filtered;
 };
 
-class Settings {
+class SettingsScreen {
     /**
      * @example await settings.Open();
      */
@@ -520,7 +520,7 @@ class Settings {
 }
 
 module.exports = {
-    Settings,
+    SettingsScreen,
     FilterSettings,
     SettingDefault,
     SettingType,
