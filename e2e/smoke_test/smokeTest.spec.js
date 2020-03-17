@@ -108,7 +108,7 @@ describe('smoke test', () => {
             await screen.bolus.Cancel();
         });
     });
-    describe('temporary override', () => {
+    describe.skip('temporary override', () => {
         it('can be opened', async () => {
             await screen.overrides.Open();
         });
