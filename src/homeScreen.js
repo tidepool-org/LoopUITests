@@ -21,12 +21,14 @@ class HomeScreen {
         await expect(match.loop.Icon()).toHaveLabel(HomeLabel.LoopWaitingForFirstRun);
     }
     async TapLoopIcon() {
-        await waitFor(match.loop.Icon()).toBeVisible().withTimeout(2000);
+        //TODO: not reccomended
+        // await waitFor(match.loop.Icon()).toBeVisible().withTimeout(2000);
         await match.loop.Icon().tap();
     }
     async ExpectLoopStatusAlert(expectedAlertText) {
         await this.TapLoopIcon();
-        await waitFor(match.accessible.AlertLabel(expectedAlertText)).toExist().withTimeout(2000);
+        //TODO: not reccomended
+        // await waitFor(match.accessible.AlertLabel(expectedAlertText)).toExist().withTimeout(2000);
         await match.accessible.Button(Label.OK).tap();
     }
 }

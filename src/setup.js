@@ -9,7 +9,18 @@ const setup = {
      */
     async LaunchLoop() {
         await device.launchApp({
-            //newInstance: true,
+            newInstance: true,
+            permissions: { notifications: 'YES', health: 'YES' },
+            launchArgs: { 'detoxPrintBusyIdleResources': 'YES' },
+        });
+    },
+    /**
+     * @summary will reset the content and settings and then launch the loop app with permissons for notifications and health enabled
+     */
+    async ResetThenLaunchLoop() {
+        await device.resetContentAndSettings();
+        await device.launchApp({
+            newInstance: true,
             permissions: { notifications: 'YES', health: 'YES' },
         });
     },
@@ -36,6 +47,7 @@ const setup = {
         await expect(match.accessible.Label(scenarioName)).toExist();
         await match.accessible.Label(scenarioName).tap();
         await match.accessible.ButtonBarButton('Load').tap();
+        await waitFor(match.accessible.ButtonBarButton('Load')).toNotExist().withTimeout(5000);
     },
     /**
      * @param {string} scenarioName
@@ -50,7 +62,8 @@ const setup = {
         await match.accessible.SwipeButton('Advance ⏭').tap();
         await match.UITextField().typeText(cycles);
         await match.accessible.Button(Label.OK).tap();
-        await waitFor(match.accessible.ButtonBarButton(SettingsLabel.Settings)).toExist().withTimeout(2000);
+        // TODO: not reccomended
+        //  await waitFor(match.accessible.ButtonBarButton(SettingsLabel.Settings)).toExist().withTimeout(2000);
     },
 };
 
