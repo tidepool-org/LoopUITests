@@ -51,11 +51,8 @@ describe('smoke test', () => {
             it('can be added', async () => {
                 await screen.settings.AddCGMSimulator();
             });
-            it('can configure simulator model', async () => {
-                await screen.settings.SetCGMModelData(SettingDefault.CGMModelData);
-            });
-            it('can configure simulator effect', async () => {
-                await screen.settings.SetCGMEffect(CGMEffect.GlucoseNoise);
+            it('can configure simulator', async () => {
+                await screen.settings.SetCGMSimulatorSettings(SettingDefault.CGMSimulatorSettings);
             });
         });
         describe('pump', () => {
