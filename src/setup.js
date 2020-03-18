@@ -31,9 +31,11 @@ const setup = {
     async LoadDeviceScenariosFromDisk(deviceId) {
         const LoadDeviceScenariosFromDiskShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
         LoadDeviceScenariosFromDiskShellScript.stdout.on('data', () => {
+            console.log('successfully loaded scenarios');
             return null;
         });
         LoadDeviceScenariosFromDiskShellScript.stderr.on('data', (data) => {
+            console.log('error loading scenarios data ', data);
             throw Error(data);
         });
     },
@@ -44,9 +46,12 @@ const setup = {
      */
     async LoadScenario(scenarioName) {
         await device.shake();
+        console.log('LoadScenario after shake');
         await expect(match.accessible.Label(scenarioName)).toExist();
+        console.log(`LoadScenario after ${scenarioName} exists`);
         await match.accessible.Label(scenarioName).tap();
         await match.accessible.ButtonBarButton('Load').tap();
+        console.log('LoadScenario have loaded');
         await waitFor(match.accessible.ButtonBarButton('Load')).toNotExist().withTimeout(5000);
     },
     /**
