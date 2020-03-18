@@ -216,13 +216,9 @@ class SettingsScreen {
      * @example await settings.Open();
      */
     async Open() {
-
-        //await device.disableSynchronization();
         //assume we are starting from the open screen
-        await waitFor(match.accessible.ButtonBarButton(SettingsLabel.Settings)).toBeVisible().withTimeout(2000);
+        //await waitFor(match.accessible.ButtonBarButton(SettingsLabel.Settings)).toBeVisible().withTimeout(2000);
         await match.accessible.ButtonBarButton(SettingsLabel.Settings).tap();
-
-        //await device.enableSynchronization();
     }
     /**
      * @example await settings.Close();
