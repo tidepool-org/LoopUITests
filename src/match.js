@@ -35,7 +35,7 @@ const match = {
          * @param {string} theId
          * @returns {Detox.Element}
          */
-        Id(theId){
+        Id(theId) {
             return element(by.id(theId));
         },
         /**
@@ -116,8 +116,6 @@ const match = {
                             )
                     )).atIndex(pickerNumber);
         },
-
-
         /**
          * @summary returns alert items based on the given label
          * @param {string} label
@@ -125,6 +123,13 @@ const match = {
          */
         AlertLabel(label) {
             return element(by.label(label).and(by.traits(['text'])).withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView')));
+        },
+        /**
+         * @summary returns alert item
+         * @returns {Detox.Element}
+         */
+        Alert() {
+            return element(by.traits(['text'])).withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView'));
         },
     },
     loop: {

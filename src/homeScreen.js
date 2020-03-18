@@ -21,15 +21,16 @@ class HomeScreen {
         await expect(match.loop.Icon()).toHaveLabel(HomeLabel.LoopWaitingForFirstRun);
     }
     async TapLoopIcon() {
-        //TODO: not reccomended
-        // await waitFor(match.loop.Icon()).toBeVisible().withTimeout(2000);
         await match.loop.Icon().tap();
     }
     async ExpectLoopStatusAlert(expectedAlertText) {
         await this.TapLoopIcon();
-        //TODO: not reccomended
-        // await waitFor(match.accessible.AlertLabel(expectedAlertText)).toExist().withTimeout(2000);
+        await expect(match.accessible.AlertLabel(expectedAlertText)).toExist();
         await match.accessible.Button(Label.OK).tap();
+    }
+    async ExpectNoLoopStatusAlert() {
+        await this.TapLoopIcon();
+        await expect(match.accessible.Alert()).toNotExist();
     }
 }
 

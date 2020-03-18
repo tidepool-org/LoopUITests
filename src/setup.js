@@ -52,7 +52,7 @@ const setup = {
         await match.accessible.Label(scenarioName).tap();
         await match.accessible.ButtonBarButton('Load').tap();
         console.log('LoadScenario have loaded');
-        await waitFor(match.accessible.ButtonBarButton('Load')).toBeNotVisible().withTimeout(5000);
+        //await waitFor(match.accessible.ButtonBarButton('Load')).toBeNotVisible().withTimeout(5000);
     },
     /**
      * @param {string} scenarioName
