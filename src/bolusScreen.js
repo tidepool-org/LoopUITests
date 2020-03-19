@@ -24,6 +24,12 @@ class BolusScreen {
         await match.accessible.Button(BolusLabel.Deliver).tap();
     }
     /**
+     * @example await bolus.ExpectCannotDeliverBolus();
+     */
+    async ExpectCannotDeliverBolus() {
+        await expect(match.accessible.DisabledButton(BolusLabel.Deliver)).toExist();
+    }
+    /**
      * @param {number} units
      * @example await bolus.SetBolusAmount(10.5);
      */
@@ -38,8 +44,6 @@ class BolusScreen {
         await match.UITextField().clearText();
         await match.UITextField().typeText(units);
     }
-
-
 };
 
 module.exports = { BolusScreen };

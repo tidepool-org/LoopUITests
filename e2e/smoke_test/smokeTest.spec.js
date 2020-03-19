@@ -35,7 +35,6 @@ describe('smoke test', () => {
         afterAll(async () => {
             await screen.settings.Close();
         });
-
         describe('general', () => {
             it('can be go set to closed loop', async () => {
                 await screen.settings.ClosedLoop();
@@ -92,6 +91,7 @@ describe('smoke test', () => {
         it('can be set and saved without a bolus', async () => {
             await screen.carbEntry.Open();
             await screen.carbEntry.SetCarbs('30');
+            await screen.carbEntry.ContinueToBolus();
             await screen.carbEntry.SaveWithoutBolus();
         });
         it('can be set and canceled', async () => {

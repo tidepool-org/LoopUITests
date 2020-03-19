@@ -184,12 +184,13 @@ var _swipeSettingsScreenDown = async function (labelToSee) {
         await match.accessible.Label(SettingsLabel.Configuration).swipe('down', 'fast');
         await expect(match.accessible.Label(labelToSee)).toBeVisible();
     }
+    return;
 }
 var _swipeSettingsScreenUp = async function (labelToSee) {
     try {
         await expect(match.accessible.Label(labelToSee)).toBeVisible();
     } catch (err) {
-        await match.accessible.HeaderLabel(SettingsLabel.Configuration).swipe('up', 'fast');
+        await match.accessible.Header(SettingsLabel.Configuration).swipe('up', 'fast');
         await expect(match.accessible.Label(labelToSee)).toBeVisible();
     }
 }
@@ -224,7 +225,79 @@ class SettingsScreen {
      * @example await settings.Close();
      */
     async Close() {
-        await match.accessible.ButtonBarButton(Label.Done).tap();
+        await this.DoneButton().tap();
+    }
+    /**
+     * @example settings.DoneButton();
+     */
+    DoneButton() {
+        return match.accessible.ButtonBarButton(Label.Done);
+    }
+    /**
+     * @example settings.ConfigurationHeader();
+     */
+    ConfigurationHeader() {
+        return match.accessible.Header(SettingsLabel.Configuration);
+    }
+    /**
+     * @example settings.ServicesHeader();
+     */
+    ServicesHeader() {
+        return match.accessible.Header(SettingsLabel.Services);
+    }
+    /**
+     * @example settings.PumpHeader();
+     */
+    PumpHeader() {
+        return match.accessible.Header(SettingsLabel.Pump);
+    }
+    /**
+     * @example settings.ContinuousGlucoseMonitorHeader();
+     */
+    ContinuousGlucoseMonitorHeader() {
+        return match.accessible.Header(SettingsLabel.ContinuousGlucoseMonitor);
+    }
+    /**
+     * @example settings.SettingsHeader();
+     */
+    SettingsHeader() {
+        return match.accessible.Header(SettingsLabel.Settings);
+    }
+    BasalRatesLabel() {
+        return match.accessible.Label(SettingsLabel.BasalRates)
+    }
+    SuspendThresholdLabel() {
+        return match.accessible.Label(SettingsLabel.SuspendThreshold)
+    }
+    DeliveryLimitsLabel() {
+        return match.accessible.Label(SettingsLabel.DeliveryLimits)
+    }
+    InsulinModelLabel() {
+        return match.accessible.Label(SettingsLabel.InsulinModel)
+    }
+    CarbRatiosLabel() {
+        return match.accessible.Label(SettingsLabel.CarbRatios)
+    }
+    InsulinSensitivitiesLabel() {
+        return match.accessible.Label(SettingsLabel.InsulinSensitivities)
+    }
+    CorrectionRangeLabel() {
+        return match.accessible.Label(SettingsLabel.CorrectionRange);
+    }
+    ClosedLoopButton() {
+        return match.accessible.Button(SettingsLabel.ClosedLoop);
+    }
+    AddPumpLabel() {
+        return match.accessible.Label(SettingsLabel.AddPump);
+    }
+    AddCGMLabel() {
+        return match.accessible.Label(SettingsLabel.AddCGM);
+    }
+    async ScrollToBottom() {
+        return _swipeSettingsScreenDown(SettingsLabel.ServicesHeader);
+    }
+    async ScrollToTop() {
+        return _swipeSettingsScreenUp(SettingsLabel.ConfigurationHeader);
     }
     /**
      * @summary helper function to set settings by applying configured values
@@ -261,7 +334,7 @@ class SettingsScreen {
     async SetBasalRates(rates) {
         if (rates) {
             const unitsSuffix = 'U/hr';
-            await match.accessible.Text(SettingsLabel.BasalRates).tap();
+            await this.BasalRatesLabel().tap();
             await expect(match.accessible.Header(SettingsLabel.BasalRates)).toExist();
 
             for (let index = 0; index < rates.length; index++) {
@@ -287,7 +360,7 @@ class SettingsScreen {
      */
     async SetSuspendThreshold(threshold) {
         if (threshold) {
-            await match.accessible.Text(SettingsLabel.SuspendThreshold).tap();
+            await this.SuspendThresholdLabel().tap();
             await match.UIEditableTextField().typeText(threshold.value);
             await expect(match.UIEditableTextField()).toHaveText(threshold.value);
             await _exitSetting();
@@ -299,7 +372,7 @@ class SettingsScreen {
      */
     async SetDeliveryLimits(limits) {
         if (limits) {
-            await match.accessible.Text(SettingsLabel.DeliveryLimits).tap();
+            await this.DeliveryLimitsLabel().tap();
             //TODO: using atIndex, need a better way to select these
             await match.UIEditableTextField().atIndex(0).clearText();
             await match.UIEditableTextField().atIndex(0).typeText(limits.maxBasalRate);
@@ -319,7 +392,7 @@ class SettingsScreen {
      */
     async SetInsulinModel(model) {
         if (model) {
-            await match.accessible.Text(SettingsLabel.InsulinModel).tap();
+            await this.InsulinModelLabel().tap();
             await match.accessible.Text(model).tap();
             await _exitSetting();
         }
@@ -331,7 +404,7 @@ class SettingsScreen {
     */
     async SetCarbRatios(ratios) {
         if (ratios) {
-            await match.accessible.UILabel(SettingsLabel.CarbRatios).tap();
+            await this.CarbRatiosLabel().tap();
             for (let index = 0; index < ratios.length; index++) {
                 const ratio = ratios[index];
                 await match.accessible.ButtonBarButton(Label.Add).tap();
@@ -355,9 +428,9 @@ class SettingsScreen {
     */
     async SetInsulinSensitivities(sensitivities) {
         if (sensitivities) {
-            await _swipeSettingsScreenUp(SettingsLabel.Services);
+            await _swipeSettingsScreenUp(SettingsLabel.InsulinSensitivities);
             const unitsSuffix = 'mg/dL/U';
-            await match.accessible.Label(SettingsLabel.InsulinSensitivities).atIndex(1).tap();
+            await this.InsulinSensitivitiesLabel().atIndex(1).tap();
             for (let index = 0; index < sensitivities.length; index++) {
                 const sensitivity = sensitivities[index];
                 await match.accessible.ButtonBarButton(Label.Add).tap();
@@ -365,7 +438,7 @@ class SettingsScreen {
             }
             await match.accessible.Label(Label.Save).tap();
             await _exitSetting();
-            await _swipeSettingsScreenDown(SettingsLabel.Services);
+            await _swipeSettingsScreenDown(SettingsLabel.Configuration);
         }
     }
     /**
@@ -375,7 +448,7 @@ class SettingsScreen {
      */
     async SetCorrectionRanges(ranges) {
         if (ranges) {
-            await match.accessible.Text(SettingsLabel.CorrectionRange).tap();
+            await this.CorrectionRangeLabel().tap();
             await match.accessible.ButtonBarButton(Label.Add).tap();
 
             let correctionRangePickerIndex = 0;
@@ -415,7 +488,7 @@ class SettingsScreen {
                 MaximumValue: 4,
                 Units: 5,
             };
-            await match.accessible.Text(SettingsLabel.CorrectionRange).tap();
+            await this.CorrectionRangeLabel().tap();
             if (preMeal) {
                 await match.accessible.Label('Pre-Meal').tap();
                 await match.accessible.PickerItem(2, `${preMeal.max}`).tap();
@@ -431,13 +504,13 @@ class SettingsScreen {
      */
     async ClosedLoop() {
         await _swipeSettingsScreenDown(SettingsLabel.ClosedLoop);
-        await match.accessible.Button(SettingsLabel.ClosedLoop).tap();
+        await this.ClosedLoopButton().tap();
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
-            await expect(match.accessible.Button(SettingsLabel.ClosedLoop)).toHaveValue('1');
+            await expect(this.ClosedLoopButton()).toHaveValue('1');
         } catch (err) {
-            await match.accessible.Button(SettingsLabel.ClosedLoop).tap();
-            await expect(match.accessible.Button(SettingsLabel.ClosedLoop)).toHaveValue('1');
+            await this.ClosedLoopButton().tap();
+            await expect(this.ClosedLoopButton()).toHaveValue('1');
         }
     }
     /**
@@ -446,13 +519,13 @@ class SettingsScreen {
      */
     async OpenLoop() {
         await _swipeSettingsScreenDown(SettingsLabel.ClosedLoop);
-        await match.accessible.Button(SettingsLabel.ClosedLoop).tap();
+        await this.ClosedLoopButton().tap();
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
-            await expect(match.accessible.Button(SettingsLabel.ClosedLoop)).toHaveValue('0');
+            await expect(this.ClosedLoopButton()).toHaveValue('0');
         } catch (err) {
-            await match.accessible.Button(SettingsLabel.ClosedLoop).tap();
-            await expect(match.accessible.Button(SettingsLabel.ClosedLoop)).toHaveValue('0');
+            await this.ClosedLoopButton().tap();
+            await expect(this.ClosedLoopButton()).toHaveValue('0');
         }
     }
     /**
@@ -469,7 +542,7 @@ class SettingsScreen {
      * @summary add CGM Simulator
      */
     async AddCGMSimulator() {
-        await match.accessible.UILabel(SettingsLabel.AddCGM).tap();
+        await this.AddCGMLabel().tap();
         await match.accessible.Button(SettingsLabel.Simulator).tap();
     }
     /**
@@ -496,11 +569,10 @@ class SettingsScreen {
      * @summary add Pump Simulator
      */
     async AddPumpSimulator() {
-        await _swipeSettingsScreenDown(SettingsLabel.Pump);
         try {
-            await match.accessible.UILabel(SettingsLabel.AddPump).atIndex(1).tap();
+            await this.AddPumpLabel().atIndex(1).tap();
         } catch (err) {
-            await match.accessible.UILabel(SettingsLabel.AddPump).atIndex(0).tap();
+            await this.AddPumpLabel().atIndex(0).tap();
         }
         await match.accessible.Button(SettingsLabel.Simulator).tap();
         await match.accessible.Button(Label.Continue).tap();
@@ -549,7 +621,7 @@ class SettingsScreen {
                 await _setCGMBackfill(settings.backfillHours)
             }
             //TODO: multiple done buttons
-            await match.accessible.ButtonBarButton(Label.Done).atIndex(0).tap();
+            await this.DoneButton().atIndex(0).tap();
         }
     }
 }

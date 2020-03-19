@@ -18,11 +18,31 @@ class CarbEntryScreen {
         await match.accessible.ButtonBarButton(Label.Cancel).tap();
     }
     /**
+     * @example await carbs.ContinueToBolus();
+     */
+    async ContinueToBolus() {
+        await match.accessible.ButtonBarButton(Label.Continue).tap();
+    }
+    /**
      * @example await carbs.SaveWithoutBolus();
      */
     async SaveWithoutBolus() {
-        await match.accessible.ButtonBarButton(Label.Continue).tap();
         await match.accessible.Button(CarbsLabel.SaveWithoutBolusing).tap();
+    }
+    /**
+     * @param {string} glucoseValueAndUnits
+     * @example await carbs.ExpectPredictedGlucoseWarning('110 mg/dL');
+     */
+    async ExpectPredictedGlucoseWarning(glucoseValueAndUnits) {
+        const predictedGlucoseWarning = `⚠ Predicted glucose of ${glucoseValueAndUnits} is below your suspend threshold setting.`;
+        await expect(match.accessible.Label(predictedGlucoseWarning)).toExist();
+    }
+    /**
+     * @example await carbs.ExpectAbsorptionTimeMessage();
+     */
+    async ExpectAbsorptionTimeMessage() {
+        const absorbtionTimeMessage = 'Choose a longer absorption time for larger meals, or those containing fats and proteins. This is only guidance to the algorithm and need not be exact.';
+        await expect(match.accessible.Label(absorbtionTimeMessage)).toExist();
     }
     /**
      * @summary add a meal entry
