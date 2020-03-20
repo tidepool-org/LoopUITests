@@ -63,7 +63,6 @@ var SettingsLabel = {
     DeletePumpData: 'Delete Pump Data'
 };
 
-
 module.exports = {
     Label,
     CarbsLabel,

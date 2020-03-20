@@ -1,18 +1,48 @@
 const match = require('./match');
-const { Label, HomeLabel } = require('./labels');
+const { Label, HomeLabel, TempOverrideLabel, SettingsLabel, CarbsLabel, BolusLabel } = require('./labels');
 
 class HomeScreen {
+    /**
+     * @example home.ActiveCarbohydratesLabel().tap();
+     */
+    ActiveCarbohydratesLabel() {
+        return match.accessible.Label(HomeLabel.ActiveCarbohydrates);
+    }
+    /**
+     * @example home.ActiveInsulinLabel().tap();
+     */
+    ActiveInsulinLabel() {
+        return match.accessible.Label(HomeLabel.ActiveInsulin);
+    }
+    InsulinDeliveryLabel() {
+        return match.accessible.Label(HomeLabel.InsulinDelivery);
+    }
+    GlucoseLabel() {
+        return match.accessible.Label(HomeLabel.Glucose);
+    }
+    SettingsButton() {
+        return match.accessible.Button(SettingsLabel.Settings);
+    }
+    OverridesButton() {
+        return match.accessible.Button(TempOverrideLabel.WorkoutTargets);
+    }
+    AddMealButton() {
+        return match.accessible.Button(CarbsLabel.AddMeal);
+    }
+    BolusButton() {
+        return match.accessible.Button(BolusLabel.Bolus);
+    }
     async OpenActiveCarbohydratesChart() {
-        await match.accessible.Label(HomeLabel.ActiveCarbohydrates).tap();
+        await this.ActiveCarbohydratesLabel().tap();
     }
     async OpenActiveInsulinChart() {
-        await match.accessible.Label(HomeLabel.ActiveInsulin).tap();
+        await this.ActiveInsulinLabel().tap();
     }
     async OpenInsulinDeliveryChart() {
-        await match.accessible.Label(HomeLabel.InsulinDelivery).tap();
+        await this.InsulinDeliveryLabel().tap();
     }
     async OpenGlucoseChart() {
-        await match.accessible.Label(HomeLabel.ActiveCarbohydrates).tap();
+        await this.GlucoseLabel().tap();
     }
     async CloseChart() {
         await match.accessible.BackButton(Label.Status).tap();

@@ -270,6 +270,9 @@ class SettingsScreen {
     ClosedLoopButton() {
         return match.accessible.Button(SettingsLabel.ClosedLoop);
     }
+    IssueReportLabel() {
+        return match.accessible.Label(SettingsLabel.IssueReport);
+    }
     AddPumpLabel() {
         return match.accessible.Label(SettingsLabel.AddPump);
     }
@@ -421,7 +424,7 @@ class SettingsScreen {
     */
     async SetInsulinSensitivities(sensitivities) {
         if (sensitivities) {
-            await this.ScrollToBottom();//_swipeSettingsScreenUp(SettingsLabel.InsulinSensitivities);
+            await this.ScrollToBottom();
             const unitsSuffix = 'mg/dL/U';
             await this.InsulinSensitivitiesLabel().atIndex(1).tap();
             for (let index = 0; index < sensitivities.length; index++) {
@@ -431,7 +434,7 @@ class SettingsScreen {
             }
             await match.accessible.Label(Label.Save).tap();
             await _exitSetting();
-            await this.ScrollToTop();// _swipeSettingsScreenDown(SettingsLabel.Configuration);
+            await this.ScrollToTop();
         }
     }
     /**
@@ -496,7 +499,7 @@ class SettingsScreen {
      * @summary turn on closed loop mode
      */
     async ClosedLoop() {
-        await this.ScrollToTop();// _swipeSettingsScreenDown(SettingsLabel.ClosedLoop);
+        await this.ScrollToTop();
         await this.ClosedLoopButton().tap();
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
@@ -511,7 +514,7 @@ class SettingsScreen {
      * @summary set to open loop mode
      */
     async OpenLoop() {
-        await this.ScrollToTop();//_swipeSettingsScreenDown(SettingsLabel.ClosedLoop);
+        await this.ScrollToTop();
         await this.ClosedLoopButton().tap();
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
@@ -527,7 +530,7 @@ class SettingsScreen {
      * @example await settings.IssueReport();
      */
     async IssueReport() {
-        await match.accessible.Label(SettingsLabel.IssueReport).tap();//TODO: not a button
+        await this.IssueReportLabel().tap();
         await expect(match.accessible.Header(SettingsLabel.IssueReport)).toBeVisible();
         await _exitSetting();
     }
@@ -542,7 +545,7 @@ class SettingsScreen {
      * @summary Remove CGM
      */
     async RemoveCGM() {
-        await this.ScrollToTop();//_swipeSettingsScreenDown(SettingsLabel.Configuration);
+        await this.ScrollToTop();
         await _selectCGMSimulator();
         await match.accessible.Label(SettingsLabel.DeleteCGM).tap();
         await match.accessible.Label(SettingsLabel.DeleteCGM).atIndex(1).tap();
@@ -553,7 +556,7 @@ class SettingsScreen {
      * @summary Remove CGM Data
      */
     async RemoveCGMData() {
-        await this.ScrollToBottom();// _swipeSettingsScreenUp(SettingsLabel.DeleteCGMData);
+        await this.ScrollToBottom();
         //TODO static text and not a button?
         await match.accessible.Label(SettingsLabel.DeleteCGMData).atIndex(0).tap();
         await match.accessible.Label(SettingsLabel.DeleteCGMData).atIndex(1).tap();
@@ -574,7 +577,7 @@ class SettingsScreen {
      * @summary Remove Pump
      */
     async RemovePump() {
-        await this.ScrollToTop();// _swipeSettingsScreenDown(SettingsLabel.Pump);
+        await this.ScrollToTop();
         await _selectPumpSimulator();
         //TODO static text and not a button?
         await match.accessible.Label(SettingsLabel.DeletePump).tap();
@@ -586,7 +589,7 @@ class SettingsScreen {
      * @summary Remove Pump Data
      */
     async RemovePumpData() {
-        await this.ScrollToBottom();//_swipeSettingsScreenUp(SettingsLabel.DeletePumpData);
+        await this.ScrollToBottom();
         //TODO static text and not a button?
         await match.accessible.Label(SettingsLabel.DeletePumpData).atIndex(0).tap();
         await match.accessible.Label(SettingsLabel.DeletePumpData).atIndex(1).tap();
@@ -602,7 +605,7 @@ class SettingsScreen {
      */
     async SetCGMSimulatorSettings(settings) {
         if (settings) {
-            await this.ScrollToTop();// _swipeSettingsScreenDown(SettingsLabel.Configuration);
+            await this.ScrollToTop();
             await _selectCGMSimulator();
             if (settings.effect) {
                 await _setCGMEffect(settings.effect);

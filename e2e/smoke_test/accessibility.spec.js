@@ -4,6 +4,32 @@ describe('accessibility', () => {
     beforeAll(async () => {
         await setup.LaunchLoop();
     });
+    describe('home', () => {
+        it('has a Active Carbohydrates Label', async () => {
+            await expect(screen.home.ActiveCarbohydratesLabel()).toExist();
+        });
+        it('has a Active Insulin Label', async () => {
+            await expect(screen.home.ActiveInsulinLabel()).toExist();
+        });
+        it('has a Insulin Delivery Label', async () => {
+            await expect(screen.home.InsulinDeliveryLabel()).toExist();
+        });
+        it('has a Glucose Label', async () => {
+            await expect(screen.home.GlucoseLabel()).toExist();
+        });
+        it('has a Settings Button', async () => {
+            await expect(screen.home.SettingsButton()).toExist();
+        });
+        it('has a Overrides Button', async () => {
+            await expect(screen.home.OverridesButton()).toExist();
+        });
+        it('has a Add Meal Button', async () => {
+            await expect(screen.home.AddMealButton()).toExist();
+        });
+        it('has a Bolus Button', async () => {
+            await expect(screen.home.BolusButton()).toExist();
+        });
+    });
     describe('settings', () => {
         beforeAll(async () => {
             await screen.settings.Open();
@@ -25,6 +51,10 @@ describe('accessibility', () => {
         });
         it('has a settings header', async () => {
             await expect(screen.settings.SettingsHeader()).toExist();
+        });
+        it('has a Issue Report Label', async () => {
+            //TODO: this is acting like a button!
+            await expect(screen.settings.IssueReportLabel()).toExist();
         });
         it('has a Correction Range Label', async () => {
             //TODO: this is acting like a button!
@@ -56,6 +86,9 @@ describe('accessibility', () => {
         });
         it('has a Closed Loop button', async () => {
             await expect(screen.settings.ClosedLoopButton()).toExist();
+        });
+        it('has a Issue Report button', async () => {
+            await expect(screen.settings.IssueReportLabel()).toExist();
         });
         it('has a Add Pump label', async () => {
             //TODO: this is acting like a button!

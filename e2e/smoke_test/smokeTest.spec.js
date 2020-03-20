@@ -43,7 +43,7 @@ describe('smoke test', () => {
                 await screen.settings.OpenLoop();
             });
             it('can issue a report', async () => {
-                await screen.settings.IssueReport();
+                await screen.settings.IssueReportLabel();
             });
         });
         describe('cgm', () => {
