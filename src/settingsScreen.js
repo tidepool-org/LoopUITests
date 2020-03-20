@@ -177,23 +177,6 @@ var _exitSetting = async function () {
     // TODO: not reccomended
     // await waitFor(match.accessible.Header(SettingsLabel.Settings)).toBeVisible().withTimeout(2000);
 }
-var _swipeSettingsScreenDown = async function (labelToSee) {
-    try {
-        await expect(match.accessible.Label(labelToSee)).toBeVisible();
-    } catch (err) {
-        await match.accessible.Label(SettingsLabel.Configuration).swipe('down', 'fast');
-        await expect(match.accessible.Label(labelToSee)).toBeVisible();
-    }
-    return;
-}
-var _swipeSettingsScreenUp = async function (labelToSee) {
-    try {
-        await expect(match.accessible.Label(labelToSee)).toBeVisible();
-    } catch (err) {
-        await match.accessible.Header(SettingsLabel.Configuration).swipe('up', 'fast');
-        await expect(match.accessible.Label(labelToSee)).toBeVisible();
-    }
-}
 var _selectPumpSimulator = async function () {
     await match.accessible.Id('Simulator Small').tap();
 }
@@ -294,10 +277,20 @@ class SettingsScreen {
         return match.accessible.Label(SettingsLabel.AddCGM);
     }
     async ScrollToBottom() {
-        return _swipeSettingsScreenDown(SettingsLabel.ServicesHeader);
+        try {
+            await expect(match.accessible.Label(SettingsLabel.Services)).toBeVisible();
+        } catch (err) {
+            await match.accessible.Header(SettingsLabel.Configuration).swipe('up', 'fast');
+            await expect(match.accessible.Label(SettingsLabel.Services)).toBeVisible();
+        }
     }
     async ScrollToTop() {
-        return _swipeSettingsScreenUp(SettingsLabel.ConfigurationHeader);
+        try {
+            await expect(match.accessible.Label(SettingsLabel.Pump)).toBeVisible();
+        } catch (err) {
+            await match.accessible.Header(SettingsLabel.Configuration).swipe('down', 'fast');
+            await expect(match.accessible.Label(SettingsLabel.Pump)).toBeVisible();
+        }
     }
     /**
      * @summary helper function to set settings by applying configured values
@@ -428,7 +421,7 @@ class SettingsScreen {
     */
     async SetInsulinSensitivities(sensitivities) {
         if (sensitivities) {
-            await _swipeSettingsScreenUp(SettingsLabel.InsulinSensitivities);
+            await this.ScrollToBottom();//_swipeSettingsScreenUp(SettingsLabel.InsulinSensitivities);
             const unitsSuffix = 'mg/dL/U';
             await this.InsulinSensitivitiesLabel().atIndex(1).tap();
             for (let index = 0; index < sensitivities.length; index++) {
@@ -438,7 +431,7 @@ class SettingsScreen {
             }
             await match.accessible.Label(Label.Save).tap();
             await _exitSetting();
-            await _swipeSettingsScreenDown(SettingsLabel.Configuration);
+            await this.ScrollToTop();// _swipeSettingsScreenDown(SettingsLabel.Configuration);
         }
     }
     /**
@@ -503,7 +496,7 @@ class SettingsScreen {
      * @summary turn on closed loop mode
      */
     async ClosedLoop() {
-        await _swipeSettingsScreenDown(SettingsLabel.ClosedLoop);
+        await this.ScrollToTop();// _swipeSettingsScreenDown(SettingsLabel.ClosedLoop);
         await this.ClosedLoopButton().tap();
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
@@ -518,7 +511,7 @@ class SettingsScreen {
      * @summary set to open loop mode
      */
     async OpenLoop() {
-        await _swipeSettingsScreenDown(SettingsLabel.ClosedLoop);
+        await this.ScrollToTop();//_swipeSettingsScreenDown(SettingsLabel.ClosedLoop);
         await this.ClosedLoopButton().tap();
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
@@ -549,7 +542,7 @@ class SettingsScreen {
      * @summary Remove CGM
      */
     async RemoveCGM() {
-        await _swipeSettingsScreenDown(SettingsLabel.Configuration);
+        await this.ScrollToTop();//_swipeSettingsScreenDown(SettingsLabel.Configuration);
         await _selectCGMSimulator();
         await match.accessible.Label(SettingsLabel.DeleteCGM).tap();
         await match.accessible.Label(SettingsLabel.DeleteCGM).atIndex(1).tap();
@@ -560,7 +553,7 @@ class SettingsScreen {
      * @summary Remove CGM Data
      */
     async RemoveCGMData() {
-        await _swipeSettingsScreenUp(SettingsLabel.DeleteCGMData);
+        await this.ScrollToBottom();// _swipeSettingsScreenUp(SettingsLabel.DeleteCGMData);
         //TODO static text and not a button?
         await match.accessible.Label(SettingsLabel.DeleteCGMData).atIndex(0).tap();
         await match.accessible.Label(SettingsLabel.DeleteCGMData).atIndex(1).tap();
@@ -581,7 +574,7 @@ class SettingsScreen {
      * @summary Remove Pump
      */
     async RemovePump() {
-        await _swipeSettingsScreenDown(SettingsLabel.Pump);
+        await this.ScrollToTop();// _swipeSettingsScreenDown(SettingsLabel.Pump);
         await _selectPumpSimulator();
         //TODO static text and not a button?
         await match.accessible.Label(SettingsLabel.DeletePump).tap();
@@ -593,7 +586,7 @@ class SettingsScreen {
      * @summary Remove Pump Data
      */
     async RemovePumpData() {
-        await _swipeSettingsScreenUp(SettingsLabel.DeletePumpData);
+        await this.ScrollToBottom();//_swipeSettingsScreenUp(SettingsLabel.DeletePumpData);
         //TODO static text and not a button?
         await match.accessible.Label(SettingsLabel.DeletePumpData).atIndex(0).tap();
         await match.accessible.Label(SettingsLabel.DeletePumpData).atIndex(1).tap();
@@ -609,7 +602,7 @@ class SettingsScreen {
      */
     async SetCGMSimulatorSettings(settings) {
         if (settings) {
-            await _swipeSettingsScreenDown(SettingsLabel.Configuration);
+            await this.ScrollToTop();// _swipeSettingsScreenDown(SettingsLabel.Configuration);
             await _selectCGMSimulator();
             if (settings.effect) {
                 await _setCGMEffect(settings.effect);

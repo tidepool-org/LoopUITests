@@ -26,10 +26,6 @@ describe('accessibility', () => {
         it('has a settings header', async () => {
             await expect(screen.settings.SettingsHeader()).toExist();
         });
-        it('has a services header', async () => {
-            //await screen.settings.ScrollToBottom();
-            await expect(screen.settings.ServicesHeader()).toExist();
-        });
         it('has a Correction Range Label', async () => {
             //TODO: this is acting like a button!
             await expect(screen.settings.CorrectionRangeLabel()).toExist();
@@ -68,6 +64,10 @@ describe('accessibility', () => {
         it('has a Add CGM label', async () => {
             //TODO: this is acting like a button!
             await expect(screen.settings.AddCGMLabel()).toExist();
+        });
+        it('has a services header', async () => {
+            await screen.settings.ScrollToBottom();
+            await expect(screen.settings.ServicesHeader()).toExist();
         });
     });
 });
