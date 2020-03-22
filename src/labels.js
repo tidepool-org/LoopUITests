@@ -63,11 +63,22 @@ var SettingsLabel = {
     DeletePumpData: 'Delete Pump Data'
 };
 
+
+var label = {
+    general: Label,
+    bolusScreen: BolusLabel,
+    carbEntryScreen: CarbsLabel,
+    settingsScreen: SettingsLabel,
+    overridesScreen: TempOverrideLabel,
+    homeScreen: HomeLabel
+};
+
 module.exports = {
-    Label,
-    CarbsLabel,
-    BolusLabel,
-    SettingsLabel,
-    TempOverrideLabel,
-    HomeLabel
+    label
+    // Label,
+    // CarbsLabel,
+    // BolusLabel,
+    // SettingsLabel,
+    // TempOverrideLabel,
+    // HomeLabel
 };

@@ -1,7 +1,7 @@
 const exec = require('child_process').exec;
 const match = require('./match');
 
-const { Label, SettingsLabel } = require('./labels');
+const { label } = require('./labels');
 
 const setup = {
     /**
@@ -66,9 +66,9 @@ const setup = {
         await match.accessible.Label(scenarioName).swipe('left');
         await match.accessible.SwipeButton('Advance ⏭').tap();
         await match.UITextField().typeText(cycles);
-        await match.accessible.Button(Label.OK).tap();
+        await match.accessible.Button(label.general.OK).tap();
         // TODO: not reccomended
-        //  await waitFor(match.accessible.ButtonBarButton(SettingsLabel.Settings)).toExist().withTimeout(2000);
+        //  await waitFor(match.accessible.ButtonBarButton(label.settingsScreen.Settings)).toExist().withTimeout(2000);
     },
 };
 

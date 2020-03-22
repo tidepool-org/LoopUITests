@@ -1,4 +1,4 @@
-const { setup, screen, SettingDefault, CGMModel, CGMEffect } = require('../../src/index');
+const { setup, screen, SettingDefault } = require('../../src/index');
 
 describe('smoke test', () => {
     beforeAll(async () => {

@@ -1,5 +1,5 @@
 const match = require('./match');
-const { Label, BolusLabel } = require('./labels');
+const { label } = require('./labels');
 
 class BolusScreen {
     /**
@@ -8,26 +8,26 @@ class BolusScreen {
     async Open() {
         try {
             //assume we are starting from the open screen
-            await match.accessible.Button(BolusLabel.Bolus).tap();
+            await match.accessible.Button(label.bolusScreen.Bolus).tap();
         } catch (err) { } //catch and continue
     }
     /**
      * @example await bolus.Cancel();
      */
     async Cancel() {
-        await match.accessible.ButtonBarButton(Label.Cancel).tap();
+        await match.accessible.ButtonBarButton(label.general.Cancel).tap();
     }
     /**
      * @example await bolus.Deliver();
      */
     async Deliver() {
-        await match.accessible.Button(BolusLabel.Deliver).tap();
+        await match.accessible.Button(label.bolusScreen.Deliver).tap();
     }
     /**
      * @example await bolus.ExpectCannotDeliverBolus();
      */
     async ExpectCannotDeliverBolus() {
-        await expect(match.accessible.DisabledButton(BolusLabel.Deliver)).toExist();
+        await expect(match.accessible.DisabledButton(label.bolusScreen.Deliver)).toExist();
     }
     /**
      * @param {number} units

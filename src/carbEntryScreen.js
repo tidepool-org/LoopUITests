@@ -1,5 +1,5 @@
 const match = require('./match');
-const { Label, CarbsLabel } = require('./labels');
+const { label } = require('./labels');
 
 class CarbEntryScreen {
     /**
@@ -8,26 +8,26 @@ class CarbEntryScreen {
     async Open() {
         try {
             //assume we are starting from the open screen
-            await match.accessible.Button(CarbsLabel.AddMeal).tap();
+            await match.accessible.Button(label.carbEntryScreen.AddMeal).tap();
         } catch (err) { } //catch and continue
     }
     /**
      * @example await carbs.Cancel();
      */
     async Cancel() {
-        await match.accessible.ButtonBarButton(Label.Cancel).tap();
+        await match.accessible.ButtonBarButton(label.general.Cancel).tap();
     }
     /**
      * @example await carbs.ContinueToBolus();
      */
     async ContinueToBolus() {
-        await match.accessible.ButtonBarButton(Label.Continue).tap();
+        await match.accessible.ButtonBarButton(label.general.Continue).tap();
     }
     /**
      * @example await carbs.SaveWithoutBolus();
      */
     async SaveWithoutBolus() {
-        await match.accessible.Button(CarbsLabel.SaveWithoutBolusing).tap();
+        await match.accessible.Button(label.carbEntryScreen.SaveWithoutBolusing).tap();
     }
     /**
      * @param {string} glucoseValueAndUnits
