@@ -21,6 +21,20 @@ const match = {
         },
         /**
          * @param {string} label
+         * @returns {Detox.Element} LoopKitUI.SetupButton
+         */
+        SetupButton(label) {
+            return element(by.label(label).and(by.traits(['button']).and(by.type('LoopKitUI.SetupButton'))));
+        },
+        /**
+         * @param {string} label
+         * @returns {Detox.Element} disabled LoopKitUI.SetupButton
+         */
+        DisabledSetupButton(label) {
+            return element(by.label(label).and(by.traits(['button', 'disabled']).and(by.type('LoopKitUI.SetupButton'))));
+        },
+        /**
+         * @param {string} label
          * @returns {Detox.Element} accessibilityButton
          */
         Button(label) {

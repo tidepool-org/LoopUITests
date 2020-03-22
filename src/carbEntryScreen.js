@@ -15,19 +15,67 @@ class CarbEntryScreen {
      * @example await carbs.Cancel();
      */
     async Cancel() {
-        await match.accessible.ButtonBarButton(label.general.Cancel).tap();
+        await this.CancelHeaderButton().tap();
+    }
+    CancelHeaderButton() {
+        return match.accessible.ButtonBarButton(label.general.Cancel);
+    }
+    AddCarbEntryHeader() {
+        return match.accessible.Header(label.carbEntryScreen.AddCarbEntry);
+    }
+    AmountConsumedLabel() {
+        return match.accessible.Label(label.carbEntryScreen.AmountConsumed);
+    }
+    DateLabel() {
+        return match.accessible.Label(label.carbEntryScreen.Date);
+    }
+    FoodTypeLabel() {
+        return match.accessible.Label(label.carbEntryScreen.FoodType);
+    }
+    AbsorptionTimeLabel() {
+        return match.accessible.Label(label.carbEntryScreen.AbsorptionTime);
+    }
+    /**
+     * @example  carbs.ContinueButton();
+     */
+    ContinueHeaderButton() {
+        return match.accessible.ButtonBarButton(label.general.Continue);
+    }
+    /**
+     * @example  carbs.DisabledContinueButton();
+     */
+    DisabledContinueHeaderButton() {
+        return match.accessible.DisabledButtonBarButton(label.general.Continue);
+    }
+    /**
+     * @example  carbs.ContinueMainButton();
+     */
+    ContinueMainButton() {
+        return match.accessible.SetupButton(label.general.Continue);
+    }
+    /**
+     * @example  carbs.DisabledContinueMainButton();
+     */
+    DisabledContinueMainButton() {
+        return match.accessible.DisabledSetupButton(label.general.Continue);
     }
     /**
      * @example await carbs.ContinueToBolus();
      */
     async ContinueToBolus() {
-        await match.accessible.ButtonBarButton(label.general.Continue).tap();
+        await this.ContinueButton().tap();
+    }
+    /**
+     * @example carbs.SaveWithoutBolusButton();
+     */
+    SaveWithoutBolusButton() {
+        return match.accessible.Button(label.carbEntryScreen.SaveWithoutBolusing);
     }
     /**
      * @example await carbs.SaveWithoutBolus();
      */
     async SaveWithoutBolus() {
-        await match.accessible.Button(label.carbEntryScreen.SaveWithoutBolusing).tap();
+        await this.SaveWithoutBolusButton().tap();
     }
     /**
      * @param {string} glucoseValueAndUnits
@@ -38,11 +86,16 @@ class CarbEntryScreen {
         await expect(match.accessible.Label(predictedGlucoseWarning)).toExist();
     }
     /**
+     * @example carbs.AbsorptionTimeMessage();
+     */
+    AbsorptionTimeMessage() {
+        return match.accessible.Label(label.carbEntryScreen.AbsorptionMessage);
+    }
+    /**
      * @example await carbs.ExpectAbsorptionTimeMessage();
      */
     async ExpectAbsorptionTimeMessage() {
-        const absorbtionTimeMessage = 'Choose a longer absorption time for larger meals, or those containing fats and proteins. This is only guidance to the algorithm and need not be exact.';
-        await expect(match.accessible.Label(absorbtionTimeMessage)).toExist();
+        await expect(this.AbsorptionTimeMessage()).toExist();
     }
     /**
      * @summary add a meal entry

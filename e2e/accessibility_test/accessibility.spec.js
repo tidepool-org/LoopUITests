@@ -30,6 +30,90 @@ describe('accessibility', () => {
             await expect(screen.home.BolusButton()).toExist();
         });
     });
+    describe('bolus', () => {
+        beforeAll(async () => {
+            await screen.bolus.Open();
+        });
+        afterAll(async () => {
+            await screen.bolus.Cancel();
+        });
+        it('has a Bolus Header', async () => {
+            await expect(screen.bolus.BolusHeader()).toExist();
+        });
+        it('has a Deliver Button', async () => {
+            await expect(screen.bolus.DeliverButton()).toExist();
+        });
+        it('has a Disabled Deliver Button', async () => {
+            await expect(screen.bolus.DisabledDeliverButton()).toExist();
+        });
+        it('has a Recommended Label', async () => {
+            await expect(screen.bolus.RecommendedLabel()).toExist();
+        });
+        it('has a Entered Label', async () => {
+            await expect(screen.bolus.EnteredLabel()).toExist();
+        });
+        it('has a Cancel Header Button', async () => {
+            await expect(screen.bolus.CancelHeaderButton()).toExist();
+        });
+    });
+    describe('add meal', () => {
+        beforeAll(async () => {
+            await screen.carbEntry.Open();
+        });
+        afterAll(async () => {
+            await screen.carbEntry.Cancel();
+        });
+        it('has a Add Carb Entry Header', async () => {
+            await expect(screen.carbEntry.AddCarbEntryHeader()).toExist();
+        });
+        it('has a Cancel Header Button', async () => {
+            await expect(screen.carbEntry.CancelHeaderButton()).toExist();
+        });
+        it('has a Disabled Continue Main Button', async () => {
+            await expect(screen.carbEntry.DisabledContinueMainButton()).toExist();
+        });
+        it('has a Disabled Continue Header Button', async () => {
+            await expect(screen.carbEntry.DisabledContinueHeaderButton()).toExist();
+        });
+        it('has a Absorption Time Message', async () => {
+            await expect(screen.carbEntry.AbsorptionTimeMessage()).toExist();
+        });
+        it('has a Absorption Time Label', async () => {
+            await expect(screen.carbEntry.AbsorptionTimeLabel()).toExist();
+        });
+        it('has a Date Label', async () => {
+            await expect(screen.carbEntry.DateLabel()).toExist();
+        });
+        it('has a Amount Consumed Label', async () => {
+            await expect(screen.carbEntry.AmountConsumedLabel()).toExist();
+        });
+        it('has a Food Type Label', async () => {
+            await expect(screen.carbEntry.FoodTypeLabel()).toExist();
+        });
+    });
+    describe('override', () => {
+        beforeAll(async () => {
+            await screen.overrides.Open();
+        });
+        afterAll(async () => {
+            await screen.overrides.Cancel();
+        });
+        it('has a Custom Preset Header', async () => {
+            await expect(screen.overrides.CustomPresetHeader()).toExist();
+        });
+        it('has a Cancel Header Button', async () => {
+            await expect(screen.overrides.CancelHeaderButton()).toExist();
+        });
+        it('has a Edit Header Button', async () => {
+            await expect(screen.overrides.EditHeaderButton()).toExist();
+        });
+        it('has a Add Header Button', async () => {
+            await expect(screen.overrides.AddHeaderButton()).toExist();
+        });
+        it('has a Add Preset Message', async () => {
+            await expect(screen.overrides.AddPresetMessage()).toExist();
+        });
+    });
     describe('settings', () => {
         beforeAll(async () => {
             await screen.settings.Open();

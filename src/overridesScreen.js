@@ -15,7 +15,34 @@ class OverridesScreen {
      * @example await overrides.Cancel();
      */
     async Cancel() {
-        await match.accessible.ButtonBarButton(label.general.Cancel).tap();
+        await this.CancelHeaderButton().tap();
+    }
+    /**
+     * @example await overrides.Add();
+     */
+    async Add() {
+        await this.AddHeaderButton().tap();
+    }
+    /**
+     * @example await overrides.Edit();
+     */
+    async Edit() {
+        await this.EditHeaderButton().tap();
+    }
+    CustomPresetHeader() {
+        return match.accessible.Header(label.overridesScreen.CustomPreset);
+    }
+    CancelHeaderButton() {
+        return match.accessible.ButtonBarButton(label.general.Cancel);
+    }
+    EditHeaderButton() {
+        return match.accessible.ButtonBarButton(label.general.Edit);
+    }
+    AddHeaderButton() {
+        return match.accessible.ButtonBarButton(label.general.Add);
+    }
+    AddPresetMessage() {
+        return match.accessible.Label(label.overridesScreen.AddPresetMessage);
     }
 }
 

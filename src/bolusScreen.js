@@ -15,13 +15,34 @@ class BolusScreen {
      * @example await bolus.Cancel();
      */
     async Cancel() {
-        await match.accessible.ButtonBarButton(label.general.Cancel).tap();
+        await this.CancelHeaderButton().tap();
+    }
+    CancelHeaderButton() {
+        return match.accessible.ButtonBarButton(label.general.Cancel);
     }
     /**
      * @example await bolus.Deliver();
      */
     async Deliver() {
-        await match.accessible.Button(label.bolusScreen.Deliver).tap();
+        await this.DeliverButton().tap();
+    }
+    DeliverButton() {
+        return match.accessible.Button(label.bolusScreen.Deliver);
+    }
+    DisabledDeliverButton() {
+        return match.accessible.DisabledButton(label.bolusScreen.Deliver);
+    }
+    BolusHeader() {
+        return match.accessible.Header(label.bolusScreen.Bolus);
+    }
+    BolusLabel() {
+        return match.accessible.Label(label.bolusScreen.Bolus);
+    }
+    EnteredLabel() {
+        return match.accessible.Label('Entered');
+    }
+    RecommendedLabel() {
+        return match.accessible.Label('Recommended');
     }
     /**
      * @example await bolus.ExpectCannotDeliverBolus();

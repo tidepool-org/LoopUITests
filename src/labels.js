@@ -21,6 +21,12 @@ var HomeLabel = {
 var CarbsLabel = {
     AddMeal: 'Add Meal',
     SaveWithoutBolusing: 'Save without Bolusing',
+    AddCarbEntry: 'Add Carb Entry',
+    AmountConsumed: 'Amount Consumed',
+    Date: 'Date',
+    FoodType: 'Food Type',
+    AbsorptionTime: 'Absorption Time',
+    AbsorptionMessage: 'Choose a longer absorption time for larger meals, or those containing fats and proteins. This is only guidance to the algorithm and need not be exact.'
 };
 
 var BolusLabel = {
@@ -34,7 +40,9 @@ var TempOverrideLabel = {
     TemporaryOverride: 'Temporary Override',
     Symbol: 'Symbol',
     Name: 'Name',
-    Recommended: 'Recommended'
+    Recommended: 'Recommended',
+    CustomPreset: 'Custom Preset',
+    AddPresetMessage: "Tap '+' to create a new custom preset."
 };
 
 var SettingsLabel = {
