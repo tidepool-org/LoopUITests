@@ -91,7 +91,7 @@ describe('accessibility', () => {
             await expect(screen.carbEntry.FoodTypeLabel()).toExist();
         });
     });
-    describe('override', () => {
+    describe.skip('override', () => {
         beforeAll(async () => {
             await screen.overrides.Open();
         });
