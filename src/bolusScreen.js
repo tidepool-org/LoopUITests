@@ -1,5 +1,5 @@
 const match = require('./match');
-const { label } = require('./labels');
+const text = require('./text');
 
 class BolusScreen {
     /**
@@ -8,7 +8,7 @@ class BolusScreen {
     async Open() {
         try {
             //assume we are starting from the open screen
-            await match.accessible.Button(label.bolusScreen.Bolus).tap();
+            await match.accessible.Button(text.bolusScreen.Bolus).tap();
         } catch (err) { } //catch and continue
     }
     /**
@@ -18,7 +18,7 @@ class BolusScreen {
         await this.CancelHeaderButton().tap();
     }
     CancelHeaderButton() {
-        return match.accessible.ButtonBarButton(label.general.Cancel);
+        return match.accessible.ButtonBarButton(text.general.Cancel);
     }
     /**
      * @example await bolus.Deliver();
@@ -27,28 +27,28 @@ class BolusScreen {
         await this.DeliverButton().tap();
     }
     DeliverButton() {
-        return match.accessible.Button(label.bolusScreen.Deliver);
+        return match.accessible.Button(text.bolusScreen.Deliver);
     }
     DisabledDeliverButton() {
-        return match.accessible.DisabledButton(label.bolusScreen.Deliver);
+        return match.accessible.DisabledButton(text.bolusScreen.Deliver);
     }
     BolusHeader() {
-        return match.accessible.Header(label.bolusScreen.Bolus);
+        return match.accessible.Header(text.bolusScreen.Bolus);
     }
     BolusLabel() {
-        return match.accessible.Label(label.bolusScreen.Bolus);
+        return match.accessible.Label(text.bolusScreen.Bolus);
     }
     EnteredLabel() {
-        return match.accessible.Label('Entered');
+        return match.accessible.Label(text.bolusScreen.Entered);
     }
     RecommendedLabel() {
-        return match.accessible.Label('Recommended');
+        return match.accessible.Label(text.bolusScreen.Recommended);
     }
     /**
      * @example await bolus.ExpectCannotDeliverBolus();
      */
     async ExpectCannotDeliverBolus() {
-        await expect(match.accessible.DisabledButton(label.bolusScreen.Deliver)).toExist();
+        await expect(match.accessible.DisabledButton(text.bolusScreen.Deliver)).toExist();
     }
     /**
      * @param {number} units

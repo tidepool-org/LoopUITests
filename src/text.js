@@ -1,4 +1,4 @@
-var Label = {
+var General = {
     Cancel: 'Cancel',
     Continue: 'Continue',
     Done: 'Done',
@@ -10,7 +10,7 @@ var Label = {
     OK: 'OK',
 };
 
-var HomeLabel = {
+var HomeScreen = {
     ActiveCarbohydrates: 'Active Carbohydrates',
     ActiveInsulin: 'Active Insulin',
     InsulinDelivery: 'Insulin Delivery',
@@ -18,7 +18,7 @@ var HomeLabel = {
     LoopWaitingForFirstRun: 'Waiting for first run'
 };
 
-var CarbsLabel = {
+var CarbEntryScreen = {
     AddMeal: 'Add Meal',
     SaveWithoutBolusing: 'Save without Bolusing',
     AddCarbEntry: 'Add Carb Entry',
@@ -29,13 +29,14 @@ var CarbsLabel = {
     AbsorptionMessage: 'Choose a longer absorption time for larger meals, or those containing fats and proteins. This is only guidance to the algorithm and need not be exact.'
 };
 
-var BolusLabel = {
+var BolusScreen = {
     Bolus: 'Bolus',
     Deliver: 'Deliver',
-    Recommended: 'Recommended'
+    Recommended: 'Recommended',
+    Entered: 'Entered'
 };
 
-var TempOverrideLabel = {
+var TempOverrideScreen = {
     WorkoutTargets: 'Workout Targets',
     TemporaryOverride: 'Temporary Override',
     Symbol: 'Symbol',
@@ -45,7 +46,7 @@ var TempOverrideLabel = {
     AddPresetMessage: "Tap '+' to create a new custom preset."
 };
 
-var SettingsLabel = {
+var SettingsScreen = {
     Settings: 'Settings',
     Configuration: 'CONFIGURATION',
     Services: 'SERVICES',
@@ -72,21 +73,13 @@ var SettingsLabel = {
 };
 
 
-var label = {
-    general: Label,
-    bolusScreen: BolusLabel,
-    carbEntryScreen: CarbsLabel,
-    settingsScreen: SettingsLabel,
-    overridesScreen: TempOverrideLabel,
-    homeScreen: HomeLabel
+var text = {
+    general: General,
+    bolusScreen: BolusScreen,
+    carbEntryScreen: CarbEntryScreen,
+    settingsScreen: SettingsScreen,
+    overridesScreen: TempOverrideScreen,
+    homeScreen: HomeScreen
 };
 
-module.exports = {
-    label
-    // Label,
-    // CarbsLabel,
-    // BolusLabel,
-    // SettingsLabel,
-    // TempOverrideLabel,
-    // HomeLabel
-};
+module.exports = text;

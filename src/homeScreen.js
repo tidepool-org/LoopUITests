@@ -1,36 +1,36 @@
 const match = require('./match');
-const { label } = require('./labels');
+const text = require('./text');
 
 class HomeScreen {
     /**
      * @example home.ActiveCarbohydratesLabel().tap();
      */
     ActiveCarbohydratesLabel() {
-        return match.accessible.Label(label.homeScreen.ActiveCarbohydrates);
+        return match.accessible.Label(text.homeScreen.ActiveCarbohydrates);
     }
     /**
      * @example home.ActiveInsulinLabel().tap();
      */
     ActiveInsulinLabel() {
-        return match.accessible.Label(label.homeScreen.ActiveInsulin);
+        return match.accessible.Label(text.homeScreen.ActiveInsulin);
     }
     InsulinDeliveryLabel() {
-        return match.accessible.Label(label.homeScreen.InsulinDelivery);
+        return match.accessible.Label(text.homeScreen.InsulinDelivery);
     }
     GlucoseLabel() {
-        return match.accessible.Label(label.homeScreen.Glucose);
+        return match.accessible.Label(text.homeScreen.Glucose);
     }
     SettingsButton() {
-        return match.accessible.Button(label.settingsScreen.Settings);
+        return match.accessible.Button(text.settingsScreen.Settings);
     }
     OverridesButton() {
-        return match.accessible.Button(label.overridesScreen.WorkoutTargets);
+        return match.accessible.Button(text.overridesScreen.WorkoutTargets);
     }
     AddMealButton() {
-        return match.accessible.Button(label.carbEntryScreen.AddMeal);
+        return match.accessible.Button(text.carbEntryScreen.AddMeal);
     }
     BolusButton() {
-        return match.accessible.Button(label.bolusScreen.Bolus);
+        return match.accessible.Button(text.bolusScreen.Bolus);
     }
     async OpenActiveCarbohydratesChart() {
         await this.ActiveCarbohydratesLabel().tap();
@@ -45,10 +45,10 @@ class HomeScreen {
         await this.GlucoseLabel().tap();
     }
     async CloseChart() {
-        await match.accessible.BackButton(label.general.Status).tap();
+        await match.accessible.BackButton(text.general.Status).tap();
     }
     async ExpectLoopNotYetRun() {
-        await expect(match.loop.Icon()).toHaveLabel(label.homeScreen.LoopWaitingForFirstRun);
+        await expect(match.loop.Icon()).toHaveLabel(text.homeScreen.LoopWaitingForFirstRun);
     }
     async TapLoopIcon() {
         await match.loop.Icon().tap();
@@ -56,7 +56,7 @@ class HomeScreen {
     async ExpectLoopStatusAlert(expectedAlertText) {
         await this.TapLoopIcon();
         await expect(match.accessible.AlertLabel(expectedAlertText)).toExist();
-        await match.accessible.Button(label.general.OK).tap();
+        await match.accessible.Button(text.general.OK).tap();
     }
     async ExpectNoLoopStatusAlert() {
         await this.TapLoopIcon();
