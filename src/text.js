@@ -10,6 +10,7 @@ var General = {
     OK: 'OK',
 };
 
+
 var HomeScreen = {
     ActiveCarbohydrates: 'Active Carbohydrates',
     ActiveInsulin: 'Active Insulin',
@@ -72,8 +73,14 @@ var SettingsScreen = {
     DeletePumpData: 'Delete Pump Data'
 };
 
+var Alerts = {
+    MissingCarbEffects: 'Missing Data: Carb Effects',
+    MissingInsulinEffects: 'Missing Data: Insulin Effects',
+    ConfigurationError: 'Configuration Error: Check Settings'
+};
 
 var text = {
+    alerts: Alerts,
     general: General,
     bolusScreen: BolusScreen,
     carbEntryScreen: CarbEntryScreen,

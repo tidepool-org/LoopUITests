@@ -17,7 +17,7 @@ describe('Closed loop is not allowed when settings', () => {
         await screen.home.ExpectLoopNotYetRun();
     });
     it('should show error that indicates why not in closed loop mode', async () => {
-        await screen.home.ExpectLoopStatusAlert('Missing Data: Insulin Effects');
+        await screen.home.ExpectLoopStatusInsulinAlert();
     });
 });
 

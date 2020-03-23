@@ -53,9 +53,19 @@ class HomeScreen {
     async TapLoopIcon() {
         await match.loop.Icon().tap();
     }
-    async ExpectLoopStatusAlert(expectedAlertText) {
+    async ExpectLoopStatusCarbsAlert() {
         await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(expectedAlertText)).toExist();
+        await expect(match.accessible.AlertLabel(text.alerts.MissingCarbEffects)).toExist();
+        await match.accessible.Button(text.general.OK).tap();
+    }
+    async ExpectLoopStatusInsulinAlert() {
+        await this.TapLoopIcon();
+        await expect(match.accessible.AlertLabel(text.alerts.MissingInsulinEffects)).toExist();
+        await match.accessible.Button(text.general.OK).tap();
+    }
+    async ExpectLoopStatusConfigurationAlert() {
+        await this.TapLoopIcon();
+        await expect(match.accessible.AlertLabel(text.alerts.ConfigurationError)).toExist();
         await match.accessible.Button(text.general.OK).tap();
     }
     async ExpectNoLoopStatusAlert() {

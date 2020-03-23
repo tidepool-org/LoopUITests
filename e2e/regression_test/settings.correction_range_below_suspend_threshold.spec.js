@@ -21,7 +21,7 @@ describe('Bolus not given', () => {
     });
     it('should show error that indicates why not in closed loop mode', async () => {
         //TODO: confirm this??
-        await screen.home.ExpectLoopStatusAlert('Missing Data: Carb Effects');
+        await screen.home.ExpectLoopStatusCarbsAlert();
     });
     it('should only enter carbs', async () => {
         await screen.carbEntry.Open();
