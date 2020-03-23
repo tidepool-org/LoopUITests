@@ -57,8 +57,8 @@ ln -sf "${BUILD_ROOT}" build
 info "Running detox wip tests with configuration '${CONFIGURATION}'..."
 detox test e2e/wip --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
 
-# info "Running detox accessibility tests with configuration '${CONFIGURATION}'..."
-# detox test e2e/accessibility_test --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
+info "Running detox accessibility tests with configuration '${CONFIGURATION}'..."
+detox test e2e/accessibility_test --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
 
 # info "Running detox smoke tests with configuration '${CONFIGURATION}'..."
 # detox test e2e/smoke_test --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
