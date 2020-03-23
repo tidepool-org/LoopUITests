@@ -54,6 +54,9 @@ export PATH="${PWD}/bin:${PWD}/node_modules/.bin:${PATH}"
 info "Creating build symlink to '${BUILD_ROOT}'..."
 ln -sf "${BUILD_ROOT}" build
 
+info "Running detox accessibility tests with configuration '${CONFIGURATION}'..."
+detox test e2e/accessibility_test --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
+
 info "Running detox smoke tests with configuration '${CONFIGURATION}'..."
 detox test e2e/smoke_test --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
 
