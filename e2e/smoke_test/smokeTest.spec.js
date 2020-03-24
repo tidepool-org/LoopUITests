@@ -25,7 +25,7 @@ describe('smoke test', () => {
             await screen.home.ExpectLoopNotYetRun();
         });
         it('has Loop icon has alert when not setup', async () => {
-            await screen.home.ExpectLoopStatusAlert('Missing Data: Glucose Data Not Available');
+            await screen.home.ExpectLoopStatusGlucoseDataAlert();
         });
     });
     describe('settings', () => {

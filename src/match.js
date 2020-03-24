@@ -206,14 +206,6 @@ const match = {
     UITextField() {
         return element(by.type('UITextField'));
     },
-    /**
-     * @summary returns non accessible ButtonBarButton
-     * @param {string} label
-     * @returns {Detox.Element} ButtonBarButton
-     */
-    ButtonBarButton(label) {
-        return element(by.label(label).and(by.type('_UIButtonBarButton')));
-    },
 };
 
 module.exports = match;

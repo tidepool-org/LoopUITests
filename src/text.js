@@ -76,7 +76,8 @@ var SettingsScreen = {
 var Alerts = {
     MissingCarbEffects: 'Missing Data: Carb Effects',
     MissingInsulinEffects: 'Missing Data: Insulin Effects',
-    ConfigurationError: 'Configuration Error: Check Settings'
+    ConfigurationError: 'Configuration Error: Check Settings',
+    MissingGlucoseData: 'Missing Data: Glucose Data Not Available'
 };
 
 var text = {

@@ -30,11 +30,9 @@ const setup = {
     async LoadDeviceScenariosFromDisk(deviceId) {
         const LoadDeviceScenariosFromDiskShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
         LoadDeviceScenariosFromDiskShellScript.stdout.on('data', () => {
-            console.log('successfully loaded scenarios');
             return null;
         });
         LoadDeviceScenariosFromDiskShellScript.stderr.on('data', (data) => {
-            console.log('error loading scenarios data ', data);
             throw Error(data);
         });
     },
@@ -45,13 +43,9 @@ const setup = {
      */
     async LoadScenario(scenarioName) {
         await device.shake();
-        console.log('LoadScenario after shake');
         await expect(match.accessible.Label(scenarioName)).toExist();
-        console.log(`LoadScenario after ${scenarioName} exists`);
         await match.accessible.Label(scenarioName).tap();
         await match.accessible.ButtonBarButton('Load').tap();
-        console.log('LoadScenario have loaded');
-        //await waitFor(match.accessible.ButtonBarButton('Load')).toBeNotVisible().withTimeout(5000);
     },
     /**
      * @param {string} scenarioName
@@ -66,8 +60,6 @@ const setup = {
         await match.accessible.SwipeButton('Advance ⏭').tap();
         await match.UITextField().typeText(cycles);
         await match.accessible.Button(text.general.OK).tap();
-        // TODO: not reccomended
-        //  await waitFor(match.accessible.ButtonBarButton(text.settingsScreen.Settings)).toExist().withTimeout(2000);
     },
 };
 

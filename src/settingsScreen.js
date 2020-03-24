@@ -129,12 +129,13 @@ var _setCGMEffect = async function (effect) {
         case CGMEffect.GlucoseNoise:
             await match.UIEditableTextField().clearText();
             await match.UIEditableTextField().typeText('100');
-            await match.ButtonBarButton(text.general.Back).tap();
+            //TODO:
+            await match.accessible.ButtonBarButton(text.general.Back).tap();
             break;
         case CGMEffect.RandomError:
             await match.UIEditableTextField().clearText();
             await match.UIEditableTextField().typeText('10');
-            await match.ButtonBarButton(text.general.Back).tap();
+            await match.accessible.ButtonBarButton(text.general.Back).tap();
             break;
         default:
             break;
@@ -174,16 +175,12 @@ var _setCGMBackfill = async function (hours) {
 
 var _exitSetting = async function () {
     await match.accessible.BackButton(text.settingsScreen.Settings).tap();
-    // TODO: not reccomended
-    // await waitFor(match.accessible.Header(text.settingsScreen.Settings)).toBeVisible().withTimeout(2000);
 }
 var _selectPumpSimulator = async function () {
     await match.accessible.Id('Simulator Small').tap();
 }
 var _selectCGMSimulator = async function () {
-    // TODO: not reccomended
-    // await waitFor(match.accessible.Label(text.settingsScreen.ContinuousGlucoseMonitor)).toBeVisible().withTimeout(2000);
-    //TODO: wee need to select by Id
+    //TODO: we need to select by Id
     try {
         await match.accessible.Label(text.settingsScreen.Simulator).atIndex(1).tap();
     } catch (err) {
@@ -200,8 +197,6 @@ class SettingsScreen {
      * @example await settings.Open();
      */
     async Open() {
-        //assume we are starting from the open screen
-        //await waitFor(match.accessible.ButtonBarButton(text.settingsScreen.Settings)).toBeVisible().withTimeout(2000);
         await match.accessible.ButtonBarButton(text.settingsScreen.Settings).tap();
     }
     /**
@@ -349,7 +344,6 @@ class SettingsScreen {
         }
     }
     /**
-     * @name settings.SetSuspendThreshold
      * @summary set the suspend threshold in mg/dL
      * @param {object} threshold e.g. '150'
      * @example await settings.SetSuspendThreshold({value:150});
@@ -495,7 +489,6 @@ class SettingsScreen {
         }
     }
     /**
-     * @name settings.ClosedLoop
      * @summary turn on closed loop mode
      */
     async ClosedLoop() {
@@ -510,7 +503,6 @@ class SettingsScreen {
         }
     }
     /**
-     * @name settings.OpenLoop
      * @summary set to open loop mode
      */
     async OpenLoop() {
@@ -525,7 +517,6 @@ class SettingsScreen {
         }
     }
     /**
-     * @name settings.IssueReport
      * @summary set to open loop mode
      * @example await settings.IssueReport();
      */
@@ -549,8 +540,6 @@ class SettingsScreen {
         await _selectCGMSimulator();
         await match.accessible.Label(text.settingsScreen.DeleteCGM).tap();
         await match.accessible.Label(text.settingsScreen.DeleteCGM).atIndex(1).tap();
-        // TODO: not reccomended
-        // await waitFor(match.accessible.Label(text.settingsScreen.AddCGM)).toExist().withTimeout(2000);
     }
     /**
      * @summary Remove CGM Data
@@ -582,8 +571,6 @@ class SettingsScreen {
         //TODO static text and not a button?
         await match.accessible.Label(text.settingsScreen.DeletePump).tap();
         await match.accessible.Label(text.settingsScreen.DeletePump).atIndex(1).tap();
-        // TODO: not reccomended
-        // await waitFor(match.accessible.Label(text.settingsScreen.AddPump)).toExist().withTimeout(2000);
     }
     /**
      * @summary Remove Pump Data

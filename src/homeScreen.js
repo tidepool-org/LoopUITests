@@ -14,12 +14,21 @@ class HomeScreen {
     ActiveInsulinLabel() {
         return match.accessible.Label(text.homeScreen.ActiveInsulin);
     }
+    /**
+     * @example home.InsulinDeliveryLabel().tap();
+     */
     InsulinDeliveryLabel() {
         return match.accessible.Label(text.homeScreen.InsulinDelivery);
     }
+    /**
+     * @example home.GlucoseLabel().tap();
+     */
     GlucoseLabel() {
         return match.accessible.Label(text.homeScreen.Glucose);
     }
+    /**
+     * @example home.SettingsButton().tap();
+     */
     SettingsButton() {
         return match.accessible.Button(text.settingsScreen.Settings);
     }
@@ -66,6 +75,11 @@ class HomeScreen {
     async ExpectLoopStatusConfigurationAlert() {
         await this.TapLoopIcon();
         await expect(match.accessible.AlertLabel(text.alerts.ConfigurationError)).toExist();
+        await match.accessible.Button(text.general.OK).tap();
+    }
+    async ExpectLoopStatusGlucoseDataAlert() {
+        await this.TapLoopIcon();
+        await expect(match.accessible.AlertLabel(text.alerts.MissingGlucoseData)).toExist();
         await match.accessible.Button(text.general.OK).tap();
     }
     async ExpectNoLoopStatusAlert() {
