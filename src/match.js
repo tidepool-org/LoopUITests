@@ -200,8 +200,8 @@ const match = {
         return element(by.type('LoopKitUI.PaddedTextField'));
     },
     /**
-     * @summary get a non accessible UIEditableTextField
-     * @returns {Detox.Element} UIEditableTextField
+     * @summary get text field for data entry
+     * @returns {Detox.Element}
      */
     UITextField() {
         return element(by.type('UITextField'));
