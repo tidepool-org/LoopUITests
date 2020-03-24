@@ -1,6 +1,6 @@
-const { setup, loopSettings, screen, SettingDefault } = require('../../src/index');
+const { setup, loopSettings, screen, SettingDefault, CGMModel } = require('../../src/index');
 
-describe('Closed loop is allowed when', () => {
+describe.skip('Closed loop is stopped when we have cgm data loss', () => {
     let config = {
         scenario: 'flat_cgm_trace',
         settings: SettingDefault,
@@ -22,5 +22,11 @@ describe('Closed loop is allowed when', () => {
     });
     it('should have no status alert', async () => {
         await screen.home.ExpectNoLoopStatusAlert();
+    });
+    it('cgm data is turned off', async () => {
+        await screen.settings.SetCGMSimulatorSettings({ modelData: { bgValues: [], model: CGMModel.None } })
+    });
+    it('should have CGM data status alert', async () => {
+        await screen.home.ExpectLoopStatusGlucoseDataAlert();
     });
 });
