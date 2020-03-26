@@ -1,6 +1,6 @@
 const element = require('detox').element;
 const match = require('./match');
-const { Label, SettingsLabel } = require('./labels');
+const text = require('./text');
 
 /**
  * @summary insulin activity model
@@ -11,6 +11,15 @@ var InsulinModel = {
     RapidAdults: 'Rapid-Acting – Adults',
     RapidChildren: 'Rapid-Acting – Children',
     Fiasp: 'Fiasp'
+};
+
+/**
+ * @summary CGMModel that can be applied to the simulator
+ */
+var CGMModel = {
+    Constant: 'Constant',
+    SineCurve: 'Sine Curve',
+    None: 'No Data'
 };
 
 /**
@@ -43,9 +52,9 @@ var SettingDefault = {
      */
     InsulinSensitivities: [{ time: '12:00 AM', bgValuePerInsulinUnit: '500' }],
     /**
-     * @summary  CorrectionRanges: [{ time: '12:00 AM', min: '120', max: '160' }]
+     * @summary  CorrectionRanges: [{ time: '12:00 AM', min: '140', max: '160' }]
      */
-    CorrectionRanges: [{ time: '12:00 AM', min: '120', max: '160' }],
+    CorrectionRanges: [{ time: '12:00 AM', min: '140', max: '160' }],
     /**
      * @summary  PreMealCorrectionRange: { min: '179', max: '180' }
      */
@@ -62,6 +71,10 @@ var SettingDefault = {
      *  @summary  AddPumpSimulator: true
      */
     AddPumpSimulator: true,
+    /**
+     * @summary  CGMSimulatorSettings: { modelData: { model: CGMModel.Constant, bgValues: ['142'] }, backfillHours: '3' }
+     */
+    CGMSimulatorSettings: { modelData: { model: CGMModel.Constant, bgValues: ['142'] }, backfillHours: '3' }
 };
 
 /**
@@ -79,16 +92,9 @@ var SettingType = {
     ClosedLoop: 'ClosedLoop',
     AddPumpSimulator: 'AddPumpSimulator',
     AddCGMSimulator: 'AddCGMSimulator',
+    CGMSimulatorSettings: 'CGMSimulatorSettings'
 };
 
-/**
-     * @summary CGMModel that can be applied to the simulator
-     */
-var CGMModel = {
-    Constant: 'Constant',
-    SineCurve: 'Sine Curve',
-    None: 'No Data'
-};
 /**
  * @summary CGMEffect that can be applied to the simulator
  */
@@ -98,7 +104,6 @@ var CGMEffect = {
     RandomLowOutlier: 'Random Low Outlier',
     RandomError: 'Random Error'
 };
-
 
 /**
  * @summary filter out settings defaults for those that you don't want to apply
@@ -117,56 +122,171 @@ var FilterSettings = function (values, types) {
     return filtered;
 };
 
+
+var _setCGMEffect = async function (effect) {
+    await match.accessible.Label(effect).tap();
+    switch (effect) {
+        case CGMEffect.GlucoseNoise:
+            await match.UIEditableTextField().clearText();
+            await match.UIEditableTextField().typeText('100');
+            await match.accessible.ButtonBarButton(text.general.Back).tap();
+            break;
+        case CGMEffect.RandomError:
+            await match.UIEditableTextField().clearText();
+            await match.UIEditableTextField().typeText('10');
+            await match.accessible.ButtonBarButton(text.general.Back).tap();
+            break;
+        default:
+            break;
+    }
+};
+
+var _setCGMModel = async function (modelData) {
+    if (modelData) {
+        await match.accessible.Label(modelData.model).tap();
+        switch (modelData.model) {
+            case CGMModel.Constant:
+                await match.UIEditableTextField().clearText();
+                await match.UIEditableTextField().typeText(modelData.bgValues[0]);
+                await match.accessible.BackButton('CGM Settings').tap();
+                break;
+            case CGMModel.SineCurve:
+                await match.accessible.Label('Base Glucose').tap();
+                await match.UIEditableTextField().clearText();
+                await match.UIEditableTextField().typeText(modelData.bgValues[0]);
+                await match.accessible.BackButton('Sine Curve').tap();
+                await match.accessible.Label('Amplitude').tap();
+                await match.UIEditableTextField().clearText();
+                await match.UIEditableTextField().typeText(modelData.bgValues[1]);
+                await match.accessible.BackButton('Sine Curve').tap();
+                await match.accessible.BackButton('CGM Settings').tap();
+                break;
+            default:
+                break;
+        }
+    }
+};
+var _setCGMBackfill = async function (hours) {
+    await match.accessible.Label('Backfill Glucose').tap();
+    await match.accessible.Label('3 hr').tap();
+    await match.accessible.BackButton('CGM Settings').tap();
+};
+
+var _exitSetting = async function () {
+    await match.accessible.BackButton(text.settingsScreen.Settings).tap();
+}
+var _selectPumpSimulator = async function () {
+    await match.accessible.Id('Simulator Small').tap();
+}
+var _selectCGMSimulator = async function () {
+    //TODO: we need to select by Id
+    try {
+        await match.accessible.Label(text.settingsScreen.Simulator).atIndex(1).tap();
+    } catch (err) {
+        try {
+            await match.accessible.Label(text.settingsScreen.Simulator).atIndex(0).tap();
+        } catch (err2) {
+            await match.accessible.Label(text.settingsScreen.Simulator).atIndex(2).tap();
+        }
+    }
+}
+
 class SettingsScreen {
     /**
      * @example await settings.Open();
      */
     async Open() {
-        try {
-            //assume we are starting from the open screen
-            await match.accessible.ButtonBarButton(SettingsLabel.Settings).tap();
-        } catch (err) { } //catch and continue
+        await match.accessible.ButtonBarButton(text.settingsScreen.Settings).tap();
     }
     /**
      * @example await settings.Close();
      */
     async Close() {
-        await match.accessible.ButtonBarButton(Label.Done).tap();
+        await this.DoneButton().tap();
     }
-    async  _exitSetting() {
-        await match.accessible.BackButton(SettingsLabel.Settings).tap();
-        await waitFor(match.accessible.Header(SettingsLabel.Settings)).toBeVisible().withTimeout(2000);
+    /**
+     * @example settings.DoneButton();
+     */
+    DoneButton() {
+        return match.accessible.ButtonBarButton(text.general.Done);
     }
-    async  _swipeSettingsScreenDown(labelToSee) {
+    /**
+     * @example settings.ConfigurationHeader();
+     */
+    ConfigurationHeader() {
+        return match.accessible.Header(text.settingsScreen.Configuration);
+    }
+    /**
+     * @example settings.ServicesHeader();
+     */
+    ServicesHeader() {
+        return match.accessible.Header(text.settingsScreen.Services);
+    }
+    /**
+     * @example settings.PumpHeader();
+     */
+    PumpHeader() {
+        return match.accessible.Header(text.settingsScreen.Pump);
+    }
+    /**
+     * @example settings.ContinuousGlucoseMonitorHeader();
+     */
+    ContinuousGlucoseMonitorHeader() {
+        return match.accessible.Header(text.settingsScreen.ContinuousGlucoseMonitor);
+    }
+    /**
+     * @example settings.SettingsHeader();
+     */
+    SettingsHeader() {
+        return match.accessible.Header(text.settingsScreen.Settings);
+    }
+    BasalRatesLabel() {
+        return match.accessible.Label(text.settingsScreen.BasalRates)
+    }
+    SuspendThresholdLabel() {
+        return match.accessible.Label(text.settingsScreen.SuspendThreshold)
+    }
+    DeliveryLimitsLabel() {
+        return match.accessible.Label(text.settingsScreen.DeliveryLimits)
+    }
+    InsulinModelLabel() {
+        return match.accessible.Label(text.settingsScreen.InsulinModel)
+    }
+    CarbRatiosLabel() {
+        return match.accessible.Label(text.settingsScreen.CarbRatios)
+    }
+    InsulinSensitivitiesLabel() {
+        return match.accessible.Label(text.settingsScreen.InsulinSensitivities)
+    }
+    CorrectionRangeLabel() {
+        return match.accessible.Label(text.settingsScreen.CorrectionRange);
+    }
+    ClosedLoopButton() {
+        return match.accessible.Button(text.settingsScreen.ClosedLoop);
+    }
+    IssueReportLabel() {
+        return match.accessible.Label(text.settingsScreen.IssueReport);
+    }
+    AddPumpLabel() {
+        return match.accessible.Label(text.settingsScreen.AddPump);
+    }
+    AddCGMLabel() {
+        return match.accessible.Label(text.settingsScreen.AddCGM);
+    }
+    async ScrollToBottom() {
         try {
-            await expect(match.accessible.Label(labelToSee)).toBeVisible();
+            await expect(match.accessible.Label(text.settingsScreen.Services)).toBeVisible();
         } catch (err) {
-            await match.accessible.Label(SettingsLabel.Configuration).swipe('down', 'fast');
-            await expect(match.accessible.Label(labelToSee)).toBeVisible();
+            await match.accessible.Header(text.settingsScreen.Configuration).swipe('up', 'fast');
+            await expect(match.accessible.Label(text.settingsScreen.Services)).toBeVisible();
         }
     }
-    async  _swipeSettingsScreenUp(labelToSee) {
+    async ScrollToTop() {
         try {
-            await expect(match.accessible.Label(labelToSee)).toBeVisible();
+            await expect(match.accessible.Label(text.settingsScreen.Pump)).toBeVisible();
         } catch (err) {
-            await match.accessible.HeaderLabel(SettingsLabel.Configuration).swipe('up', 'fast');
-            await expect(match.accessible.Label(labelToSee)).toBeVisible();
-        }
-    }
-    async _selectPumpSimulator() {
-        await match.accessible.Id('Simulator Small').tap();
-    }
-    async _selectCGMSimulator() {
-        await waitFor(match.accessible.Label(SettingsLabel.ContinuousGlucoseMonitor)).toBeVisible().withTimeout(2000);
-        //TODO: wee need to select by Id
-        try {
-            await match.accessible.Label(SettingsLabel.Simulator).atIndex(1).tap();
-        } catch (err) {
-            try {
-                await match.accessible.Label(SettingsLabel.Simulator).atIndex(0).tap();
-            } catch (err2) {
-                await match.accessible.Label(SettingsLabel.Simulator).atIndex(2).tap();
-            }
+            await match.accessible.Header(text.settingsScreen.Configuration).swipe('down', 'fast');
+            await expect(match.accessible.Label(text.settingsScreen.Pump)).toBeVisible();
         }
     }
     /**
@@ -181,6 +301,7 @@ class SettingsScreen {
         if (values.AddPumpSimulator) {
             await this.AddPumpSimulator();
         }
+        await this.SetCGMSimulatorSettings(values.CGMSimulatorSettings);
         await this.SetCorrectionRanges(values.CorrectionRanges);
         await this.SetSuspendThreshold(values.SuspendThreshold);
         await this.SetBasalRates(values.BasalRates);
@@ -188,10 +309,11 @@ class SettingsScreen {
         await this.SetInsulinModel(values.InsulinModel);
         await this.SetCarbRatios(values.CarbRatios);
         await this.SetInsulinSensitivities(values.InsulinSensitivities);
+
         if (values.ClosedLoop) {
-            await this.ClosedLoop();
+            await this.SetClosedLoop();
         } else {
-            await this.OpenLoop();
+            await this.SetOpenLoop();
         }
     }
     /**
@@ -202,12 +324,12 @@ class SettingsScreen {
     async SetBasalRates(rates) {
         if (rates) {
             const unitsSuffix = 'U/hr';
-            await match.accessible.Text(SettingsLabel.BasalRates).tap();
-            await expect(match.accessible.Header(SettingsLabel.BasalRates)).toExist();
+            await this.BasalRatesLabel().tap();
+            await expect(match.accessible.Header(text.settingsScreen.BasalRates)).toExist();
 
             for (let index = 0; index < rates.length; index++) {
                 const rate = rates[index];
-                await match.accessible.ButtonBarButton(Label.Add).tap();
+                await match.accessible.ButtonBarButton(text.general.Add).tap();
                 if (index == 0) {
                     await match.accessible.Label(`0 ${unitsSuffix}`).atIndex(0).tap();
                 } else {
@@ -216,22 +338,21 @@ class SettingsScreen {
                 await match.accessible.Label(`${rate.unitsPerHour} ${unitsSuffix}`).tap();
                 match.accessible.Label(`${rate.time}`);
             }
-            await match.accessible.Label(SettingsLabel.SaveToSimulator).tap();
-            await this._exitSetting();
+            await match.accessible.Label(text.settingsScreen.SaveToSimulator).tap();
+            await _exitSetting();
         }
     }
     /**
-     * @name settings.SetSuspendThreshold
      * @summary set the suspend threshold in mg/dL
      * @param {object} threshold e.g. '150'
      * @example await settings.SetSuspendThreshold({value:150});
      */
     async SetSuspendThreshold(threshold) {
         if (threshold) {
-            await match.accessible.Text(SettingsLabel.SuspendThreshold).tap();
+            await this.SuspendThresholdLabel().tap();
             await match.UIEditableTextField().typeText(threshold.value);
             await expect(match.UIEditableTextField()).toHaveText(threshold.value);
-            await this._exitSetting();
+            await _exitSetting();
         }
     }
     /**
@@ -240,7 +361,7 @@ class SettingsScreen {
      */
     async SetDeliveryLimits(limits) {
         if (limits) {
-            await match.accessible.Text(SettingsLabel.DeliveryLimits).tap();
+            await this.DeliveryLimitsLabel().tap();
             //TODO: using atIndex, need a better way to select these
             await match.UIEditableTextField().atIndex(0).clearText();
             await match.UIEditableTextField().atIndex(0).typeText(limits.maxBasalRate);
@@ -250,9 +371,8 @@ class SettingsScreen {
             await match.UIEditableTextField().atIndex(1).typeText(limits.maxBolus);
             await match.UIEditableTextField().atIndex(1).tapReturnKey();
             await expect(match.UIEditableTextField().atIndex(1)).toHaveText(limits.maxBolus);
-            await match.accessible.Label(SettingsLabel.SaveToSimulator).tap();
-            await this._exitSetting();
-
+            await match.accessible.Label(text.settingsScreen.SaveToSimulator).tap();
+            await _exitSetting();
         }
     }
     /**
@@ -261,9 +381,9 @@ class SettingsScreen {
      */
     async SetInsulinModel(model) {
         if (model) {
-            await match.accessible.Text(SettingsLabel.InsulinModel).tap();
+            await this.InsulinModelLabel().tap();
             await match.accessible.Text(model).tap();
-            await this._exitSetting();
+            await _exitSetting();
         }
     }
     /**
@@ -273,10 +393,10 @@ class SettingsScreen {
     */
     async SetCarbRatios(ratios) {
         if (ratios) {
-            await match.accessible.UILabel(SettingsLabel.CarbRatios).tap();
+            await this.CarbRatiosLabel().tap();
             for (let index = 0; index < ratios.length; index++) {
                 const ratio = ratios[index];
-                await match.accessible.ButtonBarButton(Label.Add).tap();
+                await match.accessible.ButtonBarButton(text.general.Add).tap();
                 if (index == 0) {
                     await element(by.type('UITextField')).clearText();
                     await element(by.type('UITextField')).typeText(ratio.carbGramsPerInsulinUnit);
@@ -287,7 +407,7 @@ class SettingsScreen {
                     await expect(element(by.type('UITextField').atIndex(index))).toHaveText(ratio.carbGramsPerInsulinUnit);
                 }
             }
-            await this._exitSetting();
+            await _exitSetting();
         }
     }
     /**
@@ -297,17 +417,17 @@ class SettingsScreen {
     */
     async SetInsulinSensitivities(sensitivities) {
         if (sensitivities) {
-            await this._swipeSettingsScreenUp(SettingsLabel.Services);
+            await this.ScrollToBottom();
             const unitsSuffix = 'mg/dL/U';
-            await match.accessible.Label(SettingsLabel.InsulinSensitivities).atIndex(1).tap();
+            await this.InsulinSensitivitiesLabel().atIndex(1).tap();
             for (let index = 0; index < sensitivities.length; index++) {
                 const sensitivity = sensitivities[index];
-                await match.accessible.ButtonBarButton(Label.Add).tap();
+                await match.accessible.ButtonBarButton(text.general.Add).tap();
                 await match.accessible.Label(`${sensitivity.bgValuePerInsulinUnit} ${unitsSuffix}`).atIndex(1).tap();
             }
-            await match.accessible.Label(Label.Save).tap();
-            await this._exitSetting();
-            await this._swipeSettingsScreenDown(SettingsLabel.Services);
+            await match.accessible.Label(text.general.Save).tap();
+            await _exitSetting();
+            await this.ScrollToTop();
         }
     }
     /**
@@ -317,8 +437,8 @@ class SettingsScreen {
      */
     async SetCorrectionRanges(ranges) {
         if (ranges) {
-            await match.accessible.Text(SettingsLabel.CorrectionRange).tap();
-            await match.accessible.ButtonBarButton(Label.Add).tap();
+            await this.CorrectionRangeLabel().tap();
+            await match.accessible.ButtonBarButton(text.general.Add).tap();
 
             let correctionRangePickerIndex = 0;
             for (let index = 0; index < ranges.length; index++) {
@@ -338,8 +458,8 @@ class SettingsScreen {
                 }
                 correctionRangePickerIndex++;
             }
-            await match.accessible.Label(Label.Save).tap();
-            await this._exitSetting();
+            await match.accessible.Label(text.general.Save).tap();
+            await _exitSetting();
         }
     }
     /**
@@ -357,165 +477,134 @@ class SettingsScreen {
                 MaximumValue: 4,
                 Units: 5,
             };
-            await match.accessible.Text(SettingsLabel.CorrectionRange).tap();
+            await this.CorrectionRangeLabel().tap();
             if (preMeal) {
                 await match.accessible.Label('Pre-Meal').tap();
                 await match.accessible.PickerItem(2, `${preMeal.max}`).tap();
                 await match.accessible.PickerItem(2, `${preMeal.min}`).atIndex(glucosePreMealOverridePickerColumns.MinimumValue).tap(); //sets min
             }
-            await match.accessible.Label(Label.Save).tap();
-            await this._exitSetting();
+            await match.accessible.Label(text.general.Save).tap();
+            await _exitSetting();
         }
-
     }
     /**
-     * @name settings.ClosedLoop
      * @summary turn on closed loop mode
      */
-    async ClosedLoop() {
-        await match.accessible.Button(SettingsLabel.ClosedLoop).tap();
+    async SetClosedLoop() {
+        await this.ScrollToTop();
+        await this.ClosedLoopButton().tap();
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
-            await expect(match.accessible.Button(SettingsLabel.ClosedLoop)).toHaveValue('1');
+            await expect(this.ClosedLoopButton()).toHaveValue('1');
         } catch (err) {
-            await match.accessible.Button(SettingsLabel.ClosedLoop).tap();
-            await expect(match.accessible.Button(SettingsLabel.ClosedLoop)).toHaveValue('1');
+            await this.ClosedLoopButton().tap();
+            await expect(this.ClosedLoopButton()).toHaveValue('1');
         }
     }
     /**
-     * @name settings.OpenLoop
      * @summary set to open loop mode
      */
-    async OpenLoop() {
-        await match.accessible.Button(SettingsLabel.ClosedLoop).tap();
+    async SetOpenLoop() {
+        await this.ScrollToTop();
+        await this.ClosedLoopButton().tap();
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
-            await expect(match.accessible.Button(SettingsLabel.ClosedLoop)).toHaveValue('0');
+            await expect(this.ClosedLoopButton()).toHaveValue('0');
         } catch (err) {
-            await match.accessible.Button(SettingsLabel.ClosedLoop).tap();
-            await expect(match.accessible.Button(SettingsLabel.ClosedLoop)).toHaveValue('0');
+            await this.ClosedLoopButton().tap();
+            await expect(this.ClosedLoopButton()).toHaveValue('0');
         }
     }
     /**
-     * @name settings.IssueReport
      * @summary set to open loop mode
      * @example await settings.IssueReport();
      */
     async IssueReport() {
-        await match.accessible.Label(SettingsLabel.IssueReport).tap();//TODO: not a button
-        await expect(match.accessible.Header(SettingsLabel.IssueReport)).toBeVisible();
-        await this._exitSetting();
+        await this.IssueReportLabel().tap();
+        await expect(match.accessible.Header(text.settingsScreen.IssueReport)).toBeVisible();
+        await _exitSetting();
     }
     /**
      * @summary add CGM Simulator
      */
     async AddCGMSimulator() {
-        await match.accessible.UILabel(SettingsLabel.AddCGM).tap();
-        await match.accessible.Button(SettingsLabel.Simulator).tap();
+        await this.AddCGMLabel().tap();
+        await match.accessible.Button(text.settingsScreen.Simulator).tap();
     }
     /**
      * @summary Remove CGM
      */
     async RemoveCGM() {
-        await this._swipeSettingsScreenDown(SettingsLabel.Configuration);
-        await this._selectCGMSimulator();
-        await match.accessible.Label(SettingsLabel.DeleteCGM).tap();
-        await match.accessible.Label(SettingsLabel.DeleteCGM).atIndex(1).tap();
-        await waitFor(match.accessible.Label(SettingsLabel.AddCGM)).toExist().withTimeout(2000);
+        await this.ScrollToTop();
+        await _selectCGMSimulator();
+        await match.accessible.Label(text.settingsScreen.DeleteCGM).tap();
+        await match.accessible.Label(text.settingsScreen.DeleteCGM).atIndex(1).tap();
     }
     /**
      * @summary Remove CGM Data
      */
     async RemoveCGMData() {
-        await this._swipeSettingsScreenUp(SettingsLabel.DeleteCGMData);
+        await this.ScrollToBottom();
         //TODO static text and not a button?
-        await match.accessible.Label(SettingsLabel.DeleteCGMData).atIndex(0).tap();
-        await match.accessible.Label(SettingsLabel.DeleteCGMData).atIndex(1).tap();
+        await match.accessible.Label(text.settingsScreen.DeleteCGMData).atIndex(0).tap();
+        await match.accessible.Label(text.settingsScreen.DeleteCGMData).atIndex(1).tap();
     }
     /**
      * @summary add Pump Simulator
      */
     async AddPumpSimulator() {
-        await this._swipeSettingsScreenDown(SettingsLabel.Pump);
-        await match.accessible.UILabel(SettingsLabel.AddPump).atIndex(1).tap();
-        await match.accessible.Button(SettingsLabel.Simulator).tap();
-        await match.accessible.Button(Label.Continue).tap();
+        try {
+            await this.AddPumpLabel().atIndex(1).tap();
+        } catch (err) {
+            await this.AddPumpLabel().atIndex(0).tap();
+        }
+        await match.accessible.Button(text.settingsScreen.Simulator).tap();
+        await match.accessible.Button(text.general.Continue).tap();
     }
     /**
      * @summary Remove Pump
      */
     async RemovePump() {
-        await this._swipeSettingsScreenDown(SettingsLabel.Pump);
-        await this._selectPumpSimulator();
+        await this.ScrollToTop();
+        await _selectPumpSimulator();
         //TODO static text and not a button?
-        await match.accessible.Label(SettingsLabel.DeletePump).tap();
-        await match.accessible.Label(SettingsLabel.DeletePump).atIndex(1).tap();
-        await waitFor(match.accessible.Label(SettingsLabel.AddPump)).toExist().withTimeout(2000);
+        await match.accessible.Label(text.settingsScreen.DeletePump).tap();
+        await match.accessible.Label(text.settingsScreen.DeletePump).atIndex(1).tap();
     }
     /**
      * @summary Remove Pump Data
      */
     async RemovePumpData() {
-        await this._swipeSettingsScreenUp(SettingsLabel.DeletePumpData);
+        await this.ScrollToBottom();
         //TODO static text and not a button?
-        await match.accessible.Label(SettingsLabel.DeletePumpData).atIndex(0).tap();
-        await match.accessible.Label(SettingsLabel.DeletePumpData).atIndex(1).tap();
+        await match.accessible.Label(text.settingsScreen.DeletePumpData).atIndex(0).tap();
+        await match.accessible.Label(text.settingsScreen.DeletePumpData).atIndex(1).tap();
     }
     /**
      * @summary set the cgm simulator effect
-     * @param {CGMEffect} effect
+     * @param {object} settings
+     * @param {CGMEffect} settings.effect
+     * @param {object} settings.modelData
+     * @param {CGMModel} settings.modelData.model
+     * @param {Array} settings.modelData.bgValues
+     * @param {string} settings.backfillHours
      */
-    async SetCGMEffect(effect) {
-        await this._swipeSettingsScreenDown(SettingsLabel.Configuration);
-        await this._selectCGMSimulator();
-        await match.accessible.Label(effect).tap();
-        switch (effect) {
-            case CGMEffect.GlucoseNoise:
-                await match.UIEditableTextField().clearText();
-                await match.UIEditableTextField().typeText('100');
-                await match.ButtonBarButton(Label.Back).tap();
-                break;
-            case CGMEffect.RandomError:
-                await match.UIEditableTextField().clearText();
-                await match.UIEditableTextField().typeText('10');
-                await match.ButtonBarButton(Label.Back).tap();
-                break;
-            default:
-                break;
+    async SetCGMSimulatorSettings(settings) {
+        if (settings) {
+            await this.ScrollToTop();
+            await _selectCGMSimulator();
+            if (settings.effect) {
+                await _setCGMEffect(settings.effect);
+            }
+            if (settings.modelData) {
+                await _setCGMModel(settings.modelData);
+            }
+            if (settings.backfillHours) {
+                await _setCGMBackfill(settings.backfillHours)
+            }
+            //TODO: multiple done buttons
+            await this.DoneButton().atIndex(0).tap();
         }
-        //TODO: multiple done buttons
-        await match.accessible.ButtonBarButton(Label.Done).atIndex(0).tap();
-    }
-    /**
-    * @param {CGMModel} model e.g. Constant
-    * @param {Array} bgValues e.g. [100, 50]
-    */
-    async SetCGMModel(model, bgValues) {
-        await this._swipeSettingsScreenDown(SettingsLabel.Configuration);
-        await this._selectCGMSimulator();
-        await match.accessible.Label(model).tap();
-        switch (model) {
-            case CGMModel.Constant:
-                await match.UIEditableTextField().clearText();
-                await match.UIEditableTextField().typeText(bgValues[0]);
-                await match.accessible.BackButton('CGM Settings').tap();
-                break;
-            case CGMModel.SineCurve:
-                await match.accessible.Label('Base Glucose').tap();
-                await match.UIEditableTextField().clearText();
-                await match.UIEditableTextField().typeText(bgValues[0]);
-                await match.accessible.BackButton('Sine Curve').tap();
-                await match.accessible.Label('Amplitude').tap();
-                await match.UIEditableTextField().clearText();
-                await match.UIEditableTextField().typeText(bgValues[1]);
-                await match.accessible.BackButton('Sine Curve').tap();
-                await match.accessible.BackButton('CGM Settings').tap();
-                break;
-            default:
-                break;
-        }
-        //TODO: multiple done buttons
-        await match.accessible.ButtonBarButton(Label.Done).atIndex(0).tap();
     }
 }
 

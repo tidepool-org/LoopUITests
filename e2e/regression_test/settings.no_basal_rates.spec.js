@@ -1,23 +1,23 @@
-const { setup, loopSettings, HomeScreen, FilterSettings, SettingDefault, SettingType } = require('../../src/index');
+const { setup, loopSettings, screen, FilterSettings, SettingDefault, SettingType } = require('../../src/index');
 
 describe('Closed loop is not allowed when settings', () => {
-    var home;
     beforeAll(async () => {
         await setup.LaunchLoop();
-        home = new HomeScreen();
+    });
+    afterAll(async () => {
+        await loopSettings.RemoveData();
     });
     it('are not applied for basal rates', async () => {
-        let config = {
+        await loopSettings.Configure({
             scenario: 'flat_cgm_trace',
             settings: FilterSettings(SettingDefault, [SettingType.BasalRates])
-        };
-        await loopSettings.Configure(config);
+        });
     });
     it('should not be in closed loop mode', async () => {
-        await home.ExpectLoopNotYetRun();
+        await screen.home.ExpectLoopNotYetRun();
     });
     it('should show error that indicates why not in closed loop mode', async () => {
-        await home.ExpectLoopStatusAlert('Missing Data: Insulin Effects');
+        await screen.home.ExpectLoopStatusInsulinAlert();
     });
 });
 

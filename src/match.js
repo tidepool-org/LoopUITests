@@ -10,19 +10,28 @@ const match = {
          * @returns {Detox.Element} ButtonBarButton
          */
         ButtonBarButton(label) {
-            return ButtonBarButton(label, true);
+            return element(by.label(label).and(by.traits(['button']).and(by.type('_UIButtonBarButton'))));
         },
         /**
          *
          * @param {string} label
-         * @param {boolean} enabled
          */
-        ButtonBarButton(label, enabled) {
-            accessibilityTraits = ['button'];
-            if (enabled == false) {
-                accessibilityTraits.push('disabled');
-            }
-            return element(by.label(label).and(by.traits(accessibilityTraits).and(by.type('_UIButtonBarButton'))));
+        DisabledButtonBarButton(label) {
+            return element(by.label(label).and(by.traits(['button', 'disabled']).and(by.type('_UIButtonBarButton'))));
+        },
+        /**
+         * @param {string} label
+         * @returns {Detox.Element} LoopKitUI.SetupButton
+         */
+        SetupButton(label) {
+            return element(by.label(label).and(by.traits(['button']).and(by.type('LoopKitUI.SetupButton'))));
+        },
+        /**
+         * @param {string} label
+         * @returns {Detox.Element} disabled LoopKitUI.SetupButton
+         */
+        DisabledSetupButton(label) {
+            return element(by.label(label).and(by.traits(['button', 'disabled']).and(by.type('LoopKitUI.SetupButton'))));
         },
         /**
          * @param {string} label
@@ -32,10 +41,16 @@ const match = {
             return element(by.label(label).and(by.traits(['button'])));
         },
         /**
+         * @param {string} label
+         */
+        DisabledButton(label) {
+            return element(by.label(label).and(by.traits(['button', 'disabled'])));
+        },
+        /**
          * @param {string} theId
          * @returns {Detox.Element}
          */
-        Id(theId){
+        Id(theId) {
             return element(by.id(theId));
         },
         /**
@@ -62,24 +77,10 @@ const match = {
         },
         /**
          * @param {string} text
-         * @returns {Detox.Element} accessibilityHeaderText
-         */
-        HeaderText(text) {
-            return element(by.label(text).and(by.traits(['text']).and(by.traits(['header']))));
-        },
-        /**
-         * @param {string} text
          * @returns {Detox.Element} accessibilityHeader
          */
         Header(text) {
-            return element(by.text(text).and(by.traits(['header'])));
-        },
-        /**
-         * @param {string} label
-         * @returns {Detox.Element} accessibilityHeader
-         */
-        HeaderLabel(label) {
-            return element(by.label(label).and(by.traits(['header'])));
+            return element(by.label(text).and(by.traits(['header'])));
         },
         /**
          * @param {string} label
@@ -116,8 +117,6 @@ const match = {
                             )
                     )).atIndex(pickerNumber);
         },
-
-
         /**
          * @summary returns alert items based on the given label
          * @param {string} label
@@ -125,6 +124,13 @@ const match = {
          */
         AlertLabel(label) {
             return element(by.label(label).and(by.traits(['text'])).withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView')));
+        },
+        /**
+         * @summary returns alert item
+         * @returns {Detox.Element}
+         */
+        Alert() {
+            return element(by.traits(['text'])).withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView'));
         },
     },
     loop: {
@@ -194,19 +200,11 @@ const match = {
         return element(by.type('LoopKitUI.PaddedTextField'));
     },
     /**
-     * @summary get a non accessible UIEditableTextField
-     * @returns {Detox.Element} UIEditableTextField
+     * @summary get text field for data entry
+     * @returns {Detox.Element}
      */
     UITextField() {
         return element(by.type('UITextField'));
-    },
-    /**
-     * @summary returns none accessible ButtonBarButton
-     * @param {string} label
-     * @returns {Detox.Element} ButtonBarButton
-     */
-    ButtonBarButton(label) {
-        return element(by.label(label).and(by.type('_UIButtonBarButton')));
     },
 };
 

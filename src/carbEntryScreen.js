@@ -1,5 +1,5 @@
 const match = require('./match');
-const { Label, CarbsLabel } = require('./labels');
+const text = require('./text');
 
 class CarbEntryScreen {
     /**
@@ -8,21 +8,94 @@ class CarbEntryScreen {
     async Open() {
         try {
             //assume we are starting from the open screen
-            await match.accessible.Button(CarbsLabel.AddMeal).tap();
+            await match.accessible.Button(text.carbEntryScreen.AddMeal).tap();
         } catch (err) { } //catch and continue
     }
     /**
      * @example await carbs.Cancel();
      */
     async Cancel() {
-        await match.accessible.ButtonBarButton(Label.Cancel).tap();
+        await this.CancelHeaderButton().tap();
+    }
+    CancelHeaderButton() {
+        return match.accessible.ButtonBarButton(text.general.Cancel);
+    }
+    AddCarbEntryHeader() {
+        return match.accessible.Header(text.carbEntryScreen.AddCarbEntry);
+    }
+    AmountConsumedLabel() {
+        return match.accessible.Label(text.carbEntryScreen.AmountConsumed);
+    }
+    DateLabel() {
+        return match.accessible.Label(text.carbEntryScreen.Date);
+    }
+    FoodTypeLabel() {
+        return match.accessible.Label(text.carbEntryScreen.FoodType);
+    }
+    AbsorptionTimeLabel() {
+        return match.accessible.Label(text.carbEntryScreen.AbsorptionTime);
+    }
+    /**
+     * @example  carbs.ContinueButton();
+     */
+    ContinueHeaderButton() {
+        return match.accessible.ButtonBarButton(text.general.Continue);
+    }
+    /**
+     * @example  carbs.DisabledContinueButton();
+     */
+    DisabledContinueHeaderButton() {
+        return match.accessible.DisabledButtonBarButton(text.general.Continue);
+    }
+    /**
+     * @example  carbs.ContinueMainButton();
+     */
+    ContinueMainButton() {
+        return match.accessible.SetupButton(text.general.Continue);
+    }
+    /**
+     * @example  carbs.DisabledContinueMainButton();
+     */
+    DisabledContinueMainButton() {
+        return match.accessible.DisabledSetupButton(text.general.Continue);
+    }
+    /**
+     * @example await carbs.ContinueToBolus();
+     */
+    async ContinueToBolus() {
+        await this.ContinueHeaderButton().tap();
+    }
+    /**
+     * @example carbs.SaveWithoutBolusButton();
+     */
+    SaveWithoutBolusButton() {
+        return match.accessible.Button(text.carbEntryScreen.SaveWithoutBolusing);
     }
     /**
      * @example await carbs.SaveWithoutBolus();
      */
     async SaveWithoutBolus() {
-        await match.accessible.ButtonBarButton(Label.Continue).tap();
-        await match.accessible.Button(CarbsLabel.SaveWithoutBolusing).tap();
+        await this.SaveWithoutBolusButton().tap();
+    }
+    /**
+     * @param {string} glucoseValueAndUnits
+     * @example await carbs.ExpectPredictedGlucoseWarning('110 mg/dL');
+     */
+    async ExpectPredictedGlucoseWarning(glucoseValueAndUnits) {
+        const predictedGlucoseWarning = `⚠ Predicted glucose of ${glucoseValueAndUnits} is below your suspend threshold setting.`;
+        await expect(match.accessible.Label(predictedGlucoseWarning)).toExist();
+    }
+    /**
+     * @example carbs.AbsorptionTimeMessage();
+     */
+    AbsorptionTimeMessage() {
+        return match.accessible.Label(text.carbEntryScreen.AbsorptionMessage);
+    }
+    /**
+     * @example await carbs.ExpectAbsorptionTimeMessage();
+     */
+    async ExpectAbsorptionTimeMessage() {
+        await expect(this.AbsorptionTimeMessage()).toExist();
     }
     /**
      * @summary add a meal entry

@@ -1,33 +1,90 @@
 const match = require('./match');
-const { Label, HomeLabel } = require('./labels');
+const text = require('./text');
 
 class HomeScreen {
+    /**
+     * @example home.ActiveCarbohydratesLabel().tap();
+     */
+    ActiveCarbohydratesLabel() {
+        return match.accessible.Label(text.homeScreen.ActiveCarbohydrates);
+    }
+    /**
+     * @example home.ActiveInsulinLabel().tap();
+     */
+    ActiveInsulinLabel() {
+        return match.accessible.Label(text.homeScreen.ActiveInsulin);
+    }
+    /**
+     * @example home.InsulinDeliveryLabel().tap();
+     */
+    InsulinDeliveryLabel() {
+        return match.accessible.Label(text.homeScreen.InsulinDelivery);
+    }
+    /**
+     * @example home.GlucoseLabel().tap();
+     */
+    GlucoseLabel() {
+        return match.accessible.Label(text.homeScreen.Glucose);
+    }
+    /**
+     * @example home.SettingsButton().tap();
+     */
+    SettingsButton() {
+        return match.accessible.Button(text.settingsScreen.Settings);
+    }
+    OverridesButton() {
+        return match.accessible.Button(text.overridesScreen.WorkoutTargets);
+    }
+    AddMealButton() {
+        return match.accessible.Button(text.carbEntryScreen.AddMeal);
+    }
+    BolusButton() {
+        return match.accessible.Button(text.bolusScreen.Bolus);
+    }
     async OpenActiveCarbohydratesChart() {
-        await match.accessible.Label(HomeLabel.ActiveCarbohydrates).tap();
+        await this.ActiveCarbohydratesLabel().tap();
     }
     async OpenActiveInsulinChart() {
-        await match.accessible.Label(HomeLabel.ActiveInsulin).tap();
+        await this.ActiveInsulinLabel().tap();
     }
     async OpenInsulinDeliveryChart() {
-        await match.accessible.Label(HomeLabel.InsulinDelivery).tap();
+        await this.InsulinDeliveryLabel().tap();
     }
     async OpenGlucoseChart() {
-        await match.accessible.Label(HomeLabel.ActiveCarbohydrates).tap();
+        await this.GlucoseLabel().tap();
     }
     async CloseChart() {
-        await match.accessible.BackButton(Label.Status).tap();
+        await match.accessible.BackButton(text.general.Status).tap();
     }
     async ExpectLoopNotYetRun() {
-        await expect(match.loop.Icon()).toHaveLabel(HomeLabel.LoopWaitingForFirstRun);
+        await expect(match.loop.Icon()).toHaveLabel(text.homeScreen.LoopWaitingForFirstRun);
     }
     async TapLoopIcon() {
-        await waitFor(match.loop.Icon()).toBeVisible().withTimeout(2000);
         await match.loop.Icon().tap();
     }
-    async ExpectLoopStatusAlert(expectedAlertText) {
+    async ExpectLoopStatusCarbsAlert() {
         await this.TapLoopIcon();
-        await waitFor(match.accessible.AlertLabel(expectedAlertText)).toExist().withTimeout(2000);
-        await match.accessible.Button(Label.OK).tap();
+        await expect(match.accessible.AlertLabel(text.alerts.MissingCarbEffects)).toExist();
+        await match.accessible.Button(text.general.OK).tap();
+    }
+    async ExpectLoopStatusInsulinAlert() {
+        await this.TapLoopIcon();
+        await expect(match.accessible.AlertLabel(text.alerts.MissingInsulinEffects)).toExist();
+        await match.accessible.Button(text.general.OK).tap();
+    }
+    async ExpectLoopStatusConfigurationAlert() {
+        await this.TapLoopIcon();
+        await expect(match.accessible.AlertLabel(text.alerts.ConfigurationError)).toExist();
+        await match.accessible.Button(text.general.OK).tap();
+    }
+    async ExpectLoopStatusGlucoseDataAlert() {
+        await this.TapLoopIcon();
+        await expect(match.accessible.AlertLabel(text.alerts.MissingGlucoseData)).toExist();
+        await match.accessible.Button(text.general.OK).tap();
+    }
+    async ExpectNoLoopStatusAlert() {
+        await this.TapLoopIcon();
+        await expect(match.accessible.Alert()).toNotExist();
     }
 }
 

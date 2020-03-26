@@ -7,12 +7,18 @@ const { BolusScreen } = require('./bolusScreen');
 const { HomeScreen } = require('./homeScreen');
 const { SettingsScreen, SettingDefault, SettingType, InsulinModel, FilterSettings, CGMModel, CGMEffect } = require('./settingsScreen');
 
+
+var screen = {
+    home: new HomeScreen(),
+    settings: new SettingsScreen(),
+    carbEntry: new CarbEntryScreen(),
+    bolus: new BolusScreen(),
+    overrides: new OverridesScreen()
+};
+
 module.exports = {
     setup,
-    CarbEntryScreen,
-    OverridesScreen,
-    BolusScreen,
-    HomeScreen,
+    screen,
     loopSettings,
-    SettingsScreen, SettingDefault, SettingType, InsulinModel, FilterSettings, CGMModel, CGMEffect,
+    SettingDefault, SettingType, InsulinModel, FilterSettings, CGMModel, CGMEffect,
 };

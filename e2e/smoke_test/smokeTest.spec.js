@@ -1,152 +1,139 @@
-const { setup, CarbEntryScreen, HomeScreen, BolusScreen, OverridesScreen, SettingsScreen, SettingDefault, CGMModel, CGMEffect } = require('../../src/index');
+const { setup, screen, SettingDefault } = require('../../src/index');
 
 describe('smoke test', () => {
-    var settings;
-    var carbEntry;
-    var bolus;
-    var overrides;
-    var home;
     beforeAll(async () => {
         await setup.LaunchLoop();
-        settings = new SettingsScreen();
-        carbEntry = new CarbEntryScreen();
-        bolus = new BolusScreen();
-        overrides = new OverridesScreen();
-        home = new HomeScreen();
     });
     describe('home screen', () => {
         it('has Active Carbohydrates section', async () => {
-            await home.OpenActiveCarbohydratesChart();
-            await home.CloseChart();
+            await screen.home.OpenActiveCarbohydratesChart();
+            await screen.home.CloseChart();
         });
         it('has Active Insulin section', async () => {
-            await home.OpenActiveInsulinChart();
-            await home.CloseChart();
+            await screen.home.OpenActiveInsulinChart();
+            await screen.home.CloseChart();
         });
         it('has Insulin Delivery section', async () => {
-            await home.OpenInsulinDeliveryChart();
-            await home.CloseChart();
+            await screen.home.OpenInsulinDeliveryChart();
+            await screen.home.CloseChart();
         });
         it('has Glucose section', async () => {
-            await home.OpenGlucoseChart();
-            await home.CloseChart();
+            await screen.home.OpenGlucoseChart();
+            await screen.home.CloseChart();
         });
         it('has Loop icon', async () => {
-            await home.ExpectLoopNotYetRun();
+            await screen.home.ExpectLoopNotYetRun();
         });
         it('has Loop icon has alert when not setup', async () => {
-            await home.ExpectLoopStatusAlert('Missing Data: Glucose Data Not Available');
+            await screen.home.ExpectLoopStatusGlucoseDataAlert();
         });
     });
     describe('settings', () => {
         beforeAll(async () => {
-            await settings.Open();
+            await screen.settings.Open();
         });
         afterAll(async () => {
-            await settings.Close();
+            await screen.settings.Close();
         });
-
         describe('general', () => {
             it('can be go set to closed loop', async () => {
-                await settings.ClosedLoop();
+                await screen.settings.SetClosedLoop();
             });
             it('can be go set to open loop', async () => {
-                await settings.OpenLoop();
+                await screen.settings.SetOpenLoop();
             });
             it('can issue a report', async () => {
-                await settings.IssueReport();
+                await screen.settings.IssueReportLabel();
             });
         });
         describe('cgm', () => {
             it('can be added', async () => {
-                await settings.AddCGMSimulator();
+                await screen.settings.AddCGMSimulator();
             });
-            it('can configure simulator model', async () => {
-                await settings.SetCGMModel(CGMModel.Constant, ['114']);
-            });
-            it('can configure simulator effect', async () => {
-                await settings.SetCGMEffect(CGMEffect.GlucoseNoise);
+            it('can configure simulator', async () => {
+                await screen.settings.SetCGMSimulatorSettings(SettingDefault.CGMSimulatorSettings);
             });
         });
         describe('pump', () => {
             it('can be added', async () => {
-                await settings.AddPumpSimulator();
+                await screen.settings.AddPumpSimulator();
             });
             it('set suspend threshold', async () => {
-                await settings.SetSuspendThreshold(SettingDefault.SuspendThreshold);
+                await screen.settings.SetSuspendThreshold(SettingDefault.SuspendThreshold);
             });
             it('set basal rates', async () => {
-                await settings.SetBasalRates(SettingDefault.BasalRates);
+                await screen.settings.SetBasalRates(SettingDefault.BasalRates);
             });
             it('set delivery limits', async () => {
-                await settings.SetDeliveryLimits(SettingDefault.DeliveryLimits);
+                await screen.settings.SetDeliveryLimits(SettingDefault.DeliveryLimits);
             });
             it('set insulin model', async () => {
-                await settings.SetInsulinModel(SettingDefault.InsulinModel);
+                await screen.settings.SetInsulinModel(SettingDefault.InsulinModel);
             });
             it('set carb ratios', async () => {
-                await settings.SetCarbRatios(SettingDefault.CarbRatios);
+                await screen.settings.SetCarbRatios(SettingDefault.CarbRatios);
             });
             it('set insulin sensitivites', async () => {
-                await settings.SetInsulinSensitivities(SettingDefault.InsulinSensitivities);
+                await screen.settings.SetInsulinSensitivities(SettingDefault.InsulinSensitivities);
             });
             it('set correction range', async () => {
-                await settings.SetCorrectionRanges(SettingDefault.CorrectionRanges);
+                await screen.settings.SetCorrectionRanges([{ time: '12:00 AM', min: '150', max: '170' }]);
             });
         });
     });
     describe('carb entry', () => {
         it('can be opened', async () => {
-            await carbEntry.Open();
+            await screen.carbEntry.Open();
         });
         it('can be canecled', async () => {
-            await carbEntry.Cancel();
+            await screen.carbEntry.Cancel();
         });
         it('can be set and saved without a bolus', async () => {
-            await carbEntry.Open();
-            await carbEntry.SetCarbs('30');
-            await carbEntry.SaveWithoutBolus();
+            await screen.carbEntry.Open();
+            await screen.carbEntry.SetCarbs('30');
+            await screen.carbEntry.ContinueToBolus();
+            await screen.carbEntry.SaveWithoutBolus();
         });
         it('can be set and canceled', async () => {
-            await carbEntry.Open();
-            await carbEntry.SetCarbs('20');
-            await carbEntry.Cancel();
+            await screen.carbEntry.Open();
+            await screen.carbEntry.SetCarbs('20');
+            await screen.carbEntry.Cancel();
         });
     });
     describe('bolus', () => {
         it('can be opened', async () => {
-            await bolus.Open();
+            await screen.bolus.Open();
         });
         it('can be canceled', async () => {
-            await bolus.Cancel();
+            await screen.bolus.Cancel();
         });
     });
-    describe('temporary override', () => {
+    describe.skip('temporary override', () => {
         it('can be opened', async () => {
-            await overrides.Open();
+            await screen.overrides.Open();
         });
         it('can be canceled', async () => {
-            await overrides.Cancel();
+            await screen.overrides.Cancel();
         });
     });
     describe('cleanup', () => {
         it('opening settings', async () => {
-            await settings.Open();
+            await screen.settings.Open();
         });
         it('can remove pump data', async () => {
-            await settings.RemovePumpData();
+            await screen.settings.RemovePumpData();
         });
         it('can remove pump', async () => {
-            await settings.RemovePump();
+            await screen.settings.RemovePump();
         });
         it('can remove CGM data', async () => {
-            await settings.RemoveCGMData();
+            await screen.settings.RemoveCGMData();
         });
         it('can remove CGM', async () => {
-            await settings.RemoveCGM();
+            await screen.settings.RemoveCGM();
         });
         it('closing settings', async () => {
-            await settings.Close();
+            await screen.settings.Close();
         });
     });
 });
