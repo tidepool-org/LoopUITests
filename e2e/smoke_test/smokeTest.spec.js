@@ -37,10 +37,10 @@ describe('smoke test', () => {
         });
         describe('general', () => {
             it('can be go set to closed loop', async () => {
-                await screen.settings.ClosedLoop();
+                await screen.settings.SetClosedLoop();
             });
             it('can be go set to open loop', async () => {
-                await screen.settings.OpenLoop();
+                await screen.settings.SetOpenLoop();
             });
             it('can issue a report', async () => {
                 await screen.settings.IssueReportLabel();
@@ -106,14 +106,6 @@ describe('smoke test', () => {
         });
         it('can be canceled', async () => {
             await screen.bolus.Cancel();
-        });
-    });
-    describe.skip('temporary override', () => {
-        it('can be opened', async () => {
-            await screen.overrides.Open();
-        });
-        it('can be canceled', async () => {
-            await screen.overrides.Cancel();
         });
     });
     describe('cleanup', () => {

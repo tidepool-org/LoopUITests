@@ -91,29 +91,6 @@ describe('accessibility', () => {
             await expect(screen.carbEntry.FoodTypeLabel()).toExist();
         });
     });
-    describe.skip('override', () => {
-        beforeAll(async () => {
-            await screen.overrides.Open();
-        });
-        afterAll(async () => {
-            await screen.overrides.Cancel();
-        });
-        it('has a Custom Preset Header', async () => {
-            await expect(screen.overrides.CustomPresetHeader()).toExist();
-        });
-        it('has a Cancel Header Button', async () => {
-            await expect(screen.overrides.CancelHeaderButton()).toExist();
-        });
-        it('has a Edit Header Button', async () => {
-            await expect(screen.overrides.EditHeaderButton()).toExist();
-        });
-        it('has a Add Header Button', async () => {
-            await expect(screen.overrides.AddHeaderButton()).toExist();
-        });
-        it('has a Add Preset Message', async () => {
-            await expect(screen.overrides.AddPresetMessage()).toExist();
-        });
-    });
     describe('settings', () => {
         beforeAll(async () => {
             await screen.settings.Open();

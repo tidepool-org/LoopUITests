@@ -129,7 +129,6 @@ var _setCGMEffect = async function (effect) {
         case CGMEffect.GlucoseNoise:
             await match.UIEditableTextField().clearText();
             await match.UIEditableTextField().typeText('100');
-            //TODO:
             await match.accessible.ButtonBarButton(text.general.Back).tap();
             break;
         case CGMEffect.RandomError:
@@ -312,9 +311,9 @@ class SettingsScreen {
         await this.SetInsulinSensitivities(values.InsulinSensitivities);
 
         if (values.ClosedLoop) {
-            await this.ClosedLoop();
+            await this.SetClosedLoop();
         } else {
-            await this.OpenLoop();
+            await this.SetOpenLoop();
         }
     }
     /**
@@ -499,7 +498,7 @@ class SettingsScreen {
     /**
      * @summary turn on closed loop mode
      */
-    async ClosedLoop() {
+    async SetClosedLoop() {
         await this.ScrollToTop();
         await this.ClosedLoopButton().tap();
         //NOTE: not elegant but try catch approach is used by others in detox tests
@@ -513,7 +512,7 @@ class SettingsScreen {
     /**
      * @summary set to open loop mode
      */
-    async OpenLoop() {
+    async SetOpenLoop() {
         await this.ScrollToTop();
         await this.ClosedLoopButton().tap();
         //NOTE: not elegant but try catch approach is used by others in detox tests
