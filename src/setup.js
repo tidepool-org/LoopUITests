@@ -18,10 +18,7 @@ const setup = {
      */
     async ResetThenLaunchLoop() {
         await device.resetContentAndSettings();
-        await device.launchApp({
-            newInstance: true,
-            permissions: { notifications: 'YES', health: 'YES' },
-        });
+        await this.LaunchLoop();
     },
     /**
      * @param {string} deviceId

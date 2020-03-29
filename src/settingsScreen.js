@@ -322,12 +322,10 @@ class SettingsScreen {
      * @example await settings.SetBasalRates([{time:'12:00 AM', unitsPerHour:'0.1'},{time:'12:30 AM', unitsPerHour:'0.3'}])
      */
     async SetBasalRates(rates) {
-
         var _updatePickerItem = function (current) {
             current += 0.05;
             return Number(current.toFixed(2));
         }
-
         if (rates) {
             const unitsSuffix = 'U/hr';
             await this.BasalRatesLabel().tap();
@@ -445,25 +443,33 @@ class SettingsScreen {
      */
     async SetCorrectionRanges(ranges) {
         if (ranges) {
-            await this.CorrectionRangeLabel().tap();
+            try {
+                await this.CorrectionRangeLabel().tap();
+            } catch (error) {
+                await this.CorrectionRangeLabel().atIndex(0).tap();
+            }
             await match.accessible.ButtonBarButton(text.general.Add).tap();
-
             let correctionRangePickerIndex = 0;
             for (let index = 0; index < ranges.length; index++) {
                 const range = ranges[index];
                 await match.accessible.Label(`${range.time}`).atIndex(correctionRangePickerIndex).tap();
-                for (let currentMax = 180; currentMax >= range.max; currentMax--) {
+                let currentMax = 180;
+                do {
                     await match.accessible.PickerItem(1, `${currentMax}`).tap();
-                }
-                for (let currentMin = range.max; currentMin >= range.min; currentMin--) {
+                    currentMax--;
+                } while (currentMax >= range.max);
+
+                let currentMin = range.max;
+                do {
                     if (currentMin == range.max) {
                         await match.accessible.PickerItem(4, `${currentMin}`).tap();
-                    } else if (currentMin == (range.max - 1))
+                    } else if (currentMin == (range.max - 1)) {
                         await match.accessible.PickerItem(2, `${currentMin}`).tap();
-                    else {
+                    } else {
                         await match.accessible.PickerItem(1, `${currentMin}`).tap();
                     }
-                }
+                    currentMin--;
+                } while (currentMin >= range.min);
                 correctionRangePickerIndex++;
             }
             await match.accessible.Label(text.general.Save).tap();

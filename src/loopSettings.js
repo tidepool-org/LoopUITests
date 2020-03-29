@@ -25,6 +25,8 @@ const loopSettings = {
     /**
      * @summary Configures loop with simulator cgm, simulator pump and all required settings applied to give a running instance of loop
      * @param {object} config  { scenario string, settings object }
+     * @param {string} config.scenario
+     * @param {SettingDefault} config.settings settings that will be applied
      * @example await loopSettings.Configure({scenario:'flat_cgm', settings: SettingDefault})
      */
     async Configure(config) {
@@ -36,10 +38,20 @@ const loopSettings = {
         await settingsScreen.Close();
     },
     /**
-     * @summary Removes up loop CGM and Pump data
-     * @example await loopSettings.RemoveData();
+     * @summary Configures loop with simulator cgm, simulator pump only
+     */
+    async SetSimulators() {
+        let settingsScreen = new SettingsScreen();
+        await settingsScreen.Open();
+        await settingsScreen.AddCGMSimulator();
+        await settingsScreen.AddPumpSimulator();
+        await settingsScreen.Close();
+    },
+    /**
+     * @summary Removes loop CGM and Pump data
      */
     async RemoveData() {
+        let settingsScreen = new SettingsScreen();
         await settingsScreen.Open();
         await settingsScreen.RemoveCGMData();
         await settingsScreen.RemovePumpData();
