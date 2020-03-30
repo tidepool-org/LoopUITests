@@ -1,23 +1,20 @@
-const { setup, loopSettings, screen, FilterSettings, SettingDefault, SettingType } = require('../../src/index');
+const { loop } = require('../../src/index');
 
-describe('Closed loop is not allowed when settings', () => {
-    beforeAll(async () => {
-        await setup.LaunchLoop();
-    });
+describe('Closed loop is not allowed when settings are not applied for Insulin Sensitivities', () => {
     afterAll(async () => {
-        await loopSettings.RemoveData();
+        await loop.app.RemoveData();
     });
-    it('are not applied for insulin sensitivities', async () => {
-        await loopSettings.Configure({
+    it('setup without Insulin Sensitivities applied', async () => {
+        await (await loop.app.Launch()).AndConfigure({
             scenario: 'flat_cgm_trace',
-            settings: FilterSettings(SettingDefault, [SettingType.InsulinSensitivities])
+            settings: loop.settings.filter(loop.settings.default, [loop.settings.type.InsulinSensitivities])
         });
     });
     it('should not be in closed loop mode', async () => {
-        await screen.home.ExpectLoopNotYetRun();
+        await loop.screen.home.ExpectLoopNotYetRun();
     });
     it('should show error that indicates why not in closed loop mode', async () => {
-        await screen.home.ExpectLoopStatusCarbsAlert();
+        await loop.screen.home.ExpectLoopStatusCarbsAlert();
     });
 });
 

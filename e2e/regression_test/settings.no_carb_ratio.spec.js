@@ -1,23 +1,20 @@
-const { setup, loopSettings, screen, FilterSettings, SettingDefault, SettingType } = require('../../src/index');
+const { loop } = require('../../src/index');
 
 describe('Closed loop is not allowed when settings', () => {
-    beforeAll(async () => {
-        await setup.LaunchLoop();
-    });
     afterAll(async () => {
-        await loopSettings.RemoveData();
+        await loop.app.RemoveData();
     });
     it('are not applied for carb ratios', async () => {
-        await loopSettings.Configure({
+        await (await loop.app.Launch()).AndConfigure({
             scenario: 'flat_cgm_trace',
-            settings: FilterSettings(SettingDefault, [SettingType.CarbRatios])
+            settings: loop.settings.filter(loop.settings.default, [loop.settings.type.CarbRatios])
         });
     });
     it('should not be in closed loop mode', async () => {
-        await screen.home.ExpectLoopNotYetRun();
+        await loop.screen.home.ExpectLoopNotYetRun();
     });
     it('should show error that indicates why not in closed loop mode', async () => {
-        await screen.home.ExpectLoopStatusCarbsAlert();
+        await loop.screen.home.ExpectLoopStatusCarbsAlert();
     });
 });
 

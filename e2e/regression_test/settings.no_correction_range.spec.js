@@ -1,16 +1,13 @@
-const { setup, loopSettings, screen, FilterSettings, SettingDefault, SettingType } = require('../../src/index');
+const { loop } = require('../../src/index');
 
-describe('Closed loop is not allowed when settings', () => {
-    beforeAll(async () => {
-        await setup.LaunchLoop();
-    });
+describe('Closed loop is not allowed when settings are not applied for correction ranges', () => {
     afterAll(async () => {
         await loopSettings.RemoveData();
     });
-    it('are not applied for correction ranges', async () => {
-        await loopSettings.Configure({
+    it('setup without correction ranges applied', async () => {
+        await (await loop.app.Launch()).AndConfigure({
             scenario: 'flat_cgm_trace',
-            settings: FilterSettings(SettingDefault, [SettingType.CorrectionRanges])
+            settings: loop.settings.filter(loop.settings.default, [loop.settings.type.CorrectionRanges])
         });
     });
     it('should not be in closed loop mode', async () => {

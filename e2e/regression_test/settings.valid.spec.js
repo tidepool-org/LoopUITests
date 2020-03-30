@@ -1,26 +1,23 @@
-const { setup, loopSettings, screen, SettingDefault } = require('../../src/index');
+const { loop } = require('../../src/index');
 
 describe('Closed loop is allowed when', () => {
     let config = {
         scenario: 'flat_cgm_trace',
-        settings: SettingDefault,
+        settings: loop.settings.default
     };
-    beforeAll(async () => {
-        await setup.LaunchLoop();
-    });
     afterAll(async () => {
-        await loopSettings.RemoveData();
+        await loop.app.RemoveData();
     });
     it('we apply all settings', async () => {
-        await loopSettings.Configure(config);
+        await (await loop.app.Launch()).AndConfigure(config);
     });
     it('should not be in closed loop mode', async () => {
-        await screen.home.ExpectLoopNotYetRun();
+        await loop.screen.home.ExpectLoopNotYetRun();
     });
     it('should advance the scenario so we are looping', async () => {
-        await setup.AdvanceScenario(config.scenario, '1');
+        await loop.app.AdvanceScenario(config.scenario, '1');
     });
     it('should have no status alert', async () => {
-        await screen.home.ExpectNoLoopStatusAlert();
+        await loop.screen.home.ExpectNoLoopStatusAlert();
     });
 });

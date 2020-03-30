@@ -1,16 +1,13 @@
-const { setup, loopSettings, screen, FilterSettings, SettingDefault, SettingType } = require('../../src/index');
+const { loop } = require('../../src/index');
 
-describe('Closed loop is not allowed when settings', () => {
-    beforeAll(async () => {
-        await setup.LaunchLoop();
-    });
+describe('Closed loop is not allowed when settings are not applied for delivery limits', () => {
     afterAll(async () => {
         await loopSettings.RemoveData();
     });
-    it('are not applied for delivery limits', async () => {
-        await loopSettings.Configure({
+    it('setup without delivery limits applied', async () => {
+        await (await loop.app.Launch()).AndConfigure({
             scenario: 'flat_cgm_trace',
-            settings: FilterSettings(SettingDefault, [SettingType.DeliveryLimits])
+            settings: loop.settings.filter(loop.settings.default, [loop.settings.type.DeliveryLimits])
         });
     });
     it('should not be in closed loop mode', async () => {
