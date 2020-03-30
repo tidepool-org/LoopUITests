@@ -8,10 +8,10 @@ describe('Bolus not given', () => {
         let applySettings = loop.settings.default;
         applySettings.CorrectionRanges = [{ time: '12:00 AM', min: '120', max: '140' }];
         applySettings.SuspendThreshold = { value: '150' };
-        await (await loop.app.Launch()).AndConfigure({
+        await loop.app.Launch().then(() => loop.app.Configure({
             scenario: 'flat_cgm_trace',
             settings: applySettings,
-        });
+        }));
     });
     it('should not be in closed loop mode', async () => {
         await loo.screen.home.ExpectLoopNotYetRun();

@@ -5,11 +5,11 @@ describe.skip('Closed loop is stopped when we have cgm data loss', () => {
         scenario: 'flat_cgm_trace',
         settings: loop.settings.default,
     };
-    beforeAll(async () => {
-        await (await loop.app.Launch()).AndConfigure(config);
-    });
     afterAll(async () => {
         await loop.app.RemoveData();
+    });
+    it('should setup with correct configuration', async () => {
+        await loop.app.Launch().then(() => loop.app.Configure(config));
     });
     it('should not be in closed loop mode', async () => {
         await loop.screen.home.ExpectLoopNotYetRun();

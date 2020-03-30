@@ -40,12 +40,11 @@ const loopApp = {
             permissions: { notifications: 'YES', health: 'YES' },
             launchArgs: { 'detoxPrintBusyIdleResources': 'YES' },
         });
-        return this;
     },
     /**
      * @summary will launch the loop app with permissons for notifications and health enabled
      */
-    async AndConfigure(config) {
+    async Configure(config) {
 
         var loadScenarioData = async function (config, settingsScreen) {
             if (config.scenario) {
@@ -73,11 +72,12 @@ const loopApp = {
         await settingsScreen.Open();
         await settingsScreen.Apply(settingsToApply);
         await settingsScreen.Close();
+
     },
     /**
      * @summary Configures loop with simulator cgm, simulator pump only
      */
-    async AndSetSimulators(simulators) {
+    async SetSimulators(simulators) {
         let settingsScreen = new SettingsScreen();
         await settingsScreen.Open();
         if (simulators.cgm) {

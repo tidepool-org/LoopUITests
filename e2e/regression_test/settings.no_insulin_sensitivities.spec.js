@@ -5,10 +5,10 @@ describe('Closed loop is not allowed when settings are not applied for Insulin S
         await loop.app.RemoveData();
     });
     it('setup without Insulin Sensitivities applied', async () => {
-        await (await loop.app.Launch()).AndConfigure({
+        await loop.app.Launch().then(() => loop.app.Configure({
             scenario: 'flat_cgm_trace',
             settings: loop.settings.filter(loop.settings.default, [loop.settings.type.InsulinSensitivities])
-        });
+        }));
     });
     it('should not be in closed loop mode', async () => {
         await loop.screen.home.ExpectLoopNotYetRun();

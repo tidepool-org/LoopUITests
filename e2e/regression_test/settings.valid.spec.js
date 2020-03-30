@@ -9,7 +9,7 @@ describe('Closed loop is allowed when', () => {
         await loop.app.RemoveData();
     });
     it('we apply all settings', async () => {
-        await (await loop.app.Launch()).AndConfigure(config);
+        await loop.app.Launch().then(() => loop.app.Configure(config));
     });
     it('should not be in closed loop mode', async () => {
         await loop.screen.home.ExpectLoopNotYetRun();

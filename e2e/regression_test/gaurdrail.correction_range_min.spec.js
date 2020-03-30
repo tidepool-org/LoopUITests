@@ -5,14 +5,12 @@ describe('gaurdrail set correction range minimum is set to 60', () => {
         await loopSettings.RemoveData();
     });
     it('open settings add pump simulator, set correction range minimum to 60', async () => {
-        await (await loop.app.Launch()).AndConfigure(
-            {
-                settings: {
-                    AddPumpSimulator: true,
-                    SetCorrectionRanges: [{ time: '12:00 AM', min: '60', max: '180' }]
-                }
+        await loop.app.Launch().then(() => loop.app.Configure({
+            settings: {
+                AddPumpSimulator: true,
+                SetCorrectionRanges: [{ time: '12:00 AM', min: '60', max: '180' }]
             }
-        );
+        }));
     });
     it('close settings', async () => {
         await screen.settings.Close();
