@@ -1,19 +1,20 @@
 const { loop } = require('../../src/index');
 
-describe('gaurdrail settings max bolus minimum allowed is 0 units', () => {
+describe('guardrail settings max bolus minimum allowed is 0 units', () => {
     afterAll(async () => {
-        await loop.app.RemoveData();
+        await loop.RemoveData();
     });
     it('open settings add pump simulator, set max bolus as 0 units', async () => {
-        await loop.app.Launch().then(() => loop.app.Configure({
+        await loop.Launch();
+        await loop.Configure({
             settings: {
                 AddPumpSimulator: true,
                 SetDeliveryLimits: { maxBolus: '0.0', maxBasalRate: '1.0' }
             }
-        }));
+        });
     });
     it('close settings', async () => {
-        await loop.screen.settings.Close();
+        await loop.screens.settings.Close();
     });
 });
 

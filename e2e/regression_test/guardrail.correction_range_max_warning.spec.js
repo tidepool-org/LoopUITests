@@ -1,19 +1,20 @@
 const { loop } = require('../../src/index');
 
-describe('gaurdrail correction range maximum warning is set to 120', () => {
+describe('guard rail correction range maximum warning is set to 120', () => {
     afterAll(async () => {
-        await loop.app.RemoveData();
+        await loop.RemoveData();
     });
     it('open settings add pump simulator, set correction range maximum to 120', async () => {
-        await loop.app.Launch().then(() => loop.app.Configure({
+        await loop.Launch();
+        await loop.Configure({
             settings: {
                 AddPumpSimulator: true,
                 SetCorrectionRanges: [{ time: '12:00 AM', min: '119', max: '120' }]
             }
-        }));
+        });
     });
     it('close settings', async () => {
-        await loop.screen.settings.Close();
+        await loop.screens.settings.Close();
     });
 });
 

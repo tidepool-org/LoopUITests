@@ -6,18 +6,19 @@ describe('Closed loop is allowed when', () => {
         settings: loop.settings.default
     };
     afterAll(async () => {
-        await loop.app.RemoveData();
+        await loop.RemoveData();
     });
     it('we apply all settings', async () => {
-        await loop.app.Launch().then(() => loop.app.Configure(config));
+        await loop.Launch();
+        await loop.Configure(config);
     });
     it('should not be in closed loop mode', async () => {
-        await loop.screen.home.ExpectLoopNotYetRun();
+        await loop.screens.home.ExpectLoopNotYetRun();
     });
     it('should advance the scenario so we are looping', async () => {
-        await loop.app.AdvanceScenario(config.scenario, '1');
+        await loop.AdvanceScenario(config.scenario, '1');
     });
     it('should have no status alert', async () => {
-        await loop.screen.home.ExpectNoLoopStatusAlert();
+        await loop.screens.home.ExpectNoLoopStatusAlert();
     });
 });
