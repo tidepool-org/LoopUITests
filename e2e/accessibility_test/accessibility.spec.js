@@ -20,9 +20,6 @@ describe('accessibility', () => {
         it('has a Settings Button', async () => {
             await expect(loop.screens.home.SettingsButton()).toExist();
         });
-        it('has a Overrides Button', async () => {
-            await expect(loop.screens.home.OverridesButton()).toExist();
-        });
         it('has a Add Meal Button', async () => {
             await expect(loop.screens.home.AddMealButton()).toExist();
         });
