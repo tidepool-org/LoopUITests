@@ -1,14 +1,13 @@
 const { loop } = require('../../src/index');
 
-describe('Closed loop is not allowed when settings are not applied for Insulin Sensitivities', () => {
-    afterAll(async () => {
-        await loop.RemoveData();
+describe('Closed loop is not allowed when settings', () => {
+    it('launch loop', async () => {
+        await loop.Launch();
     });
-    it('setup without Insulin Sensitivities applied', async () => {
-        await loop.Launch()
+    it('are not applied for carb ratios', async () => {
         await loop.Configure({
             scenario: 'flat_cgm_trace',
-            settings: loop.settings.filter(loop.settings.default, [loop.settings.type.InsulinSensitivities])
+            settings: loop.settings.filter(loop.settings.default, [loop.settings.type.CarbRatios])
         });
     });
     it('should not be in closed loop mode', async () => {
