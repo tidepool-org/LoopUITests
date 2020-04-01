@@ -51,7 +51,7 @@ describe('smoke test', () => {
                 await loop.screens.settings.AddCGMSimulator();
             });
             it('can configure simulator', async () => {
-                await loop.screens.settings.SetCGMSimulatorSettings(SettingDefault.CGMSimulatorSettings);
+                await loop.screens.settings.SetCGMSimulatorSettings(loop.settings.default.CGMSimulatorSettings);
             });
         });
         describe('pump', () => {
@@ -59,22 +59,22 @@ describe('smoke test', () => {
                 await loop.screens.settings.AddPumpSimulator();
             });
             it('set suspend threshold', async () => {
-                await loop.screens.settings.SetSuspendThreshold(SettingDefault.SuspendThreshold);
+                await loop.screens.settings.SetSuspendThreshold(loop.settings.default.SuspendThreshold);
             });
             it('set basal rates', async () => {
-                await loop.screens.settings.SetBasalRates(SettingDefault.BasalRates);
+                await loop.screens.settings.SetBasalRates(loop.settings.default.BasalRates);
             });
             it('set delivery limits', async () => {
-                await loop.screens.settings.SetDeliveryLimits(SettingDefault.DeliveryLimits);
+                await loop.screens.settings.SetDeliveryLimits(loop.settings.default.DeliveryLimits);
             });
             it('set insulin model', async () => {
-                await loop.screens.settings.SetInsulinModel(SettingDefault.InsulinModel);
+                await loop.screens.settings.SetInsulinModel(loop.settings.default.InsulinModel);
             });
             it('set carb ratios', async () => {
-                await loop.screens.settings.SetCarbRatios(SettingDefault.CarbRatios);
+                await loop.screens.settings.SetCarbRatios(loop.settings.default.CarbRatios);
             });
             it('set insulin sensitivites', async () => {
-                await loop.screens.settings.SetInsulinSensitivities(SettingDefault.InsulinSensitivities);
+                await loop.screens.settings.SetInsulinSensitivities(loop.settings.default.InsulinSensitivities);
             });
             it('set correction range', async () => {
                 await loop.screens.settings.SetCorrectionRanges([{ time: '12:00 AM', min: '150', max: '170' }]);

@@ -64,6 +64,10 @@ var SettingDefault = {
      */
     ClosedLoop: true,
     /**
+     *  @summary  OpenLoop: true
+     */
+    OpenLoop: false,
+    /**
      *  @summary  AddCGMSimulator: true
      */
     AddCGMSimulator: true,
@@ -312,7 +316,7 @@ class SettingsScreen {
 
         if (values.ClosedLoop) {
             await this.SetClosedLoop();
-        } else {
+        } else if (values.OpenLoop) {
             await this.SetOpenLoop();
         }
     }
@@ -442,6 +446,7 @@ class SettingsScreen {
      * @example await settings.SetCorrectionRanges([{ time: '12:00 AM', min: '80', max: '150' },{ time: '12:30 AM', min: '80', max: '130' }])
      */
     async SetCorrectionRanges(ranges) {
+        console.log('SetCorrectionRanges: ', ranges);
         if (ranges) {
             try {
                 await this.CorrectionRangeLabel().tap();

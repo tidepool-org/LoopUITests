@@ -33,6 +33,18 @@ var AdvanceScenario = async function (scenarioName, cycles) {
     await match.accessible.Button(text.general.OK).tap();
 };
 
+var SetSimulators = async function (simulators) {
+    let settingsScreen = new SettingsScreen();
+    await settingsScreen.Open();
+    if (simulators.cgm) {
+        await settingsScreen.AddCGMSimulator();
+    }
+    if (simulators.pump) {
+        await settingsScreen.AddPumpSimulator();
+    }
+    await settingsScreen.Close();
+};
+
 
 var loop = {
     /**
@@ -45,18 +57,19 @@ var loop = {
             launchArgs: { 'detoxPrintBusyIdleResources': 'YES' },
         });
     },
+    async ResetAndLaunch() {
+        await device.resetContentAndSettings();
+        await this.Launch();
+    },
     /**
      * @summary will launch the loop app with permissons for notifications and health enabled
      */
     async Configure(config) {
 
-        var loadScenarioData = async function (config, settingsScreen) {
+        var loadScenarioData = async function (config) {
             if (config.scenario) {
                 await LoadDeviceScenariosFromDisk(device.id);
-                await settingsScreen.Open();
-                await settingsScreen.AddCGMSimulator();
-                await settingsScreen.AddPumpSimulator();
-                await settingsScreen.Close();
+                await SetSimulators({ cgm: true, pump: true })
                 await LoadScenario(config.scenario);
             }
         }
@@ -71,26 +84,11 @@ var loop = {
 
         let settingsScreen = new SettingsScreen();
         let settingsToApply = filterSettingsBasedOnConfig(config);
-
-        await loadScenarioData(config, settingsScreen);
+        await loadScenarioData(config);
         await settingsScreen.Open();
         await settingsScreen.Apply(settingsToApply);
         await settingsScreen.Close();
 
-    },
-    /**
-     * @summary Configures loop with simulator cgm, simulator pump only
-     */
-    async SetSimulators(simulators) {
-        let settingsScreen = new SettingsScreen();
-        await settingsScreen.Open();
-        if (simulators.cgm) {
-            await settingsScreen.AddCGMSimulator();
-        }
-        if (simulators.pump) {
-            await settingsScreen.AddPumpSimulator();
-        }
-        await settingsScreen.Close();
     },
     async RemoveData() {
         let settingsScreen = new SettingsScreen();
@@ -99,6 +97,10 @@ var loop = {
         await settingsScreen.RemovePumpData();
         await settingsScreen.Close();
     },
+    /**
+     * @summary Configures loop with simulator cgm, simulator pump only
+     */
+    SetSimulators: SetSimulators,
     /**
      * @param {string} deviceId
      * @summary will load all available scenarios for the given deviceId

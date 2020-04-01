@@ -8,8 +8,10 @@ describe('Closed loop is allowed when', () => {
     afterAll(async () => {
         await loop.RemoveData();
     });
-    it('we apply all settings', async () => {
+    it('lauch loop', async () => {
         await loop.Launch();
+    });
+    it('apply all settings', async () => {
         await loop.Configure(config);
     });
     it('should not be in closed loop mode', async () => {
