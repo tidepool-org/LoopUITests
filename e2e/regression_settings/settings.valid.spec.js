@@ -2,7 +2,7 @@ const { loop } = require('../../src/index');
 
 describe('Closed loop is allowed when', () => {
     let config = {
-        scenario: 'flat_cgm_trace',
+        scenario: 'flat_cgm_trace_with_basal',//also need insulin data too ...
         settings: loop.settings.default
     };
     afterAll(async () => {
