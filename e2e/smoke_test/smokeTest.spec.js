@@ -85,7 +85,7 @@ describe('smoke test', () => {
         it('can be opened', async () => {
             await loop.screens.carbEntry.Open();
         });
-        it('can be canecled', async () => {
+        it('can be canceled', async () => {
             await loop.screens.carbEntry.Cancel();
         });
         it('can be set and saved without a bolus', async () => {
@@ -93,11 +93,6 @@ describe('smoke test', () => {
             await loop.screens.carbEntry.SetCarbs('30');
             await loop.screens.carbEntry.ContinueToBolus();
             await loop.screens.carbEntry.SaveWithoutBolus();
-        });
-        it('can be set and canceled', async () => {
-            await loop.screens.carbEntry.Open();
-            await loop.screens.carbEntry.SetCarbs('20');
-            await loop.screens.carbEntry.Cancel();
         });
     });
     describe('bolus', () => {
