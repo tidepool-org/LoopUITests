@@ -19,15 +19,7 @@
     "configurations": {
       "ios.sim.debug": {
         "binaryPath": "build/Debug-iphonesimulator/Loop.app",
-        "build": "source ./scripts/build_loop.dev.sh Debug dev debug_build_log.txt",
-        "type": "ios.simulator",
-        "device": {
-          "type": "iPhone 11 Pro"
-        }
-      },
-      "ios.sim.release": {
-        "binaryPath": "build/Release-iphonesimulator/Loop.app",
-        "build": "source ./scripts/build_loop.dev.sh Release dev release_build_log.txt",
+        "build": "source ./scripts/build_loop.dev.sh dev",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11 Pro"
