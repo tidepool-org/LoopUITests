@@ -98,7 +98,8 @@ describe('smoke test', () => {
             await loop.screens.carbEntry.SaveWithoutBolus();
         });
     });
-    describe('bolus', () => {
+    describe.skip('bolus', () => {
+        //TODO: not yet used
         it('can be opened', async () => {
             await loop.screens.bolus.Open();
         });
