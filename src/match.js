@@ -97,6 +97,17 @@ const match = {
             return element(by.text(text).and(by.traits(['text'])));
         },
         /**
+         * @summary returns Picker
+         * @param {Integer} pickerNumber
+         * @returns {Detox.Element}
+         */
+        Picker(pickerNumber) {
+            return element(
+                by.type('UIPickerView')
+                    .withAncestor(by.type('UITableViewCellContentView'))
+            ).atIndex(pickerNumber);
+        },
+        /**
          * @summary returns Picker item(s) for given label and index
          * @param {Integer} pickerNumber
          * @param {string} itemLabel

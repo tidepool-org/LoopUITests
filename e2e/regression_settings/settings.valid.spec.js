@@ -2,7 +2,7 @@ const { loop } = require('../../src/index');
 
 describe('Closed loop is allowed when', () => {
     let config = {
-        scenario: 'flat_cgm_trace_with_basal',//also need insulin data too ...
+        scenario: 'flat_cgm_trace_with_basal',
         settings: loop.settings.default
     };
     afterAll(async () => {
@@ -21,6 +21,6 @@ describe('Closed loop is allowed when', () => {
         await loop.AdvanceScenario(config.scenario, '1');
     });
     it('should have no status alert', async () => {
-        await loop.screens.home.ExpectNoLoopStatusAlert();
+        await loop.screens.home.ExpectSuccessfulLoop();
     });
 });

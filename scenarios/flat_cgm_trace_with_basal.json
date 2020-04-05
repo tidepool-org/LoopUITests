@@ -5769,5 +5769,17 @@
         }
     ],
     "bolusDoses": [],
-    "carbEntries": []
+    "carbEntries": [
+        {
+            "gramValue": 30,
+            "dateOffset": -300,
+            "absorptionTime": 10800
+        },
+        {
+            "gramValue": 15,
+            "dateOffset": 900,
+            "absorptionTime": 7200,
+            "enteredAtOffset": -900
+        }
+    ]
 }

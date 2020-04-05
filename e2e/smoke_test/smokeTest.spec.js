@@ -42,8 +42,11 @@ describe('smoke test', () => {
             it('can be go set to open loop', async () => {
                 await loop.screens.settings.SetOpenLoop();
             });
-            it('can issue a report', async () => {
-                loop.screens.settings.IssueReportLabel();
+            it('can open issue report', async () => {
+                await loop.screens.settings.OpenIssueReport();
+            });
+            it('can close issue report', async () => {
+                await loop.screens.settings.CloseIssueReport();
             });
         });
         describe('cgm', () => {

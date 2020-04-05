@@ -64,10 +64,6 @@ var SettingDefault = {
      */
     ClosedLoop: true,
     /**
-     *  @summary  OpenLoop: true
-     */
-    OpenLoop: false,
-    /**
      *  @summary  AddCGMSimulator: true
      */
     AddCGMSimulator: true,
@@ -315,9 +311,11 @@ class SettingsScreen {
         await this.SetInsulinSensitivities(values.InsulinSensitivities);
 
         if (values.ClosedLoop) {
-            await this.SetClosedLoop();
-        } else if (values.OpenLoop) {
-            await this.SetOpenLoop();
+            if (values.ClosedLoop == true) {
+                await this.SetClosedLoop();
+            } else if (values.ClosedLoop == false) {
+                await this.SetOpenLoop();
+            }
         }
     }
     /**
@@ -624,6 +622,12 @@ class SettingsScreen {
             //TODO: multiple done buttons
             await this.DoneButton().atIndex(0).tap();
         }
+    }
+    async OpenIssueReport() {
+        await this.IssueReportLabel().tap();
+    }
+    async CloseIssueReport() {
+        await _exitSetting();
     }
 }
 
