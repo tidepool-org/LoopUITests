@@ -59,7 +59,3 @@ detox test e2e/accessibility_test --configuration "${CONFIGURATION}" --loglevel 
 
 info "Running detox smoke tests with configuration '${CONFIGURATION}'..."
 detox test e2e/smoke_test --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
-
-# TODO further investitaion
-# info "Running detox regression tests with configuration '${CONFIGURATION}'..."
-# detox test e2e/regression_test --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup

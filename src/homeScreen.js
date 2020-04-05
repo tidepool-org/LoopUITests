@@ -82,7 +82,7 @@ class HomeScreen {
         await expect(match.accessible.AlertLabel(text.alerts.MissingGlucoseData)).toExist();
         await match.accessible.Button(text.general.OK).tap();
     }
-    async ExpectNoLoopStatusAlert() {
+    async ExpectSuccessfulLoop() {
         await this.TapLoopIcon();
         await expect(match.accessible.Alert()).toNotExist();
     }
