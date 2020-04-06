@@ -36,16 +36,16 @@ describe('smoke test', () => {
             await loop.screens.settings.Close();
         });
         describe('general', () => {
-            it('can be go set to closed loop', async () => {
+            it('set to closed loop', async () => {
                 await loop.screens.settings.SetClosedLoop();
             });
-            it('can be go set to open loop', async () => {
+            it('set to open loop', async () => {
                 await loop.screens.settings.SetOpenLoop();
             });
-            it('can open issue report', async () => {
+            it('open issue report', async () => {
                 await loop.screens.settings.OpenIssueReport();
             });
-            it('can close issue report', async () => {
+            it('close issue report', async () => {
                 await loop.screens.settings.CloseIssueReport();
             });
         });
@@ -85,45 +85,46 @@ describe('smoke test', () => {
         });
     });
     describe('carb entry', () => {
-        it('can be opened', async () => {
+        it('open dialog', async () => {
             await loop.screens.carbEntry.Open();
         });
-        it('can be canceled', async () => {
+        it('cancel dialog', async () => {
             await loop.screens.carbEntry.Cancel();
         });
-        it('can be set and saved without a bolus', async () => {
+        it('set carbs and save without a bolus', async () => {
             await loop.screens.carbEntry.Open();
             await loop.screens.carbEntry.SetCarbs('30');
             await loop.screens.carbEntry.ContinueToBolus();
             await loop.screens.carbEntry.SaveWithoutBolus();
         });
     });
+    //TODO: skipped until we can interact
     describe.skip('bolus', () => {
-        //TODO: not yet used
-        it('can be opened', async () => {
+
+        it('open dialog', async () => {
             await loop.screens.bolus.Open();
         });
-        it('can be canceled', async () => {
+        it('cancel dialog', async () => {
             await loop.screens.bolus.Cancel();
         });
     });
-    describe('cleanup', () => {
-        it('opening settings', async () => {
+    describe.skip('cleanup', () => {
+        it('open settings', async () => {
             await loop.screens.settings.Open();
         });
-        it('can remove pump data', async () => {
+        it('remove pump data', async () => {
             await loop.screens.settings.RemovePumpData();
         });
-        it('can remove pump', async () => {
+        it('remove pump', async () => {
             await loop.screens.settings.RemovePump();
         });
-        it('can remove CGM data', async () => {
+        it('remove CGM data', async () => {
             await loop.screens.settings.RemoveCGMData();
         });
-        it('can remove CGM', async () => {
+        it('remove CGM', async () => {
             await loop.screens.settings.RemoveCGM();
         });
-        it('closing settings', async () => {
+        it('close settings', async () => {
             await loop.screens.settings.Close();
         });
     });
