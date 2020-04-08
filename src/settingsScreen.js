@@ -365,10 +365,10 @@ class SettingsScreen {
     }
     /**
      * @param {object} limits { maxBasalRate string, maxBolus string }
-     * @private {function} optionalChecksFn
+     * @param {function} postChecksFn function that is called after the setting is set
      * @example await settings.SetDeliveryLimits({maxBasalRate:'1.0', maxBolus:'10.0'}, checks)
      */
-    async SetDeliveryLimits(limits, optionalChecksFn) {
+    async SetDeliveryLimits(limits, postChecksFn) {
         if (limits) {
             await this.DeliveryLimitsLabel().tap();
             //TODO: using atIndex, need a better way to select these
@@ -381,8 +381,8 @@ class SettingsScreen {
             await match.UIEditableTextField().atIndex(1).tapReturnKey();
             await expect(match.UIEditableTextField().atIndex(1)).toHaveText(limits.maxBolus);
             await match.accessible.Label(text.settingsScreen.SaveToSimulator).tap();
-            if (optionalChecksFn) {
-                await optionalChecksFn();
+            if (postChecksFn) {
+                await postChecksFn();
             }
             await _exitSetting();
         }
