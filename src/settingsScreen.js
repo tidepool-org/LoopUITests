@@ -364,10 +364,11 @@ class SettingsScreen {
         }
     }
     /**
-     * @param {object} { maxBasalRate string, maxBolus string }
-     * @example await settings.SetDeliveryLimits({maxBasalRate:'1.0', maxBolus:'10.0'})
+     * @param {object} limits { maxBasalRate string, maxBolus string }
+     * @private {function} optionalChecksFn
+     * @example await settings.SetDeliveryLimits({maxBasalRate:'1.0', maxBolus:'10.0'}, checks)
      */
-    async SetDeliveryLimits(limits) {
+    async SetDeliveryLimits(limits, optionalChecksFn) {
         if (limits) {
             await this.DeliveryLimitsLabel().tap();
             //TODO: using atIndex, need a better way to select these
@@ -380,6 +381,9 @@ class SettingsScreen {
             await match.UIEditableTextField().atIndex(1).tapReturnKey();
             await expect(match.UIEditableTextField().atIndex(1)).toHaveText(limits.maxBolus);
             await match.accessible.Label(text.settingsScreen.SaveToSimulator).tap();
+            if (optionalChecksFn) {
+                await optionalChecksFn();
+            }
             await _exitSetting();
         }
     }
@@ -628,6 +632,12 @@ class SettingsScreen {
     }
     async CloseIssueReport() {
         await _exitSetting();
+    }
+    async HasAlert() {
+        await expect(match.accessible.Alert()).toExist();
+    }
+    async DismissAlert() {
+        await match.accessible.AlertButton(text.general.OK).tap();
     }
 }
 

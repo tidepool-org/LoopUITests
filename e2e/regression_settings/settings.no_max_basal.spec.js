@@ -5,15 +5,13 @@ describe('Closed loop is not allowed when settings are not applied for max basal
         await loop.Launch();
     });
     it('setup without max basal applied', async () => {
-        let noMaxBasalRate = loop.settings.default;
-        noMaxBasalRate.DeliveryLimits = { maxBolus: '10.0', maxBasalRate: '' };
-        await loop.Configure({ scenario: 'flat_cgm_trace', settings: noMaxBasalRate });
-    });
-    it('should not be in closed loop mode', async () => {
-        await loop.screens.home.ExpectLoopNotYetRun();
-    });
-    it('should show error that indicates why not in closed loop mode', async () => {
-        await loop.screens.home.ExpectLoopStatusInsulinAlert()
+        await loop.screens.settings.Open();
+        await loop.screens.settings.AddPumpSimulator();
+        var checks = async function () {
+            await loop.screens.settings.HasAlert();
+            await loop.screens.settings.DismissAlert();
+        };
+        await loop.screens.settings.SetDeliveryLimits({ maxBolus: '10.0', maxBasalRate: '' }, checks);
     });
 });
 
