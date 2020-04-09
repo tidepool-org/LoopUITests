@@ -7,11 +7,11 @@ describe('Closed loop is not allowed when settings are not applied for max basal
     it('setup without max basal applied', async () => {
         await loop.screens.settings.Open();
         await loop.screens.settings.AddPumpSimulator();
-        var checks = async function () {
+        var expectations = async function () {
             await loop.screens.settings.HasAlert();
             await loop.screens.settings.DismissAlert();
         };
-        await loop.screens.settings.SetDeliveryLimits({ maxBolus: '10.0', maxBasalRate: '' }, checks);
+        await loop.screens.settings.SetDeliveryLimits({ maxBolus: '10.0', maxBasalRate: '' }, expectations);
     });
 });
 
