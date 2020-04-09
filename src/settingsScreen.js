@@ -434,7 +434,11 @@ class SettingsScreen {
             for (let index = 0; index < sensitivities.length; index++) {
                 const sensitivity = sensitivities[index];
                 await match.accessible.ButtonBarButton(text.general.Add).tap();
-                await match.accessible.Label(`${sensitivity.bgValuePerInsulinUnit} ${unitsSuffix}`).atIndex(1).tap();
+                let currentMax = 500;
+                do {
+                    await match.accessible.PickerItem(1, `${currentMax} ${unitsSuffix}`).tap();
+                    currentMax--;
+                } while (currentMax >= sensitivity.bgValuePerInsulinUnit);
             }
             await match.accessible.Label(text.general.Save).tap();
             await _exitSetting();
