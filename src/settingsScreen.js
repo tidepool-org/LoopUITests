@@ -171,7 +171,6 @@ var _setCGMBackfill = async function (hours) {
     await match.accessible.Label('3 hr').tap();
     await match.accessible.BackButton('CGM Settings').tap();
 };
-
 var _exitSetting = async function () {
     await match.accessible.BackButton(text.settingsScreen.Settings).tap();
 }
@@ -364,10 +363,11 @@ class SettingsScreen {
         }
     }
     /**
-     * @param {object} { maxBasalRate string, maxBolus string }
-     * @example await settings.SetDeliveryLimits({maxBasalRate:'1.0', maxBolus:'10.0'})
+     * @param {object} limits { maxBasalRate string, maxBolus string }
+     * @param {function} additionalExpectations optional, function executed before exiting if it exists
+     * @example await settings.SetDeliveryLimits({maxBasalRate:'1.0', maxBolus:'10.0'}, checks)
      */
-    async SetDeliveryLimits(limits) {
+    async SetDeliveryLimits(limits, additionalExpectations) {
         if (limits) {
             await this.DeliveryLimitsLabel().tap();
             //TODO: using atIndex, need a better way to select these
@@ -380,6 +380,9 @@ class SettingsScreen {
             await match.UIEditableTextField().atIndex(1).tapReturnKey();
             await expect(match.UIEditableTextField().atIndex(1)).toHaveText(limits.maxBolus);
             await match.accessible.Label(text.settingsScreen.SaveToSimulator).tap();
+            if (additionalExpectations) {
+                await additionalExpectations();
+            }
             await _exitSetting();
         }
     }
@@ -628,6 +631,12 @@ class SettingsScreen {
     }
     async CloseIssueReport() {
         await _exitSetting();
+    }
+    async HasAlert() {
+        await expect(match.accessible.Alert()).toExist();
+    }
+    async DismissAlert() {
+        await match.accessible.AlertButton(text.general.OK).tap();
     }
 }
 

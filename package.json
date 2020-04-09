@@ -12,8 +12,8 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "detox": "^16.0.2",
-    "jest": "^25.2.4"
+    "detox": "^16.1.1",
+    "jest": "^25.2.7"
   },
   "detox": {
     "configurations": {

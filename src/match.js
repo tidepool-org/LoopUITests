@@ -137,12 +137,20 @@ const match = {
             return element(by.label(label).and(by.traits(['text'])).withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView')));
         },
         /**
-         * @summary returns alert item
+         * @summary returns alert action item
+         * @returns {Detox.Element}
+         */
+        AlertButton(label) {
+            return element(by.label(label).and(by.traits(['button'])).and(by.type('_UIAlertControllerActionView')));
+        },
+        /**
+         * @summary returns alert if found
          * @returns {Detox.Element}
          */
         Alert() {
-            return element(by.traits(['text'])).withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView'));
+            return element(by.type('_UIAlertControllerInterfaceActionGroupView'));
         },
+
     },
     loop: {
         /**
