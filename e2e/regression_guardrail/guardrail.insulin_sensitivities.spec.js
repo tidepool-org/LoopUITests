@@ -9,6 +9,7 @@ describe('guardrail insulin sensitivities', () => {
                 InsulinSensitivities: [{ time: '12:00 AM', bgValuePerInsulinUnit: '501' }],
             }
         });
+        //TODO assert cannot be set
     });
     it('set 500 units, warning', async () => {
         await loop.Launch();
@@ -49,6 +50,16 @@ describe('guardrail insulin sensitivities', () => {
             }
         });
         //TODO assert on warning
+    });
+    it('cannot set 9 units', async () => {
+        await loop.Launch();
+        await loop.Configure({
+            settings: {
+                AddPumpSimulator: true,
+                InsulinSensitivities: [{ time: '12:00 AM', bgValuePerInsulinUnit: '9' }],
+            }
+        });
+        //TODO assert cannot be set
     });
 });
 
