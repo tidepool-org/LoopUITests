@@ -59,15 +59,10 @@ ln -sf "${BUILD_ROOT}" build
 
 if [ ${TEST_TYPE} == 'smoke' ]; then
   info "Running smoke tests '${CONFIGURATION}'..."
-
-  detox test e2e/accessibility_test --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
-  detox test e2e/smoke_test --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
+  detox test e2e/smoke --workers 2 --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
 fi
 
 if [ ${TEST_TYPE} == 'regression' ]; then
   info "Running regression tests '${CONFIGURATION}'..."
-
-  detox test e2e/regression_guardrail --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
-  detox test e2e/regression_settings --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
-  detox test e2e/regression_risk --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
+  detox test e2e/regression --workers 2 --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
 fi
