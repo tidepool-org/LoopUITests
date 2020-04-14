@@ -1,6 +1,7 @@
 const element = require('detox').element;
 const match = require('./match');
 const text = require('./text');
+const constant = require('./config');
 
 /**
  * @summary insulin activity model
@@ -324,11 +325,10 @@ class SettingsScreen {
      */
     async SetBasalRates(rates) {
         var _updatePickerItem = function (current) {
-            current += 0.05;
+            current += config.basalRatesUnitsPerHourStepSize;
             return Number(current.toFixed(2));
         }
         if (rates) {
-            const unitsSuffix = 'U/hr';
             await this.BasalRatesLabel().tap();
             await expect(match.accessible.Header(text.settingsScreen.BasalRates)).toExist();
             let basalRatesPickerIndex = 0;
@@ -337,9 +337,9 @@ class SettingsScreen {
                 await match.accessible.ButtonBarButton(text.general.Add).tap();
                 if (index == 0) {
                     await match.accessible.Label(`${rate.time}`).atIndex(0).tap();
-                    var currentUnitsPerHour = 0.05;
+                    var currentUnitsPerHour = config.basalRatesUnitsPerHourStepSize;
                     do {
-                        await match.accessible.PickerItem(basalRatesPickerIndex, `${currentUnitsPerHour} ${unitsSuffix}`).tap();
+                        await match.accessible.PickerItem(basalRatesPickerIndex, `${currentUnitsPerHour} ${config.basalRatesUnits}`).tap();
                         currentUnitsPerHour = _updatePickerItem(currentUnitsPerHour);
                     } while (currentUnitsPerHour <= rate.unitsPerHour);
                 }
@@ -429,14 +429,13 @@ class SettingsScreen {
     async SetInsulinSensitivities(sensitivities) {
         if (sensitivities) {
             await this.ScrollToBottom();
-            const unitsSuffix = 'mg/dL/U';
             await this.InsulinSensitivitiesLabel().atIndex(1).tap();
             for (let index = 0; index < sensitivities.length; index++) {
                 const sensitivity = sensitivities[index];
                 await match.accessible.ButtonBarButton(text.general.Add).tap();
-                let currentMax = 500;
+                let currentMax = config.insulinSensitivitiesMaximum;
                 do {
-                    await match.accessible.PickerItem(1, `${currentMax} ${unitsSuffix}`).tap();
+                    await match.accessible.PickerItem(1, `${currentMax} ${config.insulinSensitivitiesUnits}`).tap();
                     currentMax--;
                 } while (currentMax >= sensitivity.bgValuePerInsulinUnit);
             }
@@ -451,7 +450,6 @@ class SettingsScreen {
      * @example await settings.SetCorrectionRanges([{ time: '12:00 AM', min: '80', max: '150' },{ time: '12:30 AM', min: '80', max: '130' }])
      */
     async SetCorrectionRanges(ranges) {
-        console.log('SetCorrectionRanges: ', ranges);
         if (ranges) {
             try {
                 await this.CorrectionRangeLabel().tap();
@@ -463,7 +461,7 @@ class SettingsScreen {
             for (let index = 0; index < ranges.length; index++) {
                 const range = ranges[index];
                 await match.accessible.Label(`${range.time}`).atIndex(correctionRangePickerIndex).tap();
-                let currentMax = 180;
+                let currentMax = config.correctionRangesMaximum;
                 do {
                     await match.accessible.PickerItem(1, `${currentMax}`).tap();
                     currentMax--;
