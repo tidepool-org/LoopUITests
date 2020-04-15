@@ -7,6 +7,13 @@ const { HomeScreen } = require('./homeScreen');
 const { SettingsScreen, SettingDefault, SettingType, InsulinModel, FilterSettings, CGMModel, CGMEffect } = require('./settingsScreen');
 const exec = require('child_process').exec;
 
+var ScreenName = {
+    settings: 'settings',
+    home: 'home',
+    bolus: 'bolus',
+    carbEntry: 'carbEntry',
+};
+
 var LoadDeviceScenariosFromDisk = async function (deviceId) {
     const LoadDeviceScenariosFromDiskShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
     LoadDeviceScenariosFromDiskShellScript.stdout.on('data', () => {
@@ -63,6 +70,10 @@ var loop = {
     },
     /**
      * @summary will launch the loop app with permissons for notifications and health enabled
+     * @param {object} config
+     * @param {string} config.scenario
+     * @param {object} config.settings
+     * @param {ScreenName} config.startScreen
      */
     async Configure(config) {
 
@@ -87,8 +98,13 @@ var loop = {
         await loadScenarioData(config);
         await settingsScreen.Open();
         await settingsScreen.Apply(settingsToApply);
-        await settingsScreen.Close();
-
+        switch (config.startScreen) {
+            case ScreenName.settings:
+                break;
+            default:
+                await settingsScreen.Close();
+                break;
+        }
     },
     async RemoveData() {
         let settingsScreen = new SettingsScreen();
@@ -120,6 +136,7 @@ var loop = {
      */
     AdvanceScenario: AdvanceScenario,
     screens: {
+        name: ScreenName,
         home: new HomeScreen(),
         settings: new SettingsScreen(),
         carbEntry: new CarbEntryScreen(),

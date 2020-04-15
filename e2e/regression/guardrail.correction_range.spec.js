@@ -3,8 +3,7 @@ const { loop } = require('../../src/index');
 describe.skip('guard rail correction range', () => {
     beforeAll(async () => {
         await loop.Launch();
-        await loop.Configure({ settings: { AddPumpSimulator: true } });
-        await loop.screens.settings.Open();
+        await loop.Configure({ settings: { AddPumpSimulator: true }, startScreen: loop.screens.name.settings });
     });
 
     // TODO: once CorrectionRanges uses accessibile pickers we should

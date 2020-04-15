@@ -3,8 +3,7 @@ const { loop } = require('../../src/index');
 describe('guardrail settings max basal rate', () => {
     beforeAll(async () => {
         await loop.Launch();
-        await loop.Configure({ settings: { AddPumpSimulator: true } });
-        await loop.screens.settings.Open();
+        await loop.Configure({ settings: { AddPumpSimulator: true }, startScreen: loop.screens.name.settings });
     });
 
     it('set 35 units', async () => {

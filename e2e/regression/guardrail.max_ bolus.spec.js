@@ -3,8 +3,7 @@ const { loop } = require('../../src/index');
 describe('guardrail settings max bolus', () => {
     beforeAll(async () => {
         await loop.Launch();
-        await loop.Configure({ settings: { AddPumpSimulator: true } });
-        await loop.screens.settings.Open();
+        await loop.Configure({ settings: { AddPumpSimulator: true }, startScreen: loop.screens.name.settings });
     });
 
     it('cannot set 30.1 units', async () => {

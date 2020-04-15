@@ -3,7 +3,7 @@ const { loop } = require('../../src/index');
 describe.skip('Closed loop is allowed when', () => {
     let config = {
         scenario: 'flat_cgm_trace_with_basal',
-        settings: loop.settings.default
+        settings: loop.settings.default,
     };
     afterAll(async () => {
         await loop.RemoveData();
