@@ -324,26 +324,14 @@ class SettingsScreen {
      * @example await settings.SetBasalRates([{time:'12:00 AM', unitsPerHour:'0.1'},{time:'12:30 AM', unitsPerHour:'0.3'}])
      */
     async SetBasalRates(rates) {
-        var _updatePickerItem = function (current) {
-            current += config.basalRatesUnitsPerHourStepSize;
-            return Number(current.toFixed(2));
-        }
         if (rates) {
             await this.BasalRatesLabel().tap();
             await expect(match.accessible.Header(text.settingsScreen.BasalRates)).toExist();
-            let basalRatesPickerIndex = 0;
             for (let index = 0; index < rates.length; index++) {
                 const rate = rates[index];
                 await match.accessible.ButtonBarButton(text.general.Add).tap();
-                if (index == 0) {
-                    await match.accessible.Label(`${rate.time}`).atIndex(0).tap();
-                    var currentUnitsPerHour = config.basalRatesUnitsPerHourStepSize;
-                    do {
-                        await match.accessible.PickerItem(basalRatesPickerIndex, `${currentUnitsPerHour} ${config.basalRatesUnits}`).tap();
-                        currentUnitsPerHour = _updatePickerItem(currentUnitsPerHour);
-                    } while (currentUnitsPerHour <= rate.unitsPerHour);
-                }
-                basalRatesPickerIndex++;
+                await match.accessible.Label(`${rate.time}`).atIndex(0).tap();
+                await match.accessible.SetPickerValue(1, `${rate.unitsPerHour} ${config.basalRatesUnits}`);
             }
             await match.accessible.Label(text.settingsScreen.SaveToSimulator).tap();
             await _exitSetting();
@@ -369,7 +357,13 @@ class SettingsScreen {
      */
     async SetDeliveryLimits(limits, additionalExpectations) {
         if (limits) {
-            await this.DeliveryLimitsLabel().tap();
+            try {
+                await this.DeliveryLimitsLabel().tap();
+            } catch (error) {
+                //sometimes there are multiples?
+                await this.DeliveryLimitsLabel().atIndex(1).tap();
+            }
+
             //TODO: using atIndex, need a better way to select these
             await match.UIEditableTextField().atIndex(0).clearText();
             await match.UIEditableTextField().atIndex(0).typeText(limits.maxBasalRate);
@@ -437,7 +431,7 @@ class SettingsScreen {
                 if (sensitivity.time != "12:00 AM") {
                     await match.accessible.Label(`${sensitivity.time}`).atIndex(0).tap();
                 }
-                await match.accessible.SetPickerValue(0, 1, `${sensitivity.bgValuePerInsulinUnit} ${config.insulinSensitivitiesUnits}`);
+                await match.accessible.SetPickerValue(1, `${sensitivity.bgValuePerInsulinUnit} ${config.insulinSensitivitiesUnits}`);
             }
             await match.accessible.Label(text.general.Save).tap();
             await _exitSetting();
@@ -460,7 +454,7 @@ class SettingsScreen {
             for (let index = 0; index < ranges.length; index++) {
                 const range = ranges[index];
                 await match.accessible.Label(`${range.time}`).atIndex(0).tap();
-                await match.accessible.SetPickerValue(0, 1, range.max);
+                await match.accessible.SetPickerValue(1, range.max);
             }
             await match.accessible.Label(text.general.Save).tap();
             await _exitSetting();
