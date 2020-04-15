@@ -1,6 +1,6 @@
 const { loop } = require('../../src/index');
 
-describe('Closed loop is allowed when', () => {
+describe.skip('Closed loop is allowed when', () => {
     let config = {
         scenario: 'flat_cgm_trace_with_basal',
         settings: loop.settings.default
