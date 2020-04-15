@@ -11,7 +11,7 @@ describe.skip('guard rail correction range', () => {
     // be able to launch loop once and then reuse the setup
     it('maximum 180 can be set, warning', async () => {
         await loop.screens.settings.SetCorrectionRanges([{ time: '12:00 AM', min: '179', max: '180' }]);
-        //TODO assert on warning as above 120
+        //TODO assert on warning
     });
     it('maximum 121 can be set, warning', async () => {
         await loop.screens.settings.SetCorrectionRanges([{ time: '12:30 AM', min: '120', max: '121' }]);
