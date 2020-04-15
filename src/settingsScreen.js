@@ -1,7 +1,7 @@
 const element = require('detox').element;
 const match = require('./match');
 const text = require('./text');
-const constant = require('./config');
+const config = require('./config');
 
 /**
  * @summary insulin activity model
@@ -433,15 +433,37 @@ class SettingsScreen {
             for (let index = 0; index < sensitivities.length; index++) {
                 const sensitivity = sensitivities[index];
                 await match.accessible.ButtonBarButton(text.general.Add).tap();
-                let currentMax = config.insulinSensitivitiesMaximum;
-                do {
-                    await match.accessible.PickerItem(1, `${currentMax} ${config.insulinSensitivitiesUnits}`).tap();
-                    currentMax--;
-                } while (currentMax >= sensitivity.bgValuePerInsulinUnit);
+                //select time unless this is the first Insulin Sensitivitiy we have set...
+                if (sensitivity.time != "12:00 AM") {
+                    await match.accessible.Label(`${sensitivity.time}`).atIndex(0).tap();
+                }
+                await match.accessible.SetPickerValue(0, 1, `${sensitivity.bgValuePerInsulinUnit} ${config.insulinSensitivitiesUnits}`);
             }
             await match.accessible.Label(text.general.Save).tap();
             await _exitSetting();
             await this.ScrollToTop();
+        }
+    }
+    /**
+     * @summary correct ranges to be set. NOTE: it is assumed that the ranges are given in order of time
+     * @param {object} ranges e.g. [{ time: '12:00 AM', min: '80', max: '150' }];
+     * @example await settings.SetCorrectionRanges([{ time: '12:00 AM', min: '80', max: '150' },{ time: '12:30 AM', min: '80', max: '130' }])
+     */
+    async SetCorrectionRanges_v2(ranges) {
+        if (ranges) {
+            try {
+                await this.CorrectionRangeLabel().tap();
+            } catch (error) {
+                await this.CorrectionRangeLabel().atIndex(0).tap();
+            }
+            await match.accessible.ButtonBarButton(text.general.Add).tap();
+            for (let index = 0; index < ranges.length; index++) {
+                const range = ranges[index];
+                await match.accessible.Label(`${range.time}`).atIndex(0).tap();
+                await match.accessible.SetPickerValue(0, 1, range.max);
+            }
+            await match.accessible.Label(text.general.Save).tap();
+            await _exitSetting();
         }
     }
     /**

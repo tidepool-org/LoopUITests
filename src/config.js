@@ -5,7 +5,6 @@ const insulinSensitivitiesUnits = 'mg/dL/U';
 const insulinSensitivitiesMaximum = 500;
 const correctionRangesMaximum = 180;
 
-
 var config = {
     basalRatesUnits,
     basalRatesUnitsPerHourStepSize,
