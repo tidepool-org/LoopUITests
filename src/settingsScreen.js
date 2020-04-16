@@ -440,10 +440,12 @@ class SettingsScreen {
     }
     /**
      * @summary correct ranges to be set. NOTE: it is assumed that the ranges are given in order of time
-     * @param {object} ranges e.g. [{ time: '12:00 AM', min: '80', max: '150' }];
+     * @param {Array} ranges e.g. [{ time: '12:00 AM', min: '80', max: '150' }];
      * @example await settings.SetCorrectionRanges([{ time: '12:00 AM', min: '80', max: '150' },{ time: '12:30 AM', min: '80', max: '130' }])
      */
     async SetCorrectionRanges_v2(ranges) {
+        const minimumColumn = 3;
+        const maximumColumn = 1;
         if (ranges) {
             try {
                 await this.CorrectionRangeLabel().tap();
@@ -454,7 +456,8 @@ class SettingsScreen {
             for (let index = 0; index < ranges.length; index++) {
                 const range = ranges[index];
                 await match.accessible.Label(`${range.time}`).atIndex(0).tap();
-                await match.accessible.SetPickerValue(1, range.max);
+                await match.accessible.SetPickerValue(maximumColumn, range.max);
+                await match.accessible.SetPickerValue(minimumColumn, range.min);
             }
             await match.accessible.Label(text.general.Save).tap();
             await _exitSetting();
@@ -462,7 +465,7 @@ class SettingsScreen {
     }
     /**
      * @summary correct ranges to be set. NOTE: it is assumed that the ranges are given in order of time
-     * @param {object} ranges e.g. [{ time: '12:00 AM', min: '80', max: '150' }];
+     * @param {Array} ranges e.g. [{ time: '12:00 AM', min: '80', max: '150' }];
      * @example await settings.SetCorrectionRanges([{ time: '12:00 AM', min: '80', max: '150' },{ time: '12:30 AM', min: '80', max: '130' }])
      */
     async SetCorrectionRanges(ranges) {

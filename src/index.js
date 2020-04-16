@@ -93,18 +93,35 @@ var loop = {
             return config.settings;
         }
 
+        var setStartScreen = async function (start) {
+            switch (start) {
+                case ScreenName.settings:
+                    break;
+                case ScreenName.home:
+                    await settingsScreen.Close();
+                    break;
+                case ScreenName.bolus:
+                    let bolusScreen = new BolusScreen();
+                    await settingsScreen.Close();
+                    await bolusScreen.Open();
+                    break;
+                case ScreenName.carbEntry:
+                    let carbEntryScreen = new CarbEntryScreen();
+                    await settingsScreen.Close();
+                    await carbEntryScreen.Open();
+                    break;
+                default:
+                    await settingsScreen.Close();
+                    break;
+            }
+        }
+
         let settingsScreen = new SettingsScreen();
         let settingsToApply = filterSettingsBasedOnConfig(config);
         await loadScenarioData(config);
         await settingsScreen.Open();
         await settingsScreen.Apply(settingsToApply);
-        switch (config.startScreen) {
-            case ScreenName.settings:
-                break;
-            default:
-                await settingsScreen.Close();
-                break;
-        }
+        await setStartScreen(config.startScreen);
     },
     async RemoveData() {
         let settingsScreen = new SettingsScreen();
