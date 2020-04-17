@@ -34,8 +34,8 @@ BUILD_ROOT="${1}"
 shift 1
 CONFIGURATION="${1}"
 shift 1
-TEST_TYPE="${1}"
-shift 1
+# TEST_TYPE="${1}"
+# shift 1
 
 if [ ${#} -ne 0 ]; then
   error "Unexpected arguments: ${*}"
@@ -57,10 +57,10 @@ export PATH="${PWD}/bin:${PWD}/node_modules/.bin:${PATH}"
 info "Creating build symlink to '${BUILD_ROOT}'..."
 ln -sf "${BUILD_ROOT}" build
 
-if [ "${TEST_TYPE}" = "regression" ]; then
-  info "Running regression tests '${CONFIGURATION}'..."
-  detox test e2e/regression --workers 2 --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
-else
-  info "Running smoke tests '${CONFIGURATION}'..."
-  detox test e2e/smoke --workers 2 --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
-fi
+# if [ "${TEST_TYPE}" = "regression" ]; then
+#   info "Running regression tests '${CONFIGURATION}'..."
+#   detox test e2e/regression --workers 2 --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
+# else
+info "Running smoke tests '${CONFIGURATION}'..."
+detox test e2e/smoke --workers 2 --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
+# fi
