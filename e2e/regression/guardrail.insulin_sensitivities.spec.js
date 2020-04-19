@@ -2,7 +2,7 @@ const { LoopTest, screenName, target } = require('../../src/index');
 
 describe('guardrail insulin sensitivities', () => {
     var loopTest;
-    it('should setup with correct configuration', async () => {
+    it('should setup with pump simulator', async () => {
         loopTest = await new LoopTest.Builder(target.tidepool)
             .withSettings({ AddPumpSimulator: true })
             .withStartScreen(screenName.settings)

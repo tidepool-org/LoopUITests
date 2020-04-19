@@ -63,7 +63,7 @@ class LoopTest {
                 permissions: { notifications: 'YES', health: 'YES' },
             });
 
-            //TODO: nothing done with these yet
+            //TODO: nothing done with `target` or `language` yet
             this.target = build.target;
             this.language = build.language || text;
 
