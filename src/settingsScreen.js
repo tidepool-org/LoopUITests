@@ -4,23 +4,6 @@ const config = require('./config');
 
 const { setting } = require('./properties');
 
-/**
- * @summary filter out settings defaults for those that you don't want to apply
- * @param {object} values
- * @param {Array} types
- * @example FilterSettings(SettingDefault, [SettingType.SetBasalRates])
- * @returns filtered Defaults set
- */
-var FilterSettings = function (values, types) {
-    const filtered = values;
-    if (types) {
-        for (const type of types) {
-            delete filtered[type];
-        }
-    }
-    return filtered;
-};
-
 class SettingsScreen {
     constructor(language) {
         this.language = language;
@@ -565,6 +548,5 @@ class SettingsScreen {
 }
 
 module.exports = {
-    SettingsScreen,
-    FilterSettings
+    SettingsScreen
 };

@@ -1,20 +1,23 @@
-const { loop } = require('../../src/index');
+const { LoopTest, setting, screenName, target } = require('../../src/index');
 
 describe('Closed loop is not allowed when settings are not applied for basal rates', () => {
-    it('launch loop', async () => {
-        await loop.Launch();
+    var loopTest;
+    it('should without basal rates applied', async () => {
+        loopTest = await new LoopTest.Builder(target.tidepool)
+            .withScenario('flat_cgm_trace')
+            .withSettings(setting.default)
+            .withSettingsFilter([setting.type.BasalRates])
+            .withStartScreen(screenName.settings)
+            .build();
     });
-    it('setup without basal rates applied', async () => {
-        await loop.Configure({
-            scenario: 'flat_cgm_trace',
-            settings: loop.settings.filter(loop.settings.default, [loop.settings.type.BasalRates])
-        });
+    afterAll(async () => {
+        await loopTest.removeData();
     });
     it('should not be in closed loop mode', async () => {
-        await loop.screens.home.ExpectLoopNotYetRun();
+        await loopTest.homeScreen.ExpectLoopNotYetRun();
     });
     it('should show error that indicates why not in closed loop mode', async () => {
-        await loop.screens.home.ExpectLoopStatusInsulinAlert()
+        await loopTest.homeScreen.ExpectLoopStatusInsulinAlert()
     });
 });
 

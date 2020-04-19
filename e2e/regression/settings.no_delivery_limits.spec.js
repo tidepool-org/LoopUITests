@@ -1,20 +1,20 @@
-const { loop } = require('../../src/index');
+const { LoopTest, setting, target, screenName } = require('../../src/index');
 
 describe('Closed loop is not allowed when settings are not applied for delivery limits', () => {
-    it('launch loop', async () => {
-        await loop.Launch();
-    });
-    it('setup without delivery limits applied', async () => {
-        await loop.Configure({
-            scenario: 'flat_cgm_trace',
-            settings: loop.settings.filter(loop.settings.default, [loop.settings.type.DeliveryLimits])
-        });
+    var loopTest;
+    it('should without delivery limits applied', async () => {
+        loopTest = await new LoopTest.Builder(target.tidepool)
+            .withScenario('flat_cgm_trace')
+            .withSettings(setting.default)
+            .withSettingsFilter([setting.type.DeliveryLimits])
+            .withStartScreen(screenName.settings)
+            .build();
     });
     it('should not be in closed loop mode', async () => {
-        await loop.screens.home.ExpectLoopNotYetRun();
+        await loopTest.homeScreen.ExpectLoopNotYetRun();
     });
     it('should show error that indicates why not in closed loop mode', async () => {
-        await loop.screens.home.ExpectLoopStatusConfigurationAlert();
+        await loopTest.homeScreen.ExpectLoopStatusConfigurationAlert();
     });
 });
 

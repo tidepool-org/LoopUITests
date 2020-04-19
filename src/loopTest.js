@@ -1,27 +1,10 @@
-const { SettingsScreen, FilterSettings } = require('./settingsScreen');
+const { SettingsScreen } = require('./settingsScreen');
 const { CarbEntryScreen } = require('./carbEntryScreen');
 const { BolusScreen } = require('./bolusScreen');
 const { HomeScreen } = require('./homeScreen');
 const exec = require('child_process').exec;
 const match = require('./match');
 const text = require('./text');
-
-var target = {
-    tidepool: 'tidepool',
-    diy: 'diy',
-};
-
-var unit = {
-    mmoll: 'mmol/L',
-    mgdl: 'mg/dL',
-};
-
-var screenName = {
-    settings: 'settings',
-    home: 'home',
-    bolus: 'bolus',
-    carbEntry: 'carbEntry',
-};
 
 class LoopTest {
 
@@ -63,6 +46,16 @@ class LoopTest {
         }
     }
 
+    _filterSettings(values, types) {
+        const filtered = values;
+        if (types) {
+            for (const type of types) {
+                delete filtered[type];
+            }
+        }
+        return filtered;
+    }
+
     constructor(build) {
         return (async () => {
             await device.launchApp({
@@ -90,12 +83,17 @@ class LoopTest {
                 await _loadDeviceScenariosFromDisk(device.deviceId);
                 await _loadScenario(this.scenario);
                 if (this.settings) {
-                    this.settings = FilterSettings(this.settings, [SettingType.CGMSimulatorSettings, SettingType.AddCGMSimulator, SettingType.AddPumpSimulator]);
+                    this.settings = this._filterSettings(this.settings, [SettingType.CGMSimulatorSettings, SettingType.AddCGMSimulator, SettingType.AddPumpSimulator]);
                 }
             }
 
             if (this.settings) {
                 await this.settingsScreen.Open();
+
+                if (this.filter) {
+                    this.settings = this._filterSettings(this.settings, this.filter)
+                }
+
                 await this.settingsScreen.Apply(this.settings);
             } else if (this.simulators) {
                 await settingsScreen.Open();
@@ -113,16 +111,6 @@ class LoopTest {
             return this;
         })();
 
-    }
-
-    filterSettings(values, types) {
-        const filtered = values;
-        if (types) {
-            for (const type of types) {
-                delete filtered[type];
-            }
-        }
-        return filtered;
     }
 
     async removeData() {
@@ -166,6 +154,10 @@ class LoopTest {
                 this.settings = settings;
                 return this;
             }
+            withSettingsFilter(filter) {
+                this.filter = filter;
+                return this;
+            }
             withSimulators(simulators) {
                 this.simulators = simulators;
             }
@@ -178,8 +170,5 @@ class LoopTest {
 }
 
 module.exports = {
-    LoopTest,
-    target,
-    screenName,
-    unit,
+    LoopTest
 };

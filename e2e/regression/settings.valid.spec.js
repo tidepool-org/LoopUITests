@@ -1,26 +1,21 @@
-const { loop } = require('../../src/index');
+const { LoopTest, setting, target, screenName } = require('../../src/index');
 
 describe.skip('Closed loop is allowed when', () => {
-    let config = {
-        scenario: 'flat_cgm_trace_with_basal',
-        settings: loop.settings.default,
-    };
-    afterAll(async () => {
-        await loop.RemoveData();
-    });
-    it('lauch loop', async () => {
-        await loop.Launch();
-    });
-    it('apply all settings', async () => {
-        await loop.Configure(config);
+    var loopTest;
+    it('should launch with all settings applied', async () => {
+        loopTest = await new LoopTest.Builder(target.tidepool)
+            .withScenario('flat_cgm_trace_with_basal')
+            .withSettings(setting.default)
+            .withStartScreen(screenName.home)
+            .build();
     });
     it('should not be in closed loop mode', async () => {
-        await loop.screens.home.ExpectLoopNotYetRun();
+        await loopTest.homeScreen.ExpectLoopNotYetRun();
     });
     it('should advance the scenario so we are looping', async () => {
-        await loop.AdvanceScenario(config.scenario, '1');
+        await loop.advanceScenario('1');
     });
     it('should have no status alert', async () => {
-        await loop.screens.home.ExpectSuccessfulLoop();
+        await loopTest.homeScreen.ExpectSuccessfulLoop();
     });
 });
