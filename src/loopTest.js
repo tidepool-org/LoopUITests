@@ -1,4 +1,4 @@
-const { SettingDefault, SettingsScreen, FilterSettings } = require('./settingsScreen');
+const { SettingsScreen, FilterSettings } = require('./settingsScreen');
 const { CarbEntryScreen } = require('./carbEntryScreen');
 const { BolusScreen } = require('./bolusScreen');
 const { HomeScreen } = require('./homeScreen');
@@ -47,29 +47,6 @@ class LoopTest {
             case ScreenName.settings:
                 break;
             case ScreenName.home:
-                await settingsScreen.Close();
-                break;
-            case ScreenName.bolus:
-                let bolusScreen = new BolusScreen();
-                await settingsScreen.Close();
-                await bolusScreen.Open();
-                break;
-            case ScreenName.carbEntry:
-                let carbEntryScreen = new CarbEntryScreen();
-                await settingsScreen.Close();
-                await carbEntryScreen.Open();
-                break;
-            default:
-                await settingsScreen.Close();
-                break;
-        }
-    }
-
-    async _setStartScreen(start) {
-        switch (start) {
-            case ScreenName.settings:
-                break;
-            case ScreenName.home:
                 await this.settingsScreen.Close();
                 break;
             case ScreenName.bolus:
@@ -87,52 +64,65 @@ class LoopTest {
     }
 
     constructor(build) {
-        await device.launchApp({
-            newInstance: true,
-            permissions: { notifications: 'YES', health: 'YES' },
-        });
+        return (async () => {
+            await device.launchApp({
+                newInstance: true,
+                permissions: { notifications: 'YES', health: 'YES' },
+            });
 
-        //TODO: nothing done with these yet
-        this.target = build.target;
-        this.language = build.language || text;
+            //TODO: nothing done with these yet
+            this.target = build.target;
+            this.language = build.language || text;
 
-        this.units = build.units;
+            this.units = build.units;
 
-        this.scenario = build.scenario;
-        this.startScreen = build.startScreen;
-        this.settings = build.settings;
-        this.simulators = build.simulators;
+            this.scenario = build.scenario;
+            this.startScreen = build.startScreen;
+            this.settings = build.settings;
+            this.simulators = build.simulators;
 
-        this.settingsScreen = new SettingsScreen();
-        this.homeScreen = new HomeScreen(this.language);
-        this.bolusScreen = new BolusScreen(this.language);
-        this.carbEntryScreen = new CarbEntryScreen(this.language);
+            this.settingsScreen = new SettingsScreen(this.language);
+            this.homeScreen = new HomeScreen(this.language);
+            this.bolusScreen = new BolusScreen(this.language);
+            this.carbEntryScreen = new CarbEntryScreen(this.language);
 
-        if (this.scenario) {
-            await _loadDeviceScenariosFromDisk(device.deviceId);
-            await _loadScenario(this.scenario);
+            if (this.scenario) {
+                await _loadDeviceScenariosFromDisk(device.deviceId);
+                await _loadScenario(this.scenario);
+                if (this.settings) {
+                    this.settings = FilterSettings(this.settings, [SettingType.CGMSimulatorSettings, SettingType.AddCGMSimulator, SettingType.AddPumpSimulator]);
+                }
+            }
+
             if (this.settings) {
-                this.settings = FilterSettings(this.settings, [SettingType.CGMSimulatorSettings, SettingType.AddCGMSimulator, SettingType.AddPumpSimulator]);
+                await this.settingsScreen.Open();
+                await this.settingsScreen.Apply(this.settings);
+            } else if (this.simulators) {
+                await settingsScreen.Open();
+                if (this.simulators.cgm) {
+                    await settingsScreen.AddCGMSimulator();
+                }
+                if (this.simulators.pump) {
+                    await settingsScreen.AddPumpSimulator();
+                }
+            }
+
+            if (this.startScreen) {
+                await _setStartScreen(this.startScreen);
+            }
+            return this;
+        })();
+
+    }
+
+    filterSettings(values, types) {
+        const filtered = values;
+        if (types) {
+            for (const type of types) {
+                delete filtered[type];
             }
         }
-
-        if (this.settings) {
-            await this.settingsScreen.Open();
-            await this.settingsScreen.Apply(this.settings);
-        } else if (this.simulators) {
-            await settingsScreen.Open();
-            if (this.simulators.cgm) {
-                await settingsScreen.AddCGMSimulator();
-            }
-            if (this.simulators.pump) {
-                await settingsScreen.AddPumpSimulator();
-            }
-        }
-
-        if (this.startScreen) {
-            await _setStartScreen(this.startScreen);
-        }
-
+        return filtered;
     }
 
     async removeData() {
@@ -149,22 +139,6 @@ class LoopTest {
         await match.accessible.SwipeButton('Advance ⏭').tap();
         await match.UITextField().typeText(cycles);
         await match.accessible.Button(text.general.OK).tap();
-    }
-
-    static get settingsScreen() {
-        return this.settingsScreen;
-    }
-
-    static get carbEntryScreen() {
-        return this.carbEntryScreen;
-    }
-
-    static get bolusScreen() {
-        return this.bolusScreen;
-    }
-
-    static get homeScreen() {
-        return this.homeScreen;
     }
 
     static get Builder() {
@@ -195,7 +169,7 @@ class LoopTest {
             withSimulators(simulators) {
                 this.simulators = simulators;
             }
-            build() {
+            async build() {
                 return new LoopTest(this);
             }
         }
@@ -203,16 +177,9 @@ class LoopTest {
     }
 }
 
-
 module.exports = {
     LoopTest,
     target,
     screenName,
     unit,
 };
-
-let loopTest = new LoopTest.Builder(target.tidepool)
-    .withSettings(SettingDefault)
-    .withStartScreen(ScreenName.settings)
-    .withUnits(Unit.mgdl)
-    .build();

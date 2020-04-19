@@ -1,131 +1,132 @@
-const { loop } = require('../../src/index');
+const { LoopTest, target, setting } = require('../../src/index');
 
 describe('smoke test', () => {
+    var loopTest;
     beforeAll(async () => {
-        await loop.Launch();
+        loopTest = await new LoopTest.Builder(target.tidepool).build();
     });
     describe('home screen', () => {
         it('has Active Carbohydrates section', async () => {
-            await loop.screens.home.OpenActiveCarbohydratesChart();
-            await loop.screens.home.CloseChart();
+            await loopTest.homeScreen.OpenActiveCarbohydratesChart();
+            await loopTest.homeScreen.CloseChart();
         });
         it('has Active Insulin section', async () => {
-            await loop.screens.home.OpenActiveInsulinChart();
-            await loop.screens.home.CloseChart();
+            await loopTest.homeScreen.OpenActiveInsulinChart();
+            await loopTest.homeScreen.CloseChart();
         });
         it('has Insulin Delivery section', async () => {
-            await loop.screens.home.OpenInsulinDeliveryChart();
-            await loop.screens.home.CloseChart();
+            await loopTest.homeScreen.OpenInsulinDeliveryChart();
+            await loopTest.homeScreen.CloseChart();
         });
         it('has Glucose section', async () => {
-            await loop.screens.home.OpenGlucoseChart();
-            await loop.screens.home.CloseChart();
+            await loopTest.homeScreen.OpenGlucoseChart();
+            await loopTest.homeScreen.CloseChart();
         });
         it('has Loop icon', async () => {
-            await loop.screens.home.ExpectLoopNotYetRun();
+            await loopTest.homeScreen.ExpectLoopNotYetRun();
         });
         it('has Loop icon has alert when not setup', async () => {
-            await loop.screens.home.ExpectLoopStatusGlucoseDataAlert();
+            await loopTest.homeScreen.ExpectLoopStatusGlucoseDataAlert();
         });
     });
     describe('settings', () => {
         beforeAll(async () => {
-            await loop.screens.settings.Open();
+            await loopTest.settingsScreen.Open();
         });
         afterAll(async () => {
-            await loop.screens.settings.Close();
+            await loopTest.settingsScreen.Close();
         });
         describe('general', () => {
             it('set to closed loop', async () => {
-                await loop.screens.settings.SetClosedLoop();
+                await loopTest.settingsScreen.SetClosedLoop();
             });
             it('set to open loop', async () => {
-                await loop.screens.settings.SetOpenLoop();
+                await loopTest.settingsScreen.SetOpenLoop();
             });
             it('open issue report', async () => {
-                await loop.screens.settings.OpenIssueReport();
+                await loopTest.settingsScreen.OpenIssueReport();
             });
             it('close issue report', async () => {
-                await loop.screens.settings.CloseIssueReport();
+                await loopTest.settingsScreen.CloseIssueReport();
             });
         });
         describe('cgm', () => {
             it('can be added', async () => {
-                await loop.screens.settings.AddCGMSimulator();
+                await loopTest.settingsScreen.AddCGMSimulator();
             });
             it('can configure simulator', async () => {
-                await loop.screens.settings.SetCGMSimulatorSettings(loop.settings.default.CGMSimulatorSettings);
+                await loopTest.settingsScreen.SetCGMSimulatorSettings(setting.default.CGMSimulatorSettings);
             });
         });
         describe('pump', () => {
             it('can be added', async () => {
-                await loop.screens.settings.AddPumpSimulator();
+                await loopTest.settingsScreen.AddPumpSimulator();
             });
             it('set suspend threshold', async () => {
-                await loop.screens.settings.SetSuspendThreshold(loop.settings.default.SuspendThreshold);
+                await loopTest.settingsScreen.SetSuspendThreshold(setting.default.SuspendThreshold);
             });
             it('set basal rates', async () => {
-                await loop.screens.settings.SetBasalRates(loop.settings.default.BasalRates);
+                await loopTest.settingsScreen.SetBasalRates(setting.default.BasalRates);
             });
             it('set delivery limits', async () => {
-                await loop.screens.settings.SetDeliveryLimits(loop.settings.default.DeliveryLimits);
+                await loopTest.settingsScreen.SetDeliveryLimits(setting.default.DeliveryLimits);
             });
             it('set insulin model', async () => {
-                await loop.screens.settings.SetInsulinModel(loop.settings.default.InsulinModel);
+                await loopTest.settingsScreen.SetInsulinModel(setting.default.InsulinModel);
             });
             it('set carb ratios', async () => {
-                await loop.screens.settings.SetCarbRatios(loop.settings.default.CarbRatios);
+                await loopTest.settingsScreen.SetCarbRatios(setting.default.CarbRatios);
             });
             it('set insulin sensitivites', async () => {
-                await loop.screens.settings.SetInsulinSensitivities(loop.settings.default.InsulinSensitivities);
+                await loopTest.settingsScreen.SetInsulinSensitivities(setting.default.InsulinSensitivities);
             });
             it('set correction range', async () => {
-                await loop.screens.settings.SetCorrectionRanges([{ time: '12:00 AM', min: '150', max: '170' }]);
+                await loopTest.settingsScreen.SetCorrectionRanges([{ time: '12:00 AM', min: '150', max: '170' }]);
             });
         });
     });
     describe('carb entry', () => {
         it('open dialog', async () => {
-            await loop.screens.carbEntry.Open();
+            await loopTest.carbEntryScreen.Open();
         });
         it('cancel dialog', async () => {
-            await loop.screens.carbEntry.Cancel();
+            await loopTest.carbEntryScreen.Cancel();
         });
         it('set carbs and save without a bolus', async () => {
-            await loop.screens.carbEntry.Open();
-            await loop.screens.carbEntry.SetCarbs('30');
-            await loop.screens.carbEntry.ContinueToBolus();
-            await loop.screens.carbEntry.SaveWithoutBolus();
+            await loopTest.carbEntryScreen.Open();
+            await loopTest.carbEntryScreen.SetCarbs('30');
+            await loopTest.carbEntryScreen.ContinueToBolus();
+            await loopTest.carbEntryScreen.SaveWithoutBolus();
         });
     });
     //TODO: skipped until we can interact
     describe.skip('bolus', () => {
 
         it('open dialog', async () => {
-            await loop.screens.bolus.Open();
+            await loopTest.bolusScreen.Open();
         });
         it('cancel dialog', async () => {
-            await loop.screens.bolus.Cancel();
+            await loopTest.bolusScreen.Cancel();
         });
     });
     describe.skip('cleanup', () => {
         it('open settings', async () => {
-            await loop.screens.settings.Open();
+            await loopTest.settingsScreen.Open();
         });
         it('remove pump data', async () => {
-            await loop.screens.settings.RemovePumpData();
+            await loopTest.settingsScreen.RemovePumpData();
         });
         it('remove pump', async () => {
-            await loop.screens.settings.RemovePump();
+            await loopTest.settingsScreen.RemovePump();
         });
         it('remove CGM data', async () => {
-            await loop.screens.settings.RemoveCGMData();
+            await loopTest.settingsScreen.RemoveCGMData();
         });
         it('remove CGM', async () => {
-            await loop.screens.settings.RemoveCGM();
+            await loopTest.settingsScreen.RemoveCGM();
         });
         it('close settings', async () => {
-            await loop.screens.settings.Close();
+            await loopTest.settingsScreen.Close();
         });
     });
 });
