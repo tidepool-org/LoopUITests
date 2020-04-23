@@ -130,14 +130,14 @@ const match = {
         },
         /**
          * @summary sets the pickers column to the given value
-         * @param {Integer} pickerNumber
          * @param {Integer} column
          * @param {string} strValue
          */
-        SetPickerValue(pickerNumber, column, strValue) {
+        SetPickerValue(column, strValue) {
+            const currentPicker = 0;
             return element(
                 by.type('UIPickerView')
-            ).atIndex(pickerNumber).setColumnToValue(column, strValue)
+            ).atIndex(currentPicker).setColumnToValue(column, strValue)
         },
         /**
          * @summary returns alert items based on the given label
