@@ -59,7 +59,7 @@ ln -sf "${BUILD_ROOT}" build
 
 # if [ "${TEST_TYPE}" = "regression" ]; then
   info "Running regression tests '${CONFIGURATION}'..."
-  detox test e2e/regression --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
+  detox test e2e/regression --configuration "${CONFIGURATION}" --loglevel fatal --debug-synchronization 200 --record-logs failing --record-timeline all --bail --cleanup
 # else
 #   info "Running smoke tests '${CONFIGURATION}'..."
 #   detox test e2e/smoke --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
