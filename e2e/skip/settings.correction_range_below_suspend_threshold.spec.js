@@ -1,4 +1,4 @@
-const { Test, setting, screenName } = require('../../src/index');
+const { Test, setting } = require('../../src/index');
 
 describe('Bolus not given when settings are applied with correction ranges below suspend threshold', () => {
     var test;
@@ -6,14 +6,9 @@ describe('Bolus not given when settings are applied with correction ranges below
         let applySettings = setting.default;
         applySettings.CorrectionRanges = [{ time: '12:00 AM', min: '120', max: '145' }];
         applySettings.SuspendThreshold = { value: '150' };
-
-        test = new Test()
-            .withScenario('flat_cgm_trace')
-            .withSettings(applySettings)
-            .withStartScreen(screenName.settings)
+        test = new Test().withSettings(applySettings);
         await test.prepare();
     });
-
     afterAll(async () => {
         await test.removeData();
     });
