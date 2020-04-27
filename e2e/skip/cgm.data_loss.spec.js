@@ -7,7 +7,6 @@ describe.skip('Closed loop is stopped when we have cgm data loss', () => {
     });
     it('should setup with correct configuration', async () => {
         test = new test()
-            .withScenario('flat_cgm_trace')
             .withSettings(setting.default)
             .withStartScreen(screenName.home);
         await test.prepare();

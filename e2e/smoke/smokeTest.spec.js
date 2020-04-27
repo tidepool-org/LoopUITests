@@ -79,7 +79,7 @@ describe('smoke test', () => {
                 await test.settingsScreen.SetCarbRatios(setting.default.CarbRatios);
             });
             it('set insulin sensitivites', async () => {
-                await test.settingsScreen.SetInsulinSensitivities(setting.default.InsulinSensitivities, { fromSettings: true, toSettings: true });
+                await test.settingsScreen.SetInsulinSensitivities(setting.default.InsulinSensitivities);
             });
             it('set correction range', async () => {
                 await test.settingsScreen.SetCorrectionRanges([{ time: '12:00 AM', min: '150', max: '170' }]);
