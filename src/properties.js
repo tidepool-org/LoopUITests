@@ -50,7 +50,7 @@ var settingDefault = {
     ClosedLoop: true,
     AddCGMSimulator: true,
     AddPumpSimulator: true,
-    CGMSimulatorSettings: { modelData: { model: settingCGMModel.Constant, bgValues: ['142'] }, backfillHours: '3' }
+    CGMSimulatorSettings: { modelData: { model: settingCGMModel.Constant, bgValues: ['110'] }, backfillHours: '6' }
 };
 
 /**

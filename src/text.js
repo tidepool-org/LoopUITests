@@ -70,8 +70,16 @@ var SettingsScreen = {
     DeleteCGM: 'Delete CGM',
     AddPump: 'Add Pump',
     DeletePump: 'Delete Pump',
-    DeletePumpData: 'Delete Pump Data'
+    DeletePumpData: 'Delete Pump Data',
 };
+
+var CGMSimulatorSettingsScreen = {
+    CGMSettings: 'CGM Settings',
+    BaseGlucose: 'Base Glucose',
+    SineCurve: 'Sine Curve',
+    Amplitude: 'Amplitude',
+    BackfillGlucose: 'Backfill Glucose',
+}
 
 var Alerts = {
     MissingCarbEffects: 'Missing Data: Carb Effects',
@@ -86,6 +94,7 @@ var text = {
     bolusScreen: BolusScreen,
     carbEntryScreen: CarbEntryScreen,
     settingsScreen: SettingsScreen,
+    cgmSimulatorSettingsScreen: CGMSimulatorSettingsScreen,
     overridesScreen: TempOverrideScreen,
     homeScreen: HomeScreen
 };

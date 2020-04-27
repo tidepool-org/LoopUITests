@@ -1,4 +1,4 @@
-const { Test, setting } = require('../../src/index');
+const { Test, setting, screenName } = require('../../src/index');
 
 describe('Bolus not given when settings are applied with correction ranges below suspend threshold', () => {
     var test;

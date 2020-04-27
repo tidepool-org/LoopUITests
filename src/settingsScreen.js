@@ -4,17 +4,40 @@ const config = require('./config');
 
 const { setting } = require('./properties');
 
-class SettingsScreen {
-    startAndReturnToSettings() {
-        return {
-            fromSettings: true,
-            toSettings: true,
-        }
-    }
+class CGMSimulatorScreen {
     constructor(language) {
         this.language = language;
     }
-    async  _setCGMEffect(effect) {
+    async Open() {
+        //TODO: we need to select by Id
+        try {
+            await match.accessible.Label(this.language.settingsScreen.Simulator).atIndex(1).tap();
+        } catch (err) {
+            try {
+                await match.accessible.Label(this.language.settingsScreen.Simulator).atIndex(0).tap();
+            } catch (err2) {
+                await match.accessible.Label(this.language.settingsScreen.Simulator).atIndex(2).tap();
+            }
+        }
+        this.needsClosing = true;
+    }
+    async Close() {
+        if (this.needsClosing) {
+            await this.DoneButton().atIndex(0).tap();
+        }
+    }
+    async Apply(settings) {
+        if (settings.effect) {
+            await this._setCGMEffect(settings.effect);
+        }
+        if (settings.modelData) {
+            await this._setCGMModel(settings.modelData);
+        }
+        if (settings.backfillHours) {
+            await this._setCGMBackfill(settings.backfillHours);
+        }
+    }
+    async _setCGMEffect(effect) {
         await match.accessible.Label(effect).tap();
         switch (effect) {
             case setting.cgmEffect.GlucoseNoise:
@@ -38,18 +61,18 @@ class SettingsScreen {
                 case setting.cgmModel.Constant:
                     await match.UIEditableTextField().clearText();
                     await match.UIEditableTextField().typeText(modelData.bgValues[0]);
-                    await match.accessible.BackButton('CGM Settings').tap();
+                    await match.accessible.BackButton(this.language.cgmSimulatorSettingsScreen.CGMSettings).tap();
                     break;
                 case setting.cgmModel.SineCurve:
-                    await match.accessible.Label('Base Glucose').tap();
+                    await match.accessible.Label(this.language.cgmSimulatorSettingsScreen.BaseGlucose).tap();
                     await match.UIEditableTextField().clearText();
                     await match.UIEditableTextField().typeText(modelData.bgValues[0]);
-                    await match.accessible.BackButton('Sine Curve').tap();
-                    await match.accessible.Label('Amplitude').tap();
+                    await match.accessible.BackButton(this.language.cgmSimulatorSettingsScreen.SineCurve).tap();
+                    await match.accessible.Label(this.language.cgmSimulatorSettingsScreen.Amplitude).tap();
                     await match.UIEditableTextField().clearText();
                     await match.UIEditableTextField().typeText(modelData.bgValues[1]);
-                    await match.accessible.BackButton('Sine Curve').tap();
-                    await match.accessible.BackButton('CGM Settings').tap();
+                    await match.accessible.BackButton(this.language.cgmSimulatorSettingsScreen.SineCurve).tap();
+                    await match.accessible.BackButton(this.language.cgmSimulatorSettingsScreen.CGMSettings).tap();
                     break;
                 default:
                     break;
@@ -57,27 +80,34 @@ class SettingsScreen {
         }
     }
     async _setCGMBackfill(hours) {
-        await match.accessible.Label('Backfill Glucose').tap();
-        await match.accessible.Label('3 hr').tap();
-        await match.accessible.BackButton('CGM Settings').tap();
+        this.needsClosing = false;
+        await match.accessible.Label(this.language.cgmSimulatorSettingsScreen.BackfillGlucose).tap();
+        await match.accessible.SetPickerValue(0, `${hours}`);
+        await match.accessible.ButtonBarButton(this.language.general.Save).tap();
+    }
+    async RemoveSimulator() {
+        this.needsClosing = false;
+        await match.accessible.Label(this.language.settingsScreen.DeleteCGM).tap();
+        await match.accessible.Label(this.language.settingsScreen.DeleteCGM).atIndex(1).tap();
+    }
+}
+
+class SettingsScreen {
+    startAndReturnToSettings() {
+        return {
+            fromSettings: true,
+            toSettings: true,
+        }
+    }
+    constructor(language) {
+        this.language = language;
+        this.cgmSimulatorScreen = new CGMSimulatorScreen(language);
     }
     async _exitSetting() {
         await match.accessible.BackButton(this.language.settingsScreen.Settings).tap();
     }
     async _selectPumpSimulator() {
         await match.accessible.Id('Simulator Small').tap();
-    }
-    async _selectCGMSimulator() {
-        //TODO: we need to select by Id
-        try {
-            await match.accessible.Label(this.language.settingsScreen.Simulator).atIndex(1).tap();
-        } catch (err) {
-            try {
-                await match.accessible.Label(this.language.settingsScreen.Simulator).atIndex(0).tap();
-            } catch (err2) {
-                await match.accessible.Label(this.language.settingsScreen.Simulator).atIndex(2).tap();
-            }
-        }
     }
     async Open() {
         await match.accessible.ButtonBarButton(this.language.settingsScreen.Settings).tap();
@@ -424,9 +454,9 @@ class SettingsScreen {
     }
     async RemoveCGM() {
         await this.ScrollToTop();
-        await this._selectCGMSimulator();
-        await match.accessible.Label(this.language.settingsScreen.DeleteCGM).tap();
-        await match.accessible.Label(this.language.settingsScreen.DeleteCGM).atIndex(1).tap();
+        await this.cgmSimulatorScreen.Open();
+        await this.cgmSimulatorScreen.RemoveSimulator();
+        await this.cgmSimulatorScreen.Close();
     }
     async RemoveCGMData() {
         await this.ScrollToBottom();
@@ -468,18 +498,9 @@ class SettingsScreen {
     async SetCGMSimulatorSettings(settings) {
         if (settings) {
             await this.ScrollToTop();
-            await this._selectCGMSimulator();
-            if (settings.effect) {
-                await this._setCGMEffect(settings.effect);
-            }
-            if (settings.modelData) {
-                await this._setCGMModel(settings.modelData);
-            }
-            if (settings.backfillHours) {
-                await this._setCGMBackfill(settings.backfillHours)
-            }
-            //TODO: multiple done buttons
-            await this.DoneButton().atIndex(0).tap();
+            await this.cgmSimulatorScreen.Open();
+            await this.cgmSimulatorScreen.Apply(settings);
+            await this.cgmSimulatorScreen.Close();
         }
     }
     async OpenIssueReport() {

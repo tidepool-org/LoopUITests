@@ -90,6 +90,9 @@ class Test {
         if (!this.language) {
             this.language = text;
         }
+        if (!this.startScreen) {
+            this.startScreen = screenName.home;
+        }
 
         this.settingsScreen = new SettingsScreen(this.language);
         this.homeScreen = new HomeScreen(this.language);
