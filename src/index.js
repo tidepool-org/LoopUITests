@@ -1,5 +1,6 @@
 const { Test } = require('./test');
-const { target, screenName, unit, setting, limits } = require('./properties');
+const { target, screenName, unit, setting } = require('./properties');
+const { limits } = require('./limits');
 
 module.exports = {
     Test,
