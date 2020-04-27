@@ -115,6 +115,18 @@ class SettingsScreen {
     async Close() {
         await this.DoneButton().tap();
     }
+    _startFromSettings(optionalProperties) {
+        if (!optionalProperties) {
+            return true;
+        }
+        return optionalProperties.fromSettings;
+    }
+    _returnToSettings(optionalProperties) {
+        if (!optionalProperties) {
+            return true;
+        }
+        return optionalProperties.toSettings;
+    }
     DoneButton() {
         return match.accessible.ButtonBarButton(this.language.general.Done);
     }
@@ -200,7 +212,7 @@ class SettingsScreen {
         await this.SetDeliveryLimits(values.DeliveryLimits);
         await this.SetInsulinModel(values.InsulinModel);
         await this.SetCarbRatios(values.CarbRatios);
-        await this.SetInsulinSensitivities(values.InsulinSensitivities, { fromSettings: true, toSettings: true });
+        await this.SetInsulinSensitivities(values.InsulinSensitivities);
 
         if (values.ClosedLoop) {
             if (values.ClosedLoop == true) {
@@ -213,10 +225,15 @@ class SettingsScreen {
     /**
      * @summary basal rates to be set. NOTE: it is assumed that the rates are given in order of time
      * @param {Array} rates [{time:'12:00 AM', unitsPerHour:'0.1'}]
+     * @param {Object} optionalProperties
+     * @param {boolean} optionalProperties.fromSettings
+     * @param {boolean} optionalProperties.toSettings
      */
-    async SetBasalRates(rates) {
+    async SetBasalRates(rates, optionalProperties) {
         if (rates) {
-            await this.BasalRatesLabel().tap();
+            if (this._startFromSettings(optionalProperties)) {
+                await this.BasalRatesLabel().tap();
+            }
             await expect(match.accessible.Header(this.language.settingsScreen.BasalRates)).toExist();
             for (let index = 0; index < rates.length; index++) {
                 const rate = rates[index];
@@ -225,18 +242,22 @@ class SettingsScreen {
                 await match.accessible.SetPickerValue(1, `${rate.unitsPerHour} ${config.basalRatesUnits}`);
             }
             await match.accessible.Label(this.language.settingsScreen.SaveToSimulator).tap();
-            await this._exitSetting();
+            if (this._returnToSettings(optionalProperties)) {
+                await this._exitSetting();
+            }
         }
     }
     /**
      * @summary set the suspend threshold in mg/dL
-     * @param {object} threshold e.g. '150'
+     * @param {Object} threshold e.g. '150'
+     * @param {String} threshold.value
      */
     async SetSuspendThreshold(threshold) {
         if (threshold) {
             await this.SuspendThresholdLabel().tap();
-            await match.UIEditableTextField().typeText(threshold.value);
-            await expect(match.UIEditableTextField()).toHaveText(threshold.value);
+            await match.UIEditableTextField().clearText();
+            await match.UIEditableTextField().typeText(String(threshold.value));
+            await expect(match.UIEditableTextField()).toHaveText(String(threshold.value));
             await this._exitSetting();
         }
     }
@@ -305,13 +326,13 @@ class SettingsScreen {
     /**
     * @summary Sensitivities be set. NOTE: it is assumed that the Sensitivities are given in order of time
     * @param {Array} sensitivities [{time:'12:00 AM', bgValuePerInsulinUnit:'500'}]
-    * @param {Object} properties
-    * @param {boolean} properties.fromSettings
-    * @param {boolean} properties.toSettings
+    * @param {Object} optionalProperties
+    * @param {boolean} optionalProperties.fromSettings
+    * @param {boolean} optionalProperties.toSettings
     */
-    async SetInsulinSensitivities(sensitivities, properties) {
+    async SetInsulinSensitivities(sensitivities, optionalProperties) {
         if (sensitivities) {
-            if (properties && properties.fromSettings) {
+            if (this._startFromSettings(optionalProperties)) {
                 await this.ScrollToBottom();
                 await this.InsulinSensitivitiesLabel().atIndex(1).tap();
             }
@@ -326,7 +347,7 @@ class SettingsScreen {
             }
             await match.accessible.Label(this.language.general.Save).tap();
 
-            if (properties && properties.toSettings) {
+            if (this._returnToSettings(optionalProperties)) {
                 await this._exitSetting();
                 await this.ScrollToTop();
             }
