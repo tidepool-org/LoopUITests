@@ -1,13 +1,6 @@
-const { Test, screenName, limits } = require('../../src/index');
+const { limits } = require('../../src/index');
 
-describe.skip('guard rail correction range', () => {
-    var test;
-    it('should setup with correct configuration', async () => {
-        test = new Test()
-            .withSettings({ AddPumpSimulator: true })
-            .withStartScreen(screenName.settings);
-        await test.prepare();
-    });
+var correctionRange = (test) => {
 
     // TODO: once CorrectionRanges uses accessibile pickers we should
     // be able to launch loop once and then reuse the setup
@@ -16,8 +9,8 @@ describe.skip('guard rail correction range', () => {
         try {
             await test.settingsScreen.SetCorrectionRanges([{
                 time: '12:00 AM',
-                min: limits.correctionRange.max.maximum,
-                max: limits.correctionRange.max.maximum + limits.correctionRange.unitIncrement
+                min: limits.correctionRange.max.limit,
+                max: limits.correctionRange.max.limit + limits.correctionRange.step
             }]);
         } catch (error) {
             //errors as cannot set to 181
@@ -27,48 +20,48 @@ describe.skip('guard rail correction range', () => {
     it('maximum can be set with warning', async () => {
         await test.settingsScreen.SetCorrectionRanges([{
             time: '12:00 AM',
-            min: limits.correctionRange.max.maximum - limits.correctionRange.unitIncrement,
-            max: limits.correctionRange.max.maximum
+            min: limits.correctionRange.max.limit - limits.correctionRange.step,
+            max: limits.correctionRange.max.limit
         }]);
         //TODO assert on warning
     });
     it('maximum above lower boundary can be set with warning', async () => {
         await test.settingsScreen.SetCorrectionRanges([{
             time: '12:30 AM',
-            min: limits.correctionRange.max.lowerBoundary,
-            max: limits.correctionRange.max.lowerBoundary + limits.correctionRange.unitIncrement
+            min: limits.correctionRange.max.warning,
+            max: limits.correctionRange.max.warning + limits.correctionRange.step
         }]);
         //TODO assert on warning
     });
     it('maximum lower boundary can be set, no warning', async () => {
         await test.settingsScreen.SetCorrectionRanges([{
             time: '1:00 AM',
-            min: limits.correctionRange.max.lowerBoundary - limits.correctionRange.unitIncrement,
-            max: limits.correctionRange.max.lowerBoundary
+            min: limits.correctionRange.max.warning - limits.correctionRange.step,
+            max: limits.correctionRange.max.warning
         }]);
         //TODO assert NO warning
     });
     it('above minimum upper boundary can be set, no warning', async () => {
         await test.settingsScreen.SetCorrectionRanges([{
             time: '1:30 AM',
-            min: limits.correctionRange.min.upperBoundary,
-            max: limits.correctionRange.max.maximum
+            min: limits.correctionRange.min.warning,
+            max: limits.correctionRange.max.limit
         }]);
         //TODO assert NO warning
     });
     it('minimum upper boundary can be set with warning', async () => {
         await test.settingsScreen.SetCorrectionRanges([{
             time: '2:00 AM',
-            min: limits.correctionRange.min.upperBoundary - limits.correctionRange.unitIncrement,
-            max: limits.correctionRange.max.maximum
+            min: limits.correctionRange.min.warning - limits.correctionRange.step,
+            max: limits.correctionRange.max.limit
         }]);
         //TODO assert on warning
     });
     it('minimum can be set with warning', async () => {
         await test.settingsScreen.SetCorrectionRanges([{
             time: '2:30 AM',
-            min: limits.correctionRange.min.minimum,
-            max: limits.correctionRange.max.maximum
+            min: limits.correctionRange.min.limit,
+            max: limits.correctionRange.max.limit
         }]);
         //TODO assert on warning
     });
@@ -76,12 +69,13 @@ describe.skip('guard rail correction range', () => {
         try {
             await test.settingsScreen.SetCorrectionRanges([{
                 time: '12:00 AM',
-                min: limits.correctionRange.min.minimum - limits.correctionRange.unitIncrement,
-                max: limits.correctionRange.max.maximum
+                min: limits.correctionRange.min.limit - limits.correctionRange.step,
+                max: limits.correctionRange.max.limit
             }]);
         } catch (error) {
             //errors as cannot set to 59
         }
     });
+};
 
-});
+module.exports = { correctionRange };

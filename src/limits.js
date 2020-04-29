@@ -1,66 +1,64 @@
 /**
- * @summary limits that are used when applying settings
+ * @summary limits that are used when applying settings for guardrails
  */
 var limits = {
     correctionRange: {
-        unitIncrement: 1,
+        step: 1,
         max: {
-            maximum: 180,
-            lowerBoundary: 120,
+            limit: 180,
+            warning: 120,
         },
         min: {
-            minimum: 60,
-            upperBoundary: 70,
+            limit: 60,
+            warning: 70,
         },
     },
     insulinSensitivities: {
-        unitIncrement: 1,
+        step: 1,
         max: {
-            maximum: 500,
-            lowerBoundary: 400,
+            limit: 500,
+            warning: 400,
         },
         min: {
-            minimum: 10,
-            upperBoundary: 15,
+            limit: 10,
+            warning: 15,
         },
     },
-    delivery: {
-        bolus: {
-            unitIncrement: 0.1,
-            max: {
-                maximum: 30.0,
-                lowerBoundary: 20.0,
-            },
-            min: {
-                minimum: 0.0,
-            },
+    bolusDelivery: {
+        step: 0.1,
+        max: {
+            limit: 30.0,
+            warning: 20.0,
         },
-        basal: {
-            unitIncrement: 0.1,
-            max: {
-                maximum: 35,
-            },
+        min: {
+            limit: 0.0,
+        },
+    },
+    basalDelivery: {
+        step: 0.1,
+        max: {
+            limit: 35,
         },
     },
     basalRates: {
-        unitIncrement: 0.05,
+        step: 0.05,
         max: {
-            maximum: 35,
-            lowerBoundary: 20.0,
+            limit: 35,
+            warning: 20.0,
         },
         min: {
-            minimum: 0,
+            limit: 0,
         },
     },
     suspendThreshold: {
-        unitIncrement: 1,
+        step: 1,
         max: {
-            maximum: 180,
-            lowerBoundary: 120,
+            limit: 180,
+            warning: 120,
         },
         min: {
-            minimum: 54,
-            upperBoundary: 70,
+            limit: 54,
+            warning: 70,
         },
     },
 };

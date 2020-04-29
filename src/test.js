@@ -91,7 +91,9 @@ class Test {
             this.language = text;
         }
         if (!this.startScreen) {
-            this.startScreen = screenName.home;
+            if (this.settings || this.simulators) {
+                this.startScreen = screenName.home;
+            }
         }
 
         this.settingsScreen = new SettingsScreen(this.language);

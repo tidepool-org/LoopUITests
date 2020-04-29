@@ -255,9 +255,9 @@ class SettingsScreen {
     async SetSuspendThreshold(threshold) {
         if (threshold) {
             await this.SuspendThresholdLabel().tap();
-            await match.UIEditableTextField().clearText();
-            await match.UIEditableTextField().typeText(String(threshold.value));
-            await expect(match.UIEditableTextField()).toHaveText(String(threshold.value));
+            await match.accessible.Label('mg/dL').atIndex(0).tap();
+            await match.accessible.SetPickerValue(0, `${threshold.value}`);
+            await match.accessible.Button(this.language.general.Save).tap();
             await this._exitSetting();
         }
     }
