@@ -1,6 +1,6 @@
 const { limits } = require('../../src/index');
 
-var suspendThreshold = (test) => {
+var suspendThresholdTests = (test) => {
     it('can set max units with warning', async () => {
         await test.settingsScreen.SetSuspendThreshold(
             { value: limits.suspendThreshold.max.limit }
@@ -57,4 +57,4 @@ var suspendThreshold = (test) => {
     });
 };
 
-module.exports = { suspendThreshold };
+module.exports = { suspendThresholdTests };

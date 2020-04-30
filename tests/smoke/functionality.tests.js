@@ -1,6 +1,6 @@
 const { setting } = require('../../src/index');
 
-var homeScreen = (test) => {
+var homeScreenFunctionalityTests = (test) => {
     it('has Active Carbohydrates section', async () => {
         await test.homeScreen.OpenActiveCarbohydratesChart();
         await test.homeScreen.CloseChart();
@@ -20,12 +20,12 @@ var homeScreen = (test) => {
     it('has Loop icon', async () => {
         await test.homeScreen.ExpectLoopNotYetRun();
     });
-    it('has Loop icon has alert when not setup', async () => {
+    it.skip('has Loop icon has alert when not setup', async () => {
         await test.homeScreen.ExpectLoopStatusGlucoseDataAlert();
     });
 };
 
-var settingsScreen = (test) => {
+var settingsScreenFunctionalityTests = (test) => {
     it('can open the settings', async () => {
         await test.settingsScreen.Open();
     });
@@ -48,7 +48,9 @@ var settingsScreen = (test) => {
             await test.settingsScreen.AddCGMSimulator();
         });
         it('can configure simulator', async () => {
-            await test.settingsScreen.SetCGMSimulatorSettings(setting.default.CGMSimulatorSettings);
+            let screen = await test.settingsScreen.OpenCGMSimulatorScreen();
+            await screen.Apply(setting.default.CGMSimulatorSettings);
+            await screen.Close();
         });
     });
     describe('pump', () => {
@@ -56,25 +58,40 @@ var settingsScreen = (test) => {
             await test.settingsScreen.AddPumpSimulator();
         });
         it.skip('set suspend threshold', async () => {
+            //TODO update
             await test.settingsScreen.SetSuspendThreshold(setting.default.SuspendThreshold);
         });
         it('set basal rates', async () => {
-            await test.settingsScreen.SetBasalRates(setting.default.BasalRates);
+            let screen = await test.settingsScreen.OpenBasalRatesScreen();
+            await screen.ApplyAll(setting.default.BasalRates);
+            await screen.Save();
+            await screen.Close();
         });
         it('set delivery limits', async () => {
-            await test.settingsScreen.SetDeliveryLimits(setting.default.DeliveryLimits);
+            let screen = await test.settingsScreen.OpenDeliveryLimitsScreen();
+            await screen.Apply(setting.default.DeliveryLimits);
+            await screen.Save();
+            await screen.Close();
         });
         it('set insulin model', async () => {
             await test.settingsScreen.SetInsulinModel(setting.default.InsulinModel);
         });
         it('set carb ratios', async () => {
-            await test.settingsScreen.SetCarbRatios(setting.default.CarbRatios);
+            let screen = await test.settingsScreen.OpenCarbRatiosScreen();
+            await screen.ApplyAll(setting.default.CarbRatios);
+            await screen.Close();
         });
         it('set insulin sensitivites', async () => {
-            await test.settingsScreen.SetInsulinSensitivities(setting.default.InsulinSensitivities);
+            let screen = await test.settingsScreen.OpenInsulinSensitivitiesScreen();
+            await screen.ApplyAll(setting.default.InsulinSensitivities);
+            await screen.Save();
+            await screen.Close();
         });
         it('set correction range', async () => {
-            await test.settingsScreen.SetCorrectionRanges([{ time: '12:00 AM', min: '150', max: '170' }]);
+            let screen = test.settingsScreen.OpenCorrectionRangeScreen();
+            await screen.ApplyAll([{ time: '12:00 AM', min: '169', max: '170' }]);
+            await screen.Save();
+            await screen.Close();
         });
     });
     it('can close the settings', async () => {
@@ -82,8 +99,7 @@ var settingsScreen = (test) => {
     });
 };
 
-
-var carbEntryScreen = (test) => {
+var carbEntryScreenFunctionalityTests = (test) => {
     it('open dialog', async () => {
         await test.carbEntryScreen.Open();
     });
@@ -98,7 +114,7 @@ var carbEntryScreen = (test) => {
     });
 };
 
-var cleanup = (test) => {
+var cleanupFunctionalityTests = (test) => {
     it('open settings', async () => {
         await test.settingsScreen.Open();
     });
@@ -108,7 +124,7 @@ var cleanup = (test) => {
     it('remove pump', async () => {
         await test.settingsScreen.RemovePump();
     });
-    it('remove CGM data', async () => {
+    it.skip('remove CGM data', async () => {
         await test.settingsScreen.RemoveCGMData();
     });
     it.skip('remove CGM', async () => {
@@ -119,14 +135,9 @@ var cleanup = (test) => {
     });
 };
 
-var generalTests = {
-    settingsScreen,
-    homeScreen,
-    carbEntryScreen,
-    cleanup
-};
-
-
 module.exports = {
-    generalTests
+    settingsScreenFunctionalityTests,
+    homeScreenFunctionalityTests,
+    carbEntryScreenFunctionalityTests,
+    cleanupFunctionalityTests
 };

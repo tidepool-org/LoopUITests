@@ -1,5 +1,5 @@
 
-var homeScreen = (test) => {
+var homeScreenAccessibilityTests = (test) => {
     it('has a Active Carbohydrates Label', async () => {
         await expect(test.homeScreen.ActiveCarbohydratesLabel()).toExist();
     });
@@ -23,7 +23,7 @@ var homeScreen = (test) => {
     });
 };
 
-var bolusScreen = (test) => {
+var bolusScreenAccessibilityTests = (test) => {
     it('has to open the bolus screen', async () => {
         await test.bolusScreen.Open();
     });
@@ -50,7 +50,7 @@ var bolusScreen = (test) => {
     });
 };
 
-var carbEntryScreen = (test) => {
+var carbEntryScreenAccessibilityTests = (test) => {
     it('has to open the Carb Entry screen', async () => {
         await test.carbEntryScreen.Open();
     });
@@ -86,7 +86,7 @@ var carbEntryScreen = (test) => {
     });
 };
 
-var settingsScreen = (test) => {
+var settingsScreenAccessibilityTests = (test) => {
     it('has to open the settings screen', async () => {
         await test.settingsScreen.Open();
     });
@@ -160,14 +160,90 @@ var settingsScreen = (test) => {
     });
 };
 
-var accessibilityTests = {
-    homeScreen,
-    bolusScreen,
-    carbEntryScreen,
-    settingsScreen
+var settingsCarbRatiosScreenAccessibilityTests = (test) => {
+    var screen;
+    it('open', async () => {
+        await test.settingsScreen.Open();
+        screen = await test.settingsScreen.OpenCarbRatiosScreen();
+    });
+    it('has a header', async () => {
+        await expect(screen.CarbRatiosHeader()).toExist();
+    });
+    it('close', async () => {
+        await screen.Close();
+        await test.settingsScreen.Close();
+    });
+};
+
+var settingsBasalRatesScreenAccessibilityTests = (test) => {
+    var screen;
+    it('open', async () => {
+        await test.settingsScreen.Open();
+        screen = await test.settingsScreen.OpenBasalRatesScreen();
+    });
+    it('has a header', async () => {
+        await expect(screen.BasalRatesHeader()).toExist();
+    });
+    it('close', async () => {
+        await screen.Close();
+        await test.settingsScreen.Close();
+    });
+};
+
+var settingsDeliveryLimitsScreenAccessibilityTests = (test) => {
+    var screen;
+    it('open', async () => {
+        await test.settingsScreen.Open();
+        screen = await test.settingsScreen.OpenDeliveryLimitsScreen();
+    });
+    it('has a header', async () => {
+        await expect(screen.DeliveryLimitsHeader()).toExist();
+    });
+    it('close', async () => {
+        await screen.Close();
+        await test.settingsScreen.Close();
+    });
+};
+
+var settingsInsulinSensitivitiesScreenAccessibilityTests = (test) => {
+    var screen;
+    it('open', async () => {
+        await test.settingsScreen.Open();
+        screen = await test.settingsScreen.OpenInsulinSensitivitiesScreen();
+    });
+    it('has a header', async () => {
+        await expect(screen.InsulinSensitivitiesHeader()).toExist();
+    });
+    it('close', async () => {
+        await screen.Cancel();
+        await test.settingsScreen.Close();
+    });
+};
+
+var settingsCorrectionRangeScreenAccessibilityTests = (test) => {
+    var screen;
+    it('open', async () => {
+        await test.settingsScreen.Open();
+        screen = await test.settingsScreen.OpenCorrectionRangeScreen();
+    });
+    it('has a header', async () => {
+        await expect(screen.CorrectionRangeHeader()).toExist();
+    });
+    it('close', async () => {
+        await screen.Close();
+        await test.settingsScreen.Close();
+    });
 };
 
 
 module.exports = {
-    accessibilityTests
+    homeScreenAccessibilityTests,
+    bolusScreenAccessibilityTests,
+    carbEntryScreenAccessibilityTests,
+    settingsScreenAccessibilityTests,
+    settingsCarbRatiosScreenAccessibilityTests,
+    settingsBasalRatesScreenAccessibilityTests,
+    settingsDeliveryLimitsScreenAccessibilityTests,
+    settingsInsulinSensitivitiesScreenAccessibilityTests,
+    settingsCorrectionRangeScreenAccessibilityTests
 };

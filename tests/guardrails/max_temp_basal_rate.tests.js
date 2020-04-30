@@ -1,9 +1,13 @@
 
 const { limits } = require('../../src/index');
 
-var maxTempBasalRate = (test) => {
+var maxTempBasalRateTests = (test) => {
+    var screen;
+    it('open', async () => {
+        screen = await test.settingsScreen.OpenDeliveryLimitsScreen();
+    });
     it('set below max limit', async () => {
-        await test.settingsScreen.SetDeliveryLimits({
+        await screen.Apply({
             maxBolus: '1.0',
             maxBasalRate: limits.basalDelivery.max.limit - limits.basalDelivery.step
         });
@@ -11,19 +15,22 @@ var maxTempBasalRate = (test) => {
     });
 
     it('set at max limit', async () => {
-        await test.settingsScreen.SetDeliveryLimits({
+        await screen.Apply({
             maxBolus: '1.0',
             maxBasalRate: limits.basalDelivery.max.limit
         });
         //TODO assert on warning
     });
     it('cannot above max limit', async () => {
-        await test.settingsScreen.SetDeliveryLimits({
+        await screen.Apply({
             maxBolus: '1.0',
             maxBasalRate: limits.basalDelivery.max.limit + limits.basalDelivery.step
         });
         //TODO assert warning
     });
+    it('close', async () => {
+        await screen.Close();
+    });
 };
 
-module.exports = { maxTempBasalRate };
+module.exports = { maxTempBasalRateTests };

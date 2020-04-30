@@ -1,5 +1,5 @@
 const { Test, screenName } = require('../../src/index');
-const { guardrailsTests } = require('../guardrails/index');
+const { guardrailsTests } = require('../../tests/guardrails/index');
 
 describe('regression test', () => {
     var test = new Test()
@@ -10,23 +10,26 @@ describe('regression test', () => {
     });
 
     describe('guardrails', () => {
+        describe('insulin sensitivity schedule', () => {
+            guardrailsTests.insulinSensitivityScheduleTests(test);
+        });
         describe('max bolus', () => {
-            guardrailsTests.maxBolus(test);
+            guardrailsTests.maxBolusTests(test);
         });
-        describe('basal rate schedules', () => {
-            guardrailsTests.basalRateSchedules(test);
+        describe('basal rate schedule', () => {
+            guardrailsTests.basalRateScheduleTests(test);
         });
-        describe.skip('insulin sensitivities', () => {
-            guardrailsTests.insulinSensitivities(test);
+        describe('insulin sensitivity schedule', () => {
+            guardrailsTests.insulinSensitivityScheduleTests(test);
         });
-        describe.skip('max temp basal rate', () => {
-            guardrailsTests.maxTempBasalRate(test);
+        describe('max temp basal rate', () => {
+            guardrailsTests.maxTempBasalRateTests(test);
+        });
+        describe('correction range schedule', () => {
+            guardrailsTests.correctionRangeScheduleTests(test);
         });
         describe.skip('suspend threshold', () => {
-            guardrailsTests.suspendThreshold(test);
-        });
-        describe.skip('correction range', () => {
-            guardrailsTests.correctionRange(test);
+            guardrailsTests.suspendThresholdTests(test);
         });
     });
 
