@@ -24,214 +24,264 @@ var homeScreenAccessibilityTests = (test) => {
 };
 
 var bolusScreenAccessibilityTests = (test) => {
+    var bolusScreen;
     it('has to open the bolus screen', async () => {
-        await test.bolusScreen.Open();
+        bolusScreen = await test.OpenBolusScreen();
     });
     it('has a Bolus Header', async () => {
-        await expect(test.bolusScreen.BolusHeader()).toExist();
+        await expect(bolusScreen.BolusHeader()).toExist();
     });
     it('has a Deliver Button', async () => {
-        await expect(test.bolusScreen.DeliverButton()).toExist();
+        await expect(bolusScreen.DeliverButton()).toExist();
     });
     it('has a Disabled Deliver Button', async () => {
-        await expect(test.bolusScreen.DisabledDeliverButton()).toExist();
+        await expect(bolusScreen.DisabledDeliverButton()).toExist();
     });
     it('has a Recommended Label', async () => {
-        await expect(test.bolusScreen.RecommendedLabel()).toExist();
+        await expect(bolusScreen.RecommendedLabel()).toExist();
     });
     it('has a Entered Label', async () => {
-        await expect(test.bolusScreen.EnteredLabel()).toExist();
+        await expect(bolusScreen.EnteredLabel()).toExist();
     });
     it('has a Cancel Header Button', async () => {
-        await expect(test.bolusScreen.CancelHeaderButton()).toExist();
+        await expect(bolusScreen.CancelHeaderButton()).toExist();
     });
     it('has to close the bolus screen', async () => {
-        await test.bolusScreen.Cancel();
+        await bolusScreen.Cancel();
     });
 };
 
 var carbEntryScreenAccessibilityTests = (test) => {
+    var carbEntryScreen;
     it('has to open the Carb Entry screen', async () => {
-        await test.carbEntryScreen.Open();
+        carbEntryScreen = await test.OpenCarbEntryScreen();
     });
     it('has a Add Carb Entry Header', async () => {
-        await expect(test.carbEntryScreen.AddCarbEntryHeader()).toExist();
+        await expect(carbEntryScreen.AddCarbEntryHeader()).toExist();
     });
     it('has a Cancel Header Button', async () => {
-        await expect(test.carbEntryScreen.CancelHeaderButton()).toExist();
+        await expect(carbEntryScreen.CancelHeaderButton()).toExist();
     });
     it('has a Disabled Continue Main Button', async () => {
-        await expect(test.carbEntryScreen.DisabledContinueMainButton()).toExist();
+        await expect(carbEntryScreen.DisabledContinueMainButton()).toExist();
     });
     it('has a Disabled Continue Header Button', async () => {
-        await expect(test.carbEntryScreen.DisabledContinueHeaderButton()).toExist();
+        await expect(carbEntryScreen.DisabledContinueHeaderButton()).toExist();
     });
     it('has a Absorption Time Message', async () => {
-        await expect(test.carbEntryScreen.AbsorptionTimeMessage()).toExist();
+        await expect(carbEntryScreen.AbsorptionTimeMessage()).toExist();
     });
     it('has a Absorption Time Label', async () => {
-        await expect(test.carbEntryScreen.AbsorptionTimeLabel()).toExist();
+        await expect(carbEntryScreen.AbsorptionTimeLabel()).toExist();
     });
     it('has a Date Label', async () => {
-        await expect(test.carbEntryScreen.DateLabel()).toExist();
+        await expect(carbEntryScreen.DateLabel()).toExist();
     });
     it('has a Amount Consumed Label', async () => {
-        await expect(test.carbEntryScreen.AmountConsumedLabel()).toExist();
+        await expect(carbEntryScreen.AmountConsumedLabel()).toExist();
     });
     it('has a Food Type Label', async () => {
-        await expect(test.carbEntryScreen.FoodTypeLabel()).toExist();
+        await expect(carbEntryScreen.FoodTypeLabel()).toExist();
     });
     it('has to close the Carb Entry screen', async () => {
-        await test.carbEntryScreen.Cancel();
+        await carbEntryScreen.Cancel();
     });
 };
 
 var settingsScreenAccessibilityTests = (test) => {
+    var settingsScreen;
     it('has to open the settings screen', async () => {
-        await test.settingsScreen.Open();
+        settingsScreen = await test.OpenSettingsScreen();
     });
     it('has a done button', async () => {
-        await expect(test.settingsScreen.DoneButton()).toExist();
+        await expect(settingsScreen.DoneButton()).toExist();
     });
     it('has a configuration header', async () => {
-        await expect(test.settingsScreen.ConfigurationHeader()).toExist();
+        await expect(settingsScreen.ConfigurationHeader()).toExist();
     });
     it('has a pump header', async () => {
-        await expect(test.settingsScreen.PumpHeader()).toExist();
+        await expect(settingsScreen.PumpHeader()).toExist();
     });
     it('has a pump header', async () => {
-        await expect(test.settingsScreen.ContinuousGlucoseMonitorHeader()).toExist();
+        await expect(settingsScreen.ContinuousGlucoseMonitorHeader()).toExist();
     });
     it('has a settings header', async () => {
-        await expect(test.settingsScreen.SettingsHeader()).toExist();
+        await expect(settingsScreen.SettingsHeader()).toExist();
     });
     it('has a Issue Report Label', async () => {
         //TODO: this is acting like a button!
-        await expect(test.settingsScreen.IssueReportLabel()).toExist();
+        await expect(settingsScreen.IssueReportLabel()).toExist();
     });
     it('has a Correction Range Label', async () => {
         //TODO: this is acting like a button!
-        await expect(test.settingsScreen.CorrectionRangeLabel()).toExist();
+        await expect(settingsScreen.CorrectionRangeLabel()).toExist();
     });
     it('has a Suspend Threshold label', async () => {
         //TODO: this is acting like a button!
-        await expect(test.settingsScreen.SuspendThresholdLabel()).toExist();
+        await expect(settingsScreen.SuspendThresholdLabel()).toExist();
     });
     it('has a Basal Rates Label', async () => {
         //TODO: this is acting like a button!
-        await expect(test.settingsScreen.BasalRatesLabel()).toExist();
+        await expect(settingsScreen.BasalRatesLabel()).toExist();
     });
     it('has a Delivery Limits Label', async () => {
         //TODO: this is acting like a button!
-        await expect(test.settingsScreen.DeliveryLimitsLabel()).toExist();
+        await expect(settingsScreen.DeliveryLimitsLabel()).toExist();
     });
     it('has a Insulin Model Label', async () => {
         //TODO: this is acting like a button!
-        await expect(test.settingsScreen.InsulinModelLabel()).toExist();
+        await expect(settingsScreen.InsulinModelLabel()).toExist();
     });
     it('has a Carb Ratios Label', async () => {
         //TODO: this is acting like a button!
-        await expect(test.settingsScreen.CarbRatiosLabel()).toExist();
+        await expect(settingsScreen.CarbRatiosLabel()).toExist();
     });
     it('has a Insulin Sensitivities Label', async () => {
         //TODO: this is acting like a button!
-        await expect(test.settingsScreen.InsulinSensitivitiesLabel()).toExist();
+        await expect(settingsScreen.InsulinSensitivitiesLabel()).toExist();
     });
     it('has a Closed Loop button', async () => {
-        await expect(test.settingsScreen.ClosedLoopButton()).toExist();
+        await expect(settingsScreen.ClosedLoopButton()).toExist();
     });
     it('has a Issue Report button', async () => {
-        await expect(test.settingsScreen.IssueReportLabel()).toExist();
+        await expect(settingsScreen.IssueReportLabel()).toExist();
     });
     it('has a Add Pump label', async () => {
         //TODO: this is acting like a button!
-        await expect(test.settingsScreen.AddPumpLabel()).toExist();
+        await expect(settingsScreen.AddPumpLabel()).toExist();
     });
     it('has a Add CGM label', async () => {
         //TODO: this is acting like a button!
-        await expect(test.settingsScreen.AddCGMLabel()).toExist();
+        await expect(settingsScreen.AddCGMLabel()).toExist();
     });
     it('has a services header', async () => {
-        await test.settingsScreen.ScrollToBottom();
-        await expect(test.settingsScreen.ServicesHeader()).toExist();
+        await settingsScreen.ScrollToBottom();
+        await expect(settingsScreen.ServicesHeader()).toExist();
     });
     it('has to close the settings screen', async () => {
-        await test.settingsScreen.Close();
+        await settingsScreen.Close();
     });
 };
 
 var settingsCarbRatiosScreenAccessibilityTests = (test) => {
     var screen;
+    var settingsScreen;
     it('open', async () => {
-        await test.settingsScreen.Open();
-        screen = await test.settingsScreen.OpenCarbRatiosScreen();
+        settingsScreen = await test.OpenSettingsScreen();
+        screen = await settingsScreen.OpenCarbRatiosScreen();
     });
     it('has a header', async () => {
-        await expect(screen.CarbRatiosHeader()).toExist();
+        await expect(screen.Header()).toExist();
+    });
+    it('has a back button', async () => {
+        await expect(screen.BackButton()).toExist();
+    });
+    it('has a add button', async () => {
+        await expect(screen.AddButton()).toExist();
     });
     it('close', async () => {
         await screen.Close();
-        await test.settingsScreen.Close();
+        await settingsScreen.Close();
     });
 };
 
 var settingsBasalRatesScreenAccessibilityTests = (test) => {
+    var settingsScreen;
     var screen;
     it('open', async () => {
-        await test.settingsScreen.Open();
-        screen = await test.settingsScreen.OpenBasalRatesScreen();
+        settingsScreen = await test.OpenSettingsScreen();
+        screen = await settingsScreen.OpenBasalRatesScreen();
     });
     it('has a header', async () => {
-        await expect(screen.BasalRatesHeader()).toExist();
+        await expect(screen.Header()).toExist();
+    });
+    it('has a back button', async () => {
+        await expect(screen.BackButton()).toExist();
+    });
+    it('has a save button', async () => {
+        await expect(screen.SaveButton()).toExist();
+    });
+    it('has an add button', async () => {
+        await expect(screen.AddButton()).toExist();
     });
     it('close', async () => {
         await screen.Close();
-        await test.settingsScreen.Close();
+        await settingsScreen.Close();
     });
 };
 
 var settingsDeliveryLimitsScreenAccessibilityTests = (test) => {
     var screen;
+    var settingsScreen;
     it('open', async () => {
-        await test.settingsScreen.Open();
-        screen = await test.settingsScreen.OpenDeliveryLimitsScreen();
+        settingsScreen = await test.OpenSettingsScreen();
+        screen = await settingsScreen.OpenDeliveryLimitsScreen();
     });
     it('has a header', async () => {
-        await expect(screen.DeliveryLimitsHeader()).toExist();
+        await expect(screen.Header()).toExist();
+    });
+    it('has a back button', async () => {
+        await expect(screen.BackButton()).toExist();
     });
     it('close', async () => {
         await screen.Close();
-        await test.settingsScreen.Close();
+        await settingsScreen.Close();
     });
 };
 
 var settingsInsulinSensitivitiesScreenAccessibilityTests = (test) => {
     var screen;
+    var settingsScreen;
     it('open', async () => {
-        await test.settingsScreen.Open();
-        screen = await test.settingsScreen.OpenInsulinSensitivitiesScreen();
+        settingsScreen = await test.OpenSettingsScreen();
+        screen = await settingsScreen.OpenInsulinSensitivitiesScreen();
     });
     it('has a header', async () => {
-        await expect(screen.InsulinSensitivitiesHeader()).toExist();
+        await expect(screen.Header()).toExist();
+    });
+    it('has a back button but not visible', async () => {
+        await expect(screen.BackButton()).toBeNotVisible();
+    });
+    it('has a save button', async () => {
+        await expect(screen.SaveButton()).toExist();
+    });
+    it('has an add button', async () => {
+        await expect(screen.AddButton()).toExist();
+    });
+    it('has a cancel button', async () => {
+        await expect(screen.CancelButton()).toExist();
     });
     it('close', async () => {
         await screen.Cancel();
-        await test.settingsScreen.Close();
+        await settingsScreen.Close();
     });
 };
 
 var settingsCorrectionRangeScreenAccessibilityTests = (test) => {
     var screen;
+    var settingsScreen;
     it('open', async () => {
-        await test.settingsScreen.Open();
-        screen = await test.settingsScreen.OpenCorrectionRangeScreen();
+        settingsScreen = await test.OpenSettingsScreen();
+        screen = await settingsScreen.OpenCorrectionRangeScreen();
     });
     it('has a header', async () => {
-        await expect(screen.CorrectionRangeHeader()).toExist();
+        await expect(screen.Header()).toExist();
+    });
+    it('has a back button', async () => {
+        await expect(screen.BackButton()).toExist();
+    });
+    it('has a save button', async () => {
+        await expect(screen.SaveButton()).toExist();
+    });
+    it('has an add button', async () => {
+        await expect(screen.AddButton()).toExist();
+    });
+    it('has no cancel button when not editing', async () => {
+        await expect(screen.CancelButton()).toBeNotVisible();
     });
     it('close', async () => {
         await screen.Close();
-        await test.settingsScreen.Close();
+        await settingsScreen.Close();
     });
 };
 

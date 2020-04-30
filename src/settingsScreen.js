@@ -83,11 +83,23 @@ class BasalRatesScreen {
     constructor(language) {
         this.language = language;
     }
-    BasalRatesHeader() {
+    Header() {
         return match.accessible.Header(this.language.settingsScreen.BasalRates);
     }
+    BackButton() {
+        return match.accessible.BackButton(this.language.settingsScreen.Settings);
+    }
+    SaveButton() {
+        return match.accessible.Label(this.language.settingsScreen.SaveToSimulator);
+    }
+    AddButton() {
+        return match.accessible.ButtonBarButton(this.language.general.Add);
+    }
+    async Save() {
+        await this.SaveButton().tap();
+    }
     async Close() {
-        await match.accessible.BackButton(this.language.settingsScreen.Settings).tap();
+        await this.BackButton().tap();
     }
     /**
      * @summary basal rate to be set. NOTE: it is assumed that the rates are given in order of time
@@ -97,12 +109,11 @@ class BasalRatesScreen {
      */
     async Apply(rate) {
         if (rate) {
-            await match.accessible.ButtonBarButton(this.language.general.Add).tap();
+            await this.AddButton().tap();
             await match.accessible.Label(`${rate.time}`).atIndex(0).tap();
             await match.accessible.SetPickerValue(1, `${rate.unitsPerHour} ${config.basalRatesUnits}`);
         }
     }
-
     /**
      * @summary basal rates to be set. NOTE: it is assumed that the rates are given in order of time
      * @param {Array} rates [{time:'12:00 AM', unitsPerHour:'0.1'}]
@@ -126,23 +137,26 @@ class BasalRatesScreen {
             await match.accessible.SetPickerValue(1, `${rate.unitsPerHour} ${config.basalRatesUnits}`);
         }
     }
-    async Save() {
-        await match.accessible.Label(this.language.settingsScreen.SaveToSimulator).tap();
-    }
 }
 
 class DeliveryLimitsScreen {
     constructor(language) {
         this.language = language;
     }
-    DeliveryLimitsHeader() {
+    Header() {
         return match.accessible.Header(this.language.settingsScreen.DeliveryLimits);
     }
+    BackButton() {
+        return match.accessible.BackButton(this.language.settingsScreen.Settings);
+    }
+    SaveButton() {
+        return match.accessible.Label(this.language.settingsScreen.SaveToSimulator);
+    }
     async Close() {
-        await match.accessible.BackButton(this.language.settingsScreen.Settings).tap();
+        await this.BackButton().tap();
     }
     async Save() {
-        await match.accessible.Label(this.language.settingsScreen.SaveToSimulator).tap();
+        await this.SaveButton().tap();
     }
     async Apply(limits) {
         await match.UIEditableTextField().atIndex(0).clearText();
@@ -166,17 +180,29 @@ class InsulinSensitivitiesScreen {
     constructor(language) {
         this.language = language;
     }
-    InsulinSensitivitiesHeader() {
+    Header() {
         return match.accessible.Header(this.language.settingsScreen.InsulinSensitivities);
     }
+    BackButton() {
+        return match.accessible.BackButton(this.language.settingsScreen.Settings);
+    }
+    CancelButton() {
+        return match.accessible.ButtonBarButton(this.language.general.Cancel);
+    }
+    SaveButton() {
+        return match.accessible.Label(this.language.general.Save);
+    }
+    AddButton() {
+        return match.accessible.ButtonBarButton(this.language.general.Add);
+    }
     async Cancel() {
-        await match.accessible.ButtonBarButton(this.language.general.Cancel).tap();
+        await this.CancelButton().tap();
     }
     async Close() {
-        await match.accessible.BackButton(this.language.settingsScreen.Settings).tap();
+        await this.BackButton().tap();
     }
     async Save() {
-        await match.accessible.Label(this.language.general.Save).tap();
+        await this.SaveButton().tap();
     }
     async ApplyAll(sensitivities) {
         if (sensitivities) {
@@ -191,7 +217,7 @@ class InsulinSensitivitiesScreen {
      * @param {String} sensitivity.bgValuePerInsulinUnit
      */
     async Apply(sensitivity) {
-        await match.accessible.ButtonBarButton(this.language.general.Add).tap();
+        await this.AddButton().tap();
         //select time unless this is the first Insulin Sensitivitiy we have set...
         if (sensitivity.time != "12:00 AM") {
             await match.accessible.Label(`${sensitivity.time}`).atIndex(0).tap();
@@ -231,17 +257,29 @@ class CorrectionRangeScreen {
                 return 0;
         }
     }
-    CorrectionRangeHeader() {
+    Header() {
         return match.accessible.Header(this.language.settingsScreen.CorrectionRange);
     }
+    BackButton() {
+        return match.accessible.BackButton(this.language.settingsScreen.Settings);
+    }
+    CancelButton() {
+        return match.accessible.ButtonBarButton(this.language.general.Cancel);
+    }
+    SaveButton() {
+        return match.accessible.Label(this.language.general.Save);
+    }
+    AddButton() {
+        return match.accessible.ButtonBarButton(this.language.general.Add);
+    }
     async Close() {
-        await match.accessible.BackButton(this.language.settingsScreen.Settings).tap();
+        await this.BackButton().tap();
     }
     async Save() {
-        await match.accessible.Label(this.language.general.Save).tap();
+        await this.SaveButton().tap();
     }
     async Cancel() {
-        await match.accessible.ButtonBarButton(this.language.general.Cancel).tap();
+        await this.CancelButton().tap();
     }
     async ApplyAll(ranges) {
         for (let index = 0; index < ranges.length; index++) {
@@ -256,7 +294,7 @@ class CorrectionRangeScreen {
      */
     async Apply(range) {
         let pickerIndex = this._pickerIndexForTime(range.time);
-        await match.accessible.ButtonBarButton(this.language.general.Add).tap();
+        await this.AddButton().tap();
         await match.accessible.Label(`${range.time}`).atIndex(pickerIndex).tap();
         let currentMax = config.correctionRangesMaximum;
         do {
@@ -282,14 +320,23 @@ class CarbRatiosScreen {
     constructor(language) {
         this.language = language;
     }
-    CarbRatiosHeader() {
+    Header() {
         return match.accessible.Header(this.language.settingsScreen.CarbRatios);
     }
+    BackButton() {
+        return match.accessible.BackButton(this.language.settingsScreen.Settings);
+    }
+    CancelButton() {
+        return match.accessible.ButtonBarButton(this.language.general.Cancel);
+    }
+    AddButton() {
+        return match.accessible.ButtonBarButton(this.language.general.Add);
+    }
     async Close() {
-        await match.accessible.BackButton(this.language.settingsScreen.Settings).tap();
+        await this.BackButton().tap();
     }
     async Cancel() {
-        await match.accessible.ButtonBarButton(this.language.general.Cancel).tap();
+        await this.CancelButton().tap();
     }
     async ApplyAll(ratios) {
         if (ratios) {
@@ -300,7 +347,7 @@ class CarbRatiosScreen {
     }
     async Apply(ratio, index) {
         if (ratio) {
-            await match.accessible.ButtonBarButton(this.language.general.Add).tap();
+            await this.AddButton().tap();
             if (index == 0) {
                 await element(by.type('UITextField')).clearText();
                 await element(by.type('UITextField')).typeText(String(ratio.carbGramsPerInsulinUnit));

@@ -150,6 +150,21 @@ class Test {
         await match.UITextField().typeText(cycles);
         await match.accessible.Button(text.general.OK).tap();
     }
+
+    async OpenSettingsScreen() {
+        await this.settingsScreen.Open();
+        return this.settingsScreen;
+    }
+
+    async OpenCarbEntryScreen() {
+        await this.carbEntryScreen.Open();
+        return this.carbEntryScreen;
+    }
+
+    async OpenBolusScreen() {
+        await this.bolusScreen.Open();
+        return this.bolusScreen;
+    }
 }
 
 module.exports = {

@@ -1,4 +1,8 @@
-const { homeScreenFunctionalityTests, carbEntryScreenFunctionalityTests, cleanupFunctionalityTests, settingsScreenFunctionalityTests } = require('./functionality.tests');
+const {
+    homeScreenFunctionalityTests,
+    carbEntryScreenFunctionalityTests,
+    cleanupFunctionalityTests,
+    settingsScreenFunctionalityTests } = require('./functionality.tests');
 const {
     homeScreenAccessibilityTests,
     carbEntryScreenAccessibilityTests,
