@@ -88,7 +88,7 @@ var settingsScreenFunctionalityTests = (test) => {
             await screen.Close();
         });
         it('set correction range', async () => {
-            let screen = test.settingsScreen.OpenCorrectionRangeScreen();
+            let screen = await test.settingsScreen.OpenCorrectionRangeScreen();
             await screen.ApplyAll([{ time: '12:00 AM', min: '169', max: '170' }]);
             await screen.Save();
             await screen.Close();

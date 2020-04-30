@@ -172,6 +172,9 @@ class InsulinSensitivitiesScreen {
     async Cancel() {
         await match.accessible.ButtonBarButton(this.language.general.Cancel).tap();
     }
+    async Close() {
+        await match.accessible.BackButton(this.language.settingsScreen.Settings).tap();
+    }
     async Save() {
         await match.accessible.Label(this.language.general.Save).tap();
     }
@@ -207,7 +210,10 @@ class InsulinSensitivitiesScreen {
 }
 
 class CorrectionRangeScreen {
-    pickerIndexForTime(time) {
+    constructor(language) {
+        this.language = language;
+    }
+    _pickerIndexForTime(time) {
         switch (time) {
             case '12:00 AM':
                 return 0;
@@ -224,9 +230,6 @@ class CorrectionRangeScreen {
             default:
                 return 0;
         }
-    }
-    constructor(language) {
-        this.language = language;
     }
     CorrectionRangeHeader() {
         return match.accessible.Header(this.language.settingsScreen.CorrectionRange);
@@ -252,7 +255,7 @@ class CorrectionRangeScreen {
      * @param {String} range.min
      */
     async Apply(range) {
-        let pickerIndex = this.pickerIndexForTime(range.time);
+        let pickerIndex = this._pickerIndexForTime(range.time);
         await match.accessible.ButtonBarButton(this.language.general.Add).tap();
         await match.accessible.Label(`${range.time}`).atIndex(pickerIndex).tap();
         let currentMax = config.correctionRangesMaximum;

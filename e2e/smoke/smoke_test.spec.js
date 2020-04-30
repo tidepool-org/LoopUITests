@@ -6,7 +6,7 @@ describe('smoke test', () => {
     it('prepare test', async () => {
         await test.prepare();
     });
-    describe.skip('accessibility', () => {
+    describe('accessibility', () => {
         describe('home screen', () => {
             smokeTests.homeScreenAccessibilityTests(test);
         });
@@ -46,7 +46,7 @@ describe('smoke test', () => {
         describe('settings screen', () => {
             smokeTests.settingsScreenFunctionalityTests(test);
         });
-        describe.skip('cleanup', () => {
+        describe('cleanup', () => {
             smokeTests.cleanupFunctionalityTests(test);
         });
     });
