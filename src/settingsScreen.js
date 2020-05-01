@@ -638,11 +638,10 @@ class SettingsScreen {
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
             await this.ClosedLoopButton().tap();
-            await expect(this.ClosedLoopButton()).toHaveValue('1');
+            await waitFor(this.ClosedLoopButton()).toHaveValue('1').withTimeout(2000);
         } catch (err) {
-            await expect(this.ClosedLoopButton()).toHaveValue('0');
+            await waitFor(this.ClosedLoopButton()).toHaveValue('0').withTimeout(2000);
             await this.ClosedLoopButton().tap();
-            await expect(this.ClosedLoopButton()).toHaveValue('1');
         }
     }
     async SetOpenLoop() {
@@ -650,11 +649,10 @@ class SettingsScreen {
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
             await this.ClosedLoopButton().tap();
-            await expect(this.ClosedLoopButton()).toHaveValue('0');
+            await waitFor(this.ClosedLoopButton()).toHaveValue('0').withTimeout(2000);
         } catch (err) {
-            await expect(this.ClosedLoopButton()).toHaveValue('1');
+            await waitFor(this.ClosedLoopButton()).toHaveValue('1').withTimeout(2000);
             await this.ClosedLoopButton().tap();
-            await expect(this.ClosedLoopButton()).toHaveValue('0');
         }
     }
     async IssueReport() {
