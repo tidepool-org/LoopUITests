@@ -120,13 +120,13 @@ const match = {
         /**
          * @summary sets the pickers column to the given value
          * @param {Integer} column
-         * @param {string} strValue
+         * @param value
          */
-        SetPickerValue(column, strValue) {
+        SetPickerValue(column, value) {
             const currentPicker = 0;
             return element(
                 by.type('UIPickerView')
-            ).atIndex(currentPicker).setColumnToValue(column, String(strValue))
+            ).atIndex(currentPicker).setColumnToValue(column, String(value))
         },
         /**
          * @summary returns alert items based on the given label

@@ -9,8 +9,8 @@ var limits = {
             warning: 120,
         },
         min: {
-            limit: 60,
             warning: 70,
+            limit: 60,
         },
     },
     insulinSensitivities: {
@@ -37,17 +37,20 @@ var limits = {
     basalDelivery: {
         step: 0.1,
         max: {
-            limit: 35,
+            limit: 35.0,
+        },
+        min: {
+            limit: 0.0,
         },
     },
     basalRates: {
         step: 0.05,
         max: {
-            limit: 35,
+            limit: 35.0,
             warning: 20.0,
         },
         min: {
-            limit: 0,
+            limit: 0.0,
         },
     },
     suspendThreshold: {
@@ -57,8 +60,8 @@ var limits = {
             warning: 120,
         },
         min: {
-            limit: 54,
             warning: 70,
+            limit: 54,
         },
     },
 };

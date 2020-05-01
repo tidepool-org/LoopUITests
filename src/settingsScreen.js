@@ -47,13 +47,13 @@ class CGMSimulatorScreen {
             switch (modelData.model) {
                 case setting.cgmModel.Constant:
                     await match.UIEditableTextField().clearText();
-                    await match.UIEditableTextField().typeText(modelData.bgValues[0]);
+                    await match.UIEditableTextField().typeText(String(modelData.bgValues[0]));
                     await match.accessible.BackButton(this.language.cgmSimulatorSettingsScreen.CGMSettings).tap();
                     break;
                 case setting.cgmModel.SineCurve:
                     await match.accessible.Label(this.language.cgmSimulatorSettingsScreen.BaseGlucose).tap();
                     await match.UIEditableTextField().clearText();
-                    await match.UIEditableTextField().typeText(modelData.bgValues[0]);
+                    await match.UIEditableTextField().typeText(String(modelData.bgValues[0]));
                     await match.accessible.BackButton(this.language.cgmSimulatorSettingsScreen.SineCurve).tap();
                     await match.accessible.Label(this.language.cgmSimulatorSettingsScreen.Amplitude).tap();
                     await match.UIEditableTextField().clearText();

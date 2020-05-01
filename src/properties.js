@@ -39,18 +39,18 @@ var settingCGMModel = {
  * @summary Defaults that can be used to apply to all settings
  */
 var settingDefault = {
-    DeliveryLimits: { maxBolus: '10.0', maxBasalRate: '3.0' },
-    BasalRates: [{ time: '12:00 AM', unitsPerHour: '0.1' }],
-    SuspendThreshold: { value: '75' },
+    DeliveryLimits: { maxBolus: 10.0, maxBasalRate: 3.0 },
+    BasalRates: [{ time: '12:00 AM', unitsPerHour: 0.1 }],
+    SuspendThreshold: { value: 75 },
     InsulinModel: settingInsulinModel.RapidChildren,
-    CarbRatios: [{ time: '12:00 AM', carbGramsPerInsulinUnit: '8' }],
-    InsulinSensitivities: [{ time: '12:00 AM', bgValuePerInsulinUnit: '500' }],
-    CorrectionRanges: [{ time: '12:00 AM', min: '140', max: '160' }],
-    PreMealCorrectionRange: { min: '80', max: '180' },
+    CarbRatios: [{ time: '12:00 AM', carbGramsPerInsulinUnit: 8 }],
+    InsulinSensitivities: [{ time: '12:00 AM', bgValuePerInsulinUnit: 500 }],
+    CorrectionRanges: [{ time: '12:00 AM', min: 140, max: 160 }],
+    PreMealCorrectionRange: { min: 80, max: 180 },
     ClosedLoop: true,
     AddCGMSimulator: true,
     AddPumpSimulator: true,
-    CGMSimulatorSettings: { modelData: { model: settingCGMModel.Constant, bgValues: ['110'] }, backfillHours: '6' }
+    CGMSimulatorSettings: { modelData: { model: settingCGMModel.Constant, bgValues: [110] }, backfillHours: '6' }
 };
 
 /**
