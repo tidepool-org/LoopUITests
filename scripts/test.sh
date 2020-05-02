@@ -57,8 +57,8 @@ export PATH="${PWD}/bin:${PWD}/node_modules/.bin:${PATH}"
 info "Creating build symlink to '${BUILD_ROOT}'..."
 ln -sf "${BUILD_ROOT}" build
 
-info "Running regression tests '${CONFIGURATION}'..."
-detox test e2e/regression --configuration "${CONFIGURATION}" --loglevel fatal --debug-synchronization 200 --record-logs failing --record-timeline all --bail --cleanup
+info "Running tests '${CONFIGURATION}'..."
+detox test --configuration "${CONFIGURATION}" --loglevel fatal --debug-synchronization 200 --record-logs failing --record-timeline all --bail --cleanup
 
 # if [ "${TEST_TYPE}" = "regression" ]; then
 # else
