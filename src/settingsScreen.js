@@ -2,7 +2,7 @@ const element = require('detox').element;
 const match = require('./match');
 const config = require('./config');
 
-const { setting } = require('./properties');
+const { setting, indexForTime } = require('./properties');
 
 class CGMSimulatorScreen {
     constructor(language) {
@@ -239,24 +239,6 @@ class CorrectionRangeScreen {
     constructor(language) {
         this.language = language;
     }
-    _pickerIndexForTime(time) {
-        switch (time) {
-            case '12:00 AM':
-                return 0;
-            case '12:30 AM':
-                return 1;
-            case '1:00 AM':
-                return 2;
-            case '1:30 AM':
-                return 3;
-            case '2:00 AM':
-                return 4;
-            case '2:30 AM':
-                return 6;
-            default:
-                return 0;
-        }
-    }
     Header() {
         return match.accessible.Header(this.language.settingsScreen.CorrectionRange);
     }
@@ -293,7 +275,7 @@ class CorrectionRangeScreen {
      * @param {String} range.min
      */
     async Apply(range) {
-        let pickerIndex = this._pickerIndexForTime(range.time);
+        let pickerIndex = indexForTime(range.time);
         await this.AddButton().tap();
         await match.accessible.Label(`${range.time}`).atIndex(pickerIndex).tap();
         let currentMax = config.correctionRangesMaximum;
@@ -341,13 +323,18 @@ class CarbRatiosScreen {
     async ApplyAll(ratios) {
         if (ratios) {
             for (let index = 0; index < ratios.length; index++) {
-                await this.Apply(ratios[index], index);
+                await this.Apply(ratios[index]);
             }
         }
     }
-    async Apply(ratio, index) {
+    /**
+     * @param {object} ratio
+     * @param {number} ratio.carbGramsPerInsulinUnit
+     */
+    async Apply(ratio) {
         if (ratio) {
             await this.AddButton().tap();
+            let index = indexForTime(ratio.time);
             if (index == 0) {
                 await element(by.type('UITextField')).clearText();
                 await element(by.type('UITextField')).typeText(String(ratio.carbGramsPerInsulinUnit));

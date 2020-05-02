@@ -1,7 +1,7 @@
 const { Test, screenName } = require('../../src/index');
 const { guardrailsTests } = require('../../tests/guardrails/index');
 
-describe('regression test', () => {
+describe('functional test', () => {
     var test = new Test()
         .withSettings({ AddPumpSimulator: true })
         .withStartScreen(screenName.settings);
@@ -27,6 +27,9 @@ describe('regression test', () => {
         });
         describe('correction range schedule', () => {
             guardrailsTests.correctionRangeScheduleTests(test);
+        });
+        describe.skip('insulin carb ratio', () => {
+            guardrailsTests.insulinCarbRatioTests(test);
         });
         describe.skip('suspend threshold', () => {
             guardrailsTests.suspendThresholdTests(test);

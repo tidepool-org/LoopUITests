@@ -64,6 +64,17 @@ var limits = {
             limit: 54,
         },
     },
+    insulinCarbRatio: {
+        step: 1,
+        max: {
+            limit: 150,
+            warning: 28,
+        },
+        min: {
+            warning: 3,
+            limit: 1,
+        },
+    }
 };
 
 module.exports = {
