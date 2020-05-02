@@ -14,11 +14,10 @@ TEST_DIRECTORY="${SCRIPT_DIRECTORY}/.."
 
 error() {
   echo "ERROR: ${*}" >&2
-  echo "Usage: ${SCRIPT} <build-root> <configuration> <type>" >&2
+  echo "Usage: ${SCRIPT} <build-root> <configuration>" >&2
   echo "Parameters:" >&2
   echo "  <build-root>      root of the build that contains the app" >&2
   echo "  <configuration>   detox configuration to use" >&2
-  #echo "  <type>            type of tests to run, 'regression' or 'smoke' " >&2
   exit 1
 }
 
@@ -34,8 +33,6 @@ BUILD_ROOT="${1}"
 shift 1
 CONFIGURATION="${1}"
 shift 1
-# TEST_TYPE="${1}"
-# shift 1
 
 if [ ${#} -ne 0 ]; then
   error "Unexpected arguments: ${*}"
@@ -57,11 +54,8 @@ export PATH="${PWD}/bin:${PWD}/node_modules/.bin:${PATH}"
 info "Creating build symlink to '${BUILD_ROOT}'..."
 ln -sf "${BUILD_ROOT}" build
 
-info "Running tests '${CONFIGURATION}'..."
-detox test --configuration "${CONFIGURATION}" --loglevel fatal --debug-synchronization 200 --record-logs failing --record-timeline all --bail --cleanup
+info "Running detox smoke tests with configuration '${CONFIGURATION}'..."
+detox test e2e/smoke --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
 
-# if [ "${TEST_TYPE}" = "regression" ]; then
-# else
-#   info "Running smoke tests '${CONFIGURATION}'..."
-#   detox test e2e/smoke --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
-# fi
+info "Running detox regression tests with configuration '${CONFIGURATION}'..."
+detox test e2e/regression --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
