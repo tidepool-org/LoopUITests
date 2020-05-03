@@ -2,9 +2,9 @@ const { Test, screenName } = require('../../src/index');
 const { guardrailsTests } = require('../../tests/guardrails/index');
 
 describe('functional test', () => {
-    var test;
-    it('should setup with pump simulator', async () => {
-        test = new Test().withSettings({ AddPumpSimulator: true }).withStartScreen(screenName.settings);
+    var test = new Test();
+    beforeAll(async () => {
+        test.withSettings({ AddPumpSimulator: true }).withStartScreen(screenName.settings);
         await test.prepare();
     });
     describe('guardrails', () => {
