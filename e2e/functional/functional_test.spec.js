@@ -2,13 +2,10 @@ const { Test, screenName } = require('../../src/index');
 const { guardrailsTests } = require('../../tests/guardrails/index');
 
 describe('functional test', () => {
-    var test = new Test()
-        .withSettings({ AddPumpSimulator: true })
-        .withStartScreen(screenName.settings);
+    var test = new Test().withSettings({ AddPumpSimulator: true }).withStartScreen(screenName.settings);
     it('should setup with pump simulator', async () => {
         await test.prepare();
     });
-
     describe('guardrails', () => {
         describe('insulin sensitivity schedule', () => {
             guardrailsTests.insulinSensitivityScheduleTests(test);
