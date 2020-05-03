@@ -90,6 +90,11 @@ class Test {
         if (!this.language) {
             this.language = text;
         }
+        if (!this.startScreen) {
+            if (this.settings || this.simulators) {
+                this.startScreen = screenName.home;
+            }
+        }
 
         this.settingsScreen = new SettingsScreen(this.language);
         this.homeScreen = new HomeScreen(this.language);
@@ -144,6 +149,21 @@ class Test {
         await match.accessible.SwipeButton('Advance ⏭').tap();
         await match.UITextField().typeText(cycles);
         await match.accessible.Button(text.general.OK).tap();
+    }
+
+    async OpenSettingsScreen() {
+        await this.settingsScreen.Open();
+        return this.settingsScreen;
+    }
+
+    async OpenCarbEntryScreen() {
+        await this.carbEntryScreen.Open();
+        return this.carbEntryScreen;
+    }
+
+    async OpenBolusScreen() {
+        await this.bolusScreen.Open();
+        return this.bolusScreen;
     }
 }
 
