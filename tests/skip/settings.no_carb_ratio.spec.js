@@ -1,13 +1,11 @@
-const { Test, setting, screenName } = require('../../src/index');
+const { Test, setting } = require('../../src/index');
 
 describe('Closed loop is not allowed when settings', () => {
     var test;
     it('should without carb ratios applied', async () => {
         test = new Test()
-            .withScenario('flat_cgm_trace')
             .withSettings(setting.default)
-            .withSettingsFilter([setting.type.CarbRatios])
-            .withStartScreen(screenName.settings);
+            .withSettingsFilter([setting.type.CarbRatios]);
         await test.prepare();
     });
     it('should not be in closed loop mode', async () => {

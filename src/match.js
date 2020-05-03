@@ -97,17 +97,6 @@ const match = {
             return element(by.text(text).and(by.traits(['text'])));
         },
         /**
-         * @summary returns Picker
-         * @param {Integer} pickerNumber
-         * @returns {Detox.Element}
-         */
-        Picker(pickerNumber) {
-            return element(
-                by.type('UIPickerView')
-                    .withAncestor(by.type('UITableViewCellContentView'))
-            ).atIndex(pickerNumber);
-        },
-        /**
          * @summary returns Picker item(s) for given label and index
          * @param {Integer} pickerNumber
          * @param {string} itemLabel
@@ -131,13 +120,13 @@ const match = {
         /**
          * @summary sets the pickers column to the given value
          * @param {Integer} column
-         * @param {string} strValue
+         * @param value
          */
-        SetPickerValue(column, strValue) {
+        SetPickerValue(column, value) {
             const currentPicker = 0;
             return element(
                 by.type('UIPickerView')
-            ).atIndex(currentPicker).setColumnToValue(column, strValue)
+            ).atIndex(currentPicker).setColumnToValue(column, String(value))
         },
         /**
          * @summary returns alert items based on the given label
