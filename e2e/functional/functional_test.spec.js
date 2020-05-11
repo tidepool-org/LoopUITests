@@ -2,16 +2,13 @@ const { Test } = require('../../src/index');
 const { guardrailsTests } = require('../../tests/guardrails/index');
 
 describe('functional test', () => {
-    console.log('in functional test');
     var test = new Test();
     it('prepare test', async () => {
-        console.log('setting up ...');
         await test.prepare();
         let settings = await test.OpenSettingsScreen();
         await settings.AddPumpSimulator();
     });
     describe('guardrails', () => {
-        console.log('running guardrails ...');
         describe('insulin sensitivity schedule', () => {
             guardrailsTests.insulinSensitivityScheduleTests(test);
         });
