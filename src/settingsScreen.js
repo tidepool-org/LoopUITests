@@ -4,6 +4,20 @@ const config = require('./config');
 
 const { setting, indexForTime } = require('./properties');
 
+async function _setPickerValue(currentValue, expectedValue) {
+    if (currentValue > expectedValue) {
+        do {
+            match.accessible.PickerItem_v2(1, `${currentValue}`).tap();
+            currentValue--;
+        } while (currentValue >= expectedValue);
+    } else {
+        do {
+            match.accessible.PickerItem_v2(1, `${currentValue}`).tap();
+            currentValue++;
+        } while (currentValue <= expectedValue);
+    }
+}
+
 class CGMSimulatorScreen {
     constructor(language) {
         this.language = language;
@@ -254,6 +268,9 @@ class CorrectionRangeScreen {
     AddButton() {
         return match.accessible.ButtonBarButton(this.language.general.Add);
     }
+    PreMealOverrideButton() {
+        return match.accessible.Label('Pre-Meal');
+    }
     async Close() {
         await this.BackButton().tap();
     }
@@ -295,6 +312,34 @@ class CorrectionRangeScreen {
             }
             currentMin--;
         } while (currentMin >= range.min);
+    }
+
+    /**
+     * @param {Object} range
+     * @param {String} range.time
+     * @param {String} range.max
+     * @param {String} range.min
+     */
+    async Apply_v2(range) {
+        const minimumColumn = 3;
+        const maximumColumn = 1;
+        await this.AddButton().tap();
+        await match.accessible.Label(`${range.time}`).atIndex(0).tap();
+        await match.accessible.SetPickerValue(maximumColumn, range.max);
+        await match.accessible.SetPickerValue(minimumColumn, range.min);
+    }
+
+    /**
+     * @param {Object} override
+     * @param {String} override.max
+     * @param {String} override.min
+     */
+    async ApplyPreMealOverride(override) {
+        await this.PreMealOverrideButton().tap();
+        const minimumColumn = 2;
+        const maximumColumn = 0;
+        await match.accessible.SetPickerValue(maximumColumn, override.max);
+        await match.accessible.SetPickerValue(minimumColumn, override.min);
     }
 }
 
@@ -348,6 +393,45 @@ class CarbRatiosScreen {
     }
 }
 
+class SuspendThresholdScreen {
+    constructor(language) {
+        this.language = language;
+    }
+    Header() {
+        return match.accessible.Header(this.language.settingsScreen.SuspendThreshold);
+    }
+    CancelButton() {
+        return match.accessible.ButtonBarButton(this.language.general.Cancel);
+    }
+    SaveButton() {
+        return match.accessible.Button(this.language.general.Save);
+    }
+    ExclamationMark() {
+        return match.accessible.Label(this.language.alerts.ExclamationMark);
+    }
+    WarningText(text) {
+        return match.accessible.Label(text);
+    }
+    async Save() {
+        await this.SaveButton().tap();
+    }
+    async Cancel() {
+        await this.CancelButton().tap();
+    }
+    async OpenPicker() {
+        await match.accessible.Label('mg/dL').atIndex(0).tap();
+    }
+    /**
+     * @param {object} threshold e.g. '150'
+     * @param {number} threshold.value
+     **/
+    async Apply(threshold) {
+        if (threshold) {
+            await _setPickerValue(80, threshold.value);
+        }
+    }
+}
+
 class SettingsScreen {
     startAndReturnToSettings() {
         return {
@@ -363,6 +447,7 @@ class SettingsScreen {
         this.insulinSensitivitiesScreen = new InsulinSensitivitiesScreen(language);
         this.correctionRangeScreen = new CorrectionRangeScreen(language);
         this.carbRatiosScreen = new CarbRatiosScreen(language);
+        this.suspendThresholdScreen = new SuspendThresholdScreen(language);
     }
     async _exitSetting() {
         await match.accessible.BackButton(this.language.settingsScreen.Settings).tap();
@@ -411,6 +496,10 @@ class SettingsScreen {
     async OpenCarbRatiosScreen() {
         await this.CarbRatiosLabel().tap();
         return this.carbRatiosScreen;
+    }
+    async OpenSuspendThresholdScreen() {
+        await this.SuspendThresholdLabel().tap();
+        return this.suspendThresholdScreen;
     }
     DoneButton() {
         return match.accessible.ButtonBarButton(this.language.general.Done);
@@ -536,7 +625,12 @@ class SettingsScreen {
             await screen.Close();
         }
 
-        await this.SetSuspendThreshold(values.SuspendThreshold);
+        if (values.SuspendThreshold) {
+            let screen = this.OpenSuspendThresholdScreen();
+            await screen.Apply(values.SuspendThreshold);
+            await screen.Save()
+        }
+
         await this.SetInsulinModel(values.InsulinModel);
 
         if (values.ClosedLoop) {

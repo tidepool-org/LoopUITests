@@ -118,6 +118,19 @@ const match = {
                     )).atIndex(pickerNumber);
         },
         /**
+         * @summary returns Picker item(s) for given label and index
+         * @param {Integer} pickerNumber
+         * @param {string} itemLabel
+         * @returns {Detox.Element}
+         */
+        PickerItem_v2(pickerNumber, itemLabel) {
+            return element(
+                by.type('SwiftUI.AccessibilityNode')
+                    .and(by.label(itemLabel)
+                        .and(by.traits(['text'])))
+            ).atIndex(pickerNumber);
+        },
+        /**
          * @summary sets the pickers column to the given value
          * @param {Integer} column
          * @param value

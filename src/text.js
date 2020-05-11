@@ -10,7 +10,6 @@ var General = {
     OK: 'OK',
 };
 
-
 var HomeScreen = {
     ActiveCarbohydrates: 'Active Carbohydrates',
     ActiveInsulin: 'Active Insulin',
@@ -82,6 +81,7 @@ var CGMSimulatorSettingsScreen = {
 }
 
 var Alerts = {
+    ExclamationMark: 'exclamationmark.triangle.fill',
     MissingCarbEffects: 'Missing Data: Carb Effects',
     MissingInsulinEffects: 'Missing Data: Insulin Effects',
     ConfigurationError: 'Configuration Error: Check Settings',

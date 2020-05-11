@@ -58,8 +58,9 @@ var settingsScreenFunctionalityTests = (test) => {
             await test.settingsScreen.AddPumpSimulator();
         });
         it.skip('set suspend threshold', async () => {
-            //TODO update
-            await test.settingsScreen.SetSuspendThreshold(setting.default.SuspendThreshold);
+            let screen = await test.settingsScreen.OpenSuspendThresholdScreen();
+            await screen.Apply(setting.default.SuspendThreshold);
+            await screen.Save();
         });
         it('set basal rates', async () => {
             let screen = await test.settingsScreen.OpenBasalRatesScreen();
