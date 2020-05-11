@@ -59,8 +59,8 @@ ln -sf "${BUILD_ROOT}" build
 
 if [ "${TEST_TYPE}" = "functional" ]; then
   info "Running detox functional tests with configuration '${CONFIGURATION}'..."
-  detox test e2e/functional --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
+  detox test e2e/functional --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
 else
   info "Running smoke tests '${CONFIGURATION}'..."
-  detox test e2e/smoke --configuration "${CONFIGURATION}" --loglevel warn --record-logs failing --bail --cleanup
+  detox test e2e/smoke --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
 fi
