@@ -6,13 +6,13 @@
     "start-test": "detox test e2e/start -c ios.sim.debug 2>&1 | tee ./artifacts/start_test_output.txt",
     "all-test": "detox test -c ios.sim.debug 2>&1 | tee ./artifacts/all_test_output.txt",
     "smoke-test": "detox test e2e/smoke -c ios.sim.debug 2>&1 | tee ./artifacts/smoke_test_output.txt",
-    "regression-test": "detox test e2e/regression -c ios.sim.debug 2>&1 | tee ./artifacts/regression_test_output.txt",
+    "functional-test": "detox test e2e/functional -c ios.sim.debug 2>&1 | tee ./artifacts/functional_test_output.txt",
     "build": "detox build -c ios.sim.debug",
     "lint": "eslint ."
   },
   "devDependencies": {
-    "detox": "^16.2.1",
-    "jest": "^25.4.0"
+    "detox": "^16.5.0",
+    "jest": "^25.5.4"
   },
   "detox": {
     "configurations": {
