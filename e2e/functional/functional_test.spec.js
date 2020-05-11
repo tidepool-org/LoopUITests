@@ -2,6 +2,7 @@ const { Test } = require('../../src/index');
 const { guardrailsTests } = require('../../tests/guardrails/index');
 
 describe('functional test', () => {
+    console.log('in functional test');
     var test = new Test();
     it('prepare test', async () => {
         console.log('setting up ...');
