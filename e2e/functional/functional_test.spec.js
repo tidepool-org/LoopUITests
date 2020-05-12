@@ -3,7 +3,7 @@ const { guardrailsTests } = require('../../tests/guardrails/index');
 
 describe('functional test', () => {
     var test = new Test();
-    beforeAll(async () => {
+    it('prepare test', async () => {
         await test.prepare();
         let settings = await test.OpenSettingsScreen();
         await settings.AddPumpSimulator();
