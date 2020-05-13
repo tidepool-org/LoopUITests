@@ -68,19 +68,14 @@ const match = {
         SwipeButton(label) {
             return element(by.label(label).and(by.traits(['button']).and(by.type('UISwipeActionStandardButton'))));
         },
-        /**
-         * @param {string} label
-         * @returns {Detox.Element} accessibilityLabelText
-         */
         Label(label) {
             return element(by.label(label).and(by.traits(['text'])));
         },
-        /**
-         * @param {string} text
-         * @returns {Detox.Element} accessibilityHeader
-         */
-        Header(text) {
-            return element(by.label(text).and(by.traits(['header'])));
+        Image(label) {
+            return element(by.label(label).and(by.traits(['image'])));
+        },
+        Header(label) {
+            return element(by.label(label).and(by.traits(['header'])));
         },
         /**
          * @param {string} label
@@ -123,6 +118,19 @@ const match = {
          * @param {string} itemLabel
          * @returns {Detox.Element}
          */
+        PickerItem_legacy(pickerNumber, itemLabel) {
+            return element(
+                by.type('UILabel')
+                    .and(by.label(itemLabel)
+                        .and(by.traits(['text'])))
+            ).atIndex(pickerNumber);
+        },
+        /**
+         * @summary returns Picker item(s) for given label and index
+         * @param {Integer} pickerNumber
+         * @param {string} itemLabel
+         * @returns {Detox.Element}
+         */
         PickerItem_v2(pickerNumber, itemLabel) {
             return element(
                 by.type('SwiftUI.AccessibilityNode')
@@ -130,17 +138,20 @@ const match = {
                         .and(by.traits(['text'])))
             ).atIndex(pickerNumber);
         },
-        /**
-         * @summary sets the pickers column to the given value
-         * @param {Integer} column
-         * @param value
-         */
-        SetPickerValue(column, value) {
-            const currentPicker = 0;
-            return element(
-                by.type('UIPickerView')
-            ).atIndex(currentPicker).setColumnToValue(column, String(value))
+        Picker() {
+            return element(by.type('UIPickerView')).atIndex(1);
         },
+        // /**
+        //  * @summary sets the pickers column to the given value
+        //  * @param {Integer} column
+        //  * @param value
+        //  */
+        // SetPickerValue(column, value) {
+        //     const currentPicker = 0;
+        //     return element(
+        //         by.type('UIPickerView')
+        //     ).atIndex(currentPicker).setColumnToValue(column, String(value))
+        // },
         /**
          * @summary returns alert items based on the given label
          * @param {string} label

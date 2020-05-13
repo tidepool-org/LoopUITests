@@ -1,22 +1,9 @@
 const element = require('detox').element;
 const match = require('./match');
+const action = require('./action');
 const config = require('./config');
 
 const { setting, indexForTime } = require('./properties');
-
-async function _setPickerValue(currentValue, expectedValue) {
-    if (currentValue > expectedValue) {
-        do {
-            match.accessible.PickerItem_v2(1, `${currentValue}`).tap();
-            currentValue--;
-        } while (currentValue >= expectedValue);
-    } else {
-        do {
-            match.accessible.PickerItem_v2(1, `${currentValue}`).tap();
-            currentValue++;
-        } while (currentValue <= expectedValue);
-    }
-}
 
 class CGMSimulatorScreen {
     constructor(language) {
@@ -83,7 +70,7 @@ class CGMSimulatorScreen {
     async _setCGMBackfill(hours) {
         this.needsClosing = false;
         await match.accessible.Label(this.language.cgmSimulatorSettingsScreen.BackfillGlucose).tap();
-        await match.accessible.SetPickerValue(0, `${hours}`);
+        await action.SetPickerValue(0, `${hours}`);
         await match.accessible.ButtonBarButton(this.language.general.Save).tap();
     }
     async RemoveSimulator() {
@@ -125,7 +112,7 @@ class BasalRatesScreen {
         if (rate) {
             await this.AddButton().tap();
             await match.accessible.Label(`${rate.time}`).atIndex(0).tap();
-            await match.accessible.SetPickerValue(1, `${rate.unitsPerHour} ${config.basalRatesUnits}`);
+            await action.SetPickerValue(1, `${rate.unitsPerHour} ${config.basalRatesUnits}`);
         }
     }
     /**
@@ -148,7 +135,7 @@ class BasalRatesScreen {
     async Edit(rate) {
         if (rate) {
             await match.accessible.Label(`${rate.time}`).atIndex(0).tap();
-            await match.accessible.SetPickerValue(1, `${rate.unitsPerHour} ${config.basalRatesUnits}`);
+            await action.SetPickerValue(1, `${rate.unitsPerHour} ${config.basalRatesUnits}`);
         }
     }
 }
@@ -236,7 +223,7 @@ class InsulinSensitivitiesScreen {
         if (sensitivity.time != "12:00 AM") {
             await match.accessible.Label(`${sensitivity.time}`).atIndex(0).tap();
         }
-        await match.accessible.SetPickerValue(1, `${sensitivity.bgValuePerInsulinUnit} ${config.insulinSensitivitiesUnits}`);
+        await action.SetPickerValue(1, `${sensitivity.bgValuePerInsulinUnit} ${config.insulinSensitivitiesUnits}`);
     }
     /**
      * @param {Object} sensitivity
@@ -245,7 +232,7 @@ class InsulinSensitivitiesScreen {
      */
     async Edit(sensitivity) {
         await match.accessible.Label(`${sensitivity.time}`).atIndex(0).tap();
-        await match.accessible.SetPickerValue(1, `${sensitivity.bgValuePerInsulinUnit} ${config.insulinSensitivitiesUnits}`);
+        await action.SetPickerValue(1, `${sensitivity.bgValuePerInsulinUnit} ${config.insulinSensitivitiesUnits}`);
     }
 }
 
@@ -269,7 +256,10 @@ class CorrectionRangeScreen {
         return match.accessible.ButtonBarButton(this.language.general.Add);
     }
     PreMealOverrideButton() {
-        return match.accessible.Label('Pre-Meal');
+        return match.accessible.Label(this.language.settingsScreen.PreMeal);
+    }
+    async OpenPicker() {
+        await this.AddButton().tap();
     }
     async Close() {
         await this.BackButton().tap();
@@ -285,50 +275,30 @@ class CorrectionRangeScreen {
             await this.Apply(ranges[index]);
         }
     }
-    /**
-     * @param {Object} range
-     * @param {String} range.time
-     * @param {String} range.max
-     * @param {String} range.min
-     */
-    async Apply(range) {
-        let pickerIndex = indexForTime(range.time);
-        await this.AddButton().tap();
-        await match.accessible.Label(`${range.time}`).atIndex(pickerIndex).tap();
-        let currentMax = config.correctionRangesMaximum;
-        do {
-            await match.accessible.PickerItem(1, `${currentMax}`).tap();
-            currentMax--;
-        } while (currentMax >= range.max);
-
-        let currentMin = range.max;
-        do {
-            if (currentMin == range.max) {
-                await match.accessible.PickerItem(4, `${currentMin}`).tap();
-            } else if (currentMin == (range.max - 1)) {
-                await match.accessible.PickerItem(2, `${currentMin}`).tap();
-            } else {
-                await match.accessible.PickerItem(1, `${currentMin}`).tap();
-            }
-            currentMin--;
-        } while (currentMin >= range.min);
+    async SetTime(time) {
+        let pickerIndex = indexForTime(time);
+        await match.accessible.Label(`${time}`).atIndex(pickerIndex).tap();
     }
-
     /**
-     * @param {Object} range
-     * @param {String} range.time
-     * @param {String} range.max
-     * @param {String} range.min
+     * @param {object} range
+     * @param {number} range.max
+     * @param {number} range.min
+     * @param {number} currentMax
      */
-    async Apply_v2(range) {
-        const minimumColumn = 3;
-        const maximumColumn = 1;
-        await this.AddButton().tap();
-        await match.accessible.Label(`${range.time}`).atIndex(0).tap();
-        await match.accessible.SetPickerValue(maximumColumn, range.max);
-        await match.accessible.SetPickerValue(minimumColumn, range.min);
-    }
+    async Apply(range, currentMax) {
 
+        await action.ScrollMultiPickerToValue_legacy(
+            currentMax,
+            range.max,
+            true,
+        );
+
+        await action.ScrollMultiPickerToValue_legacy(
+            range.max,
+            range.min,
+            false,
+        );
+    }
     /**
      * @param {Object} override
      * @param {String} override.max
@@ -338,8 +308,8 @@ class CorrectionRangeScreen {
         await this.PreMealOverrideButton().tap();
         const minimumColumn = 2;
         const maximumColumn = 0;
-        await match.accessible.SetPickerValue(maximumColumn, override.max);
-        await match.accessible.SetPickerValue(minimumColumn, override.min);
+        await action.SetPickerValue(maximumColumn, override.max);
+        await action.SetPickerValue(minimumColumn, override.min);
     }
 }
 
@@ -406,10 +376,13 @@ class SuspendThresholdScreen {
     SaveButton() {
         return match.accessible.Button(this.language.general.Save);
     }
-    ExclamationMark() {
-        return match.accessible.Label(this.language.alerts.ExclamationMark);
+    GuardrailWarningIconPicker() {
+        return match.accessible.Image(this.language.alerts.ExclamationMark).atIndex(0);
     }
-    WarningText(text) {
+    GuardrailWarningIconSave() {
+        return match.accessible.Image(this.language.alerts.ExclamationMark).atIndex(1);
+    }
+    GuardrailWarningText(text) {
         return match.accessible.Label(text);
     }
     async Save() {
@@ -419,15 +392,22 @@ class SuspendThresholdScreen {
         await this.CancelButton().tap();
     }
     async OpenPicker() {
-        await match.accessible.Label('mg/dL').atIndex(0).tap();
+        await match.accessible.Label(this.language.units.Glucose).atIndex(0).tap();
+    }
+    async SwipePickerToMaxValue() {
+        await action.SwipePickerUp(3);
+    }
+    async SwipePickerToMinValue() {
+        await action.SwipePickerDown(3);
     }
     /**
-     * @param {object} threshold e.g. '150'
+     * @param {object} threshold
      * @param {number} threshold.value
+     * @param {number} startAt optional, starting point on the picker
      **/
-    async Apply(threshold) {
+    async Apply(threshold, startAt) {
         if (threshold) {
-            await _setPickerValue(80, threshold.value);
+            await action.ScrollPickerToValue(startAt, threshold.value);
         }
     }
 }
@@ -650,7 +630,7 @@ class SettingsScreen {
         if (threshold) {
             await this.SuspendThresholdLabel().tap();
             await match.accessible.Label('mg/dL').atIndex(0).tap();
-            await match.accessible.SetPickerValue(0, `${threshold.value}`);
+            await action.SetPickerValue(0, `${threshold.value}`);
             await match.accessible.Button(this.language.general.Save).tap();
             await this._exitSetting();
         }
@@ -683,8 +663,8 @@ class SettingsScreen {
             for (let index = 0; index < ranges.length; index++) {
                 const range = ranges[index];
                 await match.accessible.Label(`${range.time}`).atIndex(0).tap();
-                await match.accessible.SetPickerValue(maximumColumn, range.max);
-                await match.accessible.SetPickerValue(minimumColumn, range.min);
+                await action.SetPickerValue(maximumColumn, range.max);
+                await action.SetPickerValue(minimumColumn, range.min);
             }
             await match.accessible.Label(this.language.general.Save).tap();
             await this._exitSetting();

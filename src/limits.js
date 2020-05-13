@@ -3,12 +3,13 @@
  */
 var limits = {
     correctionRange: {
-        step: 1,
         max: {
             limit: 180,
             warning: 120,
+            noWarning: 121,
         },
         min: {
+            noWarning: 71,
             warning: 70,
             limit: 60,
         },
@@ -54,12 +55,13 @@ var limits = {
         },
     },
     suspendThreshold: {
-        step: 1,
         max: {
             limit: 180,
-            warning: 120,
+            warning: 121,
+            noWarning: 120,
         },
         min: {
+            noWarning: 71,
             warning: 70,
             limit: 54,
         },

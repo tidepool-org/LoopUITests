@@ -1,3 +1,9 @@
+var Units = {
+    Glucose: 'mg/dL',
+    BasalRatesUnits: 'U/hr',
+    InsulinSensitivitiesUnits: 'mg/dL/U',
+};
+
 var General = {
     Cancel: 'Cancel',
     Continue: 'Continue',
@@ -70,6 +76,7 @@ var SettingsScreen = {
     AddPump: 'Add Pump',
     DeletePump: 'Delete Pump',
     DeletePumpData: 'Delete Pump Data',
+    PreMeal: 'Pre-Meal',
 };
 
 var CGMSimulatorSettingsScreen = {
@@ -94,6 +101,7 @@ var TimeSlots = [
 ];
 
 var text = {
+    units: Units,
     alerts: Alerts,
     general: General,
     bolusScreen: BolusScreen,
