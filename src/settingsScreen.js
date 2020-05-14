@@ -280,24 +280,12 @@ class CorrectionRangeScreen {
         await match.accessible.Label(`${time}`).atIndex(pickerIndex).tap();
     }
     /**
-     * @param {object} range
-     * @param {number} range.max
-     * @param {number} range.min
-     * @param {number} currentMax
+     * @param {Object} range
+     * @param {String} range.max
+     * @param {String} range.min
      */
-    async Apply(range, currentMax) {
-
-        await action.ScrollMultiPickerToValue_legacy(
-            currentMax,
-            range.max,
-            true,
-        );
-
-        await action.ScrollMultiPickerToValue_legacy(
-            range.max,
-            range.min,
-            false,
-        );
+    async Apply(range) {
+        await action.ScrollCorrectionRangePickers(range, config.correctionRangesMaximum);
     }
     /**
      * @param {Object} override

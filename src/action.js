@@ -15,36 +15,28 @@ var _nextPickerStep = function (currentValue, expectedValue) {
 }
 
 const action = {
-    async ScrollMultiPickerToValue_legacy(currentValue, expectedValue, isMax) {
-        if (currentValue == expectedValue) {
-            return;
-        }
+    async ScrollCorrectionRangePickers(range, current) {
+
+        let currentMax = current;
+        let expectedMax = range.max;
+        let currentMin = range.max;
+        let expectedMin = range.min;
+
         do {
-            console.log(`currentValue: ${currentValue}, expectedValue: ${expectedValue}`);
-            currentValue = _nextPickerStep(currentValue, expectedValue);
-            console.log(`_nextPickerStep: ${currentValue}`);
-            //NOTE: the tree expands when you traverse through a picker. This works but is hideous!!
+            await match.accessible.PickerItem(1, `${currentMax}`).tap();
+            currentMax--;
+        } while (currentMax >= expectedMax);
 
-
-            if (isMax == true) {
-
-                await match.accessible.PickerItem_legacy(1, `${currentValue}`).tap();
-                console.log('## set MAX 1:');
+        do {
+            if (currentMin == expectedMax) {
+                await match.accessible.PickerItem(4, `${currentMin}`).tap();
+            } else if (currentMin == (expectedMax - 1)) {
+                await match.accessible.PickerItem(2, `${currentMin}`).tap();
             } else {
-                try {
-                    await match.accessible.PickerItem_legacy(4, `${currentValue}`).tap();
-                    console.log('## set 4:');
-                } catch (error) {
-                    // try {
-                    //     await match.accessible.PickerItem_legacy(1, `${currentValue}`).tap();
-                    //     console.log('## set 1:');
-                    // } catch (error) {
-                    await match.accessible.PickerItem_legacy(2, `${currentValue}`).tap();
-                    console.log('## set 2:');
-                    //}
-                }
+                await match.accessible.PickerItem(1, `${currentMin}`).tap();
             }
-        } while (currentValue != expectedValue);
+            currentMin--;
+        } while (currentMin >= expectedMin);
     },
     /**
      * @summary scroll the picker to the given `expectedValue`

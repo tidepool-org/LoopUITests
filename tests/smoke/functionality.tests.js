@@ -57,9 +57,14 @@ var settingsScreenFunctionalityTests = (test) => {
         it('can be added', async () => {
             await test.settingsScreen.AddPumpSimulator();
         });
-        it.skip('set suspend threshold', async () => {
+        it('set suspend threshold', async () => {
             let screen = await test.settingsScreen.OpenSuspendThresholdScreen();
-            await screen.Apply(setting.default.SuspendThreshold);
+            await screen.OpenPicker();
+            await screen.SwipePickerToMaxValue();
+            await screen.Apply(
+                { value: limits.suspendThreshold.max.warning },
+                limits.suspendThreshold.max.limit,
+            );
             await screen.Save();
         });
         it('set basal rates', async () => {
@@ -90,7 +95,9 @@ var settingsScreenFunctionalityTests = (test) => {
         });
         it('set correction range', async () => {
             let screen = await test.settingsScreen.OpenCorrectionRangeScreen();
-            await screen.ApplyAll([{ time: '12:00 AM', min: '169', max: '170' }]);
+            await screen.OpenPicker();
+            await screen.SetTime('12:00 AM');
+            await screen.Apply({ min: '169', max: '170' });
             await screen.Save();
             await screen.Close();
         });
