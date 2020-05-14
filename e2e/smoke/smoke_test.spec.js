@@ -19,8 +19,7 @@ describe('smoke test', () => {
         describe('carb ratios settings screen', () => {
             smokeTests.settingsCarbRatiosScreenAccessibilityTests(test);
         });
-        // TODO: investigate the opening of screen
-        describe.skip('basal rates settings screen', () => {
+        describe('basal rates settings screen', () => {
             smokeTests.settingsBasalRatesScreenAccessibilityTests(test);
         });
         describe('correction range settings screen', () => {
