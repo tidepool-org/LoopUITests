@@ -81,7 +81,7 @@ var settingsScreenFunctionalityTests = (test) => {
             await screen.ApplyAll(setting.default.CarbRatios);
             await screen.Close();
         });
-        it('set insulin sensitivites', async () => {
+        it.skip('set insulin sensitivites', async () => {
             let screen = await test.settingsScreen.OpenInsulinSensitivitiesScreen();
             await screen.ApplyAll(setting.default.InsulinSensitivities);
             await screen.Save();
