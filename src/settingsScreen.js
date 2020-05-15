@@ -427,7 +427,12 @@ class SettingsScreen {
         await match.accessible.ButtonBarButton(this.language.settingsScreen.Settings).tap();
     }
     async Close() {
-        await this.DoneButton().tap();
+        try {
+            await this.DoneButton().tap();
+        } catch (error) {
+            //sometimes there are multiples?
+            await this.DoneButton().atIndex(0).tap();
+        }
     }
     async OpenBasalRatesScreen() {
         await this.BasalRatesLabel().tap();

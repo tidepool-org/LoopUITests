@@ -9,9 +9,6 @@ describe('functional test', () => {
         await settings.AddPumpSimulator();
     });
     describe('guardrails', () => {
-        describe('insulin sensitivity schedule', () => {
-            guardrailsTests.insulinSensitivityScheduleTests(test);
-        });
         describe('max bolus', () => {
             guardrailsTests.maxBolusTests(test);
         });
@@ -32,6 +29,9 @@ describe('functional test', () => {
         });
         describe.skip('insulin carb ratio', () => {
             guardrailsTests.insulinCarbRatioTests(test);
+        });
+        describe.skip('insulin sensitivity schedule', () => {
+            guardrailsTests.insulinSensitivityScheduleTests(test);
         });
     });
 });
