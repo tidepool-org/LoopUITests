@@ -29,7 +29,7 @@ describe('smoke test', () => {
         describe('delivery limits settings screen', () => {
             smokeTests.settingsDeliveryLimitsScreenAccessibilityTests(test);
         });
-        describe('insulin sensitivities settings screen', () => {
+        describe.skip('insulin sensitivities settings screen', () => {
             smokeTests.settingsInsulinSensitivitiesScreenAccessibilityTests(test);
         });
         describe('bolus screen', () => {
