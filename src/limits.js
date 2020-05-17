@@ -6,7 +6,7 @@ var limits = {
         max: {
             limit: 180,
             warning: 120,
-            noWarning: 121,
+            noWarning: 119,
         },
         min: {
             noWarning: 71,
