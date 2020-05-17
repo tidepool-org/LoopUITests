@@ -1,4 +1,3 @@
-
 const basalRatesUnits = 'U/hr';
 const insulinSensitivitiesUnits = 'mg/dL/U';
 const correctionRangesMaximum = 180;

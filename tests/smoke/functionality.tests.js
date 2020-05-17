@@ -1,4 +1,4 @@
-const { setting } = require('../../src/index');
+const { setting, limits } = require('../../src/index');
 
 var homeScreenFunctionalityTests = (test) => {
     it('has Active Carbohydrates section', async () => {
@@ -57,9 +57,11 @@ var settingsScreenFunctionalityTests = (test) => {
         it('can be added', async () => {
             await test.settingsScreen.AddPumpSimulator();
         });
-        it.skip('set suspend threshold', async () => {
-            //TODO update
-            await test.settingsScreen.SetSuspendThreshold(setting.default.SuspendThreshold);
+        it('set suspend threshold', async () => {
+            let screen = await test.settingsScreen.OpenSuspendThresholdScreen();
+            await screen.OpenPicker();
+            await screen.Apply({ value: limits.suspendThreshold.min.noWarning }, 80);
+            await screen.Save();
         });
         it('set basal rates', async () => {
             let screen = await test.settingsScreen.OpenBasalRatesScreen();
@@ -89,7 +91,12 @@ var settingsScreenFunctionalityTests = (test) => {
         });
         it('set correction range', async () => {
             let screen = await test.settingsScreen.OpenCorrectionRangeScreen();
-            await screen.ApplyAll([{ time: '12:00 AM', min: '169', max: '170' }]);
+            await screen.OpenPicker();
+            await screen.SetTime('12:00 AM');
+            await screen.Apply({
+                min: limits.correctionRange.max.limit,
+                max: limits.correctionRange.max.limit,
+            });
             await screen.Save();
             await screen.Close();
         });

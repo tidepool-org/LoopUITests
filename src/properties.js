@@ -1,3 +1,4 @@
+const { timeSlots } = require('./text');
 
 var target = {
     tidepool: 'tidepool',
@@ -90,98 +91,7 @@ var setting = {
 };
 
 var indexForTime = (time) => {
-    switch (time) {
-        case '12:00 AM':
-            return 0;
-        case '12:30 AM':
-            return 1;
-        case '1:00 AM':
-            return 2;
-        case '1:30 AM':
-            return 3;
-        case '2:00 AM':
-            return 4;
-        case '2:30 AM':
-            return 6;
-        case '3:00 AM':
-            return 7;
-        case '3:30 AM':
-            return 8;
-        case '4:00 AM':
-            return 9;
-        case '4:30 AM':
-            return 10;
-        case '5:00 AM':
-            return 11;
-        case '6:30 AM':
-            return 12;
-        case '7:00 AM':
-            return 13;
-        case '7:30 AM':
-            return 15;
-        case '8:00 AM':
-            return 16;
-        case '8:30 AM':
-            return 17;
-        case '9:00 AM':
-            return 18;
-        case '9:30 AM':
-            return 19;
-        case '10:00 AM':
-            return 20;
-        case '10:30 AM':
-            return 21;
-        case '11:00 AM':
-            return 22;
-        case '11:30 AM':
-            return 23;
-        case '12:00 PM':
-            return 24;
-        case '12:30 PM':
-            return 25;
-        case '1:00 PM':
-            return 26;
-        case '1:30 PM':
-            return 27;
-        case '2:00 PM':
-            return 28;
-        case '2:30 PM':
-            return 29;
-        case '3:00 PM':
-            return 30;
-        case '3:30 PM':
-            return 31;
-        case '4:00 PM':
-            return 32;
-        case '4:30 PM':
-            return 33;
-        case '5:00 PM':
-            return 34;
-        case '6:30 PM':
-            return 35;
-        case '7:00 PM':
-            return 36;
-        case '7:30 PM':
-            return 37;
-        case '8:00 PM':
-            return 38;
-        case '8:30 PM':
-            return 39;
-        case '9:00 PM':
-            return 40;
-        case '9:30 PM':
-            return 41;
-        case '10:00 PM':
-            return 42;
-        case '10:30 PM':
-            return 43;
-        case '11:00 PM':
-            return 44;
-        case '11:30 PM':
-            return 45;
-        default:
-            return 0;
-    }
+    return timeSlots.findIndex((element) => element === time);
 };
 
 

@@ -24,11 +24,11 @@ describe('functional test', () => {
         describe('correction range schedule', () => {
             guardrailsTests.correctionRangeScheduleTests(test);
         });
+        describe('suspend threshold', () => {
+            guardrailsTests.suspendThresholdTests(test);
+        });
         describe.skip('insulin carb ratio', () => {
             guardrailsTests.insulinCarbRatioTests(test);
-        });
-        describe.skip('suspend threshold', () => {
-            guardrailsTests.suspendThresholdTests(test);
         });
         describe.skip('insulin sensitivity schedule', () => {
             guardrailsTests.insulinSensitivityScheduleTests(test);
