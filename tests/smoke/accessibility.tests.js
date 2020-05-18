@@ -229,6 +229,44 @@ var settingsDeliveryLimitsScreenAccessibilityTests = (test) => {
     });
 };
 
+var settingsIssueReportScreenAccessibilityTests = (test) => {
+    var screen;
+    var settingsScreen;
+    it('open', async () => {
+        settingsScreen = await test.OpenSettingsScreen();
+        screen = await settingsScreen.OpenIssueReportScreen();
+    });
+    it('has a header', async () => {
+        await expect(screen.Header()).toExist();
+    });
+    it('has a back button', async () => {
+        await expect(screen.BackButton()).toExist();
+    });
+    it('close', async () => {
+        await screen.Close();
+        await settingsScreen.Close();
+    });
+};
+
+var settingsInsulinModelScreenAccessibilityTests = (test) => {
+    var screen;
+    var settingsScreen;
+    it('open', async () => {
+        settingsScreen = await test.OpenSettingsScreen();
+        screen = await settingsScreen.OpenInsulinModelScreen();
+    });
+    it('has a header', async () => {
+        await expect(screen.Header()).toExist();
+    });
+    it('has a back button', async () => {
+        await expect(screen.BackButton()).toExist();
+    });
+    it('close', async () => {
+        await screen.Close();
+        await settingsScreen.Close();
+    });
+};
+
 var settingsInsulinSensitivitiesScreenAccessibilityTests = (test) => {
     var screen;
     var settingsScreen;
@@ -295,5 +333,7 @@ module.exports = {
     settingsBasalRatesScreenAccessibilityTests,
     settingsDeliveryLimitsScreenAccessibilityTests,
     settingsInsulinSensitivitiesScreenAccessibilityTests,
-    settingsCorrectionRangeScreenAccessibilityTests
+    settingsCorrectionRangeScreenAccessibilityTests,
+    settingsIssueReportScreenAccessibilityTests,
+    settingsInsulinModelScreenAccessibilityTests,
 };

@@ -19,20 +19,27 @@ describe('smoke test', () => {
         describe('carb ratios settings screen', () => {
             smokeTests.settingsCarbRatiosScreenAccessibilityTests(test);
         });
-        describe('basal rates settings screen', () => {
-            smokeTests.settingsBasalRatesScreenAccessibilityTests(test);
-        });
         describe('correction range settings screen', () => {
             smokeTests.settingsCorrectionRangeScreenAccessibilityTests(test);
         });
         describe('delivery limits settings screen', () => {
             smokeTests.settingsDeliveryLimitsScreenAccessibilityTests(test);
         });
-        describe.skip('insulin sensitivities settings screen', () => {
-            smokeTests.settingsInsulinSensitivitiesScreenAccessibilityTests(test);
+        describe('issue report settings screen', () => {
+            smokeTests.settingsIssueReportScreenAccessibilityTests(test);
+        });
+        describe('insulin model settings screen', () => {
+            smokeTests.settingsInsulinModelScreenAccessibilityTests(test);
         });
         describe('bolus screen', () => {
             smokeTests.bolusScreenAccessibilityTests(test);
+        });
+        describe.skip('insulin sensitivities settings screen', () => {
+            smokeTests.settingsInsulinSensitivitiesScreenAccessibilityTests(test);
+        });
+        //TODO: investigate issue
+        describe.skip('basal rates settings screen', () => {
+            smokeTests.settingsBasalRatesScreenAccessibilityTests(test);
         });
     });
     describe('functionality', () => {

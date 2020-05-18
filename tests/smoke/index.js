@@ -12,7 +12,11 @@ const {
     settingsBasalRatesScreenAccessibilityTests,
     settingsDeliveryLimitsScreenAccessibilityTests,
     settingsInsulinSensitivitiesScreenAccessibilityTests,
-    settingsCorrectionRangeScreenAccessibilityTests } = require('./accessibility.tests');
+    settingsCorrectionRangeScreenAccessibilityTests,
+    settingsInsulinModelScreenAccessibilityTests,
+    settingsIssueReportScreenAccessibilityTests,
+    settings
+} = require('./accessibility.tests');
 
 var smokeTests = {
     settingsScreenFunctionalityTests,
@@ -27,7 +31,9 @@ var smokeTests = {
     settingsBasalRatesScreenAccessibilityTests,
     settingsDeliveryLimitsScreenAccessibilityTests,
     settingsInsulinSensitivitiesScreenAccessibilityTests,
-    settingsCorrectionRangeScreenAccessibilityTests
+    settingsCorrectionRangeScreenAccessibilityTests,
+    settingsInsulinModelScreenAccessibilityTests,
+    settingsIssueReportScreenAccessibilityTests,
 };
 
 module.exports = {
