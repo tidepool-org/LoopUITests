@@ -36,12 +36,6 @@ var settingsScreenFunctionalityTests = (test) => {
         it('set to open loop', async () => {
             await test.settingsScreen.SetOpenLoop();
         });
-        it('open issue report', async () => {
-            await test.settingsScreen.OpenIssueReport();
-        });
-        it('close issue report', async () => {
-            await test.settingsScreen.CloseIssueReport();
-        });
     });
     describe('cgm', () => {
         it('can be added', async () => {
@@ -50,6 +44,15 @@ var settingsScreenFunctionalityTests = (test) => {
         it('can configure simulator', async () => {
             let screen = await test.settingsScreen.OpenCGMSimulatorScreen();
             await screen.Apply(setting.default.CGMSimulatorSettings);
+            await screen.Close();
+        });
+    });
+    describe('issue report', () => {
+        var screen;
+        it('can be opened', async () => {
+            screen = await test.settingsScreen.OpenIssueReportScreen();
+        });
+        it('can closed', async () => {
             await screen.Close();
         });
     });
@@ -76,7 +79,10 @@ var settingsScreenFunctionalityTests = (test) => {
             await screen.Close();
         });
         it('set insulin model', async () => {
-            await test.settingsScreen.SetInsulinModel(setting.default.InsulinModel);
+            let screen = await test.settingsScreen.OpenInsulinModelScreen();
+            await screen.Apply(setting.default.InsulinModel);
+            await screen.Close();
+
         });
         //TODO: update when development work complete
         it.skip('set carb ratios', async () => {
