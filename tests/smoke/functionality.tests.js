@@ -78,18 +78,21 @@ var settingsScreenFunctionalityTests = (test) => {
         it('set insulin model', async () => {
             await test.settingsScreen.SetInsulinModel(setting.default.InsulinModel);
         });
-        it('set carb ratios', async () => {
+        //TODO: update when development work complete
+        it.skip('set carb ratios', async () => {
             let screen = await test.settingsScreen.OpenCarbRatiosScreen();
             await screen.ApplyAll(setting.default.CarbRatios);
             await screen.Close();
         });
+        //TODO: update when development work complete
         it.skip('set insulin sensitivites', async () => {
             let screen = await test.settingsScreen.OpenInsulinSensitivitiesScreen();
             await screen.ApplyAll(setting.default.InsulinSensitivities);
             await screen.Save();
             await screen.Close();
         });
-        it('set correction range', async () => {
+        //TODO: update when development work complete
+        it.skip('set correction range', async () => {
             let screen = await test.settingsScreen.OpenCorrectionRangeScreen();
             await screen.OpenPicker();
             await screen.SetTime('12:00 AM');
