@@ -7,7 +7,6 @@ const { InsulinSensitivitiesScreen } = require('./insulinSensitivitiesScreen');
 const { SuspendThresholdScreen } = require('./suspendThresholdScreen');
 const { IssueReportScreen } = require('./issueReportScreen');
 const { InsulinModelScreen } = require('./insulinModelScreen');
-const { PumpSimulatorScreen } = require('./pumpSimulatorScreen');
 
 var settingsSubScreen = {
     BasalRatesScreen,
@@ -19,7 +18,6 @@ var settingsSubScreen = {
     SuspendThresholdScreen,
     IssueReportScreen,
     InsulinModelScreen,
-    PumpSimulatorScreen,
 };
 
 module.exports = {

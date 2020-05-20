@@ -13,7 +13,9 @@ class SettingsScreen {
         this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language);
         this.issueReportScreen = new settingsSubScreen.IssueReportScreen(language);
         this.insulinModelScreen = new settingsSubScreen.InsulinModelScreen(language);
-        this.pumpSimulatorScreen = new settingsSubScreen.PumpSimulatorScreen(language);
+    }
+    async _selectPumpSimulator() {
+        await match.accessible.Id('Simulator Small').tap();
     }
     async Open() {
         await match.accessible.ButtonBarButton(this.language.settingsScreen.Settings).tap();
@@ -25,11 +27,6 @@ class SettingsScreen {
             //sometimes there are multiples?
             await this.DoneButton().atIndex(0).tap();
         }
-    }
-    async OpenPumpSimulatorScreen() {
-        await this.ScrollToTop();
-        await this.PumpSimulatorLabel().tap();
-        return this.pumpSimulatorScreen;
     }
     async OpenInsulinModelScreen() {
         await this.InsulinModelLabel().tap();
@@ -274,9 +271,11 @@ class SettingsScreen {
         await match.accessible.Button(this.language.general.Continue).tap();
     }
     async RemovePump() {
-        let screen = await this.OpenPumpSimulatorScreen();
-        await screen.DeletePump();
-        await screen.ConfirmDeletePump();
+        await this.ScrollToTop();
+        await this._selectPumpSimulator();
+        //TODO static text and not a button?
+        await match.accessible.Label(this.language.settingsScreen.DeletePump).tap();
+        await match.accessible.Label(this.language.settingsScreen.DeletePump).atIndex(1).tap();
     }
     async RemovePumpData() {
         await this.ScrollToBottom();
