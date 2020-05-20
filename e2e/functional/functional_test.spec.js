@@ -21,12 +21,14 @@ describe('functional test', () => {
         describe('max temp basal rate', () => {
             guardrailsTests.maxTempBasalRateTests(test);
         });
-        describe('correction range schedule', () => {
-            guardrailsTests.correctionRangeScheduleTests(test);
-        });
         describe('suspend threshold', () => {
             guardrailsTests.suspendThresholdTests(test);
         });
+        //TODO: update when development work complete
+        describe.skip('correction range schedule', () => {
+            guardrailsTests.correctionRangeScheduleTests(test);
+        });
+        //TODO: update when development work complete
         describe.skip('insulin carb ratio', () => {
             guardrailsTests.insulinCarbRatioTests(test);
         });
