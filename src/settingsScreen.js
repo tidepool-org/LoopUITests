@@ -13,12 +13,7 @@ class SettingsScreen {
         this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language);
         this.issueReportScreen = new settingsSubScreen.IssueReportScreen(language);
         this.insulinModelScreen = new settingsSubScreen.InsulinModelScreen(language);
-    }
-    async _exitSetting() {
-        await match.accessible.BackButton(this.language.settingsScreen.Settings).tap();
-    }
-    async _selectPumpSimulator() {
-        await match.accessible.Id('Simulator Small').tap();
+        this.pumpSimulatorScreen = new settingsSubScreen.PumpSimulatorScreen(language);
     }
     async Open() {
         await match.accessible.ButtonBarButton(this.language.settingsScreen.Settings).tap();
@@ -30,6 +25,11 @@ class SettingsScreen {
             //sometimes there are multiples?
             await this.DoneButton().atIndex(0).tap();
         }
+    }
+    async OpenPumpSimulatorScreen() {
+        await this.ScrollToTop();
+        await this.PumpSimulatorLabel().tap();
+        return this.pumpSimulatorScreen;
     }
     async OpenInsulinModelScreen() {
         await this.InsulinModelLabel().tap();
@@ -126,6 +126,9 @@ class SettingsScreen {
     }
     AddPumpLabel() {
         return match.accessible.Label(this.language.settingsScreen.AddPump);
+    }
+    PumpSimulatorLabel() {
+        return match.accessible.LabelAndId(this.language.settingsScreen.Simulator, 'Simulator Small');
     }
     AddCGMLabel() {
         return match.accessible.Label(this.language.settingsScreen.AddCGM);
@@ -271,11 +274,9 @@ class SettingsScreen {
         await match.accessible.Button(this.language.general.Continue).tap();
     }
     async RemovePump() {
-        await this.ScrollToTop();
-        await this._selectPumpSimulator();
-        //TODO static text and not a button?
-        await match.accessible.Label(this.language.settingsScreen.DeletePump).tap();
-        await match.accessible.Label(this.language.settingsScreen.DeletePump).atIndex(1).tap();
+        let screen = await this.OpenPumpSimulatorScreen();
+        await screen.DeletePump();
+        await screen.ConfirmDeletePump();
     }
     async RemovePumpData() {
         await this.ScrollToBottom();

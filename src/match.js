@@ -68,6 +68,9 @@ const match = {
         SwipeButton(label) {
             return element(by.label(label).and(by.traits(['button']).and(by.type('UISwipeActionStandardButton'))));
         },
+        LabelAndId(label, id) {
+            return element(by.label(label).and(by.traits(['text']).and(by.id(id))));
+        },
         Label(label) {
             return element(by.label(label).and(by.traits(['text'])));
         },

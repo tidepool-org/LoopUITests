@@ -79,6 +79,15 @@ var SettingsScreen = {
     PreMeal: 'Pre-Meal',
 };
 
+var PumpSimulatorScreen = {
+    ReserviorRemaining: 'Reservior Remaining',
+    BatteryRemaining: 'Battery Remaining',
+    ErrorOnTempBasal: 'Error on Temp Basal',
+    ErrorOnBolus: 'Error on Bolus',
+    ErrorOnSuspend: 'Error on Suspend',
+    ErrorOnResume: 'Error on Resume',
+};
+
 var CGMSimulatorSettingsScreen = {
     CGMSettings: 'CGM Settings',
     BaseGlucose: 'Base Glucose',
@@ -108,6 +117,7 @@ var text = {
     carbEntryScreen: CarbEntryScreen,
     settingsScreen: SettingsScreen,
     cgmSimulatorSettingsScreen: CGMSimulatorSettingsScreen,
+    pumpSimulatorScreen: PumpSimulatorScreen,
     overridesScreen: TempOverrideScreen,
     homeScreen: HomeScreen,
     timeSlots: TimeSlots
