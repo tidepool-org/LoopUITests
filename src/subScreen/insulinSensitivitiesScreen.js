@@ -13,22 +13,31 @@ class InsulinSensitivitiesScreen {
         return match.accessible.BackButton(this.language.settingsScreen.Settings);
     }
     CancelButton() {
-        return match.accessible.ButtonBarButton(this.language.general.Cancel);
+        return match.accessible.Button(this.language.general.Cancel);
     }
     SaveButton() {
         return match.accessible.Label(this.language.general.Save);
     }
-    AddButton() {
-        return match.accessible.ButtonBarButton(this.language.general.Add);
+    PlusButton() {
+        return match.accessible.Button(this.language.general.Plus);
+    }
+    EditButton() {
+        return match.accessible.Button(this.language.general.Edit);
+    }
+    InfoButton() {
+        return match.accessible.Button('info.circle');
     }
     InfoLabel() {
         return match.accessible.Label(this.language.settingsScreen.InsulinSensitivityInfo);
     }
+    async Add() {
+        await this.PlusButton().tap();
+    }
+    async Edit() {
+        await this.EditButton().tap();
+    }
     async Cancel() {
         await this.CancelButton().tap();
-    }
-    async Close() {
-        await this.BackButton().tap();
     }
     async Save() {
         await this.SaveButton().tap();
@@ -46,7 +55,6 @@ class InsulinSensitivitiesScreen {
      * @param {String} sensitivity.bgValuePerInsulinUnit
      */
     async Apply(sensitivity) {
-        await this.AddButton().tap();
         //select time unless this is the first Insulin Sensitivitiy we have set...
         if (sensitivity.time != "12:00 AM") {
             await match.accessible.Label(`${sensitivity.time}`).atIndex(0).tap();

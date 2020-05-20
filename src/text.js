@@ -14,6 +14,7 @@ var General = {
     Edit: 'Edit',
     Status: 'Status',
     OK: 'OK',
+    Plus: 'plus',
 };
 
 var HomeScreen = {
