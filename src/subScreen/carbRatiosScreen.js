@@ -2,7 +2,6 @@ const element = require('detox').element;
 const match = require('../match');
 const { indexForTime } = require('../properties');
 
-
 class CarbRatiosScreen {
     constructor(language) {
         this.language = language;

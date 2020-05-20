@@ -21,6 +21,9 @@ class InsulinSensitivitiesScreen {
     AddButton() {
         return match.accessible.ButtonBarButton(this.language.general.Add);
     }
+    InfoLabel() {
+        return match.accessible.Label(this.language.settingsScreen.InsulinSensitivityInfo);
+    }
     async Cancel() {
         await this.CancelButton().tap();
     }

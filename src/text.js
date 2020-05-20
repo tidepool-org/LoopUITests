@@ -65,6 +65,7 @@ var SettingsScreen = {
     SaveToSimulator: 'Save to simulator',
     DeliveryLimits: 'Delivery Limits',
     InsulinSensitivities: 'Insulin Sensitivities',
+    InsulinSensitivityInfo: 'Your insulin sensitivity factor (ISF) is the drop in glucose expected from one unit of insulin.',
     SuspendThreshold: 'Suspend Threshold',
     CorrectionRange: 'Correction Range',
     InsulinModel: 'Insulin Model',

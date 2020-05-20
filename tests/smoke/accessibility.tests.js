@@ -289,6 +289,9 @@ var settingsInsulinSensitivitiesScreenAccessibilityTests = (test) => {
     it('has a cancel button', async () => {
         await expect(screen.CancelButton()).toExist();
     });
+    it('has info label', async () => {
+        await expect(screen.InfoLabel()).toExist();
+    });
     it('close', async () => {
         await screen.Cancel();
         await settingsScreen.Close();
