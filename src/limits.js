@@ -15,14 +15,15 @@ var limits = {
         },
     },
     insulinSensitivities: {
-        step: 1,
         max: {
             limit: 500,
             warning: 400,
+            noWarning: 399,
         },
         min: {
-            limit: 10,
+            noWarning: 16,
             warning: 15,
+            limit: 10,
         },
     },
     bolusDelivery: {

@@ -4,6 +4,11 @@ var Units = {
     InsulinSensitivitiesUnits: 'mg/dL/U',
 };
 
+var ButtonLabel = {
+    Plus: 'plus',
+    InfoCircle: 'info.circle',
+};
+
 var General = {
     Cancel: 'Cancel',
     Continue: 'Continue',
@@ -112,7 +117,8 @@ var text = {
     cgmSimulatorSettingsScreen: CGMSimulatorSettingsScreen,
     overridesScreen: TempOverrideScreen,
     homeScreen: HomeScreen,
-    timeSlots: TimeSlots
+    timeSlots: TimeSlots,
+    buttonLabel: ButtonLabel,
 };
 
 module.exports = text;

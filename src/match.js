@@ -141,6 +141,12 @@ const match = {
         Picker() {
             return element(by.type('UIPickerView')).atIndex(1);
         },
+        TimePicker() {
+            return element(by.label('Time').and(by.type('UIPickerView')));
+        },
+        QuantityPicker() {
+            return element(by.label('Quantity').and(by.type('UIPickerView')));
+        },
         /**
          * @summary returns alert items based on the given label
          * @param {string} label

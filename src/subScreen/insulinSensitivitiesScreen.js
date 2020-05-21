@@ -19,16 +19,34 @@ class InsulinSensitivitiesScreen {
         return match.accessible.Label(this.language.general.Save);
     }
     PlusButton() {
-        return match.accessible.Button(this.language.general.Plus);
+        return match.accessible.Button(this.language.buttonLabel.Plus);
+    }
+    AddNewEntryButton() {
+        return match.accessible.Button(this.language.general.Add);
+    }
+    CancelNewEntryButton() {
+        return match.accessible.Button(this.language.general.Cancel);
+    }
+    NewEntryLabel() {
+        return match.accessible.Label('New Entry');
+    }
+    NewEntryTimeLabel() {
+        return match.accessible.Label('Time');
     }
     EditButton() {
         return match.accessible.Button(this.language.general.Edit);
     }
     InfoButton() {
-        return match.accessible.Button('info.circle');
+        return match.accessible.Button(this.language.buttonLabel.InfoCircle);
     }
     InfoLabel() {
         return match.accessible.Label(this.language.settingsScreen.InsulinSensitivityInfo);
+    }
+    GuardrailWarningIconPicker() {
+        return match.accessible.Image(this.language.alerts.ExclamationMark).atIndex(0);
+    }
+    GuardrailWarningIconSave() {
+        return match.accessible.Image(this.language.alerts.ExclamationMark).atIndex(1);
     }
     async Add() {
         await this.PlusButton().tap();
@@ -39,15 +57,14 @@ class InsulinSensitivitiesScreen {
     async Cancel() {
         await this.CancelButton().tap();
     }
+    async CancelNewEntry() {
+        await this.CancelNewEntryButton().tap();
+    }
+    async AddNewEntry() {
+        await this.AddNewEntryButton().tap();
+    }
     async Save() {
         await this.SaveButton().tap();
-    }
-    async ApplyAll(sensitivities) {
-        if (sensitivities) {
-            for (let index = 0; index < sensitivities.length; index++) {
-                await this.Apply(sensitivities[index]);
-            }
-        }
     }
     /**
      * @param {Object} sensitivity
@@ -57,18 +74,24 @@ class InsulinSensitivitiesScreen {
     async Apply(sensitivity) {
         //select time unless this is the first Insulin Sensitivitiy we have set...
         if (sensitivity.time != "12:00 AM") {
-            await match.accessible.Label(`${sensitivity.time}`).atIndex(0).tap();
+            await action.ScrollPickerToValue("12:00 AM", `${sensitivity.time}`);
         }
-        await action.SetPickerValue(1, `${sensitivity.bgValuePerInsulinUnit} ${config.insulinSensitivitiesUnits}`);
+
+        //assumption this is new and starts at 500
+
+        await action.ScrollPickerToValue(500, `${sensitivity.bgValuePerInsulinUnit}`);
+
+        //await action.SetPickerValue(1, `${sensitivity.bgValuePerInsulinUnit} ${config.insulinSensitivitiesUnits}`);
     }
     /**
      * @param {Object} sensitivity
      * @param {String} sensitivity.time
      * @param {String} sensitivity.bgValuePerInsulinUnit
      */
-    async Edit(sensitivity) {
-        await match.accessible.Label(`${sensitivity.time}`).atIndex(0).tap();
-        await action.SetPickerValue(1, `${sensitivity.bgValuePerInsulinUnit} ${config.insulinSensitivitiesUnits}`);
+    async Edit(sensitivity, fromSensitivity) {
+        await match.accessible.Label(`${fromSensitivity.time}`).tap();
+        await action.ScrollPickerToValue(`${fromSensitivity.time}`, `${sensitivity.time}`);
+        await action.ScrollPickerToValue(`${fromSensitivity.bgValuePerInsulinUnit}`, `${sensitivity.bgValuePerInsulinUnit}`);
     }
 }
 

@@ -79,6 +79,14 @@ const action = {
         } while (count <= times);
 
     },
+    async SwipeQuantityPickerUp(times) {
+        let count = 1;
+        do {
+            await match.accessible.QuantityPicker().tap();//.swipe('up', 'fast', 0.5);
+            count++;
+        } while (count <= times);
+
+    },
     /**
      * @summary sets the pickers column to the given value
      */
@@ -89,7 +97,13 @@ const action = {
             count++;
         } while (count <= times);
     },
-
+    async SwipeQuantityPickerDown(times) {
+        let count = 1;
+        do {
+            await match.accessible.QuantityPicker().tap();//.swipe('down', 'fast', 0.5);
+            count++;
+        } while (count <= times);
+    },
 };
 
 module.exports = action;
