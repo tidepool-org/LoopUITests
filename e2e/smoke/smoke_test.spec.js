@@ -1,6 +1,5 @@
 const { Test, } = require('../../src/index');
-const { smokeTests } = require('../../tests/smoke/index');
-
+const { functionalityTests } = require('../../tests/functionality/index');
 const { accessibilityTests } = require('../../tests/accessibility/index');
 
 describe('smoke test', () => {
@@ -12,18 +11,18 @@ describe('smoke test', () => {
         describe('home screen', () => {
             accessibilityTests.homeScreenAccessibilityTests(test);
         });
-        // describe('carb entry screen', () => {
-        //     accessibilityTests.carbEntryScreenAccessibilityTests(test);
-        // });
-        // describe('settings screen', () => {
-        //     accessibilityTests.settingsScreenAccessibilityTests(test);
-        // });
-        // describe('bolus screen', () => {
-        //     accessibilityTests.bolusScreenAccessibilityTests(test);
-        // });
-        // describe('delivery limits settings screen', () => {
-        //     accessibilityTests.settingsDeliveryLimitsScreenAccessibilityTests(test);
-        // });
+        describe('carb entry screen', () => {
+            accessibilityTests.carbEntryScreenAccessibilityTests(test);
+        });
+        describe('settings screen', () => {
+            accessibilityTests.settingsScreenAccessibilityTests(test);
+        });
+        describe('bolus screen', () => {
+            accessibilityTests.bolusScreenAccessibilityTests(test);
+        });
+        describe('delivery limits settings screen', () => {
+            accessibilityTests.settingsDeliveryLimitsScreenAccessibilityTests(test);
+        });
         describe('insulin sensitivities settings screen', () => {
             accessibilityTests.settingsInsulinSensitivitiesScreenAccessibilityTests(test);
         });
@@ -39,18 +38,18 @@ describe('smoke test', () => {
             accessibilityTests.settingsBasalRatesScreenAccessibilityTests(test);
         });
     });
-    describe.skip('functionality', () => {
+    describe('functionality', () => {
         describe('home screen', () => {
-            smokeTests.functionalityTests.homeScreenFunctionalityTests(test);
+            functionalityTests.homeScreenFunctionalityTests(test);
         });
         describe('carb entry screen', () => {
-            smokeTests.functionalityTests.carbEntryScreenFunctionalityTests(test);
+            functionalityTests.carbEntryScreenFunctionalityTests(test);
         });
         describe('settings screen', () => {
-            smokeTests.functionalityTests.settingsScreenFunctionalityTests(test);
+            functionalityTests.settingsScreenFunctionalityTests(test);
         });
         describe('cleanup', () => {
-            smokeTests.functionalityTests.cleanupFunctionalityTests(test);
+            functionalityTests.cleanupFunctionalityTests(test);
         });
     });
 });

@@ -151,9 +151,9 @@ class SettingsScreen {
     }
     async ScrollToTop() {
         try {
-            await expect(match.accessible.Label(this.language.settingsScreen.Pump)).toBeVisible();
+            await expect(match.accessible.Label(this.language.settingsScreen.ClosedLoop)).toBeVisible();
         } catch (err) {
-            await match.accessible.Header(this.language.settingsScreen.Configuration).swipe('down', 'fast');
+            await match.accessible.Header(this.language.settingsScreen.Services).swipe('down', 'fast');
             await expect(match.accessible.Label(this.language.settingsScreen.Pump)).toBeVisible();
         }
     }
