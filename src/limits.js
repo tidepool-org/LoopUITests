@@ -5,12 +5,12 @@ var limits = {
     correctionRange: {
         max: {
             limit: 180,
-            warning: 120,
-            noWarning: 119,
+            warning: 121,
+            noWarning: 120,
         },
         min: {
-            noWarning: 71,
-            warning: 70,
+            noWarning: 100,
+            warning: 99,
             limit: 60,
         },
     },
