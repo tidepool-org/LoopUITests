@@ -151,9 +151,13 @@ var cleanupFunctionalityTests = (test) => {
     });
 };
 
-module.exports = {
+var functionalityTests = {
     settingsScreenFunctionalityTests,
     homeScreenFunctionalityTests,
     carbEntryScreenFunctionalityTests,
     cleanupFunctionalityTests
+};
+
+module.exports = {
+    functionalityTests
 };
