@@ -7,8 +7,8 @@ class SettingsScreen {
         this.cgmSimulatorScreen = new settingsSubScreen.CGMSimulatorScreen(language);
         this.basalRatesScreen = new settingsSubScreen.BasalRatesScreen(language);
         this.deliveryLimitsScreen = new settingsSubScreen.DeliveryLimitsScreen(language);
-        this.insulinSensitivitiesScreen = new settingsSubScreen.InsulinSensitivitiesScreen(language);
-        this.correctionRangeScreen = new settingsSubScreen.CorrectionRangeScreen(language);
+        this.insulinSensitivitiesScreen = new settingsSubScreen.InsulinSensitivitiesScreen(language, { maxStart: 500 });
+        this.correctionRangeScreen = new settingsSubScreen.CorrectionRangeScreen(language, { maxStart: 120, minStart: 100 });
         this.carbRatiosScreen = new settingsSubScreen.CarbRatiosScreen(language);
         this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language);
         this.issueReportScreen = new settingsSubScreen.IssueReportScreen(language);
