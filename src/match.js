@@ -74,6 +74,9 @@ const match = {
         Image(label) {
             return element(by.label(label).and(by.traits(['image'])));
         },
+        ImageAndId(label, theId) {
+            return element(by.label(label).and(by.traits(['image']).and(by.id(theId))));
+        },
         Header(label) {
             return element(by.label(label).and(by.traits(['header'])));
         },
@@ -138,14 +141,28 @@ const match = {
                         .and(by.traits(['text'])))
             ).atIndex(pickerNumber);
         },
+        QuantityPickerItem(itemLabel, id) {
+            return element(
+                by.type('SwiftUI.AccessibilityNode')
+                    .and(by.label(itemLabel)
+                        .and(by.traits(['text'])))
+                    .withAncestor(by.id(id))
+            ).atIndex(1);
+        },
         Picker() {
             return element(by.type('UIPickerView')).atIndex(1);
         },
-        TimePicker() {
+        TimePicker(id) {
+            if (id) {
+                return element(by.label('Time').and(by.type('UIPickerView').and(by.id(id))));
+            }
             return element(by.label('Time').and(by.type('UIPickerView')));
         },
-        QuantityPicker() {
-            return element(by.label('Quantity').and(by.type('UIPickerView')));
+        QuantityPicker(id) {
+            if (id) {
+                return element(by.label('Quantity').and(by.id(id)));
+            }
+            return element(by.label('Quantity'));
         },
         /**
          * @summary returns alert items based on the given label

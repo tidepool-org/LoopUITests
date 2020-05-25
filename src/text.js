@@ -74,6 +74,7 @@ var SettingsScreen = {
     InsulinSensitivityInfo: 'Your insulin sensitivity factor (ISF) is the drop in glucose expected from one unit of insulin.',
     SuspendThreshold: 'Suspend Threshold',
     CorrectionRange: 'Correction Range',
+    CorrectionRangeInfo: 'The app adjusts insulin delivery in an effort to bring your glucose into your correction range.',
     InsulinModel: 'Insulin Model',
     CarbRatios: 'Carb Ratios',
     ClosedLoop: 'Closed Loop',

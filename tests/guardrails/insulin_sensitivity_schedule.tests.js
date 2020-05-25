@@ -2,31 +2,69 @@ const { limits } = require('../../src/index');
 
 var insulinSensitivityScheduleTests = (test) => {
     var screen;
-    it('setup', async () => {
+    beforeAll(async () => {
         screen = await test.settingsScreen.OpenInsulinSensitivitiesScreen();
+    });
+    afterAll(async () => {
+        await screen.Cancel();
     });
     it('can set max units with warning', async () => {
         await screen.Add();
-        await screen.Apply({ time: '12:00 AM', bgValuePerInsulinUnit: limits.insulinSensitivities.max.limit });
+        await screen.Apply(
+            {
+                time: '12:00 AM',
+                bgValuePerInsulinUnit: limits.insulinSensitivities.max.limit
+            }
+        );
         await screen.AddNewEntry();
-        await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
-        await expect(screen.GuardrailWarningIconSave()).toBeVisible();
+        await expect(screen.GuardrailWarningIconPicker(0)).toBeVisible();
     });
-    it.skip('can set max lower boundary units with warning', async () => {
-        await screen.Edit(
+    it('can set max lower boundary units with warning', async () => {
+        await screen.Add();
+        await screen.Apply(
             { time: '12:00 AM', bgValuePerInsulinUnit: limits.insulinSensitivities.max.warning },
             { time: '12:00 AM', bgValuePerInsulinUnit: limits.insulinSensitivities.max.limit }
         );
-        await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
-        await expect(screen.GuardrailWarningIconSave()).toBeVisible();
+        await screen.AddNewEntry();
+        await expect(screen.GuardrailWarningIconPicker(1)).toBeVisible();
     });
-    it.skip('can set below max lower boundary units without warning', async () => {
-        await screen.Edit(
+    it('can set below max lower boundary units without warning', async () => {
+        await screen.Add();
+        await screen.Apply(
             { time: '12:00 AM', bgValuePerInsulinUnit: limits.insulinSensitivities.max.noWarning },
             { time: '12:00 AM', bgValuePerInsulinUnit: limits.insulinSensitivities.max.warning },
         );
-        await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
-        await expect(screen.GuardrailWarningIconSave()).toBeNotVisible();
+        await screen.AddNewEntry();
+        await expect(screen.GuardrailWarningIconPicker(2)).toBeNotVisible();
+    });
+
+    it('can set above min lower boundary units without warning', async () => {
+        await screen.Add();
+        await screen.Apply(
+            { time: '12:00 AM', bgValuePerInsulinUnit: limits.insulinSensitivities.min.noWarning },
+            { time: '12:00 AM', bgValuePerInsulinUnit: limits.insulinSensitivities.max.noWarning },
+        );
+        await screen.AddNewEntry();
+        await expect(screen.GuardrailWarningIconPicker(3)).toBeNotVisible();
+    });
+
+    it('can set at min lower boundary units with warning', async () => {
+        await screen.Add();
+        await screen.Apply(
+            { time: '12:00 AM', bgValuePerInsulinUnit: limits.insulinSensitivities.min.warning },
+            { time: '12:00 AM', bgValuePerInsulinUnit: limits.insulinSensitivities.min.noWarning },
+        );
+        await screen.AddNewEntry();
+        await expect(screen.GuardrailWarningIconPicker(4)).toBeVisible();
+    });
+    it('can set at min limit with warning', async () => {
+        await screen.Add();
+        await screen.Apply(
+            { time: '12:00 AM', bgValuePerInsulinUnit: limits.insulinSensitivities.min.limit },
+            { time: '12:00 AM', bgValuePerInsulinUnit: limits.insulinSensitivities.min.warning },
+        );
+        await screen.AddNewEntry();
+        await expect(screen.GuardrailWarningIconPicker(5)).toBeVisible();
     });
 };
 

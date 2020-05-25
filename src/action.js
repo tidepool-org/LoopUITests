@@ -1,5 +1,8 @@
 const match = require('./match');
 const element = require('detox').element;
+const { indexForTime } = require('./properties');
+
+
 
 var _nextPickerStep = function (currentValue, expectedValue) {
     let step = 1;
@@ -12,6 +15,21 @@ var _nextPickerStep = function (currentValue, expectedValue) {
         return currentValue + step;
     }
     return currentValue;
+}
+
+var _nextTimeStep = function (currentTime, expectedTime) {
+    expectedTimeIndex = indexForTime(expectedTime);
+    currentTimeIndex = indexForTime(currentTime);
+    let step = 1;
+    if (Math.abs(currentTimeIndex - expectedTimeIndex) >= 2) {
+        step = 2;
+    }
+    if (currentTimeIndex > expectedTimeIndex) {
+        return currentTimeIndex - step;
+    } else if (currentTimeIndex < expectedValue) {
+        return currentTimeIndex + step;
+    }
+    return currentTimeIndex;
 }
 
 const action = {
@@ -59,6 +77,24 @@ const action = {
             }
         } while (currentValue != expectedValue);
     },
+    async ScrollQuantityPicker(currentValue, expectedValue, id) {
+        if (currentValue == expectedValue) {
+            return;
+        }
+        do {
+            currentValue = _nextPickerStep(currentValue, expectedValue);
+            await match.accessible.QuantityPickerItem(`${currentValue}`, id).tap();
+        } while (currentValue != expectedValue);
+    },
+    async ScrollTimePicker(currentTime, expectedTime, id) {
+        // if (currentTime == expectedTime) {
+        //     return;
+        // }
+        // do {
+        //     currentTime = _nextTimeStep(currentTime, expectedTime);
+        //     await match.accessible.QuantityPickerItem(`${currentTime}`, id).tap();
+        // } while (currentTime != expectedTime);
+    },
     /**
      * @summary sets the pickers column to the given value
      */
@@ -79,10 +115,10 @@ const action = {
         } while (count <= times);
 
     },
-    async SwipeQuantityPickerUp(times) {
+    async SwipeQuantityPickerUp(times, id) {
         let count = 1;
         do {
-            await match.accessible.QuantityPicker().tap();//.swipe('up', 'fast', 0.5);
+            await match.accessible.QuantityPicker(id).swipe('up', 'fast', 0.5);
             count++;
         } while (count <= times);
 
@@ -97,10 +133,10 @@ const action = {
             count++;
         } while (count <= times);
     },
-    async SwipeQuantityPickerDown(times) {
+    async SwipeQuantityPickerDown(times, id) {
         let count = 1;
         do {
-            await match.accessible.QuantityPicker().tap();//.swipe('down', 'fast', 0.5);
+            await match.accessible.QuantityPicker(id).swipe('down', 'fast', 0.5);
             count++;
         } while (count <= times);
     },
