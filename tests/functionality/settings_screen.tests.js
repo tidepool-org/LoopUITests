@@ -1,30 +1,5 @@
 const { setting, limits } = require('../../src/index');
 
-var homeScreenFunctionalityTests = (test) => {
-    it('has Active Carbohydrates section', async () => {
-        await test.homeScreen.OpenActiveCarbohydratesChart();
-        await test.homeScreen.CloseChart();
-    });
-    it('has Active Insulin section', async () => {
-        await test.homeScreen.OpenActiveInsulinChart();
-        await test.homeScreen.CloseChart();
-    });
-    it('has Insulin Delivery section', async () => {
-        await test.homeScreen.OpenInsulinDeliveryChart();
-        await test.homeScreen.CloseChart();
-    });
-    it('has Glucose section', async () => {
-        await test.homeScreen.OpenGlucoseChart();
-        await test.homeScreen.CloseChart();
-    });
-    it('has Loop icon', async () => {
-        await test.homeScreen.ExpectLoopNotYetRun();
-    });
-    it.skip('has Loop icon has alert when not setup', async () => {
-        await test.homeScreen.ExpectLoopStatusGlucoseDataAlert();
-    });
-};
-
 var settingsScreenFunctionalityTests = (test) => {
     it('can open the settings', async () => {
         await test.settingsScreen.Open();
@@ -115,49 +90,6 @@ var settingsScreenFunctionalityTests = (test) => {
     });
 };
 
-var carbEntryScreenFunctionalityTests = (test) => {
-    it('open dialog', async () => {
-        await test.carbEntryScreen.Open();
-    });
-    it('cancel dialog', async () => {
-        await test.carbEntryScreen.Cancel();
-    });
-    it('set carbs and save without a bolus', async () => {
-        await test.carbEntryScreen.Open();
-        await test.carbEntryScreen.SetCarbs('30');
-        await test.carbEntryScreen.ContinueToBolus();
-        await test.carbEntryScreen.SaveWithoutBolus();
-    });
-};
-
-var cleanupFunctionalityTests = (test) => {
-    it('open settings', async () => {
-        await test.settingsScreen.Open();
-    });
-    it('remove pump data', async () => {
-        await test.settingsScreen.RemovePumpData();
-    });
-    it('remove pump', async () => {
-        await test.settingsScreen.RemovePump();
-    });
-    it.skip('remove CGM data', async () => {
-        await test.settingsScreen.RemoveCGMData();
-    });
-    it.skip('remove CGM', async () => {
-        await test.settingsScreen.RemoveCGM();
-    });
-    it('close settings', async () => {
-        await test.settingsScreen.Close();
-    });
-};
-
-var functionalityTests = {
-    settingsScreenFunctionalityTests,
-    homeScreenFunctionalityTests,
-    carbEntryScreenFunctionalityTests,
-    cleanupFunctionalityTests
-};
-
 module.exports = {
-    functionalityTests
+    settingsScreenFunctionalityTests
 };

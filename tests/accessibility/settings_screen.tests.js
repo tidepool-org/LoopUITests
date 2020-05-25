@@ -48,6 +48,7 @@ var settingsScreenAccessibilityTests = (test) => {
     });
     it('has a Insulin Sensitivities Label', async () => {
         //TODO: this is acting like a button!
+        await settingsScreen.ScrollToBottom();
         await expect(settingsScreen.InsulinSensitivitiesLabel()).toExist();
     });
     it('has a Closed Loop button', async () => {
