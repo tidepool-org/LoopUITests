@@ -1,6 +1,8 @@
 const { Test, } = require('../../src/index');
 const { smokeTests } = require('../../tests/smoke/index');
 
+const { accessibilityTests } = require('../../tests/accessibility/index');
+
 describe('smoke test', () => {
     var test = new Test();
     it('prepare test', async () => {
@@ -8,49 +10,47 @@ describe('smoke test', () => {
     });
     describe('accessibility', () => {
         describe('home screen', () => {
-            smokeTests.homeScreenAccessibilityTests(test);
+            accessibilityTests.homeScreenAccessibilityTests(test);
         });
-        describe('carb entry screen', () => {
-            smokeTests.carbEntryScreenAccessibilityTests(test);
+        // describe('carb entry screen', () => {
+        //     accessibilityTests.carbEntryScreenAccessibilityTests(test);
+        // });
+        // describe('settings screen', () => {
+        //     accessibilityTests.settingsScreenAccessibilityTests(test);
+        // });
+        // describe('bolus screen', () => {
+        //     accessibilityTests.bolusScreenAccessibilityTests(test);
+        // });
+        // describe('delivery limits settings screen', () => {
+        //     accessibilityTests.settingsDeliveryLimitsScreenAccessibilityTests(test);
+        // });
+        describe('insulin sensitivities settings screen', () => {
+            accessibilityTests.settingsInsulinSensitivitiesScreenAccessibilityTests(test);
         });
-        describe('settings screen', () => {
-            smokeTests.settingsScreenAccessibilityTests(test);
-        });
-        describe('bolus screen', () => {
-            smokeTests.bolusScreenAccessibilityTests(test);
-        });
-        describe('delivery limits settings screen', () => {
-            smokeTests.settingsDeliveryLimitsScreenAccessibilityTests(test);
+        describe('correction range settings screen', () => {
+            accessibilityTests.settingsCorrectionRangeScreenAccessibilityTests(test);
         });
         //TODO: update when development work complete
         describe.skip('carb ratios settings screen', () => {
-            smokeTests.settingsCarbRatiosScreenAccessibilityTests(test);
-        });
-        //TODO: update when development work complete
-        describe.skip('insulin sensitivities settings screen', () => {
-            smokeTests.settingsInsulinSensitivitiesScreenAccessibilityTests(test);
-        });
-        //TODO: update when development work complete
-        describe.skip('correction range settings screen', () => {
-            smokeTests.settingsCorrectionRangeScreenAccessibilityTests(test);
+            accessibilityTests.settingsCarbRatiosScreenAccessibilityTests(test);
         });
         //TODO: investigate issue
         describe.skip('basal rates settings screen', () => {
-            smokeTests.settingsBasalRatesScreenAccessibilityTests(test);
+            accessibilityTests.settingsBasalRatesScreenAccessibilityTests(test);
         });
     });
-    describe('functionality', () => {
+    describe.skip('functionality', () => {
         describe('home screen', () => {
-            smokeTests.homeScreenFunctionalityTests(test);
+            smokeTests.functionalityTests.homeScreenFunctionalityTests(test);
         });
         describe('carb entry screen', () => {
-            smokeTests.carbEntryScreenFunctionalityTests(test);
+            smokeTests.functionalityTests.carbEntryScreenFunctionalityTests(test);
         });
         describe('settings screen', () => {
-            smokeTests.settingsScreenFunctionalityTests(test);
+            smokeTests.functionalityTests.settingsScreenFunctionalityTests(test);
         });
         describe('cleanup', () => {
-            smokeTests.cleanupFunctionalityTests(test);
+            smokeTests.functionalityTests.cleanupFunctionalityTests(test);
         });
     });
 });
