@@ -18,9 +18,6 @@ var homeScreenFunctionalityTests = (test) => {
     it('has Loop icon', async () => {
         await test.homeScreen.ExpectLoopNotYetRun();
     });
-    it.skip('has Loop icon has alert when not setup', async () => {
-        await test.homeScreen.ExpectLoopStatusGlucoseDataAlert();
-    });
 };
 
 module.exports = {

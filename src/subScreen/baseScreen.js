@@ -30,7 +30,7 @@ class BaseScreen {
         return match.accessible.Button(this.language.general.Cancel);
     }
     NewEntryLabel() {
-        return match.accessible.Label('New Entry');
+        return match.accessible.Label(this.language.general.NewEntry);
     }
     InfoButton() {
         return match.accessible.Button(this.language.buttonLabel.InfoCircle);

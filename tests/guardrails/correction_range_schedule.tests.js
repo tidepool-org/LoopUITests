@@ -5,9 +5,9 @@ var correctionRangeScheduleTests = (test) => {
     beforeAll(async () => {
         screen = await test.settingsScreen.OpenCorrectionRangeScreen();
     });
-    // afterAll(async () => {
-    //     await screen.Cancel();
-    // });
+    afterAll(async () => {
+        await screen.Cancel();
+    });
     it('can set max units at limit', async () => {
         await screen.Add();
         await screen.Apply({

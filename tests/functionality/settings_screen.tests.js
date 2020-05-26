@@ -59,29 +59,26 @@ var settingsScreenFunctionalityTests = (test) => {
             await screen.Close();
 
         });
+        it('set insulin sensitivites', async () => {
+            let screen = await test.settingsScreen.OpenInsulinSensitivitiesScreen();
+            await screen.Add();
+            await screen.Apply(setting.default.InsulinSensitivities[0]);
+            await screen.AddNewEntry();
+            await screen.Save();
+
+        });
+        it('set correction range', async () => {
+            let screen = await test.settingsScreen.OpenCorrectionRangeScreen();
+            await screen.Add();
+            await screen.Apply(setting.default.CorrectionRanges[0]);
+            await screen.AddNewEntry();
+            await screen.Save();
+        });
+
         //TODO: update when development work complete
         it.skip('set carb ratios', async () => {
             let screen = await test.settingsScreen.OpenCarbRatiosScreen();
             await screen.ApplyAll(setting.default.CarbRatios);
-            await screen.Close();
-        });
-        //TODO: update when development work complete
-        it.skip('set insulin sensitivites', async () => {
-            let screen = await test.settingsScreen.OpenInsulinSensitivitiesScreen();
-            await screen.ApplyAll(setting.default.InsulinSensitivities);
-            await screen.Save();
-            await screen.Close();
-        });
-        //TODO: update when development work complete
-        it.skip('set correction range', async () => {
-            let screen = await test.settingsScreen.OpenCorrectionRangeScreen();
-            await screen.OpenPicker();
-            await screen.SetTime('12:00 AM');
-            await screen.Apply({
-                min: limits.correctionRange.max.limit,
-                max: limits.correctionRange.max.limit,
-            });
-            await screen.Save();
             await screen.Close();
         });
     });

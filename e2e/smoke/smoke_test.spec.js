@@ -29,13 +29,13 @@ describe('smoke test', () => {
         describe('correction range settings screen', () => {
             accessibilityTests.settingsCorrectionRangeScreenAccessibilityTests(test);
         });
+        //TODO: not accesible via simulator. Need to investigate
+        describe.skip('basal rates settings screen', () => {
+            accessibilityTests.settingsBasalRatesScreenAccessibilityTests(test);
+        });
         //TODO: update when development work complete
         describe.skip('carb ratios settings screen', () => {
             accessibilityTests.settingsCarbRatiosScreenAccessibilityTests(test);
-        });
-        //TODO: investigate issue
-        describe.skip('basal rates settings screen', () => {
-            accessibilityTests.settingsBasalRatesScreenAccessibilityTests(test);
         });
     });
     describe('functionality', () => {

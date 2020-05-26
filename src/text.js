@@ -10,6 +10,7 @@ var ButtonLabel = {
 };
 
 var General = {
+    NewEntry: 'New Entry',
     Cancel: 'Cancel',
     Continue: 'Continue',
     Done: 'Done',
