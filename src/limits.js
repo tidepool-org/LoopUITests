@@ -5,24 +5,25 @@ var limits = {
     correctionRange: {
         max: {
             limit: 180,
-            warning: 120,
-            noWarning: 119,
+            warning: 121,
+            noWarning: 120,
         },
         min: {
-            noWarning: 71,
-            warning: 70,
+            noWarning: 100,
+            warning: 99,
             limit: 60,
         },
     },
     insulinSensitivities: {
-        step: 1,
         max: {
             limit: 500,
             warning: 400,
+            noWarning: 399,
         },
         min: {
-            limit: 10,
+            noWarning: 16,
             warning: 15,
+            limit: 10,
         },
     },
     bolusDelivery: {

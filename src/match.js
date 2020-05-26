@@ -74,6 +74,9 @@ const match = {
         Image(label) {
             return element(by.label(label).and(by.traits(['image'])));
         },
+        ImageAndId(label, theId) {
+            return element(by.label(label).and(by.traits(['image']).and(by.id(theId))));
+        },
         Header(label) {
             return element(by.label(label).and(by.traits(['header'])));
         },
@@ -97,40 +100,6 @@ const match = {
          * @param {string} itemLabel
          * @returns {Detox.Element}
          */
-        PickerItem(pickerNumber, itemLabel) {
-            return element(
-                by.type('UILabel')
-                    .and(by.label(itemLabel)
-                        .and(by.traits(['text'])))
-                    .withAncestor(
-                        by.type('UIPickerTableViewTitledCell')
-                            .withAncestor(
-                                by.type('UIPickerColumnView')
-                                    .withAncestor(
-                                        by.type('UIPickerView')
-                                    )
-                            )
-                    )).atIndex(pickerNumber);
-        },
-        /**
-         * @summary returns Picker item(s) for given label and index
-         * @param {Integer} pickerNumber
-         * @param {string} itemLabel
-         * @returns {Detox.Element}
-         */
-        PickerItem_legacy(pickerNumber, itemLabel) {
-            return element(
-                by.type('UILabel')
-                    .and(by.label(itemLabel)
-                        .and(by.traits(['text'])))
-            ).atIndex(pickerNumber);
-        },
-        /**
-         * @summary returns Picker item(s) for given label and index
-         * @param {Integer} pickerNumber
-         * @param {string} itemLabel
-         * @returns {Detox.Element}
-         */
         PickerItem_v2(pickerNumber, itemLabel) {
             return element(
                 by.type('SwiftUI.AccessibilityNode')
@@ -138,8 +107,22 @@ const match = {
                         .and(by.traits(['text'])))
             ).atIndex(pickerNumber);
         },
+        QuantityPickerItem(itemLabel, id) {
+            return element(
+                by.type('SwiftUI.AccessibilityNode')
+                    .and(by.label(itemLabel)
+                        .and(by.traits(['text'])))
+                    .withAncestor(by.id(id))
+            ).atIndex(1);
+        },
         Picker() {
             return element(by.type('UIPickerView')).atIndex(1);
+        },
+        QuantityPicker(id) {
+            if (id) {
+                return element(by.label('Quantity').and(by.id(id)));
+            }
+            return element(by.label('Quantity'));
         },
         /**
          * @summary returns alert items based on the given label

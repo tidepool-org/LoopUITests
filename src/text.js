@@ -4,7 +4,13 @@ var Units = {
     InsulinSensitivitiesUnits: 'mg/dL/U',
 };
 
+var ButtonLabel = {
+    Plus: 'plus',
+    InfoCircle: 'info.circle',
+};
+
 var General = {
+    NewEntry: 'New Entry',
     Cancel: 'Cancel',
     Continue: 'Continue',
     Done: 'Done',
@@ -14,6 +20,7 @@ var General = {
     Edit: 'Edit',
     Status: 'Status',
     OK: 'OK',
+    Plus: 'plus',
 };
 
 var HomeScreen = {
@@ -65,8 +72,11 @@ var SettingsScreen = {
     SaveToSimulator: 'Save to simulator',
     DeliveryLimits: 'Delivery Limits',
     InsulinSensitivities: 'Insulin Sensitivities',
+    InsulinSensitivityInfo: 'Your insulin sensitivity factor (ISF) is the drop in glucose expected from one unit of insulin.',
     SuspendThreshold: 'Suspend Threshold',
+    SuspendThresholdInfo: 'When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/h and will not recommend a bolus.',
     CorrectionRange: 'Correction Range',
+    CorrectionRangeInfo: 'The app adjusts insulin delivery in an effort to bring your glucose into your correction range.',
     InsulinModel: 'Insulin Model',
     CarbRatios: 'Carb Ratios',
     ClosedLoop: 'Closed Loop',
@@ -110,7 +120,8 @@ var text = {
     cgmSimulatorSettingsScreen: CGMSimulatorSettingsScreen,
     overridesScreen: TempOverrideScreen,
     homeScreen: HomeScreen,
-    timeSlots: TimeSlots
+    timeSlots: TimeSlots,
+    buttonLabel: ButtonLabel,
 };
 
 module.exports = text;

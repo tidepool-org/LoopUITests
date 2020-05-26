@@ -24,16 +24,12 @@ describe('functional test', () => {
         describe('suspend threshold', () => {
             guardrailsTests.suspendThresholdTests(test);
         });
-        //TODO: update when development work complete
-        describe.skip('correction range schedule', () => {
+        describe('correction range schedule', () => {
             guardrailsTests.correctionRangeScheduleTests(test);
         });
         //TODO: update when development work complete
         describe.skip('insulin carb ratio', () => {
             guardrailsTests.insulinCarbRatioTests(test);
-        });
-        describe.skip('insulin sensitivity schedule', () => {
-            guardrailsTests.insulinSensitivityScheduleTests(test);
         });
     });
 });

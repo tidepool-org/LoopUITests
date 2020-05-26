@@ -115,13 +115,13 @@ class Test {
         }
 
         if (this.settings) {
-            await this.settingsScreen.Open();
+            await this.OpenSettingsScreen();
             if (this.filter) {
                 this.settings = this._filterSettings(this.settings, this.filter)
             }
             await this.settingsScreen.Apply(this.settings);
         } else if (this.simulators) {
-            await this.settingsScreen.Open();
+            await this.OpenSettingsScreen();
             if (this.simulators.cgm) {
                 await this.settingsScreen.AddCGMSimulator();
             }
@@ -136,10 +136,10 @@ class Test {
     }
 
     async removeData() {
-        await this.settingsScreen.Open();
-        await this.settingsScreen.RemoveCGMData();
-        await this.settingsScreen.RemovePumpData();
-        await this.settingsScreen.Close();
+        var screen = await this.OpenSettingsScreen();
+        await screen.RemoveCGMData();
+        await screen.RemovePumpData();
+        await screen.Close();
     }
 
     async advanceScenario(cycles) {

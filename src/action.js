@@ -15,29 +15,6 @@ var _nextPickerStep = function (currentValue, expectedValue) {
 }
 
 const action = {
-    async ScrollCorrectionRangePickers(range, current) {
-
-        let currentMax = current;
-        let expectedMax = range.max;
-        let currentMin = range.max;
-        let expectedMin = range.min;
-
-        do {
-            await match.accessible.PickerItem(1, `${currentMax}`).tap();
-            currentMax--;
-        } while (currentMax >= expectedMax);
-
-        do {
-            if (currentMin == expectedMax) {
-                await match.accessible.PickerItem(4, `${currentMin}`).tap();
-            } else if (currentMin == (expectedMax - 1)) {
-                await match.accessible.PickerItem(2, `${currentMin}`).tap();
-            } else {
-                await match.accessible.PickerItem(1, `${currentMin}`).tap();
-            }
-            currentMin--;
-        } while (currentMin >= expectedMin);
-    },
     /**
      * @summary scroll the picker to the given `expectedValue`
      */
@@ -57,6 +34,15 @@ const action = {
                     await match.accessible.PickerItem_v2(2, `${currentValue}`).tap();
                 }
             }
+        } while (currentValue != expectedValue);
+    },
+    async ScrollQuantityPicker(currentValue, expectedValue, id) {
+        if (currentValue == expectedValue) {
+            return;
+        }
+        do {
+            currentValue = _nextPickerStep(currentValue, expectedValue);
+            await match.accessible.QuantityPickerItem(`${currentValue}`, id).tap();
         } while (currentValue != expectedValue);
     },
     /**
@@ -79,6 +65,14 @@ const action = {
         } while (count <= times);
 
     },
+    async SwipeQuantityPickerUp(times, id) {
+        let count = 1;
+        do {
+            await match.accessible.QuantityPicker(id).swipe('up', 'fast', 0.5);
+            count++;
+        } while (count <= times);
+
+    },
     /**
      * @summary sets the pickers column to the given value
      */
@@ -89,7 +83,13 @@ const action = {
             count++;
         } while (count <= times);
     },
-
+    async SwipeQuantityPickerDown(times, id) {
+        let count = 1;
+        do {
+            await match.accessible.QuantityPicker(id).swipe('down', 'fast', 0.5);
+            count++;
+        } while (count <= times);
+    },
 };
 
 module.exports = action;
