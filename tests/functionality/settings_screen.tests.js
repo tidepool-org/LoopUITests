@@ -38,7 +38,7 @@ var settingsScreenFunctionalityTests = (test) => {
         it('set suspend threshold', async () => {
             let screen = await test.settingsScreen.OpenSuspendThresholdScreen();
             await screen.OpenPicker();
-            await screen.Apply({ value: limits.suspendThreshold.min.noWarning }, 80);
+            await screen.Apply({ value: limits.suspendThreshold.min.noWarning });
             await screen.Save();
         });
         it('set basal rates', async () => {

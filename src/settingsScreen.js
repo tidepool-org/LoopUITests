@@ -7,12 +7,13 @@ class SettingsScreen {
         this.cgmSimulatorScreen = new settingsSubScreen.CGMSimulatorScreen(language);
         this.basalRatesScreen = new settingsSubScreen.BasalRatesScreen(language);
         this.deliveryLimitsScreen = new settingsSubScreen.DeliveryLimitsScreen(language);
-        this.insulinSensitivitiesScreen = new settingsSubScreen.InsulinSensitivitiesScreen(language, { maxStart: 500 });
-        this.correctionRangeScreen = new settingsSubScreen.CorrectionRangeScreen(language, { maxStart: 120, minStart: 100 });
         this.carbRatiosScreen = new settingsSubScreen.CarbRatiosScreen(language);
-        this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language);
         this.issueReportScreen = new settingsSubScreen.IssueReportScreen(language);
         this.insulinModelScreen = new settingsSubScreen.InsulinModelScreen(language);
+        //TODO: decide where to set these configuration values
+        this.insulinSensitivitiesScreen = new settingsSubScreen.InsulinSensitivitiesScreen(language, { maxStart: 500 });
+        this.correctionRangeScreen = new settingsSubScreen.CorrectionRangeScreen(language, { maxStart: 120, minStart: 100 });
+        this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language, { start: 80 });
     }
     async _selectPumpSimulator() {
         await match.accessible.Id('Simulator Small').tap();
@@ -152,7 +153,7 @@ class SettingsScreen {
         try {
             await expect(match.accessible.Label(this.language.settingsScreen.ClosedLoop)).toBeVisible();
         } catch (err) {
-            await match.accessible.Header(this.language.settingsScreen.Services).swipe('down', 'fast');
+            await match.accessible.Label(this.language.settingsScreen.Services).swipe('down', 'fast');
         }
     }
     /**

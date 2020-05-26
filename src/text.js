@@ -74,6 +74,7 @@ var SettingsScreen = {
     InsulinSensitivities: 'Insulin Sensitivities',
     InsulinSensitivityInfo: 'Your insulin sensitivity factor (ISF) is the drop in glucose expected from one unit of insulin.',
     SuspendThreshold: 'Suspend Threshold',
+    SuspendThresholdInfo: 'When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/h and will not recommend a bolus.',
     CorrectionRange: 'Correction Range',
     CorrectionRangeInfo: 'The app adjusts insulin delivery in an effort to bring your glucose into your correction range.',
     InsulinModel: 'Insulin Model',

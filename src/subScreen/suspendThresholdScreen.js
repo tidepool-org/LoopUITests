@@ -1,33 +1,15 @@
 const match = require('../match');
 const action = require('../action');
 
-class SuspendThresholdScreen {
-    constructor(language) {
-        this.language = language;
-    }
-    Header() {
-        return match.accessible.Header(this.language.settingsScreen.SuspendThreshold);
-    }
-    CancelButton() {
-        return match.accessible.ButtonBarButton(this.language.general.Cancel);
-    }
-    SaveButton() {
-        return match.accessible.Button(this.language.general.Save);
-    }
-    GuardrailWarningIconPicker() {
-        return match.accessible.Image(this.language.alerts.ExclamationMark).atIndex(0);
-    }
-    GuardrailWarningIconSave() {
-        return match.accessible.Image(this.language.alerts.ExclamationMark).atIndex(1);
-    }
-    GuardrailWarningText(text) {
-        return match.accessible.Label(text);
-    }
-    async Save() {
-        await this.SaveButton().tap();
-    }
-    async Cancel() {
-        await this.CancelButton().tap();
+const { BaseEntryScreen } = require('./baseEntryScreen');
+
+class SuspendThresholdScreen extends BaseEntryScreen {
+    constructor(language, config) {
+        super(language, {
+            HeaderLabel: language.settingsScreen.SuspendThreshold,
+            InfoLabel: language.settingsScreen.SuspendThresholdInfo,
+        });
+        this.config = config;
     }
     async OpenPicker() {
         await match.accessible.Label(this.language.units.Glucose).atIndex(0).tap();
@@ -39,13 +21,15 @@ class SuspendThresholdScreen {
         await action.SwipePickerDown(3);
     }
     /**
-     * @param {object} threshold
-     * @param {number} threshold.value
-     * @param {number} startAt optional, starting point on the picker
+     * @param {object} expectedThreshold
+     * @param {number} expectedThreshold.value
+     * @param {object} currentThreshold optional
      **/
-    async Apply(threshold, startAt) {
-        if (threshold) {
-            await action.ScrollPickerToValue(startAt, threshold.value);
+    async Apply(expectedThreshold, currentThreshold) {
+        if (currentThreshold) {
+            await action.ScrollPickerToValue(currentThreshold.value, expectedThreshold.value);
+        } else {
+            await action.ScrollPickerToValue(this.config.start, expectedThreshold.value);
         }
     }
 }

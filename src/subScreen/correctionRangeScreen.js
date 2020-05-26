@@ -1,12 +1,11 @@
-const match = require('../match');
 const action = require('../action');
 
-const { BaseScreen } = require('./baseScreen');
+const { BaseEntriesScreen } = require('./baseEntriesScreen');
 
 const maxGlucosePickerID = 'max_glucose_picker';
 const minGlucosePickerID = 'min_glucose_picker';
 
-class CorrectionRangeScreen extends BaseScreen {
+class CorrectionRangeScreen extends BaseEntriesScreen {
     constructor(language, config) {
         super(language, {
             HeaderLabel: language.settingsScreen.CorrectionRange,
