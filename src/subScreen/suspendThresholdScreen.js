@@ -25,7 +25,7 @@ class SuspendThresholdScreen extends BaseEntryScreen {
      * @param {number} expectedThreshold.value
      * @param {object} currentThreshold optional
      **/
-    async Apply(expectedThreshold, currentThreshold) {
+    async ApplyOne(expectedThreshold, currentThreshold) {
         if (currentThreshold) {
             await action.ScrollPickerToValue(currentThreshold.value, expectedThreshold.value);
         } else {

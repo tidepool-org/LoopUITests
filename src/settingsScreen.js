@@ -173,10 +173,8 @@ class SettingsScreen {
             await screen.Close();
         }
         if (values.CorrectionRanges) {
-            let screen = this.OpenCorrectionRangeScreen();
             await screen.ApplyAll(values.CorrectionRanges);
             await screen.Save();
-            await screen.Close();
         }
         if (values.BasalRates) {
             let screen = this.OpenBasalRatesScreen();
@@ -194,7 +192,6 @@ class SettingsScreen {
             let screen = this.OpenInsulinSensitivitiesScreen();
             await screen.ApplyAll(values.InsulinSensitivities);
             await screen.Save();
-            await screen.Close();
         }
         if (values.CarbRatios) {
             let screen = this.OpenCarbRatiosScreen();

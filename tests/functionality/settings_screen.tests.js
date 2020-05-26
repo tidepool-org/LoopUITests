@@ -38,7 +38,7 @@ var settingsScreenFunctionalityTests = (test) => {
         it('set suspend threshold', async () => {
             let screen = await test.settingsScreen.OpenSuspendThresholdScreen();
             await screen.OpenPicker();
-            await screen.Apply({ value: limits.suspendThreshold.min.noWarning });
+            await screen.ApplyOne({ value: limits.suspendThreshold.min.noWarning });
             await screen.Save();
         });
         it('set basal rates', async () => {
@@ -62,7 +62,7 @@ var settingsScreenFunctionalityTests = (test) => {
         it('set insulin sensitivites', async () => {
             let screen = await test.settingsScreen.OpenInsulinSensitivitiesScreen();
             await screen.Add();
-            await screen.Apply(setting.default.InsulinSensitivities[0]);
+            await screen.ApplyOne(setting.default.InsulinSensitivities[0]);
             await screen.AddNewEntry();
             await screen.Save();
 
@@ -70,7 +70,7 @@ var settingsScreenFunctionalityTests = (test) => {
         it('set correction range', async () => {
             let screen = await test.settingsScreen.OpenCorrectionRangeScreen();
             await screen.Add();
-            await screen.Apply(setting.default.CorrectionRanges[0]);
+            await screen.ApplyOne(setting.default.CorrectionRanges[0]);
             await screen.AddNewEntry();
             await screen.Save();
         });

@@ -11,14 +11,14 @@ var suspendThresholdTests = (test) => {
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
     });
     it('can set max lower boundary units with warning', async () => {
-        await screen.Apply(
+        await screen.ApplyOne(
             { value: limits.suspendThreshold.max.warning },
             { value: limits.suspendThreshold.max.limit },
         );
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
     });
     it('can set below max lower boundary units without warning', async () => {
-        await screen.Apply(
+        await screen.ApplyOne(
             { value: limits.suspendThreshold.max.noWarning },
             { value: limits.suspendThreshold.max.warning },
         );
@@ -29,14 +29,14 @@ var suspendThresholdTests = (test) => {
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
     });
     it('can set min upper boundary units with warning', async () => {
-        await screen.Apply(
+        await screen.ApplyOne(
             { value: limits.suspendThreshold.min.warning },
             { value: limits.suspendThreshold.min.limit },
         );
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
     });
     it('can set above min upper boundary units with no warning', async () => {
-        await screen.Apply(
+        await screen.ApplyOne(
             { value: limits.suspendThreshold.min.noWarning },
             { value: limits.suspendThreshold.min.warning },
         );

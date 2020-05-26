@@ -10,7 +10,7 @@ var correctionRangeScheduleTests = (test) => {
     });
     it('can set max units at limit', async () => {
         await screen.Add();
-        await screen.Apply({
+        await screen.ApplyOne({
             min: 100,
             max: limits.correctionRange.max.limit,
         });
@@ -19,7 +19,7 @@ var correctionRangeScheduleTests = (test) => {
     });
     it('can set max units with warning', async () => {
         await screen.Add();
-        await screen.Apply(
+        await screen.ApplyOne(
             {
                 min: 100,
                 max: limits.correctionRange.max.warning,
@@ -33,7 +33,7 @@ var correctionRangeScheduleTests = (test) => {
     });
     it('can set max units with no warning', async () => {
         await screen.Add();
-        await screen.Apply(
+        await screen.ApplyOne(
             {
                 min: 100,
                 max: limits.correctionRange.max.noWarning,
@@ -47,7 +47,7 @@ var correctionRangeScheduleTests = (test) => {
     });
     it('can set min units with no warning', async () => {
         await screen.Add();
-        await screen.Apply(
+        await screen.ApplyOne(
             {
                 min: limits.correctionRange.min.noWarning,
                 max: limits.correctionRange.max.noWarning,
@@ -61,7 +61,7 @@ var correctionRangeScheduleTests = (test) => {
     });
     it('can set min units with warning', async () => {
         await screen.Add();
-        await screen.Apply(
+        await screen.ApplyOne(
             {
                 min: limits.correctionRange.min.warning,
                 max: limits.correctionRange.max.noWarning,
@@ -75,7 +75,7 @@ var correctionRangeScheduleTests = (test) => {
     });
     it('can set min units at limit', async () => {
         await screen.Add();
-        await screen.Apply(
+        await screen.ApplyOne(
             {
                 min: limits.correctionRange.min.limit,
                 max: limits.correctionRange.max.noWarning,

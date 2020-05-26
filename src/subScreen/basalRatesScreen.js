@@ -30,7 +30,7 @@ class BasalRatesScreen {
      * @param {String} rate.time
      * @param {String} rate.unitsPerHour
      */
-    async Apply(rate) {
+    async ApplyOne(rate) {
         if (rate) {
             await this.AddButton().tap();
             await match.accessible.Label(`${rate.time}`).atIndex(0).tap();
@@ -44,7 +44,7 @@ class BasalRatesScreen {
     async ApplyAll(rates) {
         if (rates) {
             for (let index = 0; index < rates.length; index++) {
-                await this.Apply(rates[index]);
+                await this.ApplyOne(rates[index]);
             }
         }
     }
