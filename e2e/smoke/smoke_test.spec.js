@@ -29,7 +29,7 @@ describe('smoke test', () => {
         describe('correction range settings screen', () => {
             accessibilityTests.settingsCorrectionRangeScreenAccessibilityTests(test);
         });
-        describe('correction suspend threshold screen', () => {
+        describe('suspend threshold screen', () => {
             accessibilityTests.settingsSuspendThresholdScreenAccessibilityTests(test);
         });
         //TODO: not accesible via simulator. Need to investigate

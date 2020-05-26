@@ -100,40 +100,6 @@ const match = {
          * @param {string} itemLabel
          * @returns {Detox.Element}
          */
-        PickerItem(pickerNumber, itemLabel) {
-            return element(
-                by.type('UILabel')
-                    .and(by.label(itemLabel)
-                        .and(by.traits(['text'])))
-                    .withAncestor(
-                        by.type('UIPickerTableViewTitledCell')
-                            .withAncestor(
-                                by.type('UIPickerColumnView')
-                                    .withAncestor(
-                                        by.type('UIPickerView')
-                                    )
-                            )
-                    )).atIndex(pickerNumber);
-        },
-        /**
-         * @summary returns Picker item(s) for given label and index
-         * @param {Integer} pickerNumber
-         * @param {string} itemLabel
-         * @returns {Detox.Element}
-         */
-        PickerItem_legacy(pickerNumber, itemLabel) {
-            return element(
-                by.type('UILabel')
-                    .and(by.label(itemLabel)
-                        .and(by.traits(['text'])))
-            ).atIndex(pickerNumber);
-        },
-        /**
-         * @summary returns Picker item(s) for given label and index
-         * @param {Integer} pickerNumber
-         * @param {string} itemLabel
-         * @returns {Detox.Element}
-         */
         PickerItem_v2(pickerNumber, itemLabel) {
             return element(
                 by.type('SwiftUI.AccessibilityNode')
@@ -151,12 +117,6 @@ const match = {
         },
         Picker() {
             return element(by.type('UIPickerView')).atIndex(1);
-        },
-        TimePicker(id) {
-            if (id) {
-                return element(by.label('Time').and(by.type('UIPickerView').and(by.id(id))));
-            }
-            return element(by.label('Time').and(by.type('UIPickerView')));
         },
         QuantityPicker(id) {
             if (id) {
