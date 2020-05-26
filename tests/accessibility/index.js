@@ -9,6 +9,7 @@ const { settingsInsulinSensitivitiesScreenAccessibilityTests } = require('./sett
 const { settingsCorrectionRangeScreenAccessibilityTests } = require('./settings_correction_range_screen.tests');
 const { settingsIssueReportScreenAccessibilityTests } = require('./settings_issue_report_screen.tests');
 const { settingsInsulinModelScreenAccessibilityTests } = require('./settings_insulin_model_screen.tests');
+const { settingsSuspendThresholdScreenAccessibilityTests } = require('./settings_suspend_threshold_screen.tests');
 
 var accessibilityTests = {
     homeScreenAccessibilityTests,
@@ -22,6 +23,7 @@ var accessibilityTests = {
     settingsCorrectionRangeScreenAccessibilityTests,
     settingsIssueReportScreenAccessibilityTests,
     settingsInsulinModelScreenAccessibilityTests,
+    settingsSuspendThresholdScreenAccessibilityTests,
 };
 
 module.exports = {
