@@ -1,8 +1,5 @@
 const match = require('./match');
 const element = require('detox').element;
-const { indexForTime } = require('./properties');
-
-
 
 var _nextPickerStep = function (currentValue, expectedValue) {
     let step = 1;
@@ -17,45 +14,7 @@ var _nextPickerStep = function (currentValue, expectedValue) {
     return currentValue;
 }
 
-var _nextTimeStep = function (currentTime, expectedTime) {
-    expectedTimeIndex = indexForTime(expectedTime);
-    currentTimeIndex = indexForTime(currentTime);
-    let step = 1;
-    if (Math.abs(currentTimeIndex - expectedTimeIndex) >= 2) {
-        step = 2;
-    }
-    if (currentTimeIndex > expectedTimeIndex) {
-        return currentTimeIndex - step;
-    } else if (currentTimeIndex < expectedValue) {
-        return currentTimeIndex + step;
-    }
-    return currentTimeIndex;
-}
-
 const action = {
-    async ScrollCorrectionRangePickers(range, current) {
-
-        let currentMax = current;
-        let expectedMax = range.max;
-        let currentMin = range.max;
-        let expectedMin = range.min;
-
-        do {
-            await match.accessible.PickerItem(1, `${currentMax}`).tap();
-            currentMax--;
-        } while (currentMax >= expectedMax);
-
-        do {
-            if (currentMin == expectedMax) {
-                await match.accessible.PickerItem(4, `${currentMin}`).tap();
-            } else if (currentMin == (expectedMax - 1)) {
-                await match.accessible.PickerItem(2, `${currentMin}`).tap();
-            } else {
-                await match.accessible.PickerItem(1, `${currentMin}`).tap();
-            }
-            currentMin--;
-        } while (currentMin >= expectedMin);
-    },
     /**
      * @summary scroll the picker to the given `expectedValue`
      */
@@ -85,15 +44,6 @@ const action = {
             currentValue = _nextPickerStep(currentValue, expectedValue);
             await match.accessible.QuantityPickerItem(`${currentValue}`, id).tap();
         } while (currentValue != expectedValue);
-    },
-    async ScrollTimePicker(currentTime, expectedTime, id) {
-        // if (currentTime == expectedTime) {
-        //     return;
-        // }
-        // do {
-        //     currentTime = _nextTimeStep(currentTime, expectedTime);
-        //     await match.accessible.QuantityPickerItem(`${currentTime}`, id).tap();
-        // } while (currentTime != expectedTime);
     },
     /**
      * @summary sets the pickers column to the given value
