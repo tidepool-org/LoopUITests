@@ -101,7 +101,7 @@ var PumpSimulatorSettingsScreen = {
     PumpSettings: 'Pump Settings',
     RemainingReservoir: 'Remaining Reservoir',
     RemainingBattery: 'Remaining Battery',
-    ErrorOnTempBasal: 'Rrror on Temp Basal',
+    ErrorOnTempBasal: 'Error on Temp Basal',
     ErrorOnBolus: 'Error on Bolus',
     ErrorOnSuspend: 'Error on Suspend',
     ErrorOnResume: 'Error on Resume',
