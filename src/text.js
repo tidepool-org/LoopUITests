@@ -99,8 +99,8 @@ var CGMSimulatorSettingsScreen = {
 
 var PumpSimulatorSettingsScreen = {
     PumpSettings: 'Pump Settings',
-    RemainingReservoir: 'Remaining Reservoir',
-    RemainingBattery: 'Remaining Battery',
+    ReservoirRemaining: 'Reservoir Remaining',
+    BatteryRemaining: 'Battery Remaining',
     ErrorOnTempBasal: 'Error on Temp Basal',
     ErrorOnBolus: 'Error on Bolus',
     ErrorOnSuspend: 'Error on Suspend',

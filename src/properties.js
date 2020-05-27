@@ -52,7 +52,7 @@ var settingDefault = {
     AddCGMSimulator: true,
     AddPumpSimulator: true,
     CGMSimulatorSettings: { modelData: { model: settingCGMModel.Constant, bgValues: [110] }, backfillHours: '6' },
-    PumpSimulatorSettings: { errorOnBolus: false, errorOnTempBasal: false, errorOnSuspend: false, errorOnResume: false, remainingReservoir: 200, remainingBattery: 100 }
+    PumpSimulatorSettings: { errorOnBolus: false, errorOnTempBasal: false, errorOnSuspend: false, errorOnResume: false, reservoirRemaining: 188, batteryRemaining: 85 }
 };
 
 /**

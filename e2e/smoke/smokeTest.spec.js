@@ -51,8 +51,8 @@ describe('smoke test', () => {
         describe('settings screen', () => {
             functionalityTests.settingsScreenFunctionalityTests(test);
         });
-        describe('cleanup', () => {
-            functionalityTests.cleanupFunctionalityTests(test);
+        describe('pump simulator screen', () => {
+            functionalityTests.pumpSimulatorScreenTests(test);
         });
     });
 });

@@ -1,3 +1,4 @@
+const element = require('detox').element;
 const match = require('../match');
 
 class PumpSimulatorScreen {
@@ -13,18 +14,18 @@ class PumpSimulatorScreen {
     ConfigurationHeader() {
         return match.accessible.Header(this.language.settingsScreen.Configuration);
     }
-    RemainingReservoirLabel() {
-        return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.PumpSettings);
+    ReservoirRemainingLabel() {
+        return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.ReservoirRemaining);
     }
-    RemainingBatteryLabel() {
-        return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.RemainingBattery);
+    BatteryRemainingLabel() {
+        return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.BatteryRemaining);
     }
     ErrorOnTempBasalLabel() {
         return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.ErrorOnTempBasal);
     }
     async _isErrorOnTempBasal() {
         try {
-            await waitFor(this.ErrorOnTempBasalButton()).toHaveValue('1').withTimeout(2000);
+            await expect(this.ErrorOnTempBasalButton()).toHaveValue('1');
             return true;
         } catch (error) {
             return false;
@@ -33,13 +34,12 @@ class PumpSimulatorScreen {
     ErrorOnTempBasalButton() {
         return match.accessible.Button(this.language.pumpSimulatorSettingsScreen.ErrorOnTempBasal);
     }
-    //
     ErrorOnBolusLabel() {
         return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.ErrorOnBolus);
     }
     async _isErrorOnBolus() {
         try {
-            await waitFor(this.ErrorOnBolusButton()).toHaveValue('1').withTimeout(2000);
+            await expect(this.ErrorOnTempBasalButton()).toHaveValue('1');
             return true;
         } catch (error) {
             return false;
@@ -53,7 +53,7 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnSuspend() {
         try {
-            await waitFor(this.ErrorOnSuspendButton()).toHaveValue('1').withTimeout(2000);
+            await expect(this.ErrorOnTempBasalButton()).toHaveValue('1');
             return true;
         } catch (error) {
             return false;
@@ -67,7 +67,7 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnResume() {
         try {
-            await waitFor(this.ErrorOnResumeButton()).toHaveValue('1').withTimeout(2000);
+            await expect(this.ErrorOnTempBasalButton()).toHaveValue('1');
             return true;
         } catch (error) {
             return false;
@@ -91,8 +91,8 @@ class PumpSimulatorScreen {
      * @param {boolean} settings.errorOnTempBasal
      * @param {boolean} settings.errorOnSuspend
      * @param {boolean} settings.errorOnResume
-     * @param {number} settings.remainingReservoir
-     * @param {number} settings.remainingBattery
+     * @param {number} settings.reservoirRemaining
+     * @param {number} settings.batteryRemaining
      */
     async Apply(settings) {
         if (settings.errorOnBolus) {
@@ -114,6 +114,12 @@ class PumpSimulatorScreen {
             await this.ErrorOnSuspendOn();
         } else if (!settings.errorOnSuspend) {
             await this.ErrorOnSuspendOff();
+        }
+        if (settings.batteryRemaining) {
+            await this.ApplyBatteryRemaining(settings.batteryRemaining);
+        }
+        if (settings.reservoirRemaining) {
+            await this.ApplyReservoirRemaining(settings.reservoirRemaining);
         }
     }
     async ErrorOnBolusOn() {
@@ -163,6 +169,31 @@ class PumpSimulatorScreen {
             await this.ErrorOnResumeButton().tap();
         }
         return;
+    }
+    async _backToPumpSimulator() {
+        await match.accessible.BackButton(this.language.pumpSimulatorSettingsScreen.PumpSettings).tap();
+    }
+    async _setValue(val) {
+        await element(by.type('UITextField')).clearText();
+        await element(by.type('UITextField')).typeText(String(val));
+    }
+    async ApplyBatteryRemaining(percent) {
+        if (percent > 100 || percent < 0) {
+            console.log('battery remaining percent must be in the range of 0-100');
+            return;
+        }
+        await this.BatteryRemainingLabel().tap();
+        await this._setValue(percent);
+        await this._backToPumpSimulator();
+    }
+    async ApplyReservoirRemaining(units) {
+        if (units > 200 || units < 0) {
+            console.log('reservoir remaining units must be in the range of 0-200');
+            return;
+        }
+        await this.ReservoirRemainingLabel().tap();
+        await this._setValue(units);
+        await this._backToPumpSimulator();
     }
     async Close() {
         await this.DoneButton().atIndex(0).tap();
