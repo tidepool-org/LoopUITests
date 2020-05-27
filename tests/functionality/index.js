@@ -1,6 +1,6 @@
-const { settingsScreenFunctionalityTests } = require('./settings_screen.tests');
-const { homeScreenFunctionalityTests } = require('./home_screen.tests');
-const { carbEntryScreenFunctionalityTests } = require('./carb_entry_screen.tests');
+const { settingsScreenFunctionalityTests } = require('./settingsScreen.tests');
+const { homeScreenFunctionalityTests } = require('./homeScreen.tests');
+const { carbEntryScreenFunctionalityTests } = require('./carbEntryScreen.tests');
 const { cleanupFunctionalityTests } = require('./cleanup.tests');
 
 var functionalityTests = {
