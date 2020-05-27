@@ -1,15 +1,15 @@
-const { homeScreenAccessibilityTests } = require('./home_screen.tests');
-const { bolusScreenAccessibilityTests } = require('./bolus_screen.tests');
-const { carbEntryScreenAccessibilityTests } = require('./carb_entry_screen.tests');
-const { settingsScreenAccessibilityTests } = require('./settings_screen.tests');
-const { settingsCarbRatiosScreenAccessibilityTests } = require('./settings_carb_ratios_screen.tests');
-const { settingsBasalRatesScreenAccessibilityTests } = require('./settings_basal_rates_screen.tests');
-const { settingsDeliveryLimitsScreenAccessibilityTests } = require('./settings_delivery_limits_screen.tests');
-const { settingsInsulinSensitivitiesScreenAccessibilityTests } = require('./settings_insulin_sensitivities_screen.tests');
-const { settingsCorrectionRangeScreenAccessibilityTests } = require('./settings_correction_range_screen.tests');
-const { settingsIssueReportScreenAccessibilityTests } = require('./settings_issue_report_screen.tests');
-const { settingsInsulinModelScreenAccessibilityTests } = require('./settings_insulin_model_screen.tests');
-const { settingsSuspendThresholdScreenAccessibilityTests } = require('./settings_suspend_threshold_screen.tests');
+const { homeScreenAccessibilityTests } = require('./homeScreen.tests');
+const { bolusScreenAccessibilityTests } = require('./bolusScreen.tests');
+const { carbEntryScreenAccessibilityTests } = require('./carbEntryScreen.tests');
+const { settingsScreenAccessibilityTests } = require('./settingsScreen.tests');
+const { settingsCarbRatiosScreenAccessibilityTests } = require('./settingsCarbRatiosScreen.tests');
+const { settingsBasalRatesScreenAccessibilityTests } = require('./settingsBasalRatesScreen.tests');
+const { settingsDeliveryLimitsScreenAccessibilityTests } = require('./settingsDeliveryLimitsScreen.tests');
+const { settingsInsulinSensitivitiesScreenAccessibilityTests } = require('./settingsInsulinSensitivitiesScreen.tests');
+const { settingsCorrectionRangeScreenAccessibilityTests } = require('./settingsCorrectionRangeScreen.tests');
+const { settingsIssueReportScreenAccessibilityTests } = require('./settingsIssueReportScreen.tests');
+const { settingsInsulinModelScreenAccessibilityTests } = require('./settingsInsulinModelScreen.tests');
+const { settingsSuspendThresholdScreenAccessibilityTests } = require('./settingsSuspendThresholdScreen.tests');
 
 var accessibilityTests = {
     homeScreenAccessibilityTests,
