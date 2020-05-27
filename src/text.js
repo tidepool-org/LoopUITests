@@ -97,6 +97,19 @@ var CGMSimulatorSettingsScreen = {
     BackfillGlucose: 'Backfill Glucose',
 }
 
+var PumpSimulatorSettingsScreen = {
+    PumpSettings: 'Pump Settings',
+    RemainingReservoir: 'Remaining Reservoir',
+    RemainingBattery: 'Remaining Battery',
+    ErrorOnTempBasal: 'Rrror on Temp Basal',
+    ErrorOnBolus: 'Error on Bolus',
+    ErrorOnSuspend: 'Error on Suspend',
+    ErrorOnResume: 'Error on Resume',
+    DeletePump: 'Delete Pump',
+    SuspendDelivery: 'Suspend Delivery',
+    ResumeDelivery: 'Resume Delivery',
+}
+
 var Alerts = {
     ExclamationMark: 'exclamationmark.triangle.fill',
     MissingCarbEffects: 'Missing Data: Carb Effects',
@@ -118,6 +131,7 @@ var text = {
     carbEntryScreen: CarbEntryScreen,
     settingsScreen: SettingsScreen,
     cgmSimulatorSettingsScreen: CGMSimulatorSettingsScreen,
+    pumpSimulatorSettingsScreen: PumpSimulatorSettingsScreen,
     overridesScreen: TempOverrideScreen,
     homeScreen: HomeScreen,
     timeSlots: TimeSlots,

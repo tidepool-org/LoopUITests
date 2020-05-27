@@ -8,6 +8,7 @@ var cleanupFunctionalityTests = (test) => {
         await screen.RemovePumpData();
     });
     it('remove pump', async () => {
+        await screen.AddPumpSimulator();
         await screen.RemovePump();
     });
     it.skip('remove CGM data', async () => {

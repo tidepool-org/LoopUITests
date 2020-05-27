@@ -10,13 +10,11 @@ class SettingsScreen {
         this.carbRatiosScreen = new settingsSubScreen.CarbRatiosScreen(language);
         this.issueReportScreen = new settingsSubScreen.IssueReportScreen(language);
         this.insulinModelScreen = new settingsSubScreen.InsulinModelScreen(language);
+        this.pumpSimulatorScreen = new settingsSubScreen.PumpSimulatorScreen(language);
         //TODO: decide where to set these configuration values
         this.insulinSensitivitiesScreen = new settingsSubScreen.InsulinSensitivitiesScreen(language, { maxStart: 500 });
         this.correctionRangeScreen = new settingsSubScreen.CorrectionRangeScreen(language, { maxStart: 120, minStart: 100 });
         this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language, { start: 80 });
-    }
-    async _selectPumpSimulator() {
-        await match.accessible.Id('Simulator Small').tap();
     }
     async Open() {
         await match.accessible.ButtonBarButton(this.language.settingsScreen.Settings).tap();
@@ -40,6 +38,11 @@ class SettingsScreen {
     async OpenBasalRatesScreen() {
         await this.BasalRatesLabel().tap();
         return this.basalRatesScreen;
+    }
+    async OpenPumpSimulatorScreen() {
+        await this.ScrollToTop();
+        await match.accessible.Id('Simulator Small').tap();
+        return this.pumpSimulatorScreen;
     }
     async OpenCGMSimulatorScreen() {
         await this.ScrollToTop();
@@ -208,7 +211,7 @@ class SettingsScreen {
         if (values.InsulinModel) {
             let screen = this.OpenInsulinModelScreen();
             await screen.Apply(values.InsulinModel);
-            await screen.Close()
+            await screen.Close();
         }
 
         if (values.ClosedLoop) {
@@ -267,11 +270,8 @@ class SettingsScreen {
         await match.accessible.Button(this.language.general.Continue).tap();
     }
     async RemovePump() {
-        await this.ScrollToTop();
-        await this._selectPumpSimulator();
-        //TODO static text and not a button?
-        await match.accessible.Label(this.language.settingsScreen.DeletePump).tap();
-        await match.accessible.Label(this.language.settingsScreen.DeletePump).atIndex(1).tap();
+        let screen = await this.OpenPumpSimulatorScreen();
+        await screen.DeletePump();
     }
     async RemovePumpData() {
         await this.ScrollToBottom();
