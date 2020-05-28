@@ -156,7 +156,7 @@ class SettingsScreen {
         try {
             await expect(match.accessible.Label(this.language.settingsScreen.ClosedLoop)).toBeVisible();
         } catch (err) {
-            await match.accessible.Label(this.language.settingsScreen.Services).swipe('down', 'fast');
+            await match.accessible.Header(this.language.settingsScreen.Services).swipe('down', 'fast');
         }
     }
     /**

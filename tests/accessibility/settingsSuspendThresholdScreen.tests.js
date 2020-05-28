@@ -20,9 +20,9 @@ var settingsSuspendThresholdScreenAccessibilityTests = (test) => {
     it('has an info button', async () => {
         await expect(screen.InfoButton()).toExist();
     });
-    it('has a cancel button', async () => {
-        await expect(screen.CancelButton()).toExist();
-    });
+    // it('has a cancel button', async () => {
+    //     await expect(screen.CancelButton()).toExist();
+    // });
     it('has a save button', async () => {
         await expect(screen.SaveButton()).toExist();
     });
