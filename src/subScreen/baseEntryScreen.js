@@ -26,7 +26,7 @@ class BaseEntryScreen {
     async Cancel() {
         await this.CancelButton().atIndex(0).tap();
     }
-    async Save() {
+    async SaveAndClose() {
         await this.SaveButton().tap();
     }
 }

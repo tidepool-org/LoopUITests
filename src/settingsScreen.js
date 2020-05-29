@@ -176,8 +176,9 @@ class SettingsScreen {
             await screen.Close();
         }
         if (values.CorrectionRanges) {
+            let screen = this.OpenCorrectionRangeScreen();
             await screen.ApplyAll(values.CorrectionRanges);
-            await screen.Save();
+            await screen.SaveAndClose();
         }
         if (values.BasalRates) {
             let screen = this.OpenBasalRatesScreen();
@@ -194,7 +195,7 @@ class SettingsScreen {
         if (values.InsulinSensitivities) {
             let screen = this.OpenInsulinSensitivitiesScreen();
             await screen.ApplyAll(values.InsulinSensitivities);
-            await screen.Save();
+            await screen.SaveAndClose();
         }
         if (values.CarbRatios) {
             let screen = this.OpenCarbRatiosScreen();
@@ -205,7 +206,7 @@ class SettingsScreen {
         if (values.SuspendThreshold) {
             let screen = this.OpenSuspendThresholdScreen();
             await screen.Apply(values.SuspendThreshold);
-            await screen.Save()
+            await screen.SaveAndClose()
         }
 
         if (values.InsulinModel) {
