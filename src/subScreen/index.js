@@ -1,5 +1,5 @@
 const { BasalRatesScreen } = require('./basalRatesScreen');
-const { CarbRatiosScreen } = require('./carbRatiosScreen');
+const { CarbRatioScreen } = require('./carbRatioScreen');
 const { CGMSimulatorScreen } = require('./cgmSimulatorScreen');
 const { CorrectionRangeScreen } = require('./correctionRangeScreen');
 const { DeliveryLimitsScreen } = require('./deliveryLimitsScreen');
@@ -11,7 +11,7 @@ const { PumpSimulatorScreen } = require('./pumpSimulatorScreen');
 
 var settingsSubScreen = {
     BasalRatesScreen,
-    CarbRatiosScreen,
+    CarbRatioScreen,
     CGMSimulatorScreen,
     CorrectionRangeScreen,
     DeliveryLimitsScreen,

@@ -68,14 +68,15 @@ var limits = {
         },
     },
     insulinCarbRatio: {
-        step: 1,
         max: {
-            limit: 150,
-            warning: 28,
+            limit: 150.0,
+            warning: 28.0,
+            noWarning: 27.0,
         },
         min: {
-            warning: 3,
-            limit: 1,
+            noWarning: 4.0,
+            warning: 3.0,
+            limit: 1.0,
         },
     }
 };

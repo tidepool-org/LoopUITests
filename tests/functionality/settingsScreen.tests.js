@@ -38,9 +38,8 @@ var settingsScreenFunctionalityTests = (test) => {
         });
         it('set suspend threshold', async () => {
             let screen = await settingsScreen.OpenSuspendThresholdScreen();
-            await screen.OpenPicker();
-            await screen.ApplyOne({ value: limits.suspendThreshold.min.noWarning });
-            await screen.Save();
+            await screen.Apply(setting.default.SuspendThreshold);
+            await screen.SaveAndClose();
         });
         it('set basal rates', async () => {
             let screen = await settingsScreen.OpenBasalRatesScreen();
@@ -62,24 +61,19 @@ var settingsScreenFunctionalityTests = (test) => {
         });
         it('set insulin sensitivites', async () => {
             let screen = await settingsScreen.OpenInsulinSensitivitiesScreen();
-            await screen.Add();
-            await screen.ApplyOne(setting.default.InsulinSensitivities[0]);
-            await screen.AddNewEntry();
-            await screen.Save();
+            await screen.ApplyAll(setting.default.InsulinSensitivities);
+            await screen.SaveAndClose();
 
         });
         it('set correction range', async () => {
             let screen = await settingsScreen.OpenCorrectionRangeScreen();
-            await screen.Add();
-            await screen.ApplyOne(setting.default.CorrectionRanges[0]);
-            await screen.AddNewEntry();
-            await screen.Save();
+            await screen.ApplyAll(setting.default.CorrectionRanges);
+            await screen.SaveAndClose();
         });
-        //TODO: update when development work complete
-        it.skip('set carb ratios', async () => {
-            let screen = await settingsScreen.OpenCarbRatiosScreen();
+        it('set carb ratios', async () => {
+            let screen = await settingsScreen.OpenCarbRatioScreen();
             await screen.ApplyAll(setting.default.CarbRatios);
-            await screen.Close();
+            await screen.SaveAndClose();
         });
         it('can be removed', async () => {
             await settingsScreen.RemovePumpData();

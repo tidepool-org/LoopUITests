@@ -27,8 +27,7 @@ describe('functional test', () => {
         describe('correction range schedule', () => {
             guardrailsTests.correctionRangeScheduleTests(test);
         });
-        //TODO: update when development work complete
-        describe.skip('insulin carb ratio', () => {
+        describe('insulin carb ratio', () => {
             guardrailsTests.insulinCarbRatioTests(test);
         });
     });

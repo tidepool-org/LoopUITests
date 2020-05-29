@@ -79,6 +79,7 @@ var SettingsScreen = {
     CorrectionRangeInfo: 'The app adjusts insulin delivery in an effort to bring your glucose into your correction range.',
     InsulinModel: 'Insulin Model',
     CarbRatios: 'Carb Ratios',
+    CarbRatioInfo: 'Your carb ratio',
     ClosedLoop: 'Closed Loop',
     AddCGM: 'Add CGM',
     DeleteCGMData: 'Delete CGM Data',
