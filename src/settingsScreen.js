@@ -10,13 +10,11 @@ class SettingsScreen {
         this.carbRatiosScreen = new settingsSubScreen.CarbRatiosScreen(language);
         this.issueReportScreen = new settingsSubScreen.IssueReportScreen(language);
         this.insulinModelScreen = new settingsSubScreen.InsulinModelScreen(language);
+        this.pumpSimulatorScreen = new settingsSubScreen.PumpSimulatorScreen(language);
         //TODO: decide where to set these configuration values
         this.insulinSensitivitiesScreen = new settingsSubScreen.InsulinSensitivitiesScreen(language, { maxStart: 500 });
         this.correctionRangeScreen = new settingsSubScreen.CorrectionRangeScreen(language, { maxStart: 120, minStart: 100 });
         this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language, { start: 80 });
-    }
-    async _selectPumpSimulator() {
-        await match.accessible.Id('Simulator Small').tap();
     }
     async Open() {
         await match.accessible.ButtonBarButton(this.language.settingsScreen.Settings).tap();
@@ -40,6 +38,11 @@ class SettingsScreen {
     async OpenBasalRatesScreen() {
         await this.BasalRatesLabel().tap();
         return this.basalRatesScreen;
+    }
+    async OpenPumpSimulatorScreen() {
+        await this.ScrollToTop();
+        await match.accessible.Id('Simulator Small').tap();
+        return this.pumpSimulatorScreen;
     }
     async OpenCGMSimulatorScreen() {
         await this.ScrollToTop();
@@ -153,7 +156,7 @@ class SettingsScreen {
         try {
             await expect(match.accessible.Label(this.language.settingsScreen.ClosedLoop)).toBeVisible();
         } catch (err) {
-            await match.accessible.Label(this.language.settingsScreen.Services).swipe('down', 'fast');
+            await match.accessible.Header(this.language.settingsScreen.Services).swipe('down', 'fast');
         }
     }
     /**
@@ -175,8 +178,7 @@ class SettingsScreen {
         if (values.CorrectionRanges) {
             let screen = this.OpenCorrectionRangeScreen();
             await screen.ApplyAll(values.CorrectionRanges);
-            await screen.Save();
-            await screen.Close();
+            await screen.SaveAndClose();
         }
         if (values.BasalRates) {
             let screen = this.OpenBasalRatesScreen();
@@ -193,8 +195,7 @@ class SettingsScreen {
         if (values.InsulinSensitivities) {
             let screen = this.OpenInsulinSensitivitiesScreen();
             await screen.ApplyAll(values.InsulinSensitivities);
-            await screen.Save();
-            await screen.Close();
+            await screen.SaveAndClose();
         }
         if (values.CarbRatios) {
             let screen = this.OpenCarbRatiosScreen();
@@ -205,13 +206,13 @@ class SettingsScreen {
         if (values.SuspendThreshold) {
             let screen = this.OpenSuspendThresholdScreen();
             await screen.Apply(values.SuspendThreshold);
-            await screen.Save()
+            await screen.SaveAndClose()
         }
 
         if (values.InsulinModel) {
             let screen = this.OpenInsulinModelScreen();
             await screen.Apply(values.InsulinModel);
-            await screen.Close()
+            await screen.Close();
         }
 
         if (values.ClosedLoop) {
@@ -270,11 +271,8 @@ class SettingsScreen {
         await match.accessible.Button(this.language.general.Continue).tap();
     }
     async RemovePump() {
-        await this.ScrollToTop();
-        await this._selectPumpSimulator();
-        //TODO static text and not a button?
-        await match.accessible.Label(this.language.settingsScreen.DeletePump).tap();
-        await match.accessible.Label(this.language.settingsScreen.DeletePump).atIndex(1).tap();
+        let screen = await this.OpenPumpSimulatorScreen();
+        await screen.DeletePump();
     }
     async RemovePumpData() {
         await this.ScrollToBottom();

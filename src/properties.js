@@ -51,7 +51,8 @@ var settingDefault = {
     ClosedLoop: true,
     AddCGMSimulator: true,
     AddPumpSimulator: true,
-    CGMSimulatorSettings: { modelData: { model: settingCGMModel.Constant, bgValues: [110] }, backfillHours: '6' }
+    CGMSimulatorSettings: { modelData: { model: settingCGMModel.Constant, bgValues: [110] }, backfillHours: '6' },
+    PumpSimulatorSettings: { errorOnBolus: false, errorOnTempBasal: false, errorOnSuspend: false, errorOnResume: false, reservoirRemaining: 188, batteryRemaining: 85 }
 };
 
 /**
@@ -69,7 +70,8 @@ var settingType = {
     ClosedLoop: 'ClosedLoop',
     AddPumpSimulator: 'AddPumpSimulator',
     AddCGMSimulator: 'AddCGMSimulator',
-    CGMSimulatorSettings: 'CGMSimulatorSettings'
+    CGMSimulatorSettings: 'CGMSimulatorSettings',
+    PumpSimulatorSettings: 'PumpSimulatorSettings',
 };
 
 /**

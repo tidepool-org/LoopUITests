@@ -1,10 +1,10 @@
-const { maxBolusTests } = require('./max_bolus.tests');
-const { basalRateScheduleTests } = require('./basal_rate_schedule.tests');
-const { insulinSensitivityScheduleTests } = require('./insulin_sensitivity_schedule.tests');
-const { maxTempBasalRateTests } = require('./max_temp_basal_rate.tests');
-const { suspendThresholdTests } = require('./suspend_threshold.tests');
-const { correctionRangeScheduleTests } = require('./correction_range_schedule.tests');
-const { insulinCarbRatioTests } = require('./insulin_carb_ratio.tests');
+const { maxBolusTests } = require('./maxBolus.tests');
+const { basalRateScheduleTests } = require('./basalRateSchedule.tests');
+const { insulinSensitivityScheduleTests } = require('./insulinSensitivitySchedule.tests');
+const { maxTempBasalRateTests } = require('./maxTempBasalRate.tests');
+const { suspendThresholdTests } = require('./suspendThreshold.tests');
+const { correctionRangeScheduleTests } = require('./correctionRangeSchedule.tests');
+const { insulinCarbRatioTests } = require('./insulinCarbRatio.tests');
 
 var guardrailsTests = {
     maxBolusTests,

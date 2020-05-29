@@ -20,13 +20,28 @@ class CorrectionRangeScreen extends BaseEntriesScreen {
      * @param {String} expectedRange.min
      * @param {Object} currentRange optional
      */
-    async Apply(expectedRange, currentRange) {
+    async ApplyOne(expectedRange, currentRange) {
         if (currentRange) {
             await action.ScrollQuantityPicker(currentRange.max, expectedRange.max, maxGlucosePickerID);
             await action.ScrollQuantityPicker(currentRange.min, expectedRange.min, minGlucosePickerID);
         } else {
             await action.ScrollQuantityPicker(this.config.maxStart, expectedRange.max, maxGlucosePickerID);
             await action.ScrollQuantityPicker(this.config.minStart, expectedRange.min, minGlucosePickerID);
+        }
+    }
+    /**
+     * @param {Array} ranges
+     */
+    async ApplyAll(ranges) {
+        await this.Add();
+        for (let index = 0; index < ranges.length; index++) {
+            var existing;
+            let expected = ranges[index];
+            if (index > 0) {
+                existing = ranges[index - 1];
+            }
+            await this.ApplyOne(expected, existing);
+            await this.AddNewEntry();
         }
     }
 }

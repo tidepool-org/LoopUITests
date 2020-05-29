@@ -18,7 +18,7 @@ class InsulinSensitivitiesScreen extends BaseEntriesScreen {
      * @param {String} expectedSensitivity.bgValuePerInsulinUnit
      * @param {Object} currentSensitivity optional
      */
-    async Apply(expectedSensitivity, currentSensitivity) {
+    async ApplyOne(expectedSensitivity, currentSensitivity) {
         if (currentSensitivity) {
             await action.ScrollQuantityPicker(
                 currentSensitivity.bgValuePerInsulinUnit,
@@ -34,19 +34,19 @@ class InsulinSensitivitiesScreen extends BaseEntriesScreen {
         }
     }
     /**
-     * @param {Object} expectedSensitivity
-     * @param {String} expectedSensitivity.time
-     * @param {String} expectedSensitivity.bgValuePerInsulinUnit
-     * @param {Object} currentSensitivity optional
+     * @param {Array} sensitivities
      */
-    async Edit(expectedSensitivity, currentSensitivity) {
-        await match.accessible.Label(`${currentSensitivity.time}`).tap();
-        await action.ScrollPickerToValue(`${currentSensitivity.time}`, `${expectedSensitivity.time}`);
-        await action.ScrollQuantityPicker(
-            currentSensitivity.bgValuePerInsulinUnit,
-            expectedSensitivity.bgValuePerInsulinUnit,
-            pickerID,
-        );
+    async ApplyAll(sensitivities) {
+        await this.Add();
+        for (let index = 0; index < sensitivities.length; index++) {
+            var existing;
+            let expected = sensitivities[index];
+            if (index > 0) {
+                existing = sensitivities[index - 1];
+            }
+            await this.ApplyOne(expected, existing);
+            await this.AddNewEntry();
+        }
     }
 }
 

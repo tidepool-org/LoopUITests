@@ -54,7 +54,7 @@ class BaseEntriesScreen {
     async AddNewEntry() {
         await this.AddNewEntryButton().tap();
     }
-    async Save() {
+    async SaveAndClose() {
         await this.SaveButton().tap();
     }
 }
