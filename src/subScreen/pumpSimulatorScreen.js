@@ -25,13 +25,13 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnTempBasal() {
         try {
-            await expect(this.ErrorOnTempBasalButton()).toHaveValue('1');
+            await expect(this.ErrorOnTempBasalToggel()).toHaveValue('1');
             return true;
         } catch (error) {
             return false;
         }
     }
-    ErrorOnTempBasalButton() {
+    ErrorOnTempBasalToggel() {
         return match.accessible.Button(this.language.pumpSimulatorSettingsScreen.ErrorOnTempBasal);
     }
     ErrorOnBolusLabel() {
@@ -39,13 +39,13 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnBolus() {
         try {
-            await expect(this.ErrorOnTempBasalButton()).toHaveValue('1');
+            await expect(this.ErrorOnBolusToggel()).toHaveValue('1');
             return true;
         } catch (error) {
             return false;
         }
     }
-    ErrorOnBolusButton() {
+    ErrorOnBolusToggel() {
         return match.accessible.Button(this.language.pumpSimulatorSettingsScreen.ErrorOnBolus);
     }
     ErrorOnSuspendLabel() {
@@ -53,13 +53,13 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnSuspend() {
         try {
-            await expect(this.ErrorOnTempBasalButton()).toHaveValue('1');
+            await expect(this.ErrorOnSuspendToggel()).toHaveValue('1');
             return true;
         } catch (error) {
             return false;
         }
     }
-    ErrorOnSuspendButton() {
+    ErrorOnSuspendToggel() {
         return match.accessible.Button(this.language.pumpSimulatorSettingsScreen.ErrorOnSuspend);
     }
     ErrorOnResumeLabel() {
@@ -67,13 +67,13 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnResume() {
         try {
-            await expect(this.ErrorOnTempBasalButton()).toHaveValue('1');
+            await expect(this.ErrorOnResumeToggel()).toHaveValue('1');
             return true;
         } catch (error) {
             return false;
         }
     }
-    ErrorOnResumeButton() {
+    ErrorOnResumeToggel() {
         return match.accessible.Button(this.language.pumpSimulatorSettingsScreen.ErrorOnResume);
     }
     DeletePumpLabel() {
@@ -95,80 +95,60 @@ class PumpSimulatorScreen {
      * @param {number} settings.batteryRemaining
      */
     async Apply(settings) {
-        if (settings.errorOnBolus) {
-            await this.ErrorOnBolusOn();
-        } else if (!settings.errorOnBolus) {
-            await this.ErrorOnBolusOff();
-        }
-        if (settings.errorOnTempBasal) {
-            await this.ErrorOnTempBasalOn();
-        } else if (!settings.errorOnTempBasal) {
-            await this.ErrorOnTempBasalOff();
-        }
-        if (settings.errorOnResume) {
-            await this.ErrorOnResumeOn();
-        } else if (!settings.errorOnResume) {
-            await this.ErrorOnResumeOff();
-        }
-        if (settings.errorOnSuspend) {
-            await this.ErrorOnSuspendOn();
-        } else if (!settings.errorOnSuspend) {
-            await this.ErrorOnSuspendOff();
-        }
-        if (settings.batteryRemaining) {
-            await this.ApplyBatteryRemaining(settings.batteryRemaining);
-        }
-        if (settings.reservoirRemaining) {
-            await this.ApplyReservoirRemaining(settings.reservoirRemaining);
+        await this.SetErrorOnBolus(settings.errorOnBolus);
+        await this.SetErrorOnTempBasal(settings.errorOnTempBasal);
+        await this.SetErrorOnSuspend(settings.errorOnSuspend);
+        await this.SetErrorOnResume(settings.errorOnResume);
+        await this.ApplyBatteryRemaining(settings.batteryRemaining);
+        await this.ApplyReservoirRemaining(settings.reservoirRemaining);
+    }
+    async SetErrorOnBolus(turnOn) {
+        let allReadyOn = await this._isErrorOnBolus();
+        if (turnOn == true) {
+            if (allReadyOn == false) {
+                await this.ErrorOnBolusToggel().tap();
+            }
+        } else if (turnOn == false) {
+            if (allReadyOn == true) {
+                await this.ErrorOnBolusToggel().tap();
+            }
         }
     }
-    async ErrorOnBolusOn() {
-        if (await this._isErrorOnBolus()) {
-            return;
+    async SetErrorOnTempBasal(turnOn) {
+        let allReadyOn = await this._isErrorOnTempBasal();
+        if (turnOn == true) {
+            if (allReadyOn == false) {
+                await this.ErrorOnTempBasalToggel().tap();
+            }
+        } else if (turnOn == false) {
+            if (allReadyOn == true) {
+                await this.ErrorOnTempBasalToggel().tap();
+            }
         }
-        await this.ErrorOnBolusButton().tap();
     }
-    async ErrorOnBolusOff() {
-        if (await this._isErrorOnBolus()) {
-            await this.ErrorOnBolusButton().tap();
+    async SetErrorOnSuspend(turnOn) {
+        let allReadyOn = await this._isErrorOnSuspend();
+        if (turnOn == true) {
+            if (allReadyOn == false) {
+                await this.ErrorOnSuspendToggel().tap();
+            }
+        } else if (turnOn == false) {
+            if (allReadyOn == true) {
+                await this.ErrorOnSuspendToggel().tap();
+            }
         }
-        return;
     }
-    async ErrorOnTempBasalOn() {
-        if (await this._isErrorOnTempBasal()) {
-            return;
+    async SetErrorOnResume(turnOn) {
+        let allReadyOn = await this._isErrorOnResume();
+        if (turnOn == true) {
+            if (allReadyOn == false) {
+                await this.ErrorOnResumeToggel().tap();
+            }
+        } else if (turnOn == false) {
+            if (allReadyOn == true) {
+                await this.ErrorOnResumeToggel().tap();
+            }
         }
-        await this.ErrorOnTempBasalButton().tap();
-    }
-    async ErrorOnTempBasalOff() {
-        if (await this._isErrorOnTempBasal()) {
-            await this.ErrorOnTempBasalButton().tap();
-        }
-        return;
-    }
-    async ErrorOnSuspendOn() {
-        if (await this._isErrorOnSuspend()) {
-            return;
-        }
-        await this.ErrorOnSuspendButton().tap();
-    }
-    async ErrorOnSuspendOff() {
-        if (await this._isErrorOnSuspend()) {
-            await this.ErrorOnSuspendButton().tap();
-        }
-        return;
-    }
-    async ErrorOnResumeOn() {
-        if (await this._isErrorOnResume()) {
-            return;
-        }
-        await this.ErrorOnResumeButton().tap();
-    }
-    async ErrorOnResumeOff() {
-        if (await this._isErrorOnResume()) {
-            await this.ErrorOnResumeButton().tap();
-        }
-        return;
     }
     async _backToPumpSimulator() {
         await match.accessible.BackButton(this.language.pumpSimulatorSettingsScreen.PumpSettings).tap();
@@ -178,22 +158,26 @@ class PumpSimulatorScreen {
         await element(by.type('UITextField')).typeText(String(val));
     }
     async ApplyBatteryRemaining(percent) {
-        if (percent > 100 || percent < 0) {
-            console.log('battery remaining percent must be in the range of 0-100');
-            return;
+        if (percent) {
+            if (percent > 100 || percent < 0) {
+                console.log('battery remaining percent must be in the range of 0-100');
+                return;
+            }
+            await this.BatteryRemainingLabel().tap();
+            await this._setValue(percent);
+            await this._backToPumpSimulator();
         }
-        await this.BatteryRemainingLabel().tap();
-        await this._setValue(percent);
-        await this._backToPumpSimulator();
     }
     async ApplyReservoirRemaining(units) {
-        if (units > 200 || units < 0) {
-            console.log('reservoir remaining units must be in the range of 0-200');
-            return;
+        if (units) {
+            if (units > 200 || units < 0) {
+                console.log('reservoir remaining units must be in the range of 0-200');
+                return;
+            }
+            await this.ReservoirRemainingLabel().tap();
+            await this._setValue(units);
+            await this._backToPumpSimulator();
         }
-        await this.ReservoirRemainingLabel().tap();
-        await this._setValue(units);
-        await this._backToPumpSimulator();
     }
     async Close() {
         await this.DoneButton().atIndex(0).tap();
