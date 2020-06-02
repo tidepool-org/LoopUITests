@@ -14,7 +14,7 @@ var insulinCarbRatioTests = (test) => {
             carbGramsPerInsulinUnit: limits.insulinCarbRatio.max.limit,
         });
         await screen.AddNewEntry();
-        await expect(screen.GuardrailWarningIconPicker(0)).toBeVisible();
+        await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
     });
     it('can set max units with warning', async () => {
         await screen.Add();
@@ -26,7 +26,7 @@ var insulinCarbRatioTests = (test) => {
                 carbGramsPerInsulinUnit: limits.insulinCarbRatio.max.limit,
             });
         await screen.AddNewEntry();
-        await expect(screen.GuardrailWarningIconPicker(1)).toBeVisible();
+        await expect(screen.GuardrailWarningIconPicker({ index: 1 })).toBeVisible();
     });
     it('can set max units with no warning', async () => {
         await screen.Add();
@@ -38,7 +38,7 @@ var insulinCarbRatioTests = (test) => {
                 carbGramsPerInsulinUnit: limits.insulinCarbRatio.max.warning,
             });
         await screen.AddNewEntry();
-        await expect(screen.GuardrailWarningIconPicker(2)).toBeNotVisible();
+        await expect(screen.GuardrailWarningIconPicker({ index: 2 })).toBeNotVisible();
     });
     it('can set min units with no warning', async () => {
         await screen.Add();
@@ -50,7 +50,7 @@ var insulinCarbRatioTests = (test) => {
                 carbGramsPerInsulinUnit: limits.insulinCarbRatio.max.noWarning,
             });
         await screen.AddNewEntry();
-        await expect(screen.GuardrailWarningIconPicker(3)).toBeNotVisible();
+        await expect(screen.GuardrailWarningIconPicker({ index: 3 })).toBeNotVisible();
     });
     it('can set min units with warning', async () => {
         await screen.Add();
@@ -62,7 +62,7 @@ var insulinCarbRatioTests = (test) => {
                 carbGramsPerInsulinUnit: limits.insulinCarbRatio.min.noWarning,
             });
         await screen.AddNewEntry();
-        await expect(screen.GuardrailWarningIconPicker(4)).toBeVisible();
+        await expect(screen.GuardrailWarningIconPicker({ index: 4 })).toBeVisible();
     });
     it('can set min units at limit', async () => {
         await screen.Add();
@@ -74,7 +74,7 @@ var insulinCarbRatioTests = (test) => {
                 carbGramsPerInsulinUnit: limits.insulinCarbRatio.min.warning,
             });
         await screen.AddNewEntry();
-        await expect(screen.GuardrailWarningIconPicker(5)).toBeVisible();
+        await expect(screen.GuardrailWarningIconPicker({ index: 5 })).toBeVisible();
     });
 };
 
