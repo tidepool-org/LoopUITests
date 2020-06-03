@@ -36,13 +36,20 @@ const action = {
             }
         } while (currentValue != expectedValue);
     },
-    async ScrollQuantityPicker(currentValue, expectedValue, id) {
+    async ScrollQuantityPicker(currentValue, expectedValue, pickerID) {
+        await this.ScrollQuantityPicker(currentValue, expectedValue, pickerID, false);
+    },
+    async ScrollQuantityPicker(currentValue, expectedValue, pickerID, useItemID) {
         if (currentValue == expectedValue) {
             return;
         }
         do {
             currentValue = _nextPickerStep(currentValue, expectedValue);
-            await match.accessible.QuantityPickerItem(`${currentValue}`, id).tap();
+            if (useItemID) {
+                await match.accessible.QuantityPickerItem(`${currentValue}`, pickerID, `${currentValue}`).tap();
+            } else {
+                await match.accessible.QuantityPickerItem(`${currentValue}`, pickerID).tap();
+            }
         } while (currentValue != expectedValue);
     },
     /**

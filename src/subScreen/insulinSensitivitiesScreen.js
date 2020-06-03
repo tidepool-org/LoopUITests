@@ -24,12 +24,14 @@ class InsulinSensitivitiesScreen extends BaseEntriesScreen {
                 currentSensitivity.bgValuePerInsulinUnit,
                 expectedSensitivity.bgValuePerInsulinUnit,
                 pickerID,
+                true,
             );
         } else {
             await action.ScrollQuantityPicker(
                 this.config.maxStart,
                 expectedSensitivity.bgValuePerInsulinUnit,
                 pickerID,
+                true,
             );
         }
     }

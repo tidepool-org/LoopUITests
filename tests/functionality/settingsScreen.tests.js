@@ -41,7 +41,8 @@ var settingsScreenFunctionalityTests = (test) => {
             await screen.Apply(setting.default.SuspendThreshold);
             await screen.SaveAndClose();
         });
-        it('set basal rates', async () => {
+        //TODO: update when gaurdrails work is complete
+        it.skip('set basal rates', async () => {
             let screen = await settingsScreen.OpenBasalRatesScreen();
             await screen.ApplyAll(setting.default.BasalRates);
             await screen.Save();
