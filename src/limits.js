@@ -10,7 +10,7 @@ var limits = {
         },
         min: {
             noWarning: 100,
-            warning: 99,
+            warning: 69,
             limit: 60,
         },
     },
