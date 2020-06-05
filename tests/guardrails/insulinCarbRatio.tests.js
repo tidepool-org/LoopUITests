@@ -1,9 +1,9 @@
-const { limits } = require('../../src/index');
-
 var insulinCarbRatioTests = (test) => {
     var screen;
+    var screenLimit;
     beforeAll(async () => {
         screen = await test.settingsScreen.OpenCarbRatioScreen();
+        screenLimit = test.limits.insulinCarbRatio;
     });
     afterAll(async () => {
         await screen.Cancel();
@@ -11,7 +11,7 @@ var insulinCarbRatioTests = (test) => {
     it('can set max units at limit', async () => {
         await screen.Add();
         await screen.ApplyOne({
-            carbGramsPerInsulinUnit: limits.insulinCarbRatio.max.limit,
+            carbGramsPerInsulinUnit: screenLimit.max.limit,
         });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
@@ -20,10 +20,10 @@ var insulinCarbRatioTests = (test) => {
         await screen.Add();
         await screen.ApplyOne(
             {
-                carbGramsPerInsulinUnit: limits.insulinCarbRatio.max.warning,
+                carbGramsPerInsulinUnit: screenLimit.max.warning,
             },
             {
-                carbGramsPerInsulinUnit: limits.insulinCarbRatio.max.limit,
+                carbGramsPerInsulinUnit: screenLimit.max.limit,
             });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 1 })).toBeVisible();
@@ -32,10 +32,10 @@ var insulinCarbRatioTests = (test) => {
         await screen.Add();
         await screen.ApplyOne(
             {
-                carbGramsPerInsulinUnit: limits.insulinCarbRatio.max.noWarning,
+                carbGramsPerInsulinUnit: screenLimit.max.noWarning,
             },
             {
-                carbGramsPerInsulinUnit: limits.insulinCarbRatio.max.warning,
+                carbGramsPerInsulinUnit: screenLimit.max.warning,
             });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 2 })).toBeNotVisible();
@@ -44,10 +44,10 @@ var insulinCarbRatioTests = (test) => {
         await screen.Add();
         await screen.ApplyOne(
             {
-                carbGramsPerInsulinUnit: limits.insulinCarbRatio.min.noWarning,
+                carbGramsPerInsulinUnit: screenLimit.min.noWarning,
             },
             {
-                carbGramsPerInsulinUnit: limits.insulinCarbRatio.max.noWarning,
+                carbGramsPerInsulinUnit: screenLimit.max.noWarning,
             });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 3 })).toBeNotVisible();
@@ -56,10 +56,10 @@ var insulinCarbRatioTests = (test) => {
         await screen.Add();
         await screen.ApplyOne(
             {
-                carbGramsPerInsulinUnit: limits.insulinCarbRatio.min.warning,
+                carbGramsPerInsulinUnit: screenLimit.min.warning,
             },
             {
-                carbGramsPerInsulinUnit: limits.insulinCarbRatio.min.noWarning,
+                carbGramsPerInsulinUnit: screenLimit.min.noWarning,
             });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 4 })).toBeVisible();
@@ -68,10 +68,10 @@ var insulinCarbRatioTests = (test) => {
         await screen.Add();
         await screen.ApplyOne(
             {
-                carbGramsPerInsulinUnit: limits.insulinCarbRatio.min.limit,
+                carbGramsPerInsulinUnit: screenLimit.min.limit,
             },
             {
-                carbGramsPerInsulinUnit: limits.insulinCarbRatio.min.warning,
+                carbGramsPerInsulinUnit: screenLimit.min.warning,
             });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 5 })).toBeVisible();

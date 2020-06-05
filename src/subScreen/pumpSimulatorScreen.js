@@ -3,25 +3,27 @@ const match = require('../match');
 
 class PumpSimulatorScreen {
     constructor(language) {
-        this.language = language;
+        this.language = language.pumpSimulatorSettingsScreen;
+        this.language.general = language.general;
+        this.language.ConfigHeader = language.settingsScreen.Configuration;
     }
     Header() {
-        return match.accessible.Header(this.language.pumpSimulatorSettingsScreen.PumpSettings);
+        return match.accessible.Header(this.language.PumpSettings);
     }
     DoneButton() {
         return match.accessible.Button(this.language.general.Done);
     }
     ConfigurationHeader() {
-        return match.accessible.Header(this.language.settingsScreen.Configuration);
+        return match.accessible.Header(this.language.ConfigHeader);
     }
     ReservoirRemainingLabel() {
-        return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.ReservoirRemaining);
+        return match.accessible.Label(this.language.ReservoirRemaining);
     }
     BatteryRemainingLabel() {
-        return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.BatteryRemaining);
+        return match.accessible.Label(this.language.BatteryRemaining);
     }
     ErrorOnTempBasalLabel() {
-        return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.ErrorOnTempBasal);
+        return match.accessible.Label(this.language.ErrorOnTempBasal);
     }
     async _isErrorOnTempBasal() {
         try {
@@ -32,10 +34,10 @@ class PumpSimulatorScreen {
         }
     }
     ErrorOnTempBasalToggel() {
-        return match.accessible.Button(this.language.pumpSimulatorSettingsScreen.ErrorOnTempBasal);
+        return match.accessible.Button(this.language.ErrorOnTempBasal);
     }
     ErrorOnBolusLabel() {
-        return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.ErrorOnBolus);
+        return match.accessible.Label(this.language.ErrorOnBolus);
     }
     async _isErrorOnBolus() {
         try {
@@ -46,10 +48,10 @@ class PumpSimulatorScreen {
         }
     }
     ErrorOnBolusToggel() {
-        return match.accessible.Button(this.language.pumpSimulatorSettingsScreen.ErrorOnBolus);
+        return match.accessible.Button(this.language.ErrorOnBolus);
     }
     ErrorOnSuspendLabel() {
-        return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.ErrorOnSuspend);
+        return match.accessible.Label(this.language.ErrorOnSuspend);
     }
     async _isErrorOnSuspend() {
         try {
@@ -60,10 +62,10 @@ class PumpSimulatorScreen {
         }
     }
     ErrorOnSuspendToggel() {
-        return match.accessible.Button(this.language.pumpSimulatorSettingsScreen.ErrorOnSuspend);
+        return match.accessible.Button(this.language.ErrorOnSuspend);
     }
     ErrorOnResumeLabel() {
-        return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.ErrorOnResume);
+        return match.accessible.Label(this.language.ErrorOnResume);
     }
     async _isErrorOnResume() {
         try {
@@ -74,16 +76,16 @@ class PumpSimulatorScreen {
         }
     }
     ErrorOnResumeToggel() {
-        return match.accessible.Button(this.language.pumpSimulatorSettingsScreen.ErrorOnResume);
+        return match.accessible.Button(this.language.ErrorOnResume);
     }
     DeletePumpLabel() {
-        return match.accessible.Label(this.language.pumpSimulatorSettingsScreen.DeletePump);
+        return match.accessible.Label(this.language.DeletePump);
     }
     SuspendDeliveryButton() {
-        return match.accessible.Button(this.language.pumpSimulatorSettingsScreen.SuspendDelivery);
+        return match.accessible.Button(this.language.SuspendDelivery);
     }
     ResumeDeliveryButton() {
-        return match.accessible.Button(this.language.pumpSimulatorSettingsScreen.ResumeDelivery);
+        return match.accessible.Button(this.language.ResumeDelivery);
     }
     /**
      * @param {object} settings
@@ -151,7 +153,7 @@ class PumpSimulatorScreen {
         }
     }
     async _backToPumpSimulator() {
-        await match.accessible.BackButton(this.language.pumpSimulatorSettingsScreen.PumpSettings).tap();
+        await match.accessible.BackButton(this.language.PumpSettings).tap();
     }
     async _setValue(val) {
         await element(by.type('UITextField')).clearText();

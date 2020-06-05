@@ -6,13 +6,14 @@ const { BaseEntryScreen } = require('./baseEntryScreen');
 class SuspendThresholdScreen extends BaseEntryScreen {
     constructor(language, config) {
         super(language, {
-            HeaderLabel: language.settingsScreen.SuspendThreshold,
-            InfoLabel: language.settingsScreen.SuspendThresholdInfo,
+            HeaderLabel: language.suspendThresholdSettingScreen.SuspendThreshold,
+            InfoLabel: language.suspendThresholdSettingScreen.SuspendThresholdInfo,
         });
+        this.bgUnitsLabel = language.suspendThresholdSettingScreen.BGUnits;
         this.config = config;
     }
     async OpenPicker() {
-        await match.accessible.Label(this.language.units.Glucose).atIndex(0).tap();
+        await match.accessible.Label(this.bgUnitsLabel).atIndex(0).tap();
     }
     async SwipePickerToMaxValue() {
         await action.SwipePickerUp(3);

@@ -103,7 +103,7 @@ class SettingsScreen {
         return match.accessible.Label(this.language.settingsScreen.BasalRates)
     }
     SuspendThresholdLabel() {
-        return match.accessible.Label(this.language.settingsScreen.SuspendThreshold)
+        return match.accessible.Label(this.language.suspendThresholdSettingScreen.SuspendThreshold)
     }
     DeliveryLimitsLabel() {
         return match.accessible.Label(this.language.settingsScreen.DeliveryLimits)
@@ -112,7 +112,7 @@ class SettingsScreen {
         return match.accessible.Label(this.language.settingsScreen.InsulinModel)
     }
     CarbRatiosLabel() {
-        return match.accessible.Label(this.language.settingsScreen.CarbRatios)
+        return match.accessible.Label(this.language.carbRatioSettingsScreen.CarbRatios)
     }
     InsulinSensitivitiesLabel() {
         return match.accessible.Label(this.language.settingsScreen.InsulinSensitivities)

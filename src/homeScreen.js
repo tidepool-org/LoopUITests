@@ -4,33 +4,18 @@ class HomeScreen {
     constructor(language) {
         this.language = language;
     }
-    /**
-     * @example home.ActiveCarbohydratesLabel().tap();
-     */
     ActiveCarbohydratesLabel() {
         return match.accessible.Label(this.language.homeScreen.ActiveCarbohydrates);
     }
-    /**
-     * @example home.ActiveInsulinLabel().tap();
-     */
     ActiveInsulinLabel() {
         return match.accessible.Label(this.language.homeScreen.ActiveInsulin);
     }
-    /**
-     * @example home.InsulinDeliveryLabel().tap();
-     */
     InsulinDeliveryLabel() {
         return match.accessible.Label(this.language.homeScreen.InsulinDelivery);
     }
-    /**
-     * @example home.GlucoseLabel().tap();
-     */
     GlucoseLabel() {
         return match.accessible.Label(this.language.homeScreen.Glucose);
     }
-    /**
-     * @example home.SettingsButton().tap();
-     */
     SettingsButton() {
         return match.accessible.Button(this.language.settingsScreen.Settings);
     }

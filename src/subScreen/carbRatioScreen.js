@@ -5,8 +5,8 @@ const { BaseEntriesScreen } = require('./baseEntriesScreen');
 class CarbRatioScreen extends BaseEntriesScreen {
     constructor(language, config) {
         super(language, {
-            HeaderLabel: language.settingsScreen.CarbRatios,
-            InfoLabel: language.settingsScreen.CarbRatioInfo,
+            HeaderLabel: language.carbRatioSettingsScreen.CarbRatios,
+            InfoLabel: language.carbRatioSettingsScreen.CarbRatioInfo,
         });
         this.config = config;
     }

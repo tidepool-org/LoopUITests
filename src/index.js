@@ -1,12 +1,7 @@
 const { Test } = require('./test');
-const { target, screenName, unit, setting } = require('./properties');
-const { limits } = require('./limits');
+const { Config } = require('./config/index');
 
 module.exports = {
     Test,
-    target,
-    screenName,
-    unit,
-    setting,
-    limits,
+    Config,
 };

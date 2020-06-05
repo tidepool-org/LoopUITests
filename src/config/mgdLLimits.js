@@ -1,7 +1,4 @@
-/**
- * @summary limits that are used when applying settings for guardrails
- */
-var limits = {
+var mgdLLimits = {
     correctionRange: {
         max: {
             limit: 180,
@@ -31,6 +28,7 @@ var limits = {
         max: {
             limit: 30.0,
             warning: 20.0,
+            noWarning: 19.0,
         },
         min: {
             limit: 0.0,
@@ -40,6 +38,7 @@ var limits = {
         step: 0.1,
         max: {
             limit: 35.0,
+            noWarning: 34.0,
         },
         min: {
             limit: 0.0,
@@ -50,6 +49,7 @@ var limits = {
         max: {
             limit: 35.0,
             warning: 20.0,
+            noWarning: 19.0,
         },
         min: {
             limit: 0.0,
@@ -82,5 +82,5 @@ var limits = {
 };
 
 module.exports = {
-    limits
+    mgdLLimits
 };

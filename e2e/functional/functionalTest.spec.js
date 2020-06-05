@@ -1,9 +1,12 @@
-const { Test } = require('../../src/index');
+const { Test, Config } = require('../../src/index');
 const { guardrailsTests } = require('../../tests/guardrails/index');
 
 describe('functional test', () => {
     var test = new Test();
+    var config = new Config();
     it('prepare test', async () => {
+        let testConfig = config.prepare();
+        test = test.withLanguage(testConfig.text).withLimits(testConfig.limits);
         await test.prepare();
         let settings = await test.OpenSettingsScreen();
         await settings.AddPumpSimulator();

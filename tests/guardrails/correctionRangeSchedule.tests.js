@@ -1,9 +1,9 @@
-const { limits } = require('../../src/index');
-
 var correctionRangeScheduleTests = (test) => {
     var screen;
+    var screenLimit;
     beforeAll(async () => {
         screen = await test.settingsScreen.OpenCorrectionRangeScreen();
+        screenLimit = test.limits.correctionRange;
     });
     afterAll(async () => {
         await screen.Cancel();
@@ -12,7 +12,7 @@ var correctionRangeScheduleTests = (test) => {
         await screen.Add();
         await screen.ApplyOne({
             min: 100,
-            max: limits.correctionRange.max.limit,
+            max: screenLimit.max.limit,
         });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
@@ -22,11 +22,11 @@ var correctionRangeScheduleTests = (test) => {
         await screen.ApplyOne(
             {
                 min: 100,
-                max: limits.correctionRange.max.warning,
+                max: screenLimit.max.warning,
             },
             {
                 min: 100,
-                max: limits.correctionRange.max.limit,
+                max: screenLimit.max.limit,
             });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 1 })).toBeVisible();
@@ -36,11 +36,11 @@ var correctionRangeScheduleTests = (test) => {
         await screen.ApplyOne(
             {
                 min: 100,
-                max: limits.correctionRange.max.noWarning,
+                max: screenLimit.max.noWarning,
             },
             {
                 min: 100,
-                max: limits.correctionRange.max.warning,
+                max: screenLimit.max.warning,
             });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 2 })).toBeNotVisible();
@@ -49,12 +49,12 @@ var correctionRangeScheduleTests = (test) => {
         await screen.Add();
         await screen.ApplyOne(
             {
-                min: limits.correctionRange.min.noWarning,
-                max: limits.correctionRange.max.noWarning,
+                min: screenLimit.min.noWarning,
+                max: screenLimit.max.noWarning,
             },
             {
                 min: 100,
-                max: limits.correctionRange.max.noWarning,
+                max: screenLimit.max.noWarning,
             });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 3 })).toBeNotVisible();
@@ -63,12 +63,12 @@ var correctionRangeScheduleTests = (test) => {
         await screen.Add();
         await screen.ApplyOne(
             {
-                min: limits.correctionRange.min.warning,
-                max: limits.correctionRange.max.noWarning,
+                min: screenLimit.min.warning,
+                max: screenLimit.max.noWarning,
             },
             {
-                min: limits.correctionRange.min.noWarning,
-                max: limits.correctionRange.max.noWarning,
+                min: screenLimit.min.noWarning,
+                max: screenLimit.max.noWarning,
             });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 4 })).toBeVisible();
@@ -77,12 +77,12 @@ var correctionRangeScheduleTests = (test) => {
         await screen.Add();
         await screen.ApplyOne(
             {
-                min: limits.correctionRange.min.limit,
-                max: limits.correctionRange.max.noWarning,
+                min: screenLimit.min.limit,
+                max: screenLimit.max.noWarning,
             },
             {
-                min: limits.correctionRange.min.warning,
-                max: limits.correctionRange.max.noWarning,
+                min: screenLimit.min.warning,
+                max: screenLimit.max.noWarning,
             });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 5 })).toBeVisible();

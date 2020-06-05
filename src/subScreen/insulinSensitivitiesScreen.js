@@ -1,4 +1,3 @@
-const match = require('../match');
 const action = require('../action');
 const { BaseEntriesScreen } = require('./baseEntriesScreen');
 
