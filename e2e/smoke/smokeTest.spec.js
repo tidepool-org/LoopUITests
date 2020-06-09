@@ -6,8 +6,8 @@ describe('smoke test', () => {
     var test = new Test();
     var config = new Config();
     it('prepare test', async () => {
-        let testConfig = config.prepare();
-        test = test.withLanguage(testConfig.text).withSettingDefault(testConfig.settingDefault);
+        config = await config.prepare();
+        test = test.withLanguage(config.text).withSettingDefault(config.settingDefault);
         await test.prepare();
     });
     describe('accessibility', () => {

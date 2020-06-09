@@ -11,9 +11,9 @@ class SettingsScreen {
         this.insulinModelScreen = new settingsSubScreen.InsulinModelScreen(language);
         this.pumpSimulatorScreen = new settingsSubScreen.PumpSimulatorScreen(language);
         //TODO: decide where to set these configuration values
-        this.insulinSensitivitiesScreen = new settingsSubScreen.InsulinSensitivitiesScreen(language, { maxStart: 500 });
-        this.correctionRangeScreen = new settingsSubScreen.CorrectionRangeScreen(language, { maxStart: 120, minStart: 100 });
-        this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language, { start: 80 });
+        this.insulinSensitivitiesScreen = new settingsSubScreen.InsulinSensitivitiesScreen(language, { defaultStart: 500 });
+        this.correctionRangeScreen = new settingsSubScreen.CorrectionRangeScreen(language, { defaultMaxStart: 120, defaultMinStart: 100 });
+        this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language, { defaultStart: 80 });
         this.carbRatioScreen = new settingsSubScreen.CarbRatioScreen(language, { defaultWhole: 150, defaultDecimal: 0 });
     }
     async Open() {

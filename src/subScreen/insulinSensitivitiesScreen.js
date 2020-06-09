@@ -12,23 +12,24 @@ class InsulinSensitivitiesScreen extends BaseEntriesScreen {
         this.config = config;
     }
     /**
-     * @param {Object} expectedSensitivity
-     * @param {String} expectedSensitivity.time
-     * @param {String} expectedSensitivity.bgValuePerInsulinUnit
-     * @param {Object} currentSensitivity optional
+     * @param {Object} sensitivity
+     * @param {Object} sensitivity.expected
+     * @param {String} sensitivity.expected.time
+     * @param {String} sensitivity.expected.bgValuePerInsulinUnit
+     * @param {Object} sensitivity.current optional
      */
-    async ApplyOne(expectedSensitivity, currentSensitivity) {
-        if (currentSensitivity) {
+    async ApplyOne(sensitivity) {
+        if (sensitivity.current) {
             await action.ScrollQuantityPicker(
-                currentSensitivity.bgValuePerInsulinUnit,
-                expectedSensitivity.bgValuePerInsulinUnit,
+                sensitivity.current.bgValuePerInsulinUnit,
+                sensitivity.expected.bgValuePerInsulinUnit,
                 pickerID,
                 true,
             );
         } else {
             await action.ScrollQuantityPicker(
-                this.config.maxStart,
-                expectedSensitivity.bgValuePerInsulinUnit,
+                this.config.defaultStart,
+                sensitivity.expected.bgValuePerInsulinUnit,
                 pickerID,
                 true,
             );
@@ -40,12 +41,12 @@ class InsulinSensitivitiesScreen extends BaseEntriesScreen {
     async ApplyAll(sensitivities) {
         await this.Add();
         for (let index = 0; index < sensitivities.length; index++) {
-            var existing;
+            var current;
             let expected = sensitivities[index];
             if (index > 0) {
-                existing = sensitivities[index - 1];
+                current = sensitivities[index - 1];
             }
-            await this.ApplyOne(expected, existing);
+            await this.ApplyOne({ expected, current });
             await this.AddNewEntry();
         }
     }

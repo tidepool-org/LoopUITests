@@ -11,24 +11,22 @@ class CarbRatioScreen extends BaseEntriesScreen {
         this.config = config;
     }
     /**
-     * @param {Object} expectedRatio
-     * @param {String} expectedRatio.time
-     * @param {String} expectedRatio.carbGramsPerInsulinUnit
-     * @param {Object} currentRatio optional
+     * @param {Object} ratio
+     * @param {Object} ratio.expected
+     * @param {String} ratio.expected.time
+     * @param {String} ratio.expected.carbGramsPerInsulinUnit
+     * @param {Object} ratio.current optional
      */
-    async ApplyOne(expectedRatio, currentRatio) {
+    async ApplyOne(ratio) {
         const pickerID = 'quantity_picker'
         const wholePart = 0;
-        const decimalPart = 1;
-        let expectedParts = String(expectedRatio.carbGramsPerInsulinUnit).split('.');
+        let expectedParts = String(ratio.expected.carbGramsPerInsulinUnit).split('.');
 
-        if (currentRatio) {
-            let currentParts = String(currentRatio.carbGramsPerInsulinUnit).split('.');
+        if (ratio.current) {
+            let currentParts = String(ratio.current.carbGramsPerInsulinUnit).split('.');
             await action.ScrollQuantityPicker(Number(currentParts[wholePart]), Number(expectedParts[wholePart]), pickerID);
-            //await action.ScrollQuantityPicker(Number(currentParts[decimalPart]), Number(expectedParts[decimalPart]), pickerID);
         } else {
             await action.ScrollQuantityPicker(this.config.defaultWhole, Number(expectedParts[wholePart]), pickerID);
-            //await action.ScrollQuantityPicker(this.config.defaultDecimal, expectedParts[decimalPart], pickerID);
         }
     }
     /**
@@ -37,12 +35,12 @@ class CarbRatioScreen extends BaseEntriesScreen {
     async ApplyAll(ratios) {
         await this.Add();
         for (let index = 0; index < ratios.length; index++) {
-            var existing;
+            var current;
             let expected = ratios[index];
             if (index > 0) {
-                existing = ratios[index - 1];
+                current = ratios[index - 1];
             }
-            await this.ApplyOne(expected, existing);
+            await this.ApplyOne({ expected, current });
             await this.AddNewEntry();
         }
     }

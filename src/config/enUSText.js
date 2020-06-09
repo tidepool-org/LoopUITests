@@ -149,7 +149,7 @@ var TimeSlots = [
     '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM'
 ];
 
-var enUSText = {
+module.exports = {
     alerts: Alerts,
     general: General,
     bolusScreen: BolusScreen,
@@ -165,8 +165,4 @@ var enUSText = {
     homeScreen: HomeScreen,
     timeSlots: TimeSlots,
     buttonLabel: ButtonLabel,
-};
-
-module.exports = {
-    enUSText
 };

@@ -1,4 +1,4 @@
-var mgdLLimits = {
+module.exports = {
     correctionRange: {
         max: {
             limit: 180,
@@ -79,8 +79,4 @@ var mgdLLimits = {
             limit: 1.0,
         },
     }
-};
-
-module.exports = {
-    mgdLLimits
 };

@@ -5,8 +5,8 @@ describe('functional test', () => {
     var test = new Test();
     var config = new Config();
     it('prepare test', async () => {
-        let testConfig = config.prepare();
-        test = test.withLanguage(testConfig.text).withLimits(testConfig.limits);
+        config = await config.prepare();
+        test = test.withLanguage(config.text).withLimits(config.limits);
         await test.prepare();
         let settings = await test.OpenSettingsScreen();
         await settings.AddPumpSimulator();

@@ -14,17 +14,17 @@ var suspendThresholdTests = (test) => {
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
     });
     it('can set max lower boundary units with warning', async () => {
-        await screen.ApplyOne(
-            { value: screenLimit.max.warning },
-            { value: screenLimit.max.limit },
-        );
+        await screen.ApplyOne({
+            expected: { value: screenLimit.max.warning },
+            current: { value: screenLimit.max.limit },
+        });
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
     });
     it('can set below max lower boundary units without warning', async () => {
-        await screen.ApplyOne(
-            { value: screenLimit.max.noWarning },
-            { value: screenLimit.max.warning },
-        );
+        await screen.ApplyOne({
+            expected: { value: screenLimit.max.noWarning },
+            current: { value: screenLimit.max.warning },
+        });
         await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
     });
     it('can set min units with warning', async () => {
@@ -32,17 +32,17 @@ var suspendThresholdTests = (test) => {
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
     });
     it('can set min upper boundary units with warning', async () => {
-        await screen.ApplyOne(
-            { value: screenLimit.min.warning },
-            { value: screenLimit.min.limit },
-        );
+        await screen.ApplyOne({
+            expected: { value: screenLimit.min.warning },
+            current: { value: screenLimit.min.limit },
+        });
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
     });
     it('can set above min upper boundary units with no warning', async () => {
-        await screen.ApplyOne(
-            { value: screenLimit.min.noWarning },
-            { value: screenLimit.min.warning },
-        );
+        await screen.ApplyOne({
+            expected: { value: screenLimit.min.noWarning },
+            current: { value: screenLimit.min.warning },
+        });
         await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
     });
 };
