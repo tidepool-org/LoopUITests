@@ -6,13 +6,14 @@ const { BaseEntryScreen } = require('./baseEntryScreen');
 class SuspendThresholdScreen extends BaseEntryScreen {
     constructor(language, config) {
         super(language, {
-            HeaderLabel: language.settingsScreen.SuspendThreshold,
-            InfoLabel: language.settingsScreen.SuspendThresholdInfo,
+            HeaderLabel: language.suspendThresholdSettingScreen.SuspendThreshold,
+            InfoLabel: language.suspendThresholdSettingScreen.SuspendThresholdInfo,
         });
+        this.bgUnitsLabel = language.suspendThresholdSettingScreen.BGUnits;
         this.config = config;
     }
     async OpenPicker() {
-        await match.accessible.Label(this.language.units.Glucose).atIndex(0).tap();
+        await match.accessible.Label(this.bgUnitsLabel).atIndex(0).tap();
     }
     async SwipePickerToMaxValue() {
         await action.SwipePickerUp(3);
@@ -21,15 +22,16 @@ class SuspendThresholdScreen extends BaseEntryScreen {
         await action.SwipePickerDown(3);
     }
     /**
-     * @param {object} expectedThreshold
-     * @param {number} expectedThreshold.value
-     * @param {object} currentThreshold optional
+     * @param {object} threshold
+     * @param {object} threshold.expected
+     * @param {number} threshold.expected.value
+     * @param {object} threshold.current optional
      **/
-    async ApplyOne(expectedThreshold, currentThreshold) {
-        if (currentThreshold) {
-            await action.ScrollPickerToValue(currentThreshold.value, expectedThreshold.value);
+    async ApplyOne(threshold) {
+        if (threshold.current) {
+            await action.ScrollPickerToValue(threshold.current.value, threshold.expected.value);
         } else {
-            await action.ScrollPickerToValue(this.config.start, expectedThreshold.value);
+            await action.ScrollPickerToValue(this.config.defaultStart, threshold.expected.value);
         }
     }
 }

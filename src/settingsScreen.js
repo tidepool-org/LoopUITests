@@ -7,14 +7,14 @@ class SettingsScreen {
         this.cgmSimulatorScreen = new settingsSubScreen.CGMSimulatorScreen(language);
         this.basalRatesScreen = new settingsSubScreen.BasalRatesScreen(language);
         this.deliveryLimitsScreen = new settingsSubScreen.DeliveryLimitsScreen(language);
-        this.carbRatiosScreen = new settingsSubScreen.CarbRatiosScreen(language);
         this.issueReportScreen = new settingsSubScreen.IssueReportScreen(language);
         this.insulinModelScreen = new settingsSubScreen.InsulinModelScreen(language);
         this.pumpSimulatorScreen = new settingsSubScreen.PumpSimulatorScreen(language);
         //TODO: decide where to set these configuration values
-        this.insulinSensitivitiesScreen = new settingsSubScreen.InsulinSensitivitiesScreen(language, { maxStart: 500 });
-        this.correctionRangeScreen = new settingsSubScreen.CorrectionRangeScreen(language, { maxStart: 120, minStart: 100 });
-        this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language, { start: 80 });
+        this.insulinSensitivitiesScreen = new settingsSubScreen.InsulinSensitivitiesScreen(language, { defaultStart: 500 });
+        this.correctionRangeScreen = new settingsSubScreen.CorrectionRangeScreen(language, { defaultMaxStart: 120, defaultMinStart: 100 });
+        this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language, { defaultStart: 80 });
+        this.carbRatioScreen = new settingsSubScreen.CarbRatioScreen(language, { defaultWhole: 150, defaultDecimal: 0 });
     }
     async Open() {
         await match.accessible.ButtonBarButton(this.language.settingsScreen.Settings).tap();
@@ -72,9 +72,10 @@ class SettingsScreen {
         }
         return this.correctionRangeScreen;
     }
-    async OpenCarbRatiosScreen() {
+    async OpenCarbRatioScreen() {
+        await this.ScrollToBottom();
         await this.CarbRatiosLabel().tap();
-        return this.carbRatiosScreen;
+        return this.carbRatioScreen;
     }
     async OpenSuspendThresholdScreen() {
         await this.SuspendThresholdLabel().tap();
@@ -102,7 +103,7 @@ class SettingsScreen {
         return match.accessible.Label(this.language.settingsScreen.BasalRates)
     }
     SuspendThresholdLabel() {
-        return match.accessible.Label(this.language.settingsScreen.SuspendThreshold)
+        return match.accessible.Label(this.language.suspendThresholdSettingScreen.SuspendThreshold)
     }
     DeliveryLimitsLabel() {
         return match.accessible.Label(this.language.settingsScreen.DeliveryLimits)
@@ -111,7 +112,7 @@ class SettingsScreen {
         return match.accessible.Label(this.language.settingsScreen.InsulinModel)
     }
     CarbRatiosLabel() {
-        return match.accessible.Label(this.language.settingsScreen.CarbRatios)
+        return match.accessible.Label(this.language.carbRatioSettingsScreen.CarbRatios)
     }
     InsulinSensitivitiesLabel() {
         return match.accessible.Label(this.language.settingsScreen.InsulinSensitivities)
@@ -198,15 +199,15 @@ class SettingsScreen {
             await screen.SaveAndClose();
         }
         if (values.CarbRatios) {
-            let screen = this.OpenCarbRatiosScreen();
+            let screen = this.OpenCarbRatioScreen();
             await screen.ApplyAll(values.CarbRatios);
-            await screen.Close();
+            await screen.SaveAndClose();
         }
 
         if (values.SuspendThreshold) {
             let screen = this.OpenSuspendThresholdScreen();
             await screen.Apply(values.SuspendThreshold);
-            await screen.SaveAndClose()
+            await screen.SaveAndClose();
         }
 
         if (values.InsulinModel) {

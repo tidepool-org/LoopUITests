@@ -2,7 +2,7 @@ const { homeScreenAccessibilityTests } = require('./homeScreen.tests');
 const { bolusScreenAccessibilityTests } = require('./bolusScreen.tests');
 const { carbEntryScreenAccessibilityTests } = require('./carbEntryScreen.tests');
 const { settingsScreenAccessibilityTests } = require('./settingsScreen.tests');
-const { settingsCarbRatiosScreenAccessibilityTests } = require('./settingsCarbRatiosScreen.tests');
+const { settingsCarbRatioScreenAccessibilityTests } = require('./settingsCarbRatioScreen.tests');
 const { settingsBasalRatesScreenAccessibilityTests } = require('./settingsBasalRatesScreen.tests');
 const { settingsDeliveryLimitsScreenAccessibilityTests } = require('./settingsDeliveryLimitsScreen.tests');
 const { settingsInsulinSensitivitiesScreenAccessibilityTests } = require('./settingsInsulinSensitivitiesScreen.tests');
@@ -16,7 +16,7 @@ var accessibilityTests = {
     bolusScreenAccessibilityTests,
     carbEntryScreenAccessibilityTests,
     settingsScreenAccessibilityTests,
-    settingsCarbRatiosScreenAccessibilityTests,
+    settingsCarbRatioScreenAccessibilityTests,
     settingsBasalRatesScreenAccessibilityTests,
     settingsDeliveryLimitsScreenAccessibilityTests,
     settingsInsulinSensitivitiesScreenAccessibilityTests,

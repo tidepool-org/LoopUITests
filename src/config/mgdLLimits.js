@@ -1,7 +1,4 @@
-/**
- * @summary limits that are used when applying settings for guardrails
- */
-var limits = {
+module.exports = {
     correctionRange: {
         max: {
             limit: 180,
@@ -31,6 +28,7 @@ var limits = {
         max: {
             limit: 30.0,
             warning: 20.0,
+            noWarning: 19.0,
         },
         min: {
             limit: 0.0,
@@ -40,6 +38,7 @@ var limits = {
         step: 0.1,
         max: {
             limit: 35.0,
+            noWarning: 34.0,
         },
         min: {
             limit: 0.0,
@@ -50,6 +49,7 @@ var limits = {
         max: {
             limit: 35.0,
             warning: 20.0,
+            noWarning: 19.0,
         },
         min: {
             limit: 0.0,
@@ -68,18 +68,15 @@ var limits = {
         },
     },
     insulinCarbRatio: {
-        step: 1,
         max: {
-            limit: 150,
-            warning: 28,
+            limit: 150.0,
+            warning: 28.0,
+            noWarning: 27.0,
         },
         min: {
-            warning: 3,
-            limit: 1,
+            noWarning: 4.0,
+            warning: 3.0,
+            limit: 1.0,
         },
     }
-};
-
-module.exports = {
-    limits
 };

@@ -1,10 +1,10 @@
 const match = require('../match');
 const action = require('../action');
-const config = require('../config');
 
 class BasalRatesScreen {
     constructor(language) {
         this.language = language;
+        this.unitsLabel = language.basalRatesSettingScreen.Units;
     }
     Header() {
         return match.accessible.Header(this.language.settingsScreen.BasalRates);
@@ -34,7 +34,7 @@ class BasalRatesScreen {
         if (rate) {
             await this.AddButton().tap();
             await match.accessible.Label(`${rate.time}`).atIndex(0).tap();
-            await action.SetPickerValue(1, `${rate.unitsPerHour} ${config.basalRatesUnits}`);
+            await action.SetPickerValue(1, `${rate.unitsPerHour} ${this.unitsLabel}`);
         }
     }
     /**
@@ -57,7 +57,7 @@ class BasalRatesScreen {
     async Edit(rate) {
         if (rate) {
             await match.accessible.Label(`${rate.time}`).atIndex(0).tap();
-            await action.SetPickerValue(1, `${rate.unitsPerHour} ${config.basalRatesUnits}`);
+            await action.SetPickerValue(1, `${rate.unitsPerHour} ${this.unitsLabel}`);
         }
     }
 }

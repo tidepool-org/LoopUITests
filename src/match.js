@@ -107,12 +107,24 @@ const match = {
                         .and(by.traits(['text'])))
             ).atIndex(pickerNumber);
         },
-        QuantityPickerItem(itemLabel, id) {
+        QuantityPickerItem(itemLabel, pickerID) {
+            return this.QuantityPickerItem(itemLabel, pickerID, null);
+        },
+        QuantityPickerItem(itemLabel, pickerID, itemID) {
+            if (itemID) {
+                return element(
+                    by.type('SwiftUI.AccessibilityNode')
+                        .and(by.label(itemLabel)
+                            .and(by.traits(['text'])
+                                .and(by.id(itemID))))
+                        .withAncestor(by.id(pickerID))
+                ).atIndex(1);
+            }
             return element(
                 by.type('SwiftUI.AccessibilityNode')
                     .and(by.label(itemLabel)
                         .and(by.traits(['text'])))
-                    .withAncestor(by.id(id))
+                    .withAncestor(by.id(pickerID))
             ).atIndex(1);
         },
         Picker() {

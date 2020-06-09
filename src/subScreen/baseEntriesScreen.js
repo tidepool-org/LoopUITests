@@ -35,8 +35,13 @@ class BaseEntriesScreen {
     InfoButton() {
         return match.accessible.Button(this.language.buttonLabel.InfoCircle);
     }
-    GuardrailWarningIconPicker(itemNumber) {
-        let scheduleItemMask = `schedule_item_${itemNumber}`;
+    /**
+     *
+     * @param {object} entry
+     * @param {number} entry.index
+     */
+    GuardrailWarningIconPicker(entry) {
+        let scheduleItemMask = `schedule_item_${entry.index}`;
         return match.accessible.ImageAndId(this.language.alerts.ExclamationMark, scheduleItemMask);
     }
     async Add() {

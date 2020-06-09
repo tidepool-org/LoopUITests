@@ -14,19 +14,20 @@ class CorrectionRangeScreen extends BaseEntriesScreen {
         this.config = config;
     }
     /**
-     * @param {Object} expectedRange
-     * @param {String} expectedRange.time
-     * @param {String} expectedRange.max
-     * @param {String} expectedRange.min
-     * @param {Object} currentRange optional
+     * @param {Object} range
+     * @param {Object} range.expected
+     * @param {String} range.expected.time
+     * @param {String} range.expected.max
+     * @param {String} range.expected.min
+     * @param {Object} range.current optional
      */
-    async ApplyOne(expectedRange, currentRange) {
-        if (currentRange) {
-            await action.ScrollQuantityPicker(currentRange.max, expectedRange.max, maxGlucosePickerID);
-            await action.ScrollQuantityPicker(currentRange.min, expectedRange.min, minGlucosePickerID);
+    async ApplyOne(range) {
+        if (range.current) {
+            await action.ScrollQuantityPicker(range.current.max, range.expected.max, maxGlucosePickerID);
+            await action.ScrollQuantityPicker(range.current.min, range.expected.min, minGlucosePickerID);
         } else {
-            await action.ScrollQuantityPicker(this.config.maxStart, expectedRange.max, maxGlucosePickerID);
-            await action.ScrollQuantityPicker(this.config.minStart, expectedRange.min, minGlucosePickerID);
+            await action.ScrollQuantityPicker(this.config.defaultMaxStart, range.expected.max, maxGlucosePickerID);
+            await action.ScrollQuantityPicker(this.config.defaultMinStart, range.expected.min, minGlucosePickerID);
         }
     }
     /**
@@ -35,12 +36,12 @@ class CorrectionRangeScreen extends BaseEntriesScreen {
     async ApplyAll(ranges) {
         await this.Add();
         for (let index = 0; index < ranges.length; index++) {
-            var existing;
+            var current;
             let expected = ranges[index];
             if (index > 0) {
-                existing = ranges[index - 1];
+                current = ranges[index - 1];
             }
-            await this.ApplyOne(expected, existing);
+            await this.ApplyOne({ expected, current });
             await this.AddNewEntry();
         }
     }

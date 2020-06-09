@@ -1,10 +1,13 @@
-const { Test, } = require('../../src/index');
+const { Test, Config } = require('../../src/index');
 const { functionalityTests } = require('../../tests/functionality/index');
 const { accessibilityTests } = require('../../tests/accessibility/index');
 
 describe('smoke test', () => {
     var test = new Test();
+    var config = new Config();
     it('prepare test', async () => {
+        config = await config.prepare();
+        test = test.withLanguage(config.text).withSettingDefault(config.settingDefault);
         await test.prepare();
     });
     describe('accessibility', () => {
@@ -36,9 +39,8 @@ describe('smoke test', () => {
         describe.skip('basal rates settings screen', () => {
             accessibilityTests.settingsBasalRatesScreenAccessibilityTests(test);
         });
-        //TODO: update when development work complete
-        describe.skip('carb ratios settings screen', () => {
-            accessibilityTests.settingsCarbRatiosScreenAccessibilityTests(test);
+        describe('carb ratios settings screen', () => {
+            accessibilityTests.settingsCarbRatioScreenAccessibilityTests(test);
         });
     });
     describe('functionality', () => {

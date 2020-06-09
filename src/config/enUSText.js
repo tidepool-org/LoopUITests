@@ -1,9 +1,3 @@
-var Units = {
-    Glucose: 'mg/dL',
-    BasalRatesUnits: 'U/hr',
-    InsulinSensitivitiesUnits: 'mg/dL/U',
-};
-
 var ButtonLabel = {
     Plus: 'plus',
     InfoCircle: 'info.circle',
@@ -73,12 +67,9 @@ var SettingsScreen = {
     DeliveryLimits: 'Delivery Limits',
     InsulinSensitivities: 'Insulin Sensitivities',
     InsulinSensitivityInfo: 'Your insulin sensitivity factor (ISF) is the drop in glucose expected from one unit of insulin.',
-    SuspendThreshold: 'Suspend Threshold',
-    SuspendThresholdInfo: 'When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/h and will not recommend a bolus.',
     CorrectionRange: 'Correction Range',
     CorrectionRangeInfo: 'The app adjusts insulin delivery in an effort to bring your glucose into your correction range.',
     InsulinModel: 'Insulin Model',
-    CarbRatios: 'Carb Ratios',
     ClosedLoop: 'Closed Loop',
     AddCGM: 'Add CGM',
     DeleteCGMData: 'Delete CGM Data',
@@ -89,13 +80,48 @@ var SettingsScreen = {
     PreMeal: 'Pre-Meal',
 };
 
+var BasalRatesSettingScreen = {
+    Units: 'U/hr',
+};
+
+var SuspendThresholdSettingScreen = {
+    BGUnits: 'mg/dL',
+    SuspendThreshold: 'Suspend Threshold',
+    SuspendThresholdInfo: 'When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/h and will not recommend a bolus.',
+};
+
 var CGMSimulatorSettingsScreen = {
     CGMSettings: 'CGM Settings',
     BaseGlucose: 'Base Glucose',
     SineCurve: 'Sine Curve',
     Amplitude: 'Amplitude',
     BackfillGlucose: 'Backfill Glucose',
+    Effect: {
+        GlucoseNoise: 'Glucose Noise',
+        RandomHighOutlier: 'Random High Outlier',
+        RandomLowOutlier: 'Random Low Outlier',
+        RandomError: 'Random Error',
+    },
+    Model: {
+        Constant: 'Constant',
+        SineCurve: 'Sine Curve',
+        None: 'No Data',
+    }
 }
+
+var InsulinModelSettingsScreen = {
+    Model: {
+        Walsh: 'Walsh',
+        RapidAdults: 'Rapid-Acting – Adults',
+        RapidChildren: 'Rapid-Acting – Children',
+        Fiasp: 'Fiasp'
+    }
+};
+
+var CarbRatioSettingsScreen = {
+    CarbRatios: 'Carb Ratios',
+    CarbRatioInfo: 'Your carb ratio is the number of grams of carbohydrate covered by one unit of insulin.',
+};
 
 var PumpSimulatorSettingsScreen = {
     PumpSettings: 'Pump Settings',
@@ -123,8 +149,7 @@ var TimeSlots = [
     '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM'
 ];
 
-var text = {
-    units: Units,
+module.exports = {
     alerts: Alerts,
     general: General,
     bolusScreen: BolusScreen,
@@ -132,10 +157,12 @@ var text = {
     settingsScreen: SettingsScreen,
     cgmSimulatorSettingsScreen: CGMSimulatorSettingsScreen,
     pumpSimulatorSettingsScreen: PumpSimulatorSettingsScreen,
+    insulinModelSettingsScreen: InsulinModelSettingsScreen,
+    basalRatesSettingScreen: BasalRatesSettingScreen,
+    suspendThresholdSettingScreen: SuspendThresholdSettingScreen,
+    carbRatioSettingsScreen: CarbRatioSettingsScreen,
     overridesScreen: TempOverrideScreen,
     homeScreen: HomeScreen,
     timeSlots: TimeSlots,
     buttonLabel: ButtonLabel,
 };
-
-module.exports = text;

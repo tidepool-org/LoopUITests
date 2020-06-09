@@ -4,12 +4,15 @@ const { BolusScreen } = require('./bolusScreen');
 const { HomeScreen } = require('./homeScreen');
 const exec = require('child_process').exec;
 const match = require('./match');
-const text = require('./text');
-const { screenName } = require('./properties');
+const { screenName, settingType } = require('./properties');
 
 class Test {
     withLanguage(language) {
         this.language = language;
+        return this;
+    }
+    withLimits(limits) {
+        this.limits = limits;
         return this;
     }
     withScenario(scenario) {
@@ -20,12 +23,12 @@ class Test {
         this.startScreen = startScreen;
         return this;
     }
-    withUnits(units) {
-        this.units = units;
+    withSettingsToApply(settingsToApply) {
+        this.settingsToApply = settingsToApply;
         return this;
     }
-    withSettings(settings) {
-        this.settings = settings;
+    withSettingDefault(settingDefault) {
+        this.settingDefault = settingDefault;
         return this;
     }
     withSettingsFilter(filter) {
@@ -36,7 +39,6 @@ class Test {
         this.simulators = simulators;
         return this;
     }
-
     async _loadDeviceScenariosFromDisk(deviceId) {
         const _loadDeviceScenariosFromDiskShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
         _loadDeviceScenariosFromDiskShellScript.stdout.on('data', () => {
@@ -46,14 +48,12 @@ class Test {
             throw Error(data);
         });
     }
-
     async _loadScenario(scenarioName) {
         await device.shake();
         await expect(match.accessible.Label(scenarioName)).toExist();
         await match.accessible.Label(scenarioName).tap();
         await match.accessible.ButtonBarButton('Load').tap();
     }
-
     async _setStartScreen(start) {
         switch (start) {
             case screenName.settings:
@@ -74,7 +74,6 @@ class Test {
                 break;
         }
     }
-
     _filterSettings(values, types) {
         const filtered = values;
         if (types) {
@@ -86,16 +85,14 @@ class Test {
     }
 
     async prepare() {
-
         if (!this.language) {
-            this.language = text;
+            throw 'language is required!';
         }
         if (!this.startScreen) {
-            if (this.settings || this.simulators) {
+            if (this.settingsToApply || this.simulators) {
                 this.startScreen = screenName.home;
             }
         }
-
         this.settingsScreen = new SettingsScreen(this.language);
         this.homeScreen = new HomeScreen(this.language);
         this.bolusScreen = new BolusScreen(this.language);
@@ -109,17 +106,17 @@ class Test {
         if (this.scenario) {
             await _loadDeviceScenariosFromDisk(device.deviceId);
             await _loadScenario(this.scenario);
-            if (this.settings) {
-                this.settings = this._filterSettings(this.settings, [SettingType.CGMSimulatorSettings, SettingType.AddCGMSimulator, SettingType.AddPumpSimulator]);
+            if (this.settingsToApply) {
+                this.settingsToApply = this._filterSettings(this.settingsToApply, [settingType.CGMSimulatorSettings, settingType.AddCGMSimulator, settingType.AddPumpSimulator]);
             }
         }
 
-        if (this.settings) {
+        if (this.settingsToApply) {
             await this.OpenSettingsScreen();
             if (this.filter) {
-                this.settings = this._filterSettings(this.settings, this.filter)
+                this.settingsToApply = this._filterSettings(this.settingsToApply, this.filter)
             }
-            await this.settingsScreen.Apply(this.settings);
+            await this.settingsScreen.Apply(this.settingsToApply);
         } else if (this.simulators) {
             await this.OpenSettingsScreen();
             if (this.simulators.cgm) {
@@ -148,7 +145,7 @@ class Test {
         await match.accessible.Label(this.scenario).swipe('left');
         await match.accessible.SwipeButton('Advance ⏭').tap();
         await match.UITextField().typeText(cycles);
-        await match.accessible.Button(text.general.OK).tap();
+        await match.accessible.Button(this.language.general.OK).tap();
     }
 
     async OpenSettingsScreen() {

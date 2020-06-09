@@ -1,10 +1,10 @@
 const match = require('../match');
 const action = require('../action');
-const { setting } = require('../properties');
 
 class CGMSimulatorScreen {
     constructor(language) {
-        this.language = language;
+        this.language = language.cgmSimulatorSettingsScreen;
+        this.language.general = language.general;
     }
     async Close() {
         if (this.needsClosing) {
@@ -25,12 +25,12 @@ class CGMSimulatorScreen {
     async _setCGMEffect(effect) {
         await match.accessible.Label(effect).tap();
         switch (effect) {
-            case setting.cgmEffect.GlucoseNoise:
+            case this.language.Effect.GlucoseNoise:
                 await match.UIEditableTextField().clearText();
                 await match.UIEditableTextField().typeText('100');
                 await match.accessible.ButtonBarButton(this.language.general.Back).tap();
                 break;
-            case setting.cgmEffect.RandomError:
+            case this.language.Effect.RandomError:
                 await match.UIEditableTextField().clearText();
                 await match.UIEditableTextField().typeText('10');
                 await match.accessible.ButtonBarButton(this.language.general.Back).tap();
@@ -43,21 +43,21 @@ class CGMSimulatorScreen {
         if (modelData) {
             await match.accessible.Label(modelData.model).tap();
             switch (modelData.model) {
-                case setting.cgmModel.Constant:
+                case this.language.Model.Constant:
                     await match.UIEditableTextField().clearText();
                     await match.UIEditableTextField().typeText(String(modelData.bgValues[0]));
-                    await match.accessible.BackButton(this.language.cgmSimulatorSettingsScreen.CGMSettings).tap();
+                    await match.accessible.BackButton(this.language.CGMSettings).tap();
                     break;
-                case setting.cgmModel.SineCurve:
-                    await match.accessible.Label(this.language.cgmSimulatorSettingsScreen.BaseGlucose).tap();
+                case this.language.Model.SineCurve:
+                    await match.accessible.Label(this.language.BaseGlucose).tap();
                     await match.UIEditableTextField().clearText();
                     await match.UIEditableTextField().typeText(String(modelData.bgValues[0]));
-                    await match.accessible.BackButton(this.language.cgmSimulatorSettingsScreen.SineCurve).tap();
-                    await match.accessible.Label(this.language.cgmSimulatorSettingsScreen.Amplitude).tap();
+                    await match.accessible.BackButton(this.language.SineCurve).tap();
+                    await match.accessible.Label(this.language.Amplitude).tap();
                     await match.UIEditableTextField().clearText();
                     await match.UIEditableTextField().typeText(modelData.bgValues[1]);
-                    await match.accessible.BackButton(this.language.cgmSimulatorSettingsScreen.SineCurve).tap();
-                    await match.accessible.BackButton(this.language.cgmSimulatorSettingsScreen.CGMSettings).tap();
+                    await match.accessible.BackButton(this.language.SineCurve).tap();
+                    await match.accessible.BackButton(this.language.CGMSettings).tap();
                     break;
                 default:
                     break;
@@ -66,7 +66,7 @@ class CGMSimulatorScreen {
     }
     async _setCGMBackfill(hours) {
         this.needsClosing = false;
-        await match.accessible.Label(this.language.cgmSimulatorSettingsScreen.BackfillGlucose).tap();
+        await match.accessible.Label(this.language.BackfillGlucose).tap();
         await action.SetPickerValue(0, `${hours}`);
         await match.accessible.ButtonBarButton(this.language.general.Save).tap();
     }

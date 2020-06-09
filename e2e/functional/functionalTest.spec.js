@@ -1,9 +1,12 @@
-const { Test } = require('../../src/index');
+const { Test, Config } = require('../../src/index');
 const { guardrailsTests } = require('../../tests/guardrails/index');
 
 describe('functional test', () => {
     var test = new Test();
+    var config = new Config();
     it('prepare test', async () => {
+        config = await config.prepare();
+        test = test.withLanguage(config.text).withLimits(config.limits);
         await test.prepare();
         let settings = await test.OpenSettingsScreen();
         await settings.AddPumpSimulator();
@@ -24,8 +27,7 @@ describe('functional test', () => {
         describe('correction range schedule', () => {
             guardrailsTests.correctionRangeScheduleTests(test);
         });
-        //TODO: update when development work complete
-        describe.skip('insulin carb ratio', () => {
+        describe('insulin carb ratio', () => {
             guardrailsTests.insulinCarbRatioTests(test);
         });
         //TODO: update when development work complete

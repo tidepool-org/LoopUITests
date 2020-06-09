@@ -1,14 +1,15 @@
-var settingsCarbRatiosScreenAccessibilityTests = (test) => {
+var settingsCarbRatioScreenAccessibilityTests = (test) => {
     var screen;
     var settingsScreen;
     beforeAll(async () => {
         settingsScreen = await test.OpenSettingsScreen();
-        screen = await settingsScreen.OpenCarbRatiosScreen();
+        screen = await settingsScreen.OpenCarbRatioScreen();
     });
     afterAll(async () => {
-        await screen.Close();
+        await screen.Cancel();
         await settingsScreen.Close();
     });
+    //TODO: should be a header but is a label
     it.skip('has a header', async () => {
         await expect(screen.Header()).toExist();
     });
@@ -33,5 +34,5 @@ var settingsCarbRatiosScreenAccessibilityTests = (test) => {
 };
 
 module.exports = {
-    settingsCarbRatiosScreenAccessibilityTests
+    settingsCarbRatioScreenAccessibilityTests
 };

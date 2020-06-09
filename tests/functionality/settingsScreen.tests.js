@@ -1,5 +1,3 @@
-const { setting, limits } = require('../../src/index');
-
 var settingsScreenFunctionalityTests = (test) => {
     var settingsScreen;
     it('can open the settings', async () => {
@@ -19,7 +17,7 @@ var settingsScreenFunctionalityTests = (test) => {
         });
         it('can configure simulator', async () => {
             let screen = await settingsScreen.OpenCGMSimulatorScreen();
-            await screen.Apply(setting.default.CGMSimulatorSettings);
+            await screen.Apply(test.settingDefault.CGMSimulatorSettings);
             await screen.Close();
         });
     });
@@ -36,50 +34,46 @@ var settingsScreenFunctionalityTests = (test) => {
         it('can be added', async () => {
             await settingsScreen.AddPumpSimulator();
         });
-        it('set suspend threshold', async () => {
+        it.skip('set suspend threshold', async () => {
             let screen = await settingsScreen.OpenSuspendThresholdScreen();
             await screen.OpenPicker();
-            await screen.ApplyOne({ value: limits.suspendThreshold.min.noWarning });
-            await screen.Save();
+            await screen.ApplyOne(test.settingDefault.SuspendThreshold);
+            await screen.SaveAndClose();
         });
-        it('set basal rates', async () => {
+        //TODO: update when gaurdrails work is complete
+        it.skip('set basal rates', async () => {
             let screen = await settingsScreen.OpenBasalRatesScreen();
-            await screen.ApplyAll(setting.default.BasalRates);
+            await screen.ApplyAll(test.settingDefault.BasalRates);
             await screen.Save();
             await screen.Close();
         });
         it('set delivery limits', async () => {
             let screen = await settingsScreen.OpenDeliveryLimitsScreen();
-            await screen.Apply(setting.default.DeliveryLimits);
+            await screen.Apply(test.settingDefault.DeliveryLimits);
             await screen.Save();
             await screen.Close();
         });
         it('set insulin model', async () => {
             let screen = await settingsScreen.OpenInsulinModelScreen();
-            await screen.Apply(setting.default.InsulinModel);
+            await screen.Apply(test.settingDefault.InsulinModel);
             await screen.Close();
 
         });
         it('set insulin sensitivites', async () => {
             let screen = await settingsScreen.OpenInsulinSensitivitiesScreen();
-            await screen.Add();
-            await screen.ApplyOne(setting.default.InsulinSensitivities[0]);
-            await screen.AddNewEntry();
-            await screen.Save();
+            await screen.ApplyAll(test.settingDefault.InsulinSensitivities);
+            await screen.SaveAndClose();
 
         });
         it('set correction range', async () => {
             let screen = await settingsScreen.OpenCorrectionRangeScreen();
-            await screen.Add();
-            await screen.ApplyOne(setting.default.CorrectionRanges[0]);
-            await screen.AddNewEntry();
-            await screen.Save();
+            await screen.ApplyAll(test.settingDefault.CorrectionRanges);
+            await screen.SaveAndClose();
         });
-        //TODO: update when development work complete
-        it.skip('set carb ratios', async () => {
-            let screen = await settingsScreen.OpenCarbRatiosScreen();
-            await screen.ApplyAll(setting.default.CarbRatios);
-            await screen.Close();
+        it('set carb ratios', async () => {
+            let screen = await settingsScreen.OpenCarbRatioScreen();
+            await screen.ApplyAll(test.settingDefault.CarbRatios);
+            await screen.SaveAndClose();
         });
         it('can be removed', async () => {
             await settingsScreen.RemovePumpData();

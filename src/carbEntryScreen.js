@@ -2,7 +2,8 @@ const match = require('./match');
 
 class CarbEntryScreen {
     constructor(language) {
-        this.language = language;
+        this.language = language.carbEntryScreen;
+        this.language.general = language.general;
     }
     /**
      * @example await carbs.Open();
@@ -10,7 +11,7 @@ class CarbEntryScreen {
     async Open() {
         try {
             //assume we are starting from the open screen
-            await match.accessible.Button(this.language.carbEntryScreen.AddMeal).tap();
+            await match.accessible.Button(this.language.AddMeal).tap();
         } catch (err) { } //catch and continue
     }
     /**
@@ -23,19 +24,19 @@ class CarbEntryScreen {
         return match.accessible.ButtonBarButton(this.language.general.Cancel);
     }
     AddCarbEntryHeader() {
-        return match.accessible.Header(this.language.carbEntryScreen.AddCarbEntry);
+        return match.accessible.Header(this.language.AddCarbEntry);
     }
     AmountConsumedLabel() {
-        return match.accessible.Label(this.language.carbEntryScreen.AmountConsumed);
+        return match.accessible.Label(this.language.AmountConsumed);
     }
     DateLabel() {
-        return match.accessible.Label(this.language.carbEntryScreen.Date);
+        return match.accessible.Label(this.language.Date);
     }
     FoodTypeLabel() {
-        return match.accessible.Label(this.language.carbEntryScreen.FoodType);
+        return match.accessible.Label(this.language.FoodType);
     }
     AbsorptionTimeLabel() {
-        return match.accessible.Label(this.language.carbEntryScreen.AbsorptionTime);
+        return match.accessible.Label(this.language.AbsorptionTime);
     }
     /**
      * @example  carbs.ContinueButton();
@@ -71,7 +72,7 @@ class CarbEntryScreen {
      * @example carbs.SaveWithoutBolusButton();
      */
     SaveWithoutBolusButton() {
-        return match.accessible.Button(this.language.carbEntryScreen.SaveWithoutBolusing);
+        return match.accessible.Button(this.language.SaveWithoutBolusing);
     }
     /**
      * @example await carbs.SaveWithoutBolus();
@@ -91,7 +92,7 @@ class CarbEntryScreen {
      * @example carbs.AbsorptionTimeMessage();
      */
     AbsorptionTimeMessage() {
-        return match.accessible.Label(this.language.carbEntryScreen.AbsorptionMessage);
+        return match.accessible.Label(this.language.AbsorptionMessage);
     }
     /**
      * @example await carbs.ExpectAbsorptionTimeMessage();
