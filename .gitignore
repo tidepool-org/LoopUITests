@@ -4,3 +4,5 @@
 /e2e/wip
 
 e2e/start/wip.spec.js
+
+*.xml

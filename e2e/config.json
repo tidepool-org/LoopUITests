@@ -5,8 +5,15 @@
     "testEnvironment": "node",
     "reporters": [
         "detox/runners/jest/streamlineReporter",
-        "jest-junit"
+        [
+            "jest-junit",
+            {
+                "suiteName": "loop UI tests",
+                "outputDirectory": "./artifacts",
+                "outputName": "loopUITests.xml",
+                "ancestorSeparator": " › "
+            }
+        ]
     ],
-    "testResultsProcessor": "jest-junit",
     "verbose": true
 }
