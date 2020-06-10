@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest",
-    "quick-test": "detox test e2e/quick -c ios.sim.debug",
-    "all-test": "detox test -c ios.sim.debug 2>&1 | tee ./artifacts/all_test_output.txt",
+    "all-test": "detox test -c ios.sim.debug",
     "smoke-test": "detox test e2e/smoke -c ios.sim.debug",
-    "functional-test": "detox test e2e/functional -c ios.sim.debug 2>&1 | tee ./artifacts/functional_test_output.txt",
+    "functional-test": "detox test e2e/functional -c ios.sim.debug",
     "build": "detox build -c ios.sim.debug",
     "lint": "eslint ."
   },
