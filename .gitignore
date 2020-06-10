@@ -1,8 +1,3 @@
 /artifacts
 /build
 /node_modules
-/e2e/wip
-
-e2e/start/wip.spec.js
-
-*.xml
