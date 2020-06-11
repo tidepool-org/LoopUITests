@@ -35,6 +35,12 @@ describe('smoke test', () => {
         describe('suspend threshold screen', () => {
             accessibilityTests.settingsSuspendThresholdScreenAccessibilityTests(test);
         });
+        describe('CGM simulator settings screen', () => {
+            accessibilityTests.settingsCGMSimulatorScreenTests(test);
+        });
+        describe('pump simulator settings screen', () => {
+            accessibilityTests.settingsPumpSimulatorScreenTests(test);
+        });
         //TODO: not accesible via simulator. Need to investigate
         describe.skip('basal rates settings screen', () => {
             accessibilityTests.settingsBasalRatesScreenAccessibilityTests(test);
@@ -43,7 +49,7 @@ describe('smoke test', () => {
             accessibilityTests.settingsCarbRatioScreenAccessibilityTests(test);
         });
     });
-    describe('functionality', () => {
+    describe.skip('functionality', () => {
         describe('home screen', () => {
             functionalityTests.homeScreenFunctionalityTests(test);
         });
