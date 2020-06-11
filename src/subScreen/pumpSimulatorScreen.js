@@ -11,7 +11,7 @@ class PumpSimulatorScreen {
         return match.accessible.Header(this.language.PumpSettings);
     }
     DoneButton() {
-        return match.accessible.Button(this.language.general.Done);
+        return match.accessible.Button(this.language.general.Done).atIndex(0);
     }
     ConfigurationHeader() {
         return match.accessible.Header(this.language.ConfigHeader);
@@ -80,6 +80,9 @@ class PumpSimulatorScreen {
     }
     DeletePumpLabel() {
         return match.accessible.Label(this.language.DeletePump);
+    }
+    DeletePumpConfirmationLabel() {
+        return match.accessible.Label(this.language.DeletePump).atIndex(1);
     }
     SuspendDeliveryButton() {
         return match.accessible.Button(this.language.SuspendDelivery);
@@ -182,7 +185,7 @@ class PumpSimulatorScreen {
         }
     }
     async Close() {
-        await this.DoneButton().atIndex(0).tap();
+        await this.DoneButton().tap();
     }
     async ResumeDelivery() {
         await this.ResumeDeliveryButton().tap();
@@ -190,9 +193,9 @@ class PumpSimulatorScreen {
     async SuspendDelivery() {
         await this.SuspendDeliveryButton().tap();
     }
-    async DeletePump() {
+    async RemoveSimulator() {
         await this.DeletePumpLabel().tap();
-        await this.DeletePumpLabel().atIndex(1).tap();
+        await this.DeletePumpConfirmationLabel().tap();
     }
 
 }

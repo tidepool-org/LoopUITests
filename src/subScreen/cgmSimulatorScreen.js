@@ -10,7 +10,7 @@ class CGMSimulatorScreen {
         return match.accessible.Header(this.language.CGMSettings);
     }
     DoneButton() {
-        return match.accessible.Button(this.language.general.Done);
+        return match.accessible.Button(this.language.general.Done).atIndex(0);
     }
     ModelHeader() {
         return match.accessible.Header(this.language.Model.Header);
@@ -54,9 +54,15 @@ class CGMSimulatorScreen {
     IssueAlertsLabel() {
         return match.accessible.Label(this.language.Alerts.IssueAlerts);
     }
+    DeleteCGMLabel() {
+        return match.accessible.Label(this.language.DeleteCGM);
+    }
+    DeleteCGMConfirmationLabel() {
+        return match.accessible.Label(this.language.DeleteCGM).atIndex(1);
+    }
     async Close() {
         if (this.needsClosing) {
-            await this.DoneButton().atIndex(0).tap();
+            await this.DoneButton().tap();
         }
     }
     async Apply(settings) {
@@ -119,9 +125,9 @@ class CGMSimulatorScreen {
         await match.accessible.ButtonBarButton(this.language.general.Save).tap();
     }
     async RemoveSimulator() {
-        this.needsClosing = false;
-        await match.accessible.Label(this.language.settingsScreen.DeleteCGM).tap();
-        await match.accessible.Label(this.language.settingsScreen.DeleteCGM).atIndex(1).tap();
+        await this.HistoryHeader().swipe('up', 'fast');
+        await this.DeleteCGMLabel().tap();
+        await this.DeleteCGMConfirmationLabel().tap();
     }
 }
 

@@ -95,6 +95,7 @@ var CGMSimulatorSettingsScreen = {
     BaseGlucose: 'Base Glucose',
     SineCurve: 'Sine Curve',
     Amplitude: 'Amplitude',
+    DeleteCGM: 'Delete CGM',
     Alerts: {
         Header: 'ALERTS',
         IssueAlerts: 'Issue Alerts',

@@ -1,9 +1,14 @@
 var settingsCGMSimulatorScreenTests = (test) => {
     var screen;
     var settingsScreen;
-    it('open', async () => {
+    beforeAll(async () => {
         settingsScreen = await test.OpenSettingsScreen();
+        await settingsScreen.AddCGMSimulator();
         screen = await settingsScreen.OpenCGMSimulatorScreen();
+    });
+    afterAll(async () => {
+        await screen.RemoveSimulator();
+        await settingsScreen.Close();
     });
     it('has a header', async () => {
         await expect(screen.Header()).toExist();
@@ -44,7 +49,6 @@ var settingsCGMSimulatorScreenTests = (test) => {
     it('has a random low outlier label', async () => {
         await expect(screen.RandomLowOutlierEffectLabel()).toExist();
     });
-
     it('has a history header', async () => {
         await expect(screen.HistoryHeader()).toExist();
     });
@@ -54,18 +58,11 @@ var settingsCGMSimulatorScreenTests = (test) => {
     it('has a backfill glucose label', async () => {
         await expect(screen.BackfillGlucoseHistoryLabel()).toExist();
     });
-
     it('has a alerts header', async () => {
         await expect(screen.AlertsHeader()).toExist();
     });
     it('has a issue alerts label', async () => {
         await expect(screen.IssueAlertsLabel()).toExist();
-    });
-
-
-    it('close', async () => {
-        await screen.Close();
-        await settingsScreen.Close();
     });
 };
 
