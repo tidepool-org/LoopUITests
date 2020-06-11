@@ -1,6 +1,5 @@
 const { Test, Config } = require('../../src/index');
-const { functionalityTests } = require('../../tests/functionality/index');
-const { accessibilityTests } = require('../../tests/accessibility/index');
+const accessibilityTests = require('../../tests/accessibility/index');
 
 describe('smoke test', () => {
     var test = new Test();
@@ -41,20 +40,6 @@ describe('smoke test', () => {
         });
         describe('carb ratios settings screen', () => {
             accessibilityTests.settingsCarbRatioScreenAccessibilityTests(test);
-        });
-    });
-    describe('functionality', () => {
-        describe('home screen', () => {
-            functionalityTests.homeScreenFunctionalityTests(test);
-        });
-        describe('carb entry screen', () => {
-            functionalityTests.carbEntryScreenFunctionalityTests(test);
-        });
-        describe('settings screen', () => {
-            functionalityTests.settingsScreenFunctionalityTests(test);
-        });
-        describe('pump simulator screen', () => {
-            functionalityTests.pumpSimulatorScreenTests(test);
         });
     });
 });

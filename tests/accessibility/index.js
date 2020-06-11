@@ -11,7 +11,7 @@ const { settingsIssueReportScreenAccessibilityTests } = require('./settingsIssue
 const { settingsInsulinModelScreenAccessibilityTests } = require('./settingsInsulinModelScreen.tests');
 const { settingsSuspendThresholdScreenAccessibilityTests } = require('./settingsSuspendThresholdScreen.tests');
 
-var accessibilityTests = {
+module.exports = {
     homeScreenAccessibilityTests,
     bolusScreenAccessibilityTests,
     carbEntryScreenAccessibilityTests,
@@ -24,8 +24,4 @@ var accessibilityTests = {
     settingsIssueReportScreenAccessibilityTests,
     settingsInsulinModelScreenAccessibilityTests,
     settingsSuspendThresholdScreenAccessibilityTests,
-};
-
-module.exports = {
-    accessibilityTests
 };
