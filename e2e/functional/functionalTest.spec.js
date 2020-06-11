@@ -9,8 +9,6 @@ describe('functional test', () => {
         config = await config.prepare();
         test = test.withLanguage(config.text).withLimits(config.limits);
         await test.prepare();
-        let settings = await test.OpenSettingsScreen();
-        await settings.AddPumpSimulator();
     });
     describe.skip('functionality', () => {
         describe('home screen', () => {
@@ -27,6 +25,10 @@ describe('functional test', () => {
         });
     });
     describe('guardrails', () => {
+        it('add required pump simulator', async () => {
+            let settings = await test.OpenSettingsScreen();
+            await settings.AddPumpSimulator();
+        });
         describe('max bolus', () => {
             guardrailsTests.maxBolusTests(test);
         });
