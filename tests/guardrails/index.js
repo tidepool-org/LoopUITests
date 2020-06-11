@@ -6,7 +6,7 @@ const { suspendThresholdTests } = require('./suspendThreshold.tests');
 const { correctionRangeScheduleTests } = require('./correctionRangeSchedule.tests');
 const { insulinCarbRatioTests } = require('./insulinCarbRatio.tests');
 
-var guardrailsTests = {
+module.exports = {
     maxBolusTests,
     basalRateScheduleTests,
     insulinSensitivityScheduleTests,
@@ -14,8 +14,4 @@ var guardrailsTests = {
     correctionRangeScheduleTests,
     suspendThresholdTests,
     insulinCarbRatioTests
-}
-
-module.exports = {
-    guardrailsTests,
 };

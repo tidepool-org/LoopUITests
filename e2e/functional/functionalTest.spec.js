@@ -1,5 +1,6 @@
 const { Test, Config } = require('../../src/index');
-const { guardrailsTests } = require('../../tests/guardrails/index');
+const guardrailsTests = require('../../tests/guardrails/index');
+const functionalityTests = require('../../tests/functionality/index');
 
 describe('functional test', () => {
     var test = new Test();
@@ -8,10 +9,26 @@ describe('functional test', () => {
         config = await config.prepare();
         test = test.withLanguage(config.text).withLimits(config.limits);
         await test.prepare();
-        let settings = await test.OpenSettingsScreen();
-        await settings.AddPumpSimulator();
+    });
+    describe.skip('functionality', () => {
+        describe('home screen', () => {
+            functionalityTests.homeScreenFunctionalityTests(test);
+        });
+        describe('carb entry screen', () => {
+            functionalityTests.carbEntryScreenFunctionalityTests(test);
+        });
+        describe('settings screen', () => {
+            functionalityTests.settingsScreenFunctionalityTests(test);
+        });
+        describe('pump simulator screen', () => {
+            functionalityTests.pumpSimulatorScreenTests(test);
+        });
     });
     describe('guardrails', () => {
+        it('add required pump simulator', async () => {
+            let settings = await test.OpenSettingsScreen();
+            await settings.AddPumpSimulator();
+        });
         describe('max bolus', () => {
             guardrailsTests.maxBolusTests(test);
         });
