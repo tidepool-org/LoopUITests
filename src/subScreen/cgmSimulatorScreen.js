@@ -6,6 +6,54 @@ class CGMSimulatorScreen {
         this.language = language.cgmSimulatorSettingsScreen;
         this.language.general = language.general;
     }
+    Header() {
+        return match.accessible.Header(this.language.CGMSettings);
+    }
+    DoneButton() {
+        return match.accessible.Button(this.language.general.Done);
+    }
+    ModelHeader() {
+        return match.accessible.Header(this.language.Model.Header);
+    }
+    ConstantModelLabel() {
+        return match.accessible.Label(this.language.Model.Constant);
+    }
+    SineCurveModelLabel() {
+        return match.accessible.Label(this.language.Model.SineCurve);
+    }
+    NoDataModelLabel() {
+        return match.accessible.Label(this.language.Model.None);
+    }
+    EffectsHeader() {
+        return match.accessible.Header(this.language.Effect.Header);
+    }
+    RandomErrorEffectLabel() {
+        return match.accessible.Label(this.language.Effect.RandomError);
+    }
+    GlucoseNoiseEffectLabel() {
+        return match.accessible.Label(this.language.Effect.GlucoseNoise);
+    }
+    RandomHighOutlierEffectLabel() {
+        return match.accessible.Label(this.language.Effect.RandomHighOutlier);
+    }
+    RandomLowOutlierEffectLabel() {
+        return match.accessible.Label(this.language.Effect.RandomLowOutlier);
+    }
+    BackfillGlucoseHistoryLabel() {
+        return match.accessible.Label(this.language.History.BackfillGlucose);
+    }
+    TrendHistoryLabel() {
+        return match.accessible.Label(this.language.History.Trend);
+    }
+    HistoryHeader() {
+        return match.accessible.Header(this.language.History.Header);
+    }
+    AlertsHeader() {
+        return match.accessible.Header(this.language.Alerts.Header);
+    }
+    IssueAlertsLabel() {
+        return match.accessible.Label(this.language.Alerts.IssueAlerts);
+    }
     async Close() {
         if (this.needsClosing) {
             await this.DoneButton().atIndex(0).tap();

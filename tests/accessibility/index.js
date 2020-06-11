@@ -10,6 +10,8 @@ const { settingsCorrectionRangeScreenAccessibilityTests } = require('./settingsC
 const { settingsIssueReportScreenAccessibilityTests } = require('./settingsIssueReportScreen.tests');
 const { settingsInsulinModelScreenAccessibilityTests } = require('./settingsInsulinModelScreen.tests');
 const { settingsSuspendThresholdScreenAccessibilityTests } = require('./settingsSuspendThresholdScreen.tests');
+const { settingsCGMSimulatorScreenTests } = require('./settingsCGMSimulatorScreen.tests');
+const { settingsPumpSimulatorScreenTests } = require('./settingsPumpSimulatorScreen.tests');
 
 var accessibilityTests = {
     homeScreenAccessibilityTests,
@@ -24,6 +26,8 @@ var accessibilityTests = {
     settingsIssueReportScreenAccessibilityTests,
     settingsInsulinModelScreenAccessibilityTests,
     settingsSuspendThresholdScreenAccessibilityTests,
+    settingsCGMSimulatorScreenTests,
+    settingsPumpSimulatorScreenTests,
 };
 
 module.exports = {

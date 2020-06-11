@@ -95,14 +95,24 @@ var CGMSimulatorSettingsScreen = {
     BaseGlucose: 'Base Glucose',
     SineCurve: 'Sine Curve',
     Amplitude: 'Amplitude',
-    BackfillGlucose: 'Backfill Glucose',
+    Alerts: {
+        Header: 'ALERTS',
+        IssueAlerts: 'Issue Alerts',
+    },
+    History: {
+        Header: 'HISTORY',
+        BackfillGlucose: 'Backfill Glucose',
+        Trend: 'Trend',
+    },
     Effect: {
+        Header: 'EFFECTS',
         GlucoseNoise: 'Glucose Noise',
         RandomHighOutlier: 'Random High Outlier',
         RandomLowOutlier: 'Random Low Outlier',
         RandomError: 'Random Error',
     },
     Model: {
+        Header: 'MODEL',
         Constant: 'Constant',
         SineCurve: 'Sine Curve',
         None: 'No Data',
