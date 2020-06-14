@@ -11,56 +11,59 @@ describe('smoke test', () => {
         await test.prepare();
     });
     describe('accessibility', () => {
-        describe('home screen', () => {
-            accessibilityTests.homeScreenAccessibilityTests(test);
-        });
-        describe('carb entry screen', () => {
-            accessibilityTests.carbEntryScreenAccessibilityTests(test);
-        });
-        describe('settings screen', () => {
-            accessibilityTests.settingsScreenAccessibilityTests(test);
-        });
-        describe('bolus screen', () => {
-            accessibilityTests.bolusScreenAccessibilityTests(test);
-        });
-        describe('delivery limits settings screen', () => {
-            accessibilityTests.settingsDeliveryLimitsScreenAccessibilityTests(test);
-        });
-        describe('insulin sensitivities settings screen', () => {
-            accessibilityTests.settingsInsulinSensitivitiesScreenAccessibilityTests(test);
-        });
-        describe('correction range settings screen', () => {
-            accessibilityTests.settingsCorrectionRangeScreenAccessibilityTests(test);
-        });
-        describe('suspend threshold screen', () => {
-            accessibilityTests.settingsSuspendThresholdScreenAccessibilityTests(test);
-        });
-        describe('CGM simulator settings screen', () => {
-            accessibilityTests.settingsCGMSimulatorScreenTests(test);
-        });
-        describe('pump simulator settings screen', () => {
-            accessibilityTests.settingsPumpSimulatorScreenTests(test);
-        });
-        //TODO: not accesible via simulator. Need to investigate
-        describe.skip('basal rates settings screen', () => {
-            accessibilityTests.settingsBasalRatesScreenAccessibilityTests(test);
-        });
-        describe('carb ratios settings screen', () => {
-            accessibilityTests.settingsCarbRatioScreenAccessibilityTests(test);
-        });
+        // describe('home screen', () => {
+        //     accessibilityTests.homeScreenAccessibilityTests(test);
+        // });
+        // describe('carb entry screen', () => {
+        //     accessibilityTests.carbEntryScreenAccessibilityTests(test);
+        // });
+        // describe('settings screen', () => {
+        //     accessibilityTests.settingsScreenAccessibilityTests(test);
+        // });
+        // describe('bolus screen', () => {
+        //     accessibilityTests.bolusScreenAccessibilityTests(test);
+        // });
+        // describe('delivery limits settings screen', () => {
+        //     accessibilityTests.settingsDeliveryLimitsScreenAccessibilityTests(test);
+        // });
+        // describe('insulin sensitivities settings screen', () => {
+        //     accessibilityTests.settingsInsulinSensitivitiesScreenAccessibilityTests(test);
+        // });
+        // describe('correction range settings screen', () => {
+        //     accessibilityTests.settingsCorrectionRangeScreenAccessibilityTests(test);
+        // });
+        // describe('suspend threshold screen', () => {
+        //     accessibilityTests.settingsSuspendThresholdScreenAccessibilityTests(test);
+        // });
+        // describe('CGM simulator settings screen', () => {
+        //     accessibilityTests.settingsCGMSimulatorScreenTests(test);
+        // });
+        // describe('pump simulator settings screen', () => {
+        //     accessibilityTests.settingsPumpSimulatorScreenTests(test);
+        // });
+        // //TODO: not accesible via simulator. Need to investigate
+        // describe.skip('basal rates settings screen', () => {
+        //     accessibilityTests.settingsBasalRatesScreenAccessibilityTests(test);
+        // });
+        // describe('carb ratios settings screen', () => {
+        //     accessibilityTests.settingsCarbRatioScreenAccessibilityTests(test);
+        // });
     });
-    describe.skip('functionality', () => {
-        describe('home screen', () => {
-            functionalityTests.homeScreenFunctionalityTests(test);
-        });
-        describe('carb entry screen', () => {
-            functionalityTests.carbEntryScreenFunctionalityTests(test);
-        });
-        describe('settings screen', () => {
-            functionalityTests.settingsScreenFunctionalityTests(test);
-        });
-        describe('pump simulator screen', () => {
-            functionalityTests.pumpSimulatorScreenTests(test);
+    describe('functionality', () => {
+        // describe('home screen', () => {
+        //     functionalityTests.homeScreenFunctionalityTests(test);
+        // });
+        // describe('carb entry screen', () => {
+        //     functionalityTests.carbEntryScreenFunctionalityTests(test);
+        // });
+        // describe('settings screen', () => {
+        //     functionalityTests.settingsScreenFunctionalityTests(test);
+        // });
+        // describe('pump simulator screen', () => {
+        //     functionalityTests.pumpSimulatorScreenTests(test);
+        // });
+        describe('cgm simulator screen', () => {
+            functionalityTests.cgmSimulatorScreenTests(test);
         });
     });
 });

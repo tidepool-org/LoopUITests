@@ -14,7 +14,7 @@ class PumpSimulatorScreen {
         return match.accessible.Button(this.language.general.Done).atIndex(0);
     }
     ConfigurationHeader() {
-        return match.accessible.Header(this.language.ConfigHeader);
+        return match.accessible.Header(this.language.ConfigHeader).atIndex(0);
     }
     ReservoirRemainingLabel() {
         return match.accessible.Label(this.language.ReservoirRemaining);

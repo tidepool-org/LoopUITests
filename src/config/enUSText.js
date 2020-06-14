@@ -99,11 +99,20 @@ var CGMSimulatorSettingsScreen = {
     Alerts: {
         Header: 'ALERTS',
         IssueAlerts: 'Issue Alerts',
+        DelayedAlert: 'Issue a "delayed 30.0 seconds" alert',
+        ReapeatingAlert: 'Issue a "repeating every 30.0 seconds" alert',
     },
     History: {
         Header: 'HISTORY',
         BackfillGlucose: 'Backfill Glucose',
         Trend: 'Trend',
+        RisingVeryFastTrend: '⇈  Rising very fast',
+        RisingFastTrend: '↑  Rising fast',
+        RisingTrend: '↗︎  Rising',
+        FaltTrend: '→  Flat',
+        FallingTrend: '↘︎  Falling',
+        FallingFastTrend: '↓  Falling fast',
+        FallingVeryFastTrend: '⇊  Falling very fast',
     },
     Effect: {
         Header: 'EFFECTS',

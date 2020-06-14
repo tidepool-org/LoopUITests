@@ -37,8 +37,8 @@ class Config {
             AddCGMSimulator: true,
             AddPumpSimulator: true,
             CGMSimulatorSettings: {
-                modelData: {
-                    model: text.cgmSimulatorSettingsScreen.Model.Constant,
+                model: {
+                    name: text.cgmSimulatorSettingsScreen.Model.Constant,
                     bgValues: [110],
                 },
                 backfillHours: '6',
