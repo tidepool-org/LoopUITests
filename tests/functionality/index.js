@@ -4,14 +4,10 @@ const { carbEntryScreenFunctionalityTests } = require('./carbEntryScreen.tests')
 const { pumpSimulatorScreenTests } = require('./pumpSimulatorScreen.tests');
 const { cgmSimulatorScreenTests } = require('./cgmSimulatorScreen.tests');
 
-var functionalityTests = {
+module.exports = {
     settingsScreenFunctionalityTests,
     homeScreenFunctionalityTests,
     carbEntryScreenFunctionalityTests,
     pumpSimulatorScreenTests,
     cgmSimulatorScreenTests,
-};
-
-module.exports = {
-    functionalityTests,
 };

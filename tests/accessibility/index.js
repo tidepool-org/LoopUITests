@@ -13,7 +13,7 @@ const { settingsSuspendThresholdScreenAccessibilityTests } = require('./settings
 const { settingsCGMSimulatorScreenTests } = require('./settingsCGMSimulatorScreen.tests');
 const { settingsPumpSimulatorScreenTests } = require('./settingsPumpSimulatorScreen.tests');
 
-var accessibilityTests = {
+module.exports = {
     homeScreenAccessibilityTests,
     bolusScreenAccessibilityTests,
     carbEntryScreenAccessibilityTests,
@@ -28,8 +28,4 @@ var accessibilityTests = {
     settingsSuspendThresholdScreenAccessibilityTests,
     settingsCGMSimulatorScreenTests,
     settingsPumpSimulatorScreenTests,
-};
-
-module.exports = {
-    accessibilityTests
 };
