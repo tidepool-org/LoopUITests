@@ -20,12 +20,7 @@ class SettingsScreen {
         await match.accessible.ButtonBarButton(this.language.settingsScreen.Settings).tap();
     }
     async Close() {
-        try {
-            await this.DoneButton().tap();
-        } catch (error) {
-            //sometimes there are multiples?
-            await this.DoneButton().atIndex(0).tap();
-        }
+        await this.DoneButton().tap();
     }
     async OpenInsulinModelScreen() {
         await this.InsulinModelLabel().tap();
@@ -50,26 +45,17 @@ class SettingsScreen {
         return this.cgmSimulatorScreen;
     }
     async OpenDeliveryLimitsScreen() {
-        try {
-            await this.DeliveryLimitsLabel().tap();
-        } catch (error) {
-            //sometimes there are multiples?
-            await this.DeliveryLimitsLabel().atIndex(1).tap();
-        }
+        await this.DeliveryLimitsLabel().tap();
         return this.deliveryLimitsScreen;
     }
     async OpenInsulinSensitivitiesScreen() {
         await this.ScrollToBottom();
-        await this.InsulinSensitivitiesLabel().atIndex(1).tap();
+        await this.InsulinSensitivitiesLabel().tap();
         return this.insulinSensitivitiesScreen;
     }
     async OpenCorrectionRangeScreen() {
         await this.ScrollToTop();
-        try {
-            await this.CorrectionRangeLabel().tap();
-        } catch (error) {
-            await this.CorrectionRangeLabel().atIndex(0).tap();
-        }
+        await this.CorrectionRangeLabel().tap();
         return this.correctionRangeScreen;
     }
     async OpenCarbRatioScreen() {
@@ -82,7 +68,12 @@ class SettingsScreen {
         return this.suspendThresholdScreen;
     }
     DoneButton() {
-        return match.accessible.ButtonBarButton(this.language.general.Done);
+        try {
+            return match.accessible.ButtonBarButton(this.language.general.Done);
+        } catch (error) {
+            //sometimes there are multiples?
+            return match.accessible.ButtonBarButton(this.language.general.Done).atIndex(0);
+        }
     }
     ConfigurationHeader() {
         return match.accessible.Header(this.language.settingsScreen.Configuration);
@@ -106,7 +97,12 @@ class SettingsScreen {
         return match.accessible.Label(this.language.suspendThresholdSettingScreen.SuspendThreshold)
     }
     DeliveryLimitsLabel() {
-        return match.accessible.Label(this.language.settingsScreen.DeliveryLimits)
+        try {
+            return match.accessible.Label(this.language.settingsScreen.DeliveryLimits);
+        } catch (error) {
+            //sometimes there are multiples?
+            return match.accessible.Label(this.language.settingsScreen.DeliveryLimits).atIndex(1);
+        }
     }
     InsulinModelLabel() {
         return match.accessible.Label(this.language.settingsScreen.InsulinModel)
@@ -115,10 +111,14 @@ class SettingsScreen {
         return match.accessible.Label(this.language.carbRatioSettingsScreen.CarbRatios)
     }
     InsulinSensitivitiesLabel() {
-        return match.accessible.Label(this.language.settingsScreen.InsulinSensitivities)
+        return match.accessible.Label(this.language.settingsScreen.InsulinSensitivities).atIndex(1);
     }
     CorrectionRangeLabel() {
-        return match.accessible.Label(this.language.settingsScreen.CorrectionRange);
+        try {
+            return match.accessible.Label(this.language.settingsScreen.CorrectionRange);
+        } catch (error) {
+            return match.accessible.Label(this.language.settingsScreen.CorrectionRange).atIndex(0);
+        }
     }
     ClosedLoopButton() {
         return match.accessible.Button(this.language.settingsScreen.ClosedLoop);
@@ -134,6 +134,18 @@ class SettingsScreen {
     }
     AddCGMLabel() {
         return match.accessible.Label(this.language.settingsScreen.AddCGM);
+    }
+    RemoveCGMDataLabel() {
+        return match.accessible.Label(this.language.settingsScreen.DeleteCGMData).atIndex(0);
+    }
+    RemoveCGMDataConfirmationLabel() {
+        return match.accessible.Label(this.language.settingsScreen.DeleteCGMData).atIndex(1);
+    }
+    RemovePumpDataLabel() {
+        return match.accessible.Label(this.language.settingsScreen.DeletePumpData).atIndex(0);
+    }
+    RemovePumpDataConfirmationLabel() {
+        return match.accessible.Label(this.language.settingsScreen.DeletePumpData).atIndex(1);
     }
     CGMSimulatorLabel() {
         try {
@@ -250,17 +262,11 @@ class SettingsScreen {
         await this.AddCGMLabel().tap();
         await match.accessible.Button(this.language.settingsScreen.Simulator).tap();
     }
-    async RemoveCGM() {
-        await this.ScrollToTop();
-        await this.cgmSimulatorScreen.Open();
-        await this.cgmSimulatorScreen.RemoveSimulator();
-        await this.cgmSimulatorScreen.Close();
-    }
     async RemoveCGMData() {
         await this.ScrollToBottom();
         //TODO static text and not a button?
-        await match.accessible.Label(this.language.settingsScreen.DeleteCGMData).atIndex(0).tap();
-        await match.accessible.Label(this.language.settingsScreen.DeleteCGMData).atIndex(1).tap();
+        await this.RemoveCGMDataLabel().tap();
+        await this.RemoveCGMDataConfirmationLabel().tap();
     }
     async AddPumpSimulator() {
         try {
@@ -271,15 +277,11 @@ class SettingsScreen {
         await match.accessible.Button(this.language.settingsScreen.Simulator).tap();
         await match.accessible.Button(this.language.general.Continue).tap();
     }
-    async RemovePump() {
-        let screen = await this.OpenPumpSimulatorScreen();
-        await screen.DeletePump();
-    }
     async RemovePumpData() {
         await this.ScrollToBottom();
         //TODO static text and not a button?
-        await match.accessible.Label(this.language.settingsScreen.DeletePumpData).atIndex(0).tap();
-        await match.accessible.Label(this.language.settingsScreen.DeletePumpData).atIndex(1).tap();
+        await this.RemovePumpDataLabel().tap();
+        await this.RemovePumpDataConfirmationLabel().tap();
     }
     async HasAlert() {
         await expect(match.accessible.Alert()).toExist();
