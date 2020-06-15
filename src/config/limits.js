@@ -1,4 +1,4 @@
-module.exports = {
+var mgdL = {
     correctionRange: {
         max: {
             limit: 180,
@@ -79,4 +79,8 @@ module.exports = {
             limit: 1.0,
         },
     }
+};
+
+module.exports = {
+    mgdL
 };

@@ -75,9 +75,12 @@ var settingsScreenFunctionalityTests = (test) => {
             await screen.ApplyAll(test.settingDefault.CarbRatios);
             await screen.SaveAndClose();
         });
-        it('can be removed', async () => {
+        it('data can be removed', async () => {
             await settingsScreen.RemovePumpData();
-            await settingsScreen.RemovePump();
+        });
+        it('pump can be removed', async () => {
+            let screen = await this.OpenPumpSimulatorScreen();
+            await screen.RemoveSimulator();
         });
     });
     it('can close the settings', async () => {

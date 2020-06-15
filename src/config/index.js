@@ -1,4 +1,5 @@
-const mgdLLimits = require('./mgdLLimits');
+const limits = require('./limits');
+const defaults = require('./defaults');
 const enUSText = require('./enUSText');
 
 class Config {
@@ -37,8 +38,8 @@ class Config {
             AddCGMSimulator: true,
             AddPumpSimulator: true,
             CGMSimulatorSettings: {
-                modelData: {
-                    model: text.cgmSimulatorSettingsScreen.Model.Constant,
+                model: {
+                    name: text.cgmSimulatorSettingsScreen.Model.Constant,
                     bgValues: [110],
                 },
                 backfillHours: '6',
@@ -55,9 +56,10 @@ class Config {
     }
     async prepare() {
         return {
-            limits: mgdLLimits,
+            limits: limits.mgdL,
+            screenDefaults: defaults.mgdL,
             text: enUSText,
-            settingDefault: this._getDefaults(mgdLLimits, enUSText),
+            settingDefault: this._getDefaults(limits.mgdL, enUSText),
         };
     }
 }

@@ -6,7 +6,7 @@ describe('smoke test', () => {
     var config = new Config();
     it('prepare test', async () => {
         config = await config.prepare();
-        test = test.withLanguage(config.text).withSettingDefault(config.settingDefault);
+        test = test.withLanguage(config.text).withSettingDefault(config.settingDefault).withScreenDefaults(config.screenDefaults);
         await test.prepare();
     });
     describe('accessibility', () => {
@@ -33,6 +33,12 @@ describe('smoke test', () => {
         });
         describe('suspend threshold screen', () => {
             accessibilityTests.settingsSuspendThresholdScreenAccessibilityTests(test);
+        });
+        describe('CGM simulator settings screen', () => {
+            accessibilityTests.settingsCGMSimulatorScreenTests(test);
+        });
+        describe('pump simulator settings screen', () => {
+            accessibilityTests.settingsPumpSimulatorScreenTests(test);
         });
         //TODO: not accesible via simulator. Need to investigate
         describe.skip('basal rates settings screen', () => {
