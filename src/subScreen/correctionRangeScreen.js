@@ -26,8 +26,8 @@ class CorrectionRangeScreen extends BaseEntriesScreen {
             await action.ScrollQuantityPicker(range.current.max, range.expected.max, maxGlucosePickerID);
             await action.ScrollQuantityPicker(range.current.min, range.expected.min, minGlucosePickerID);
         } else {
-            await action.ScrollQuantityPicker(this.config.defaultMaxStart, range.expected.max, maxGlucosePickerID);
-            await action.ScrollQuantityPicker(this.config.defaultMinStart, range.expected.min, minGlucosePickerID);
+            await action.ScrollQuantityPicker(this.config.maxStart, range.expected.max, maxGlucosePickerID);
+            await action.ScrollQuantityPicker(this.config.minStart, range.expected.min, minGlucosePickerID);
         }
     }
     /**

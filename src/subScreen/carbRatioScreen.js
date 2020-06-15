@@ -26,7 +26,7 @@ class CarbRatioScreen extends BaseEntriesScreen {
             let currentParts = String(ratio.current.carbGramsPerInsulinUnit).split('.');
             await action.ScrollQuantityPicker(Number(currentParts[wholePart]), Number(expectedParts[wholePart]), pickerID);
         } else {
-            await action.ScrollQuantityPicker(this.config.defaultWhole, Number(expectedParts[wholePart]), pickerID);
+            await action.ScrollQuantityPicker(this.config.startWhole, Number(expectedParts[wholePart]), pickerID);
         }
     }
     /**

@@ -31,7 +31,7 @@ class SuspendThresholdScreen extends BaseEntryScreen {
         if (threshold.current) {
             await action.ScrollPickerToValue(threshold.current.value, threshold.expected.value);
         } else {
-            await action.ScrollPickerToValue(this.config.defaultStart, threshold.expected.value);
+            await action.ScrollPickerToValue(this.config.start, threshold.expected.value);
         }
     }
 }
