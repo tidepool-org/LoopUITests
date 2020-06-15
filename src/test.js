@@ -15,6 +15,10 @@ class Test {
         this.limits = limits;
         return this;
     }
+    withScreenDefaults(screenDefaults) {
+        this.screenDefaults = screenDefaults;
+        return this;
+    }
     withScenario(scenario) {
         this.scenario = scenario;
         return this;
@@ -88,12 +92,15 @@ class Test {
         if (!this.language) {
             throw 'language is required!';
         }
+        if (!this.screenDefaults) {
+            throw 'screenDefaults is required!';
+        }
         if (!this.startScreen) {
             if (this.settingsToApply || this.simulators) {
                 this.startScreen = screenName.home;
             }
         }
-        this.settingsScreen = new SettingsScreen(this.language);
+        this.settingsScreen = new SettingsScreen(this.language, this.screenDefaults);
         this.homeScreen = new HomeScreen(this.language);
         this.bolusScreen = new BolusScreen(this.language);
         this.carbEntryScreen = new CarbEntryScreen(this.language);

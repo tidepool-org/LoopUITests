@@ -1,4 +1,5 @@
 const mgdLLimits = require('./mgdLLimits');
+const mgdLDefaults = require('./mgdLDefaults');
 const enUSText = require('./enUSText');
 
 class Config {
@@ -56,6 +57,7 @@ class Config {
     async prepare() {
         return {
             limits: mgdLLimits,
+            screenDefaults: mgdLDefaults,
             text: enUSText,
             settingDefault: this._getDefaults(mgdLLimits, enUSText),
         };

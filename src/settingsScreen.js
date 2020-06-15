@@ -2,7 +2,7 @@ const match = require('./match');
 const { settingsSubScreen } = require('./subScreen/index');
 
 class SettingsScreen {
-    constructor(language) {
+    constructor(language, screenDefaults) {
         this.language = language;
         this.cgmSimulatorScreen = new settingsSubScreen.CGMSimulatorScreen(language);
         this.basalRatesScreen = new settingsSubScreen.BasalRatesScreen(language);
@@ -10,11 +10,10 @@ class SettingsScreen {
         this.issueReportScreen = new settingsSubScreen.IssueReportScreen(language);
         this.insulinModelScreen = new settingsSubScreen.InsulinModelScreen(language);
         this.pumpSimulatorScreen = new settingsSubScreen.PumpSimulatorScreen(language);
-        //TODO: decide where to set these configuration values
-        this.insulinSensitivitiesScreen = new settingsSubScreen.InsulinSensitivitiesScreen(language, { defaultStart: 500 });
-        this.correctionRangeScreen = new settingsSubScreen.CorrectionRangeScreen(language, { defaultMaxStart: 120, defaultMinStart: 100 });
-        this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language, { defaultStart: 80 });
-        this.carbRatioScreen = new settingsSubScreen.CarbRatioScreen(language, { defaultWhole: 150, defaultDecimal: 0 });
+        this.insulinSensitivitiesScreen = new settingsSubScreen.InsulinSensitivitiesScreen(language, screenDefaults.insulinSensitivity);
+        this.correctionRangeScreen = new settingsSubScreen.CorrectionRangeScreen(language, screenDefaults.correctionRange);
+        this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language, screenDefaults.suspendThreshold);
+        this.carbRatioScreen = new settingsSubScreen.CarbRatioScreen(language, screenDefaults.carbRatio);
     }
     async Open() {
         await match.accessible.ButtonBarButton(this.language.settingsScreen.Settings).tap();
