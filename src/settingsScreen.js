@@ -199,8 +199,7 @@ class SettingsScreen {
         if (values.BasalRates) {
             let screen = this.OpenBasalRatesScreen();
             await screen.ApplyAll(values.BasalRates);
-            await screen.Save();
-            await screen.Close();
+            await screen.SaveAndClose();
         }
         if (values.DeliveryLimits) {
             let screen = this.OpenDeliveryLimitsScreen();
@@ -218,19 +217,16 @@ class SettingsScreen {
             await screen.ApplyAll(values.CarbRatios);
             await screen.SaveAndClose();
         }
-
         if (values.SuspendThreshold) {
             let screen = this.OpenSuspendThresholdScreen();
             await screen.Apply(values.SuspendThreshold);
             await screen.SaveAndClose();
         }
-
         if (values.InsulinModel) {
             let screen = this.OpenInsulinModelScreen();
             await screen.Apply(values.InsulinModel);
             await screen.Close();
         }
-
         if (values.ClosedLoop) {
             if (values.ClosedLoop == true) {
                 await this.SetClosedLoop();
