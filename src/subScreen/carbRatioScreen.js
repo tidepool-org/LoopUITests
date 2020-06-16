@@ -33,16 +33,7 @@ class CarbRatioScreen extends BaseEntriesScreen {
      * @param {Array} ratios
      */
     async ApplyAll(ratios) {
-        await this.Add();
-        for (let index = 0; index < ratios.length; index++) {
-            var current;
-            let expected = ratios[index];
-            if (index > 0) {
-                current = ratios[index - 1];
-            }
-            await this.ApplyOne({ expected, current });
-            await this.AddNewEntry();
-        }
+        await super.ApplyAll(ratios, this.ApplyOne);
     }
 }
 

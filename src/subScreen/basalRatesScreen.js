@@ -31,10 +31,10 @@ class BasalRatesScreen extends BaseEntriesScreen {
         }
     }
     /**
-     * @param {Array} ratios
+     * @param {Array} rates
      */
-    async ApplyAll(ratios) {
-        super.ApplyAll(ratios, this.ApplyOne);
+    async ApplyAll(rates) {
+        await super.ApplyAll(rates, this.ApplyOne);
     }
 }
 

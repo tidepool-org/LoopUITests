@@ -34,16 +34,7 @@ class CorrectionRangeScreen extends BaseEntriesScreen {
      * @param {Array} ranges
      */
     async ApplyAll(ranges) {
-        await this.Add();
-        for (let index = 0; index < ranges.length; index++) {
-            var current;
-            let expected = ranges[index];
-            if (index > 0) {
-                current = ranges[index - 1];
-            }
-            await this.ApplyOne({ expected, current });
-            await this.AddNewEntry();
-        }
+        await super.ApplyAll(ranges, this.ApplyOne);
     }
 }
 
