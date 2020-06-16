@@ -32,13 +32,15 @@ describe('functional test', () => {
             let settings = await test.OpenSettingsScreen();
             await settings.AddPumpSimulator();
         });
-        describe('max bolus', () => {
+        //TODO: add back when guardrails work is complete
+        describe.skip('max bolus', () => {
             guardrailsTests.maxBolusTests(test);
         });
         describe('insulin sensitivity schedule', () => {
             guardrailsTests.insulinSensitivityScheduleTests(test);
         });
-        describe('max temp basal rate', () => {
+        //TODO: add back when guardrails work is complete
+        describe.skip('max temp basal rate', () => {
             guardrailsTests.maxTempBasalRateTests(test);
         });
         describe('suspend threshold', () => {
@@ -50,7 +52,7 @@ describe('functional test', () => {
         describe('insulin carb ratio', () => {
             guardrailsTests.insulinCarbRatioTests(test);
         });
-        //TODO: update when development work complete
+        //TODO: add back when guardrails work is complete
         describe.skip('basal rate schedule', () => {
             guardrailsTests.basalRateScheduleTests(test);
         });

@@ -22,7 +22,8 @@ describe('smoke test', () => {
         describe('bolus screen', () => {
             accessibilityTests.bolusScreenAccessibilityTests(test);
         });
-        describe('delivery limits settings screen', () => {
+        //TODO: add back when guardrails work is complete
+        describe.skip('delivery limits settings screen', () => {
             accessibilityTests.settingsDeliveryLimitsScreenAccessibilityTests(test);
         });
         describe('insulin sensitivities settings screen', () => {
@@ -40,7 +41,7 @@ describe('smoke test', () => {
         describe('pump simulator settings screen', () => {
             accessibilityTests.settingsPumpSimulatorScreenTests(test);
         });
-        //TODO: not accesible via simulator. Need to investigate
+        //TODO: add back when guardrails work is complete
         describe.skip('basal rates settings screen', () => {
             accessibilityTests.settingsBasalRatesScreenAccessibilityTests(test);
         });
