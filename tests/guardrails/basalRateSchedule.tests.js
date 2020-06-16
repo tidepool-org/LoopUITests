@@ -8,46 +8,64 @@ var basalRateScheduleTests = (test) => {
     afterAll(async () => {
         await screen.Close();
     });
-    it('cannot set above max limit', async () => {
-        try {
-            await screen.Apply({ time: '12:00 AM', unitsPerHour: screenLimit.max.limit + screenLimit.step });
-        } catch (error) {
-            await screen.Save();
-            //TODO assert cannot be set
-        }
+    it('can set max units at limit', async () => {
+        await screen.Add();
+        await screen.ApplyOne({
+            expected: {
+                time: '12:00 AM',
+                unitsPerHour: screenLimit.max.limit,
+            }
+        });
+        await screen.AddNewEntry();
+        await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
     });
-    it('can set max limit', async () => {
-        await screen.Edit({ time: '12:00 AM', unitsPerHour: screenLimit.max.limit });
-        await screen.Save();
-        //TODO assert on warning
+    it('can set max units with no warning', async () => {
+        await screen.Add();
+        await screen.ApplyOne({
+            expected:
+            {
+                time: '12:00 AM',
+                unitsPerHour: screenLimit.max.noWarning,
+            },
+            current: {
+                time: '12:00 AM',
+                unitsPerHour: screenLimit.max.limit,
+            },
+        });
+        await screen.AddNewEntry();
+        await expect(screen.GuardrailWarningIconPicker({ index: 1 })).toBeNotVisible();
     });
-    it('can set max warning', async () => {
-        await screen.Edit({ time: '12:00 AM', unitsPerHour: screenLimit.max.warning });
-        await screen.Save();
-        //TODO assert on warning
+    it('can set min units with no warning', async () => {
+        await screen.Add();
+        await screen.ApplyOne({
+            expected:
+            {
+                time: '12:00 AM',
+                unitsPerHour: screenLimit.min.noWarning,
+            },
+            current: {
+                time: '12:00 AM',
+                unitsPerHour: screenLimit.max.noWarning,
+            }
+        });
+        await screen.AddNewEntry();
+        await expect(screen.GuardrailWarningIconPicker({ index: 2 })).toBeNotVisible();
     });
-    it('can set below max warning', async () => {
-        await screen.Edit({ time: '12:00 AM', unitsPerHour: screenLimit.max.warning - screenLimit.step });
-        await screen.Save();
-        //TODO assert NO warning
-    });
-    it('can set above min ', async () => {
-        await screen.Edit({ time: '12:00 AM', unitsPerHour: screenLimit.min.limit + screenLimit.step });
-        await screen.Save();
-        //TODO assert NO warning
-    });
-    it('can set at min', async () => {
-        await screen.Edit({ time: '12:00 AM', unitsPerHour: screenLimit.min.limit });
-        await screen.Save();
-        //TODO assert on warning
-    });
-    it('cannot set below the min limit', async () => {
-        try {
-            await screen.Edit({ time: '12:00 AM', unitsPerHour: screenLimit.min.limit - screenLimit.step });
-        } catch (error) {
-            //TODO assert cannot be set
-            await screen.Save();
-        }
+    it('can set min units at limit', async () => {
+        await screen.Add();
+        await screen.ApplyOne({
+            expected:
+            {
+                time: '12:00 AM',
+                unitsPerHour: screenLimit.min.limit,
+            },
+            current: {
+                time: '12:00 AM',
+                unitsPerHour: screenLimit.min.noWarning,
+            }
+        });
+        await screen.AddNewEntry();
+        await expect(screen.GuardrailWarningIconPicker({ index: 3 })).toBeVisible();
     });
 };
 

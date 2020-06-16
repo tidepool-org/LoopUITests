@@ -45,14 +45,13 @@ var mgdL = {
         },
     },
     basalRates: {
-        step: 0.05,
         max: {
             limit: 35.0,
-            warning: 20.0,
-            noWarning: 19.0,
+            noWarning: 34.0,
         },
         min: {
             limit: 0.0,
+            noWarning: 1.0,
         },
     },
     suspendThreshold: {

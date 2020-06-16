@@ -10,7 +10,7 @@ describe('functional test', () => {
         test = test.withLanguage(config.text).withLimits(config.limits).withScreenDefaults(config.screenDefaults);
         await test.prepare();
     });
-    describe.skip('functionality', () => {
+    describe('functionality', () => {
         describe('home screen', () => {
             functionalityTests.homeScreenFunctionalityTests(test);
         });
@@ -50,8 +50,7 @@ describe('functional test', () => {
         describe('insulin carb ratio', () => {
             guardrailsTests.insulinCarbRatioTests(test);
         });
-        //TODO: update when development work complete
-        describe.skip('basal rate schedule', () => {
+        describe('basal rate schedule', () => {
             guardrailsTests.basalRateScheduleTests(test);
         });
     });

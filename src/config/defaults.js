@@ -12,7 +12,11 @@ var mgdL = {
     carbRatio: {
         startWhole: 150,
         startDecimal: 0
-    }
+    },
+    basalRate: {
+        startWhole: 0,
+        startDecimal: '00'
+    },
 };
 
 module.exports = {

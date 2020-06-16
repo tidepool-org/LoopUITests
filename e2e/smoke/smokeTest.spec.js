@@ -40,8 +40,7 @@ describe('smoke test', () => {
         describe('pump simulator settings screen', () => {
             accessibilityTests.settingsPumpSimulatorScreenTests(test);
         });
-        //TODO: not accesible via simulator. Need to investigate
-        describe.skip('basal rates settings screen', () => {
+        describe('basal rates settings screen', () => {
             accessibilityTests.settingsBasalRatesScreenAccessibilityTests(test);
         });
         describe('carb ratios settings screen', () => {
