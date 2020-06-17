@@ -79,8 +79,7 @@ var settingsScreenFunctionalityTests = (test) => {
             await settingsScreen.RemovePumpData();
         });
         it('pump can be removed', async () => {
-            let screen = await this.OpenPumpSimulatorScreen();
-            await screen.RemoveSimulator();
+            await settingsScreen.RemovePumpSimulator();
         });
     });
     it('can close the settings', async () => {

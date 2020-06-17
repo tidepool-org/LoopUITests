@@ -1,8 +1,9 @@
 const match = require('../match');
 
 class BaseEntriesScreen {
-    constructor(language, parentScreen) {
+    constructor(language, config, parentScreen) {
         this.language = language;
+        this.config = config;
         this.parentScreen = parentScreen;
     }
     Header() {
@@ -61,18 +62,6 @@ class BaseEntriesScreen {
     }
     async SaveAndClose() {
         await this.SaveButton().tap();
-    }
-    async ApplyAll(values, applyOneFunc) {
-        await this.Add();
-        for (let index = 0; index < values.length; index++) {
-            var current;
-            let expected = values[index];
-            if (index > 0) {
-                current = values[index - 1];
-            }
-            await applyOneFunc({ expected, current });
-            await this.AddNewEntry();
-        }
     }
 }
 

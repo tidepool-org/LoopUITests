@@ -7,11 +7,10 @@ const minGlucosePickerID = 'min_glucose_picker';
 
 class CorrectionRangeScreen extends BaseEntriesScreen {
     constructor(language, config) {
-        super(language, {
+        super(language, config, {
             HeaderLabel: language.settingsScreen.CorrectionRange,
             InfoLabel: language.settingsScreen.CorrectionRangeInfo,
         });
-        this.config = config;
     }
     /**
      * @param {Object} range
@@ -34,7 +33,16 @@ class CorrectionRangeScreen extends BaseEntriesScreen {
      * @param {Array} ranges
      */
     async ApplyAll(ranges) {
-        await super.ApplyAll(ranges, this.ApplyOne);
+        await this.Add();
+        for (let index = 0; index < ranges.length; index++) {
+            var current;
+            let expected = ranges[index];
+            if (index > 0) {
+                current = ranges[index - 1];
+            }
+            await this.ApplyOne({ expected, current });
+            await this.AddNewEntry();
+        }
     }
 }
 

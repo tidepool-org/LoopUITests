@@ -4,11 +4,10 @@ const { BaseEntriesScreen } = require('./baseEntriesScreen');
 
 class CarbRatioScreen extends BaseEntriesScreen {
     constructor(language, config) {
-        super(language, {
+        super(language, config, {
             HeaderLabel: language.carbRatioSettingsScreen.CarbRatios,
             InfoLabel: language.carbRatioSettingsScreen.CarbRatioInfo,
         });
-        this.config = config;
     }
     /**
      * @param {Object} ratio
@@ -33,7 +32,16 @@ class CarbRatioScreen extends BaseEntriesScreen {
      * @param {Array} ratios
      */
     async ApplyAll(ratios) {
-        await super.ApplyAll(ratios, this.ApplyOne);
+        await this.Add();
+        for (let index = 0; index < ratios.length; index++) {
+            var current;
+            let expected = ratios[index];
+            if (index > 0) {
+                current = ratios[index - 1];
+            }
+            await this.ApplyOne({ expected, current });
+            await this.AddNewEntry();
+        }
     }
 }
 

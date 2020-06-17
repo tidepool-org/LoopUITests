@@ -5,11 +5,10 @@ const pickerID = 'quantity_picker';
 
 class InsulinSensitivitiesScreen extends BaseEntriesScreen {
     constructor(language, config) {
-        super(language, {
+        super(language, config, {
             HeaderLabel: language.settingsScreen.InsulinSensitivities,
             InfoLabel: language.settingsScreen.InsulinSensitivityInfo,
         });
-        this.config = config;
     }
     /**
      * @param {Object} sensitivity
@@ -39,7 +38,16 @@ class InsulinSensitivitiesScreen extends BaseEntriesScreen {
      * @param {Array} sensitivities
      */
     async ApplyAll(sensitivities) {
-        await super.ApplyAll(sensitivities, this.ApplyOne);
+        await this.Add();
+        for (let index = 0; index < sensitivities.length; index++) {
+            var current;
+            let expected = sensitivities[index];
+            if (index > 0) {
+                current = sensitivities[index - 1];
+            }
+            await this.ApplyOne({ expected, current });
+            await this.AddNewEntry();
+        }
     }
 }
 
