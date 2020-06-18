@@ -18,7 +18,7 @@ error() {
   echo "Parameters:" >&2
   echo "  <build-root>      root of the build that contains the app" >&2
   echo "  <configuration>   detox configuration to use" >&2
-  echo "  <type>            type of tests to run, 'functional' or 'smoke' " >&2
+  echo "  <type>            type of tests to run, 'functional' or 'smoke' or 'guardrails' " >&2
   exit 1
 }
 
@@ -60,7 +60,12 @@ ln -sf "${BUILD_ROOT}" build
 if [ "${TEST_TYPE}" = "functional" ]; then
   info "Running detox functional tests with configuration '${CONFIGURATION}'..."
   detox test e2e/functional --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
-else
+fi
+if [ "${TEST_TYPE}" = "smoke" ]; then
   info "Running smoke tests '${CONFIGURATION}'..."
   detox test e2e/smoke --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
+fi
+if [ "${TEST_TYPE}" = "guardrails" ]; then
+  info "Running guardrails tests '${CONFIGURATION}'..."
+  detox test e2e/guardrails --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
 fi
