@@ -1,4 +1,4 @@
-var bolusScreenAccessibilityTests = (test) => {
+var bolusScreen = (test) => {
     var bolusScreen;
     it('has to open the bolus screen', async () => {
         bolusScreen = await test.OpenBolusScreen();
@@ -27,5 +27,5 @@ var bolusScreenAccessibilityTests = (test) => {
 };
 
 module.exports = {
-    bolusScreenAccessibilityTests
+    bolusScreen
 };

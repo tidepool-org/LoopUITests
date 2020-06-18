@@ -22,7 +22,36 @@ var HomeScreen = {
     ActiveInsulin: 'Active Insulin',
     InsulinDelivery: 'Insulin Delivery',
     Glucose: 'Glucose',
-    LoopWaitingForFirstRun: 'Waiting for first run'
+    LoopWaitingForFirstRun: 'Waiting for first run',
+    GlucoseScreen: {
+        PredictedGlucose: 'Predicted Glucose',
+        Carbohydrates: 'Carbohydrates',
+        Insulin: 'Insulin',
+        GlucoseMomentum: 'Glucose Momentum',
+        RetrospectiveCorrection: 'Retrospective Correction',
+    },
+    ActiveInsulinScreen: {
+        InsulinDelivery: 'Insulin Delivery',
+        IOB: 'U IOB',
+        Total: 'U Total',
+        EventHistory: 'Event History',
+        Reservoir: 'Reservoir',
+    },
+    InsulinDeliveryScreen: {
+        InsulinDelivery: 'Insulin Delivery',
+        IOB: 'U IOB',
+        Total: 'U Total',
+        EventHistory: 'Event History',
+        Reservoir: 'Reservoir',
+    },
+    ActiveCarbohydratesScreen: {
+        Carbohydrates: 'Carbohydrates',
+        GlucoseChange: 'Glucose Change',
+        Predicted: 'Predicted',
+        Observed: 'Observed',
+        COB: 'g COB',
+        Total: 'g Total',
+    }
 };
 
 var CarbEntryScreen = {

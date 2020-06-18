@@ -1,4 +1,4 @@
-var settingsScreenAccessibilityTests = (test) => {
+var settingsScreen = (test) => {
     var settingsScreen;
     it('has to open the settings screen', async () => {
         settingsScreen = await test.OpenSettingsScreen();
@@ -76,5 +76,5 @@ var settingsScreenAccessibilityTests = (test) => {
 
 
 module.exports = {
-    settingsScreenAccessibilityTests
+    settingsScreen
 };

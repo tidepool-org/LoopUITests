@@ -1,8 +1,11 @@
 var pumpSimulatorScreenTests = (test) => {
-    var settingsScreen;
     var pumpSimulatorScreen;
-    it('open settings', async () => {
+    var settingsScreen;
+    beforeAll(async () => {
         settingsScreen = await test.OpenSettingsScreen();
+    });
+    afterAll(async () => {
+        await settingsScreen.Close();
     });
     it('add simulator', async () => {
         await settingsScreen.AddPumpSimulator();
@@ -38,11 +41,8 @@ var pumpSimulatorScreenTests = (test) => {
     it('set reservoir remaining units', async () => {
         await pumpSimulatorScreen.Apply({ reservoirRemaining: 99 });
     });
-    it('can be cleaned up', async () => {
-        await pumpSimulatorScreen.DeletePump();
-    });
-    it('close', async () => {
-        await settingsScreen.Close();
+    it('can be removed', async () => {
+        await pumpSimulatorScreen.RemoveSimulator();
     });
 };
 

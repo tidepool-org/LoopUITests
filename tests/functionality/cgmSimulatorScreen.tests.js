@@ -3,14 +3,14 @@ var cgmSimulatorScreenTests = (test) => {
     var settingsScreen;
     beforeAll(async () => {
         settingsScreen = await test.OpenSettingsScreen();
+    });
+    afterAll(async () => {
+        await settingsScreen.Close();
+    });
+    it('can add simulator', async () => {
         await settingsScreen.AddCGMSimulator();
         screen = await settingsScreen.OpenCGMSimulatorScreen();
     });
-    afterAll(async () => {
-        await screen.RemoveSimulator();
-        await settingsScreen.Close();
-    });
-
     it('set effect as Glucose Noise', async () => {
         await screen.Apply({
             effect: {
@@ -98,6 +98,9 @@ var cgmSimulatorScreenTests = (test) => {
             }
         });
         await screen.BackToCGMSettings();
+    });
+    it('can remove simulator', async () => {
+        await screen.RemoveSimulator();
     });
 };
 

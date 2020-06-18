@@ -1,4 +1,4 @@
-var settingsInsulinSensitivitiesScreenAccessibilityTests = (test) => {
+var settingsInsulinSensitivitiesScreen = (test) => {
     var screen;
     var settingsScreen;
     beforeAll(async () => {
@@ -34,5 +34,5 @@ var settingsInsulinSensitivitiesScreenAccessibilityTests = (test) => {
 };
 
 module.exports = {
-    settingsInsulinSensitivitiesScreenAccessibilityTests
+    settingsInsulinSensitivitiesScreen
 };

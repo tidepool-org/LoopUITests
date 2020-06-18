@@ -1,5 +1,5 @@
 const match = require('./match');
-const { settingsSubScreen } = require('./subScreen/index');
+const { settingsSubScreen } = require('./settingScreen/index');
 
 class SettingsScreen {
     constructor(language, screenDefaults) {
