@@ -4,11 +4,10 @@ const { BaseEntriesScreen } = require('./baseEntriesScreen');
 
 class CarbRatioScreen extends BaseEntriesScreen {
     constructor(language, config) {
-        super(language, {
+        super(language, config, {
             HeaderLabel: language.carbRatioSettingsScreen.CarbRatios,
             InfoLabel: language.carbRatioSettingsScreen.CarbRatioInfo,
         });
-        this.config = config;
     }
     /**
      * @param {Object} ratio

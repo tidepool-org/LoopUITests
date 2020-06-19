@@ -41,8 +41,7 @@ describe('smoke test', () => {
         describe('pump simulator settings screen', () => {
             accessibilityTests.settingsPumpSimulatorScreenTests(test);
         });
-        //TODO: add back when guardrails work is complete
-        describe.skip('basal rates settings screen', () => {
+        describe('basal rates settings screen', () => {
             accessibilityTests.settingsBasalRatesScreenAccessibilityTests(test);
         });
         describe('carb ratios settings screen', () => {

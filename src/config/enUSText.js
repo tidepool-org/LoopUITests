@@ -81,6 +81,8 @@ var SettingsScreen = {
 };
 
 var BasalRatesSettingScreen = {
+    BasalRates: 'Basal Rates',
+    BasalRatesInfo: 'Your basal rate of insulin is the number of units per hour that you want to use to cover your background insulin needs.',
     Units: 'U/hr',
 };
 

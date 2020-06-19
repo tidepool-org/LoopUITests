@@ -5,7 +5,7 @@ class SettingsScreen {
     constructor(language, screenDefaults) {
         this.language = language;
         this.cgmSimulatorScreen = new settingsSubScreen.CGMSimulatorScreen(language);
-        this.basalRatesScreen = new settingsSubScreen.BasalRatesScreen(language);
+        this.basalRatesScreen = new settingsSubScreen.BasalRatesScreen(language, screenDefaults.basalRate);
         this.deliveryLimitsScreen = new settingsSubScreen.DeliveryLimitsScreen(language);
         this.issueReportScreen = new settingsSubScreen.IssueReportScreen(language);
         this.insulinModelScreen = new settingsSubScreen.InsulinModelScreen(language);
@@ -126,7 +126,11 @@ class SettingsScreen {
         return match.accessible.Label(this.language.settingsScreen.IssueReport);
     }
     AddPumpLabel() {
-        return match.accessible.Label(this.language.settingsScreen.AddPump);
+        try {
+            return match.accessible.Label(this.language.settingsScreen.AddPump).atIndex(1);
+        } catch (err) {
+            return match.accessible.Label(this.language.settingsScreen.AddPump).atIndex(0);
+        }
     }
     PumpSimulatorLabel() {
         return match.accessible.LabelAndId(this.language.settingsScreen.Simulator, 'Simulator Small');
@@ -195,8 +199,7 @@ class SettingsScreen {
         if (values.BasalRates) {
             let screen = this.OpenBasalRatesScreen();
             await screen.ApplyAll(values.BasalRates);
-            await screen.Save();
-            await screen.Close();
+            await screen.SaveAndClose();
         }
         if (values.DeliveryLimits) {
             let screen = this.OpenDeliveryLimitsScreen();
@@ -214,19 +217,16 @@ class SettingsScreen {
             await screen.ApplyAll(values.CarbRatios);
             await screen.SaveAndClose();
         }
-
         if (values.SuspendThreshold) {
             let screen = this.OpenSuspendThresholdScreen();
             await screen.Apply(values.SuspendThreshold);
             await screen.SaveAndClose();
         }
-
         if (values.InsulinModel) {
             let screen = this.OpenInsulinModelScreen();
             await screen.Apply(values.InsulinModel);
             await screen.Close();
         }
-
         if (values.ClosedLoop) {
             if (values.ClosedLoop == true) {
                 await this.SetClosedLoop();
@@ -268,13 +268,13 @@ class SettingsScreen {
         await this.RemoveCGMDataConfirmationLabel().tap();
     }
     async AddPumpSimulator() {
-        try {
-            await this.AddPumpLabel().atIndex(1).tap();
-        } catch (err) {
-            await this.AddPumpLabel().atIndex(0).tap();
-        }
+        await this.AddPumpLabel().tap();
         await match.accessible.Button(this.language.settingsScreen.Simulator).tap();
         await match.accessible.Button(this.language.general.Continue).tap();
+    }
+    async RemovePumpSimulator() {
+        var screen = await this.OpenPumpSimulatorScreen();
+        await screen.RemoveSimulator();
     }
     async RemovePumpData() {
         await this.ScrollToBottom();

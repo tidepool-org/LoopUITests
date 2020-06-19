@@ -1,8 +1,9 @@
 const match = require('../match');
 
 class BaseEntriesScreen {
-    constructor(language, parentScreen) {
+    constructor(language, config, parentScreen) {
         this.language = language;
+        this.config = config;
         this.parentScreen = parentScreen;
     }
     Header() {

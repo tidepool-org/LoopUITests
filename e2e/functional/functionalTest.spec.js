@@ -7,9 +7,13 @@ describe('functional test', () => {
     var config = new Config();
     it('prepare test', async () => {
         config = await config.prepare();
-        test = test.withLanguage(config.text).withLimits(config.limits).withScreenDefaults(config.screenDefaults);
+        test = test.withLanguage(config.text)
+            .withLimits(config.limits)
+            .withScreenDefaults(config.screenDefaults)
+            .withSettingDefault(config.settingDefault);
         await test.prepare();
     });
+    //TODO: decide which tests to still run as many are covered in the gaurdrails tests also
     describe.skip('functionality', () => {
         describe('home screen', () => {
             functionalityTests.homeScreenFunctionalityTests(test);
@@ -52,8 +56,7 @@ describe('functional test', () => {
         describe('insulin carb ratio', () => {
             guardrailsTests.insulinCarbRatioTests(test);
         });
-        //TODO: add back when guardrails work is complete
-        describe.skip('basal rate schedule', () => {
+        describe('basal rate schedule', () => {
             guardrailsTests.basalRateScheduleTests(test);
         });
     });
