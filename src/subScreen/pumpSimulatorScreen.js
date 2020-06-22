@@ -11,7 +11,11 @@ class PumpSimulatorScreen {
         return match.accessible.Header(this.language.PumpSettings);
     }
     DoneButton() {
-        return match.accessible.Button(this.language.general.Done).atIndex(0);
+        try {
+            return match.accessible.Button(this.language.general.Done);
+        } catch (error) {
+            return match.accessible.Button(this.language.general.Done).atIndex(0);
+        }
     }
     ConfigurationHeader() {
         return match.accessible.Header(this.language.ConfigHeader).atIndex(0);
@@ -85,10 +89,10 @@ class PumpSimulatorScreen {
         return match.accessible.Label(this.language.DeletePump).atIndex(1);
     }
     SuspendDeliveryButton() {
-        return match.accessible.Button(this.language.SuspendDelivery);
+        return match.accessible.Label(this.language.SuspendDelivery);
     }
     ResumeDeliveryButton() {
-        return match.accessible.Button(this.language.ResumeDelivery);
+        return match.accessible.Label(this.language.ResumeDelivery);
     }
     /**
      * @param {object} settings
@@ -197,7 +201,12 @@ class PumpSimulatorScreen {
         await this.DeletePumpLabel().tap();
         await this.DeletePumpConfirmationLabel().tap();
     }
-
+    async HasAlert() {
+        await expect(match.accessible.Alert()).toExist();
+    }
+    async DismissAlert() {
+        await match.accessible.AlertButton(this.language.general.OK).tap();
+    }
 }
 
 module.exports = {
