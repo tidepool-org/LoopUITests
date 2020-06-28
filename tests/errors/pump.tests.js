@@ -29,13 +29,12 @@ var pumpTests = (test) => {
         await settingsScreen.Close();
     });
     it('set error on suspend', async () => {
-        await screen.Apply({ reservoirRemaining: 50, errorOnSuspend: true });
+        await screen.Apply({ errorOnSuspend: true });
         await screen.SuspendDelivery();
-        //check alert
         await screen.HasAlert();
         await screen.DismissAlert();
-        await screen.Close();
-        await settingsScreen.Close();
+        // await screen.Close();
+        // await settingsScreen.Close();
     });
     it.skip('set error on resume', async () => {
         await screen.Apply({ errorOnResume: true });

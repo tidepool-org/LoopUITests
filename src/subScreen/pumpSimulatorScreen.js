@@ -12,9 +12,9 @@ class PumpSimulatorScreen {
     }
     DoneButton() {
         try {
-            return match.accessible.Button(this.language.general.Done);
-        } catch (error) {
             return match.accessible.Button(this.language.general.Done).atIndex(0);
+        } catch (error) {
+            return match.accessible.Button(this.language.general.Done).atIndex(1);
         }
     }
     ConfigurationHeader() {
@@ -31,7 +31,7 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnTempBasal() {
         try {
-            await expect(this.ErrorOnTempBasalToggel()).toHaveValue('1');
+            await waitFor(this.ErrorOnTempBasalToggel()).toHaveValue('1').withTimeout(2000);
             return true;
         } catch (error) {
             return false;
@@ -45,7 +45,7 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnBolus() {
         try {
-            await expect(this.ErrorOnBolusToggel()).toHaveValue('1');
+            await waitFor(this.ErrorOnBolusToggel()).toHaveValue('1').withTimeout(2000);
             return true;
         } catch (error) {
             return false;
@@ -59,7 +59,7 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnSuspend() {
         try {
-            await expect(this.ErrorOnSuspendToggel()).toHaveValue('1');
+            await waitFor(this.ErrorOnSuspendToggel()).toHaveValue('1').withTimeout(2000);
             return true;
         } catch (error) {
             return false;
@@ -73,7 +73,7 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnResume() {
         try {
-            await expect(this.ErrorOnResumeToggel()).toHaveValue('1');
+            await waitFor(this.ErrorOnResumeToggel()).toHaveValue('1').withTimeout(2000);
             return true;
         } catch (error) {
             return false;
