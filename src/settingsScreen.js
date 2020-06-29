@@ -26,6 +26,7 @@ class SettingsScreen {
         return this.insulinModelScreen;
     }
     async OpenIssueReportScreen() {
+        await this.ScrollToBottom();
         await this.IssueReportLabel().tap();
         return this.issueReportScreen;
     }
@@ -35,7 +36,7 @@ class SettingsScreen {
     }
     async OpenPumpSimulatorScreen() {
         await this.ScrollToTop();
-        await match.accessible.Id('Simulator Small').tap();
+        await this.PumpSimulatorLabel().tap();
         return this.pumpSimulatorScreen;
     }
     async OpenCGMSimulatorScreen() {
@@ -67,18 +68,16 @@ class SettingsScreen {
         return this.suspendThresholdScreen;
     }
     DoneButton() {
-        try {
-            return match.accessible.ButtonBarButton(this.language.general.Done);
-        } catch (error) {
-            //sometimes there are multiples?
-            return match.accessible.ButtonBarButton(this.language.general.Done).atIndex(0);
-        }
+        return match.accessible.ButtonBarButton(this.language.general.Done).atIndex(0);
     }
     ConfigurationHeader() {
         return match.accessible.Header(this.language.settingsScreen.Configuration);
     }
     ServicesHeader() {
         return match.accessible.Header(this.language.settingsScreen.Services);
+    }
+    SupportHeader() {
+        return match.accessible.Header(this.language.settingsScreen.Support);
     }
     PumpHeader() {
         return match.accessible.Header(this.language.settingsScreen.Pump);
@@ -96,12 +95,7 @@ class SettingsScreen {
         return match.accessible.Label(this.language.suspendThresholdSettingScreen.SuspendThreshold)
     }
     DeliveryLimitsLabel() {
-        try {
-            return match.accessible.Label(this.language.settingsScreen.DeliveryLimits);
-        } catch (error) {
-            //sometimes there are multiples?
-            return match.accessible.Label(this.language.settingsScreen.DeliveryLimits).atIndex(1);
-        }
+        return match.accessible.Label(this.language.settingsScreen.DeliveryLimits).atIndex(0);
     }
     InsulinModelLabel() {
         return match.accessible.Label(this.language.settingsScreen.InsulinModel)
@@ -110,33 +104,29 @@ class SettingsScreen {
         return match.accessible.Label(this.language.carbRatioSettingsScreen.CarbRatios)
     }
     InsulinSensitivitiesLabel() {
-        return match.accessible.Label(this.language.settingsScreen.InsulinSensitivities).atIndex(1);
+        return match.accessible.Label(this.language.settingsScreen.InsulinSensitivities).atIndex(0);
     }
     CorrectionRangeLabel() {
         try {
             return match.accessible.Label(this.language.settingsScreen.CorrectionRange);
-        } catch (error) {
+        } catch (err) {
             return match.accessible.Label(this.language.settingsScreen.CorrectionRange).atIndex(0);
         }
     }
     ClosedLoopButton() {
-        return match.accessible.Button(this.language.settingsScreen.ClosedLoop);
+        return match.accessible.Label(this.language.settingsScreen.ClosedLoop).atIndex(0);
     }
     IssueReportLabel() {
         return match.accessible.Label(this.language.settingsScreen.IssueReport);
     }
     AddPumpLabel() {
-        try {
-            return match.accessible.Label(this.language.settingsScreen.AddPump).atIndex(1);
-        } catch (err) {
-            return match.accessible.Label(this.language.settingsScreen.AddPump).atIndex(0);
-        }
+        return match.accessible.Label(this.language.settingsScreen.AddPump).atIndex(0);
     }
     PumpSimulatorLabel() {
-        return match.accessible.LabelAndId(this.language.settingsScreen.Simulator, 'Simulator Small');
+        return match.accessible.Id('Simulator Small');
     }
     AddCGMLabel() {
-        return match.accessible.Label(this.language.settingsScreen.AddCGM);
+        return match.accessible.Label(this.language.settingsScreen.AddCGM).atIndex(0);
     }
     RemoveCGMDataLabel() {
         return match.accessible.Label(this.language.settingsScreen.DeleteCGMData).atIndex(0);
@@ -163,16 +153,22 @@ class SettingsScreen {
     }
     async ScrollToBottom() {
         try {
-            await expect(match.accessible.Label(this.language.settingsScreen.Services)).toBeVisible();
+            await expect(this.ServicesHeader()).toBeVisible();
         } catch (err) {
-            await match.accessible.Header(this.language.settingsScreen.Configuration).swipe('up', 'fast');
+            await this.ConfigurationHeader().swipe('up', 'fast');
         }
     }
     async ScrollToTop() {
         try {
-            await expect(match.accessible.Label(this.language.settingsScreen.ClosedLoop)).toBeVisible();
+            await expect(this.PumpHeader()).toBeVisible();
         } catch (err) {
-            await match.accessible.Header(this.language.settingsScreen.Services).swipe('down', 'fast');
+            try {
+                console.log('ScrollToTop - ServicesHeader');
+                await this.ServicesHeader().swipe('down', 'fast');
+            } catch (err) {
+                console.log('ScrollToTop - ConfigurationHeader');
+                await this.ConfigurationHeader().swipe('down', 'fast');
+            }
         }
     }
     /**

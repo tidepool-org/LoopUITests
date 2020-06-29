@@ -1,4 +1,3 @@
-
 var settingsCorrectionRangeScreen = (test) => {
     var screen;
     var settingsScreen;

@@ -86,6 +86,7 @@ var SettingsScreen = {
     Settings: 'Settings',
     Configuration: 'CONFIGURATION',
     Services: 'SERVICES',
+    Support: 'SUPPORT',
     ContinuousGlucoseMonitor: 'CONTINUOUS GLUCOSE MONITOR',
     Pump: 'PUMP',
     AddService: 'Add Service',
