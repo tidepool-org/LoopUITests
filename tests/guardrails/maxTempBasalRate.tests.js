@@ -1,4 +1,4 @@
-var maxTempBasalRateTests = (test) => {
+var maxTempBasalRate = (test) => {
     var testDefaultBolus = 1.0;
     var screen;
     var screenLimit;
@@ -33,4 +33,4 @@ var maxTempBasalRateTests = (test) => {
     });
 };
 
-module.exports = { maxTempBasalRateTests };
+module.exports = { maxTempBasalRate };

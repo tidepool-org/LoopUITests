@@ -1,5 +1,5 @@
 
-var settingsSuspendThresholdScreenAccessibilityTests = (test) => {
+var settingsSuspendThresholdScreen = (test) => {
     var screen;
     var settingsScreen;
     beforeAll(async () => {
@@ -28,5 +28,5 @@ var settingsSuspendThresholdScreenAccessibilityTests = (test) => {
     });
 };
 module.exports = {
-    settingsSuspendThresholdScreenAccessibilityTests
+    settingsSuspendThresholdScreen
 };

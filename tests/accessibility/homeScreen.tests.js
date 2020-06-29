@@ -1,4 +1,4 @@
-var homeScreenAccessibilityTests = (test) => {
+var homeScreen = (test) => {
     it('has a Active Carbohydrates Label', async () => {
         await expect(test.homeScreen.ActiveCarbohydratesLabel()).toExist();
     });
@@ -24,5 +24,5 @@ var homeScreenAccessibilityTests = (test) => {
 
 
 module.exports = {
-    homeScreenAccessibilityTests
+    homeScreen
 };

@@ -1,4 +1,4 @@
-var homeScreenFunctionalityTests = (test) => {
+var homeScreen = (test) => {
     it('has Active Carbohydrates section', async () => {
         await test.homeScreen.OpenActiveCarbohydratesChart();
         await test.homeScreen.CloseChart();
@@ -21,5 +21,5 @@ var homeScreenFunctionalityTests = (test) => {
 };
 
 module.exports = {
-    homeScreenFunctionalityTests
+    homeScreen
 };

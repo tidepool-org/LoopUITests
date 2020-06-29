@@ -1,4 +1,4 @@
-var carbEntryScreenAccessibilityTests = (test) => {
+var carbEntryScreen = (test) => {
     var carbEntryScreen;
     it('has to open the Carb Entry screen', async () => {
         carbEntryScreen = await test.OpenCarbEntryScreen();
@@ -37,5 +37,5 @@ var carbEntryScreenAccessibilityTests = (test) => {
 
 
 module.exports = {
-    carbEntryScreenAccessibilityTests
+    carbEntryScreen
 };

@@ -1,4 +1,4 @@
-var insulinCarbRatioTests = (test) => {
+var insulinCarbRatio = (test) => {
     var screen;
     var screenLimit;
     beforeAll(async () => {
@@ -91,4 +91,4 @@ var insulinCarbRatioTests = (test) => {
     });
 };
 
-module.exports = { insulinCarbRatioTests };
+module.exports = { insulinCarbRatio };

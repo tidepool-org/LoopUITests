@@ -1,4 +1,4 @@
-var settingsDeliveryLimitsScreenAccessibilityTests = (test) => {
+var settingsDeliveryLimitsScreen = (test) => {
     var screen;
     var settingsScreen;
     it('open', async () => {
@@ -18,5 +18,5 @@ var settingsDeliveryLimitsScreenAccessibilityTests = (test) => {
 };
 
 module.exports = {
-    settingsDeliveryLimitsScreenAccessibilityTests
+    settingsDeliveryLimitsScreen
 };

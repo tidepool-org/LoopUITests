@@ -1,4 +1,4 @@
-var correctionRangeScheduleTests = (test) => {
+var correctionRangeSchedule = (test) => {
     var screen;
     var screenLimit;
     beforeAll(async () => {
@@ -97,4 +97,4 @@ var correctionRangeScheduleTests = (test) => {
     });
 };
 
-module.exports = { correctionRangeScheduleTests };
+module.exports = { correctionRangeSchedule };

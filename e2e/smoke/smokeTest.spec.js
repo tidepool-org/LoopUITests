@@ -11,29 +11,41 @@ describe('smoke test', () => {
     });
     describe('accessibility', () => {
         describe('home screen', () => {
-            accessibilityTests.homeScreenAccessibilityTests(test);
+            accessibilityTests.homeScreen(test);
+        });
+        describe('home glucose screen', () => {
+            accessibilityTests.homeGlucoseScreen(test);
+        });
+        describe('home active insulin screen', () => {
+            accessibilityTests.homeActiveInsulinScreen(test);
+        });
+        describe('home insulin delivery screen', () => {
+            accessibilityTests.homeInsulinDeliveryScreen(test);
+        });
+        describe('home active carbohydrates screen', () => {
+            accessibilityTests.homeActiveCarbohydratesScreen(test);
         });
         describe('carb entry screen', () => {
-            accessibilityTests.carbEntryScreenAccessibilityTests(test);
+            accessibilityTests.carbEntryScreen(test);
         });
         describe('settings screen', () => {
-            accessibilityTests.settingsScreenAccessibilityTests(test);
+            accessibilityTests.settingsScreen(test);
         });
         describe('bolus screen', () => {
-            accessibilityTests.bolusScreenAccessibilityTests(test);
+            accessibilityTests.bolusScreen(test);
         });
         //TODO: add back when guardrails work is complete
         describe.skip('delivery limits settings screen', () => {
-            accessibilityTests.settingsDeliveryLimitsScreenAccessibilityTests(test);
+            accessibilityTests.settingsDeliveryLimitsScreen(test);
         });
         describe('insulin sensitivities settings screen', () => {
-            accessibilityTests.settingsInsulinSensitivitiesScreenAccessibilityTests(test);
+            accessibilityTests.settingsInsulinSensitivitiesScreen(test);
         });
         describe('correction range settings screen', () => {
-            accessibilityTests.settingsCorrectionRangeScreenAccessibilityTests(test);
+            accessibilityTests.settingsCorrectionRangeScreen(test);
         });
         describe('suspend threshold screen', () => {
-            accessibilityTests.settingsSuspendThresholdScreenAccessibilityTests(test);
+            accessibilityTests.settingsSuspendThresholdScreen(test);
         });
         describe('CGM simulator settings screen', () => {
             accessibilityTests.settingsCGMSimulatorScreenTests(test);
@@ -42,10 +54,10 @@ describe('smoke test', () => {
             accessibilityTests.settingsPumpSimulatorScreenTests(test);
         });
         describe('basal rates settings screen', () => {
-            accessibilityTests.settingsBasalRatesScreenAccessibilityTests(test);
+            accessibilityTests.settingsBasalRatesScreen(test);
         });
         describe('carb ratios settings screen', () => {
-            accessibilityTests.settingsCarbRatioScreenAccessibilityTests(test);
+            accessibilityTests.settingsCarbRatioScreen(test);
         });
     });
 });
