@@ -6,6 +6,7 @@
     "all-test": "detox test -c ios.sim.debug",
     "smoke-test": "detox test e2e/smoke -c ios.sim.debug",
     "functional-test": "detox test e2e/functional -c ios.sim.debug",
+    "guardrails-test": "detox test e2e/guardrails -c ios.sim.debug",
     "build": "detox build -c ios.sim.debug",
     "lint": "eslint ."
   },
