@@ -14,27 +14,27 @@ describe('guardrails test', () => {
         await settings.AddPumpSimulator();
     });
     describe('insulin sensitivity schedule', () => {
-        guardrailsTests.insulinSensitivityScheduleTests(test);
+        guardrailsTests.insulinSensitivitySchedule(test);
     });
     describe('suspend threshold', () => {
-        guardrailsTests.suspendThresholdTests(test);
+        guardrailsTests.suspendThreshold(test);
     });
     describe('insulin carb ratio', () => {
-        guardrailsTests.insulinCarbRatioTests(test);
+        guardrailsTests.insulinCarbRatio(test);
     });
     describe('correction range schedule', () => {
-        guardrailsTests.correctionRangeScheduleTests(test);
+        guardrailsTests.correctionRangeSchedule(test);
     });
     //TODO: add back when guardrails work is complete
     describe.skip('basal rate schedule', () => {
-        guardrailsTests.basalRateScheduleTests(test);
+        guardrailsTests.basalRateSchedule(test);
     });
     //TODO: add back when guardrails work is complete
     describe.skip('max temp basal rate', () => {
-        guardrailsTests.maxTempBasalRateTests(test);
+        guardrailsTests.maxTempBasalRate(test);
     });
     //TODO: add back when guardrails work is complete
     describe.skip('max bolus', () => {
-        guardrailsTests.maxBolusTests(test);
+        guardrailsTests.maxBolus(test);
     });
 });

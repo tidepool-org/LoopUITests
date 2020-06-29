@@ -1,4 +1,4 @@
-var settingsScreenFunctionalityTests = (test) => {
+var settingsScreen = (test) => {
     var settingsScreen;
     it('can open the settings', async () => {
         settingsScreen = await test.OpenSettingsScreen();
@@ -24,5 +24,5 @@ var settingsScreenFunctionalityTests = (test) => {
 };
 
 module.exports = {
-    settingsScreenFunctionalityTests
+    settingsScreen
 };

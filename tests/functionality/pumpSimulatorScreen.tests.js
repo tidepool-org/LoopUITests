@@ -1,4 +1,4 @@
-var pumpSimulatorScreenTests = (test) => {
+var pumpSimulatorScreen = (test) => {
     var pumpSimulatorScreen;
     var settingsScreen;
     beforeAll(async () => {
@@ -47,5 +47,5 @@ var pumpSimulatorScreenTests = (test) => {
 };
 
 module.exports = {
-    pumpSimulatorScreenTests
+    pumpSimulatorScreen
 };

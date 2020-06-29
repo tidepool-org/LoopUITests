@@ -1,4 +1,4 @@
-var cgmSimulatorScreenTests = (test) => {
+var cgmSimulatorScreen = (test) => {
     var screen;
     var settingsScreen;
     beforeAll(async () => {
@@ -105,5 +105,5 @@ var cgmSimulatorScreenTests = (test) => {
 };
 
 module.exports = {
-    cgmSimulatorScreenTests
+    cgmSimulatorScreen
 };

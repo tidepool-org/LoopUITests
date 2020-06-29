@@ -1,4 +1,4 @@
-var suspendThresholdTests = (test) => {
+var suspendThreshold = (test) => {
     var screen;
     var screenLimit;
     beforeAll(async () => {
@@ -47,4 +47,4 @@ var suspendThresholdTests = (test) => {
     });
 };
 
-module.exports = { suspendThresholdTests };
+module.exports = { suspendThreshold };

@@ -1,4 +1,4 @@
-var carbEntryScreenFunctionalityTests = (test) => {
+var carbEntryScreen = (test) => {
     it('open dialog', async () => {
         await test.carbEntryScreen.Open();
     });
@@ -14,5 +14,5 @@ var carbEntryScreenFunctionalityTests = (test) => {
 };
 
 module.exports = {
-    carbEntryScreenFunctionalityTests
+    carbEntryScreen
 };

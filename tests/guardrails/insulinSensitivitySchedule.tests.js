@@ -1,4 +1,4 @@
-var insulinSensitivityScheduleTests = (test) => {
+var insulinSensitivitySchedule = (test) => {
     var screen;
     var screenLimit;
     beforeAll(async () => {
@@ -63,4 +63,4 @@ var insulinSensitivityScheduleTests = (test) => {
     });
 };
 
-module.exports = { insulinSensitivityScheduleTests };
+module.exports = { insulinSensitivitySchedule };

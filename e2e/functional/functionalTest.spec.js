@@ -13,18 +13,18 @@ describe('functional test', () => {
         await test.prepare();
     });
     describe('home screen', () => {
-        functionalityTests.homeScreenFunctionalityTests(test);
+        functionalityTests.homeScreen(test);
     });
     describe('carb entry screen', () => {
-        functionalityTests.carbEntryScreenFunctionalityTests(test);
+        functionalityTests.carbEntryScreen(test);
     });
     describe('settings screen', () => {
-        functionalityTests.settingsScreenFunctionalityTests(test);
+        functionalityTests.settingsScreen(test);
     });
     describe('pump simulator screen', () => {
-        functionalityTests.pumpSimulatorScreenTests(test);
+        functionalityTests.pumpSimulatorScreen(test);
     });
     describe('cgm simulator screen', () => {
-        functionalityTests.cgmSimulatorScreenTests(test);
+        functionalityTests.cgmSimulatorScreen(test);
     });
 });
