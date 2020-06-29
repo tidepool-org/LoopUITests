@@ -13,9 +13,6 @@ var homeGlucoseScreen = (test) => {
     it('has a Carbohydrates Label', async () => {
         await expect(glucoseScreen.CarbohydratesLabel()).toExist();
     });
-    it('has a Carbohydrates Label', async () => {
-        await expect(glucoseScreen.CarbohydratesLabel()).toExist();
-    });
     it('has a Insulin Label', async () => {
         await expect(glucoseScreen.InsulinLabel()).toExist();
     });
