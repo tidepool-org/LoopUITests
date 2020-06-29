@@ -41,6 +41,10 @@ if [ ${#} -ne 0 ]; then
   error "Unexpected arguments: ${*}"
 fi
 
+if [ "${TEST_TYPE}" != "functional" -a "${TEST_TYPE}" != "smoke" -a  "${TEST_TYPE}" != "guardrails"]; then
+  error "Unexpected test type: ${TEST_TYPE}"
+fi
+
 cd "${TEST_DIRECTORY}"
 
 info "Checking node version..."
@@ -57,15 +61,5 @@ export PATH="${PWD}/bin:${PWD}/node_modules/.bin:${PATH}"
 info "Creating build symlink to '${BUILD_ROOT}'..."
 ln -sf "${BUILD_ROOT}" build
 
-if [ "${TEST_TYPE}" = "functional" ]; then
-  info "Running detox functional tests with configuration '${CONFIGURATION}'..."
-  detox test e2e/functional --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
-fi
-if [ "${TEST_TYPE}" = "smoke" ]; then
-  info "Running smoke tests '${CONFIGURATION}'..."
-  detox test e2e/smoke --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
-fi
-if [ "${TEST_TYPE}" = "guardrails" ]; then
-  info "Running guardrails tests '${CONFIGURATION}'..."
-  detox test e2e/guardrails --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
-fi
+info "Running detox '${TEST_TYPE}' tests with configuration '${CONFIGURATION}'..."
+detox test e2e/${TEST_TYPE} --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
