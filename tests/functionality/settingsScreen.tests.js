@@ -3,13 +3,11 @@ var settingsScreenFunctionalityTests = (test) => {
     it('can open the settings', async () => {
         settingsScreen = await test.OpenSettingsScreen();
     });
-    describe('general', () => {
-        it('set to closed loop', async () => {
-            await settingsScreen.SetClosedLoop();
-        });
-        it('set to open loop', async () => {
-            await settingsScreen.SetOpenLoop();
-        });
+    it('set to closed loop', async () => {
+        await settingsScreen.SetClosedLoop();
+    });
+    it('set to open loop', async () => {
+        await settingsScreen.SetOpenLoop();
     });
     describe('issue report', () => {
         var screen;

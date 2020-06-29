@@ -114,7 +114,7 @@ class SettingsScreen {
         }
     }
     ClosedLoopButton() {
-        return match.accessible.Label(this.language.settingsScreen.ClosedLoop).atIndex(0);
+        return match.accessible.Button(this.language.settingsScreen.ClosedLoop).atIndex(2);
     }
     IssueReportLabel() {
         return match.accessible.Label(this.language.settingsScreen.IssueReport);
@@ -163,10 +163,8 @@ class SettingsScreen {
             await expect(this.PumpHeader()).toBeVisible();
         } catch (err) {
             try {
-                console.log('ScrollToTop - ServicesHeader');
                 await this.ServicesHeader().swipe('down', 'fast');
             } catch (err) {
-                console.log('ScrollToTop - ConfigurationHeader');
                 await this.ConfigurationHeader().swipe('down', 'fast');
             }
         }
@@ -238,7 +236,6 @@ class SettingsScreen {
             await this.ClosedLoopButton().tap();
             await waitFor(this.ClosedLoopButton()).toHaveValue('1').withTimeout(2000);
         } catch (err) {
-            await waitFor(this.ClosedLoopButton()).toHaveValue('0').withTimeout(2000);
             await this.ClosedLoopButton().tap();
         }
     }
@@ -249,7 +246,6 @@ class SettingsScreen {
             await this.ClosedLoopButton().tap();
             await waitFor(this.ClosedLoopButton()).toHaveValue('0').withTimeout(2000);
         } catch (err) {
-            await waitFor(this.ClosedLoopButton()).toHaveValue('1').withTimeout(2000);
             await this.ClosedLoopButton().tap();
         }
     }
