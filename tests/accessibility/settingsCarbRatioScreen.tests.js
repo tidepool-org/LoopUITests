@@ -1,4 +1,4 @@
-var settingsCarbRatioScreenAccessibilityTests = (test) => {
+var settingsCarbRatioScreen = (test) => {
     var screen;
     var settingsScreen;
     beforeAll(async () => {
@@ -34,5 +34,5 @@ var settingsCarbRatioScreenAccessibilityTests = (test) => {
 };
 
 module.exports = {
-    settingsCarbRatioScreenAccessibilityTests
+    settingsCarbRatioScreen
 };

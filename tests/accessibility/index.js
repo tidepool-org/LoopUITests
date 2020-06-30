@@ -1,31 +1,39 @@
-const { homeScreenAccessibilityTests } = require('./homeScreen.tests');
-const { bolusScreenAccessibilityTests } = require('./bolusScreen.tests');
-const { carbEntryScreenAccessibilityTests } = require('./carbEntryScreen.tests');
-const { settingsScreenAccessibilityTests } = require('./settingsScreen.tests');
-const { settingsCarbRatioScreenAccessibilityTests } = require('./settingsCarbRatioScreen.tests');
-const { settingsBasalRatesScreenAccessibilityTests } = require('./settingsBasalRatesScreen.tests');
-const { settingsDeliveryLimitsScreenAccessibilityTests } = require('./settingsDeliveryLimitsScreen.tests');
-const { settingsInsulinSensitivitiesScreenAccessibilityTests } = require('./settingsInsulinSensitivitiesScreen.tests');
-const { settingsCorrectionRangeScreenAccessibilityTests } = require('./settingsCorrectionRangeScreen.tests');
-const { settingsIssueReportScreenAccessibilityTests } = require('./settingsIssueReportScreen.tests');
-const { settingsInsulinModelScreenAccessibilityTests } = require('./settingsInsulinModelScreen.tests');
-const { settingsSuspendThresholdScreenAccessibilityTests } = require('./settingsSuspendThresholdScreen.tests');
+const { homeScreen } = require('./homeScreen.tests');
+const { homeGlucoseScreen } = require('./homeGlucoseScreen.tests');
+const { homeActiveInsulinScreen } = require('./homeActiveInsulinScreen.tests');
+const { homeInsulinDeliveryScreen } = require('./homeInsulinDeliveryScreen.tests');
+const { bolusScreen } = require('./bolusScreen.tests');
+const { carbEntryScreen } = require('./carbEntryScreen.tests');
+const { settingsScreen } = require('./settingsScreen.tests');
+const { settingsCarbRatioScreen } = require('./settingsCarbRatioScreen.tests');
+const { settingsBasalRatesScreen } = require('./settingsBasalRatesScreen.tests');
+const { settingsDeliveryLimitsScreen } = require('./settingsDeliveryLimitsScreen.tests');
+const { settingsInsulinSensitivitiesScreen } = require('./settingsInsulinSensitivitiesScreen.tests');
+const { settingsCorrectionRangeScreen } = require('./settingsCorrectionRangeScreen.tests');
+const { settingsIssueReportScreen } = require('./settingsIssueReportScreen.tests');
+const { settingsInsulinModelScreen } = require('./settingsInsulinModelScreen.tests');
+const { settingsSuspendThresholdScreen } = require('./settingsSuspendThresholdScreen.tests');
 const { settingsCGMSimulatorScreenTests } = require('./settingsCGMSimulatorScreen.tests');
 const { settingsPumpSimulatorScreenTests } = require('./settingsPumpSimulatorScreen.tests');
+const { homeActiveCarbohydratesScreen } = require('./homeActiveCarbohydratesScreen.tests');
 
 module.exports = {
-    homeScreenAccessibilityTests,
-    bolusScreenAccessibilityTests,
-    carbEntryScreenAccessibilityTests,
-    settingsScreenAccessibilityTests,
-    settingsCarbRatioScreenAccessibilityTests,
-    settingsBasalRatesScreenAccessibilityTests,
-    settingsDeliveryLimitsScreenAccessibilityTests,
-    settingsInsulinSensitivitiesScreenAccessibilityTests,
-    settingsCorrectionRangeScreenAccessibilityTests,
-    settingsIssueReportScreenAccessibilityTests,
-    settingsInsulinModelScreenAccessibilityTests,
-    settingsSuspendThresholdScreenAccessibilityTests,
+    homeScreen,
+    homeGlucoseScreen,
+    homeActiveInsulinScreen,
+    homeInsulinDeliveryScreen,
+    homeActiveCarbohydratesScreen,
+    bolusScreen,
+    carbEntryScreen,
+    settingsScreen,
+    settingsCarbRatioScreen,
+    settingsBasalRatesScreen,
+    settingsDeliveryLimitsScreen,
+    settingsInsulinSensitivitiesScreen,
+    settingsCorrectionRangeScreen,
+    settingsIssueReportScreen,
+    settingsInsulinModelScreen,
+    settingsSuspendThresholdScreen,
     settingsCGMSimulatorScreenTests,
     settingsPumpSimulatorScreenTests,
 };

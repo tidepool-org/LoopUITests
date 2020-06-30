@@ -1,8 +1,13 @@
 const match = require('./match');
+const { homeSubScreen } = require('./homeScreen/index');
 
 class HomeScreen {
     constructor(language) {
         this.language = language;
+        this.glucoseScreen = new homeSubScreen.GlucoseScreen(language);
+        this.activeInsulinScreen = new homeSubScreen.ActiveInsulinScreen(language);
+        this.insulinDeliveryScreen = new homeSubScreen.InsulinDeliveryScreen(language);
+        this.activeCarbohydratesScreen = new homeSubScreen.ActiveCarbohydratesScreen(language);
     }
     ActiveCarbohydratesLabel() {
         return match.accessible.Label(this.language.homeScreen.ActiveCarbohydrates);
@@ -30,15 +35,19 @@ class HomeScreen {
     }
     async OpenActiveCarbohydratesChart() {
         await this.ActiveCarbohydratesLabel().tap();
+        return this.activeCarbohydratesScreen;
     }
     async OpenActiveInsulinChart() {
         await this.ActiveInsulinLabel().tap();
+        return this.activeInsulinScreen;
     }
     async OpenInsulinDeliveryChart() {
         await this.InsulinDeliveryLabel().tap();
+        return this.insulinDeliveryScreen;
     }
     async OpenGlucoseChart() {
         await this.GlucoseLabel().tap();
+        return this.glucoseScreen;
     }
     async CloseChart() {
         await match.accessible.BackButton(this.language.general.Status).tap();

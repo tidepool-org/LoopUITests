@@ -1,4 +1,4 @@
-var settingsInsulinModelScreenAccessibilityTests = (test) => {
+var settingsInsulinModelScreen = (test) => {
     var screen;
     var settingsScreen;
     it('open', async () => {
@@ -18,5 +18,5 @@ var settingsInsulinModelScreenAccessibilityTests = (test) => {
 };
 
 module.exports = {
-    settingsInsulinModelScreenAccessibilityTests
+    settingsInsulinModelScreen
 };

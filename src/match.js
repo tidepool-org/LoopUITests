@@ -40,6 +40,9 @@ const match = {
         Button(label) {
             return element(by.label(label).and(by.traits(['button'])));
         },
+        Switch(label) {
+            return element(by.label(label).and(by.traits(['button']).and(by.type('UISwitch'))));
+        },
         /**
          * @param {string} label
          */

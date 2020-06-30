@@ -1,4 +1,4 @@
-var basalRateScheduleTests = (test) => {
+var basalRateSchedule = (test) => {
     var screen;
     var screenLimit;
     beforeAll(async () => {
@@ -69,4 +69,4 @@ var basalRateScheduleTests = (test) => {
     });
 };
 
-module.exports = { basalRateScheduleTests };
+module.exports = { basalRateSchedule };

@@ -1,5 +1,4 @@
-
-var settingsCorrectionRangeScreenAccessibilityTests = (test) => {
+var settingsCorrectionRangeScreen = (test) => {
     var screen;
     var settingsScreen;
     beforeAll(async () => {
@@ -34,5 +33,5 @@ var settingsCorrectionRangeScreenAccessibilityTests = (test) => {
     });
 };
 module.exports = {
-    settingsCorrectionRangeScreenAccessibilityTests
+    settingsCorrectionRangeScreen
 };

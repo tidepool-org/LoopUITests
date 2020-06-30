@@ -4,12 +4,11 @@ const { BaseEntriesScreen } = require('./baseEntriesScreen');
 
 class BasalRatesScreen extends BaseEntriesScreen {
     constructor(language, config) {
-        super(language, {
+        super(language, config, {
             HeaderLabel: language.basalRatesSettingScreen.BasalRates,
             InfoLabel: language.basalRatesSettingScreen.BasalRatesInfo,
         });
         this.unitsLabel = language.basalRatesSettingScreen.Units;
-        this.config = config;
     }
     /**
      * @param {Object} rate

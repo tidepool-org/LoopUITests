@@ -18,7 +18,7 @@ error() {
   echo "Parameters:" >&2
   echo "  <build-root>      root of the build that contains the app" >&2
   echo "  <configuration>   detox configuration to use" >&2
-  echo "  <type>            type of tests to run, 'functional' or 'smoke' " >&2
+  echo "  <type>            type of tests to run, 'functional' or 'smoke' or 'guardrails' " >&2
   exit 1
 }
 
@@ -41,6 +41,10 @@ if [ ${#} -ne 0 ]; then
   error "Unexpected arguments: ${*}"
 fi
 
+if [ "${TEST_TYPE}" != "functional" -a "${TEST_TYPE}" != "smoke" -a  "${TEST_TYPE}" != "guardrails"]; then
+  error "Unexpected test type: ${TEST_TYPE}"
+fi
+
 cd "${TEST_DIRECTORY}"
 
 info "Checking node version..."
@@ -57,10 +61,5 @@ export PATH="${PWD}/bin:${PWD}/node_modules/.bin:${PATH}"
 info "Creating build symlink to '${BUILD_ROOT}'..."
 ln -sf "${BUILD_ROOT}" build
 
-if [ "${TEST_TYPE}" = "functional" ]; then
-  info "Running detox functional tests with configuration '${CONFIGURATION}'..."
-  detox test e2e/functional --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
-else
-  info "Running smoke tests '${CONFIGURATION}'..."
-  detox test e2e/smoke --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
-fi
+info "Running detox '${TEST_TYPE}' tests with configuration '${CONFIGURATION}'..."
+detox test e2e/${TEST_TYPE} --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup

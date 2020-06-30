@@ -1,4 +1,5 @@
-var settingsBasalRatesScreenAccessibilityTests = (test) => {
+var settingsBasalRatesScreen = (test) => {
+    var settingsScreen;
     var screen;
     var settingsScreen;
     beforeAll(async () => {
@@ -36,5 +37,5 @@ var settingsBasalRatesScreenAccessibilityTests = (test) => {
 };
 
 module.exports = {
-    settingsBasalRatesScreenAccessibilityTests
+    settingsBasalRatesScreen
 };
