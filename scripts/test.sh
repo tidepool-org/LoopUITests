@@ -41,7 +41,7 @@ if [ ${#} -ne 0 ]; then
   error "Unexpected arguments: ${*}"
 fi
 
-if [ "${TEST_TYPE}" != "functional" -a "${TEST_TYPE}" != "smoke" -a  "${TEST_TYPE}" != "guardrails"]; then
+if [ "${TEST_TYPE}" != "functional" -a "${TEST_TYPE}" != "smoke" -a  "${TEST_TYPE}" != "guardrails" ]; then
   error "Unexpected test type: ${TEST_TYPE}"
 fi
 
