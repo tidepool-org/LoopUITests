@@ -13,28 +13,22 @@ describe('guardrails test', () => {
         let settings = await test.OpenSettingsScreen();
         await settings.AddPumpSimulator();
     });
-    describe('insulin sensitivity schedule', () => {
-        guardrailsTests.insulinSensitivitySchedule(test);
-    });
-    describe('suspend threshold', () => {
-        guardrailsTests.suspendThreshold(test);
-    });
-    describe('insulin carb ratio', () => {
-        guardrailsTests.insulinCarbRatio(test);
-    });
-    describe('correction range schedule', () => {
-        guardrailsTests.correctionRangeSchedule(test);
-    });
-    //TODO: add back when guardrails work is complete
-    describe.skip('basal rate schedule', () => {
-        guardrailsTests.basalRateSchedule(test);
-    });
-    //TODO: add back when guardrails work is complete
-    describe.skip('max temp basal rate', () => {
-        guardrailsTests.maxTempBasalRate(test);
-    });
-    //TODO: add back when guardrails work is complete
-    describe.skip('max bolus', () => {
-        guardrailsTests.maxBolus(test);
+    // describe('insulin sensitivity schedule', () => {
+    //     guardrailsTests.insulinSensitivitySchedule(test);
+    // });
+    // describe('suspend threshold', () => {
+    //     guardrailsTests.suspendThreshold(test);
+    // });
+    // describe('insulin carb ratio', () => {
+    //     guardrailsTests.insulinCarbRatio(test);
+    // });
+    // describe('correction range schedule', () => {
+    //     guardrailsTests.correctionRangeSchedule(test);
+    // });
+    // describe('basal rate schedule', () => {
+    //     guardrailsTests.basalRateSchedule(test);
+    // });
+    describe('delivery limits', () => {
+        guardrailsTests.deliveryLimits(test);
     });
 });

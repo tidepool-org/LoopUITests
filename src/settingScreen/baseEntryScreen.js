@@ -18,10 +18,10 @@ class BaseEntryScreen {
         return match.accessible.Label(this.language.general.Save);
     }
     InfoButton() {
-        return match.accessible.Button(this.language.buttonLabel.InfoCircle);
+        return match.accessible.Button(this.language.general.ButtonLabel.InfoCircle);
     }
     GuardrailWarningIconPicker() {
-        return match.accessible.Image(this.language.alerts.ExclamationMark).atIndex(0);
+        return match.accessible.Image(this.language.general.Alerts.ExclamationMark).atIndex(0);
     }
     async Cancel() {
         await this.CancelButton().atIndex(0).tap();

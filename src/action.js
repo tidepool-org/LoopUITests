@@ -1,10 +1,12 @@
 const match = require('./match');
 const element = require('detox').element;
 
-var _nextPickerStep = function (currentValue, expectedValue) {
+var _nextPickerStep = function (currentValue, expectedValue, smallStep) {
     let step = 1;
-    if (Math.abs(currentValue - expectedValue) >= 2) {
-        step = 2;
+    if (smallStep == false) {
+        if (Math.abs(currentValue - expectedValue) >= 2) {
+            step = 2;
+        }
     }
     if (currentValue > expectedValue) {
         return currentValue - step;
@@ -23,7 +25,7 @@ const action = {
             return;
         }
         do {
-            currentValue = _nextPickerStep(currentValue, expectedValue);
+            currentValue = _nextPickerStep(currentValue, expectedValue, false);
             //NOTE: the tree expands when you traverse through a picker. This works but is hideous!!
             try {
                 await match.accessible.PickerItem_v2(1, `${currentValue}`).tap();
@@ -36,19 +38,25 @@ const action = {
             }
         } while (currentValue != expectedValue);
     },
-    async ScrollQuantityPicker(currentValue, expectedValue, pickerID) {
-        await this.ScrollQuantityPicker(currentValue, expectedValue, pickerID, false);
-    },
-    async ScrollQuantityPicker(currentValue, expectedValue, pickerID, useItemID) {
+    /**
+     *
+     * @param {string} currentValue
+     * @param {string} expectedValue
+     * @param {object} config
+     * @param {string} config.pickerID
+     * @param {boolean} config.useItemID
+     * @param {boolean} config.smallStep
+     */
+    async ScrollQuantityPicker(currentValue, expectedValue, config) {
         if (currentValue == expectedValue) {
             return;
         }
         do {
-            currentValue = _nextPickerStep(currentValue, expectedValue);
-            if (useItemID) {
-                await match.accessible.QuantityPickerItem(`${currentValue}`, pickerID, `${currentValue}`).tap();
+            currentValue = _nextPickerStep(currentValue, expectedValue, config.smallStep);
+            if (config.useItemID) {
+                await match.accessible.QuantityPickerItem(`${currentValue}`, config.pickerID, `${currentValue}`).tap();
             } else {
-                await match.accessible.QuantityPickerItem(`${currentValue}`, pickerID).tap();
+                await match.accessible.QuantityPickerItem(`${currentValue}`, config.pickerID).tap();
             }
         } while (currentValue != expectedValue);
     },

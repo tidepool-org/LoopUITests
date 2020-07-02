@@ -60,22 +60,22 @@ class HomeScreen {
     }
     async ExpectLoopStatusCarbsAlert() {
         await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(this.language.alerts.MissingCarbEffects)).toExist();
+        await expect(match.accessible.AlertLabel(this.language.general.Alerts.MissingCarbEffects)).toExist();
         await match.accessible.Button(this.language.general.OK).tap();
     }
     async ExpectLoopStatusInsulinAlert() {
         await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(this.language.alerts.MissingInsulinEffects)).toExist();
+        await expect(match.accessible.AlertLabel(this.language.general.Alerts.MissingInsulinEffects)).toExist();
         await match.accessible.Button(this.language.general.OK).tap();
     }
     async ExpectLoopStatusConfigurationAlert() {
         await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(this.language.alerts.ConfigurationError)).toExist();
+        await expect(match.accessible.AlertLabel(this.language.general.Alerts.ConfigurationError)).toExist();
         await match.accessible.Button(this.language.general.OK).tap();
     }
     async ExpectLoopStatusGlucoseDataAlert() {
         await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(this.language.alerts.MissingGlucoseData)).toExist();
+        await expect(match.accessible.AlertLabel(this.language.general.Alerts.MissingGlucoseData)).toExist();
         await match.accessible.Button(this.language.general.OK).tap();
     }
     async ExpectSuccessfulLoop() {

@@ -23,27 +23,6 @@ var mgdL = {
             limit: 10,
         },
     },
-    bolusDelivery: {
-        step: 0.1,
-        max: {
-            limit: 30.0,
-            warning: 20.0,
-            noWarning: 19.0,
-        },
-        min: {
-            limit: 0.0,
-        },
-    },
-    basalDelivery: {
-        step: 0.1,
-        max: {
-            limit: 35.0,
-            noWarning: 34.0,
-        },
-        min: {
-            limit: 0.0,
-        },
-    },
     basalRates: {
         max: {
             limit: 35.0,
@@ -77,6 +56,28 @@ var mgdL = {
             warning: 3.0,
             limit: 1.0,
         },
+    },
+    delivery: {
+        basalRate: {
+            max: {
+                limit: 35.0,
+                warning: 34.9,
+                noWarning: 34.0,
+            },
+            min: {
+                limit: 0.0,
+            },
+        },
+        bolus: {
+            max: {
+                limit: 30.0,
+                warning: 20.0,
+                noWarning: 19.0,
+            },
+            min: {
+                limit: 0.0,
+            },
+        }
     }
 };
 

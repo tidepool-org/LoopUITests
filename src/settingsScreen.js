@@ -6,7 +6,7 @@ class SettingsScreen {
         this.language = language;
         this.cgmSimulatorScreen = new settingsSubScreen.CGMSimulatorScreen(language);
         this.basalRatesScreen = new settingsSubScreen.BasalRatesScreen(language, screenDefaults.basalRate);
-        this.deliveryLimitsScreen = new settingsSubScreen.DeliveryLimitsScreen(language);
+        this.deliveryLimitsScreen = new settingsSubScreen.DeliveryLimitsScreen(language, screenDefaults.deliveryLimit);
         this.issueReportScreen = new settingsSubScreen.IssueReportScreen(language);
         this.insulinModelScreen = new settingsSubScreen.InsulinModelScreen(language);
         this.pumpSimulatorScreen = new settingsSubScreen.PumpSimulatorScreen(language);
@@ -92,7 +92,7 @@ class SettingsScreen {
         return match.accessible.Label(this.language.settingsScreen.BasalRates)
     }
     SuspendThresholdLabel() {
-        return match.accessible.Label(this.language.suspendThresholdSettingScreen.SuspendThreshold)
+        return match.accessible.Label(this.language.settingsScreen.SuspendThresholdScreen.SuspendThreshold)
     }
     DeliveryLimitsLabel() {
         return match.accessible.Label(this.language.settingsScreen.DeliveryLimits).atIndex(0);
@@ -101,7 +101,7 @@ class SettingsScreen {
         return match.accessible.Label(this.language.settingsScreen.InsulinModel)
     }
     CarbRatiosLabel() {
-        return match.accessible.Label(this.language.carbRatioSettingsScreen.CarbRatios)
+        return match.accessible.Label(this.language.settingsScreen.CarbRatioScreen.CarbRatios)
     }
     InsulinSensitivitiesLabel() {
         return match.accessible.Label(this.language.settingsScreen.InsulinSensitivities).atIndex(0);

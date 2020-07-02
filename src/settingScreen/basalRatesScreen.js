@@ -5,10 +5,10 @@ const { BaseEntriesScreen } = require('./baseEntriesScreen');
 class BasalRatesScreen extends BaseEntriesScreen {
     constructor(language, config) {
         super(language, config, {
-            HeaderLabel: language.basalRatesSettingScreen.BasalRates,
-            InfoLabel: language.basalRatesSettingScreen.BasalRatesInfo,
+            HeaderLabel: language.settingsScreen.BasalRatesScreen.BasalRates,
+            InfoLabel: language.settingsScreen.BasalRatesScreen.BasalRatesInfo,
         });
-        this.unitsLabel = language.basalRatesSettingScreen.Units;
+        this.unitsLabel = language.settingsScreen.BasalRatesScreen.Units;
     }
     /**
      * @param {Object} rate
@@ -24,9 +24,17 @@ class BasalRatesScreen extends BaseEntriesScreen {
 
         if (rate.current) {
             let currentParts = String(rate.current.unitsPerHour).split('.');
-            await action.ScrollQuantityPicker(Number(currentParts[wholePart]), Number(expectedParts[wholePart]), pickerID);
+            await action.ScrollQuantityPicker(
+                Number(currentParts[wholePart]),
+                Number(expectedParts[wholePart]),
+                { pickerID: pickerID, useItemID: false, smallStep: false }
+            );
         } else {
-            await action.ScrollQuantityPicker(this.config.startWhole, Number(expectedParts[wholePart]), pickerID);
+            await action.ScrollQuantityPicker(
+                this.config.startWhole,
+                Number(expectedParts[wholePart]),
+                { pickerID: pickerID, useItemID: false, smallStep: false }
+            );
         }
     }
     /**

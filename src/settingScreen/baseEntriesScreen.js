@@ -16,7 +16,7 @@ class BaseEntriesScreen {
         return match.accessible.Button(this.language.general.Cancel);
     }
     PlusButton() {
-        return match.accessible.Button(this.language.buttonLabel.Plus);
+        return match.accessible.Button(this.language.general.ButtonLabel.Plus);
     }
     EditButton() {
         return match.accessible.Button(this.language.general.Edit);
@@ -34,7 +34,7 @@ class BaseEntriesScreen {
         return match.accessible.Label(this.language.general.NewEntry);
     }
     InfoButton() {
-        return match.accessible.Button(this.language.buttonLabel.InfoCircle);
+        return match.accessible.Button(this.language.general.ButtonLabel.InfoCircle);
     }
     /**
      *
@@ -43,7 +43,7 @@ class BaseEntriesScreen {
      */
     GuardrailWarningIconPicker(entry) {
         let scheduleItemMask = `schedule_item_${entry.index}`;
-        return match.accessible.ImageAndId(this.language.alerts.ExclamationMark, scheduleItemMask);
+        return match.accessible.ImageAndId(this.language.general.Alerts.ExclamationMark, scheduleItemMask);
     }
     async Add() {
         await this.PlusButton().tap();

@@ -1,40 +1,66 @@
+const action = require('../action');
 const match = require('../match');
 
-class DeliveryLimitsScreen {
-    constructor(language) {
-        this.language = language;
+const { BaseEntryScreen } = require('./baseEntryScreen');
+
+class DeliveryLimitsScreen extends BaseEntryScreen {
+    constructor(language, config) {
+        super(language, {
+            HeaderLabel: language.settingsScreen.DeliveryLimitsScreen.DeliveryLimits,
+            InfoLabel: language.settingsScreen.DeliveryLimitsScreen.MaxBasalRateInfo,
+        });
+        this.config = config;
     }
-    Header() {
-        return match.accessible.Header(this.language.settingsScreen.DeliveryLimits);
+    _limitParts(limitAmount) {
+        return String(limitAmount).split('.');
     }
-    BackButton() {
-        return match.accessible.BackButton(this.language.settingsScreen.Settings);
+    async _set(expected, current) {
+        await action.ScrollQuantityPicker(
+            current[0],
+            expected[0],
+            { pickerID: 'quantity_picker', useItemID: true, smallStep: true }
+        );
     }
-    SaveButton() {
-        return match.accessible.Label(this.language.settingsScreen.SaveToSimulator);
+    MaxBasalRateLabel() {
+        return match.accessible.Label(this.language.settingsScreen.DeliveryLimitsScreen.MaxBasalRate);
     }
-    async Close() {
-        await this.BackButton().tap();
+    MaxBolusLabel() {
+        return match.accessible.Label(this.language.settingsScreen.DeliveryLimitsScreen.MaxBolus);
     }
-    async Save() {
-        await this.SaveButton().tap();
+    async OpenBasalRatePicker() {
+        await this.MaxBasalRateLabel().tap();
     }
-    async Apply(limits) {
-        await match.UIEditableTextField().atIndex(0).clearText();
-        await match.UIEditableTextField().atIndex(0).typeText(String(limits.maxBasalRate));
-        await match.UIEditableTextField().atIndex(0).tapReturnKey();
-        await expect(match.UIEditableTextField().atIndex(0)).toHaveText(String(limits.maxBasalRate));
-        await match.UIEditableTextField().atIndex(1).clearText();
-        await match.UIEditableTextField().atIndex(1).typeText(String(limits.maxBolus));
-        await match.UIEditableTextField().atIndex(1).tapReturnKey();
-        await expect(match.UIEditableTextField().atIndex(1)).toHaveText(String(limits.maxBolus));
+    async OpenBolusPicker() {
+        await this.MaxBolusLabel().tap();
     }
-    async ApplyWithExpectations(limits, additionalExpectations) {
-        await this.Apply(limits);
-        if (additionalExpectations) {
-            await additionalExpectations();
+    /**
+     * @param {Object} limits
+     * @param {Object} limits.basal
+     * @param {String} limits.basal.expected.rate
+     * @param {String} limits.basal.current.rate optional
+     * @param {Object} limits.bolus
+     * @param {String} limits.bolus.expected.amount
+     * @param {String} limits.bolus.current.amount optional
+     */
+    async ApplyOne(limits) {
+        if (limits.basal) {
+            let currentParts = [this.config.basalRate.startWhole];
+            if (limits.basal.current) {
+                currentParts = this._limitParts(limits.basal.current.rate);
+            }
+            let expectedParts = this._limitParts(limits.basal.expected.rate);
+            await this._set(expectedParts, currentParts);
+        }
+        if (limits.bolus) {
+            let currentParts = [this.config.bolus.startWhole];
+            if (limits.bolus.current) {
+                currentParts = this._limitParts(limits.bolus.current.amount);
+            }
+            let expectedParts = this._limitParts(limits.bolus.expected.amount);
+            await this._set(expectedParts, currentParts);
         }
     }
+
 }
 
 module.exports = {

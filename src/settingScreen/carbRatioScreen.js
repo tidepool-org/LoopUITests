@@ -5,9 +5,12 @@ const { BaseEntriesScreen } = require('./baseEntriesScreen');
 class CarbRatioScreen extends BaseEntriesScreen {
     constructor(language, config) {
         super(language, config, {
-            HeaderLabel: language.carbRatioSettingsScreen.CarbRatios,
-            InfoLabel: language.carbRatioSettingsScreen.CarbRatioInfo,
+            HeaderLabel: language.settingsScreen.CarbRatioScreen.CarbRatios,
+            InfoLabel: language.settingsScreen.CarbRatioScreen.CarbRatioInfo,
         });
+    }
+    _unitParts(carbGramsPerInsulinUnit) {
+        return String(carbGramsPerInsulinUnit).split('.');
     }
     /**
      * @param {Object} ratio
@@ -19,13 +22,13 @@ class CarbRatioScreen extends BaseEntriesScreen {
     async ApplyOne(ratio) {
         const pickerID = 'quantity_picker'
         const wholePart = 0;
-        let expectedParts = String(ratio.expected.carbGramsPerInsulinUnit).split('.');
+        let expectedParts = this._unitParts(ratio.expected.carbGramsPerInsulinUnit);
 
         if (ratio.current) {
-            let currentParts = String(ratio.current.carbGramsPerInsulinUnit).split('.');
-            await action.ScrollQuantityPicker(Number(currentParts[wholePart]), Number(expectedParts[wholePart]), pickerID);
+            let currentParts = this._unitParts(ratio.current.carbGramsPerInsulinUnit);
+            await action.ScrollQuantityPicker(Number(currentParts[wholePart]), Number(expectedParts[wholePart]), { pickerID: pickerID, useItemID: false, smallStep: false });
         } else {
-            await action.ScrollQuantityPicker(this.config.startWhole, Number(expectedParts[wholePart]), pickerID);
+            await action.ScrollQuantityPicker(this.config.startWhole, Number(expectedParts[wholePart]), { pickerID: pickerID, useItemID: false, smallStep: false });
         }
     }
     /**

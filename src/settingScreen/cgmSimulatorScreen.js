@@ -3,7 +3,7 @@ const action = require('../action');
 
 class CGMSimulatorScreen {
     constructor(language) {
-        this.language = language.cgmSimulatorSettingsScreen;
+        this.language = language.settingsScreen.CGMSimulatorScreen;
         this.language.general = language.general;
     }
     Header() {

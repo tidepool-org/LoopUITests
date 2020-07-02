@@ -17,6 +17,16 @@ var mgdL = {
         startWhole: 0,
         startDecimal: '00'
     },
+    deliveryLimit: {
+        basalRate: {
+            startWhole: 35,
+            startDecimal: '00'
+        },
+        bolus: {
+            startWhole: 19,
+            startDecimal: '00'
+        }
+    }
 };
 
 module.exports = {

@@ -22,15 +22,13 @@ class InsulinSensitivitiesScreen extends BaseEntriesScreen {
             await action.ScrollQuantityPicker(
                 sensitivity.current.bgValuePerInsulinUnit,
                 sensitivity.expected.bgValuePerInsulinUnit,
-                pickerID,
-                true,
+                { pickerID: pickerID, useItemID: true, smallStep: false }
             );
         } else {
             await action.ScrollQuantityPicker(
                 this.config.start,
                 sensitivity.expected.bgValuePerInsulinUnit,
-                pickerID,
-                true,
+                { pickerID: pickerID, useItemID: true, smallStep: false }
             );
         }
     }

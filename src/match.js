@@ -121,14 +121,14 @@ const match = {
                             .and(by.traits(['text'])
                                 .and(by.id(itemID))))
                         .withAncestor(by.id(pickerID))
-                ).atIndex(1);
+                ).atIndex(2);
             }
             return element(
                 by.type('SwiftUI.AccessibilityNode')
                     .and(by.label(itemLabel)
                         .and(by.traits(['text'])))
                     .withAncestor(by.id(pickerID))
-            ).atIndex(1);
+            ).atIndex(2);
         },
         Picker() {
             return element(by.type('UIPickerView')).atIndex(1);
