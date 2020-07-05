@@ -110,19 +110,7 @@ const match = {
                         .and(by.traits(['text'])))
             ).atIndex(pickerNumber);
         },
-        QuantityPickerItem(itemLabel, pickerID) {
-            return this.QuantityPickerItem(itemLabel, pickerID, null);
-        },
-        QuantityPickerItem(itemLabel, pickerID, itemID) {
-            if (itemID) {
-                return element(
-                    by.type('SwiftUI.AccessibilityNode')
-                        .and(by.label(itemLabel)
-                            .and(by.traits(['text'])
-                                .and(by.id(itemID))))
-                        .withAncestor(by.id(pickerID))
-                ).atIndex(2);
-            }
+        QuantityPickerItemLabel(itemLabel, pickerID) {
             return element(
                 by.type('SwiftUI.AccessibilityNode')
                     .and(by.label(itemLabel)
@@ -130,14 +118,26 @@ const match = {
                     .withAncestor(by.id(pickerID))
             ).atIndex(2);
         },
+        QuantityPickerItemID(itemID, pickerID) {
+            return element(
+                by.type('SwiftUI.AccessibilityNode')
+                    .and(by.id(itemID)
+                        .and(by.traits(['text'])))
+                    .withAncestor(by.id(pickerID))
+            ).atIndex(2);
+        },
+        QuantityPickerItemID_v2(itemID, pickerID) {
+            return element(
+                by.id(itemID)
+                    .and(by.traits(['text']))
+                    .withAncestor(by.id(pickerID))
+            ).atIndex(2);
+        },
         Picker() {
             return element(by.type('UIPickerView')).atIndex(1);
         },
         QuantityPicker(id) {
-            if (id) {
-                return element(by.label('Quantity').and(by.id(id)));
-            }
-            return element(by.label('Quantity'));
+            return element(by.label('Quantity').and(by.id(id)));
         },
         /**
          * @summary returns alert items based on the given label

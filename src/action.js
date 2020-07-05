@@ -54,9 +54,15 @@ const action = {
         do {
             currentValue = _nextPickerStep(currentValue, expectedValue, config.smallStep);
             if (config.useItemID) {
-                await match.accessible.QuantityPickerItem(`${currentValue}`, config.pickerID, `${currentValue}`).tap();
+                await match.accessible.QuantityPickerItemID_v2(
+                    `${currentValue}`,
+                    config.pickerID,
+                ).atIndex(0).tap();
             } else {
-                await match.accessible.QuantityPickerItem(`${currentValue}`, config.pickerID).tap();
+                await match.accessible.QuantityPickerItemLabel(
+                    `${currentValue}`,
+                    config.pickerID,
+                ).tap();
             }
         } while (currentValue != expectedValue);
     },
