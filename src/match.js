@@ -1,5 +1,10 @@
 const element = require('detox').element;
 
+
+const staticTextTrait = 'text';
+const buttonTrait = 'button';
+const imageTrait = 'image';
+
 const match = {
     /**
      * @summary items that have accessibility traits applied to them
@@ -10,44 +15,44 @@ const match = {
          * @returns {Detox.Element} ButtonBarButton
          */
         ButtonBarButton(label) {
-            return element(by.label(label).and(by.traits(['button']).and(by.type('_UIButtonBarButton'))));
+            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('_UIButtonBarButton'))));
         },
         /**
          *
          * @param {string} label
          */
         DisabledButtonBarButton(label) {
-            return element(by.label(label).and(by.traits(['button', 'disabled']).and(by.type('_UIButtonBarButton'))));
+            return element(by.label(label).and(by.traits([buttonTrait, 'disabled']).and(by.type('_UIButtonBarButton'))));
         },
         /**
          * @param {string} label
          * @returns {Detox.Element} LoopKitUI.SetupButton
          */
         SetupButton(label) {
-            return element(by.label(label).and(by.traits(['button']).and(by.type('LoopKitUI.SetupButton'))));
+            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('LoopKitUI.SetupButton'))));
         },
         /**
          * @param {string} label
          * @returns {Detox.Element} disabled LoopKitUI.SetupButton
          */
         DisabledSetupButton(label) {
-            return element(by.label(label).and(by.traits(['button', 'disabled']).and(by.type('LoopKitUI.SetupButton'))));
+            return element(by.label(label).and(by.traits([buttonTrait, 'disabled']).and(by.type('LoopKitUI.SetupButton'))));
         },
         /**
          * @param {string} label
          * @returns {Detox.Element} accessibilityButton
          */
         Button(label) {
-            return element(by.label(label).and(by.traits(['button'])));
+            return element(by.label(label).and(by.traits([buttonTrait])));
         },
         Switch(label) {
-            return element(by.label(label).and(by.traits(['button']).and(by.type('UISwitch'))));
+            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwitch'))));
         },
         /**
          * @param {string} label
          */
         DisabledButton(label) {
-            return element(by.label(label).and(by.traits(['button', 'disabled'])));
+            return element(by.label(label).and(by.traits([buttonTrait, 'disabled'])));
         },
         /**
          * @param {string} theId
@@ -61,7 +66,7 @@ const match = {
          * @returns {Detox.Element} accessibilityBackButton
          */
         BackButton(label) {
-            return element(by.label(label).and(by.traits(['button']).and(by.type('UIAccessibilityBackButtonElement'))));
+            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UIAccessibilityBackButtonElement'))));
         },
         /**
          * @param {string} label
@@ -69,16 +74,16 @@ const match = {
          * @example await match.SwipeButton('some label').tap();
          */
         SwipeButton(label) {
-            return element(by.label(label).and(by.traits(['button']).and(by.type('UISwipeActionStandardButton'))));
+            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwipeActionStandardButton'))));
         },
         Label(label) {
-            return element(by.label(label).and(by.traits(['text'])));
+            return element(by.label(label).and(by.traits([staticTextTrait])));
         },
         Image(label) {
-            return element(by.label(label).and(by.traits(['image'])));
+            return element(by.label(label).and(by.traits([imageTrait])));
         },
         ImageAndId(label, theId) {
-            return element(by.label(label).and(by.traits(['image']).and(by.id(theId))));
+            return element(by.label(label).and(by.traits([imageTrait]).and(by.id(theId))));
         },
         Header(label) {
             return element(by.label(label).and(by.traits(['header'])));
@@ -88,14 +93,14 @@ const match = {
          * @returns {Detox.Element} labeled element
          */
         UILabel(label) {
-            return element(by.label(label).and(by.type('UILabel').and(by.traits(['text']))));
+            return element(by.label(label).and(by.type('UILabel').and(by.traits([staticTextTrait]))));
         },
         /**
          * @param {string} text
          * @returns {Detox.Element} accessibilityText
          */
         Text(text) {
-            return element(by.text(text).and(by.traits(['text'])));
+            return element(by.text(text).and(by.traits([staticTextTrait])));
         },
         /**
          * @summary returns Picker item(s) for given label and index
@@ -107,7 +112,7 @@ const match = {
             return element(
                 by.type('SwiftUI.AccessibilityNode')
                     .and(by.label(itemLabel)
-                        .and(by.traits(['text'])))
+                        .and(by.traits([staticTextTrait])))
             ).atIndex(pickerNumber);
         },
         QuantityPickerItem(itemLabel, pickerID) {
@@ -118,7 +123,7 @@ const match = {
                 return element(
                     by.type('SwiftUI.AccessibilityNode')
                         .and(by.label(itemLabel)
-                            .and(by.traits(['text'])
+                            .and(by.traits([staticTextTrait])
                                 .and(by.id(itemID))))
                         .withAncestor(by.id(pickerID))
                 ).atIndex(1);
@@ -126,7 +131,7 @@ const match = {
             return element(
                 by.type('SwiftUI.AccessibilityNode')
                     .and(by.label(itemLabel)
-                        .and(by.traits(['text'])))
+                        .and(by.traits([staticTextTrait])))
                     .withAncestor(by.id(pickerID))
             ).atIndex(1);
         },
@@ -145,14 +150,14 @@ const match = {
          * @returns {Detox.Element}
          */
         AlertLabel(label) {
-            return element(by.label(label).and(by.traits(['text'])).withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView')));
+            return element(by.label(label).and(by.traits([staticTextTrait])).withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView')));
         },
         /**
          * @summary returns alert action item
          * @returns {Detox.Element}
          */
         AlertButton(label) {
-            return element(by.label(label).and(by.traits(['button'])).and(by.type('_UIAlertControllerActionView')));
+            return element(by.label(label).and(by.traits([buttonTrait])).and(by.type('_UIAlertControllerActionView')));
         },
         /**
          * @summary returns alert if found
@@ -179,7 +184,7 @@ const match = {
          * @example await expect(match.loop.CompletionInfo()).toHaveLabel('50%')
          */
         CompletionInfo() {
-            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopUI.LoopCompletionHUDView')));
+            return element(by.type('UILabel').and(by.traits([staticTextTrait])).withAncestor(by.type('LoopUI.LoopCompletionHUDView')));
         },
         /**
         * @summary returns elements that relate to pump battery info
@@ -188,7 +193,7 @@ const match = {
         * @example await match.loop.BatteryLevelInfo()
         */
         BatteryLevelInfo() {
-            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopKitUI.BatteryLevelHUDView')));
+            return element(by.type('UILabel').and(by.traits([staticTextTrait])).withAncestor(by.type('LoopKitUI.BatteryLevelHUDView')));
         },
         /**
          * @summary returns elements that relate to pump reservoir info
@@ -198,7 +203,7 @@ const match = {
          * @example await match.loop.ReservoirVolumeInfo()
          */
         ReservoirVolumeInfo() {
-            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopKitUI.ReservoirVolumeHUDView')));
+            return element(by.type('UILabel').and(by.traits([staticTextTrait])).withAncestor(by.type('LoopKitUI.ReservoirVolumeHUDView')));
         },
         /**
          * @summary returns elements that relate to basal rate info
@@ -208,7 +213,7 @@ const match = {
          * @example await match.loop.BasalRateInfo()
          */
         BasalRateInfo() {
-            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopUI.BasalRateHUDView')));
+            return element(by.type('UILabel').and(by.traits([staticTextTrait])).withAncestor(by.type('LoopUI.BasalRateHUDView')));
         },
         /**
          * @summary returns elements that relate to blood glucose info
@@ -219,7 +224,7 @@ const match = {
          * @example await match.loop.GlucoseInfo()
          */
         GlucoseInfo() {
-            return element(by.type('UILabel').and(by.traits(['text'])).withAncestor(by.type('LoopUI.GlucoseHUDView')));
+            return element(by.type('UILabel').and(by.traits([staticTextTrait])).withAncestor(by.type('LoopUI.GlucoseHUDView')));
         },
     },
     /**
@@ -236,6 +241,9 @@ const match = {
     UITextField() {
         return element(by.type('UITextField'));
     },
+    Text(theText) {
+        return element(by.text(theText));
+    }
 };
 
 module.exports = match;

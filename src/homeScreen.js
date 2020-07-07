@@ -1,13 +1,22 @@
 const match = require('./match');
+
 const { homeSubScreen } = require('./homeScreen/index');
+const { SettingsScreen } = require('./settingsScreen');
+const { CarbEntryScreen } = require('./carbEntryScreen');
+const { BolusScreen } = require('./bolusScreen');
 
 class HomeScreen {
-    constructor(language) {
-        this.language = language;
+    constructor(language, settingsScreenDefaults) {
+
         this.glucoseScreen = new homeSubScreen.GlucoseScreen(language);
         this.activeInsulinScreen = new homeSubScreen.ActiveInsulinScreen(language);
         this.insulinDeliveryScreen = new homeSubScreen.InsulinDeliveryScreen(language);
         this.activeCarbohydratesScreen = new homeSubScreen.ActiveCarbohydratesScreen(language);
+        this.settingsScreen = new SettingsScreen(language, settingsScreenDefaults);
+        this.bolusScreen = new BolusScreen(language);
+        this.carbEntryScreen = new CarbEntryScreen(language);
+
+        this.language = language;
     }
     ActiveCarbohydratesLabel() {
         return match.accessible.Label(this.language.homeScreen.ActiveCarbohydrates);
@@ -48,6 +57,19 @@ class HomeScreen {
     async OpenGlucoseChart() {
         await this.GlucoseLabel().tap();
         return this.glucoseScreen;
+    }
+
+    async OpenSettingsScreen() {
+        await this.SettingsButton().tap();
+        return this.settingsScreen;
+    }
+    async OpenCarbEntryScreen() {
+        await this.AddMealButton().tap();
+        return this.carbEntryScreen;
+    }
+    async OpenBolusScreen() {
+        await this.BolusButton().tap();
+        return this.bolusScreen;
     }
     async CloseChart() {
         await match.accessible.BackButton(this.language.general.Status).tap();

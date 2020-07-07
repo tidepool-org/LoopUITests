@@ -12,8 +12,8 @@ var carbEntryScreen = (test) => {
     it('has a Disabled Continue Main Button', async () => {
         await expect(carbEntryScreen.DisabledContinueMainButton()).toExist();
     });
-    it('has a Disabled Continue Header Button', async () => {
-        await expect(carbEntryScreen.DisabledContinueHeaderButton()).toExist();
+    it('has a Disabled Continue Button', async () => {
+        await expect(carbEntryScreen.DisabledContinueButton()).toExist();
     });
     it('has a Absorption Time Message', async () => {
         await expect(carbEntryScreen.AbsorptionTimeMessage()).toExist();

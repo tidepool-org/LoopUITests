@@ -1,15 +1,16 @@
 var carbEntryScreen = (test) => {
-    it('open dialog', async () => {
-        await test.carbEntryScreen.Open();
-    });
-    it('cancel dialog', async () => {
-        await test.carbEntryScreen.Cancel();
+    var carbEntryScreen;
+    it('can open screen', async () => {
+        carbEntryScreen = await test.OpenCarbEntryScreen();
     });
     it('set carbs and save without a bolus', async () => {
-        await test.carbEntryScreen.Open();
-        await test.carbEntryScreen.SetCarbs('30');
-        await test.carbEntryScreen.ContinueToBolus();
-        await test.carbEntryScreen.SaveWithoutBolus();
+        await carbEntryScreen.SetCarbs(30);
+        await carbEntryScreen.ContinueToBolus();
+        await carbEntryScreen.SaveWithoutBolus();
+    });
+    it('can cancel open screen', async () => {
+        carbEntryScreen = await test.OpenCarbEntryScreen();
+        await carbEntryScreen.Cancel();
     });
 };
 

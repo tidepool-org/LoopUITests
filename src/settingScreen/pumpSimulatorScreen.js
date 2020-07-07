@@ -94,6 +94,18 @@ class PumpSimulatorScreen {
     ResumeDeliveryButton() {
         return match.accessible.Label(this.language.ResumeDelivery);
     }
+    DetectOcclusionButton() {
+        return match.accessible.Label(this.language.DetectOcclusion);
+    }
+    ResolveOcclusionButton() {
+        return match.accessible.Label(this.language.ResolveOcclusion);
+    }
+    CausePumpErrorButton() {
+        return match.accessible.Label(this.language.CausePumpError);
+    }
+    ResolvePumpErrorButton() {
+        return match.accessible.Label(this.language.ResolvePumpError);
+    }
     /**
      * @param {object} settings
      * @param {boolean} settings.errorOnBolus

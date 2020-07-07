@@ -12,7 +12,7 @@ describe('error test', () => {
             .withSettingDefault(config.settingDefault);
         await test.prepare();
     });
-    describe('pump battery', () => {
+    describe('pump', () => {
         errorsTests.pumpTests(test);
     });
 });
