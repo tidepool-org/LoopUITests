@@ -4,10 +4,10 @@ var carbEntryScreen = (test) => {
         carbEntryScreen = await test.OpenCarbEntryScreen();
     });
     it('has a Add Carb Entry Header', async () => {
-        await expect(carbEntryScreen.AddCarbEntryHeader()).toExist();
+        await expect(carbEntryScreen.Header()).toExist();
     });
-    it('has a Cancel Header Button', async () => {
-        await expect(carbEntryScreen.CancelHeaderButton()).toExist();
+    it('has a Cancel Button', async () => {
+        await expect(carbEntryScreen.CancelButton()).toExist();
     });
     it('has a Disabled Continue Main Button', async () => {
         await expect(carbEntryScreen.DisabledContinueMainButton()).toExist();

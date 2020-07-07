@@ -5,7 +5,7 @@ const { BaseScreen } = require('./baseScreen');
 class BolusScreen extends BaseScreen {
     constructor(language) {
         super({
-            headerLabel: language.bolusScreen.MealBolus,
+            headerLabel: language.bolusScreen.Bolus,
             openScreenLabel: language.bolusScreen.Bolus,
             screenTxt: language.bolusScreen,
             generalTxt: language.general,

@@ -163,6 +163,10 @@ class Test {
     async OpenBolusScreen() {
         return this.homeScreen.OpenBolusScreen();
     }
+
+    async OpenHomeScreen() {
+        return this.homeScreen;
+    }
 }
 
 module.exports = {

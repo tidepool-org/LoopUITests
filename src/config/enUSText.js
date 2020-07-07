@@ -18,6 +18,10 @@ var General = {
 };
 
 var HomeScreen = {
+    AddPump: 'Add Pump',
+    PumpError: 'Pump Error',
+    AddCGM: 'Add CGM',
+    CGMError: 'CGM Error',
     ActiveCarbohydrates: 'Active Carbohydrates',
     ActiveInsulin: 'Active Insulin',
     InsulinDelivery: 'Insulin Delivery',
@@ -186,6 +190,10 @@ var PumpSimulatorSettingsScreen = {
     DeletePump: 'Delete Pump',
     SuspendDelivery: 'Suspend Delivery',
     ResumeDelivery: 'Resume Delivery',
+    CausePumpError: 'Cause Pump Error',
+    ResolvePumpError: 'Resolve Pump Error',
+    DetectOcclusion: 'Detect Occlusion',
+    ResolveOcclusion: 'Resolve Occlusion',
 }
 
 var Alerts = {

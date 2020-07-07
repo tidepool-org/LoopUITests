@@ -103,8 +103,14 @@ class PumpSimulatorScreen {
     CausePumpErrorButton() {
         return match.accessible.Label(this.language.CausePumpError);
     }
+    async CausePumpError() {
+        return this.CausePumpErrorButton().tap();
+    }
     ResolvePumpErrorButton() {
         return match.accessible.Label(this.language.ResolvePumpError);
+    }
+    async ResolvePumpError() {
+        return this.ResolvePumpErrorButton().tap();
     }
     /**
      * @param {object} settings

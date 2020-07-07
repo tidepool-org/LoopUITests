@@ -21,9 +21,6 @@ var bolusScreen = (test) => {
     it('has a Cancel Header Button', async () => {
         await expect(bolusScreen.CancelButton()).toExist();
     });
-    it('has a continue Header Button', async () => {
-        await expect(bolusScreen.ContinueButton()).toExist();
-    });
     it('has to close the bolus screen', async () => {
         await bolusScreen.Cancel();
     });

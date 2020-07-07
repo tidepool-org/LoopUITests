@@ -15,8 +15,12 @@ class HomeScreen {
         this.settingsScreen = new SettingsScreen(language, settingsScreenDefaults);
         this.bolusScreen = new BolusScreen(language);
         this.carbEntryScreen = new CarbEntryScreen(language);
+        this.header = new homeSubScreen.Header(language);
 
         this.language = language;
+    }
+    Header() {
+        return this.header;
     }
     ActiveCarbohydratesLabel() {
         return match.accessible.Label(this.language.homeScreen.ActiveCarbohydrates);
@@ -58,7 +62,6 @@ class HomeScreen {
         await this.GlucoseLabel().tap();
         return this.glucoseScreen;
     }
-
     async OpenSettingsScreen() {
         await this.SettingsButton().tap();
         return this.settingsScreen;
