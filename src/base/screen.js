@@ -1,6 +1,6 @@
-const match = require('./match');
+const match = require('../match');
 
-class BaseScreen {
+class Screen {
     /**
      * @param {object} parentScreen
      * @param {string} parentScreen.headerLabel
@@ -38,5 +38,5 @@ class BaseScreen {
 }
 
 module.exports = {
-    BaseScreen
+    Screen
 };

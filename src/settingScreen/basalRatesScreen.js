@@ -1,8 +1,7 @@
 const action = require('../action');
+const { base } = require('../base/index');
 
-const { BaseEntriesScreen } = require('./baseEntriesScreen');
-
-class BasalRatesScreen extends BaseEntriesScreen {
+class BasalRatesScreen extends base.EntriesScreen {
     constructor(language, config) {
         super(language, config, {
             HeaderLabel: language.basalRatesSettingScreen.BasalRates,

@@ -1,6 +1,6 @@
 const match = require('../match');
 
-class BaseEntriesScreen {
+class EntriesScreen {
     constructor(language, config, parentScreen) {
         this.language = language;
         this.config = config;
@@ -66,5 +66,5 @@ class BaseEntriesScreen {
 }
 
 module.exports = {
-    BaseEntriesScreen
+    EntriesScreen
 };

@@ -1,9 +1,8 @@
 const match = require('../match');
 const action = require('../action');
+const { base } = require('../base/index');
 
-const { BaseEntryScreen } = require('./baseEntryScreen');
-
-class SuspendThresholdScreen extends BaseEntryScreen {
+class SuspendThresholdScreen extends base.EntryScreen {
     constructor(language, config) {
         super(language, {
             HeaderLabel: language.suspendThresholdSettingScreen.SuspendThreshold,

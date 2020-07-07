@@ -1,9 +1,9 @@
 const action = require('../action');
-const { BaseEntriesScreen } = require('./baseEntriesScreen');
+const { base } = require('../base/index');
 
 const pickerID = 'quantity_picker';
 
-class InsulinSensitivitiesScreen extends BaseEntriesScreen {
+class InsulinSensitivitiesScreen extends base.EntriesScreen {
     constructor(language, config) {
         super(language, config, {
             HeaderLabel: language.settingsScreen.InsulinSensitivities,

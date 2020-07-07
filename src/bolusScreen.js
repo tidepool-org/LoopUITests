@@ -1,8 +1,7 @@
 const match = require('./match');
+const { base } = require('./base/index');
 
-const { BaseScreen } = require('./baseScreen');
-
-class BolusScreen extends BaseScreen {
+class BolusScreen extends base.Screen {
     constructor(language) {
         super({
             headerLabel: language.bolusScreen.Bolus,
