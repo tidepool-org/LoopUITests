@@ -3,8 +3,8 @@ var bolusScreen = (test) => {
     it('has to open the bolus screen', async () => {
         bolusScreen = await test.OpenBolusScreen();
     });
-    it('has a Bolus Header', async () => {
-        await expect(bolusScreen.BolusHeader()).toExist();
+    it('has a Header', async () => {
+        await expect(bolusScreen.Header()).toExist();
     });
     it('has a Deliver Button', async () => {
         await expect(bolusScreen.DeliverButton()).toExist();
@@ -19,10 +19,10 @@ var bolusScreen = (test) => {
         await expect(bolusScreen.EnteredLabel()).toExist();
     });
     it('has a Cancel Header Button', async () => {
-        await expect(bolusScreen.CancelHeaderButton()).toExist();
+        await expect(bolusScreen.CancelButton()).toExist();
     });
     it('has to close the bolus screen', async () => {
-        await bolusScreen.Cancel();
+        await bolusScreen.CancelAndClose();
     });
 };
 

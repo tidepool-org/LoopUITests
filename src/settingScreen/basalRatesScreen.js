@@ -1,13 +1,14 @@
 const action = require('../action');
+const { base } = require('../base/index');
 
-const { BaseEntriesScreen } = require('./baseEntriesScreen');
-
-class BasalRatesScreen extends BaseEntriesScreen {
+class BasalRatesScreen extends base.EntriesScreen {
     constructor(language, config) {
-        super(language, config, {
-            HeaderLabel: language.settingsScreen.BasalRatesScreen.BasalRates,
-            InfoLabel: language.settingsScreen.BasalRatesScreen.BasalRatesInfo,
-        });
+        super({
+            screenTxt: language.settingsScreen.BasalRatesScreen,
+            generalTxt: language.general,
+            openLabel: language.settingsScreen.BasalRatesScreen.Header,
+            backLabel: language.general.Cancel,
+        }, config);
         this.unitsLabel = language.settingsScreen.BasalRatesScreen.Units;
     }
     /**

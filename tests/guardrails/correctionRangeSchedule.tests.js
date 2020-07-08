@@ -5,9 +5,6 @@ var correctionRangeSchedule = (test) => {
         screen = await test.settingsScreen.OpenCorrectionRangeScreen();
         screenLimit = test.limits.correctionRange;
     });
-    afterAll(async () => {
-        await screen.Cancel();
-    });
     it('can set max units at limit', async () => {
         await screen.Add();
         await screen.ApplyOne({
@@ -94,6 +91,9 @@ var correctionRangeSchedule = (test) => {
         });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 5 })).toBeVisible();
+    });
+    it('can close screen', async () => {
+        await screen.CancelAndClose();
     });
 };
 

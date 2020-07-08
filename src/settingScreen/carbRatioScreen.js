@@ -1,13 +1,14 @@
 const action = require('../action');
+const { base } = require('../base/index');
 
-const { BaseEntriesScreen } = require('./baseEntriesScreen');
-
-class CarbRatioScreen extends BaseEntriesScreen {
+class CarbRatioScreen extends base.EntriesScreen {
     constructor(language, config) {
-        super(language, config, {
-            HeaderLabel: language.settingsScreen.CarbRatioScreen.CarbRatios,
-            InfoLabel: language.settingsScreen.CarbRatioScreen.CarbRatioInfo,
-        });
+        super({
+            screenTxt: language.settingsScreen.CarbRatioScreen,
+            generalTxt: language.general,
+            openLabel: language.settingsScreen.CarbRatioScreen.Header,
+            backLabel: language.general.Cancel,
+        }, config);
     }
     _unitParts(carbGramsPerInsulinUnit) {
         return String(carbGramsPerInsulinUnit).split('.');

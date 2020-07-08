@@ -6,9 +6,6 @@ var suspendThreshold = (test) => {
         screenLimit = test.limits.suspendThreshold;
         await screen.OpenPicker();
     });
-    afterAll(async () => {
-        await screen.Cancel();
-    });
     it('can set max units with warning', async () => {
         await screen.SwipePickerToMaxValue();
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
@@ -44,6 +41,9 @@ var suspendThreshold = (test) => {
             current: { value: screenLimit.min.warning },
         });
         await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
+    });
+    it('can close screen', async () => {
+        await screen.CancelAndClose();
     });
 };
 

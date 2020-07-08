@@ -1,16 +1,23 @@
 const match = require('../match');
 const action = require('../action');
+const { base } = require('../base/index');
 
-const { BaseEntryScreen } = require('./baseEntryScreen');
-
-class SuspendThresholdScreen extends BaseEntryScreen {
+class SuspendThresholdScreen extends base.EntryScreen {
     constructor(language, config) {
-        super(language, {
-            HeaderLabel: language.settingsScreen.SuspendThresholdScreen.SuspendThreshold,
-            InfoLabel: language.settingsScreen.SuspendThresholdScreen.SuspendThresholdInfo,
+        super({
+            screenTxt: language.settingsScreen.SuspendThresholdScreen,
+            generalTxt: language.general,
+            openLabel: language.settingsScreen.SuspendThresholdScreen.Header,
+            backLabel: language.general.Cancel,
         });
         this.bgUnitsLabel = language.settingsScreen.SuspendThresholdScreen.BGUnits;
         this.config = config;
+    }
+    /**
+     * @override so we access the correct CancelButton
+     */
+    async CancelAndClose() {
+        return this.CancelButton().atIndex(0).tap();
     }
     async OpenPicker() {
         await match.accessible.Label(this.bgUnitsLabel).atIndex(0).tap();

@@ -4,6 +4,7 @@
   "scripts": {
     "test": "jest",
     "all-test": "detox test -c ios.sim.debug",
+    "error-test": "detox test e2e/error -c ios.sim.debug",
     "smoke-test": "detox test e2e/smoke -c ios.sim.debug",
     "functional-test": "detox test e2e/functional -c ios.sim.debug",
     "guardrails-test": "detox test e2e/guardrails -c ios.sim.debug",
@@ -11,7 +12,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "detox": "^16.8.1",
+    "detox": "^16.9.2",
     "jest": "^25.5.4",
     "jest-junit": "^10.0.0"
   },

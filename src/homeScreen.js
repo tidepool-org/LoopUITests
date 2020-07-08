@@ -1,13 +1,26 @@
 const match = require('./match');
+
 const { homeSubScreen } = require('./homeScreen/index');
+const { SettingsScreen } = require('./settingsScreen');
+const { CarbEntryScreen } = require('./carbEntryScreen');
+const { BolusScreen } = require('./bolusScreen');
 
 class HomeScreen {
-    constructor(language) {
-        this.language = language;
+    constructor(language, settingsScreenDefaults) {
+
         this.glucoseScreen = new homeSubScreen.GlucoseScreen(language);
         this.activeInsulinScreen = new homeSubScreen.ActiveInsulinScreen(language);
         this.insulinDeliveryScreen = new homeSubScreen.InsulinDeliveryScreen(language);
         this.activeCarbohydratesScreen = new homeSubScreen.ActiveCarbohydratesScreen(language);
+        this.settingsScreen = new SettingsScreen(language, settingsScreenDefaults);
+        this.bolusScreen = new BolusScreen(language);
+        this.carbEntryScreen = new CarbEntryScreen(language);
+        this.header = new homeSubScreen.Header(language);
+
+        this.language = language;
+    }
+    Header() {
+        return this.header;
     }
     ActiveCarbohydratesLabel() {
         return match.accessible.Label(this.language.homeScreen.ActiveCarbohydrates);
@@ -31,7 +44,7 @@ class HomeScreen {
         return match.accessible.Button(this.language.carbEntryScreen.AddMeal);
     }
     BolusButton() {
-        return match.accessible.Button(this.language.bolusScreen.Bolus);
+        return match.accessible.Button(this.language.bolusScreen.Header);
     }
     async OpenActiveCarbohydratesChart() {
         await this.ActiveCarbohydratesLabel().tap();
@@ -49,6 +62,18 @@ class HomeScreen {
         await this.GlucoseLabel().tap();
         return this.glucoseScreen;
     }
+    async OpenSettingsScreen() {
+        await this.SettingsButton().tap();
+        return this.settingsScreen;
+    }
+    async OpenCarbEntryScreen() {
+        await this.AddMealButton().tap();
+        return this.carbEntryScreen;
+    }
+    async OpenBolusScreen() {
+        await this.BolusButton().tap();
+        return this.bolusScreen;
+    }
     async CloseChart() {
         await match.accessible.BackButton(this.language.general.Status).tap();
     }
@@ -60,22 +85,22 @@ class HomeScreen {
     }
     async ExpectLoopStatusCarbsAlert() {
         await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(this.language.general.Alerts.MissingCarbEffects)).toExist();
+        await expect(match.accessible.AlertLabel(this.language.general.Alert.MissingCarbEffects)).toExist();
         await match.accessible.Button(this.language.general.OK).tap();
     }
     async ExpectLoopStatusInsulinAlert() {
         await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(this.language.general.Alerts.MissingInsulinEffects)).toExist();
+        await expect(match.accessible.AlertLabel(this.language.general.Alert.MissingInsulinEffects)).toExist();
         await match.accessible.Button(this.language.general.OK).tap();
     }
     async ExpectLoopStatusConfigurationAlert() {
         await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(this.language.general.Alerts.ConfigurationError)).toExist();
+        await expect(match.accessible.AlertLabel(this.language.general.Alert.ConfigurationError)).toExist();
         await match.accessible.Button(this.language.general.OK).tap();
     }
     async ExpectLoopStatusGlucoseDataAlert() {
         await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(this.language.general.Alerts.MissingGlucoseData)).toExist();
+        await expect(match.accessible.AlertLabel(this.language.general.Alert.MissingGlucoseData)).toExist();
         await match.accessible.Button(this.language.general.OK).tap();
     }
     async ExpectSuccessfulLoop() {

@@ -6,7 +6,10 @@ describe('smoke test', () => {
     var config = new Config();
     it('prepare test', async () => {
         config = await config.prepare();
-        test = test.withLanguage(config.text).withSettingDefault(config.settingDefault).withScreenDefaults(config.screenDefaults);
+        test = test.withLanguage(config.text)
+            .withSettingDefault(config.settingDefault)
+            .withScreenDefaults(config.screenDefaults)
+            .withStartScreen('home');
         await test.prepare();
     });
     describe('accessibility', () => {
@@ -34,8 +37,7 @@ describe('smoke test', () => {
         describe('bolus screen', () => {
             accessibilityTests.bolusScreen(test);
         });
-        //TODO: add back when guardrails work is complete
-        describe.skip('delivery limits settings screen', () => {
+        describe('delivery limits settings screen', () => {
             accessibilityTests.settingsDeliveryLimitsScreen(test);
         });
         describe('insulin sensitivities settings screen', () => {

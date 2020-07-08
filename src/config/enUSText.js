@@ -9,25 +9,28 @@ var General = {
     Edit: 'Edit',
     Status: 'Status',
     OK: 'OK',
-    Plus: 'plus',
-    TimeSlots: [
-        '12:00 AM', '12:30 AM', '1:00 AM', '1:30 AM', '2:00 AM', '2:30 AM', '3:00 AM', '3:30 AM', '4:00 AM', '4:30 AM', '5:00 AM', '5:30 AM', '6:00 AM', '6:30 AM', '7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
-        '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM'
-    ],
-    Alerts: {
+    ButtonLabel: {
+        Plus: 'plus',
+        InfoCircle: 'info.circle',
+    },
+    Alert: {
         ExclamationMark: 'exclamationmark.triangle.fill',
         MissingCarbEffects: 'Missing Data: Carb Effects',
         MissingInsulinEffects: 'Missing Data: Insulin Effects',
         ConfigurationError: 'Configuration Error: Check Settings',
         MissingGlucoseData: 'Missing Data: Glucose Data Not Available'
     },
-    ButtonLabel: {
-        Plus: 'plus',
-        InfoCircle: 'info.circle',
-    }
+    TimeSlot: [
+        '12:00 AM', '12:30 AM', '1:00 AM', '1:30 AM', '2:00 AM', '2:30 AM', '3:00 AM', '3:30 AM', '4:00 AM', '4:30 AM', '5:00 AM', '5:30 AM', '6:00 AM', '6:30 AM', '7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
+        '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM'
+    ]
 };
 
 var HomeScreen = {
+    AddPump: 'Add Pump',
+    PumpError: 'Pump Error',
+    AddCGM: 'Add CGM',
+    CGMError: 'CGM Error',
     ActiveCarbohydrates: 'Active Carbohydrates',
     ActiveInsulin: 'Active Insulin',
     InsulinDelivery: 'Insulin Delivery',
@@ -65,9 +68,9 @@ var HomeScreen = {
 };
 
 var CarbEntryScreen = {
+    Header: 'Add Carb Entry',
     AddMeal: 'Add Meal',
     SaveWithoutBolusing: 'Save without Bolusing',
-    AddCarbEntry: 'Add Carb Entry',
     AmountConsumed: 'Amount Consumed',
     Date: 'Date',
     FoodType: 'Food Type',
@@ -76,7 +79,7 @@ var CarbEntryScreen = {
 };
 
 var BolusScreen = {
-    Bolus: 'Bolus',
+    Header: 'Bolus',
     Deliver: 'Deliver',
     Recommended: 'Recommended',
     Entered: 'Entered'
@@ -102,13 +105,8 @@ var SettingsScreen = {
     AddService: 'Add Service',
     Simulator: 'Simulator',
     IssueReport: 'Issue Report',
-    BasalRates: 'Basal Rates',
     SaveToSimulator: 'Save to simulator',
     DeliveryLimits: 'Delivery Limits',
-    InsulinSensitivities: 'Insulin Sensitivities',
-    InsulinSensitivityInfo: 'Your insulin sensitivity factor (ISF) is the drop in glucose expected from one unit of insulin.',
-    CorrectionRange: 'Correction Range',
-    CorrectionRangeInfo: 'The app adjusts insulin delivery in an effort to bring your glucose into your correction range.',
     InsulinModel: 'Insulin Model',
     ClosedLoop: 'Closed Loop',
     AddCGM: 'Add CGM',
@@ -119,7 +117,8 @@ var SettingsScreen = {
     DeletePumpData: 'Delete Pump Data',
     PreMeal: 'Pre-Meal',
     DeliveryLimitsScreen: {
-        DeliveryLimits: 'Delivery Limits',
+        Header: 'Delivery Limits',
+        Info: 'Maximum Basal ......',
         MaxBasalRate: 'Maximum Basal Rate',
         MaxBasalRateInfo: 'Maximum Basal ......',
         BasalRateUnits: 'U/hr',
@@ -127,15 +126,23 @@ var SettingsScreen = {
         MaxBolusInfo: 'Maximum Bolus .....',
         BolusUnits: 'U',
     },
+    InsulinSensitivitiesScreen: {
+        Header: 'Insulin Sensitivities',
+        Info: 'Your insulin sensitivity factor (ISF) is the drop in glucose expected from one unit of insulin.',
+    },
+    CorrectionRangeScreen: {
+        Header: 'Correction Range',
+        Info: 'The app adjusts insulin delivery in an effort to bring your glucose into your correction range.',
+    },
     BasalRatesScreen: {
-        BasalRates: 'Basal Rates',
-        BasalRatesInfo: 'Your basal rate of insulin is the number of units per hour that you want to use to cover your background insulin needs.',
+        Header: 'Basal Rates',
+        Info: 'Your basal rate of insulin is the number of units per hour that you want to use to cover your background insulin needs.',
         Units: 'U/hr',
     },
     SuspendThresholdScreen: {
         BGUnits: 'mg/dL',
-        SuspendThreshold: 'Suspend Threshold',
-        SuspendThresholdInfo: 'When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/h and will not recommend a bolus.',
+        Header: 'Suspend Threshold',
+        Info: 'When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/h and will not recommend a bolus.',
     },
     CGMSimulatorScreen: {
         CGMSettings: 'CGM Settings',
@@ -184,8 +191,8 @@ var SettingsScreen = {
         }
     },
     CarbRatioScreen: {
-        CarbRatios: 'Carb Ratios',
-        CarbRatioInfo: 'Your carb ratio is the number of grams of carbohydrate covered by one unit of insulin.',
+        Header: 'Carb Ratios',
+        Info: 'Your carb ratio is the number of grams of carbohydrate covered by one unit of insulin.',
     },
     PumpSimulatorScreen: {
         PumpSettings: 'Pump Settings',
@@ -198,6 +205,10 @@ var SettingsScreen = {
         DeletePump: 'Delete Pump',
         SuspendDelivery: 'Suspend Delivery',
         ResumeDelivery: 'Resume Delivery',
+        CausePumpError: 'Cause Pump Error',
+        ResolvePumpError: 'Resolve Pump Error',
+        DetectOcclusion: 'Detect Occlusion',
+        ResolveOcclusion: 'Resolve Occlusion',
     }
 };
 

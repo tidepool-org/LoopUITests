@@ -1,15 +1,22 @@
 const action = require('../action');
 const match = require('../match');
+const { base } = require('../base/index');
 
-const { BaseEntryScreen } = require('./baseEntryScreen');
-
-class DeliveryLimitsScreen extends BaseEntryScreen {
+class DeliveryLimitsScreen extends base.EntryScreen {
     constructor(language, config) {
-        super(language, {
-            HeaderLabel: language.settingsScreen.DeliveryLimitsScreen.DeliveryLimits,
-            InfoLabel: language.settingsScreen.DeliveryLimitsScreen.MaxBasalRateInfo,
+        super({
+            screenTxt: language.settingsScreen.DeliveryLimitsScreen,
+            generalTxt: language.general,
+            openLabel: language.settingsScreen.SuspendThresholdScreen.Header,
+            backLabel: language.general.Cancel,
         });
         this.config = config;
+    }
+    /**
+     * @override so we access the correct CancelButton
+     */
+    CancelButton() {
+        return match.accessible.ButtonBarButton(this.generalTxt.Cancel);
     }
     _limitParts(limitAmount) {
         return String(limitAmount).split('.');

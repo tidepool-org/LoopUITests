@@ -9,7 +9,8 @@ describe('functional test', () => {
         test = test.withLanguage(config.text)
             .withLimits(config.limits)
             .withScreenDefaults(config.screenDefaults)
-            .withSettingDefault(config.settingDefault);
+            .withSettingDefault(config.settingDefault)
+            .withStartScreen('home');
         await test.prepare();
     });
     describe('home screen', () => {

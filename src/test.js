@@ -1,6 +1,3 @@
-const { SettingsScreen } = require('./settingsScreen');
-const { CarbEntryScreen } = require('./carbEntryScreen');
-const { BolusScreen } = require('./bolusScreen');
 const { HomeScreen } = require('./homeScreen');
 const exec = require('child_process').exec;
 const match = require('./match');
@@ -67,11 +64,11 @@ class Test {
                 break;
             case screenName.bolus:
                 await this.settingsScreen.Close();
-                await this.bolusScreen.Open();
+                await this.OpenBolusScreen();
                 break;
             case screenName.carbEntry:
                 await this.settingsScreen.Close();
-                await this.carbEntryScreen.Open();
+                await this.OpenCarbEntryScreen();
                 break;
             default:
                 await this.settingsScreen.Close();
@@ -100,10 +97,8 @@ class Test {
                 this.startScreen = screenName.home;
             }
         }
-        this.settingsScreen = new SettingsScreen(this.language, this.screenDefaults);
-        this.homeScreen = new HomeScreen(this.language);
-        this.bolusScreen = new BolusScreen(this.language);
-        this.carbEntryScreen = new CarbEntryScreen(this.language);
+
+        this.homeScreen = new HomeScreen(this.language, this.screenDefaults);
 
         await device.launchApp({
             newInstance: true,
@@ -117,6 +112,8 @@ class Test {
                 this.settingsToApply = this._filterSettings(this.settingsToApply, [settingType.CGMSimulatorSettings, settingType.AddCGMSimulator, settingType.AddPumpSimulator]);
             }
         }
+
+        this.settingsScreen = await this.OpenSettingsScreen();
 
         if (this.settingsToApply) {
             await this.OpenSettingsScreen();
@@ -156,18 +153,19 @@ class Test {
     }
 
     async OpenSettingsScreen() {
-        await this.settingsScreen.Open();
-        return this.settingsScreen;
+        return this.homeScreen.OpenSettingsScreen();
     }
 
     async OpenCarbEntryScreen() {
-        await this.carbEntryScreen.Open();
-        return this.carbEntryScreen;
+        return this.homeScreen.OpenCarbEntryScreen();
     }
 
     async OpenBolusScreen() {
-        await this.bolusScreen.Open();
-        return this.bolusScreen;
+        return this.homeScreen.OpenBolusScreen();
+    }
+
+    async OpenHomeScreen() {
+        return this.homeScreen;
     }
 }
 

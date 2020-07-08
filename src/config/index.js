@@ -10,7 +10,7 @@ class Config {
                 maxBasalRate: limits.delivery.basalRate.max.noWarning,
             },
             BasalRates: [{
-                time: text.general.TimeSlots[0],
+                time: text.general.TimeSlot[0],
                 unitsPerHour: limits.basalRates.max.noWarning
             }],
             SuspendThreshold: {
@@ -18,15 +18,15 @@ class Config {
             },
             InsulinModel: text.settingsScreen.InsulinModelScreen.Model.RapidAdults,
             CarbRatios: [{
-                time: text.general.TimeSlots[0],
+                time: text.general.TimeSlot[0],
                 carbGramsPerInsulinUnit: limits.insulinCarbRatio.max.noWarning
             }],
             InsulinSensitivities: [{
-                time: text.general.TimeSlots[0],
+                time: text.general.TimeSlot[0],
                 bgValuePerInsulinUnit: limits.insulinSensitivities.max.noWarning,
             }],
             CorrectionRanges: [{
-                time: text.general.TimeSlots[0],
+                time: text.general.TimeSlot[0],
                 min: limits.correctionRange.min.noWarning,
                 max: limits.correctionRange.max.noWarning,
             }],

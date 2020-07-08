@@ -1,63 +1,53 @@
 const match = require('./match');
+const { base } = require('./base/index');
 
-class BolusScreen {
+class BolusScreen extends base.Screen {
     constructor(language) {
-        this.language = language.bolusScreen;
-        this.language.general = language.general;
+        super({
+            openScreenLabel: language.bolusScreen.Header,
+            screenTxt: language.bolusScreen,
+            generalTxt: language.general,
+        });
     }
-    async Open() {
-        try {
-            //assume we are starting from the open screen
-            await match.accessible.Button(this.language.Bolus).tap();
-        } catch (err) { } //catch and continue
-    }
-    async Cancel() {
-        await this.CancelHeaderButton().tap();
-    }
-    CancelHeaderButton() {
-        return match.accessible.ButtonBarButton(this.language.general.Cancel);
+    /**
+     * @override so we access the correct CancelButton
+     */
+    CancelButton() {
+        return match.accessible.ButtonBarButton(this.generalTxt.Cancel);
     }
     async Deliver() {
         await this.DeliverButton().tap();
     }
     DeliverButton() {
-        return match.accessible.Button(this.language.Deliver);
+        return match.accessible.Button(this.screenTxt.Deliver);
     }
     DisabledDeliverButton() {
-        return match.accessible.DisabledButton(this.language.Deliver);
-    }
-    BolusHeader() {
-        return match.accessible.Header(this.language.Bolus);
+        return match.accessible.DisabledButton(this.screenTxt.Deliver);
     }
     BolusLabel() {
-        return match.accessible.Label(this.language.Bolus);
+        return match.accessible.Label(this.screenTxt.Header);
     }
     EnteredLabel() {
-        return match.accessible.Label(this.language.Entered);
+        return match.accessible.Label(this.screenTxt.Entered);
     }
     RecommendedLabel() {
-        return match.accessible.Label(this.language.Recommended);
+        return match.accessible.Label(this.screenTxt.Recommended);
     }
-    /**
-     * @example await bolus.ExpectCannotDeliverBolus();
-     */
     async ExpectCannotDeliverBolus() {
-        await expect(match.accessible.DisabledButton(this.language.Deliver)).toExist();
+        await expect(match.accessible.DisabledButton(this.screenTxt.Deliver)).toExist();
     }
-    /**
-     * @param {number} units
-     * @example await bolus.SetBolusAmount(10.5);
-     */
     async SetBolusAmount(units) {
         await match.UITextField().clearText();
-        await match.UITextField().typeText(units);
+        await match.UITextField().typeText(String(units));
+        await match.UITextField().tapReturnKey();
     }
-    /**
-     * @example await bolus.SetAuthentication();
-     */
-    async SetAuthentication() {
+    AuthenticationLabel() {
+        return match.Text('Authenticate to bolus');
+    }
+    async SetAuthentication(passcode) {
         await match.UITextField().clearText();
-        await match.UITextField().typeText(units);
+        await match.UITextField().typeText(String(passcode));
+        await match.UITextField().tapReturnKey();
     }
 };
 
