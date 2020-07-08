@@ -1,134 +1,75 @@
 const match = require('./match');
+const { base } = require('./base/index');
 
-class CarbEntryScreen {
+class CarbEntryScreen extends base.Screen {
     constructor(language) {
-        this.language = language.carbEntryScreen;
-        this.language.general = language.general;
+        super({
+            openLabel: language.carbEntryScreen.AddMeal,
+            screenText: language.carbEntryScreen,
+            generalText: language.general,
+        });
     }
     /**
-     * @example await carbs.Open();
+     * @override so we access the correct CancelButton
      */
-    async Open() {
-        try {
-            //assume we are starting from the open screen
-            await match.accessible.Button(this.language.AddMeal).tap();
-        } catch (err) { } //catch and continue
-    }
-    /**
-     * @example await carbs.Cancel();
-     */
-    async Cancel() {
-        await this.CancelHeaderButton().tap();
-    }
-    CancelHeaderButton() {
-        return match.accessible.ButtonBarButton(this.language.general.Cancel);
-    }
-    AddCarbEntryHeader() {
-        return match.accessible.Header(this.language.AddCarbEntry);
+    CancelButton() {
+        return match.accessible.ButtonBarButton(this.generalText.Cancel);
     }
     AmountConsumedLabel() {
-        return match.accessible.Label(this.language.AmountConsumed);
+        return match.accessible.Label(this.screenText.AmountConsumed);
     }
     DateLabel() {
-        return match.accessible.Label(this.language.Date);
+        return match.accessible.Label(this.screenText.Date);
     }
     FoodTypeLabel() {
-        return match.accessible.Label(this.language.FoodType);
+        return match.accessible.Label(this.screenText.FoodType);
     }
     AbsorptionTimeLabel() {
-        return match.accessible.Label(this.language.AbsorptionTime);
+        return match.accessible.Label(this.screenText.AbsorptionTime);
     }
-    /**
-     * @example  carbs.ContinueButton();
-     */
-    ContinueHeaderButton() {
-        return match.accessible.ButtonBarButton(this.language.general.Continue);
+    DisabledContinueButton() {
+        return match.accessible.DisabledButtonBarButton(this.generalText.Continue);
     }
-    /**
-     * @example  carbs.DisabledContinueButton();
-     */
-    DisabledContinueHeaderButton() {
-        return match.accessible.DisabledButtonBarButton(this.language.general.Continue);
-    }
-    /**
-     * @example  carbs.ContinueMainButton();
-     */
     ContinueMainButton() {
-        return match.accessible.SetupButton(this.language.general.Continue);
+        return match.accessible.SetupButton(this.generalText.Continue);
     }
-    /**
-     * @example  carbs.DisabledContinueMainButton();
-     */
     DisabledContinueMainButton() {
-        return match.accessible.DisabledSetupButton(this.language.general.Continue);
+        return match.accessible.DisabledSetupButton(this.generalText.Continue);
     }
-    /**
-     * @example await carbs.ContinueToBolus();
-     */
     async ContinueToBolus() {
-        await this.ContinueHeaderButton().tap();
+        await this.Continue();
     }
-    /**
-     * @example carbs.SaveWithoutBolusButton();
-     */
     SaveWithoutBolusButton() {
-        return match.accessible.Button(this.language.SaveWithoutBolusing);
+        return match.accessible.Button(this.screenText.SaveWithoutBolusing);
     }
-    /**
-     * @example await carbs.SaveWithoutBolus();
-     */
     async SaveWithoutBolus() {
         await this.SaveWithoutBolusButton().tap();
     }
-    /**
-     * @param {string} glucoseValueAndUnits
-     * @example await carbs.ExpectPredictedGlucoseWarning('110 mg/dL');
-     */
     async ExpectPredictedGlucoseWarning(glucoseValueAndUnits) {
         const predictedGlucoseWarning = `⚠ Predicted glucose of ${glucoseValueAndUnits} is below your suspend threshold setting.`;
         await expect(match.accessible.Label(predictedGlucoseWarning)).toExist();
     }
-    /**
-     * @example carbs.AbsorptionTimeMessage();
-     */
     AbsorptionTimeMessage() {
-        return match.accessible.Label(this.language.AbsorptionMessage);
+        return match.accessible.Label(this.screenText.AbsorptionMessage);
     }
-    /**
-     * @example await carbs.ExpectAbsorptionTimeMessage();
-     */
     async ExpectAbsorptionTimeMessage() {
         await expect(this.AbsorptionTimeMessage()).toExist();
     }
-    /**
-     * @summary add a meal entry
-     * @param {string} amount
-     * @example await carbs.SetCarbs('30');
-     */
     async SetCarbs(amount) {
-        //TODO: we need a better way to find this
         await match.UITextField().clearText();
-        await match.UITextField().typeText(amount);
+        await match.UITextField().typeText(String(amount));
+        await match.UITextField().tapReturnKey();
     }
-    /**
-     * @summary set the date / time for the given carbs
-     * @param {string} date
-     * @example await carbs.SetDate('30');
-     */
     async SetDate(amount) {
-        //TODO: we need a better way to find this
         await match.UITextField().clearText();
-        await match.UITextField().typeText(amount);
+        await match.UITextField().typeText(String(amount));
+        await match.UITextField().tapReturnKey();
+
     }
-    /**
-     * @summary set the absortion time for the given carbs
-     * @param {string} hours
-     * @example await carbs.SetAbsortionTime('1');
-     */
     async SetAbsortionTime(hours) {
-        //TODO: we need a better way to find this
         await match.UITextField().clearText();
-        await match.UITextField().typeText(amount);
+        await match.UITextField().typeText(String(hours));
+        await match.UITextField().tapReturnKey();
     }
 }
 

@@ -8,7 +8,7 @@ var settingsBasalRatesScreen = (test) => {
         screen = await settingsScreen.OpenBasalRatesScreen();
     });
     afterAll(async () => {
-        await screen.Cancel();
+        await screen.CancelAndClose();
         await settingsScreen.RemovePumpSimulator();
         await settingsScreen.Close();
     });

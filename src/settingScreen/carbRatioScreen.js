@@ -1,13 +1,14 @@
 const action = require('../action');
+const { base } = require('../base/index');
 
-const { BaseEntriesScreen } = require('./baseEntriesScreen');
-
-class CarbRatioScreen extends BaseEntriesScreen {
+class CarbRatioScreen extends base.EntriesScreen {
     constructor(language, config) {
-        super(language, config, {
-            HeaderLabel: language.carbRatioSettingsScreen.CarbRatios,
-            InfoLabel: language.carbRatioSettingsScreen.CarbRatioInfo,
-        });
+        super({
+            screenText: language.settingsScreen.CarbRatioScreen,
+            generalText: language.general,
+            openLabel: language.settingsScreen.CarbRatioScreen.Header,
+            backLabel: language.general.Cancel,
+        }, config);
     }
     /**
      * @param {Object} ratio

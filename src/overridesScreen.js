@@ -10,7 +10,7 @@ class OverridesScreen {
             await match.accessible.Button(this.language.overridesScreen.WorkoutTargets).tap();
         } catch (err) { } //catch and continue
     }
-    async Cancel() {
+    async CancelAndClose() {
         await this.CancelHeaderButton().tap();
     }
     async Add() {

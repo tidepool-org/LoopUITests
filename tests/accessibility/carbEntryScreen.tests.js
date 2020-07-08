@@ -4,16 +4,16 @@ var carbEntryScreen = (test) => {
         carbEntryScreen = await test.OpenCarbEntryScreen();
     });
     it('has a Add Carb Entry Header', async () => {
-        await expect(carbEntryScreen.AddCarbEntryHeader()).toExist();
+        await expect(carbEntryScreen.Header()).toExist();
     });
-    it('has a Cancel Header Button', async () => {
-        await expect(carbEntryScreen.CancelHeaderButton()).toExist();
+    it('has a Cancel Button', async () => {
+        await expect(carbEntryScreen.CancelButton()).toExist();
     });
     it('has a Disabled Continue Main Button', async () => {
         await expect(carbEntryScreen.DisabledContinueMainButton()).toExist();
     });
-    it('has a Disabled Continue Header Button', async () => {
-        await expect(carbEntryScreen.DisabledContinueHeaderButton()).toExist();
+    it('has a Disabled Continue Button', async () => {
+        await expect(carbEntryScreen.DisabledContinueButton()).toExist();
     });
     it('has a Absorption Time Message', async () => {
         await expect(carbEntryScreen.AbsorptionTimeMessage()).toExist();
@@ -31,7 +31,7 @@ var carbEntryScreen = (test) => {
         await expect(carbEntryScreen.FoodTypeLabel()).toExist();
     });
     it('has to close the Carb Entry screen', async () => {
-        await carbEntryScreen.Cancel();
+        await carbEntryScreen.CancelAndClose();
     });
 };
 

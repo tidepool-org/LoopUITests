@@ -6,9 +6,6 @@ var maxTempBasalRate = (test) => {
         screen = await test.settingsScreen.OpenDeliveryLimitsScreen();
         screenLimit = test.limits.basalDelivery;
     });
-    afterAll(async () => {
-        await screen.Close();
-    });
     it('set below max limit', async () => {
         await screen.Apply({
             maxBolus: testDefaultBolus,
@@ -16,7 +13,6 @@ var maxTempBasalRate = (test) => {
         });
         //TODO assert NO warning
     });
-
     it('set at max limit', async () => {
         await screen.Apply({
             maxBolus: testDefaultBolus,
@@ -30,6 +26,9 @@ var maxTempBasalRate = (test) => {
             maxBasalRate: screenLimit.max.limit + screenLimit.step
         });
         //TODO assert warning
+    });
+    it('can close screen', async () => {
+        await screen.Close();
     });
 };
 

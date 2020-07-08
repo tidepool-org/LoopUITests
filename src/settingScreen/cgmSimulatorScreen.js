@@ -3,7 +3,7 @@ const action = require('../action');
 
 class CGMSimulatorScreen {
     constructor(language) {
-        this.language = language.cgmSimulatorSettingsScreen;
+        this.language = language.settingsScreen.CGMSimulatorScreen;
         this.language.general = language.general;
     }
     Header() {
@@ -91,7 +91,7 @@ class CGMSimulatorScreen {
      * @param {number} settings.history.backfillHours required if name is 'Backfill Glucose'
      * @param {string} settings.history.trendName required if name is 'Backfill Glucose'
      * @param {object} settings.alerts
-     * @param {string} settings.alerts.name
+     * @param {string} settings.general.Alert.name
      */
     async Apply(settings) {
         await this._setEffect(settings.effect);
@@ -165,10 +165,10 @@ class CGMSimulatorScreen {
     async _setAlerts(alerts) {
         if (alerts) {
             await this.IssueAlertsLabel().tap();
-            if (alerts.name === this.language.Alerts.DelayedAlert) {
+            if (general.Alert.name === this.language.Alerts.DelayedAlert) {
                 await match.accessible.Label(this.language.Alerts.DelayedAlert).tap();
             }
-            if (alerts.name === this.language.Alerts.ReapeatingAlert) {
+            if (general.Alert.name === this.language.Alerts.ReapeatingAlert) {
                 await match.accessible.Label(this.language.Alerts.ReapeatingAlert).tap();
             }
         }

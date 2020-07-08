@@ -1,14 +1,16 @@
 const action = require('../action');
-const { BaseEntriesScreen } = require('./baseEntriesScreen');
+const { base } = require('../base/index');
 
 const pickerID = 'quantity_picker';
 
-class InsulinSensitivitiesScreen extends BaseEntriesScreen {
+class InsulinSensitivitiesScreen extends base.EntriesScreen {
     constructor(language, config) {
-        super(language, config, {
-            HeaderLabel: language.settingsScreen.InsulinSensitivities,
-            InfoLabel: language.settingsScreen.InsulinSensitivityInfo,
-        });
+        super({
+            screenText: language.settingsScreen.InsulinSensitivitiesScreen,
+            generalText: language.general,
+            openLabel: language.settingsScreen.InsulinSensitivitiesScreen.Header,
+            backLabel: language.general.Cancel,
+        }, config);
     }
     /**
      * @param {Object} sensitivity

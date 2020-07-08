@@ -3,7 +3,7 @@ const match = require('../match');
 
 class PumpSimulatorScreen {
     constructor(language) {
-        this.language = language.pumpSimulatorSettingsScreen;
+        this.language = language.settingsScreen.PumpSimulatorScreen;
         this.language.general = language.general;
         this.language.ConfigHeader = language.settingsScreen.Configuration;
     }
@@ -11,7 +11,11 @@ class PumpSimulatorScreen {
         return match.accessible.Header(this.language.PumpSettings);
     }
     DoneButton() {
-        return match.accessible.Button(this.language.general.Done).atIndex(0);
+        try {
+            return match.accessible.Button(this.language.general.Done).atIndex(0);
+        } catch (error) {
+            return match.accessible.Button(this.language.general.Done).atIndex(1);
+        }
     }
     ConfigurationHeader() {
         return match.accessible.Header(this.language.ConfigHeader).atIndex(0);
@@ -27,7 +31,7 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnTempBasal() {
         try {
-            await expect(this.ErrorOnTempBasalToggel()).toHaveValue('1');
+            await waitFor(this.ErrorOnTempBasalToggel()).toHaveValue('1').withTimeout(2000);
             return true;
         } catch (error) {
             return false;
@@ -41,7 +45,7 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnBolus() {
         try {
-            await expect(this.ErrorOnBolusToggel()).toHaveValue('1');
+            await waitFor(this.ErrorOnBolusToggel()).toHaveValue('1').withTimeout(2000);
             return true;
         } catch (error) {
             return false;
@@ -55,7 +59,7 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnSuspend() {
         try {
-            await expect(this.ErrorOnSuspendToggel()).toHaveValue('1');
+            await waitFor(this.ErrorOnSuspendToggel()).toHaveValue('1').withTimeout(2000);
             return true;
         } catch (error) {
             return false;
@@ -69,7 +73,7 @@ class PumpSimulatorScreen {
     }
     async _isErrorOnResume() {
         try {
-            await expect(this.ErrorOnResumeToggel()).toHaveValue('1');
+            await waitFor(this.ErrorOnResumeToggel()).toHaveValue('1').withTimeout(2000);
             return true;
         } catch (error) {
             return false;
@@ -85,10 +89,28 @@ class PumpSimulatorScreen {
         return match.accessible.Label(this.language.DeletePump).atIndex(1);
     }
     SuspendDeliveryButton() {
-        return match.accessible.Button(this.language.SuspendDelivery);
+        return match.accessible.Label(this.language.SuspendDelivery);
     }
     ResumeDeliveryButton() {
-        return match.accessible.Button(this.language.ResumeDelivery);
+        return match.accessible.Label(this.language.ResumeDelivery);
+    }
+    DetectOcclusionButton() {
+        return match.accessible.Label(this.language.DetectOcclusion);
+    }
+    ResolveOcclusionButton() {
+        return match.accessible.Label(this.language.ResolveOcclusion);
+    }
+    CausePumpErrorButton() {
+        return match.accessible.Label(this.language.CausePumpError);
+    }
+    async CausePumpError() {
+        return this.CausePumpErrorButton().tap();
+    }
+    ResolvePumpErrorButton() {
+        return match.accessible.Label(this.language.ResolvePumpError);
+    }
+    async ResolvePumpError() {
+        return this.ResolvePumpErrorButton().tap();
     }
     /**
      * @param {object} settings
@@ -197,7 +219,12 @@ class PumpSimulatorScreen {
         await this.DeletePumpLabel().tap();
         await this.DeletePumpConfirmationLabel().tap();
     }
-
+    async HasAlert() {
+        await expect(match.accessible.Alert()).toExist();
+    }
+    async DismissAlert() {
+        await match.accessible.AlertButton(this.language.general.OK).tap();
+    }
 }
 
 module.exports = {

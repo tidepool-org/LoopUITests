@@ -6,7 +6,7 @@ var settingsCorrectionRangeScreen = (test) => {
         screen = await settingsScreen.OpenCorrectionRangeScreen();
     });
     afterAll(async () => {
-        await screen.Cancel();
+        await screen.CancelAndClose();
         await settingsScreen.Close();
     });
     //TODO: should be a header but is a label

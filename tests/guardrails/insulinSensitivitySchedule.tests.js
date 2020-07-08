@@ -5,9 +5,6 @@ var insulinSensitivitySchedule = (test) => {
         screen = await test.settingsScreen.OpenInsulinSensitivitiesScreen();
         screenLimit = test.limits.insulinSensitivities;
     });
-    afterAll(async () => {
-        await screen.Cancel();
-    });
     it('can set max units with warning', async () => {
         await screen.Add();
         await screen.ApplyOne({
@@ -60,6 +57,9 @@ var insulinSensitivitySchedule = (test) => {
         });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 5 })).toBeVisible();
+    });
+    it('can close screen', async () => {
+        await screen.CancelAndClose();
     });
 };
 
