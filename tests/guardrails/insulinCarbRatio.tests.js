@@ -5,9 +5,6 @@ var insulinCarbRatio = (test) => {
         screen = await test.settingsScreen.OpenCarbRatioScreen();
         screenLimit = test.limits.insulinCarbRatio;
     });
-    afterAll(async () => {
-        await screen.Cancel();
-    });
     it('can set max units at limit', async () => {
         await screen.Add();
         await screen.ApplyOne({
@@ -88,6 +85,9 @@ var insulinCarbRatio = (test) => {
         });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 5 })).toBeVisible();
+    });
+    it('can canel and close screen', async () => {
+        await screen.CancelAndClose();
     });
 };
 

@@ -31,7 +31,7 @@ var carbEntryScreen = (test) => {
         await expect(carbEntryScreen.FoodTypeLabel()).toExist();
     });
     it('has to close the Carb Entry screen', async () => {
-        await carbEntryScreen.Cancel();
+        await carbEntryScreen.CancelAndClose();
     });
 };
 

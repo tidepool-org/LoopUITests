@@ -18,7 +18,7 @@ class Screen {
         return match.accessible.Header(this.screenTxt.Header);
     }
     CancelButton() {
-        return match.accessible.ButtonBarButton(this.generalTxt.Cancel);
+        return match.accessible.Button(this.generalTxt.Cancel);
     }
     BackButton() {
         if (this.backLabel) {
@@ -35,7 +35,7 @@ class Screen {
     async Open() {
         return this.OpenButton().tap();
     }
-    async Cancel() {
+    async CancelAndClose() {
         return this.CancelButton().tap();
     }
     async Back() {

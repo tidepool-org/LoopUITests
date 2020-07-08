@@ -13,6 +13,12 @@ class SuspendThresholdScreen extends base.EntryScreen {
         this.bgUnitsLabel = language.settingsScreen.SuspendThresholdScreen.BGUnits;
         this.config = config;
     }
+    /**
+     * @override so we access the correct CancelButton
+     */
+    async CancelAndClose() {
+        return this.CancelButton().atIndex(0).tap();
+    }
     async OpenPicker() {
         await match.accessible.Label(this.bgUnitsLabel).atIndex(0).tap();
     }

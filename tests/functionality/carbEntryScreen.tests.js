@@ -10,7 +10,7 @@ var carbEntryScreen = (test) => {
     });
     it('can cancel open screen', async () => {
         carbEntryScreen = await test.OpenCarbEntryScreen();
-        await carbEntryScreen.Cancel();
+        await carbEntryScreen.CancelAndClose();
     });
 };
 

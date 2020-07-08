@@ -5,9 +5,6 @@ var basalRateSchedule = (test) => {
         screen = await test.settingsScreen.OpenBasalRatesScreen();
         screenLimit = test.limits.basalRates;
     });
-    afterAll(async () => {
-        await screen.Close();
-    });
     it('can set max units at limit', async () => {
         await screen.Add();
         await screen.ApplyOne({
@@ -66,6 +63,9 @@ var basalRateSchedule = (test) => {
         });
         await screen.AddNewEntry();
         await expect(screen.GuardrailWarningIconPicker({ index: 3 })).toBeVisible();
+    });
+    it('can close screen', async () => {
+        await screen.CancelAndClose();
     });
 };
 

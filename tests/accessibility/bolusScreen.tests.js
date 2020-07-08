@@ -22,7 +22,7 @@ var bolusScreen = (test) => {
         await expect(bolusScreen.CancelButton()).toExist();
     });
     it('has to close the bolus screen', async () => {
-        await bolusScreen.Cancel();
+        await bolusScreen.CancelAndClose();
     });
 };
 
