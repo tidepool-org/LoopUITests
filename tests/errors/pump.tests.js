@@ -12,15 +12,15 @@ var pumpTests = (test) => {
         await screen.HasAlert();
         await screen.DismissAlert();
     });
-    it.skip('create pump error on bolus', async () => {
-        await screen.Apply({ errorOnBolus: true });
-        await screen.Close();
-        await settingsScreen.Close();
-        var bolusScreen = await test.OpenBolusScreen();
-        await bolusScreen.SetBolusAmount(1);
-        await bolusScreen.Deliver();
-        //TODO: cannot enter passcode
-    });
+    // TODO: cannot interact with screen and enter passcode
+    // it.skip('create pump error on bolus', async () => {
+    //     await screen.Apply({ errorOnBolus: true });
+    //     await screen.Close();
+    //     await settingsScreen.Close();
+    //     var bolusScreen = await test.OpenBolusScreen();
+    //     await bolusScreen.SetBolusAmount(1);
+    //     await bolusScreen.Deliver();
+    // });
     it('create general pump error', async () => {
         await screen.CausePumpError();
         await screen.Close();
