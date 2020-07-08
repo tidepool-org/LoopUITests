@@ -4,8 +4,8 @@ const { base } = require('../base/index');
 class BasalRatesScreen extends base.EntriesScreen {
     constructor(language, config) {
         super({
-            screenTxt: language.settingsScreen.BasalRatesScreen,
-            generalTxt: language.general,
+            screenText: language.settingsScreen.BasalRatesScreen,
+            generalText: language.general,
             openLabel: language.settingsScreen.BasalRatesScreen.Header,
             backLabel: language.general.Cancel,
         }, config);

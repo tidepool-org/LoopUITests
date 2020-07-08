@@ -6,23 +6,23 @@ class EntryScreen extends Screen {
      * @param {object} parentScreen
      * @param {string} parentScreen.openLabel
      * @param {string} parentScreen.backLabel
-     * @param {object} parentScreen.screenTxt
-     * @param {object} parentScreen.generalTxt
+     * @param {object} parentScreen.screenText
+     * @param {object} parentScreen.generalText
      */
     constructor(parentScreen) {
         super(parentScreen);
     }
     InfoLabel() {
-        return match.accessible.Label(this.screenTxt.Info);
+        return match.accessible.Label(this.screenText.Info);
     }
     SaveButton() {
-        return match.accessible.Label(this.generalTxt.Save);
+        return match.accessible.Label(this.generalText.Save);
     }
     InfoButton() {
-        return match.accessible.Button(this.generalTxt.ButtonLabel.InfoCircle);
+        return match.accessible.Button(this.generalText.ButtonLabel.InfoCircle);
     }
     GuardrailWarningIconPicker() {
-        return match.accessible.Image(this.generalTxt.Alert.ExclamationMark).atIndex(0);
+        return match.accessible.Image(this.generalText.Alert.ExclamationMark).atIndex(0);
     }
     async SaveAndClose() {
         await this.SaveButton().tap();

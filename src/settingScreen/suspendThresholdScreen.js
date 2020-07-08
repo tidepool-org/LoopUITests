@@ -5,8 +5,8 @@ const { base } = require('../base/index');
 class SuspendThresholdScreen extends base.EntryScreen {
     constructor(language, config) {
         super({
-            screenTxt: language.settingsScreen.SuspendThresholdScreen,
-            generalTxt: language.general,
+            screenText: language.settingsScreen.SuspendThresholdScreen,
+            generalText: language.general,
             openLabel: language.settingsScreen.SuspendThresholdScreen.Header,
             backLabel: language.general.Cancel,
         });

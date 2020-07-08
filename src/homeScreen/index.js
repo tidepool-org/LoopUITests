@@ -4,7 +4,7 @@ const { InsulinDeliveryScreen } = require('./insulinDeliveryScreen');
 const { ActiveCarbohydratesScreen } = require('./activeCarbohydratesScreen');
 const { Header } = require('./header');
 
-var homeSubScreen = {
+var home = {
     GlucoseScreen,
     ActiveInsulinScreen,
     InsulinDeliveryScreen,
@@ -13,5 +13,5 @@ var homeSubScreen = {
 };
 
 module.exports = {
-    homeSubScreen,
+    home,
 };

@@ -5,36 +5,36 @@ class BolusScreen extends base.Screen {
     constructor(language) {
         super({
             openScreenLabel: language.bolusScreen.Header,
-            screenTxt: language.bolusScreen,
-            generalTxt: language.general,
+            screenText: language.bolusScreen,
+            generalText: language.general,
         });
     }
     /**
      * @override so we access the correct CancelButton
      */
     CancelButton() {
-        return match.accessible.ButtonBarButton(this.generalTxt.Cancel);
+        return match.accessible.ButtonBarButton(this.generalText.Cancel);
     }
     async Deliver() {
         await this.DeliverButton().tap();
     }
     DeliverButton() {
-        return match.accessible.Button(this.screenTxt.Deliver);
+        return match.accessible.Button(this.screenText.Deliver);
     }
     DisabledDeliverButton() {
-        return match.accessible.DisabledButton(this.screenTxt.Deliver);
+        return match.accessible.DisabledButton(this.screenText.Deliver);
     }
     BolusLabel() {
-        return match.accessible.Label(this.screenTxt.Header);
+        return match.accessible.Label(this.screenText.Header);
     }
     EnteredLabel() {
-        return match.accessible.Label(this.screenTxt.Entered);
+        return match.accessible.Label(this.screenText.Entered);
     }
     RecommendedLabel() {
-        return match.accessible.Label(this.screenTxt.Recommended);
+        return match.accessible.Label(this.screenText.Recommended);
     }
     async ExpectCannotDeliverBolus() {
-        await expect(match.accessible.DisabledButton(this.screenTxt.Deliver)).toExist();
+        await expect(match.accessible.DisabledButton(this.screenText.Deliver)).toExist();
     }
     async SetBolusAmount(units) {
         await match.UITextField().clearText();
