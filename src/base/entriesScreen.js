@@ -7,8 +7,8 @@ class EntriesScreen extends Screen {
     * @param {object} parentScreen
     * @param {string} parentScreen.openLabel
     * @param {string} parentScreen.backLabel
-    * @param {object} parentScreen.screenTxt
-    * @param {object} parentScreen.generalTxt
+    * @param {object} parentScreen.screenText
+    * @param {object} parentScreen.generalText
     * @param {object} config
     */
     constructor(parentScreen, config) {
@@ -16,28 +16,28 @@ class EntriesScreen extends Screen {
         this.config = config;
     }
     InfoLabel() {
-        return match.accessible.Label(this.screenTxt.Info);
+        return match.accessible.Label(this.screenText.Info);
     }
     PlusButton() {
-        return match.accessible.Button(this.generalTxt.ButtonLabel.Plus);
+        return match.accessible.Button(this.generalText.ButtonLabel.Plus);
     }
     EditButton() {
-        return match.accessible.Button(this.generalTxt.Edit);
+        return match.accessible.Button(this.generalText.Edit);
     }
     SaveButton() {
-        return match.accessible.Label(this.generalTxt.Save);
+        return match.accessible.Label(this.generalText.Save);
     }
     AddNewEntryButton() {
-        return match.accessible.Button(this.generalTxt.Add);
+        return match.accessible.Button(this.generalText.Add);
     }
     CancelNewEntryButton() {
-        return match.accessible.Button(this.generalTxt.Cancel);
+        return match.accessible.Button(this.generalText.Cancel);
     }
     NewEntryLabel() {
-        return match.accessible.Label(this.generalTxt.NewEntry);
+        return match.accessible.Label(this.generalText.NewEntry);
     }
     InfoButton() {
-        return match.accessible.Button(this.generalTxt.ButtonLabel.InfoCircle);
+        return match.accessible.Button(this.generalText.ButtonLabel.InfoCircle);
     }
     /**
      *
@@ -46,7 +46,7 @@ class EntriesScreen extends Screen {
      */
     GuardrailWarningIconPicker(entry) {
         let scheduleItemMask = `schedule_item_${entry.index}`;
-        return match.accessible.ImageAndId(this.generalTxt.Alert.ExclamationMark, scheduleItemMask);
+        return match.accessible.ImageAndId(this.generalText.Alert.ExclamationMark, scheduleItemMask);
     }
     async Add() {
         await this.PlusButton().tap();

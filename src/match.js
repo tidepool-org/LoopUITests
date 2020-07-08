@@ -115,11 +115,28 @@ const match = {
                         .and(by.traits([staticTextTrait])))
             ).atIndex(pickerNumber);
         },
+<<<<<<< HEAD
         QuantityPickerItemLabel(itemLabel, pickerID) {
+=======
+        QuantityPickerItem(itemLabel, pickerID) {
+            return this.QuantityPickerItem(itemLabel, pickerID, null);
+        },
+        QuantityPickerItem(itemLabel, pickerID, itemID) {
+            if (itemID) {
+                return element(
+                    by.type('SwiftUI.AccessibilityNode')
+                        .and(by.label(itemLabel)
+                            .and(by.traits([staticTextTrait])
+                                .and(by.id(itemID))))
+                        .withAncestor(by.id(pickerID))
+                ).atIndex(1);
+            }
+>>>>>>> dev
             return element(
                 by.type('SwiftUI.AccessibilityNode')
                     .and(by.label(itemLabel)
                         .and(by.traits([staticTextTrait])))
+<<<<<<< HEAD
                     .withAncestor(by.id(pickerID))
             ).atIndex(2);
         },
@@ -128,6 +145,8 @@ const match = {
                 by.type('SwiftUI.AccessibilityNode')
                     .and(by.id(itemID)
                         .and(by.traits(['text'])))
+=======
+>>>>>>> dev
                     .withAncestor(by.id(pickerID))
             ).atIndex(2);
         },

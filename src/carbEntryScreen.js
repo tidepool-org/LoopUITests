@@ -5,42 +5,42 @@ class CarbEntryScreen extends base.Screen {
     constructor(language) {
         super({
             openLabel: language.carbEntryScreen.AddMeal,
-            screenTxt: language.carbEntryScreen,
-            generalTxt: language.general,
+            screenText: language.carbEntryScreen,
+            generalText: language.general,
         });
     }
     /**
      * @override so we access the correct CancelButton
      */
     CancelButton() {
-        return match.accessible.ButtonBarButton(this.generalTxt.Cancel);
+        return match.accessible.ButtonBarButton(this.generalText.Cancel);
     }
     AmountConsumedLabel() {
-        return match.accessible.Label(this.screenTxt.AmountConsumed);
+        return match.accessible.Label(this.screenText.AmountConsumed);
     }
     DateLabel() {
-        return match.accessible.Label(this.screenTxt.Date);
+        return match.accessible.Label(this.screenText.Date);
     }
     FoodTypeLabel() {
-        return match.accessible.Label(this.screenTxt.FoodType);
+        return match.accessible.Label(this.screenText.FoodType);
     }
     AbsorptionTimeLabel() {
-        return match.accessible.Label(this.screenTxt.AbsorptionTime);
+        return match.accessible.Label(this.screenText.AbsorptionTime);
     }
     DisabledContinueButton() {
-        return match.accessible.DisabledButtonBarButton(this.generalTxt.Continue);
+        return match.accessible.DisabledButtonBarButton(this.generalText.Continue);
     }
     ContinueMainButton() {
-        return match.accessible.SetupButton(this.generalTxt.Continue);
+        return match.accessible.SetupButton(this.generalText.Continue);
     }
     DisabledContinueMainButton() {
-        return match.accessible.DisabledSetupButton(this.generalTxt.Continue);
+        return match.accessible.DisabledSetupButton(this.generalText.Continue);
     }
     async ContinueToBolus() {
         await this.Continue();
     }
     SaveWithoutBolusButton() {
-        return match.accessible.Button(this.screenTxt.SaveWithoutBolusing);
+        return match.accessible.Button(this.screenText.SaveWithoutBolusing);
     }
     async SaveWithoutBolus() {
         await this.SaveWithoutBolusButton().tap();
@@ -50,7 +50,7 @@ class CarbEntryScreen extends base.Screen {
         await expect(match.accessible.Label(predictedGlucoseWarning)).toExist();
     }
     AbsorptionTimeMessage() {
-        return match.accessible.Label(this.screenTxt.AbsorptionMessage);
+        return match.accessible.Label(this.screenText.AbsorptionMessage);
     }
     async ExpectAbsorptionTimeMessage() {
         await expect(this.AbsorptionTimeMessage()).toExist();

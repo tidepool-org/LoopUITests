@@ -1,6 +1,6 @@
 const match = require('./match');
 
-const { homeSubScreen } = require('./homeScreen/index');
+const { home } = require('./homeScreen/index');
 const { SettingsScreen } = require('./settingsScreen');
 const { CarbEntryScreen } = require('./carbEntryScreen');
 const { BolusScreen } = require('./bolusScreen');
@@ -8,14 +8,14 @@ const { BolusScreen } = require('./bolusScreen');
 class HomeScreen {
     constructor(language, settingsScreenDefaults) {
 
-        this.glucoseScreen = new homeSubScreen.GlucoseScreen(language);
-        this.activeInsulinScreen = new homeSubScreen.ActiveInsulinScreen(language);
-        this.insulinDeliveryScreen = new homeSubScreen.InsulinDeliveryScreen(language);
-        this.activeCarbohydratesScreen = new homeSubScreen.ActiveCarbohydratesScreen(language);
+        this.glucoseScreen = new home.GlucoseScreen(language);
+        this.activeInsulinScreen = new home.ActiveInsulinScreen(language);
+        this.insulinDeliveryScreen = new home.InsulinDeliveryScreen(language);
+        this.activeCarbohydratesScreen = new home.ActiveCarbohydratesScreen(language);
         this.settingsScreen = new SettingsScreen(language, settingsScreenDefaults);
         this.bolusScreen = new BolusScreen(language);
         this.carbEntryScreen = new CarbEntryScreen(language);
-        this.header = new homeSubScreen.Header(language);
+        this.header = new home.Header(language);
 
         this.language = language;
     }

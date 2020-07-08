@@ -4,14 +4,11 @@ const { base } = require('../base/index');
 class CarbRatioScreen extends base.EntriesScreen {
     constructor(language, config) {
         super({
-            screenTxt: language.settingsScreen.CarbRatioScreen,
-            generalTxt: language.general,
+            screenText: language.settingsScreen.CarbRatioScreen,
+            generalText: language.general,
             openLabel: language.settingsScreen.CarbRatioScreen.Header,
             backLabel: language.general.Cancel,
         }, config);
-    }
-    _unitParts(carbGramsPerInsulinUnit) {
-        return String(carbGramsPerInsulinUnit).split('.');
     }
     /**
      * @param {Object} ratio
