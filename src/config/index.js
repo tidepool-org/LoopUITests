@@ -10,23 +10,23 @@ class Config {
                 maxBasalRate: limits.basalDelivery.max.noWarning,
             },
             BasalRates: [{
-                time: text.timeSlots[0],
+                time: text.general.TimeSlot[0],
                 unitsPerHour: limits.basalRates.max.noWarning
             }],
             SuspendThreshold: {
                 value: limits.suspendThreshold.max.noWarning
             },
-            InsulinModel: text.insulinModelSettingsScreen.Model.RapidAdults,
+            InsulinModel: text.settingsScreen.InsulinModelScreen.Model.RapidAdults,
             CarbRatios: [{
-                time: text.timeSlots[0],
+                time: text.general.TimeSlot[0],
                 carbGramsPerInsulinUnit: limits.insulinCarbRatio.max.noWarning
             }],
             InsulinSensitivities: [{
-                time: text.timeSlots[0],
+                time: text.general.TimeSlot[0],
                 bgValuePerInsulinUnit: limits.insulinSensitivities.max.noWarning,
             }],
             CorrectionRanges: [{
-                time: text.timeSlots[0],
+                time: text.general.TimeSlot[0],
                 min: limits.correctionRange.min.noWarning,
                 max: limits.correctionRange.max.noWarning,
             }],
@@ -39,7 +39,7 @@ class Config {
             AddPumpSimulator: true,
             CGMSimulatorSettings: {
                 model: {
-                    name: text.cgmSimulatorSettingsScreen.Model.Constant,
+                    name: text.settingsScreen.CGMSimulatorScreen.Model.Constant,
                     bgValues: [110],
                 },
                 backfillHours: '6',

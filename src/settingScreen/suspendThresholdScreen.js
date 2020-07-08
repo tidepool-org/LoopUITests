@@ -4,11 +4,13 @@ const { base } = require('../base/index');
 
 class SuspendThresholdScreen extends base.EntryScreen {
     constructor(language, config) {
-        super(language, {
-            HeaderLabel: language.suspendThresholdSettingScreen.SuspendThreshold,
-            InfoLabel: language.suspendThresholdSettingScreen.SuspendThresholdInfo,
+        super({
+            screenTxt: language.settingsScreen.SuspendThresholdScreen,
+            generalTxt: language.general,
+            openLabel: language.settingsScreen.SuspendThresholdScreen.Header,
+            backLabel: language.general.Cancel,
         });
-        this.bgUnitsLabel = language.suspendThresholdSettingScreen.BGUnits;
+        this.bgUnitsLabel = language.settingsScreen.SuspendThresholdScreen.BGUnits;
         this.config = config;
     }
     async OpenPicker() {

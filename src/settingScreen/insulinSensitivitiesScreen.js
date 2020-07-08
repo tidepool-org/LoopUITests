@@ -5,10 +5,12 @@ const pickerID = 'quantity_picker';
 
 class InsulinSensitivitiesScreen extends base.EntriesScreen {
     constructor(language, config) {
-        super(language, config, {
-            HeaderLabel: language.settingsScreen.InsulinSensitivities,
-            InfoLabel: language.settingsScreen.InsulinSensitivityInfo,
-        });
+        super({
+            screenTxt: language.settingsScreen.InsulinSensitivitiesScreen,
+            generalTxt: language.general,
+            openLabel: language.settingsScreen.InsulinSensitivitiesScreen.Header,
+            backLabel: language.general.Cancel,
+        }, config);
     }
     /**
      * @param {Object} sensitivity

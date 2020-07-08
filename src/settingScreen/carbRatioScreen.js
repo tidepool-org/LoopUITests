@@ -3,10 +3,12 @@ const { base } = require('../base/index');
 
 class CarbRatioScreen extends base.EntriesScreen {
     constructor(language, config) {
-        super(language, config, {
-            HeaderLabel: language.carbRatioSettingsScreen.CarbRatios,
-            InfoLabel: language.carbRatioSettingsScreen.CarbRatioInfo,
-        });
+        super({
+            screenTxt: language.settingsScreen.CarbRatioScreen,
+            generalTxt: language.general,
+            openLabel: language.settingsScreen.CarbRatioScreen.Header,
+            backLabel: language.general.Cancel,
+        }, config);
     }
     /**
      * @param {Object} ratio

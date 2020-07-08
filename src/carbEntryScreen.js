@@ -4,8 +4,7 @@ const { base } = require('./base/index');
 class CarbEntryScreen extends base.Screen {
     constructor(language) {
         super({
-            headerLabel: language.carbEntryScreen.AddCarbEntry,
-            openScreenLabel: language.carbEntryScreen.AddMeal,
+            openLabel: language.carbEntryScreen.AddMeal,
             screenTxt: language.carbEntryScreen,
             generalTxt: language.general,
         });

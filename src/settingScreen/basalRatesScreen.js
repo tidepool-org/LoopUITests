@@ -3,11 +3,13 @@ const { base } = require('../base/index');
 
 class BasalRatesScreen extends base.EntriesScreen {
     constructor(language, config) {
-        super(language, config, {
-            HeaderLabel: language.basalRatesSettingScreen.BasalRates,
-            InfoLabel: language.basalRatesSettingScreen.BasalRatesInfo,
-        });
-        this.unitsLabel = language.basalRatesSettingScreen.Units;
+        super({
+            screenTxt: language.settingsScreen.BasalRatesScreen,
+            generalTxt: language.general,
+            openLabel: language.settingsScreen.BasalRatesScreen.Header,
+            backLabel: language.general.Cancel,
+        }, config);
+        this.unitsLabel = language.settingsScreen.BasalRatesScreen.Units;
     }
     /**
      * @param {Object} rate

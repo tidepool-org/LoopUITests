@@ -1,30 +1,28 @@
 const match = require('../match');
+const { Screen } = require('./screen');
 
-class EntryScreen {
-    constructor(language, parentScreen) {
-        this.language = language;
-        this.parentScreen = parentScreen;
-    }
-    Header() {
-        return match.accessible.Header(this.parentScreen.HeaderLabel);
+class EntryScreen extends Screen {
+    /**
+     * @param {object} parentScreen
+     * @param {string} parentScreen.openLabel
+     * @param {string} parentScreen.backLabel
+     * @param {object} parentScreen.screenTxt
+     * @param {object} parentScreen.generalTxt
+     */
+    constructor(parentScreen) {
+        super(parentScreen);
     }
     InfoLabel() {
-        return match.accessible.Label(this.parentScreen.InfoLabel);
-    }
-    CancelButton() {
-        return match.accessible.Button(this.language.general.Cancel);
+        return match.accessible.Label(this.screenTxt.Info);
     }
     SaveButton() {
-        return match.accessible.Label(this.language.general.Save);
+        return match.accessible.Label(this.generalTxt.Save);
     }
     InfoButton() {
-        return match.accessible.Button(this.language.buttonLabel.InfoCircle);
+        return match.accessible.Button(this.generalTxt.ButtonLabel.InfoCircle);
     }
     GuardrailWarningIconPicker() {
-        return match.accessible.Image(this.language.alerts.ExclamationMark).atIndex(0);
-    }
-    async Cancel() {
-        await this.CancelButton().atIndex(0).tap();
+        return match.accessible.Image(this.generalTxt.Alert.ExclamationMark).atIndex(0);
     }
     async SaveAndClose() {
         await this.SaveButton().tap();

@@ -4,8 +4,7 @@ const { base } = require('./base/index');
 class BolusScreen extends base.Screen {
     constructor(language) {
         super({
-            headerLabel: language.bolusScreen.Bolus,
-            openScreenLabel: language.bolusScreen.Bolus,
+            openScreenLabel: language.bolusScreen.Header,
             screenTxt: language.bolusScreen,
             generalTxt: language.general,
         });
@@ -20,7 +19,7 @@ class BolusScreen extends base.Screen {
         return match.accessible.DisabledButton(this.screenTxt.Deliver);
     }
     BolusLabel() {
-        return match.accessible.Label(this.screenTxt.Bolus);
+        return match.accessible.Label(this.screenTxt.Header);
     }
     EnteredLabel() {
         return match.accessible.Label(this.screenTxt.Entered);

@@ -3,7 +3,7 @@ const match = require('../match');
 
 class PumpSimulatorScreen {
     constructor(language) {
-        this.language = language.pumpSimulatorSettingsScreen;
+        this.language = language.settingsScreen.PumpSimulatorScreen;
         this.language.general = language.general;
         this.language.ConfigHeader = language.settingsScreen.Configuration;
     }

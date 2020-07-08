@@ -1,40 +1,43 @@
 const match = require('../match');
+const { Screen } = require('./screen');
 
-class EntriesScreen {
-    constructor(language, config, parentScreen) {
-        this.language = language;
+
+class EntriesScreen extends Screen {
+    /**
+    * @param {object} parentScreen
+    * @param {string} parentScreen.openLabel
+    * @param {string} parentScreen.backLabel
+    * @param {object} parentScreen.screenTxt
+    * @param {object} parentScreen.generalTxt
+    * @param {object} config
+    */
+    constructor(parentScreen, config) {
+        super(parentScreen);
         this.config = config;
-        this.parentScreen = parentScreen;
-    }
-    Header() {
-        return match.accessible.Header(this.parentScreen.HeaderLabel);
     }
     InfoLabel() {
-        return match.accessible.Label(this.parentScreen.InfoLabel);
-    }
-    CancelButton() {
-        return match.accessible.Button(this.language.general.Cancel);
+        return match.accessible.Label(this.screenTxt.Info);
     }
     PlusButton() {
-        return match.accessible.Button(this.language.buttonLabel.Plus);
+        return match.accessible.Button(this.generalTxt.ButtonLabel.Plus);
     }
     EditButton() {
-        return match.accessible.Button(this.language.general.Edit);
+        return match.accessible.Button(this.generalTxt.Edit);
     }
     SaveButton() {
-        return match.accessible.Label(this.language.general.Save);
+        return match.accessible.Label(this.generalTxt.Save);
     }
     AddNewEntryButton() {
-        return match.accessible.Button(this.language.general.Add);
+        return match.accessible.Button(this.generalTxt.Add);
     }
     CancelNewEntryButton() {
-        return match.accessible.Button(this.language.general.Cancel);
+        return match.accessible.Button(this.generalTxt.Cancel);
     }
     NewEntryLabel() {
-        return match.accessible.Label(this.language.general.NewEntry);
+        return match.accessible.Label(this.generalTxt.NewEntry);
     }
     InfoButton() {
-        return match.accessible.Button(this.language.buttonLabel.InfoCircle);
+        return match.accessible.Button(this.generalTxt.ButtonLabel.InfoCircle);
     }
     /**
      *
@@ -43,16 +46,13 @@ class EntriesScreen {
      */
     GuardrailWarningIconPicker(entry) {
         let scheduleItemMask = `schedule_item_${entry.index}`;
-        return match.accessible.ImageAndId(this.language.alerts.ExclamationMark, scheduleItemMask);
+        return match.accessible.ImageAndId(this.generalTxt.Alert.ExclamationMark, scheduleItemMask);
     }
     async Add() {
         await this.PlusButton().tap();
     }
     async Edit() {
         await this.EditButton().tap();
-    }
-    async Cancel() {
-        await this.CancelButton().tap();
     }
     async CancelNewEntry() {
         await this.CancelNewEntryButton().tap();

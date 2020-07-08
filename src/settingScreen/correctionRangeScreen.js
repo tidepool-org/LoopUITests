@@ -6,10 +6,12 @@ const minGlucosePickerID = 'min_glucose_picker';
 
 class CorrectionRangeScreen extends base.EntriesScreen {
     constructor(language, config) {
-        super(language, config, {
-            HeaderLabel: language.settingsScreen.CorrectionRange,
-            InfoLabel: language.settingsScreen.CorrectionRangeInfo,
-        });
+        super({
+            screenTxt: language.settingsScreen.CorrectionRangeScreen,
+            generalTxt: language.general,
+            openLabel: language.settingsScreen.CorrectionRangeScreen.Header,
+            backLabel: language.general.Cancel,
+        }, config);
     }
     /**
      * @param {Object} range

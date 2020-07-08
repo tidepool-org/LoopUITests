@@ -89,10 +89,10 @@ class SettingsScreen {
         return match.accessible.Header(this.language.settingsScreen.Settings);
     }
     BasalRatesLabel() {
-        return match.accessible.Label(this.language.settingsScreen.BasalRates)
+        return match.accessible.Label(this.language.settingsScreen.BasalRatesScreen.Header)
     }
     SuspendThresholdLabel() {
-        return match.accessible.Label(this.language.suspendThresholdSettingScreen.SuspendThreshold)
+        return match.accessible.Label(this.language.settingsScreen.SuspendThresholdScreen.Header)
     }
     DeliveryLimitsLabel() {
         return match.accessible.Label(this.language.settingsScreen.DeliveryLimits).atIndex(0);
@@ -101,16 +101,16 @@ class SettingsScreen {
         return match.accessible.Label(this.language.settingsScreen.InsulinModel)
     }
     CarbRatiosLabel() {
-        return match.accessible.Label(this.language.carbRatioSettingsScreen.CarbRatios)
+        return match.accessible.Label(this.language.settingsScreen.CarbRatioScreen.Header)
     }
     InsulinSensitivitiesLabel() {
-        return match.accessible.Label(this.language.settingsScreen.InsulinSensitivities).atIndex(0);
+        return match.accessible.Label(this.language.settingsScreen.InsulinSensitivitiesScreen.Header).atIndex(0);
     }
     CorrectionRangeLabel() {
         try {
-            return match.accessible.Label(this.language.settingsScreen.CorrectionRange);
+            return match.accessible.Label(this.language.settingsScreen.CorrectionRangeScreen.Header);
         } catch (err) {
-            return match.accessible.Label(this.language.settingsScreen.CorrectionRange).atIndex(0);
+            return match.accessible.Label(this.language.settingsScreen.CorrectionRangeScreen.Header).atIndex(0);
         }
     }
     ClosedLoopButton() {
