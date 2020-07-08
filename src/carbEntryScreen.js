@@ -9,6 +9,12 @@ class CarbEntryScreen extends base.Screen {
             generalTxt: language.general,
         });
     }
+    /**
+     * @override so we access the correct CancelButton
+     */
+    CancelButton() {
+        return match.accessible.ButtonBarButton(this.generalTxt.Cancel);
+    }
     AmountConsumedLabel() {
         return match.accessible.Label(this.screenTxt.AmountConsumed);
     }

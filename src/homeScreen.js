@@ -44,7 +44,7 @@ class HomeScreen {
         return match.accessible.Button(this.language.carbEntryScreen.AddMeal);
     }
     BolusButton() {
-        return match.accessible.Button(this.language.bolusScreen.Bolus);
+        return match.accessible.Button(this.language.bolusScreen.Header);
     }
     async OpenActiveCarbohydratesChart() {
         await this.ActiveCarbohydratesLabel().tap();

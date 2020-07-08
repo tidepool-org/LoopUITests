@@ -9,6 +9,12 @@ class BolusScreen extends base.Screen {
             generalTxt: language.general,
         });
     }
+    /**
+     * @override so we access the correct CancelButton
+     */
+    CancelButton() {
+        return match.accessible.ButtonBarButton(this.generalTxt.Cancel);
+    }
     async Deliver() {
         await this.DeliverButton().tap();
     }
