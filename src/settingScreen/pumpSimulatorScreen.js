@@ -216,6 +216,7 @@ class PumpSimulatorScreen {
         await this.SuspendDeliveryButton().tap();
     }
     async RemoveSimulator() {
+        await this.ScrollToBottom();
         await this.DeletePumpLabel().tap();
         await this.DeletePumpConfirmationLabel().tap();
     }
@@ -224,6 +225,20 @@ class PumpSimulatorScreen {
     }
     async DismissAlert() {
         await match.accessible.AlertButton(this.language.general.OK).tap();
+    }
+    async ScrollToBottom() {
+        try {
+            await expect(this.DeletePumpLabel()).toBeVisible();
+        } catch (err) {
+            await this.ConfigurationHeader().swipe('up', 'fast');
+        }
+    }
+    async ScrollToTop() {
+        try {
+            await expect(this.SuspendDelivery()).toBeVisible();
+        } catch (err) {
+            await this.ErrorOnBolusLabel().swipe('down', 'fast');
+        }
     }
 }
 

@@ -98,10 +98,10 @@ class SettingsScreen {
         return match.accessible.Label(this.language.settingsScreen.DeliveryLimitsScreen.Header);
     }
     InsulinModelLabel() {
-        return match.accessible.Label(this.language.settingsScreen.InsulinModel)
+        return match.accessible.Label(this.language.settingsScreen.InsulinModel);
     }
     CarbRatiosLabel() {
-        return match.accessible.Label(this.language.settingsScreen.CarbRatioScreen.Header)
+        return match.accessible.Label(this.language.settingsScreen.CarbRatioScreen.Header).atIndex(1);
     }
     InsulinSensitivitiesLabel() {
         return match.accessible.Label(this.language.settingsScreen.InsulinSensitivitiesScreen.Header).atIndex(0);

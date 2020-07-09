@@ -32,7 +32,7 @@ var settingsScreen = (test) => {
             await expect(settingsScreen.AddCGMLabel()).toExist();
         });
     });
-    describe('botton of screen', () => {
+    describe('bottom of screen', () => {
         beforeAll(async () => {
             await settingsScreen.ScrollToBottom();
         });

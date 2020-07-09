@@ -5,8 +5,8 @@ const { base } = require('../base/index');
 class DeliveryLimitsScreen extends base.EntryScreen {
     constructor(language, config) {
         super({
-            screenTxt: language.settingsScreen.DeliveryLimitsScreen,
-            generalTxt: language.general,
+            screenText: language.settingsScreen.DeliveryLimitsScreen,
+            generalText: language.general,
             openLabel: language.settingsScreen.SuspendThresholdScreen.Header,
             backLabel: language.general.Cancel,
         });
@@ -16,7 +16,7 @@ class DeliveryLimitsScreen extends base.EntryScreen {
      * @override so we access the correct CancelButton
      */
     CancelButton() {
-        return match.accessible.ButtonBarButton(this.generalTxt.Cancel);
+        return match.accessible.ButtonBarButton(this.generalText.Cancel);
     }
     _limitParts(limitAmount) {
         return String(limitAmount).split('.');
@@ -67,7 +67,6 @@ class DeliveryLimitsScreen extends base.EntryScreen {
             await this._set(expectedParts, currentParts);
         }
     }
-
 }
 
 module.exports = {

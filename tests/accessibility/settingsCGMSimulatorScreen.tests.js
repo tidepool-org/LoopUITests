@@ -50,6 +50,7 @@ var settingsCGMSimulatorScreenTests = (test) => {
         await expect(screen.RandomLowOutlierEffectLabel()).toExist();
     });
     it('has a history header', async () => {
+        await screen.ScrollToBottom();
         await expect(screen.HistoryHeader()).toExist();
     });
     it('has a trend label', async () => {
