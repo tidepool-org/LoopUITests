@@ -1,4 +1,5 @@
 const action = require('../action');
+const match = require('../match');
 const { base } = require('../base/index');
 
 const maxGlucosePickerID = 'max_glucose_picker';
@@ -14,6 +15,12 @@ class CorrectionRangeScreen extends base.EntriesScreen {
         }, config);
     }
     /**
+     * @override so we access the header by label
+     */
+    Header() {
+        return match.accessible.Label(this.screenText.Header);
+    }
+    /**
      * @param {Object} range
      * @param {Object} range.expected
      * @param {String} range.expected.time
@@ -23,11 +30,27 @@ class CorrectionRangeScreen extends base.EntriesScreen {
      */
     async ApplyOne(range) {
         if (range.current) {
-            await action.ScrollQuantityPicker(range.current.max, range.expected.max, maxGlucosePickerID);
-            await action.ScrollQuantityPicker(range.current.min, range.expected.min, minGlucosePickerID);
+            await action.ScrollQuantityPicker(
+                range.current.max,
+                range.expected.max,
+                { pickerID: maxGlucosePickerID, useItemID: false, smallStep: false }
+            );
+            await action.ScrollQuantityPicker(
+                range.current.min,
+                range.expected.min,
+                { pickerID: minGlucosePickerID, useItemID: false, smallStep: false }
+            );
         } else {
-            await action.ScrollQuantityPicker(this.config.maxStart, range.expected.max, maxGlucosePickerID);
-            await action.ScrollQuantityPicker(this.config.minStart, range.expected.min, minGlucosePickerID);
+            await action.ScrollQuantityPicker(
+                this.config.maxStart,
+                range.expected.max,
+                { pickerID: maxGlucosePickerID, useItemID: false, smallStep: false }
+            );
+            await action.ScrollQuantityPicker(
+                this.config.minStart,
+                range.expected.min,
+                { pickerID: minGlucosePickerID, useItemID: false, smallStep: false }
+            );
         }
     }
     /**

@@ -28,7 +28,6 @@ var settingsPumpSimulatorScreenTests = (test) => {
     it('has a cause pump error button', async () => {
         await expect(screen.CausePumpErrorButton()).toExist();
     });
-
     it('has a error on suspend toggle', async () => {
         await expect(screen.ErrorOnSuspendToggel()).toExist();
     });
@@ -63,6 +62,7 @@ var settingsPumpSimulatorScreenTests = (test) => {
         await expect(screen.ReservoirRemainingLabel()).toExist();
     });
     it('has a delete pump label', async () => {
+        await screen.ScrollToBottom();
         await expect(screen.DeletePumpLabel()).toExist();
     });
 };

@@ -37,8 +37,7 @@ describe('smoke test', () => {
         describe('bolus screen', () => {
             accessibilityTests.bolusScreen(test);
         });
-        //TODO: add back when guardrails work is complete
-        describe.skip('delivery limits settings screen', () => {
+        describe('delivery limits settings screen', () => {
             accessibilityTests.settingsDeliveryLimitsScreen(test);
         });
         describe('insulin sensitivities settings screen', () => {

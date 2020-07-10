@@ -28,16 +28,11 @@ describe('guardrails test', () => {
     describe('correction range schedule', () => {
         guardrailsTests.correctionRangeSchedule(test);
     });
-    //TODO: add back when guardrails work is complete
-    describe.skip('basal rate schedule', () => {
+    describe('basal rate schedule', () => {
         guardrailsTests.basalRateSchedule(test);
     });
-    //TODO: add back when guardrails work is complete
-    describe.skip('max temp basal rate', () => {
-        guardrailsTests.maxTempBasalRate(test);
-    });
-    //TODO: add back when guardrails work is complete
-    describe.skip('max bolus', () => {
-        guardrailsTests.maxBolus(test);
+    //TODO: resolve isssue with picker interaction for this screen
+    describe.skip('delivery limits', () => {
+        guardrailsTests.deliveryLimits(test);
     });
 });

@@ -1,78 +1,42 @@
 const element = require('detox').element;
 
-
 const staticTextTrait = 'text';
 const buttonTrait = 'button';
 const imageTrait = 'image';
+const disabledTrait = 'disabled';
 
 const match = {
     /**
      * @summary items that have accessibility traits applied to them
      */
     accessible: {
-        /**
-         * @param {string} label
-         * @returns {Detox.Element} ButtonBarButton
-         */
         ButtonBarButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('_UIButtonBarButton'))));
         },
-        /**
-         *
-         * @param {string} label
-         */
         DisabledButtonBarButton(label) {
-            return element(by.label(label).and(by.traits([buttonTrait, 'disabled']).and(by.type('_UIButtonBarButton'))));
+            return element(by.label(label).and(by.traits([buttonTrait, disabledTrait]).and(by.type('_UIButtonBarButton'))));
         },
-        /**
-         * @param {string} label
-         * @returns {Detox.Element} LoopKitUI.SetupButton
-         */
         SetupButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('LoopKitUI.SetupButton'))));
         },
-        /**
-         * @param {string} label
-         * @returns {Detox.Element} disabled LoopKitUI.SetupButton
-         */
         DisabledSetupButton(label) {
-            return element(by.label(label).and(by.traits([buttonTrait, 'disabled']).and(by.type('LoopKitUI.SetupButton'))));
+            return element(by.label(label).and(by.traits([buttonTrait, disabledTrait]).and(by.type('LoopKitUI.SetupButton'))));
         },
-        /**
-         * @param {string} label
-         * @returns {Detox.Element} accessibilityButton
-         */
         Button(label) {
             return element(by.label(label).and(by.traits([buttonTrait])));
         },
         Switch(label) {
             return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwitch'))));
         },
-        /**
-         * @param {string} label
-         */
         DisabledButton(label) {
-            return element(by.label(label).and(by.traits([buttonTrait, 'disabled'])));
+            return element(by.label(label).and(by.traits([buttonTrait, disabledTrait])));
         },
-        /**
-         * @param {string} theId
-         * @returns {Detox.Element}
-         */
         Id(theId) {
             return element(by.id(theId));
         },
-        /**
-         * @param {string} label
-         * @returns {Detox.Element} accessibilityBackButton
-         */
         BackButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UIAccessibilityBackButtonElement'))));
         },
-        /**
-         * @param {string} label
-         * @returns {Detox.Element} accessibilityBackButton
-         * @example await match.SwipeButton('some label').tap();
-         */
         SwipeButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwipeActionStandardButton'))));
         },
@@ -88,17 +52,9 @@ const match = {
         Header(label) {
             return element(by.label(label).and(by.traits(['header'])));
         },
-        /**
-         * @param {string} label
-         * @returns {Detox.Element} labeled element
-         */
         UILabel(label) {
             return element(by.label(label).and(by.type('UILabel').and(by.traits([staticTextTrait]))));
         },
-        /**
-         * @param {string} text
-         * @returns {Detox.Element} accessibilityText
-         */
         Text(text) {
             return element(by.text(text).and(by.traits([staticTextTrait])));
         },
@@ -115,54 +71,37 @@ const match = {
                         .and(by.traits([staticTextTrait])))
             ).atIndex(pickerNumber);
         },
-        QuantityPickerItem(itemLabel, pickerID) {
-            return this.QuantityPickerItem(itemLabel, pickerID, null);
-        },
-        QuantityPickerItem(itemLabel, pickerID, itemID) {
-            if (itemID) {
-                return element(
-                    by.type('SwiftUI.AccessibilityNode')
-                        .and(by.label(itemLabel)
-                            .and(by.traits([staticTextTrait])
-                                .and(by.id(itemID))))
-                        .withAncestor(by.id(pickerID))
-                ).atIndex(1);
-            }
+        QuantityPickerItemLabel(itemLabel, pickerID) {
             return element(
                 by.type('SwiftUI.AccessibilityNode')
                     .and(by.label(itemLabel)
                         .and(by.traits([staticTextTrait])))
                     .withAncestor(by.id(pickerID))
-            ).atIndex(1);
+            ).atIndex(2);
+        },
+        QuantityPickerItemID(itemID, pickerID) {
+            return element(
+                by.type('SwiftUI.AccessibilityNode')
+                    .and(by.id(itemID)
+                        .and(by.traits([staticTextTrait])))
+                    .withAncestor(by.id(pickerID))
+            ).atIndex(2);
+        },
+        QuantityPickerItemID_v2(itemID) {
+            return element(by.id(itemID).and(by.traits([staticTextTrait])));
         },
         Picker() {
             return element(by.type('UIPickerView')).atIndex(1);
         },
         QuantityPicker(id) {
-            if (id) {
-                return element(by.label('Quantity').and(by.id(id)));
-            }
-            return element(by.label('Quantity'));
+            return element(by.label('Quantity').and(by.id(id)));
         },
-        /**
-         * @summary returns alert items based on the given label
-         * @param {string} label
-         * @returns {Detox.Element}
-         */
         AlertLabel(label) {
             return element(by.label(label).and(by.traits([staticTextTrait])).withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView')));
         },
-        /**
-         * @summary returns alert action item
-         * @returns {Detox.Element}
-         */
         AlertButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait])).and(by.type('_UIAlertControllerActionView')));
         },
-        /**
-         * @summary returns alert if found
-         * @returns {Detox.Element}
-         */
         Alert() {
             return element(by.type('_UIAlertControllerInterfaceActionGroupView'));
         },

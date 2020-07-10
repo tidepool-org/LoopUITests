@@ -16,8 +16,14 @@ class SuspendThresholdScreen extends base.EntryScreen {
     /**
      * @override so we access the correct CancelButton
      */
-    async CancelAndClose() {
-        return this.CancelButton().atIndex(0).tap();
+    CancelButton() {
+        return match.accessible.ButtonBarButton(this.generalText.Cancel);
+    }
+    /**
+     * @override so we access the header by label
+     */
+    Header() {
+        return match.accessible.Label(this.screenText.Header).atIndex(1);
     }
     async OpenPicker() {
         await match.accessible.Label(this.bgUnitsLabel).atIndex(0).tap();

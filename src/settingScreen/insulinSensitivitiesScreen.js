@@ -1,4 +1,5 @@
 const action = require('../action');
+const match = require('../match');
 const { base } = require('../base/index');
 
 const pickerID = 'quantity_picker';
@@ -13,6 +14,12 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
         }, config);
     }
     /**
+     * @override so we access the header by label
+     */
+    Header() {
+        return match.accessible.Label(this.screenText.Header).atIndex(1);
+    }
+    /**
      * @param {Object} sensitivity
      * @param {Object} sensitivity.expected
      * @param {String} sensitivity.expected.time
@@ -24,15 +31,13 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
             await action.ScrollQuantityPicker(
                 sensitivity.current.bgValuePerInsulinUnit,
                 sensitivity.expected.bgValuePerInsulinUnit,
-                pickerID,
-                true,
+                { pickerID: pickerID, useItemID: true, smallStep: false }
             );
         } else {
             await action.ScrollQuantityPicker(
                 this.config.start,
                 sensitivity.expected.bgValuePerInsulinUnit,
-                pickerID,
-                true,
+                { pickerID: pickerID, useItemID: true, smallStep: false }
             );
         }
     }

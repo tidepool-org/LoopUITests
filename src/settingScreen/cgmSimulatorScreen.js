@@ -48,9 +48,8 @@ class CGMSimulatorScreen {
     BackfillGlucoseHistoryLabel() {
         return match.accessible.Label(this.language.History.BackfillGlucose);
     }
-
     TrendHistoryLabel() {
-        return match.accessible.Label(this.language.History.Trend);
+        return match.accessible.Label(this.language.History.Trend).atIndex(0);;
     }
     HistoryHeader() {
         return match.accessible.Header(this.language.History.Header);
@@ -74,9 +73,11 @@ class CGMSimulatorScreen {
         await match.accessible.ButtonBarButton(this.language.general.Done).tap();
     }
     async BackToCGMSettings() {
+        await this.ScrollToTop();
         await this.CGMSettingsButton().tap();
     }
     async Close() {
+        await this.ScrollToTop();
         await this.DoneButton().tap();
     }
     /**
@@ -174,9 +175,27 @@ class CGMSimulatorScreen {
         }
     }
     async RemoveSimulator() {
-        await this.HistoryHeader().swipe('up', 'fast');
+        await this.ScrollToBottom();
         await this.DeleteCGMLabel().tap();
         await this.DeleteCGMConfirmationLabel().tap();
+    }
+    async ScrollToBottom() {
+        try {
+            await expect(this.DeleteCGMLabel()).toBeVisible();
+        } catch (err) {
+            await this.EffectsHeader().swipe('up', 'fast');
+        }
+    }
+    async ScrollToTop() {
+        try {
+            await expect(this.ModelHeader()).toBeVisible();
+        } catch (err) {
+            try {
+                await this.HistoryHeader().swipe('down', 'fast');
+            } catch (err) {
+                await this.EffectsHeader().swipe('down', 'fast');
+            }
+        }
     }
 }
 

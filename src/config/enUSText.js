@@ -1,4 +1,3 @@
-
 var General = {
     NewEntry: 'New Entry',
     Cancel: 'Cancel',
@@ -117,6 +116,16 @@ var SettingsScreen = {
     DeletePump: 'Delete Pump',
     DeletePumpData: 'Delete Pump Data',
     PreMeal: 'Pre-Meal',
+    DeliveryLimitsScreen: {
+        Header: 'Delivery Limits',
+        Info: 'Maximum basal rate is the highest temporary basal rate Tidepool Loop is allowed to set automatically.',
+        MaxBasalRate: 'Maximum Basal Rate',
+        MaxBasalRateInfo: 'Maximum basal rate is the highest temporary basal rate Tidepool Loop is allowed to set automatically.',
+        BasalRateUnits: 'U/hr',
+        MaxBolus: 'Maximum Bolus',
+        MaxBolusInfo: 'Maximum bolus is the highest bolus amount you can deliver at one time.',
+        BolusUnits: 'U',
+    },
     InsulinSensitivitiesScreen: {
         Header: 'Insulin Sensitivities',
         Info: 'Your insulin sensitivity factor (ISF) is the drop in glucose expected from one unit of insulin.',

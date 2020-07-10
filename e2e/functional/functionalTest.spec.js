@@ -28,4 +28,7 @@ describe('functional test', () => {
     describe('cgm simulator screen', () => {
         functionalityTests.cgmSimulatorScreen(test);
     });
+    describe('delivery limits screen', () => {
+        functionalityTests.deliveryLimitsScreen(test);
+    });
 });

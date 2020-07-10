@@ -6,8 +6,8 @@ class Config {
     _getDefaults(limits, text) {
         return {
             DeliveryLimits: {
-                maxBolus: limits.bolusDelivery.max.noWarning,
-                maxBasalRate: limits.basalDelivery.max.noWarning,
+                maxBolus: limits.delivery.bolus.max.noWarning,
+                maxBasalRate: limits.delivery.basalRate.max.noWarning,
             },
             BasalRates: [{
                 time: text.general.TimeSlot[0],

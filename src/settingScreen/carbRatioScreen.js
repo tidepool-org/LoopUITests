@@ -1,4 +1,5 @@
 const action = require('../action');
+const match = require('../match');
 const { base } = require('../base/index');
 
 class CarbRatioScreen extends base.EntriesScreen {
@@ -11,6 +12,12 @@ class CarbRatioScreen extends base.EntriesScreen {
         }, config);
     }
     /**
+     * @override so we access the header by label
+     */
+    Header() {
+        return match.accessible.Label(this.screenText.Header).atIndex(0);
+    }
+    /**
      * @param {Object} ratio
      * @param {Object} ratio.expected
      * @param {String} ratio.expected.time
@@ -20,13 +27,13 @@ class CarbRatioScreen extends base.EntriesScreen {
     async ApplyOne(ratio) {
         const pickerID = 'quantity_picker'
         const wholePart = 0;
-        let expectedParts = String(ratio.expected.carbGramsPerInsulinUnit).split('.');
+        let expectedParts = this._unitParts(ratio.expected.carbGramsPerInsulinUnit);
 
         if (ratio.current) {
-            let currentParts = String(ratio.current.carbGramsPerInsulinUnit).split('.');
-            await action.ScrollQuantityPicker(Number(currentParts[wholePart]), Number(expectedParts[wholePart]), pickerID);
+            let currentParts = this._unitParts(ratio.current.carbGramsPerInsulinUnit);
+            await action.ScrollQuantityPicker(Number(currentParts[wholePart]), Number(expectedParts[wholePart]), { pickerID: pickerID, useItemID: false, smallStep: false });
         } else {
-            await action.ScrollQuantityPicker(this.config.startWhole, Number(expectedParts[wholePart]), pickerID);
+            await action.ScrollQuantityPicker(this.config.startWhole, Number(expectedParts[wholePart]), { pickerID: pickerID, useItemID: false, smallStep: false });
         }
     }
     /**

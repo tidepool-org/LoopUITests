@@ -1,7 +1,9 @@
 var homeActiveCarbohydratesScreen = (test) => {
     var screen;
+    var homeScreen;
     beforeAll(async () => {
-        screen = await test.homeScreen.OpenActiveCarbohydratesChart();
+        homeScreen = await test.OpenHomeScreen();
+        screen = await homeScreen.OpenActiveCarbohydratesChart();
     });
     afterAll(async () => {
         await screen.Close();
