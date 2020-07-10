@@ -1,4 +1,5 @@
 const action = require('../action');
+const match = require('../match');
 const { base } = require('../base/index');
 
 const maxGlucosePickerID = 'max_glucose_picker';
@@ -12,6 +13,12 @@ class CorrectionRangeScreen extends base.EntriesScreen {
             openLabel: language.settingsScreen.CorrectionRangeScreen.Header,
             backLabel: language.general.Cancel,
         }, config);
+    }
+    /**
+     * @override so we access the header by label
+     */
+    Header() {
+        return match.accessible.Label(this.screenText.Header);
     }
     /**
      * @param {Object} range

@@ -16,22 +16,23 @@ describe('guardrails test', () => {
         let settings = await test.OpenSettingsScreen();
         await settings.AddPumpSimulator();
     });
-    // describe('insulin sensitivity schedule', () => {
-    //     guardrailsTests.insulinSensitivitySchedule(test);
-    // });
-    // describe('suspend threshold', () => {
-    //     guardrailsTests.suspendThreshold(test);
-    // });
-    // describe('insulin carb ratio', () => {
-    //     guardrailsTests.insulinCarbRatio(test);
-    // });
-    // describe('correction range schedule', () => {
-    //     guardrailsTests.correctionRangeSchedule(test);
-    // });
-    // describe('basal rate schedule', () => {
-    //     guardrailsTests.basalRateSchedule(test);
-    // });
-    describe('delivery limits', () => {
+    describe('insulin sensitivity schedule', () => {
+        guardrailsTests.insulinSensitivitySchedule(test);
+    });
+    describe('suspend threshold', () => {
+        guardrailsTests.suspendThreshold(test);
+    });
+    describe('insulin carb ratio', () => {
+        guardrailsTests.insulinCarbRatio(test);
+    });
+    describe('correction range schedule', () => {
+        guardrailsTests.correctionRangeSchedule(test);
+    });
+    describe('basal rate schedule', () => {
+        guardrailsTests.basalRateSchedule(test);
+    });
+    //TODO: resolve isssue with picker interaction for this screen
+    describe.skip('delivery limits', () => {
         guardrailsTests.deliveryLimits(test);
     });
 });

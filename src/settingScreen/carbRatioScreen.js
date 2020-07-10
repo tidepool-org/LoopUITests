@@ -1,4 +1,5 @@
 const action = require('../action');
+const match = require('../match');
 const { base } = require('../base/index');
 
 class CarbRatioScreen extends base.EntriesScreen {
@@ -9,6 +10,12 @@ class CarbRatioScreen extends base.EntriesScreen {
             openLabel: language.settingsScreen.CarbRatioScreen.Header,
             backLabel: language.general.Cancel,
         }, config);
+    }
+    /**
+     * @override so we access the header by label
+     */
+    Header() {
+        return match.accessible.Label(this.screenText.Header).atIndex(0);
     }
     /**
      * @param {Object} ratio

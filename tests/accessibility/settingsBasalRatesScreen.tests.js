@@ -12,7 +12,7 @@ var settingsBasalRatesScreen = (test) => {
         await settingsScreen.RemovePumpSimulator();
         await settingsScreen.Close();
     });
-    it.skip('has a header', async () => {
+    it('has a header', async () => {
         await expect(screen.Header()).toExist();
     });
     it('has an info label', async () => {

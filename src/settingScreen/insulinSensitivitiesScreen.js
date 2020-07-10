@@ -1,4 +1,5 @@
 const action = require('../action');
+const match = require('../match');
 const { base } = require('../base/index');
 
 const pickerID = 'quantity_picker';
@@ -11,6 +12,12 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
             openLabel: language.settingsScreen.InsulinSensitivitiesScreen.Header,
             backLabel: language.general.Cancel,
         }, config);
+    }
+    /**
+     * @override so we access the header by label
+     */
+    Header() {
+        return match.accessible.Label(this.screenText.Header).atIndex(1);
     }
     /**
      * @param {Object} sensitivity

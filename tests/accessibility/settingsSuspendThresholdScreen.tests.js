@@ -11,7 +11,7 @@ var settingsSuspendThresholdScreen = (test) => {
         await settingsScreen.Close();
     });
     //TODO: should be a header but is a label
-    it.skip('has a header', async () => {
+    it('has a header', async () => {
         await expect(screen.Header()).toExist();
     });
     it('has an info label', async () => {
@@ -20,9 +20,9 @@ var settingsSuspendThresholdScreen = (test) => {
     it('has an info button', async () => {
         await expect(screen.InfoButton()).toExist();
     });
-    // it('has a cancel button', async () => {
-    //     await expect(screen.CancelButton()).toExist();
-    // });
+    it('has a cancel button', async () => {
+        await expect(screen.CancelButton()).toExist();
+    });
     it('has a save button', async () => {
         await expect(screen.SaveButton()).toExist();
     });

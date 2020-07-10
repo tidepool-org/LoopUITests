@@ -1,4 +1,5 @@
 const action = require('../action');
+const match = require('../match');
 const { base } = require('../base/index');
 
 class BasalRatesScreen extends base.EntriesScreen {
@@ -10,6 +11,12 @@ class BasalRatesScreen extends base.EntriesScreen {
             backLabel: language.general.Cancel,
         }, config);
         this.unitsLabel = language.settingsScreen.BasalRatesScreen.Units;
+    }
+    /**
+     * @override so we access the header by label
+     */
+    Header() {
+        return match.accessible.Label(this.screenText.Header).atIndex(0);
     }
     /**
      * @param {Object} rate

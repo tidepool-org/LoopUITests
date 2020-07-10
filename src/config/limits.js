@@ -61,18 +61,17 @@ var mgdL = {
         basalRate: {
             max: {
                 limit: 35.0,
-                warning: 34.9,
-                noWarning: 34.0,
             },
             min: {
+                noWarning: 0.05,
                 limit: 0.0,
             },
         },
         bolus: {
             max: {
-                limit: 30.0,
+                limit: 35.0,
                 warning: 20.0,
-                noWarning: 19.0,
+                noWarning: 19.95,
             },
             min: {
                 limit: 0.0,

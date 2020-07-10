@@ -10,7 +10,7 @@ var settingsCorrectionRangeScreen = (test) => {
         await settingsScreen.Close();
     });
     //TODO: should be a header but is a label
-    it.skip('has a header', async () => {
+    it('has a header', async () => {
         await expect(screen.Header()).toExist();
     });
     it('has an info label', async () => {

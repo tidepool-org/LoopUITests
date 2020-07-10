@@ -18,21 +18,35 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     CancelButton() {
         return match.accessible.ButtonBarButton(this.generalText.Cancel);
     }
+    /**
+     * @override so we access the header by label
+     */
+    Header() {
+        return match.accessible.Label(this.screenText.Header).atIndex(0);
+    }
     _limitParts(limitAmount) {
         return String(limitAmount).split('.');
     }
     async _set(expected, current) {
-        await action.ScrollQuantityPicker(
-            current[0],
-            expected[0],
-            { pickerID: 'quantity_picker', useItemID: true, smallStep: true }
-        );
+        //await action.ScrollPickerToValue(current[0], expected[0]);
+        await action.SwipePickerDown(2);
+        // await action.ScrollQuantityPicker(
+        //     current[0],
+        //     expected[0],
+        //     { pickerID: 'quantity_picker', useItemID: true, smallStep: true }
+        // );
     }
     MaxBasalRateLabel() {
-        return match.accessible.Label(this.language.settingsScreen.DeliveryLimitsScreen.MaxBasalRate);
+        return match.accessible.Label(this.screenText.MaxBasalRate);
+    }
+    MaxBasalRateInfo() {
+        return match.accessible.Label(this.screenText.MaxBasalRateInfo);
     }
     MaxBolusLabel() {
-        return match.accessible.Label(this.language.settingsScreen.DeliveryLimitsScreen.MaxBolus);
+        return match.accessible.Label(this.screenText.MaxBolus);
+    }
+    MaxBolusInfo() {
+        return match.accessible.Label(this.screenText.MaxBolusInfo);
     }
     async OpenBasalRatePicker() {
         await this.MaxBasalRateLabel().tap();
