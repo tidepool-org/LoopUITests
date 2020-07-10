@@ -28,8 +28,7 @@ class DeliveryLimitsScreen extends base.EntryScreen {
         return String(limitAmount).split('.');
     }
     async _set(expected, current) {
-        //await action.ScrollPickerToValue(current[0], expected[0]);
-        await action.SwipePickerDown(2);
+        //TODO: need to sort out interaction with app
         // await action.ScrollQuantityPicker(
         //     current[0],
         //     expected[0],

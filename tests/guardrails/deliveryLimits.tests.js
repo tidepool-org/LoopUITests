@@ -32,8 +32,6 @@ var deliveryLimits = (test) => {
         });
         await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
     });
-
-
     it('can open max bolus rate picker', async () => {
         await screen.OpenBolusPicker();
     })
@@ -70,10 +68,6 @@ var deliveryLimits = (test) => {
         });
         await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
     });
-
-
-
-
 }
 
 module.exports = { deliveryLimits };
