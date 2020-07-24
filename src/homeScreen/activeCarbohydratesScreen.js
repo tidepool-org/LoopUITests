@@ -1,33 +1,30 @@
 const match = require('../match');
 
-class ActiveCarbohydratesScreen {
+const { base } = require('../base/index');
+
+class ActiveCarbohydratesScreen extends base.Screen {
     constructor(language) {
-        this.language = language.homeScreen.ActiveCarbohydratesScreen;
-        this.language.general = language.general;
-    }
-    Header() {
-        return match.accessible.Header(this.language.Carbohydrates);
+        super({
+            openClickableLabel: language.homeScreen.ActiveCarbohydratesScreen.ActiveCarbohydrates,
+            screenText: language.homeScreen.ActiveCarbohydratesScreen,
+            generalText: language.general,
+            backLabel: language.general.Status,
+        });
     }
     COBLabel() {
-        return match.accessible.TextLabel(this.language.COB);
+        return match.accessible.TextLabel(this.screenText.COB);
     }
     TotalLabel() {
-        return match.accessible.TextLabel(this.language.Total);
+        return match.accessible.TextLabel(this.screenText.Total);
     }
     GlucoseChangeLabel() {
-        return match.accessible.TextLabel(this.language.GlucoseChange);
+        return match.accessible.TextLabel(this.screenText.GlucoseChange);
     }
     ObservedLabel() {
-        return match.accessible.TextLabel(this.language.Observed);
+        return match.accessible.TextLabel(this.screenText.Observed);
     }
     PredictedLabel() {
-        return match.accessible.TextLabel(this.language.Predicted);
-    }
-    BackButton() {
-        return match.accessible.BackButton(this.language.general.Status);
-    }
-    async Close() {
-        await this.BackButton().tap();
+        return match.accessible.TextLabel(this.screenText.Predicted);
     }
 }
 

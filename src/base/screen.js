@@ -10,6 +10,7 @@ class Screen {
      */
     constructor(parentScreen) {
         this.openLabel = parentScreen.openLabel;
+        this.openClickableLabel = parentScreen.openClickableLabel;
         this.backLabel = parentScreen.backLabel;
         this.screenText = parentScreen.screenText;
         this.generalText = parentScreen.generalText;
@@ -22,7 +23,7 @@ class Screen {
     }
     BackButton() {
         if (this.backLabel) {
-            return match.accessible.ButtonBarButton(this.backLabel);
+            return match.accessible.BackButton(this.backLabel);
         }
         return this.CancelButton();
     }
@@ -30,7 +31,10 @@ class Screen {
         return match.accessible.ButtonBarButton(this.generalText.Continue);
     }
     OpenButton() {
-        return match.accessible.Button(this.openLabel);
+        if (this.openLabel) {
+            return match.accessible.Button(this.openLabel);
+        }
+        return match.accessible.ClickableLabel(this.openClickableLabel);
     }
     async Open() {
         return this.OpenButton().tap();

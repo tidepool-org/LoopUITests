@@ -23,16 +23,16 @@ class HomeScreen {
         return this.header;
     }
     ActiveCarbohydratesLabel() {
-        return match.accessible.ClickableLabel(this.language.homeScreen.ActiveCarbohydrates);
+        return this.activeCarbohydratesScreen.OpenButton();//match.accessible.ClickableLabel(this.language.homeScreen.ActiveCarbohydrates);
     }
     ActiveInsulinLabel() {
-        return match.accessible.ClickableLabel(this.language.homeScreen.ActiveInsulin);
+        return this.activeInsulinScreen.OpenButton();//match.accessible.ClickableLabel(this.language.homeScreen.ActiveInsulin);
     }
     InsulinDeliveryLabel() {
-        return match.accessible.ClickableLabel(this.language.homeScreen.InsulinDelivery);
+        return this.insulinDeliveryScreen.OpenButton();//match.accessible.ClickableLabel(this.language.homeScreen.InsulinDelivery);
     }
     GlucoseLabel() {
-        return match.accessible.ClickableLabel(this.language.homeScreen.Glucose);
+        return this.glucoseScreen.OpenButton();//match.accessible.ClickableLabel(this.language.homeScreen.Glucose);
     }
     SettingsButton() {
         return match.accessible.Button(this.language.settingsScreen.Settings);

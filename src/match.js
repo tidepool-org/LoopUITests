@@ -58,9 +58,6 @@ const match = {
         Header(label) {
             return element(by.label(label).and(by.traits(['header'])));
         },
-        UILabel(label) {
-            return element(by.label(label).and(by.type('UILabel').and(by.traits([staticTextTrait]))));
-        },
         Text(text) {
             return element(by.text(text).and(by.traits([staticTextTrait])));
         },
@@ -172,10 +169,6 @@ const match = {
             return element(by.type('UILabel').and(by.traits([staticTextTrait])).withAncestor(by.type('LoopUI.GlucoseHUDView')));
         },
     },
-    /**
-     * @summary get a non accessible UIEditableTextField
-     * @returns {Detox.Element} UIEditableTextField
-     */
     UIEditableTextField() {
         return element(by.type('LoopKitUI.PaddedTextField'));
     },
