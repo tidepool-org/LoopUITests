@@ -63,7 +63,7 @@ var cgmSimulatorScreen = (test) => {
             }
         });
     });
-    it('set history as Backfill Glucose for 5 hours', async () => {
+    it.skip('set history as Backfill Glucose for 5 hours', async () => {
         await screen.Apply({
             history: {
                 name: screen.language.History.BackfillGlucose,
@@ -72,32 +72,13 @@ var cgmSimulatorScreen = (test) => {
         });
         await screen.BackToCGMSettings();
     });
-    it('set history as Trend', async () => {
+    it.skip('set history as Trend', async () => {
         await screen.Apply({
             history: {
                 name: screen.language.History.Trend,
                 trend: screen.language.History.RisingTrend,
             }
         });
-        await screen.BackToCGMSettings();
-    });
-    it.skip('set alerts as Delayed Alert', async () => {
-        //TODO: need to see if we can remove alert otherwise it will block other interaction
-        await screen.Apply({
-            alerts: {
-                name: screen.language.Alerts.DelayedAlert,
-            }
-        });
-        await screen.BackToCGMSettings();
-    });
-    it.skip('set alerts as Reapeating Alert', async () => {
-        //TODO: appears to crash app?
-        await screen.Apply({
-            alerts: {
-                name: screen.language.Alerts.ReapeatingAlert,
-            }
-        });
-        await screen.BackToCGMSettings();
     });
     it('can remove simulator', async () => {
         await screen.RemoveSimulator();

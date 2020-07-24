@@ -16,16 +16,16 @@ class CarbEntryScreen extends base.Screen {
         return match.accessible.ButtonBarButton(this.generalText.Cancel);
     }
     AmountConsumedLabel() {
-        return match.accessible.Label(this.screenText.AmountConsumed);
+        return match.accessible.TextLabel(this.screenText.AmountConsumed);
     }
     DateLabel() {
-        return match.accessible.Label(this.screenText.Date);
+        return match.accessible.ClickableLabel(this.screenText.Date);
     }
     FoodTypeLabel() {
-        return match.accessible.Label(this.screenText.FoodType);
+        return match.accessible.ClickableLabel(this.screenText.FoodType);
     }
     AbsorptionTimeLabel() {
-        return match.accessible.Label(this.screenText.AbsorptionTime);
+        return match.accessible.ClickableLabel(this.screenText.AbsorptionTime);
     }
     DisabledContinueButton() {
         return match.accessible.DisabledButtonBarButton(this.generalText.Continue);
@@ -50,26 +50,29 @@ class CarbEntryScreen extends base.Screen {
         await expect(match.accessible.Label(predictedGlucoseWarning)).toExist();
     }
     AbsorptionTimeMessage() {
-        return match.accessible.Label(this.screenText.AbsorptionMessage);
+        return match.accessible.TextLabel(this.screenText.AbsorptionMessage);
     }
     async ExpectAbsorptionTimeMessage() {
         await expect(this.AbsorptionTimeMessage()).toExist();
     }
     async SetCarbs(amount) {
-        await match.UITextField().clearText();
-        await match.UITextField().typeText(String(amount));
-        await match.UITextField().tapReturnKey();
+        var carbsField = match.UITextField();
+        await carbsField.clearText();
+        await carbsField.typeText(String(amount));
+        await carbsField.tapReturnKey();
     }
-    async SetDate(amount) {
-        await match.UITextField().clearText();
-        await match.UITextField().typeText(String(amount));
-        await match.UITextField().tapReturnKey();
+    async SetDate(date) {
+        var dateField = match.UITextField();
+        await dateField.clearText();
+        await dateField.typeText(String(date));
+        await dateField.tapReturnKey();
 
     }
     async SetAbsortionTime(hours) {
-        await match.UITextField().clearText();
-        await match.UITextField().typeText(String(hours));
-        await match.UITextField().tapReturnKey();
+        var absortionField = match.UITextField();
+        await absortionField.clearText();
+        await absortionField.typeText(String(hours));
+        await absortionField.tapReturnKey();
     }
 }
 

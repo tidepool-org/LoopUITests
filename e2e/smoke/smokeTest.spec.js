@@ -28,38 +28,38 @@ describe('smoke test', () => {
         describe('home active carbohydrates screen', () => {
             accessibilityTests.homeActiveCarbohydratesScreen(test);
         });
-        describe('carb entry screen', () => {
-            accessibilityTests.carbEntryScreen(test);
-        });
-        describe('settings screen', () => {
-            accessibilityTests.settingsScreen(test);
-        });
-        describe('bolus screen', () => {
-            accessibilityTests.bolusScreen(test);
-        });
-        describe('delivery limits settings screen', () => {
-            accessibilityTests.settingsDeliveryLimitsScreen(test);
-        });
-        describe('insulin sensitivities settings screen', () => {
-            accessibilityTests.settingsInsulinSensitivitiesScreen(test);
-        });
-        describe('correction range settings screen', () => {
-            accessibilityTests.settingsCorrectionRangeScreen(test);
-        });
-        describe('suspend threshold screen', () => {
-            accessibilityTests.settingsSuspendThresholdScreen(test);
-        });
-        describe('CGM simulator settings screen', () => {
-            accessibilityTests.settingsCGMSimulatorScreenTests(test);
-        });
-        describe('pump simulator settings screen', () => {
-            accessibilityTests.settingsPumpSimulatorScreenTests(test);
-        });
-        describe('basal rates settings screen', () => {
-            accessibilityTests.settingsBasalRatesScreen(test);
-        });
-        describe('carb ratios settings screen', () => {
-            accessibilityTests.settingsCarbRatioScreen(test);
-        });
+        // describe('carb entry screen', () => {
+        //     accessibilityTests.carbEntryScreen(test);
+        // });
+        // describe('settings screen', () => {
+        //     accessibilityTests.settingsScreen(test);
+        // });
+        // describe('bolus screen', () => {
+        //     accessibilityTests.bolusScreen(test);
+        // });
+        // describe('delivery limits settings screen', () => {
+        //     accessibilityTests.settingsDeliveryLimitsScreen(test);
+        // });
+        // describe('insulin sensitivities settings screen', () => {
+        //     accessibilityTests.settingsInsulinSensitivitiesScreen(test);
+        // });
+        // describe('correction range settings screen', () => {
+        //     accessibilityTests.settingsCorrectionRangeScreen(test);
+        // });
+        // describe('suspend threshold screen', () => {
+        //     accessibilityTests.settingsSuspendThresholdScreen(test);
+        // });
+        // describe('CGM simulator settings screen', () => {
+        //     accessibilityTests.settingsCGMSimulatorScreenTests(test);
+        // });
+        // describe('pump simulator settings screen', () => {
+        //     accessibilityTests.settingsPumpSimulatorScreenTests(test);
+        // });
+        // describe('basal rates settings screen', () => {
+        //     accessibilityTests.settingsBasalRatesScreen(test);
+        // });
+        // describe('carb ratios settings screen', () => {
+        //     accessibilityTests.settingsCarbRatioScreen(test);
+        // });
     });
 });

@@ -9,16 +9,16 @@ class ActiveInsulinScreen {
         return match.accessible.Header(this.language.InsulinDelivery);
     }
     IOBLabel() {
-        return match.accessible.Label(this.language.IOB);
+        return match.accessible.TextLabel(this.language.IOB);
     }
     TotalLabel() {
-        return match.accessible.Label(this.language.Total);
+        return match.accessible.TextLabel(this.language.Total);
     }
     EventHistoryLabel() {
-        return match.accessible.Label(this.language.EventHistory);
+        return match.accessible.TextLabel(this.language.EventHistory);
     }
     ReservoirLabel() {
-        return match.accessible.Label(this.language.Reservoir);
+        return match.accessible.TextLabel(this.language.Reservoir);
     }
     BackButton() {
         return match.accessible.BackButton(this.language.general.Status);

@@ -1,5 +1,6 @@
 const element = require('detox').element;
 const match = require('../match');
+const action = require('../action');
 
 class PumpSimulatorScreen {
     constructor(language) {
@@ -86,7 +87,7 @@ class PumpSimulatorScreen {
         return match.accessible.Label(this.language.DeletePump);
     }
     DeletePumpConfirmationLabel() {
-        return match.accessible.Label(this.language.DeletePump).atIndex(1);
+        return match.accessible.AlertButton(this.language.DeletePump);
     }
     SuspendDeliveryButton() {
         return match.accessible.Label(this.language.SuspendDelivery);
@@ -130,6 +131,9 @@ class PumpSimulatorScreen {
         await this.ApplyReservoirRemaining(settings.reservoirRemaining);
     }
     async SetErrorOnBolus(turnOn) {
+        if (turnOn == null) {
+            return;
+        }
         let allReadyOn = await this._isErrorOnBolus();
         if (turnOn == true) {
             if (allReadyOn == false) {
@@ -142,6 +146,9 @@ class PumpSimulatorScreen {
         }
     }
     async SetErrorOnTempBasal(turnOn) {
+        if (turnOn == null) {
+            return;
+        }
         let allReadyOn = await this._isErrorOnTempBasal();
         if (turnOn == true) {
             if (allReadyOn == false) {
@@ -154,6 +161,9 @@ class PumpSimulatorScreen {
         }
     }
     async SetErrorOnSuspend(turnOn) {
+        if (turnOn == null) {
+            return;
+        }
         let allReadyOn = await this._isErrorOnSuspend();
         if (turnOn == true) {
             if (allReadyOn == false) {
@@ -166,6 +176,9 @@ class PumpSimulatorScreen {
         }
     }
     async SetErrorOnResume(turnOn) {
+        if (turnOn == null) {
+            return;
+        }
         let allReadyOn = await this._isErrorOnResume();
         if (turnOn == true) {
             if (allReadyOn == false) {
@@ -181,30 +194,33 @@ class PumpSimulatorScreen {
         await match.accessible.BackButton(this.language.PumpSettings).tap();
     }
     async _setValue(val) {
-        await element(by.type('UITextField')).clearText();
-        await element(by.type('UITextField')).typeText(String(val));
+        var valField = element(by.type('UITextField'));
+        await valField.clearText();
+        await valField.typeText(String(val));
     }
     async ApplyBatteryRemaining(percent) {
-        if (percent) {
-            if (percent > 100 || percent < 0) {
-                console.log('battery remaining percent must be in the range of 0-100');
-                return;
-            }
-            await this.BatteryRemainingLabel().tap();
-            await this._setValue(percent);
-            await this._backToPumpSimulator();
+        if (percent == null) {
+            return;
         }
+        if (percent > 100 || percent < 0) {
+            console.log('battery remaining percent must be in the range of 0-100');
+            return;
+        }
+        await this.BatteryRemainingLabel().tap();
+        await this._setValue(percent);
+        await this._backToPumpSimulator();
     }
     async ApplyReservoirRemaining(units) {
-        if (units) {
-            if (units > 200 || units < 0) {
-                console.log('reservoir remaining units must be in the range of 0-200');
-                return;
-            }
-            await this.ReservoirRemainingLabel().tap();
-            await this._setValue(units);
-            await this._backToPumpSimulator();
+        if (units == null) {
+            return;
         }
+        if (units > 200 || units < 0) {
+            console.log('reservoir remaining units must be in the range of 0-200');
+            return;
+        }
+        await this.ReservoirRemainingLabel().tap();
+        await this._setValue(units);
+        await this._backToPumpSimulator();
     }
     async Close() {
         await this.DoneButton().tap();
@@ -230,14 +246,14 @@ class PumpSimulatorScreen {
         try {
             await expect(this.DeletePumpLabel()).toBeVisible();
         } catch (err) {
-            await this.ConfigurationHeader().swipe('up', 'fast');
+            await action.ScrollToBottom();
         }
     }
     async ScrollToTop() {
         try {
             await expect(this.SuspendDelivery()).toBeVisible();
         } catch (err) {
-            await this.ErrorOnBolusLabel().swipe('down', 'fast');
+            await action.ScrollToTop();
         }
     }
 }

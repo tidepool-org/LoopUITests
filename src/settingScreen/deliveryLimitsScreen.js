@@ -22,7 +22,7 @@ class DeliveryLimitsScreen extends base.EntryScreen {
      * @override so we access the header by label
      */
     Header() {
-        return match.accessible.Label(this.screenText.Header).atIndex(0);
+        return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
     }
     _limitParts(limitAmount) {
         return String(limitAmount).split('.');
@@ -36,16 +36,16 @@ class DeliveryLimitsScreen extends base.EntryScreen {
         // );
     }
     MaxBasalRateLabel() {
-        return match.accessible.Label(this.screenText.MaxBasalRate);
+        return match.accessible.TextLabel(this.screenText.MaxBasalRate);
     }
     MaxBasalRateInfo() {
-        return match.accessible.Label(this.screenText.MaxBasalRateInfo);
+        return match.accessible.TextLabel(this.screenText.MaxBasalRateInfo);
     }
     MaxBolusLabel() {
-        return match.accessible.Label(this.screenText.MaxBolus);
+        return match.accessible.TextLabel(this.screenText.MaxBolus);
     }
     MaxBolusInfo() {
-        return match.accessible.Label(this.screenText.MaxBolusInfo);
+        return match.accessible.TextLabel(this.screenText.MaxBolusInfo);
     }
     async OpenBasalRatePicker() {
         await this.MaxBasalRateLabel().tap();

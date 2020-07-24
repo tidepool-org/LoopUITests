@@ -1,4 +1,5 @@
 const match = require('./match');
+const action = require('./action');
 const { settingsSubScreen } = require('./settingScreen/index');
 
 class SettingsScreen {
@@ -132,13 +133,13 @@ class SettingsScreen {
         return match.accessible.Label(this.language.settingsScreen.DeleteCGMData).atIndex(0);
     }
     RemoveCGMDataConfirmationLabel() {
-        return match.accessible.Label(this.language.settingsScreen.DeleteCGMData).atIndex(1);
+        return match.accessible.AlertButton(this.language.settingsScreen.DeleteCGMData);
     }
     RemovePumpDataLabel() {
         return match.accessible.Label(this.language.settingsScreen.DeletePumpData).atIndex(0);
     }
     RemovePumpDataConfirmationLabel() {
-        return match.accessible.Label(this.language.settingsScreen.DeletePumpData).atIndex(1);
+        return match.accessible.AlertButton(this.language.settingsScreen.DeletePumpData);
     }
     CGMSimulatorLabel() {
         try {
@@ -155,18 +156,14 @@ class SettingsScreen {
         try {
             await expect(this.ServicesHeader()).toBeVisible();
         } catch (err) {
-            await this.ConfigurationHeader().swipe('up', 'fast');
+            await action.ScrollToBottom();
         }
     }
     async ScrollToTop() {
         try {
             await expect(this.PumpHeader()).toBeVisible();
         } catch (err) {
-            try {
-                await this.ServicesHeader().swipe('down', 'fast');
-            } catch (err) {
-                await this.ConfigurationHeader().swipe('down', 'fast');
-            }
+            await action.ScrollToTop();
         }
     }
     /**

@@ -25,29 +25,31 @@ class BolusScreen extends base.Screen {
         return match.accessible.DisabledButton(this.screenText.Deliver);
     }
     BolusLabel() {
-        return match.accessible.Label(this.screenText.Header);
+        return match.accessible.TextLabel(this.screenText.Header);
     }
     EnteredLabel() {
-        return match.accessible.Label(this.screenText.Entered);
+        return match.accessible.TextLabel(this.screenText.Entered);
     }
     RecommendedLabel() {
-        return match.accessible.Label(this.screenText.Recommended);
+        return match.accessible.TextLabel(this.screenText.Recommended);
     }
     async ExpectCannotDeliverBolus() {
         await expect(match.accessible.DisabledButton(this.screenText.Deliver)).toExist();
     }
     async SetBolusAmount(units) {
-        await match.UITextField().clearText();
-        await match.UITextField().typeText(String(units));
-        await match.UITextField().tapReturnKey();
+        var bolusAmountField = match.UITextField();
+        await bolusAmountField.clearText();
+        await bolusAmountField.typeText(String(units));
+        await bolusAmountField.tapReturnKey();
     }
     AuthenticationLabel() {
         return match.Text('Authenticate to bolus');
     }
     async SetAuthentication(passcode) {
-        await match.UITextField().clearText();
-        await match.UITextField().typeText(String(passcode));
-        await match.UITextField().tapReturnKey();
+        var authField = match.UITextField();
+        await authField.clearText();
+        await authField.typeText(String(passcode));
+        await authField.tapReturnKey();
     }
 };
 

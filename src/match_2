@@ -1,18 +1,16 @@
 const element = require('detox').element;
 
-const staticTextTrait = 'text';
+const staticTextTrait = 'staticText';
+const headerTrait = 'header';
 const buttonTrait = 'button';
 const imageTrait = 'image';
-const disabledTrait = 'disabled';
+const disabledTrait = 'notEnabled';
 
 const match = {
     /**
      * @summary items that have accessibility traits applied to them
      */
     accessible: {
-        ButtonBarButton(label) {
-            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('_UIButtonBarButton'))));
-        },
         DisabledButtonBarButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait, disabledTrait]).and(by.type('_UIButtonBarButton'))));
         },
@@ -25,29 +23,26 @@ const match = {
         Button(label) {
             return element(by.label(label).and(by.traits([buttonTrait])));
         },
-        Switch(label) {
-            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwitch'))));
-        },
         DisabledButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait, disabledTrait])));
         },
-        Id(theId) {
-            return element(by.id(theId));
-        },
-        BackButton(label) {
-            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UIAccessibilityBackButtonElement'))));
+        Switch(label) {
+            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwitch'))));
         },
         SwipeButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwipeActionStandardButton'))));
         },
-        TextLabel(label) {
+        Text(label) {
             return element(by.label(label).and(by.traits([staticTextTrait])));
         },
-        ClickableLabel(label) {
+        ItemWithLabel(label) {
             return element(by.type('UITableViewCellContentView').withDescendant(by.label(label).and(by.traits([staticTextTrait]))));
         },
-        Label(label) {
-            return this.TextLabel(label);
+        TextFieldWithLabel(label) {
+            return element(by.type('UIFieldEditor').withDescendant(by.label(label)));
+        },
+        ButtonBarButtonWithLabel(label) {
+            return element(by.type('_UIButtonBarButton').withDescendant(by.label(label).and(by.traits([staticTextTrait]))));
         },
         Image(label) {
             return element(by.label(label).and(by.traits([imageTrait])));
@@ -56,13 +51,7 @@ const match = {
             return element(by.label(label).and(by.traits([imageTrait]).and(by.id(theId))));
         },
         Header(label) {
-            return element(by.label(label).and(by.traits(['header'])));
-        },
-        UILabel(label) {
-            return element(by.label(label).and(by.type('UILabel').and(by.traits([staticTextTrait]))));
-        },
-        Text(text) {
-            return element(by.text(text).and(by.traits([staticTextTrait])));
+            return element(by.label(label).and(by.traits([headerTrait])));
         },
         /**
          * @summary returns Picker item(s) for given label and index
@@ -111,7 +100,6 @@ const match = {
         Alert() {
             return element(by.type('_UIAlertControllerInterfaceActionGroupView'));
         },
-
     },
     loop: {
         /**
@@ -182,11 +170,15 @@ const match = {
     UITextField() {
         return element(by.type('UITextField'));
     },
+    //UIFieldEditor
     ScrollableView() {
         return element(by.type('UITableView'));
     },
-    Text(theText) {
-        return element(by.text(theText));
+    Text(label) {
+        return element(by.label(label));
+    },
+    Disabled(label) {
+        return element(by.text(label).and(by.traits(['notEnabled'])));
     }
 };
 

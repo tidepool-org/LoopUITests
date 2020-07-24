@@ -9,19 +9,19 @@ class ActiveCarbohydratesScreen {
         return match.accessible.Header(this.language.Carbohydrates);
     }
     COBLabel() {
-        return match.accessible.Label(this.language.COB);
+        return match.accessible.TextLabel(this.language.COB);
     }
     TotalLabel() {
-        return match.accessible.Label(this.language.Total);
+        return match.accessible.TextLabel(this.language.Total);
     }
     GlucoseChangeLabel() {
-        return match.accessible.Label(this.language.GlucoseChange);
+        return match.accessible.TextLabel(this.language.GlucoseChange);
     }
     ObservedLabel() {
-        return match.accessible.Label(this.language.Observed);
+        return match.accessible.TextLabel(this.language.Observed);
     }
     PredictedLabel() {
-        return match.accessible.Label(this.language.Predicted);
+        return match.accessible.TextLabel(this.language.Predicted);
     }
     BackButton() {
         return match.accessible.BackButton(this.language.general.Status);
