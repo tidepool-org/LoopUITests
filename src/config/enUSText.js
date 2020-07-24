@@ -197,6 +197,8 @@ var SettingsScreen = {
         Info: 'Your carb ratio is the number of grams of carbohydrate covered by one unit of insulin.',
     },
     PumpSimulatorScreen: {
+        Header: 'Pump Settings',
+        ConfigurationHeader: 'CONFIGURATION',
         PumpSettings: 'Pump Settings',
         ReservoirRemaining: 'Reservoir Remaining',
         BatteryRemaining: 'Battery Remaining',

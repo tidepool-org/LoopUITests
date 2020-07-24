@@ -1,4 +1,5 @@
 const match = require('./match');
+const action = require('./match');
 const { settingsSubScreen } = require('./settingScreen/index');
 
 class SettingsScreenv2 {
@@ -18,7 +19,7 @@ class SettingsScreenv2 {
         return match.accessible.ButtonBarButtonWithLabel(this.language.general.Done);
     }
     TherapySettingsLabel() {
-        return match.accessible.ItemWithLabel('Therapy Settings');
+        return match.accessible.ClickableLabel('Therapy Settings');
     }
     async ScrollToBottom() {
         try {
