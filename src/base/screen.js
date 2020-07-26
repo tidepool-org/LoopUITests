@@ -9,8 +9,9 @@ class Screen {
      * @param {string} parentScreen.backLabel
      * @param {object} parentScreen.screenText
      * @param {object} parentScreen.generalText
-     * @param {object} parentScreen.visibleBottomLabel optional, label that should be visible if your at the bottom of the screen
-     * @param {object} parentScreen.visibleTopLabel optional, label that should be visible if your at the top of the screen
+     * @param {object} parentScreen.scroll optional
+     * @param {object} parentScreen.scroll.visibleBottomLabel label that should be visible if your at the bottom of the screen
+     * @param {object} parentScreen.scroll.visibleTopLabel label that should be visible if your at the top of the screen
      */
     constructor(parentScreen) {
         this.openLabel = parentScreen.openLabel;
@@ -18,8 +19,10 @@ class Screen {
         this.backLabel = parentScreen.backLabel;
         this.screenText = parentScreen.screenText;
         this.generalText = parentScreen.generalText;
-        this.visibleBottomLabel = parentScreen.visibleBottomLabel;
-        this.visibleTopLabel = parentScreen.visibleTopLabel;
+        if (parentScreen.scroll) {
+            this.visibleBottomLabel = parentScreen.scroll.visibleBottomLabel;
+            this.visibleTopLabel = parentScreen.scroll.visibleTopLabel;
+        }
     }
     Header() {
         return match.accessible.Header(this.screenText.Header);

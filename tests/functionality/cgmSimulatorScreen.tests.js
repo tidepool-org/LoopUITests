@@ -5,7 +5,7 @@ var cgmSimulatorScreen = (test) => {
         settingsScreen = await test.OpenSettingsScreen();
     });
     afterAll(async () => {
-        await settingsScreen.Close();
+        await settingsScreen.Back();
     });
     it('can add simulator', async () => {
         await settingsScreen.AddCGMSimulator();
@@ -14,28 +14,28 @@ var cgmSimulatorScreen = (test) => {
     it('set effect as Glucose Noise', async () => {
         await screen.Apply({
             effect: {
-                name: screen.language.Effect.GlucoseNoise
+                name: screen.screenText.Effect.GlucoseNoise
             }
         });
     });
     it('set effect as Random Error', async () => {
         await screen.Apply({
             effect: {
-                name: screen.language.Effect.RandomError
+                name: screen.screenText.Effect.RandomError
             }
         });
     });
     it('set effect as Random High Outlier', async () => {
         await screen.Apply({
             effect: {
-                name: screen.language.Effect.RandomHighOutlier
+                name: screen.screenText.Effect.RandomHighOutlier
             }
         });
     });
     it('set effect as Random Low Outlier', async () => {
         await screen.Apply({
             effect: {
-                name: screen.language.Effect.RandomLowOutlier
+                name: screen.screenText.Effect.RandomLowOutlier
             }
         });
     });
@@ -43,7 +43,7 @@ var cgmSimulatorScreen = (test) => {
     it('set effect as Constant model', async () => {
         await screen.Apply({
             model: {
-                name: screen.language.Model.Constant,
+                name: screen.screenText.Model.Constant,
                 bgValues: [112],
             }
         });
@@ -51,7 +51,7 @@ var cgmSimulatorScreen = (test) => {
     it('set effect as Sine Curve model', async () => {
         await screen.Apply({
             model: {
-                name: screen.language.Model.SineCurve,
+                name: screen.screenText.Model.SineCurve,
                 bgValues: [112, 120],
             }
         });
@@ -59,14 +59,14 @@ var cgmSimulatorScreen = (test) => {
     it('set effect as No Data model', async () => {
         await screen.Apply({
             model: {
-                name: screen.language.Model.None,
+                name: screen.screenText.Model.None,
             }
         });
     });
     it.skip('set history as Backfill Glucose for 5 hours', async () => {
         await screen.Apply({
             history: {
-                name: screen.language.History.BackfillGlucose,
+                name: screen.screenText.History.BackfillGlucose,
                 backfillHours: 5,
             }
         });
@@ -75,8 +75,8 @@ var cgmSimulatorScreen = (test) => {
     it.skip('set history as Trend', async () => {
         await screen.Apply({
             history: {
-                name: screen.language.History.Trend,
-                trend: screen.language.History.RisingTrend,
+                name: screen.screenText.History.Trend,
+                trend: screen.screenText.History.RisingTrend,
             }
         });
     });

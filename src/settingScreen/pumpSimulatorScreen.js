@@ -1,7 +1,5 @@
 const element = require('detox').element;
 const match = require('../match');
-const action = require('../action');
-
 const { base } = require('../base/index');
 
 class PumpSimulatorScreen extends base.Screen {
@@ -10,8 +8,10 @@ class PumpSimulatorScreen extends base.Screen {
             screenText: language.settingsScreen.PumpSimulatorScreen,
             generalText: language.general,
             backLabel: language.general.Done,
-            visibleBottomLabel: language.settingsScreen.PumpSimulatorScreen.DeletePump,
-            visibleTopLabel: language.settingsScreen.PumpSimulatorScreen.SuspendDelivery,
+            scroll: {
+                visibleBottomLabel: language.settingsScreen.PumpSimulatorScreen.DeletePump,
+                visibleTopLabel: language.settingsScreen.PumpSimulatorScreen.SuspendDelivery,
+            },
         });
     }
     DoneButton() {

@@ -147,7 +147,7 @@ var SettingsScreen = {
         Info: 'When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/h and will not recommend a bolus.',
     },
     CGMSimulatorScreen: {
-        CGMSettings: 'CGM Settings',
+        Header: 'CGM Settings',
         BaseGlucose: 'Base Glucose',
         SineCurve: 'Sine Curve',
         Amplitude: 'Amplitude',
