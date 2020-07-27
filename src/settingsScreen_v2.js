@@ -1,53 +1,55 @@
 const match = require('./match');
-const action = require('./match');
 const { settingsSubScreen } = require('./settingScreen/index');
 
-class SettingsScreenv2 {
+const { base } = require('./base/index');
+
+class SettingsScreenv2 extends base.Screen {
     constructor(language) {
-        this.language = language;
+        super({
+            openClickableLabel: language.settingsScreen.NewSettings,
+            screenText: language.settingsScreen,
+            generalText: language.general,
+            backLabel: language.general.Done,
+            scroll: {
+                visibleBottomLabel: language.settingsScreen.Supportv2,
+                visibleTopLabel: language.settingsScreen.ClosedLoop,
+            },
+        });
     }
-    async Open() {
-        await match.accessible.ItemWithLabel(this.language.settingsScreen.NewSettings).atIndex(1).tap();
-    }
-    async Close() {
-        await this.DoneButton().tap();
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(2);
     }
     async OpenTherapySettingsScreen() {
         await this.TherapySettingsLabel().tap();
     }
-    DoneButton() {
-        return match.accessible.ButtonBarButtonWithLabel(this.language.general.Done);
+    async AddPump() {
+        await match.accessible.Button('Add Pump\nTap here to set up a pump').tap();
+        await match.accessible.Button(this.screenText.Simulator).tap();
+        await match.accessible.Button(this.generalText.Continue).tap();
+    }
+    async AddCGM() {
+        await match.accessible.Button('Add CGM\nTap here to set up a CGM').tap();
+        await match.accessible.Button(this.screenText.Simulator).tap();
+    }
+    _closedLoopButton() {
+        return match.accessible.Button('Closed Loop').atIndex(4);
+    }
+    async ClosedLoop() {
+        var btn = this._closedLoopButton()
+        var isOn = await this.IsOn(btn);
+        if (isOn == false) {
+            await btn.longPress();
+        }
+    }
+    async OpenLoop() {
+        var btn = this._closedLoopButton()
+        var isOn = await this.IsOn(btn);
+        if (isOn == true) {
+            await btn.longPress();
+        }
     }
     TherapySettingsLabel() {
-        return match.accessible.ClickableLabel('Therapy Settings');
-    }
-    async ScrollToBottom() {
-        try {
-            await expect(this.ServicesHeader()).toBeVisible();
-        } catch (err) {
-            await match.ScrollableView().atIndex(1).swipe('up');
-        }
-    }
-    async ScrollToTop() {
-        try {
-            await expect(this.PumpHeader()).toBeVisible();
-        } catch (err) {
-            await match.ScrollableView().atIndex(1).swipe('down');
-        }
-    }
-    async SetClosedLoop() {
-        await this.ScrollToTop();
-        const attributes = await this.ClosedLoopButton().getAttributes();
-        if (attributes.elements[0].value == '0') {
-            await this.ClosedLoopButton().tap();
-        }
-    }
-    async SetOpenLoop() {
-        await this.ScrollToTop();
-        const attributes = await this.ClosedLoopButton().getAttributes();
-        if (attributes.elements[0].value == '1') {
-            await this.ClosedLoopButton().tap();
-        }
+        return match.accessible.ClickableLabel('chevron.right');
     }
 }
 

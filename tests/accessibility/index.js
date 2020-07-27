@@ -4,17 +4,18 @@ const { homeActiveInsulinScreen } = require('./homeActiveInsulinScreen.tests');
 const { homeInsulinDeliveryScreen } = require('./homeInsulinDeliveryScreen.tests');
 const { bolusScreen } = require('./bolusScreen.tests');
 const { carbEntryScreen } = require('./carbEntryScreen.tests');
-const { settingsScreen } = require('./settingsScreen.tests');
-const { settingsCarbRatioScreen } = require('./settingsCarbRatioScreen.tests');
-const { settingsBasalRatesScreen } = require('./settingsBasalRatesScreen.tests');
-const { settingsDeliveryLimitsScreen } = require('./settingsDeliveryLimitsScreen.tests');
-const { settingsInsulinSensitivitiesScreen } = require('./settingsInsulinSensitivitiesScreen.tests');
-const { settingsCorrectionRangeScreen } = require('./settingsCorrectionRangeScreen.tests');
-const { settingsIssueReportScreen } = require('./settingsIssueReportScreen.tests');
-const { settingsInsulinModelScreen } = require('./settingsInsulinModelScreen.tests');
-const { settingsSuspendThresholdScreen } = require('./settingsSuspendThresholdScreen.tests');
-const { settingsCGMSimulatorScreenTests } = require('./settingsCGMSimulatorScreen.tests');
-const { settingsPumpSimulatorScreenTests } = require('./settingsPumpSimulatorScreen.tests');
+const { settingsScreen } = require('./settings/settingsScreen.tests');
+const { settingsCarbRatioScreen } = require('./settings/settingsCarbRatioScreen.tests');
+const { settingsBasalRatesScreen } = require('./settings/settingsBasalRatesScreen.tests');
+const { settingsDeliveryLimitsScreen } = require('./settings/settingsDeliveryLimitsScreen.tests');
+const { settingsInsulinSensitivitiesScreen } = require('./settings/settingsInsulinSensitivitiesScreen.tests');
+const { settingsCorrectionRangeScreen } = require('./settings/settingsCorrectionRangeScreen.tests');
+const { settingsIssueReportScreen } = require('./settings/settingsIssueReportScreen.tests');
+const { settingsInsulinModelScreen } = require('./settings/settingsInsulinModelScreen.tests');
+const { settingsSuspendThresholdScreen } = require('./settings/settingsSuspendThresholdScreen.tests');
+const { settingsCGMSimulatorScreenTests } = require('./settings/settingsCGMSimulatorScreen.tests');
+const { settingsPumpSimulatorScreenTests } = require('./settings/settingsPumpSimulatorScreen.tests');
+const { threapySettings } = require('./settings/threapySettings.tests');
 const { homeActiveCarbohydratesScreen } = require('./homeActiveCarbohydratesScreen.tests');
 
 module.exports = {
@@ -36,4 +37,5 @@ module.exports = {
     settingsSuspendThresholdScreen,
     settingsCGMSimulatorScreenTests,
     settingsPumpSimulatorScreenTests,
+    threapySettings,
 };

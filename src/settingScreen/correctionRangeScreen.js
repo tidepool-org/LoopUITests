@@ -18,7 +18,7 @@ class CorrectionRangeScreen extends base.EntriesScreen {
      * @override so we access the header by label
      */
     Header() {
-        return match.accessible.Label(this.screenText.Header);
+        return match.accessible.TextLabel(this.screenText.Header);
     }
     /**
      * @param {Object} range

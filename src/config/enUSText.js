@@ -99,9 +99,11 @@ var TempOverrideScreen = {
 
 var SettingsScreen = {
     Settings: 'Settings',
+    NewSettings: 'New Settings (under development)',
     Configuration: 'CONFIGURATION',
     Services: 'SERVICES',
     Support: 'SUPPORT',
+    Supportv2: 'Suport',
     ContinuousGlucoseMonitor: 'CONTINUOUS GLUCOSE MONITOR',
     Pump: 'PUMP',
     AddService: 'Add Service',

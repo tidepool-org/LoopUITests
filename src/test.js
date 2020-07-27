@@ -56,22 +56,27 @@ class Test {
         await match.accessible.ButtonBarButton('Load').tap();
     }
     async _setStartScreen(start) {
+
+        if (start != screenName.settings && this.settingsOpen) {
+            await this.settingsScreen.Close();
+        }
         switch (start) {
             case screenName.settings:
+                await this.OpenSettingsScreen();
                 break;
-            case screenName.home:
-                await this.settingsScreen.Close();
-                break;
+            // case screenName.home:
+            //     await this.settingsScreen.Close();
+            //     break;
             case screenName.bolus:
-                await this.settingsScreen.Close();
+                //await this.settingsScreen.Close();
                 await this.OpenBolusScreen();
                 break;
             case screenName.carbEntry:
-                await this.settingsScreen.Close();
+                //await this.settingsScreen.Close();
                 await this.OpenCarbEntryScreen();
                 break;
             default:
-                await this.settingsScreen.Close();
+                //await this.settingsScreen.Close();
                 break;
         }
     }
@@ -113,16 +118,16 @@ class Test {
             }
         }
 
-        this.settingsScreen = await this.OpenSettingsScreen();
+        // this.settingsScreen = await this.OpenSettingsScreen();
 
         if (this.settingsToApply) {
-            await this.OpenSettingsScreen();
+            this.settingsScreen = await this.OpenSettingsScreen();
             if (this.filter) {
                 this.settingsToApply = this._filterSettings(this.settingsToApply, this.filter)
             }
             await this.settingsScreen.Apply(this.settingsToApply);
         } else if (this.simulators) {
-            await this.OpenSettingsScreen();
+            this.settingsScreen = await this.OpenSettingsScreen();
             if (this.simulators.cgm) {
                 await this.settingsScreen.AddCGMSimulator();
             }
@@ -153,6 +158,7 @@ class Test {
     }
 
     async OpenSettingsScreen() {
+        this.settingsOpen = true;
         return this.homeScreen.OpenSettingsScreen();
     }
 

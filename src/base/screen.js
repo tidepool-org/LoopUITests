@@ -45,6 +45,14 @@ class Screen {
         }
         return match.accessible.ClickableLabel(this.openClickableLabel);
     }
+    async IsOn(buttonElement) {
+        try {
+            await expect(buttonElement).toHaveValue('0');
+            return false;
+        } catch (err) {
+            return true;
+        }
+    }
     async Open() {
         return this.OpenButton().tap();
     }

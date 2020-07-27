@@ -2,17 +2,19 @@ const match = require('./match');
 
 const { home } = require('./homeScreen/index');
 const { SettingsScreen } = require('./settingsScreen');
+
+const { SettingsScreenv2 } = require('./settingsScreen_v2');
 const { CarbEntryScreen } = require('./carbEntryScreen');
 const { BolusScreen } = require('./bolusScreen');
 
 class HomeScreen {
     constructor(language, settingsScreenDefaults) {
-
         this.glucoseScreen = new home.GlucoseScreen(language);
         this.activeInsulinScreen = new home.ActiveInsulinScreen(language);
         this.insulinDeliveryScreen = new home.InsulinDeliveryScreen(language);
         this.activeCarbohydratesScreen = new home.ActiveCarbohydratesScreen(language);
         this.settingsScreen = new SettingsScreen(language, settingsScreenDefaults);
+        this.settingsScreenv2 = new SettingsScreenv2(language);
         this.bolusScreen = new BolusScreen(language);
         this.carbEntryScreen = new CarbEntryScreen(language);
         this.header = new home.Header(language);
@@ -23,16 +25,16 @@ class HomeScreen {
         return this.header;
     }
     ActiveCarbohydratesLabel() {
-        return this.activeCarbohydratesScreen.OpenButton();//match.accessible.ClickableLabel(this.language.homeScreen.ActiveCarbohydrates);
+        return this.activeCarbohydratesScreen.OpenButton();
     }
     ActiveInsulinLabel() {
-        return this.activeInsulinScreen.OpenButton();//match.accessible.ClickableLabel(this.language.homeScreen.ActiveInsulin);
+        return this.activeInsulinScreen.OpenButton();
     }
     InsulinDeliveryLabel() {
-        return this.insulinDeliveryScreen.OpenButton();//match.accessible.ClickableLabel(this.language.homeScreen.InsulinDelivery);
+        return this.insulinDeliveryScreen.OpenButton();
     }
     GlucoseLabel() {
-        return this.glucoseScreen.OpenButton();//match.accessible.ClickableLabel(this.language.homeScreen.Glucose);
+        return this.glucoseScreen.OpenButton();
     }
     SettingsButton() {
         return match.accessible.Button(this.language.settingsScreen.Settings);
@@ -64,7 +66,9 @@ class HomeScreen {
     }
     async OpenSettingsScreen() {
         await this.SettingsButton().tap();
-        return this.settingsScreen;
+        await this.settingsScreenv2.Open();
+        console.log('about to return ...');
+        return this.settingsScreenv2;
     }
     async OpenCarbEntryScreen() {
         await this.AddMealButton().tap();
@@ -73,9 +77,6 @@ class HomeScreen {
     async OpenBolusScreen() {
         await this.BolusButton().tap();
         return this.bolusScreen;
-    }
-    async CloseChart() {
-        await match.accessible.BackButton(this.language.general.Status).tap();
     }
     async ExpectLoopNotYetRun() {
         await expect(match.loop.Icon()).toHaveLabel(this.language.homeScreen.LoopWaitingForFirstRun);
