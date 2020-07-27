@@ -69,7 +69,6 @@ class Screen {
         if (this.visibleBottomLabel == null) {
             return;
         }
-        console.log('ScrollToBottom ', this.visibleBottomLabel)
         try {
             await expect(match.accessible.TextLabel(this.visibleBottomLabel)).toBeVisible();
         } catch (err) {
@@ -80,7 +79,6 @@ class Screen {
         if (this.visibleTopLabel == null) {
             return;
         }
-        console.log('ScrollToTop ', this.visibleTopLabel)
         try {
             await expect(match.accessible.TextLabel(this.visibleTopLabel)).toBeVisible();
         } catch (err) {

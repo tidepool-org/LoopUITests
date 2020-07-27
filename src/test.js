@@ -56,7 +56,6 @@ class Test {
         await match.accessible.ButtonBarButton('Load').tap();
     }
     async _setStartScreen(start) {
-
         if (start != screenName.settings && this.settingsOpen) {
             await this.settingsScreen.Close();
         }
@@ -64,19 +63,13 @@ class Test {
             case screenName.settings:
                 await this.OpenSettingsScreen();
                 break;
-            // case screenName.home:
-            //     await this.settingsScreen.Close();
-            //     break;
             case screenName.bolus:
-                //await this.settingsScreen.Close();
                 await this.OpenBolusScreen();
                 break;
             case screenName.carbEntry:
-                //await this.settingsScreen.Close();
                 await this.OpenCarbEntryScreen();
                 break;
             default:
-                //await this.settingsScreen.Close();
                 break;
         }
     }
@@ -118,8 +111,6 @@ class Test {
             }
         }
 
-        // this.settingsScreen = await this.OpenSettingsScreen();
-
         if (this.settingsToApply) {
             this.settingsScreen = await this.OpenSettingsScreen();
             if (this.filter) {
@@ -135,7 +126,6 @@ class Test {
                 await this.settingsScreen.AddPumpSimulator();
             }
         }
-
         if (this.startScreen) {
             await this._setStartScreen(this.startScreen);
         }

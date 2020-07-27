@@ -4,9 +4,8 @@ var homeGlucoseScreen = (test) => {
         glucoseScreen = await test.homeScreen.OpenGlucoseChart();
     });
     afterAll(async () => {
-        await glucoseScreen.Close();
+        await glucoseScreen.Back();
     });
-
     it('has a header', async () => {
         await expect(glucoseScreen.Header()).toExist();
     });

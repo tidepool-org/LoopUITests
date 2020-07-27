@@ -14,13 +14,13 @@ class PumpSimulatorScreen extends base.Screen {
             },
         });
     }
-    DoneButton() {
-        try {
-            return match.accessible.Button(this.generalText.Done).atIndex(0);
-        } catch (error) {
-            return match.accessible.Button(this.generalText.Done).atIndex(1);
-        }
-    }
+    // DoneButton() {
+    //     try {
+    //         return match.accessible.Button(this.generalText.Done).atIndex(0);
+    //     } catch (error) {
+    //         return match.accessible.Button(this.generalText.Done).atIndex(1);
+    //     }
+    // }
     ConfigurationHeader() {
         return match.accessible.Header(this.screenText.ConfigurationHeader).atIndex(0);
     }
@@ -33,27 +33,11 @@ class PumpSimulatorScreen extends base.Screen {
     ErrorOnTempBasalLabel() {
         return match.accessible.Label(this.screenText.ErrorOnTempBasal);
     }
-    async _isErrorOnTempBasal() {
-        try {
-            await waitFor(this.ErrorOnTempBasalToggel()).toHaveValue('1').withTimeout(2000);
-            return true;
-        } catch (error) {
-            return false;
-        }
-    }
     ErrorOnTempBasalToggel() {
         return match.accessible.Button(this.screenText.ErrorOnTempBasal);
     }
     ErrorOnBolusLabel() {
         return match.accessible.Label(this.screenText.ErrorOnBolus);
-    }
-    async _isErrorOnBolus() {
-        try {
-            await waitFor(this.ErrorOnBolusToggel()).toHaveValue('1').withTimeout(2000);
-            return true;
-        } catch (error) {
-            return false;
-        }
     }
     ErrorOnBolusToggel() {
         return match.accessible.Button(this.screenText.ErrorOnBolus);
@@ -61,27 +45,11 @@ class PumpSimulatorScreen extends base.Screen {
     ErrorOnSuspendLabel() {
         return match.accessible.Label(this.screenText.ErrorOnSuspend);
     }
-    async _isErrorOnSuspend() {
-        try {
-            await waitFor(this.ErrorOnSuspendToggel()).toHaveValue('1').withTimeout(2000);
-            return true;
-        } catch (error) {
-            return false;
-        }
-    }
     ErrorOnSuspendToggel() {
         return match.accessible.Button(this.screenText.ErrorOnSuspend);
     }
     ErrorOnResumeLabel() {
         return match.accessible.Label(this.screenText.ErrorOnResume);
-    }
-    async _isErrorOnResume() {
-        try {
-            await waitFor(this.ErrorOnResumeToggel()).toHaveValue('1').withTimeout(2000);
-            return true;
-        } catch (error) {
-            return false;
-        }
     }
     ErrorOnResumeToggel() {
         return match.accessible.Button(this.screenText.ErrorOnResume);
@@ -137,7 +105,7 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this._isErrorOnBolus();
+        let allReadyOn = await this.IsOn(this.ErrorOnBolusToggel());
         if (turnOn == true) {
             if (allReadyOn == false) {
                 await this.ErrorOnBolusToggel().tap();
@@ -152,7 +120,7 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this._isErrorOnTempBasal();
+        let allReadyOn = await this.IsOn(this.ErrorOnTempBasalToggel());
         if (turnOn == true) {
             if (allReadyOn == false) {
                 await this.ErrorOnTempBasalToggel().tap();
@@ -167,7 +135,7 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this._isErrorOnSuspend();
+        let allReadyOn = await this.IsOn(this.ErrorOnSuspendToggel());
         if (turnOn == true) {
             if (allReadyOn == false) {
                 await this.ErrorOnSuspendToggel().tap();
@@ -182,7 +150,7 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this._isErrorOnResume();
+        let allReadyOn = await this.IsOn(this.ErrorOnResumeToggel());
         if (turnOn == true) {
             if (allReadyOn == false) {
                 await this.ErrorOnResumeToggel().tap();
@@ -225,9 +193,9 @@ class PumpSimulatorScreen extends base.Screen {
         await this._setValue(units);
         await this._backToPumpSimulator();
     }
-    async Close() {
-        await this.DoneButton().tap();
-    }
+    // async Close() {
+    //     await this.DoneButton().tap();
+    // }
     async ResumeDelivery() {
         await this.ResumeDeliveryButton().tap();
     }

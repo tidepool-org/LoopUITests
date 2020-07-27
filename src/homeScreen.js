@@ -1,9 +1,9 @@
 const match = require('./match');
 
 const { home } = require('./homeScreen/index');
-const { SettingsScreen } = require('./settingsScreen');
+const { SettingsScreen_Old } = require('./settingsScreen_old');
 
-const { SettingsScreenv2 } = require('./settingsScreen_v2');
+const { SettingsScreen } = require('./settingsScreen');
 const { CarbEntryScreen } = require('./carbEntryScreen');
 const { BolusScreen } = require('./bolusScreen');
 
@@ -13,8 +13,8 @@ class HomeScreen {
         this.activeInsulinScreen = new home.ActiveInsulinScreen(language);
         this.insulinDeliveryScreen = new home.InsulinDeliveryScreen(language);
         this.activeCarbohydratesScreen = new home.ActiveCarbohydratesScreen(language);
-        this.settingsScreen = new SettingsScreen(language, settingsScreenDefaults);
-        this.settingsScreenv2 = new SettingsScreenv2(language);
+        this.settingsScreenOld = new SettingsScreen_Old(language, settingsScreenDefaults);
+        this.settingsScreen = new SettingsScreen(language);
         this.bolusScreen = new BolusScreen(language);
         this.carbEntryScreen = new CarbEntryScreen(language);
         this.header = new home.Header(language);
@@ -66,9 +66,8 @@ class HomeScreen {
     }
     async OpenSettingsScreen() {
         await this.SettingsButton().tap();
-        await this.settingsScreenv2.Open();
-        console.log('about to return ...');
-        return this.settingsScreenv2;
+        await this.settingsScreen.Open();
+        return this.settingsScreen;
     }
     async OpenCarbEntryScreen() {
         await this.AddMealButton().tap();

@@ -25,6 +25,7 @@ var threapySettings = (test) => {
         await settingsScreen.AddPump();
     });
     it.skip('add CGM', async () => {
+        settingsScreen = await test.OpenSettingsScreen();
         await settingsScreen.AddCGM();
     });
 };

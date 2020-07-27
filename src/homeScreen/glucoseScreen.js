@@ -17,19 +17,11 @@ class GlucoseScreen extends base.Screen {
     InsulinLabel() {
         return match.accessible.ClickableLabel(this.screenText.Insulin);
     }
-    async _isInsulinOn() {
-        try {
-            await expect(this.InsulinLabel()).toHaveValue('1');
-            return true;
-        } catch (error) {
-            return false;
-        }
-    }
     async SetInsulin(turnOn) {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this._isInsulinOn();
+        let allReadyOn = await this.IsOn(this.InsulinLabel());
         if (turnOn == true) {
             if (allReadyOn == false) {
                 await this.InsulinLabel().tap();

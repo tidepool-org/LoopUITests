@@ -4,12 +4,11 @@ var pumpSimulatorScreen = (test) => {
     beforeAll(async () => {
         settingsScreen = await test.OpenSettingsScreen();
     });
-    afterAll(async () => {
-        await settingsScreen.Close();
-    });
     it('add simulator', async () => {
-        await settingsScreen.AddPumpSimulator();
-        pumpSimulatorScreen = await settingsScreen.OpenPumpSimulatorScreen();
+        await settingsScreen.AddPump();
+    });
+    it('open simulator', async () => {
+        pumpSimulatorScreen = await settingsScreen.OpenPumpScreen();
     });
     it('set errorOnBolus to true', async () => {
         await pumpSimulatorScreen.Apply({ errorOnBolus: true });
@@ -43,6 +42,9 @@ var pumpSimulatorScreen = (test) => {
     });
     it('can be removed', async () => {
         await pumpSimulatorScreen.RemoveSimulator();
+    });
+    it('return to start', async () => {
+        await settingsScreen.Back();
     });
 };
 
