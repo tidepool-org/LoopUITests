@@ -37,11 +37,11 @@ class SettingsScreen extends base.Screen {
     OpenButton() {
         return match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(2);
     }
-    async OpenTherapySettingsScreen() {
-        await this.TherapySettingsLabel().tap();
+    AddPumpButton() {
+        return match.accessible.Button(this.screenText.AddPump);
     }
     async AddPump() {
-        await match.accessible.Button(this.screenText.AddPump).tap();
+        await this.AddPumpButton().tap();
         await match.accessible.Button(this.screenText.Simulator).tap();
         await match.accessible.Button(this.generalText.Continue).tap();
     }
@@ -49,8 +49,11 @@ class SettingsScreen extends base.Screen {
         await match.accessible.Id(this.screenText.SimulatorPump).tap();
         return this.pumpSimulatorScreen;
     }
+    AddCGMButton() {
+        return match.accessible.Button(this.screenText.AddCGM);
+    }
     async AddCGM() {
-        await match.accessible.Button(this.screenText.AddCGM).tap();
+        await this.AddCGMButton().tap();
         await match.accessible.Button(this.screenText.Simulator).tap();
     }
     async OpenCGMScreen() {
@@ -86,6 +89,9 @@ class SettingsScreen extends base.Screen {
     }
     SupportLabel() {
         return this.supportScreen.OpenButton();
+    }
+    ConfigurationHeader() {
+        return match.accessible.Header('Configuration');
     }
     async OpenSupport() {
         this.supportScreen.Open();

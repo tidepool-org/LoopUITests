@@ -1,4 +1,5 @@
 const { base } = require('../base/index');
+const match = require('../match');
 
 class AlertScreen extends base.Screen {
     constructor(language) {
@@ -8,8 +9,8 @@ class AlertScreen extends base.Screen {
             backLabel: 'Settings',
         });
     }
-    async Open() {
-        return this.OpenButton().atIndex(1).tap();
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.openClickableLabel).atIndex(1);
     }
 }
 

@@ -1,12 +1,5 @@
 var threapySettings = (test) => {
     var settingsScreen;
-    // beforeAll(async () => {
-    //     settingsScreen = await test.OpenSettingsScreen();
-    // });
-    // afterAll(async () => {
-    //     await settingsScreen.ScrollToTop();
-    //     await settingsScreen.Close();
-    // });
     it('open settings', async () => {
         settingsScreen = await test.OpenSettingsScreen();
     });
@@ -18,15 +11,29 @@ var threapySettings = (test) => {
         await settingsScreen.OpenLoop();
         await expect(settingsScreen._closedLoopButton()).toHaveValue('0');
     });
-    it.skip('open therapy settings', async () => {
-        var screen = await settingsScreen.OpenTherapySettingsScreen();
+    it('has alert permissons label', async () => {
+        await expect(settingsScreen.AlertPermissonsLabel()).toBeVisible();
     });
-    it.skip('add pump', async () => {
-        await settingsScreen.AddPump();
+    it('has support label', async () => {
+        await expect(settingsScreen.SupportLabel()).toBeVisible();
     });
-    it.skip('add CGM', async () => {
-        settingsScreen = await test.OpenSettingsScreen();
-        await settingsScreen.AddCGM();
+    it('has support header', async () => {
+        await expect(settingsScreen.SupportHeader()).toBeVisible();
+    });
+    it('has configuration header', async () => {
+        await expect(settingsScreen.ConfigurationHeader()).toBeVisible();
+    });
+    it('has therapy settings label', async () => {
+        await expect(settingsScreen.TherapySettingsLabel()).toBeVisible();
+    });
+    it('add pump button', async () => {
+        await expect(settingsScreen.AddPumpButton()).toBeVisible();
+    });
+    it('add CGM button', async () => {
+        await expect(settingsScreen.AddCGMButton()).toBeVisible();
+    });
+    it('close', async () => {
+        await settingsScreen.BackToHome();
     });
 };
 
