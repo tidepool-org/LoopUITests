@@ -81,7 +81,7 @@ class SettingsScreen extends base.Screen {
         return this.therapyScreen.OpenButton();
     }
     async OpenTherapySettings() {
-        this.therapyScreen.Open();
+        await this.therapyScreen.Open();
         return this.therapyScreen;
     }
     SupportHeader() {
@@ -94,14 +94,15 @@ class SettingsScreen extends base.Screen {
         return match.accessible.Header('Configuration');
     }
     async OpenSupport() {
-        this.supportScreen.Open();
+        await this.ScrollToBottom();
+        await this.supportScreen.Open();
         return this.supportScreen;
     }
     AlertPermissonsLabel() {
         return this.alertScreen.OpenButton();
     }
     async OpenAlerts() {
-        this.alertScreen.Open();
+        await this.alertScreen.Open();
         return this.alertScreen;
     }
 }

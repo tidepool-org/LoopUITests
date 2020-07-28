@@ -47,7 +47,7 @@ class CarbEntryScreen extends base.Screen {
     }
     async ExpectPredictedGlucoseWarning(glucoseValueAndUnits) {
         const predictedGlucoseWarning = `⚠ Predicted glucose of ${glucoseValueAndUnits} is below your suspend threshold setting.`;
-        await expect(match.accessible.Label(predictedGlucoseWarning)).toExist();
+        await expect(match.accessible.TextLabel(predictedGlucoseWarning)).toExist();
     }
     AbsorptionTimeMessage() {
         return match.accessible.TextLabel(this.screenText.AbsorptionMessage);

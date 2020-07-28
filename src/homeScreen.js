@@ -1,11 +1,12 @@
 const match = require('./match');
 
 const { home } = require('./homeScreen/index');
-const { SettingsScreen_Old } = require('./settingsScreen_old');
-
+//const { SettingsScreen_Old } = require('./settingsScreen_old');
 const { SettingsScreen } = require('./settingsScreen');
 const { CarbEntryScreen } = require('./carbEntryScreen');
 const { BolusScreen } = require('./bolusScreen');
+
+const { CustomPresetScreen } = require('./customPresetScreen');
 
 class HomeScreen {
     constructor(language, settingsScreenDefaults) {
@@ -13,11 +14,12 @@ class HomeScreen {
         this.activeInsulinScreen = new home.ActiveInsulinScreen(language);
         this.insulinDeliveryScreen = new home.InsulinDeliveryScreen(language);
         this.activeCarbohydratesScreen = new home.ActiveCarbohydratesScreen(language);
-        this.settingsScreenOld = new SettingsScreen_Old(language, settingsScreenDefaults);
+        //this.settingsScreenOld = new SettingsScreen_Old(language, settingsScreenDefaults);
         this.settingsScreen = new SettingsScreen(language);
         this.bolusScreen = new BolusScreen(language);
         this.carbEntryScreen = new CarbEntryScreen(language);
         this.header = new home.Header(language);
+        this.customPresetScreen = new CustomPresetScreen(language);
 
         this.language = language;
     }
@@ -39,8 +41,8 @@ class HomeScreen {
     SettingsButton() {
         return match.accessible.Button(this.language.settingsScreen.Settings);
     }
-    OverridesButton() {
-        return match.accessible.Button(this.language.overridesScreen.WorkoutTargets);
+    CustomPresetButton() {
+        return match.accessible.Button(this.language.customPresetScreen.Header);
     }
     AddMealButton() {
         return match.accessible.Button(this.language.carbEntryScreen.AddMeal);
@@ -76,6 +78,10 @@ class HomeScreen {
     async OpenBolusScreen() {
         await this.BolusButton().tap();
         return this.bolusScreen;
+    }
+    async CustomPresetScreen() {
+        await this.CustomPresetButton().tap();
+        return this.customPresetScreen;
     }
     async ExpectLoopNotYetRun() {
         await expect(match.loop.Icon()).toHaveLabel(this.language.homeScreen.LoopWaitingForFirstRun);

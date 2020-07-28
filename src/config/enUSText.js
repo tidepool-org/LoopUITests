@@ -87,24 +87,21 @@ var BolusScreen = {
     Entered: 'Entered'
 };
 
-var TempOverrideScreen = {
-    WorkoutTargets: 'Workout Targets',
-    TemporaryOverride: 'Temporary Override',
-    Symbol: 'Symbol',
-    Name: 'Name',
-    Recommended: 'Recommended',
-    CustomPreset: 'Custom Preset',
-    AddPresetMessage: "Tap '+' to create a new custom preset."
+var CustomPresetScreen = {
+    Header: 'Custom Preset',
+    Info: "Tap '+' to create a new preset",
+    Presets: 'Presets',
 };
 
 var SettingsScreen = {
     Settings: 'Settings',
     NewSettings: 'New Settings (under development)',
-    Configuration: 'CONFIGURATION',
-    Services: 'SERVICES',
-    Support: 'SUPPORT',
-    Supportv2: 'Suport',
-    ContinuousGlucoseMonitor: 'CONTINUOUS GLUCOSE MONITOR',
+    Configuration_old: 'CONFIGURATION',
+    Services_old: 'SERVICES',
+    Support_old: 'SUPPORT',
+    Configuration: 'Configuration',
+    Support: 'Support',
+    ContinuousGlucoseMonitor_old: 'CONTINUOUS GLUCOSE MONITOR',
     Pump: 'PUMP',
     AddService: 'Add Service',
     Simulator: 'Simulator',
@@ -121,6 +118,10 @@ var SettingsScreen = {
     DeletePump: 'Delete Pump',
     DeletePumpData: 'Delete Pump Data',
     PreMeal: 'Pre-Meal',
+    InsulinModelScreen: {
+        Header: 'Insulin Model',
+        Info: 'Loop assumes insulin is activley working for 6 hours...',
+    },
     DeliveryLimitsScreen: {
         Header: 'Delivery Limits',
         Info: 'Maximum basal rate is the highest temporary basal rate Tidepool Loop is allowed to set automatically.',
@@ -224,6 +225,6 @@ module.exports = {
     bolusScreen: BolusScreen,
     carbEntryScreen: CarbEntryScreen,
     settingsScreen: SettingsScreen,
-    overridesScreen: TempOverrideScreen,
+    customPresetScreen: CustomPresetScreen,
     homeScreen: HomeScreen,
 };

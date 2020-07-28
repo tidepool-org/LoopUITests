@@ -18,61 +18,61 @@ class PumpSimulatorScreen extends base.Screen {
         return match.accessible.Header(this.screenText.ConfigurationHeader).atIndex(0);
     }
     ReservoirRemainingLabel() {
-        return match.accessible.Label(this.screenText.ReservoirRemaining);
+        return match.accessible.TextLabel(this.screenText.ReservoirRemaining);
     }
     BatteryRemainingLabel() {
-        return match.accessible.Label(this.screenText.BatteryRemaining);
+        return match.accessible.TextLabel(this.screenText.BatteryRemaining);
     }
     ErrorOnTempBasalLabel() {
-        return match.accessible.Label(this.screenText.ErrorOnTempBasal);
+        return match.accessible.TextLabel(this.screenText.ErrorOnTempBasal);
     }
     ErrorOnTempBasalToggel() {
         return match.accessible.Button(this.screenText.ErrorOnTempBasal);
     }
     ErrorOnBolusLabel() {
-        return match.accessible.Label(this.screenText.ErrorOnBolus);
+        return match.accessible.TextLabel(this.screenText.ErrorOnBolus);
     }
     ErrorOnBolusToggel() {
         return match.accessible.Button(this.screenText.ErrorOnBolus);
     }
     ErrorOnSuspendLabel() {
-        return match.accessible.Label(this.screenText.ErrorOnSuspend);
+        return match.accessible.TextLabel(this.screenText.ErrorOnSuspend);
     }
     ErrorOnSuspendToggel() {
         return match.accessible.Button(this.screenText.ErrorOnSuspend);
     }
     ErrorOnResumeLabel() {
-        return match.accessible.Label(this.screenText.ErrorOnResume);
+        return match.accessible.TextLabel(this.screenText.ErrorOnResume);
     }
     ErrorOnResumeToggel() {
         return match.accessible.Button(this.screenText.ErrorOnResume);
     }
     DeletePumpLabel() {
-        return match.accessible.Label(this.screenText.DeletePump);
+        return match.accessible.TextLabel(this.screenText.DeletePump);
     }
     DeletePumpConfirmationLabel() {
         return match.accessible.AlertButton(this.screenText.DeletePump);
     }
     SuspendDeliveryButton() {
-        return match.accessible.Label(this.screenText.SuspendDelivery);
+        return match.accessible.TextLabel(this.screenText.SuspendDelivery);
     }
     ResumeDeliveryButton() {
-        return match.accessible.Label(this.screenText.ResumeDelivery);
+        return match.accessible.TextLabel(this.screenText.ResumeDelivery);
     }
     DetectOcclusionButton() {
-        return match.accessible.Label(this.screenText.DetectOcclusion);
+        return match.accessible.TextLabel(this.screenText.DetectOcclusion);
     }
     ResolveOcclusionButton() {
-        return match.accessible.Label(this.screenText.ResolveOcclusion);
+        return match.accessible.TextLabel(this.screenText.ResolveOcclusion);
     }
     CausePumpErrorButton() {
-        return match.accessible.Label(this.screenText.CausePumpError);
+        return match.accessible.TextLabel(this.screenText.CausePumpError);
     }
     async CausePumpError() {
         return this.CausePumpErrorButton().tap();
     }
     ResolvePumpErrorButton() {
-        return match.accessible.Label(this.screenText.ResolvePumpError);
+        return match.accessible.TextLabel(this.screenText.ResolvePumpError);
     }
     async ResolvePumpError() {
         return this.ResolvePumpErrorButton().tap();

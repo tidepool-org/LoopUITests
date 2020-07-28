@@ -72,19 +72,19 @@ class SettingsScreen_Old {
         return match.accessible.ButtonBarButton(this.language.general.Done).atIndex(0);
     }
     ConfigurationHeader() {
-        return match.accessible.Header(this.language.settingsScreen.Configuration);
+        return match.accessible.Header(this.language.settingsScreen.Configuration_old);
     }
     ServicesHeader() {
         return match.accessible.Header(this.language.settingsScreen.Services);
     }
     SupportHeader() {
-        return match.accessible.Header(this.language.settingsScreen.Support);
+        return match.accessible.Header(this.language.settingsScreen.Support_old);
     }
     PumpHeader() {
         return match.accessible.Header(this.language.settingsScreen.Pump);
     }
     ContinuousGlucoseMonitorHeader() {
-        return match.accessible.Header(this.language.settingsScreen.ContinuousGlucoseMonitor);
+        return match.accessible.Header(this.language.settingsScreen.ContinuousGlucoseMonitor_old);
     }
     SettingsHeader() {
         return match.accessible.Header(this.language.settingsScreen.Settings);

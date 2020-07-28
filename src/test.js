@@ -51,8 +51,8 @@ class Test {
     }
     async _loadScenario(scenarioName) {
         await device.shake();
-        await expect(match.accessible.Label(scenarioName)).toExist();
-        await match.accessible.Label(scenarioName).tap();
+        await expect(match.accessible.TextLabel(scenarioName)).toExist();
+        await match.accessible.TextLabel(scenarioName).tap();
         await match.accessible.ButtonBarButton('Load').tap();
     }
     async _setStartScreen(start) {
@@ -140,8 +140,8 @@ class Test {
 
     async advanceScenario(cycles) {
         await device.shake();
-        await expect(match.accessible.Label(this.scenario)).toExist();
-        await match.accessible.Label(this.scenario).swipe('left');
+        await expect(match.accessible.TextLabel(this.scenario)).toExist();
+        await match.accessible.TextLabel(this.scenario).swipe('left');
         await match.accessible.SwipeButton('Advance ⏭').tap();
         await match.UITextField().typeText(cycles);
         await match.accessible.Button(this.language.general.OK).tap();

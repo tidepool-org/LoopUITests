@@ -25,9 +25,6 @@ const match = {
         Button(label) {
             return element(by.label(label).and(by.traits([buttonTrait])));
         },
-        Switch(label) {
-            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwitch'))));
-        },
         DisabledButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait, disabledTrait])));
         },
@@ -46,9 +43,6 @@ const match = {
         ClickableLabel(label) {
             return element(by.type('UITableViewCellContentView').withDescendant(by.label(label).and(by.traits([staticTextTrait]))));
         },
-        Label(label) {
-            return this.TextLabel(label);
-        },
         Image(label) {
             return element(by.label(label).and(by.traits([imageTrait])));
         },
@@ -57,9 +51,6 @@ const match = {
         },
         Header(label) {
             return element(by.label(label).and(by.traits(['header'])));
-        },
-        Text(text) {
-            return element(by.text(text).and(by.traits([staticTextTrait])));
         },
         /**
          * @summary returns Picker item(s) for given label and index
@@ -108,7 +99,6 @@ const match = {
         Alert() {
             return element(by.type('_UIAlertControllerInterfaceActionGroupView'));
         },
-
     },
     loop: {
         /**
