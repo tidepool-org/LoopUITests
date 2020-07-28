@@ -19,34 +19,31 @@ class BolusScreen extends base.Screen {
         await this.DeliverButton().tap();
     }
     SaveAndDeliverButton() {
-        return match.accessible.Button('Save and Deliver');
+        return match.accessible.Button(this.screenText.SaveDeliver);
     }
     BolusLabel() {
         return match.accessible.TextLabel(this.screenText.Header);
     }
     BolusUnits() {
-        return match.accessible.TextLabel('U').atIndex(0);
-    }
-    EnteredLabel() {
-        return match.accessible.TextLabel(this.screenText.Entered);
+        return match.accessible.TextLabel(this.screenText.Unit).atIndex(0);
     }
     RecommendedLabel() {
         return match.accessible.TextLabel(this.screenText.Recommended);
     }
     RecommendedBolusLabel() {
-        return match.accessible.TextLabel('Recommended Bolus');
+        return match.accessible.TextLabel(this.screenText.RecommendedBolus);
     }
     RecommendedBolusUnits() {
-        return match.accessible.TextLabel('U').atIndex(1);
+        return match.accessible.TextLabel(this.screenText.Unit).atIndex(1);
     }
     ActiveCarbsLabel() {
-        return match.accessible.TextLabel('Active Carbs');
+        return match.accessible.TextLabel(this.screenText.ActiveCarbs);
     }
     BolusSummaryHeader() {
-        return match.accessible.TextLabel('Bolus Summary');
+        return match.accessible.TextLabel(this.screenText.BolusSummary);
     }
     GlucoseHeader() {
-        return match.accessible.TextLabel('Glucose').atIndex(1);
+        return match.accessible.TextLabel(this.screenText.Glucose).atIndex(1);
     }
     async ExpectCannotDeliverBolus() {
         await expect(match.accessible.DisabledButton(this.screenText.Deliver)).toExist();

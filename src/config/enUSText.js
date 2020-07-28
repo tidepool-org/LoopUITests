@@ -83,8 +83,12 @@ var CarbEntryScreen = {
 var BolusScreen = {
     Header: 'Bolus',
     Deliver: 'Deliver',
-    Recommended: 'Recommended',
-    Entered: 'Entered'
+    Unit: 'U',
+    RecommendedBolus: 'Recommended Bolus',
+    BolusSummary: 'Bolus Summary',
+    ActiveCarbs: 'Active Carbs',
+    SaveDeliver: 'Save and Deliver',
+    Glucose: 'Glucose',
 };
 
 var CustomPresetScreen = {
