@@ -1,25 +1,43 @@
 var settingsScreen = (test) => {
     var settingsScreen;
-    it('can open the settings', async () => {
+    it('can open', async () => {
         settingsScreen = await test.OpenSettingsScreen();
     });
     it('set to closed loop', async () => {
-        await settingsScreen.SetClosedLoop();
+        await settingsScreen.ClosedLoop();
     });
     it('set to open loop', async () => {
-        await settingsScreen.SetOpenLoop();
+        await settingsScreen.OpenLoop();
     });
-    describe('issue report', () => {
+    describe('support', () => {
         var screen;
-        it('can be opened', async () => {
-            screen = await settingsScreen.OpenIssueReportScreen();
+        it('opened', async () => {
+            screen = await settingsScreen.OpenSupport();
         });
-        it('can closed', async () => {
-            await screen.Close();
+        it('closed', async () => {
+            await screen.Back();
         });
     });
-    it('can close the settings', async () => {
-        await settingsScreen.Close();
+    describe('alert permissons', () => {
+        var screen;
+        it('opened', async () => {
+            screen = await settingsScreen.OpenAlerts();
+        });
+        it('closed', async () => {
+            await screen.Back();
+        });
+    });
+    describe.skip('therapy settings', () => {
+        var screen;
+        it('opened', async () => {
+            screen = await settingsScreen.OpenTherapySettings();
+        });
+        it('closed', async () => {
+            await screen.Back();
+        });
+    });
+    it('can close', async () => {
+        await settingsScreen.BackToHome();
     });
 };
 

@@ -1,113 +1,78 @@
 const element = require('detox').element;
 const match = require('../match');
+const { base } = require('../base/index');
 
-class PumpSimulatorScreen {
+class PumpSimulatorScreen extends base.Screen {
     constructor(language) {
-        this.language = language.settingsScreen.PumpSimulatorScreen;
-        this.language.general = language.general;
-        this.language.ConfigHeader = language.settingsScreen.Configuration;
-    }
-    Header() {
-        return match.accessible.Header(this.language.PumpSettings);
-    }
-    DoneButton() {
-        try {
-            return match.accessible.Button(this.language.general.Done).atIndex(0);
-        } catch (error) {
-            return match.accessible.Button(this.language.general.Done).atIndex(1);
-        }
+        super({
+            screenText: language.settingsScreen.PumpSimulatorScreen,
+            generalText: language.general,
+            backLabel: language.general.Done,
+            scroll: {
+                visibleBottomLabel: language.settingsScreen.PumpSimulatorScreen.DeletePump,
+                visibleTopLabel: language.settingsScreen.PumpSimulatorScreen.SuspendDelivery,
+            },
+        });
     }
     ConfigurationHeader() {
-        return match.accessible.Header(this.language.ConfigHeader).atIndex(0);
+        return match.accessible.Header(this.screenText.ConfigurationHeader).atIndex(0);
     }
     ReservoirRemainingLabel() {
-        return match.accessible.Label(this.language.ReservoirRemaining);
+        return match.accessible.TextLabel(this.screenText.ReservoirRemaining);
     }
     BatteryRemainingLabel() {
-        return match.accessible.Label(this.language.BatteryRemaining);
+        return match.accessible.TextLabel(this.screenText.BatteryRemaining);
     }
     ErrorOnTempBasalLabel() {
-        return match.accessible.Label(this.language.ErrorOnTempBasal);
-    }
-    async _isErrorOnTempBasal() {
-        try {
-            await waitFor(this.ErrorOnTempBasalToggel()).toHaveValue('1').withTimeout(2000);
-            return true;
-        } catch (error) {
-            return false;
-        }
+        return match.accessible.TextLabel(this.screenText.ErrorOnTempBasal);
     }
     ErrorOnTempBasalToggel() {
-        return match.accessible.Button(this.language.ErrorOnTempBasal);
+        return match.accessible.Button(this.screenText.ErrorOnTempBasal);
     }
     ErrorOnBolusLabel() {
-        return match.accessible.Label(this.language.ErrorOnBolus);
-    }
-    async _isErrorOnBolus() {
-        try {
-            await waitFor(this.ErrorOnBolusToggel()).toHaveValue('1').withTimeout(2000);
-            return true;
-        } catch (error) {
-            return false;
-        }
+        return match.accessible.TextLabel(this.screenText.ErrorOnBolus);
     }
     ErrorOnBolusToggel() {
-        return match.accessible.Button(this.language.ErrorOnBolus);
+        return match.accessible.Button(this.screenText.ErrorOnBolus);
     }
     ErrorOnSuspendLabel() {
-        return match.accessible.Label(this.language.ErrorOnSuspend);
-    }
-    async _isErrorOnSuspend() {
-        try {
-            await waitFor(this.ErrorOnSuspendToggel()).toHaveValue('1').withTimeout(2000);
-            return true;
-        } catch (error) {
-            return false;
-        }
+        return match.accessible.TextLabel(this.screenText.ErrorOnSuspend);
     }
     ErrorOnSuspendToggel() {
-        return match.accessible.Button(this.language.ErrorOnSuspend);
+        return match.accessible.Button(this.screenText.ErrorOnSuspend);
     }
     ErrorOnResumeLabel() {
-        return match.accessible.Label(this.language.ErrorOnResume);
-    }
-    async _isErrorOnResume() {
-        try {
-            await waitFor(this.ErrorOnResumeToggel()).toHaveValue('1').withTimeout(2000);
-            return true;
-        } catch (error) {
-            return false;
-        }
+        return match.accessible.TextLabel(this.screenText.ErrorOnResume);
     }
     ErrorOnResumeToggel() {
-        return match.accessible.Button(this.language.ErrorOnResume);
+        return match.accessible.Button(this.screenText.ErrorOnResume);
     }
     DeletePumpLabel() {
-        return match.accessible.Label(this.language.DeletePump);
+        return match.accessible.TextLabel(this.screenText.DeletePump);
     }
     DeletePumpConfirmationLabel() {
-        return match.accessible.Label(this.language.DeletePump).atIndex(1);
+        return match.accessible.AlertButton(this.screenText.DeletePump);
     }
     SuspendDeliveryButton() {
-        return match.accessible.Label(this.language.SuspendDelivery);
+        return match.accessible.TextLabel(this.screenText.SuspendDelivery);
     }
     ResumeDeliveryButton() {
-        return match.accessible.Label(this.language.ResumeDelivery);
+        return match.accessible.TextLabel(this.screenText.ResumeDelivery);
     }
     DetectOcclusionButton() {
-        return match.accessible.Label(this.language.DetectOcclusion);
+        return match.accessible.TextLabel(this.screenText.DetectOcclusion);
     }
     ResolveOcclusionButton() {
-        return match.accessible.Label(this.language.ResolveOcclusion);
+        return match.accessible.TextLabel(this.screenText.ResolveOcclusion);
     }
     CausePumpErrorButton() {
-        return match.accessible.Label(this.language.CausePumpError);
+        return match.accessible.TextLabel(this.screenText.CausePumpError);
     }
     async CausePumpError() {
         return this.CausePumpErrorButton().tap();
     }
     ResolvePumpErrorButton() {
-        return match.accessible.Label(this.language.ResolvePumpError);
+        return match.accessible.TextLabel(this.screenText.ResolvePumpError);
     }
     async ResolvePumpError() {
         return this.ResolvePumpErrorButton().tap();
@@ -130,7 +95,10 @@ class PumpSimulatorScreen {
         await this.ApplyReservoirRemaining(settings.reservoirRemaining);
     }
     async SetErrorOnBolus(turnOn) {
-        let allReadyOn = await this._isErrorOnBolus();
+        if (turnOn == null) {
+            return;
+        }
+        let allReadyOn = await this.IsOn(this.ErrorOnBolusToggel());
         if (turnOn == true) {
             if (allReadyOn == false) {
                 await this.ErrorOnBolusToggel().tap();
@@ -142,7 +110,10 @@ class PumpSimulatorScreen {
         }
     }
     async SetErrorOnTempBasal(turnOn) {
-        let allReadyOn = await this._isErrorOnTempBasal();
+        if (turnOn == null) {
+            return;
+        }
+        let allReadyOn = await this.IsOn(this.ErrorOnTempBasalToggel());
         if (turnOn == true) {
             if (allReadyOn == false) {
                 await this.ErrorOnTempBasalToggel().tap();
@@ -154,7 +125,10 @@ class PumpSimulatorScreen {
         }
     }
     async SetErrorOnSuspend(turnOn) {
-        let allReadyOn = await this._isErrorOnSuspend();
+        if (turnOn == null) {
+            return;
+        }
+        let allReadyOn = await this.IsOn(this.ErrorOnSuspendToggel());
         if (turnOn == true) {
             if (allReadyOn == false) {
                 await this.ErrorOnSuspendToggel().tap();
@@ -166,7 +140,10 @@ class PumpSimulatorScreen {
         }
     }
     async SetErrorOnResume(turnOn) {
-        let allReadyOn = await this._isErrorOnResume();
+        if (turnOn == null) {
+            return;
+        }
+        let allReadyOn = await this.IsOn(this.ErrorOnResumeToggel());
         if (turnOn == true) {
             if (allReadyOn == false) {
                 await this.ErrorOnResumeToggel().tap();
@@ -178,36 +155,36 @@ class PumpSimulatorScreen {
         }
     }
     async _backToPumpSimulator() {
-        await match.accessible.BackButton(this.language.PumpSettings).tap();
+        await match.accessible.BackButton(this.screenText.PumpSettings).tap();
     }
     async _setValue(val) {
-        await element(by.type('UITextField')).clearText();
-        await element(by.type('UITextField')).typeText(String(val));
+        var valField = element(by.type('UITextField'));
+        await valField.clearText();
+        await valField.typeText(String(val));
     }
     async ApplyBatteryRemaining(percent) {
-        if (percent) {
-            if (percent > 100 || percent < 0) {
-                console.log('battery remaining percent must be in the range of 0-100');
-                return;
-            }
-            await this.BatteryRemainingLabel().tap();
-            await this._setValue(percent);
-            await this._backToPumpSimulator();
+        if (percent == null) {
+            return;
         }
+        if (percent > 100 || percent < 0) {
+            console.log('battery remaining percent must be in the range of 0-100');
+            return;
+        }
+        await this.BatteryRemainingLabel().tap();
+        await this._setValue(percent);
+        await this._backToPumpSimulator();
     }
     async ApplyReservoirRemaining(units) {
-        if (units) {
-            if (units > 200 || units < 0) {
-                console.log('reservoir remaining units must be in the range of 0-200');
-                return;
-            }
-            await this.ReservoirRemainingLabel().tap();
-            await this._setValue(units);
-            await this._backToPumpSimulator();
+        if (units == null) {
+            return;
         }
-    }
-    async Close() {
-        await this.DoneButton().tap();
+        if (units > 200 || units < 0) {
+            console.log('reservoir remaining units must be in the range of 0-200');
+            return;
+        }
+        await this.ReservoirRemainingLabel().tap();
+        await this._setValue(units);
+        await this._backToPumpSimulator();
     }
     async ResumeDelivery() {
         await this.ResumeDeliveryButton().tap();
@@ -224,21 +201,7 @@ class PumpSimulatorScreen {
         await expect(match.accessible.Alert()).toExist();
     }
     async DismissAlert() {
-        await match.accessible.AlertButton(this.language.general.OK).tap();
-    }
-    async ScrollToBottom() {
-        try {
-            await expect(this.DeletePumpLabel()).toBeVisible();
-        } catch (err) {
-            await this.ConfigurationHeader().swipe('up', 'fast');
-        }
-    }
-    async ScrollToTop() {
-        try {
-            await expect(this.SuspendDelivery()).toBeVisible();
-        } catch (err) {
-            await this.ErrorOnBolusLabel().swipe('down', 'fast');
-        }
+        await match.accessible.AlertButton(this.generalText.OK).tap();
     }
 }
 

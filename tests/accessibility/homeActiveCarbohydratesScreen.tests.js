@@ -6,7 +6,7 @@ var homeActiveCarbohydratesScreen = (test) => {
         screen = await homeScreen.OpenActiveCarbohydratesChart();
     });
     afterAll(async () => {
-        await screen.Close();
+        await screen.Back();
     });
     it('has a header', async () => {
         await expect(screen.Header()).toExist();

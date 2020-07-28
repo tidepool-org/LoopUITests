@@ -13,10 +13,10 @@ class EntryScreen extends Screen {
         super(parentScreen);
     }
     InfoLabel() {
-        return match.accessible.Label(this.screenText.Info);
+        return match.accessible.TextLabel(this.screenText.Info);
     }
     SaveButton() {
-        return match.accessible.Label(this.generalText.Save);
+        return match.accessible.TextLabel(this.generalText.Save);
     }
     InfoButton() {
         return match.accessible.Button(this.generalText.ButtonLabel.InfoCircle);

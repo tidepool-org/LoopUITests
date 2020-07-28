@@ -1,30 +1,26 @@
 const match = require('../match');
+const { base } = require('../base/index');
 
-class InsulinDeliveryScreen {
+class InsulinDeliveryScreen extends base.Screen {
     constructor(language) {
-        this.language = language.homeScreen.InsulinDeliveryScreen;
-        this.language.general = language.general;
-    }
-    Header() {
-        return match.accessible.Header(this.language.InsulinDelivery);
+        super({
+            openClickableLabel: language.homeScreen.InsulinDeliveryScreen.Header,
+            screenText: language.homeScreen.InsulinDeliveryScreen,
+            generalText: language.general,
+            backLabel: language.general.Status,
+        });
     }
     IOBLabel() {
-        return match.accessible.Label(this.language.IOB);
+        return match.accessible.TextLabel(this.screenText.IOB);
     }
     TotalLabel() {
-        return match.accessible.Label(this.language.Total);
+        return match.accessible.TextLabel(this.screenText.Total);
     }
     EventHistoryLabel() {
-        return match.accessible.Label(this.language.EventHistory);
+        return match.accessible.TextLabel(this.screenText.EventHistory);
     }
     ReservoirLabel() {
-        return match.accessible.Label(this.language.Reservoir);
-    }
-    BackButton() {
-        return match.accessible.BackButton(this.language.general.Status);
-    }
-    async Close() {
-        await this.BackButton().tap();
+        return match.accessible.TextLabel(this.screenText.Reservoir);
     }
 }
 

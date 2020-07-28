@@ -37,28 +37,30 @@ var HomeScreen = {
     Glucose: 'Glucose',
     LoopWaitingForFirstRun: 'Waiting for first run',
     GlucoseScreen: {
-        PredictedGlucose: 'Predicted Glucose',
+        Glucose: 'Glucose',
+        Header: 'Predicted Glucose',
         Carbohydrates: 'Carbohydrates',
         Insulin: 'Insulin',
         GlucoseMomentum: 'Glucose Momentum',
         RetrospectiveCorrection: 'Retrospective Correction',
     },
     ActiveInsulinScreen: {
-        InsulinDelivery: 'Insulin Delivery',
+        Header: 'Insulin Delivery',
         IOB: 'U IOB',
         Total: 'U Total',
         EventHistory: 'Event History',
         Reservoir: 'Reservoir',
     },
     InsulinDeliveryScreen: {
-        InsulinDelivery: 'Insulin Delivery',
+        Header: 'Insulin Delivery',
         IOB: 'U IOB',
         Total: 'U Total',
         EventHistory: 'Event History',
         Reservoir: 'Reservoir',
     },
     ActiveCarbohydratesScreen: {
-        Carbohydrates: 'Carbohydrates',
+        ActiveCarbohydrates: 'Active Carbohydrates',
+        Header: 'Carbohydrates',
         GlucoseChange: 'Glucose Change',
         Predicted: 'Predicted',
         Observed: 'Observed',
@@ -85,22 +87,21 @@ var BolusScreen = {
     Entered: 'Entered'
 };
 
-var TempOverrideScreen = {
-    WorkoutTargets: 'Workout Targets',
-    TemporaryOverride: 'Temporary Override',
-    Symbol: 'Symbol',
-    Name: 'Name',
-    Recommended: 'Recommended',
-    CustomPreset: 'Custom Preset',
-    AddPresetMessage: "Tap '+' to create a new custom preset."
+var CustomPresetScreen = {
+    Header: 'Custom Preset',
+    Info: "Tap '+' to create a new preset",
+    Presets: 'Presets',
 };
 
 var SettingsScreen = {
     Settings: 'Settings',
-    Configuration: 'CONFIGURATION',
-    Services: 'SERVICES',
-    Support: 'SUPPORT',
-    ContinuousGlucoseMonitor: 'CONTINUOUS GLUCOSE MONITOR',
+    NewSettings: 'New Settings (under development)',
+    Configuration_old: 'CONFIGURATION',
+    Services_old: 'SERVICES',
+    Support_old: 'SUPPORT',
+    Configuration: 'Configuration',
+    Support: 'Support',
+    ContinuousGlucoseMonitor_old: 'CONTINUOUS GLUCOSE MONITOR',
     Pump: 'PUMP',
     AddService: 'Add Service',
     Simulator: 'Simulator',
@@ -109,13 +110,18 @@ var SettingsScreen = {
     DeliveryLimits: 'Delivery Limits',
     InsulinModel: 'Insulin Model',
     ClosedLoop: 'Closed Loop',
-    AddCGM: 'Add CGM',
+    AddCGM: 'Add CGM\nTap here to set up a CGM',
     DeleteCGMData: 'Delete CGM Data',
     DeleteCGM: 'Delete CGM',
-    AddPump: 'Add Pump',
+    AddPump: 'Add Pump\nTap here to set up a pump',
+    SimulatorPump: 'Simulator Small',
     DeletePump: 'Delete Pump',
     DeletePumpData: 'Delete Pump Data',
     PreMeal: 'Pre-Meal',
+    InsulinModelScreen: {
+        Header: 'Insulin Model',
+        Info: 'Loop assumes insulin is activley working for 6 hours...',
+    },
     DeliveryLimitsScreen: {
         Header: 'Delivery Limits',
         Info: 'Maximum basal rate is the highest temporary basal rate Tidepool Loop is allowed to set automatically.',
@@ -145,7 +151,7 @@ var SettingsScreen = {
         Info: 'When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/h and will not recommend a bolus.',
     },
     CGMSimulatorScreen: {
-        CGMSettings: 'CGM Settings',
+        Header: 'CGM Settings',
         BaseGlucose: 'Base Glucose',
         SineCurve: 'Sine Curve',
         Amplitude: 'Amplitude',
@@ -195,6 +201,8 @@ var SettingsScreen = {
         Info: 'Your carb ratio is the number of grams of carbohydrate covered by one unit of insulin.',
     },
     PumpSimulatorScreen: {
+        Header: 'Pump Settings',
+        ConfigurationHeader: 'CONFIGURATION',
         PumpSettings: 'Pump Settings',
         ReservoirRemaining: 'Reservoir Remaining',
         BatteryRemaining: 'Battery Remaining',
@@ -217,6 +225,6 @@ module.exports = {
     bolusScreen: BolusScreen,
     carbEntryScreen: CarbEntryScreen,
     settingsScreen: SettingsScreen,
-    overridesScreen: TempOverrideScreen,
+    customPresetScreen: CustomPresetScreen,
     homeScreen: HomeScreen,
 };

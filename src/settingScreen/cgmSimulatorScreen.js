@@ -1,84 +1,78 @@
 const match = require('../match');
 const action = require('../action');
+const { base } = require('../base/index');
 
-class CGMSimulatorScreen {
+class CGMSimulatorScreen extends base.Screen {
     constructor(language) {
-        this.language = language.settingsScreen.CGMSimulatorScreen;
-        this.language.general = language.general;
-    }
-    Header() {
-        return match.accessible.Header(this.language.CGMSettings);
-    }
-    DoneButton() {
-        return match.accessible.Button(this.language.general.Done).atIndex(0);
-    }
-    BackButton() {
-        return match.accessible.Button(this.language.general.Back);
+        super({
+            screenText: language.settingsScreen.CGMSimulatorScreen,
+            generalText: language.general,
+            backLabel: language.general.Back,
+            scroll: {
+                visibleBottomLabel: language.settingsScreen.CGMSimulatorScreen.DeleteCGM,
+                visibleTopLabel: language.settingsScreen.CGMSimulatorScreen.Model.Constant,
+            },
+        });
     }
     CGMSettingsButton() {
-        return match.accessible.BackButton(this.language.CGMSettings);
-    }
-    ModelHeader() {
-        return match.accessible.Header(this.language.Model.Header);
-    }
-    ConstantModelLabel() {
-        return match.accessible.Label(this.language.Model.Constant);
-    }
-    SineCurveModelLabel() {
-        return match.accessible.Label(this.language.Model.SineCurve).atIndex(0);
-    }
-    NoDataModelLabel() {
-        return match.accessible.Label(this.language.Model.None).atIndex(0);
-    }
-    EffectsHeader() {
-        return match.accessible.Header(this.language.Effect.Header);
-    }
-    RandomErrorEffectLabel() {
-        return match.accessible.Label(this.language.Effect.RandomError);
-    }
-    GlucoseNoiseEffectLabel() {
-        return match.accessible.Label(this.language.Effect.GlucoseNoise);
-    }
-    RandomHighOutlierEffectLabel() {
-        return match.accessible.Label(this.language.Effect.RandomHighOutlier);
-    }
-    RandomLowOutlierEffectLabel() {
-        return match.accessible.Label(this.language.Effect.RandomLowOutlier);
-    }
-    BackfillGlucoseHistoryLabel() {
-        return match.accessible.Label(this.language.History.BackfillGlucose);
-    }
-    TrendHistoryLabel() {
-        return match.accessible.Label(this.language.History.Trend).atIndex(0);;
-    }
-    HistoryHeader() {
-        return match.accessible.Header(this.language.History.Header);
-    }
-    AlertsHeader() {
-        return match.accessible.Header(this.language.Alerts.Header);
-    }
-    IssueAlertsLabel() {
-        return match.accessible.Label(this.language.Alerts.IssueAlerts);
-    }
-    DeleteCGMLabel() {
-        return match.accessible.Label(this.language.DeleteCGM);
-    }
-    DeleteCGMConfirmationLabel() {
-        return match.accessible.Label(this.language.DeleteCGM).atIndex(1);
-    }
-    async BackfillSaveAndClose() {
-        await match.accessible.ButtonBarButton(this.language.general.Save).tap();
-    }
-    async AlertSaveAndClose() {
-        await match.accessible.ButtonBarButton(this.language.general.Done).tap();
+        return match.accessible.BackButton(this.screenText.Header);
     }
     async BackToCGMSettings() {
-        await this.ScrollToTop();
-        await this.CGMSettingsButton().tap();
+        return this.CGMSettingsButton().tap();
     }
-    async Close() {
-        await this.ScrollToTop();
-        await this.DoneButton().tap();
+    ModelHeader() {
+        return match.accessible.Header(this.screenText.Model.Header);
+    }
+    ConstantModelLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Model.Constant);
+    }
+    SineCurveModelLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Model.SineCurve).atIndex(0);
+    }
+    NoDataModelLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Model.None).atIndex(0);
+    }
+    EffectsHeader() {
+        return match.accessible.Header(this.screenText.Effect.Header);
+    }
+    RandomErrorEffectLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Effect.RandomError);
+    }
+    GlucoseNoiseEffectLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Effect.GlucoseNoise);
+    }
+    RandomHighOutlierEffectLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Effect.RandomHighOutlier);
+    }
+    RandomLowOutlierEffectLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Effect.RandomLowOutlier);
+    }
+    BackfillGlucoseHistoryLabel() {
+        return match.accessible.ClickableLabel(this.screenText.History.BackfillGlucose);
+    }
+    TrendHistoryLabel() {
+        return match.accessible.ClickableLabel(this.screenText.History.Trend).atIndex(0);
+    }
+    HistoryHeader() {
+        return match.accessible.Header(this.screenText.History.Header);
+    }
+    AlertsHeader() {
+        return match.accessible.Header(this.screenText.Alerts.Header);
+    }
+    IssueAlertsLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Alerts.IssueAlerts);
+    }
+    DeleteCGMLabel() {
+        return match.accessible.ClickableLabel(this.screenText.DeleteCGM);
+    }
+    DeleteCGMConfirmationLabel() {
+        return match.accessible.AlertButton(this.screenText.DeleteCGM);
+    }
+    async BackfillSaveAndClose() {
+        await match.accessible.ButtonBarButton(this.generalText.Save).tap();
+    }
+    async AlertSaveAndClose() {
+        await match.accessible.ButtonBarButton(this.generalText.Done).tap();
     }
     /**
      * @param {object} settings
@@ -101,101 +95,95 @@ class CGMSimulatorScreen {
         await this._setAlerts(settings.alerts);
     }
     async _setEffect(effect) {
-        if (effect)
-            if (effect === this.language.Effect.GlucoseNoise) {
-                await this.GlucoseNoiseEffectLabel().tap();
-                await match.UIEditableTextField().clearText();
-                await match.UIEditableTextField().typeText('100');
-                await this.BackButton().tap();
-            }
-        if (effect === this.language.Effect.RandomError) {
+        if (effect == null) {
+            return;
+        }
+        if (effect === this.screenText.Effect.GlucoseNoise) {
+            await this.GlucoseNoiseEffectLabel().tap();
+            var noiseField = match.UIEditableTextField();
+            await noiseField.clearText();
+            await noiseField.typeText('100');
+            await this.Back();
+        }
+        if (effect === this.screenText.Effect.RandomError) {
             await this.RandomErrorEffectLabel().tap();
-            await match.UIEditableTextField().clearText();
-            await match.UIEditableTextField().typeText('10');
-            await this.BackButton().tap();
+            var randomField = match.UIEditableTextField();
+            await randomField.clearText();
+            await randomField.typeText('10');
+            await this.Back();
         }
-        if (effect === this.language.Effect.RandomHighOutlier) {
+        if (effect === this.screenText.Effect.RandomHighOutlier) {
             await this.RandomHighOutlierEffectLabel().tap();
-            await this.CGMSettingsButton().tap();
+            await this.BackToCGMSettings();
         }
-        if (effect === this.language.Effect.RandomLowOutlier) {
+        if (effect === this.screenText.Effect.RandomLowOutlier) {
             await this.RandomLowOutlierEffectLabel().tap();
-            await this.CGMSettingsButton().tap();
+            await this.BackToCGMSettings();
         }
     }
     async _setModel(model) {
-        if (model) {
-            if (model.name === this.language.Model.Constant) {
-                await this.ConstantModelLabel().tap();
-                await match.UIEditableTextField().clearText();
-                await match.UIEditableTextField().typeText(String(model.bgValues[0]));
-                await match.accessible.BackButton(this.language.CGMSettings).tap();
-                return;
-            }
-            if (model.name === this.language.Model.SineCurve) {
-                await this.SineCurveModelLabel().tap();
-                await match.accessible.Label(this.language.BaseGlucose).tap();
-                await match.UIEditableTextField().clearText();
-                await match.UIEditableTextField().typeText(String(model.bgValues[0]));
-                await match.accessible.BackButton(this.language.Model.SineCurve).tap();
-                await match.accessible.Label(this.language.Amplitude).tap();
-                await match.UIEditableTextField().clearText();
-                await match.UIEditableTextField().typeText(String(model.bgValues[1]));
-                await match.accessible.BackButton(this.language.Model.SineCurve).tap();
-                await match.accessible.BackButton(this.language.CGMSettings).tap();
-                return;
-            }
-            if (model.name === this.language.Model.None) {
-                await this.NoDataModelLabel().tap();
-                return;
-            }
+        if (model == null) {
+            return;
+        }
+        if (model.name === this.screenText.Model.Constant) {
+            await this.ConstantModelLabel().tap();
+            var constantField = match.UIEditableTextField();
+            await constantField.clearText();
+            await constantField.typeText(String(model.bgValues[0]));
+            await this.BackToCGMSettings();
+        }
+        if (model.name === this.screenText.Model.SineCurve) {
+            await this.SineCurveModelLabel().tap();
+            await match.accessible.ClickableLabel(this.screenText.BaseGlucose).tap();
+            var baseGlucoseField = match.UIEditableTextField();
+            await baseGlucoseField.clearText();
+            await baseGlucoseField.typeText(String(model.bgValues[0]));
+            await match.accessible.BackButton(this.screenText.Model.SineCurve).tap();
+            await match.accessible.ClickableLabel(this.screenText.Amplitude).tap();
+            var amplitudeField = match.UIEditableTextField();
+            await amplitudeField.clearText();
+            await amplitudeField.typeText(String(model.bgValues[1]));
+            await match.accessible.BackButton(this.screenText.Model.SineCurve).tap();
+            await this.BackToCGMSettings();
+        }
+        if (model.name === this.screenText.Model.None) {
+            await this.NoDataModelLabel().tap();
         }
     }
     async _setHistory(history) {
-        if (history) {
-            if (history.name === this.language.History.BackfillGlucose) {
-                await this.BackfillGlucoseHistoryLabel().tap();
-                await action.SetPickerValue(0, `${history.backfillHours}`);
-            }
-            if (history.name === this.language.History.Trend) {
-                await this.TrendHistoryLabel().tap();
-                await match.accessible.Label(history.trend).tap();
-            }
+        if (history == null) {
+            return;
         }
+        await this.ScrollToBottom();
+        if (history.name === this.screenText.History.BackfillGlucose) {
+            await this.BackfillGlucoseHistoryLabel().tap();
+            await action.SetPickerValue(0, `${history.backfillHours}`);
+            await this.BackToCGMSettings();
+        }
+        if (history.name === this.screenText.History.Trend) {
+            await this.TrendHistoryLabel().tap();
+            await match.accessible.ClickableLabel(history.trend).tap();
+        }
+        await this.ScrollToTop();
     }
     async _setAlerts(alerts) {
-        if (alerts) {
-            await this.IssueAlertsLabel().tap();
-            if (general.Alert.name === this.language.Alerts.DelayedAlert) {
-                await match.accessible.Label(this.language.Alerts.DelayedAlert).tap();
-            }
-            if (general.Alert.name === this.language.Alerts.ReapeatingAlert) {
-                await match.accessible.Label(this.language.Alerts.ReapeatingAlert).tap();
-            }
+        if (alerts == null) {
+            return;
         }
+        await this.ScrollToBottom();
+        await this.IssueAlertsLabel().tap();
+        if (general.Alert.name === this.screenText.Alerts.DelayedAlert) {
+            await match.accessible.ClickableLabel(this.screenText.Alerts.DelayedAlert).tap();
+        }
+        if (general.Alert.name === this.screenText.Alerts.ReapeatingAlert) {
+            await match.accessible.ClickableLabel(this.screenText.Alerts.ReapeatingAlert).tap();
+        }
+        await this.ScrollToTop();
     }
     async RemoveSimulator() {
         await this.ScrollToBottom();
         await this.DeleteCGMLabel().tap();
         await this.DeleteCGMConfirmationLabel().tap();
-    }
-    async ScrollToBottom() {
-        try {
-            await expect(this.DeleteCGMLabel()).toBeVisible();
-        } catch (err) {
-            await this.EffectsHeader().swipe('up', 'fast');
-        }
-    }
-    async ScrollToTop() {
-        try {
-            await expect(this.ModelHeader()).toBeVisible();
-        } catch (err) {
-            try {
-                await this.HistoryHeader().swipe('down', 'fast');
-            } catch (err) {
-                await this.EffectsHeader().swipe('down', 'fast');
-            }
-        }
     }
 }
 

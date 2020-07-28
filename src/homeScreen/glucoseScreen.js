@@ -1,53 +1,42 @@
 const match = require('../match');
 
-class GlucoseScreen {
+const { base } = require('../base/index');
+
+class GlucoseScreen extends base.Screen {
     constructor(language) {
-        this.language = language.homeScreen.GlucoseScreen;
-        this.language.general = language.general;
-    }
-    Header() {
-        return match.accessible.Header(this.language.PredictedGlucose);
+        super({
+            openClickableLabel: language.homeScreen.GlucoseScreen.Glucose,
+            screenText: language.homeScreen.GlucoseScreen,
+            generalText: language.general,
+            backLabel: language.general.Status,
+        });
     }
     CarbohydratesLabel() {
-        return match.accessible.Label(this.language.Carbohydrates);
+        return match.accessible.ClickableLabel(this.screenText.Carbohydrates);
     }
     InsulinLabel() {
-        return match.accessible.Label(this.language.Insulin);
-    }
-    InsulinButton() {
-        return match.accessible.Button(this.language.Insulin);
-    }
-    async _isInsulinOn() {
-        try {
-            await expect(this.InsulinButton()).toHaveValue('1');
-            return true;
-        } catch (error) {
-            return false;
-        }
+        return match.accessible.ClickableLabel(this.screenText.Insulin);
     }
     async SetInsulin(turnOn) {
-        let allReadyOn = await this._isInsulinOn();
+        if (turnOn == null) {
+            return;
+        }
+        let allReadyOn = await this.IsOn(this.InsulinLabel());
         if (turnOn == true) {
             if (allReadyOn == false) {
-                await this.InsulinButton().tap();
+                await this.InsulinLabel().tap();
             }
         } else if (turnOn == false) {
             if (allReadyOn == true) {
-                await this.InsulinButton().tap();
+                await this.InsulinLabel().tap();
             }
         }
     }
     GlucoseMomentumLabel() {
-        return match.accessible.Label(this.language.GlucoseMomentum);
+        return match.accessible.ClickableLabel(this.screenText.GlucoseMomentum);
     }
     RetrospectiveCorrectionLabel() {
-        return match.accessible.Label(this.language.RetrospectiveCorrection);
-    }
-    BackButton() {
-        return match.accessible.BackButton(this.language.general.Status);
-    }
-    async Close() {
-        await this.BackButton().tap();
+        return match.accessible.ClickableLabel(this.screenText.RetrospectiveCorrection);
     }
 }
 

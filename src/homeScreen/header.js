@@ -5,25 +5,25 @@ class Header {
         this.language = language;
     }
     AddPumpButton() {
-        return match.accessible.Label(this.language.homeScreen.AddPump);
+        return match.accessible.ClickableLabel(this.language.homeScreen.AddPump);
     }
     async AddPump() {
         return this.AddPumpButton().tap();
     }
     PumpErrorButton() {
-        return match.accessible.Label(this.language.homeScreen.PumpError);
+        return match.accessible.ClickableLabel(this.language.homeScreen.PumpError);
     }
     async PumpError() {
         return this.PumpErrorButton().tap();
     }
     AddCGMButton() {
-        return match.accessible.Label(this.language.homeScreen.AddCGM);
+        return match.accessible.ClickableLabel(this.language.homeScreen.AddCGM);
     }
     async AddCGM() {
         return this.AddCGMButton().tap();
     }
     CGMErrorButton() {
-        return match.accessible.Label(this.language.homeScreen.CGMError);
+        return match.accessible.ClickableLabel(this.language.homeScreen.CGMError);
     }
     async CGMError() {
         return this.CGMErrorButton().tap();

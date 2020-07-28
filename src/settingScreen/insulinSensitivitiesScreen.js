@@ -17,7 +17,7 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
      * @override so we access the header by label
      */
     Header() {
-        return match.accessible.Label(this.screenText.Header).atIndex(1);
+        return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
     }
     /**
      * @param {Object} sensitivity

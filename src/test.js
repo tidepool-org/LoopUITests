@@ -51,27 +51,25 @@ class Test {
     }
     async _loadScenario(scenarioName) {
         await device.shake();
-        await expect(match.accessible.Label(scenarioName)).toExist();
-        await match.accessible.Label(scenarioName).tap();
+        await expect(match.accessible.TextLabel(scenarioName)).toExist();
+        await match.accessible.TextLabel(scenarioName).tap();
         await match.accessible.ButtonBarButton('Load').tap();
     }
     async _setStartScreen(start) {
+        if (start != screenName.settings && this.settingsOpen) {
+            await this.settingsScreen.Close();
+        }
         switch (start) {
             case screenName.settings:
-                break;
-            case screenName.home:
-                await this.settingsScreen.Close();
+                await this.OpenSettingsScreen();
                 break;
             case screenName.bolus:
-                await this.settingsScreen.Close();
                 await this.OpenBolusScreen();
                 break;
             case screenName.carbEntry:
-                await this.settingsScreen.Close();
                 await this.OpenCarbEntryScreen();
                 break;
             default:
-                await this.settingsScreen.Close();
                 break;
         }
     }
@@ -113,16 +111,14 @@ class Test {
             }
         }
 
-        this.settingsScreen = await this.OpenSettingsScreen();
-
         if (this.settingsToApply) {
-            await this.OpenSettingsScreen();
+            this.settingsScreen = await this.OpenSettingsScreen();
             if (this.filter) {
                 this.settingsToApply = this._filterSettings(this.settingsToApply, this.filter)
             }
             await this.settingsScreen.Apply(this.settingsToApply);
         } else if (this.simulators) {
-            await this.OpenSettingsScreen();
+            this.settingsScreen = await this.OpenSettingsScreen();
             if (this.simulators.cgm) {
                 await this.settingsScreen.AddCGMSimulator();
             }
@@ -130,7 +126,6 @@ class Test {
                 await this.settingsScreen.AddPumpSimulator();
             }
         }
-
         if (this.startScreen) {
             await this._setStartScreen(this.startScreen);
         }
@@ -145,14 +140,15 @@ class Test {
 
     async advanceScenario(cycles) {
         await device.shake();
-        await expect(match.accessible.Label(this.scenario)).toExist();
-        await match.accessible.Label(this.scenario).swipe('left');
+        await expect(match.accessible.TextLabel(this.scenario)).toExist();
+        await match.accessible.TextLabel(this.scenario).swipe('left');
         await match.accessible.SwipeButton('Advance ⏭').tap();
         await match.UITextField().typeText(cycles);
         await match.accessible.Button(this.language.general.OK).tap();
     }
 
     async OpenSettingsScreen() {
+        this.settingsOpen = true;
         return this.homeScreen.OpenSettingsScreen();
     }
 

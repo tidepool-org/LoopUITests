@@ -4,7 +4,7 @@ var homeInsulinDeliveryScreen = (test) => {
         insulinDeliveryScreen = await test.homeScreen.OpenInsulinDeliveryChart();
     });
     afterAll(async () => {
-        await insulinDeliveryScreen.Close();
+        await insulinDeliveryScreen.Back();
     });
     it('has a header', async () => {
         await expect(insulinDeliveryScreen.Header()).toExist();

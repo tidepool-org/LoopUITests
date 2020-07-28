@@ -16,7 +16,7 @@ class BasalRatesScreen extends base.EntriesScreen {
      * @override so we access the header by label
      */
     Header() {
-        return match.accessible.Label(this.screenText.Header).atIndex(0);
+        return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
     }
     /**
      * @param {Object} rate

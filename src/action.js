@@ -78,7 +78,7 @@ const action = {
     async SwipePickerUp(times) {
         let count = 1;
         do {
-            await match.accessible.Picker().swipe('up', 'fast', 0.5);
+            await match.accessible.Picker().swipe('up');
             count++;
         } while (count <= times);
 
@@ -86,7 +86,7 @@ const action = {
     async SwipeQuantityPickerUp(times, id) {
         let count = 1;
         do {
-            await match.accessible.QuantityPicker(id).swipe('up', 'fast', 0.5);
+            await match.accessible.QuantityPicker(id).swipe('up');
             count++;
         } while (count <= times);
 
@@ -97,16 +97,22 @@ const action = {
     async SwipePickerDown(times) {
         let count = 1;
         do {
-            await match.accessible.Picker().swipe('down', 'fast', 0.5);
+            await match.accessible.Picker().swipe('down');
             count++;
         } while (count <= times);
     },
     async SwipeQuantityPickerDown(times, id) {
         let count = 1;
         do {
-            await match.accessible.QuantityPicker(id).swipe('down', 'fast', 0.5);
+            await match.accessible.QuantityPicker(id).swipe('down');
             count++;
         } while (count <= times);
+    },
+    async ScrollToBottom() {
+        await match.ScrollableView().atIndex(1).swipe('up');
+    },
+    async ScrollToTop() {
+        await match.ScrollableView().atIndex(1).swipe('down');
     },
 };
 

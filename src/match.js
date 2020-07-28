@@ -25,9 +25,6 @@ const match = {
         Button(label) {
             return element(by.label(label).and(by.traits([buttonTrait])));
         },
-        Switch(label) {
-            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwitch'))));
-        },
         DisabledButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait, disabledTrait])));
         },
@@ -40,8 +37,11 @@ const match = {
         SwipeButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwipeActionStandardButton'))));
         },
-        Label(label) {
+        TextLabel(label) {
             return element(by.label(label).and(by.traits([staticTextTrait])));
+        },
+        ClickableLabel(label) {
+            return element(by.type('UITableViewCellContentView').withDescendant(by.label(label).and(by.traits([staticTextTrait]))));
         },
         Image(label) {
             return element(by.label(label).and(by.traits([imageTrait])));
@@ -51,12 +51,6 @@ const match = {
         },
         Header(label) {
             return element(by.label(label).and(by.traits(['header'])));
-        },
-        UILabel(label) {
-            return element(by.label(label).and(by.type('UILabel').and(by.traits([staticTextTrait]))));
-        },
-        Text(text) {
-            return element(by.text(text).and(by.traits([staticTextTrait])));
         },
         /**
          * @summary returns Picker item(s) for given label and index
@@ -105,7 +99,6 @@ const match = {
         Alert() {
             return element(by.type('_UIAlertControllerInterfaceActionGroupView'));
         },
-
     },
     loop: {
         /**
@@ -166,19 +159,14 @@ const match = {
             return element(by.type('UILabel').and(by.traits([staticTextTrait])).withAncestor(by.type('LoopUI.GlucoseHUDView')));
         },
     },
-    /**
-     * @summary get a non accessible UIEditableTextField
-     * @returns {Detox.Element} UIEditableTextField
-     */
     UIEditableTextField() {
         return element(by.type('LoopKitUI.PaddedTextField'));
     },
-    /**
-     * @summary get text field for data entry
-     * @returns {Detox.Element}
-     */
     UITextField() {
         return element(by.type('UITextField'));
+    },
+    ScrollableView() {
+        return element(by.type('UITableView'));
     },
     Text(theText) {
         return element(by.text(theText));
