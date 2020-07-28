@@ -13,24 +13,24 @@ describe('accessibility', () => {
         await test.prepare();
     });
     describe('main screens', () => {
-        describe('home', () => {
-            accessibilityTests.homeScreen(test);
-        });
-        describe('home glucose', () => {
-            accessibilityTests.homeGlucoseScreen(test);
-        });
-        describe('home active insulin', () => {
-            accessibilityTests.homeActiveInsulinScreen(test);
-        });
-        describe('home insulin delivery', () => {
-            accessibilityTests.homeInsulinDeliveryScreen(test);
-        });
-        describe('home active carbohydrates', () => {
-            accessibilityTests.homeActiveCarbohydratesScreen(test);
-        });
-        describe('carb entry', () => {
-            accessibilityTests.carbEntryScreen(test);
-        });
+        // describe('home', () => {
+        //     accessibilityTests.homeScreen(test);
+        // });
+        // describe('home glucose', () => {
+        //     accessibilityTests.homeGlucoseScreen(test);
+        // });
+        // describe('home active insulin', () => {
+        //     accessibilityTests.homeActiveInsulinScreen(test);
+        // });
+        // describe('home insulin delivery', () => {
+        //     accessibilityTests.homeInsulinDeliveryScreen(test);
+        // });
+        // describe('home active carbohydrates', () => {
+        //     accessibilityTests.homeActiveCarbohydratesScreen(test);
+        // });
+        // describe('carb entry', () => {
+        //     accessibilityTests.carbEntryScreen(test);
+        // });
         describe('bolus', () => {
             accessibilityTests.bolusScreen(test);
         });

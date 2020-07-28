@@ -33,9 +33,22 @@ class BolusScreen extends base.Screen {
     RecommendedLabel() {
         return match.accessible.TextLabel(this.screenText.Recommended);
     }
+    RecommendedBolusLabel() {
+        return match.accessible.TextLabel('Recommended Bolus');
+    }
+    ActiveCarbsLabel() {
+        return match.accessible.TextLabel('Active Carbs');
+    }
+    BolusSummaryHeader() {
+        return match.accessible.TextLabel('Bolus Summary');
+    }
+    GlucoseHeader() {
+        return match.accessible.TextLabel('Glucose').atIndex(0);
+    }
     async ExpectCannotDeliverBolus() {
         await expect(match.accessible.DisabledButton(this.screenText.Deliver)).toExist();
     }
+
     async SetBolusAmount(units) {
         var bolusAmountField = match.UITextField();
         await bolusAmountField.clearText();
