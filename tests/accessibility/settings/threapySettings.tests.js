@@ -18,8 +18,8 @@ var threapySettings = (test) => {
         await settingsScreen.OpenLoop();
         await expect(settingsScreen._closedLoopButton()).toHaveValue('0');
     });
-    it('open therapy settings', async () => {
-        await settingsScreen.OpenTherapySettingsScreen();
+    it.skip('open therapy settings', async () => {
+        var screen = await settingsScreen.OpenTherapySettingsScreen();
     });
     it.skip('add pump', async () => {
         await settingsScreen.AddPump();

@@ -17,6 +17,9 @@ class SettingsScreen extends base.Screen {
         });
         this.cgmSimulatorScreen = new settingsSubScreen.CGMSimulatorScreen(language);
         this.pumpSimulatorScreen = new settingsSubScreen.PumpSimulatorScreen(language);
+        this.alertScreen = new settingsSubScreen.AlertScreen(language);
+        this.therapyScreen = new settingsSubScreen.TherapyScreen(language);
+        this.supportScreen = new settingsSubScreen.SupportScreen(language);
     }
     /**
      * @override
@@ -72,22 +75,28 @@ class SettingsScreen extends base.Screen {
         }
     }
     TherapySettingsLabel() {
-        return match.accessible.ClickableLabel('chevron.right');
+        return this.therapyScreen.OpenButton();
     }
     async OpenTherapySettings() {
-        this.TherapySettingsLabel().tap();
+        this.therapyScreen.Open();
+        return this.therapyScreen;
     }
     SupportHeader() {
         return match.accessible.Header('Support');
     }
     SupportLabel() {
-        return match.accessible.ClickableLabel('Support');
+        return this.supportScreen.OpenButton();
     }
     async OpenSupport() {
-        this.SupportLabel().tap();
+        this.supportScreen.Open();
+        return this.supportScreen;
     }
-    async CloseSupport() {
-        match.accessible.BackButton('Settings').tap();
+    AlertPermissonsLabel() {
+        return this.alertScreen.OpenButton();
+    }
+    async OpenAlerts() {
+        this.alertScreen.Open();
+        return this.alertScreen;
     }
 }
 

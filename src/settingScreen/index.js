@@ -9,6 +9,10 @@ const { IssueReportScreen } = require('./issueReportScreen');
 const { InsulinModelScreen } = require('./insulinModelScreen');
 const { PumpSimulatorScreen } = require('./pumpSimulatorScreen');
 
+const { AlertScreen } = require('./alertScreen');
+const { SupportScreen } = require('./supportScreen');
+const { TherapyScreen } = require('./therapyScreen');
+
 var settingsSubScreen = {
     BasalRatesScreen,
     CarbRatioScreen,
@@ -20,6 +24,9 @@ var settingsSubScreen = {
     IssueReportScreen,
     InsulinModelScreen,
     PumpSimulatorScreen,
+    AlertScreen,
+    SupportScreen,
+    TherapyScreen,
 };
 
 module.exports = {

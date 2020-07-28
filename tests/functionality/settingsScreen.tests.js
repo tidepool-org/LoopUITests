@@ -9,14 +9,32 @@ var settingsScreen = (test) => {
     it('set to open loop', async () => {
         await settingsScreen.OpenLoop();
     });
-    it('support opened', async () => {
-        await settingsScreen.OpenSupport();
+    describe('support', () => {
+        var screen;
+        it('opened', async () => {
+            screen = await settingsScreen.OpenSupport();
+        });
+        it('closed', async () => {
+            await screen.Back();
+        });
     });
-    it(' supportclosed', async () => {
-        await settingsScreen.CloseSupport();
+    describe('alert permissons', () => {
+        var screen;
+        it('opened', async () => {
+            screen = await settingsScreen.OpenAlerts();
+        });
+        it('closed', async () => {
+            await screen.Back();
+        });
     });
-    it.skip('therapy settings opened', async () => {
-        await settingsScreen.OpenTherapySettings();
+    describe.skip('therapy settings', () => {
+        var screen;
+        it('opened', async () => {
+            screen = await settingsScreen.OpenTherapySettings();
+        });
+        it('closed', async () => {
+            await screen.Back();
+        });
     });
     it('can close', async () => {
         await settingsScreen.BackToHome();

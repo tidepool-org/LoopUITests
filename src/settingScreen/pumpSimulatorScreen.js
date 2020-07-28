@@ -14,13 +14,6 @@ class PumpSimulatorScreen extends base.Screen {
             },
         });
     }
-    // DoneButton() {
-    //     try {
-    //         return match.accessible.Button(this.generalText.Done).atIndex(0);
-    //     } catch (error) {
-    //         return match.accessible.Button(this.generalText.Done).atIndex(1);
-    //     }
-    // }
     ConfigurationHeader() {
         return match.accessible.Header(this.screenText.ConfigurationHeader).atIndex(0);
     }
@@ -193,9 +186,6 @@ class PumpSimulatorScreen extends base.Screen {
         await this._setValue(units);
         await this._backToPumpSimulator();
     }
-    // async Close() {
-    //     await this.DoneButton().tap();
-    // }
     async ResumeDelivery() {
         await this.ResumeDeliveryButton().tap();
     }
