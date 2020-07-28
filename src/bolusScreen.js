@@ -18,14 +18,14 @@ class BolusScreen extends base.Screen {
     async Deliver() {
         await this.DeliverButton().tap();
     }
-    DeliverButton() {
-        return match.accessible.Button(this.screenText.Deliver);
-    }
-    DisabledDeliverButton() {
-        return match.accessible.DisabledButton(this.screenText.Deliver);
+    SaveAndDeliverButton() {
+        return match.accessible.Button('Save and Deliver');
     }
     BolusLabel() {
         return match.accessible.TextLabel(this.screenText.Header);
+    }
+    BolusUnits() {
+        return match.accessible.TextLabel('U').atIndex(0);
     }
     EnteredLabel() {
         return match.accessible.TextLabel(this.screenText.Entered);
@@ -36,6 +36,9 @@ class BolusScreen extends base.Screen {
     RecommendedBolusLabel() {
         return match.accessible.TextLabel('Recommended Bolus');
     }
+    RecommendedBolusUnits() {
+        return match.accessible.TextLabel('U').atIndex(1);
+    }
     ActiveCarbsLabel() {
         return match.accessible.TextLabel('Active Carbs');
     }
@@ -43,7 +46,7 @@ class BolusScreen extends base.Screen {
         return match.accessible.TextLabel('Bolus Summary');
     }
     GlucoseHeader() {
-        return match.accessible.TextLabel('Glucose').atIndex(0);
+        return match.accessible.TextLabel('Glucose').atIndex(1);
     }
     async ExpectCannotDeliverBolus() {
         await expect(match.accessible.DisabledButton(this.screenText.Deliver)).toExist();
