@@ -104,6 +104,7 @@ var BolusScreen = {
 };
 
 var CustomPresetScreen = {
+    WorkoutTargets: 'Workout Targets',
     Header: 'Custom Preset',
     Info: "Tap '+' to create a new preset",
     Presets: 'Presets',

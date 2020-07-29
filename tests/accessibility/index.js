@@ -17,6 +17,7 @@ const { settingsCGMSimulatorScreenTests } = require('./settings/settingsCGMSimul
 const { settingsPumpSimulatorScreenTests } = require('./settings/settingsPumpSimulatorScreen.tests');
 const { threapySettings } = require('./settings/threapySettings.tests');
 const { homeActiveCarbohydratesScreen } = require('./homeActiveCarbohydratesScreen.tests');
+const { customPresetsScreen } = require('./customPresetsScreen.tests');
 
 module.exports = {
     homeScreen,
@@ -38,4 +39,5 @@ module.exports = {
     settingsCGMSimulatorScreenTests,
     settingsPumpSimulatorScreenTests,
     threapySettings,
+    customPresetsScreen,
 };

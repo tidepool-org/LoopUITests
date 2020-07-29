@@ -42,7 +42,7 @@ class HomeScreen {
         return match.accessible.Button(this.language.settingsScreen.Settings);
     }
     CustomPresetButton() {
-        return match.accessible.Button(this.language.customPresetScreen.Header);
+        return this.customPresetScreen.OpenButton();
     }
     AddMealButton() {
         return match.accessible.Button(this.language.carbEntryScreen.AddMeal);
@@ -79,8 +79,8 @@ class HomeScreen {
         await this.BolusButton().tap();
         return this.bolusScreen;
     }
-    async CustomPresetScreen() {
-        await this.CustomPresetButton().tap();
+    async OpenCustomPresetScreen() {
+        await this.customPresetScreen.Open();;
         return this.customPresetScreen;
     }
     async ExpectLoopNotYetRun() {

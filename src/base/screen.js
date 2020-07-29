@@ -9,9 +9,10 @@ class Screen {
      * @param {string} parentScreen.backLabel
      * @param {object} parentScreen.screenText
      * @param {object} parentScreen.generalText
+     * @param {boolean} parentScreen.editable optional
      * @param {object} parentScreen.scroll optional
-     * @param {object} parentScreen.scroll.visibleBottomLabel label that should be visible if your at the bottom of the screen
-     * @param {object} parentScreen.scroll.visibleTopLabel label that should be visible if your at the top of the screen
+     * @param {string} parentScreen.scroll.visibleBottomLabel label that should be visible if your at the bottom of the screen
+     * @param {string} parentScreen.scroll.visibleTopLabel label that should be visible if your at the top of the screen
      */
     constructor(parentScreen) {
         this.openLabel = parentScreen.openLabel;
@@ -19,6 +20,10 @@ class Screen {
         this.backLabel = parentScreen.backLabel;
         this.screenText = parentScreen.screenText;
         this.generalText = parentScreen.generalText;
+        this.isEditable = false;
+        if (parentScreen.editable) {
+            this.isEditable = parentScreen.editable;
+        }
         if (parentScreen.scroll) {
             this.visibleBottomLabel = parentScreen.scroll.visibleBottomLabel;
             this.visibleTopLabel = parentScreen.scroll.visibleTopLabel;
@@ -35,6 +40,25 @@ class Screen {
             return match.accessible.BackButton(this.backLabel);
         }
         return this.CancelButton();
+    }
+    AddButton() {
+        return match.accessible.ButtonBarButton(this.generalText.Add);
+    }
+    EditButton() {
+        return match.accessible.ButtonBarButton(this.generalText.Edit);
+    }
+    async Add() {
+        if (this.isEditable) {
+            await this.AddButton().tap();
+        }
+    }
+    async AddNewEntry() {
+        return this.Add();
+    }
+    async Edit() {
+        if (this.isEditable) {
+            await this.EditButton().tap();
+        }
     }
     ContinueButton() {
         return match.accessible.ButtonBarButton(this.generalText.Continue);

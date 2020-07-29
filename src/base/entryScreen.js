@@ -10,6 +10,7 @@ class EntryScreen extends Screen {
      * @param {object} parentScreen.generalText
      */
     constructor(parentScreen) {
+        parentScreen.isEditable = true;
         super(parentScreen);
     }
     InfoLabel() {

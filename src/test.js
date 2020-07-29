@@ -160,6 +160,14 @@ class Test {
         return this.homeScreen.OpenBolusScreen();
     }
 
+    async OpenBolusScreen() {
+        return this.homeScreen.OpenBolusScreen();
+    }
+
+    async OpenCustomPresetScreen() {
+        return this.homeScreen.OpenCustomPresetScreen();
+    }
+
     async OpenHomeScreen() {
         return this.homeScreen;
     }
