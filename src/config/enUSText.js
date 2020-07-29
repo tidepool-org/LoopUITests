@@ -77,7 +77,19 @@ var CarbEntryScreen = {
     Date: 'Date',
     FoodType: 'Food Type',
     AbsorptionTime: 'Absorption Time',
-    AbsorptionMessage: 'Choose a longer absorption time for larger meals, or those containing fats and proteins. This is only guidance to the algorithm and need not be exact.'
+    AbsorptionMessage: 'Choose a longer absorption time for larger meals, or those containing fats and proteins. This is only guidance to the algorithm and need not be exact.',
+    MealBolusScreen: {
+        Header: 'Meal Bolus',
+        CarbEntry: 'Carb Entry',
+        Unit: 'U',
+        RecommendedBolus: 'Recommended Bolus',
+        BolusSummary: 'Bolus Summary',
+        Bolus: 'Bolus',
+        ActiveCarbs: 'Active Carbs',
+        SaveDeliver: 'Save and Deliver',
+        Glucose: 'Glucose',
+        SaveWithoutBolusing: 'Save without Bolusing',
+    },
 };
 
 var BolusScreen = {

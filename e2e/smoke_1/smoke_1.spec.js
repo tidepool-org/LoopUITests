@@ -28,9 +28,9 @@ describe('accessibility', () => {
         // describe('home active carbohydrates', () => {
         //     accessibilityTests.homeActiveCarbohydratesScreen(test);
         // });
-        // describe('carb entry', () => {
-        //     accessibilityTests.carbEntryScreen(test);
-        // });
+        describe('carb entry', () => {
+            accessibilityTests.carbEntryScreen(test);
+        });
         describe('bolus', () => {
             accessibilityTests.bolusScreen(test);
         });

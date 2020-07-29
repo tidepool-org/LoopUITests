@@ -1,5 +1,7 @@
 const match = require('./match');
+
 const { base } = require('./base/index');
+const { MealBolusScreen } = require('./mealBolusScreen');
 
 class CarbEntryScreen extends base.Screen {
     constructor(language) {
@@ -8,6 +10,7 @@ class CarbEntryScreen extends base.Screen {
             screenText: language.carbEntryScreen,
             generalText: language.general,
         });
+        this.mealBolusScreen = new MealBolusScreen(language);
     }
     /**
      * @override so we access the correct CancelButton
@@ -27,27 +30,12 @@ class CarbEntryScreen extends base.Screen {
     AbsorptionTimeLabel() {
         return match.accessible.ClickableLabel(this.screenText.AbsorptionTime);
     }
-    DisabledContinueButton() {
-        return match.accessible.DisabledButtonBarButton(this.generalText.Continue);
-    }
     ContinueMainButton() {
         return match.accessible.SetupButton(this.generalText.Continue);
     }
-    DisabledContinueMainButton() {
-        return match.accessible.DisabledSetupButton(this.generalText.Continue);
-    }
-    async ContinueToBolus() {
-        await this.Continue();
-    }
-    SaveWithoutBolusButton() {
-        return match.accessible.Button(this.screenText.SaveWithoutBolusing);
-    }
-    async SaveWithoutBolus() {
-        await this.SaveWithoutBolusButton().tap();
-    }
-    async ExpectPredictedGlucoseWarning(glucoseValueAndUnits) {
-        const predictedGlucoseWarning = `⚠ Predicted glucose of ${glucoseValueAndUnits} is below your suspend threshold setting.`;
-        await expect(match.accessible.TextLabel(predictedGlucoseWarning)).toExist();
+    async Continue() {
+        await this.ContinueMainButton().tap();
+        return this.mealBolusScreen;
     }
     AbsorptionTimeMessage() {
         return match.accessible.TextLabel(this.screenText.AbsorptionMessage);
