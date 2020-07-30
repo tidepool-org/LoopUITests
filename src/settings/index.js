@@ -50,29 +50,6 @@ class SettingsScreen extends base.Screen {
     OpenButton() {
         return match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(2);
     }
-    // AddPumpButton() {
-    //     return match.accessible.Button(this.screenText.AddPump);
-    // }
-    // async AddPump() {
-    //     await this.AddPumpButton().tap();
-    //     await match.accessible.Button(this.screenText.Simulator).tap();
-    //     await match.accessible.Button(this.generalText.Continue).tap();
-    // }
-    // async OpenPumpScreen() {
-    //     await match.accessible.Id(this.screenText.SimulatorPump).tap();
-    //     return this.pumpSimulatorScreen;
-    // }
-    // AddCGMButton() {
-    //     return match.accessible.Button(this.screenText.AddCGM);
-    // }
-    // async AddCGM() {
-    //     await thisDevices().AddCGMButton().tap();
-    //     await match.accessible.Button(this.screenText.Simulator).tap();
-    // }
-    // async OpenCGMScreen() {
-    //     await match.accessible.ClickableLabel(this.screenText.Simulator).atIndex(1).tap();
-    //     return this.cgmSimulatorScreen;
-    // }
     _closedLoopButton() {
         return match.accessible.Button(this.screenText.ClosedLoop).atIndex(4);
     }
