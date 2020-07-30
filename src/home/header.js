@@ -1,35 +1,27 @@
 const match = require('../match');
 
 class Header {
-    constructor(language) {
+    constructor(language, devices) {
         this.language = language;
+        this.devices = devices;
     }
-    AddPumpButton() {
-        return match.accessible.ClickableLabel(this.language.homeScreen.AddPump);
-    }
-    async AddPump() {
-        return this.AddPumpButton().tap();
+    Devices() {
+        return this.devices;
     }
     PumpErrorButton() {
         return match.accessible.ClickableLabel(this.language.homeScreen.PumpError);
     }
     async PumpError() {
-        return this.PumpErrorButton().tap();
-    }
-    AddCGMButton() {
-        return match.accessible.ClickableLabel(this.language.homeScreen.AddCGM);
-    }
-    async AddCGM() {
-        return this.AddCGMButton().tap();
+        await this.PumpErrorButton().tap();
     }
     CGMErrorButton() {
         return match.accessible.ClickableLabel(this.language.homeScreen.CGMError);
     }
     async CGMError() {
-        return this.CGMErrorButton().tap();
+        await this.CGMErrorButton().tap();
     }
     LoopIcon() {
-        match.loop.Icon();
+        return match.loop.Icon();
     }
     async Loop() {
         await this.LoopIcon().tap();

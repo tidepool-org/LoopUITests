@@ -170,6 +170,9 @@ const match = {
     },
     Text(theText) {
         return element(by.text(theText));
+    },
+    Label(label) {
+        return element(by.label(label));
     }
 };
 

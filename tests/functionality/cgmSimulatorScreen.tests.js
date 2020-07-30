@@ -5,10 +5,10 @@ var cgmSimulatorScreen = (test) => {
         settingsScreen = await test.OpenSettingsScreen();
     });
     it('add simulator', async () => {
-        await settingsScreen.AddCGM();
+        await settingsScreen.Devices().AddCGM();
     });
     it('open simulator', async () => {
-        screen = await settingsScreen.OpenCGMScreen();
+        screen = await settingsScreen.Devices().OpenCGMScreen();
     });
     it('set effect as Glucose Noise', async () => {
         await screen.Apply({

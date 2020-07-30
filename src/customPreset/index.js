@@ -1,6 +1,7 @@
 
-const match = require('./match');
-const { base } = require('./base/index');
+const match = require('../match');
+const { base } = require('../base/index');
+const { AddPresetScreen } = require('./addPresetScreen');
 
 class CustomPresetScreen extends base.Screen {
     constructor(language) {
@@ -10,6 +11,7 @@ class CustomPresetScreen extends base.Screen {
             generalText: language.general,
             editable: true,
         });
+        this.addPresetScreen = new AddPresetScreen(language);
     }
     /**
      * @override so we access the correct CancelButton

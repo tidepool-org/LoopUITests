@@ -27,10 +27,10 @@ var threapySettings = (test) => {
         await expect(settingsScreen.TherapySettingsLabel()).toBeVisible();
     });
     it('add pump button', async () => {
-        await expect(settingsScreen.AddPumpButton()).toBeVisible();
+        await expect(settingsScreen.Devices().AddPumpButton()).toBeVisible();
     });
     it('add CGM button', async () => {
-        await expect(settingsScreen.AddCGMButton()).toBeVisible();
+        await expect(settingsScreen.Devices().AddCGMButton()).toBeVisible();
     });
     it('close', async () => {
         await settingsScreen.BackToHome();

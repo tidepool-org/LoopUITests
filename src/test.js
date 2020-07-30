@@ -1,4 +1,4 @@
-const { HomeScreen } = require('./homeScreen');
+const { HomeScreen } = require('./home/index');
 const exec = require('child_process').exec;
 const match = require('./match');
 const { screenName, settingType } = require('./properties');
@@ -36,6 +36,12 @@ class Test {
         this.filter = filter;
         return this;
     }
+    /**
+     *
+     * @param {object} simulators
+     * @param simulators.cgm
+     * @param simulators.pump
+     */
     withSimulators(simulators) {
         this.simulators = simulators;
         return this;

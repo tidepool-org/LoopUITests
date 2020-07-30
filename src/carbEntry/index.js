@@ -1,6 +1,6 @@
-const match = require('./match');
+const match = require('../match');
 
-const { base } = require('./base/index');
+const { base } = require('../base/index');
 const { MealBolusScreen } = require('./mealBolusScreen');
 
 class CarbEntryScreen extends base.Screen {

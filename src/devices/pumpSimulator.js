@@ -2,7 +2,7 @@ const element = require('detox').element;
 const match = require('../match');
 const { base } = require('../base/index');
 
-class PumpSimulatorScreen extends base.Screen {
+class PumpSimulator extends base.Screen {
     constructor(language) {
         super({
             screenText: language.settingsScreen.PumpSimulatorScreen,
@@ -206,5 +206,5 @@ class PumpSimulatorScreen extends base.Screen {
 }
 
 module.exports = {
-    PumpSimulatorScreen
+    PumpSimulator
 };

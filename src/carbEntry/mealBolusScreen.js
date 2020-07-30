@@ -1,5 +1,5 @@
-const match = require('./match');
-const { base } = require('./base/index');
+const match = require('../match');
+const { base } = require('../base/index');
 
 class MealBolusScreen extends base.Screen {
     constructor(language) {

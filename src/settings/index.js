@@ -1,10 +1,21 @@
-const match = require('./match');
-const { settingsSubScreen } = require('./settingScreen/index');
+const match = require('../match');
+// const { BasalRatesScreen } = require('./basalRatesScreen');
+// const { CarbRatioScreen } = require('./carbRatioScreen');
+// const { CorrectionRangeScreen } = require('./correctionRangeScreen');
+// const { DeliveryLimitsScreen } = require('./deliveryLimitsScreen');
+// const { InsulinSensitivitiesScreen } = require('./insulinSensitivitiesScreen');
+// const { SuspendThresholdScreen } = require('./suspendThresholdScreen');
+// const { IssueReportScreen } = require('./issueReportScreen');
+// const { InsulinModelScreen } = require('./insulinModelScreen');
 
-const { base } = require('./base/index');
+const { AlertScreen } = require('./alertScreen');
+const { SupportScreen } = require('./supportScreen');
+const { TherapyScreen } = require('./therapyScreen');
+
+const { base } = require('../base/index');
 
 class SettingsScreen extends base.Screen {
-    constructor(language) {
+    constructor(language, devices) {
         super({
             openClickableLabel: language.settingsScreen.NewSettings,
             screenText: language.settingsScreen,
@@ -15,11 +26,13 @@ class SettingsScreen extends base.Screen {
                 visibleTopLabel: language.settingsScreen.ClosedLoop,
             },
         });
-        this.cgmSimulatorScreen = new settingsSubScreen.CGMSimulatorScreen(language);
-        this.pumpSimulatorScreen = new settingsSubScreen.PumpSimulatorScreen(language);
-        this.alertScreen = new settingsSubScreen.AlertScreen(language);
-        this.therapyScreen = new settingsSubScreen.TherapyScreen(language);
-        this.supportScreen = new settingsSubScreen.SupportScreen(language);
+        this.devices = devices;
+        this.alertScreen = new AlertScreen(language);
+        this.therapyScreen = new TherapyScreen(language);
+        this.supportScreen = new SupportScreen(language);
+    }
+    Devices() {
+        return this.devices;
     }
     /**
      * @override
@@ -37,29 +50,29 @@ class SettingsScreen extends base.Screen {
     OpenButton() {
         return match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(2);
     }
-    AddPumpButton() {
-        return match.accessible.Button(this.screenText.AddPump);
-    }
-    async AddPump() {
-        await this.AddPumpButton().tap();
-        await match.accessible.Button(this.screenText.Simulator).tap();
-        await match.accessible.Button(this.generalText.Continue).tap();
-    }
-    async OpenPumpScreen() {
-        await match.accessible.Id(this.screenText.SimulatorPump).tap();
-        return this.pumpSimulatorScreen;
-    }
-    AddCGMButton() {
-        return match.accessible.Button(this.screenText.AddCGM);
-    }
-    async AddCGM() {
-        await this.AddCGMButton().tap();
-        await match.accessible.Button(this.screenText.Simulator).tap();
-    }
-    async OpenCGMScreen() {
-        await match.accessible.ClickableLabel(this.screenText.Simulator).atIndex(1).tap();
-        return this.cgmSimulatorScreen;
-    }
+    // AddPumpButton() {
+    //     return match.accessible.Button(this.screenText.AddPump);
+    // }
+    // async AddPump() {
+    //     await this.AddPumpButton().tap();
+    //     await match.accessible.Button(this.screenText.Simulator).tap();
+    //     await match.accessible.Button(this.generalText.Continue).tap();
+    // }
+    // async OpenPumpScreen() {
+    //     await match.accessible.Id(this.screenText.SimulatorPump).tap();
+    //     return this.pumpSimulatorScreen;
+    // }
+    // AddCGMButton() {
+    //     return match.accessible.Button(this.screenText.AddCGM);
+    // }
+    // async AddCGM() {
+    //     await thisDevices().AddCGMButton().tap();
+    //     await match.accessible.Button(this.screenText.Simulator).tap();
+    // }
+    // async OpenCGMScreen() {
+    //     await match.accessible.ClickableLabel(this.screenText.Simulator).atIndex(1).tap();
+    //     return this.cgmSimulatorScreen;
+    // }
     _closedLoopButton() {
         return match.accessible.Button(this.screenText.ClosedLoop).atIndex(4);
     }

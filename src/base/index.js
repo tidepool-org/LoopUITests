@@ -5,7 +5,7 @@ const { EntryScreen } = require('./entryScreen');
 var base = {
     Screen,
     EntriesScreen,
-    EntryScreen
+    EntryScreen,
 };
 
 module.exports = {

@@ -9,6 +9,10 @@ var General = {
     Edit: 'Edit',
     Status: 'Status',
     OK: 'OK',
+    AddPump: 'Add Pump',
+    AddCGM: 'Add CGM',
+    Simulator: 'Simulator',
+    SimulatorPump: 'Simulator Small',
     ButtonLabel: {
         Plus: 'plus',
         InfoCircle: 'info.circle',

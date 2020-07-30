@@ -1,29 +1,31 @@
-const match = require('./match');
+const match = require('../match');
 
-const { home } = require('./homeScreen/index');
-//const { SettingsScreen_Old } = require('./settingsScreen_old');
-const { SettingsScreen } = require('./settingsScreen');
-const { CarbEntryScreen } = require('./carbEntryScreen');
-const { BolusScreen } = require('./bolusScreen');
+const { GlucoseScreen } = require('./glucoseScreen');
+const { ActiveInsulinScreen } = require('./activeInsulinScreen');
+const { InsulinDeliveryScreen } = require('./insulinDeliveryScreen');
+const { ActiveCarbohydratesScreen } = require('./activeCarbohydratesScreen');
+const { Header } = require('./header');
+const { SettingsScreen } = require('../settings/index');
+const { CarbEntryScreen } = require('../carbEntry/index');
+const { BolusScreen } = require('../bolus/index');
+const { CustomPresetScreen } = require('../customPreset/index');
 
-const { CustomPresetScreen } = require('./customPresetScreen');
+const { Devices } = require('../devices/index');
 
 class HomeScreen {
     constructor(language, settingsScreenDefaults) {
-        this.glucoseScreen = new home.GlucoseScreen(language);
-        this.activeInsulinScreen = new home.ActiveInsulinScreen(language);
-        this.insulinDeliveryScreen = new home.InsulinDeliveryScreen(language);
-        this.activeCarbohydratesScreen = new home.ActiveCarbohydratesScreen(language);
-        //this.settingsScreenOld = new SettingsScreen_Old(language, settingsScreenDefaults);
-        this.settingsScreen = new SettingsScreen(language);
+        this.glucoseScreen = new GlucoseScreen(language);
+        this.activeInsulinScreen = new ActiveInsulinScreen(language);
+        this.insulinDeliveryScreen = new InsulinDeliveryScreen(language);
+        this.activeCarbohydratesScreen = new ActiveCarbohydratesScreen(language);
+        this.settingsScreen = new SettingsScreen(language, new Devices(language, false));
         this.bolusScreen = new BolusScreen(language);
         this.carbEntryScreen = new CarbEntryScreen(language);
-        this.header = new home.Header(language);
+        this.header = new Header(language, new Devices(language, true));
         this.customPresetScreen = new CustomPresetScreen(language);
-
         this.language = language;
     }
-    Header() {
+    HeaderSection() {
         return this.header;
     }
     ActiveCarbohydratesLabel() {

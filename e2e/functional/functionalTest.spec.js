@@ -16,12 +16,12 @@ describe('functional test', () => {
     describe('home screen', () => {
         functionalityTests.homeScreen(test);
     });
-    describe('carb entry screen', () => {
-        functionalityTests.carbEntryScreen(test);
-    });
-    describe('settings screen', () => {
-        functionalityTests.settingsScreen(test);
-    });
+    // describe('carb entry screen', () => {
+    //     functionalityTests.carbEntryScreen(test);
+    // });
+    // describe('settings screen', () => {
+    //     functionalityTests.settingsScreen(test);
+    // });
     describe('pump simulator screen', () => {
         functionalityTests.pumpSimulatorScreen(test);
     });
