@@ -2,12 +2,14 @@ const match = require('../match');
 
 const { PumpSimulator } = require('./pumpSimulator');
 const { CGMSimulator } = require('./cgmSimulator');
+const { DexcomG6 } = require('./dexcomG6');
 
 class Devices {
     constructor(language, header) {
         this.generalText = language.general;
         this.cgmSimulator = new CGMSimulator(language);
         this.pumpSimulator = new PumpSimulator(language);
+        this.g6 = new DexcomG6(language);
         if (header) {
             this.isHeader = true;
         }
@@ -40,6 +42,11 @@ class Devices {
     async AddCGM() {
         await this.AddCGMButton().tap();
         await match.accessible.Button(this.generalText.Simulator).tap();
+    }
+    async AddG6() {
+        await this.AddCGMButton().tap();
+        await match.accessible.Button('Dexcom G6').tap();
+        return this.g6;
     }
     async OpenCGMScreen() {
         try {

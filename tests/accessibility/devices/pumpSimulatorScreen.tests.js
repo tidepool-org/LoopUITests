@@ -1,23 +1,21 @@
-var settingsPumpSimulatorScreenTests = (test) => {
+var pumpSimulatorScreenTests = (test) => {
     var screen;
-    var settingsScreen;
     beforeAll(async () => {
-        settingsScreen = await test.OpenSettingsScreen();
-        await settingsScreen.AddPumpSimulator();
-        screen = await settingsScreen.OpenPumpSimulatorScreen();
+        var homeScreen = await test.OpenHomeScreen();
+        await homeScreen.HeaderSection().Devices().AddPump();
+        screen = await homeScreen.HeaderSection().Devices().OpenPumpScreen();
     });
     afterAll(async () => {
         await screen.RemoveSimulator();
-        await settingsScreen.Close();
     });
     it('has a header', async () => {
         await expect(screen.Header()).toExist();
     });
+    it('has a back button', async () => {
+        await expect(screen.BackButton()).toExist();
+    });
     it('has a configuration header', async () => {
         await expect(screen.ConfigurationHeader()).toExist();
-    });
-    it('has a done button', async () => {
-        await expect(screen.DoneButton()).toExist();
     });
     it('has a suspend delivery button', async () => {
         await expect(screen.SuspendDeliveryButton()).toExist();
@@ -68,5 +66,5 @@ var settingsPumpSimulatorScreenTests = (test) => {
 };
 
 module.exports = {
-    settingsPumpSimulatorScreenTests
+    pumpSimulatorScreenTests
 };

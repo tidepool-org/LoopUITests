@@ -171,6 +171,12 @@ var SettingsScreen = {
         Header: 'Suspend Threshold',
         Info: 'When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/h and will not recommend a bolus.',
     },
+    G6Screen: {
+        Header: 'Sensor Code',
+        EnterCode: 'Enter Code',
+        NoCode: 'No Code',
+        DeviceImage: 'sensor-code',
+    },
     CGMSimulatorScreen: {
         Header: 'CGM Settings',
         BaseGlucose: 'Base Glucose',

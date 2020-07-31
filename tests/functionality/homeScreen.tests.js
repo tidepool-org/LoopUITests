@@ -37,6 +37,10 @@ var homeScreen = (test) => {
             let cgm = await homeScreen.HeaderSection().Devices().OpenCGMScreen();
             await cgm.RemoveSimulator();
         });
+        it('can add G6', async () => {
+            let g6 = await homeScreen.HeaderSection().Devices().AddG6();
+            await g6.Back();
+        });
     });
 };
 

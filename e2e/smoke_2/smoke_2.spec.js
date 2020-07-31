@@ -12,10 +12,21 @@ describe('accessibility', () => {
             .withStartScreen('home');
         await test.prepare();
     });
-    describe('settings', () => {
-        describe('overview screen', () => {
-            accessibilityTests.threapySettings(test);
+    describe('devices', () => {
+        // describe('g6 screen', () => {
+        //     accessibilityTests.g6ScreenTests(test);
+        // });
+        // describe('pump screen', () => {
+        //     accessibilityTests.pumpSimulatorScreenTests(test);
+        // });
+        describe('cgm screen', () => {
+            accessibilityTests.cgmSimulatorScreenTests(test);
         });
+    });
+    describe('settings', () => {
+        // describe('overview screen', () => {
+        //     accessibilityTests.threapySettings(test);
+        // });
         // describe('delivery limits', () => {
         //     accessibilityTests.settingsDeliveryLimitsScreen(test);
         // });

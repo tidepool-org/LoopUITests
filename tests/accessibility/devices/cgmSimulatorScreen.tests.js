@@ -1,23 +1,18 @@
-var settingsCGMSimulatorScreenTests = (test) => {
+var cgmSimulatorScreenTests = (test) => {
     var screen;
-    var settingsScreen;
     beforeAll(async () => {
-        settingsScreen = await test.OpenSettingsScreen();
-        await settingsScreen.AddCGMSimulator();
-        screen = await settingsScreen.OpenCGMSimulatorScreen();
+        var homeScreen = await test.OpenHomeScreen();
+        await homeScreen.HeaderSection().Devices().AddCGM();
+        screen = await homeScreen.HeaderSection().Devices().OpenCGMScreen();
     });
     afterAll(async () => {
         await screen.RemoveSimulator();
-        await settingsScreen.Close();
     });
     it('has a header', async () => {
         await expect(screen.Header()).toExist();
     });
-    it('has a done button', async () => {
-        await expect(screen.DoneButton()).toExist();
-    });
-    it('has a model header', async () => {
-        await expect(screen.ModelHeader()).toExist();
+    it('has a back button', async () => {
+        await expect(screen.BackButton()).toExist();
     });
     it('has a model header', async () => {
         await expect(screen.ModelHeader()).toExist();
@@ -30,9 +25,6 @@ var settingsCGMSimulatorScreenTests = (test) => {
     });
     it('has a no data label', async () => {
         await expect(screen.NoDataModelLabel()).toExist();
-    });
-    it('has a model header', async () => {
-        await expect(screen.ModelHeader()).toExist();
     });
     it('has a effects header', async () => {
         await expect(screen.EffectsHeader()).toExist();
@@ -68,5 +60,5 @@ var settingsCGMSimulatorScreenTests = (test) => {
 };
 
 module.exports = {
-    settingsCGMSimulatorScreenTests
+    cgmSimulatorScreenTests
 };
