@@ -13,12 +13,12 @@ describe('accessibility', () => {
         await test.prepare();
     });
     describe('devices', () => {
-        // describe('g6 screen', () => {
-        //     accessibilityTests.g6ScreenTests(test);
-        // });
-        // describe('pump screen', () => {
-        //     accessibilityTests.pumpSimulatorScreenTests(test);
-        // });
+        describe('g6 screen', () => {
+            accessibilityTests.g6ScreenTests(test);
+        });
+        describe('pump screen', () => {
+            accessibilityTests.pumpSimulatorScreenTests(test);
+        });
         describe('cgm screen', () => {
             accessibilityTests.cgmSimulatorScreenTests(test);
         });
