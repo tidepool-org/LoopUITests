@@ -37,7 +37,7 @@ class Screen {
     }
     BackButton() {
         if (this.backLabel) {
-            return match.accessible.ButtonBarButton(this.backLabel);
+            return match.accessible.BackButton(this.backLabel);
         }
         return this.CancelButton();
     }

@@ -9,59 +9,59 @@ var pumpSimulatorScreenTests = (test) => {
         await screen.RemoveSimulator();
     });
     it('has a header', async () => {
-        await expect(screen.Header()).toExist();
+        await expect(screen.Header()).toBeVisible();
     });
     it('has a back button', async () => {
-        await expect(screen.BackButton()).toExist();
+        await expect(screen.BackButton()).toBeVisible();
     });
     it('has a configuration header', async () => {
-        await expect(screen.ConfigurationHeader()).toExist();
+        await expect(screen.ConfigurationHeader()).toBeVisible();
     });
     it('has a suspend delivery button', async () => {
-        await expect(screen.SuspendDeliveryButton()).toExist();
+        await expect(screen.SuspendDeliveryButton()).toBeVisible();
     });
     it('has a detect occlusion button', async () => {
-        await expect(screen.DetectOcclusionButton()).toExist();
+        await expect(screen.DetectOcclusionButton()).toBeVisible();
     });
     it('has a cause pump error button', async () => {
-        await expect(screen.CausePumpErrorButton()).toExist();
+        await expect(screen.CausePumpErrorButton()).toBeVisible();
     });
     it('has a error on suspend toggle', async () => {
-        await expect(screen.ErrorOnSuspendToggel()).toExist();
+        await expect(screen.ErrorOnSuspendToggel()).toBeVisible();
     });
     it('has a error on suspend label', async () => {
-        await expect(screen.ErrorOnSuspendLabel()).toExist();
+        await expect(screen.ErrorOnSuspendLabel()).toBeVisible();
     });
     it('has a error on bolus toggle', async () => {
-        await expect(screen.ErrorOnBolusToggel()).toExist();
+        await expect(screen.ErrorOnBolusToggel()).toBeVisible();
     });
     it('has a error on bolus label', async () => {
-        await expect(screen.ErrorOnBolusLabel()).toExist();
+        await expect(screen.ErrorOnBolusLabel()).toBeVisible();
     });
     it('has a error on resume toggle', async () => {
-        await expect(screen.ErrorOnResumeToggel()).toExist();
+        await expect(screen.ErrorOnResumeToggel()).toBeVisible();
     });
     it('has a error on resume label', async () => {
-        await expect(screen.ErrorOnResumeLabel()).toExist();
+        await expect(screen.ErrorOnResumeLabel()).toBeVisible();
     });
     it('has a error on temp basal toggle', async () => {
-        await expect(screen.ErrorOnTempBasalToggel()).toExist();
+        await expect(screen.ErrorOnTempBasalToggel()).toBeVisible();
     });
     it('has a error on temp basal label', async () => {
-        await expect(screen.ErrorOnTempBasalLabel()).toExist();
+        await expect(screen.ErrorOnTempBasalLabel()).toBeVisible();
     });
     it('has a error on temp basal toggle', async () => {
-        await expect(screen.ErrorOnTempBasalToggel()).toExist();
+        await expect(screen.ErrorOnTempBasalToggel()).toBeVisible();
     });
     it('has a remaining battery label', async () => {
-        await expect(screen.BatteryRemainingLabel()).toExist();
+        await expect(screen.BatteryRemainingLabel()).toBeVisible();
     });
     it('has a reservoir remaining label', async () => {
-        await expect(screen.ReservoirRemainingLabel()).toExist();
+        await expect(screen.ReservoirRemainingLabel()).toBeVisible();
     });
     it('has a delete pump label', async () => {
         await screen.ScrollToBottom();
-        await expect(screen.DeletePumpLabel()).toExist();
+        await expect(screen.DeletePumpLabel()).toBeVisible();
     });
 };
 
