@@ -24,9 +24,9 @@ describe('accessibility', () => {
         });
     });
     describe('settings', () => {
-        // describe('overview screen', () => {
-        //     accessibilityTests.threapySettings(test);
-        // });
+        describe('overview screen', () => {
+            accessibilityTests.threapySettings(test);
+        });
         // describe('delivery limits', () => {
         //     accessibilityTests.settingsDeliveryLimitsScreen(test);
         // });
@@ -38,12 +38,6 @@ describe('accessibility', () => {
         // });
         // describe('suspend threshold', () => {
         //     accessibilityTests.settingsSuspendThresholdScreen(test);
-        // });
-        // describe('CGM simulator', () => {
-        //     accessibilityTests.settingsCGMSimulatorScreenTests(test);
-        // });
-        // describe('pump simulator', () => {
-        //     accessibilityTests.settingsPumpSimulatorScreenTests(test);
         // });
         // describe('basal rates', () => {
         //     accessibilityTests.settingsBasalRatesScreen(test);

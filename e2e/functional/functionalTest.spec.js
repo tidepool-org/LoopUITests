@@ -19,9 +19,9 @@ describe('functional test', () => {
     // describe('carb entry screen', () => {
     //     functionalityTests.carbEntryScreen(test);
     // });
-    // describe('settings screen', () => {
-    //     functionalityTests.settingsScreen(test);
-    // });
+    describe('settings screen', () => {
+        functionalityTests.settingsScreen(test);
+    });
     describe('pump simulator screen', () => {
         functionalityTests.pumpSimulatorScreen(test);
     });
