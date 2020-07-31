@@ -5,10 +5,15 @@ const { base } = require('../base/index');
 class ActiveCarbohydratesScreen extends base.Screen {
     constructor(language) {
         super({
-            openClickableLabel: language.homeScreen.ActiveCarbohydratesScreen.ActiveCarbohydrates,
             screenText: language.homeScreen.ActiveCarbohydratesScreen,
             generalText: language.general,
-            backLabel: language.general.Status,
+            header: {
+                backLabel: language.general.Status,
+            },
+            open: {
+                isBtn: true,
+                label: language.homeScreen.ActiveCarbohydratesScreen.ActiveCarbohydrates,
+            },
         });
     }
     COBLabel() {

@@ -3,9 +3,14 @@ const { base } = require('../base/index');
 class SupportScreen extends base.Screen {
     constructor(language) {
         super({
-            openClickableLabel: 'Support',
             generalText: language.general,
-            backLabel: 'Settings',
+            open: {
+                isBtn: true,
+                label: 'Support',
+            },
+            header: {
+                backLabel: 'Settings',
+            },
         });
     }
 }

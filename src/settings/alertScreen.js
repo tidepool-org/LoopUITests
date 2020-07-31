@@ -4,9 +4,14 @@ const match = require('../match');
 class AlertScreen extends base.Screen {
     constructor(language) {
         super({
-            openClickableLabel: 'Alert Permissions',
             generalText: language.general,
-            backLabel: 'Settings',
+            header: {
+                backLabel: 'Settings',
+            },
+            open: {
+                isBtn: true,
+                label: 'Alert Permissions',
+            },
         });
     }
     OpenButton() {

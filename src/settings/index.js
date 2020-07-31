@@ -17,10 +17,15 @@ const { base } = require('../base/index');
 class SettingsScreen extends base.Screen {
     constructor(language, devices) {
         super({
-            openClickableLabel: language.settingsScreen.NewSettings,
             screenText: language.settingsScreen,
             generalText: language.general,
-            backLabel: language.general.Done,
+            open: {
+                isBtn: true,
+                label: language.settingsScreen.NewSettings,
+            },
+            header: {
+                backLabel: language.general.Close,
+            },
             scroll: {
                 visibleBottomLabel: language.settingsScreen.Supportv2,
                 visibleTopLabel: language.settingsScreen.ClosedLoop,

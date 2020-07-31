@@ -5,10 +5,15 @@ const { base } = require('../base/index');
 class GlucoseScreen extends base.Screen {
     constructor(language) {
         super({
-            openClickableLabel: language.homeScreen.GlucoseScreen.Glucose,
             screenText: language.homeScreen.GlucoseScreen,
             generalText: language.general,
-            backLabel: language.general.Status,
+            header: {
+                backLabel: language.general.Status,
+            },
+            open: {
+                isBtn: true,
+                label: language.homeScreen.GlucoseScreen.Glucose,
+            },
         });
     }
     CarbohydratesLabel() {

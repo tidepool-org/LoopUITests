@@ -4,10 +4,15 @@ const { base } = require('../base/index');
 class MealBolusScreen extends base.Screen {
     constructor(language) {
         super({
-            openLabel: language.general.Continue,
             screenText: language.carbEntryScreen.MealBolusScreen,
-            backLabel: language.carbEntryScreen.MealBolusScreen.CarbEntry,
             generalText: language.general,
+            header: {
+                backLabel: language.carbEntryScreen.MealBolusScreen.CarbEntry,
+            },
+            open: {
+                isBtn: false,
+                label: language.general.Continue,
+            },
         });
     }
     CarbEntryLabel() {

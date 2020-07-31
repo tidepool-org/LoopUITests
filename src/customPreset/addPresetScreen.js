@@ -5,10 +5,15 @@ const { base } = require('../base/index');
 class AddPresetScreen extends base.Screen {
     constructor(language) {
         super({
-            openLabel: language.customPresetScreen.WorkoutTargets,
             screenText: language.customPresetScreen,
             generalText: language.general,
-            editable: true,
+            open: {
+                isBtn: false,
+                label: language.customPresetScreen.WorkoutTargets,
+            },
+            header: {
+                editable: true,
+            },
         });
     }
     /**

@@ -7,7 +7,9 @@ class CGMSimulator extends base.Screen {
         super({
             screenText: language.settingsScreen.CGMSimulatorScreen,
             generalText: language.general,
-            backLabel: language.general.Done,
+            header: {
+                backLabel: language.general.Done,
+            },
             scroll: {
                 visibleBottomLabel: language.settingsScreen.CGMSimulatorScreen.DeleteCGM,
                 visibleTopLabel: language.settingsScreen.CGMSimulatorScreen.Model.Constant,

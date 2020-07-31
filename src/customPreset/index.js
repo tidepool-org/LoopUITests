@@ -6,10 +6,15 @@ const { AddPresetScreen } = require('./addPresetScreen');
 class CustomPresetScreen extends base.Screen {
     constructor(language) {
         super({
-            openLabel: language.customPresetScreen.WorkoutTargets,
             screenText: language.customPresetScreen,
             generalText: language.general,
-            editable: true,
+            open: {
+                isBtn: false,
+                label: language.customPresetScreen.WorkoutTargets,
+            },
+            header: {
+                editable: true,
+            },
         });
         this.addPresetScreen = new AddPresetScreen(language);
     }

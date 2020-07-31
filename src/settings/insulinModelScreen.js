@@ -6,8 +6,13 @@ class InsulinModelScreen extends base.Screen {
         super({
             screenText: language.settingsScreen.InsulinModelScreen,
             generalText: language.general,
-            openLabel: language.settingsScreen.InsulinModelScreen.Header,
-            backLabel: language.general.Close,
+            header: {
+                backLabel: language.general.Close,
+            },
+            open: {
+                isBtn: false,
+                label: language.settingsScreen.InsulinModelScreen.Header,
+            },
         });
     }
     async Apply(model) {

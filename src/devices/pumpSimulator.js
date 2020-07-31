@@ -7,7 +7,9 @@ class PumpSimulator extends base.Screen {
         super({
             screenText: language.settingsScreen.PumpSimulatorScreen,
             generalText: language.general,
-            backLabel: language.general.Done,
+            header: {
+                backLabel: language.general.Done,
+            },
             scroll: {
                 visibleBottomLabel: language.settingsScreen.PumpSimulatorScreen.DeletePump,
                 visibleTopLabel: language.settingsScreen.PumpSimulatorScreen.SuspendDelivery,

@@ -4,10 +4,15 @@ const { base } = require('../base/index');
 class InsulinDeliveryScreen extends base.Screen {
     constructor(language) {
         super({
-            openClickableLabel: language.homeScreen.InsulinDeliveryScreen.Header,
             screenText: language.homeScreen.InsulinDeliveryScreen,
             generalText: language.general,
-            backLabel: language.general.Status,
+            header: {
+                backLabel: language.general.Status,
+            },
+            open: {
+                isBtn: true,
+                label: language.homeScreen.InsulinDeliveryScreen.Header,
+            },
         });
     }
     IOBLabel() {

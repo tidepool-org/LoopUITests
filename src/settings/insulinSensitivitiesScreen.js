@@ -9,8 +9,13 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
         super({
             screenText: language.settingsScreen.InsulinSensitivitiesScreen,
             generalText: language.general,
-            openLabel: language.settingsScreen.InsulinSensitivitiesScreen.Header,
-            backLabel: language.general.Cancel,
+            open: {
+                isBtn: false,
+                label: language.settingsScreen.InsulinSensitivitiesScreen.Header,
+            },
+            header: {
+                backLabel: language.general.Cancel,
+            },
         }, config);
     }
     /**

@@ -7,8 +7,13 @@ class BasalRatesScreen extends base.EntriesScreen {
         super({
             screenText: language.settingsScreen.BasalRatesScreen,
             generalText: language.general,
-            openLabel: language.settingsScreen.BasalRatesScreen.Header,
-            backLabel: language.general.Cancel,
+            open: {
+                isBtn: false,
+                label: language.settingsScreen.BasalRatesScreen.Header,
+            },
+            header: {
+                backLabel: language.general.Cancel,
+            },
         }, config);
         this.unitsLabel = language.settingsScreen.BasalRatesScreen.Units;
     }

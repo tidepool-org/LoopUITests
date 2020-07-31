@@ -7,8 +7,13 @@ class CarbRatioScreen extends base.EntriesScreen {
         super({
             screenText: language.settingsScreen.CarbRatioScreen,
             generalText: language.general,
-            openLabel: language.settingsScreen.CarbRatioScreen.Header,
-            backLabel: language.general.Cancel,
+            open: {
+                isBtn: false,
+                label: language.settingsScreen.CarbRatioScreen.Header,
+            },
+            header: {
+                backLabel: language.general.Cancel,
+            },
         }, config);
     }
     /**

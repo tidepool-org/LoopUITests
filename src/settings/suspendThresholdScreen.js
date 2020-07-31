@@ -7,8 +7,13 @@ class SuspendThresholdScreen extends base.EntryScreen {
         super({
             screenText: language.settingsScreen.SuspendThresholdScreen,
             generalText: language.general,
-            openLabel: language.settingsScreen.SuspendThresholdScreen.Header,
-            backLabel: language.general.Cancel,
+            header: {
+                backLabel: language.general.Cancel,
+            },
+            open: {
+                isBtn: false,
+                label: language.settingsScreen.SuspendThresholdScreen.Header,
+            },
         });
         this.bgUnitsLabel = language.settingsScreen.SuspendThresholdScreen.BGUnits;
         this.config = config;

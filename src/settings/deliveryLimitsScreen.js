@@ -7,8 +7,13 @@ class DeliveryLimitsScreen extends base.EntryScreen {
         super({
             screenText: language.settingsScreen.DeliveryLimitsScreen,
             generalText: language.general,
-            openLabel: language.settingsScreen.SuspendThresholdScreen.Header,
-            backLabel: language.general.Cancel,
+            open: {
+                isBtn: false,
+                label: language.settingsScreen.SuspendThresholdScreen.Header,
+            },
+            header: {
+                backLabel: language.general.Cancel,
+            },
         });
         this.config = config;
     }

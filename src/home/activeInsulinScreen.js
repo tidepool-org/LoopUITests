@@ -4,10 +4,15 @@ const { base } = require('../base/index');
 class ActiveInsulinScreen extends base.Screen {
     constructor(language) {
         super({
-            openClickableLabel: language.homeScreen.ActiveInsulinScreen.Header,
             screenText: language.homeScreen.ActiveInsulinScreen,
             generalText: language.general,
-            backLabel: language.general.Status,
+            header: {
+                backLabel: language.general.Status,
+            },
+            open: {
+                isBtn: true,
+                label: language.homeScreen.ActiveInsulinScreen.Header,
+            },
         });
     }
     IOBLabel() {
