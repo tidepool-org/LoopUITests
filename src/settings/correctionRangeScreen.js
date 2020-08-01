@@ -10,9 +10,12 @@ class CorrectionRangeScreen extends base.EntriesScreen {
         super({
             screenText: language.settingsScreen.CorrectionRangeScreen,
             generalText: language.general,
-            openLabel: language.settingsScreen.CorrectionRangeScreen.Header,
             header: {
                 backLabel: language.general.Cancel,
+            },
+            open: {
+                isBtn: false,
+                label: language.settingsScreen.CorrectionRangeScreen.Header,
             },
         }, config);
     }

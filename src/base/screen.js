@@ -44,7 +44,7 @@ class Screen {
     }
     BackButton() {
         // Might be `Done`, `Cancel`, `Status` or the previous
-        return match.accessible.ButtonBarButton(this.backLabel);
+        return match.accessible.BackButton(this.backLabel);
     }
     AddButton() {
         return match.accessible.ButtonBarButton(this.generalText.Add);
@@ -89,7 +89,11 @@ class Screen {
         return this.Back();
     }
     async Back() {
-        return this.BackButton().tap();
+        try {
+            return this.BackButton().tap();
+        } catch (err) {
+            return match.accessible.ButtonBarButton(this.backLabel).tap();
+        }
     }
     async Continue() {
         return this.ContinueButton().tap();

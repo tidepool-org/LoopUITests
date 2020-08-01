@@ -4,16 +4,22 @@ const { base } = require('../base/index');
 class BolusScreen extends base.Screen {
     constructor(language) {
         super({
-            openLabel: language.bolusScreen.Header,
             screenText: language.bolusScreen,
             generalText: language.general,
+            header: {
+                backLabel: language.general.Cancel,
+            },
+            open: {
+                isBtn: false,
+                label: language.bolusScreen.Header,
+            },
         });
     }
     /**
-     * @override so we access the correct CancelButton
-     */
-    CancelButton() {
-        return match.accessible.ButtonBarButton(this.generalText.Cancel);
+     * @override Screen.BackButton()
+     * */
+    BackButton() {
+        return match.accessible.ButtonBarButton(this.backLabel);
     }
     async Deliver() {
         await this.DeliverButton().tap();

@@ -10,7 +10,7 @@ class InsulinDeliveryScreen extends base.Screen {
                 backLabel: language.general.Status,
             },
             open: {
-                isBtn: true,
+                isBtn: false,
                 label: language.homeScreen.InsulinDeliveryScreen.Header,
             },
         });

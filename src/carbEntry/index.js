@@ -6,17 +6,23 @@ const { MealBolusScreen } = require('./mealBolusScreen');
 class CarbEntryScreen extends base.Screen {
     constructor(language) {
         super({
-            openLabel: language.carbEntryScreen.AddMeal,
             screenText: language.carbEntryScreen,
             generalText: language.general,
+            header: {
+                backLabel: language.general.Cancel,
+            },
+            open: {
+                isBtn: false,
+                label: language.carbEntryScreen.AddMeal,
+            },
         });
         this.mealBolusScreen = new MealBolusScreen(language);
     }
     /**
-     * @override so we access the correct CancelButton
-     */
-    CancelButton() {
-        return match.accessible.ButtonBarButton(this.generalText.Cancel);
+     * @override Screen.BackButton()
+     * */
+    BackButton() {
+        return match.accessible.ButtonBarButton(this.backLabel);
     }
     AmountConsumedLabel() {
         return match.accessible.TextLabel(this.screenText.AmountConsumed);

@@ -9,20 +9,21 @@ class CustomPresetScreen extends base.Screen {
             screenText: language.customPresetScreen,
             generalText: language.general,
             open: {
-                isBtn: false,
+                isBtn: true,
                 label: language.customPresetScreen.WorkoutTargets,
             },
             header: {
                 editable: true,
+                backLabel: language.general.Cancel,
             },
         });
         this.addPresetScreen = new AddPresetScreen(language);
     }
     /**
-     * @override so we access the correct CancelButton
-     */
-    CancelButton() {
-        return match.accessible.ButtonBarButton(this.generalText.Cancel);
+     * @override Screen.BackButton()
+     * */
+    BackButton() {
+        return match.accessible.ButtonBarButton(this.backLabel);
     }
 }
 

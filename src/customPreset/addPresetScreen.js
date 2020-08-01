@@ -13,14 +13,15 @@ class AddPresetScreen extends base.Screen {
             },
             header: {
                 editable: true,
+                backLabel: language.general.Cancel,
             },
         });
     }
     /**
-     * @override so we access the correct CancelButton
-     */
-    CancelButton() {
-        return match.accessible.ButtonBarButton(this.generalText.Cancel);
+     * @override Screen.BackButton()
+     * */
+    BackButton() {
+        return match.accessible.ButtonBarButton(this.backLabel);
     }
 }
 

@@ -11,10 +11,16 @@ class GlucoseScreen extends base.Screen {
                 backLabel: language.general.Status,
             },
             open: {
-                isBtn: true,
+                isBtn: false,
                 label: language.homeScreen.GlucoseScreen.Glucose,
             },
         });
+    }
+    /**
+     * @override Screen.BackButton()
+     * */
+    BackButton() {
+        return match.accessible.BackButton(this.backLabel);
     }
     CarbohydratesLabel() {
         return match.accessible.ClickableLabel(this.screenText.Carbohydrates);

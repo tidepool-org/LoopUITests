@@ -7,7 +7,7 @@ var carbEntryScreen = (test) => {
         await expect(carbEntryScreen.Header()).toBeVisible();
     });
     it('has a Cancel Button', async () => {
-        await expect(carbEntryScreen.CancelButton()).toBeVisible();
+        await expect(carbEntryScreen.BackButton()).toBeVisible();
     });
     it('has a Disabled Continue Main Button', async () => {
         await expect(carbEntryScreen.ContinueMainButton()).toBeVisible();

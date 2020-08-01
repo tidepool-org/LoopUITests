@@ -7,7 +7,7 @@ var customPresetsScreen = (test) => {
         await expect(screen.Header()).toBeVisible();
     });
     it('has a Cancel Header Button', async () => {
-        await expect(screen.CancelButton()).toBeVisible();
+        await expect(screen.BackButton()).toBeVisible();
     });
     it('has a Edit Header Button', async () => {
         await expect(screen.EditButton()).toBeVisible();

@@ -10,7 +10,7 @@ class ActiveInsulinScreen extends base.Screen {
                 backLabel: language.general.Status,
             },
             open: {
-                isBtn: true,
+                isBtn: false,
                 label: language.homeScreen.ActiveInsulinScreen.Header,
             },
         });
