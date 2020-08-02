@@ -70,7 +70,7 @@ class CorrectionRangeScreen extends base.EntriesScreen {
                 current = ranges[index - 1];
             }
             await this.ApplyOne({ expected, current });
-            await this.AddNewEntry();
+            await this.Add();
         }
     }
 }

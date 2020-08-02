@@ -16,12 +16,6 @@ class GlucoseScreen extends base.Screen {
             },
         });
     }
-    /**
-     * @override Screen.BackButton()
-     * */
-    BackButton() {
-        return match.accessible.BackButton(this.backLabel);
-    }
     CarbohydratesLabel() {
         return match.accessible.ClickableLabel(this.screenText.Carbohydrates);
     }

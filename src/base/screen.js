@@ -4,14 +4,17 @@ const action = require('../action');
 class Screen {
     /**
      * @param {object} parentScreen
+     * @param {object} parentScreen.screenText
+     * @param {object} parentScreen.generalText
+     *
      * @param {object} parentScreen.open
      * @param {string} parentScreen.open.label
      * @param {boolean} parentScreen.open.isBtn
+     *
      * @param {object} parentScreen.header optional
      * @param {boolean} parentScreen.header.editable optional
      * @param {string} parentScreen.header.backLabel optional
-     * @param {object} parentScreen.screenText
-     * @param {object} parentScreen.generalText
+     *
      * @param {object} parentScreen.scroll optional
      * @param {string} parentScreen.scroll.visibleBottomLabel label that should be visible if your at the bottom of the screen
      * @param {string} parentScreen.scroll.visibleTopLabel label that should be visible if your at the top of the screen
@@ -56,9 +59,6 @@ class Screen {
         if (this.isEditable) {
             await this.AddButton().tap();
         }
-    }
-    async AddNewEntry() {
-        return this.Add();
     }
     async Edit() {
         if (this.isEditable) {

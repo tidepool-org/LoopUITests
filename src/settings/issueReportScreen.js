@@ -1,17 +1,18 @@
-const match = require('../match');
+const { base } = require('../base/index');
 
-class IssueReportScreen {
+class IssueReportScreen extends base.Screen {
     constructor(language) {
-        this.language = language;
-    }
-    Header() {
-        return match.accessible.Header(this.language.settingsScreen.IssueReport);
-    }
-    BackButton() {
-        return match.accessible.BackButton(this.language.settingsScreen.Settings);
-    }
-    async Close() {
-        await this.BackButton().tap();
+        super({
+            screenText: language.settingsScreen.IssueReportScreen,
+            generalText: language.general,
+            header: {
+                backLabel: language.settingsScreen.Settings,
+            },
+            open: {
+                isBtn: false,
+                label: language.settingsScreen.IssueReportScreen.Header,
+            }
+        });
     }
 }
 

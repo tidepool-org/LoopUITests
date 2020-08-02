@@ -13,7 +13,7 @@ var basalRateSchedule = (test) => {
                 unitsPerHour: screenLimit.max.limit,
             }
         });
-        await screen.AddNewEntry();
+        await screen.Add();
         await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
     });
     it('can set max units with no warning', async () => {
@@ -29,7 +29,7 @@ var basalRateSchedule = (test) => {
                 unitsPerHour: screenLimit.max.limit,
             },
         });
-        await screen.AddNewEntry();
+        await screen.Add();
         await expect(screen.GuardrailWarningIconPicker({ index: 1 })).toBeNotVisible();
     });
     it('can set min units with no warning', async () => {
@@ -45,7 +45,7 @@ var basalRateSchedule = (test) => {
                 unitsPerHour: screenLimit.max.noWarning,
             }
         });
-        await screen.AddNewEntry();
+        await screen.Add();
         await expect(screen.GuardrailWarningIconPicker({ index: 2 })).toBeNotVisible();
     });
     it('can set min units at limit', async () => {
@@ -61,7 +61,7 @@ var basalRateSchedule = (test) => {
                 unitsPerHour: screenLimit.min.noWarning,
             }
         });
-        await screen.AddNewEntry();
+        await screen.Add();
         await expect(screen.GuardrailWarningIconPicker({ index: 3 })).toBeVisible();
     });
     it('can close screen', async () => {

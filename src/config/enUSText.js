@@ -126,7 +126,6 @@ var SettingsScreen = {
     Pump: 'PUMP',
     AddService: 'Add Service',
     Simulator: 'Simulator',
-    IssueReport: 'Issue Report',
     SaveToSimulator: 'Save to simulator',
     DeliveryLimits: 'Delivery Limits',
     InsulinModel: 'Insulin Model',
@@ -139,6 +138,9 @@ var SettingsScreen = {
     DeletePump: 'Delete Pump',
     DeletePumpData: 'Delete Pump Data',
     PreMeal: 'Pre-Meal',
+    IssueReportScreen: {
+        Header: 'Issue Report',
+    },
     InsulinModelScreen: {
         Header: 'Insulin Model',
         Info: 'Loop assumes insulin is activley working for 6 hours...',
