@@ -47,10 +47,10 @@ class HomeScreen {
         return this.customPresetScreen.OpenButton();
     }
     AddMealButton() {
-        return match.accessible.Button(this.language.carbEntryScreen.AddMeal);
+        return this.carbEntryScreen.OpenButton();
     }
     BolusButton() {
-        return match.accessible.Button(this.language.bolusScreen.Header);
+        return this.bolusScreen.OpenButton();
     }
     async OpenActiveCarbohydratesChart() {
         await this.ActiveCarbohydratesLabel().tap();
@@ -84,36 +84,6 @@ class HomeScreen {
     async OpenCustomPresetScreen() {
         await this.customPresetScreen.Open();;
         return this.customPresetScreen;
-    }
-    async ExpectLoopNotYetRun() {
-        await expect(match.loop.Icon()).toHaveLabel(this.language.homeScreen.LoopWaitingForFirstRun);
-    }
-    async TapLoopIcon() {
-        await match.loop.Icon().tap();
-    }
-    async ExpectLoopStatusCarbsAlert() {
-        await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(this.language.general.Alert.MissingCarbEffects)).toExist();
-        await match.accessible.Button(this.language.general.OK).tap();
-    }
-    async ExpectLoopStatusInsulinAlert() {
-        await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(this.language.general.Alert.MissingInsulinEffects)).toExist();
-        await match.accessible.Button(this.language.general.OK).tap();
-    }
-    async ExpectLoopStatusConfigurationAlert() {
-        await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(this.language.general.Alert.ConfigurationError)).toExist();
-        await match.accessible.Button(this.language.general.OK).tap();
-    }
-    async ExpectLoopStatusGlucoseDataAlert() {
-        await this.TapLoopIcon();
-        await expect(match.accessible.AlertLabel(this.language.general.Alert.MissingGlucoseData)).toExist();
-        await match.accessible.Button(this.language.general.OK).tap();
-    }
-    async ExpectSuccessfulLoop() {
-        await this.TapLoopIcon();
-        await expect(match.accessible.Alert()).toNotExist();
     }
 }
 

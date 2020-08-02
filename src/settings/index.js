@@ -46,14 +46,17 @@ class SettingsScreen extends base.Screen {
         return match.accessible.ButtonBarButton(this.generalText.Done);
     }
     /**
+     * @override
+     */
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(2);
+    }
+    /**
      * @summary hack while we have two settings pages
      */
     async BackToHome() {
         await match.accessible.Button(this.generalText.Done).atIndex(2).tap();
         await match.accessible.ButtonBarButton(this.generalText.Done).tap();
-    }
-    OpenButton() {
-        return match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(2);
     }
     _closedLoopButton() {
         return match.accessible.Button(this.screenText.ClosedLoop).atIndex(4);

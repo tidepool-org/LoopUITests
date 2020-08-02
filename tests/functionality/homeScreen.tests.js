@@ -19,9 +19,6 @@ var homeScreen = (test) => {
         var screen = await homeScreen.OpenGlucoseChart();
         await screen.Back();
     });
-    it('has Loop icon', async () => {
-        await homeScreen.ExpectLoopNotYetRun();
-    });
     describe('header', () => {
         it('can add pump', async () => {
             await homeScreen.HeaderSection().Devices().AddPump();
@@ -40,6 +37,12 @@ var homeScreen = (test) => {
         it('can add G6', async () => {
             let g6 = await homeScreen.HeaderSection().Devices().AddG6();
             await g6.Back();
+        });
+        it('can check loop status', async () => {
+            await homeScreen.HeaderSection().Loop();
+        });
+        it('can close loop status alert', async () => {
+            await homeScreen.HeaderSection().CloseLoopAlert();
         });
     });
 };
