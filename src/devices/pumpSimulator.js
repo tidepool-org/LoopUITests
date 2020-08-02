@@ -16,6 +16,12 @@ class PumpSimulator extends base.Screen {
             },
         });
     }
+    /**
+     * @override Screen.BackButton()
+     **/
+    BackButton() {
+        return match.accessible.ButtonBarButton(this.backLabel);
+    }
     ConfigurationHeader() {
         return match.accessible.Header(this.screenText.ConfigurationHeader).atIndex(0);
     }

@@ -11,7 +11,7 @@ var g6ScreenTests = (test) => {
     it('has a header', async () => {
         await expect(screen.Header()).toBeVisible();
     });
-    it('has a cancel button', async () => {
+    it('has a back button', async () => {
         await expect(screen.BackButton()).toBeVisible();
     });
     it('has a enter code button', async () => {

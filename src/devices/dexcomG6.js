@@ -6,7 +6,16 @@ class DexcomG6 extends base.Screen {
         super({
             screenText: language.settingsScreen.G6Screen,
             generalText: language.general,
+            header: {
+                backLabel: language.general.Cancel,
+            },
         });
+    }
+    /**
+     * @override Screen.BackButton()
+     **/
+    BackButton() {
+        return match.accessible.Button(this.backLabel);
     }
     DeviceImage() {
         return match.accessible.Image(this.screenText.DeviceImage);

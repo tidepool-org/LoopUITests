@@ -16,6 +16,12 @@ class CGMSimulator extends base.Screen {
             },
         });
     }
+    /**
+     * @override Screen.BackButton()
+     **/
+    BackButton() {
+        return match.accessible.ButtonBarButton(this.backLabel);
+    }
     CGMSettingsButton() {
         return match.accessible.BackButton(this.screenText.Header);
     }

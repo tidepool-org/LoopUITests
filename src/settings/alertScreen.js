@@ -9,13 +9,13 @@ class AlertScreen extends base.Screen {
                 backLabel: 'Settings',
             },
             open: {
-                isBtn: true,
+                isBtn: false,
                 label: 'Alert Permissions',
             },
         });
     }
     OpenButton() {
-        return match.accessible.ClickableLabel(this.openClickableLabel).atIndex(1);
+        return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
     }
 }
 

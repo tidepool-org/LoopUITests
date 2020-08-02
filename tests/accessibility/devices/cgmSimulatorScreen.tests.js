@@ -30,7 +30,7 @@ var cgmSimulatorScreenTests = (test) => {
         await expect(screen.EffectsHeader()).toBeVisible();
     });
     it('has a random error label', async () => {
-        await expect(screen.RandomErrorEffectLabel()).toBeVisible();
+        await expect(screen.RandomErrorEffectLabel()).toExist();
     });
     it('has a glucose noise label', async () => {
         await expect(screen.GlucoseNoiseEffectLabel()).toBeVisible();
