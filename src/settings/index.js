@@ -41,13 +41,13 @@ class SettingsScreen extends base.Screen {
     /**
      * @override
      */
-    BackButton() {
+    BackButtonControl() {
         return match.accessible.ButtonBarButton(this.generalText.Done);
     }
     /**
      * @override
      */
-    OpenButton() {
+    OpenButtonControl() {
         return match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(2);
     }
     /**
@@ -75,31 +75,31 @@ class SettingsScreen extends base.Screen {
         }
     }
     TherapySettingsLabel() {
-        return this.therapyScreen.OpenButton();
+        return this.therapyScreen.OpenButtonControl();
     }
     async OpenTherapySettings() {
-        await this.therapyScreen.Open();
+        await this.therapyScreen.OpenAction();
         return this.therapyScreen;
     }
     SupportHeader() {
         return match.accessible.Header('Support');
     }
     SupportLabel() {
-        return this.supportScreen.OpenButton();
+        return this.supportScreen.OpenButtonControl();
     }
     ConfigurationHeader() {
         return match.accessible.Header('Configuration');
     }
     async OpenSupport() {
-        await this.ScrollToBottom();
-        await this.supportScreen.Open();
+        await this.ScrollToBottomAction();
+        await this.supportScreen.OpenAction();
         return this.supportScreen;
     }
     AlertPermissonsLabel() {
-        return this.alertScreen.OpenButton();
+        return this.alertScreen.OpenButtonControl();
     }
     async OpenAlerts() {
-        await this.alertScreen.Open();
+        await this.alertScreen.OpenAction();
         return this.alertScreen;
     }
 }

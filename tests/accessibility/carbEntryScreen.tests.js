@@ -7,7 +7,7 @@ var carbEntryScreen = (test) => {
         await expect(carbEntryScreen.Header()).toBeVisible();
     });
     it('has a Cancel Button', async () => {
-        await expect(carbEntryScreen.BackButton()).toBeVisible();
+        await expect(carbEntryScreen.BackButtonControl()).toBeVisible();
     });
     it('has a Disabled Continue Main Button', async () => {
         await expect(carbEntryScreen.ContinueMainButton()).toBeVisible();
@@ -33,7 +33,7 @@ var carbEntryScreen = (test) => {
             await carbEntryScreen.SetCarbs(10);
         });
         it('open on contune', async () => {
-            mealBolusScreen = await carbEntryScreen.Continue();
+            mealBolusScreen = await carbEntryScreen.ContinueAction();
         });
         it('has a Header', async () => {
             await expect(mealBolusScreen.Header()).toBeVisible();
@@ -60,11 +60,11 @@ var carbEntryScreen = (test) => {
             await expect(mealBolusScreen.GlucoseHeader()).toBeVisible();
         });
         it('can go back', async () => {
-            await mealBolusScreen.Back();
+            await mealBolusScreen.BackAction();
         });
     });
     it('has to close the Carb Entry screen', async () => {
-        await carbEntryScreen.CancelAndClose();
+        await carbEntryScreen.CancelAndCloseAction();
     });
 };
 

@@ -20,9 +20,9 @@ class CustomPresetScreen extends base.Screen {
         this.addPresetScreen = new AddPresetScreen(language);
     }
     /**
-     * @override Screen.BackButton()
+     * @override Screen.BackButtonControl()
      * */
-    BackButton() {
+    BackButtonControl() {
         return match.accessible.ButtonBarButton(this.backLabel);
     }
 }

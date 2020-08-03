@@ -7,16 +7,16 @@ var customPresetsScreen = (test) => {
         await expect(screen.Header()).toBeVisible();
     });
     it('has a Cancel Header Button', async () => {
-        await expect(screen.BackButton()).toBeVisible();
+        await expect(screen.BackButtonControl()).toBeVisible();
     });
     it('has a Edit Header Button', async () => {
-        await expect(screen.EditButton()).toBeVisible();
+        await expect(screen.EditButtonControl()).toBeVisible();
     });
     it('has a Add Header Button', async () => {
-        await expect(screen.AddButton()).toBeVisible();
+        await expect(screen.AddButtonControl()).toBeVisible();
     });
     it('can cancel and then close the screen', async () => {
-        await screen.CancelAndClose();
+        await screen.CancelAndCloseAction();
     });
 };
 

@@ -17,9 +17,9 @@ class PumpSimulatorScreen extends base.Screen {
         });
     }
     /**
-     * @override Screen.BackButton()
+     * @override Screen.BackButtonControl()
      **/
-    BackButton() {
+    BackButtonControl() {
         return match.accessible.ButtonBarButton(this.backLabel);
     }
     ConfigurationHeader() {
@@ -201,7 +201,7 @@ class PumpSimulatorScreen extends base.Screen {
         await this.SuspendDeliveryButton().tap();
     }
     async RemoveSimulator() {
-        await this.ScrollToBottom();
+        await this.ScrollToBottomAction();
         await this.DeletePumpLabel().tap();
         await this.DeletePumpConfirmationLabel().tap();
     }

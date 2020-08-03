@@ -12,7 +12,7 @@ var pumpSimulatorScreenTests = (test) => {
         await expect(screen.Header()).toBeVisible();
     });
     it('has a back button', async () => {
-        await expect(screen.BackButton()).toBeVisible();
+        await expect(screen.BackButtonControl()).toBeVisible();
     });
     it('has a configuration header', async () => {
         await expect(screen.ConfigurationHeader()).toBeVisible();
@@ -60,7 +60,7 @@ var pumpSimulatorScreenTests = (test) => {
         await expect(screen.ReservoirRemainingLabel()).toBeVisible();
     });
     it('has a delete pump label', async () => {
-        await screen.ScrollToBottom();
+        await screen.ScrollToBottomAction();
         await expect(screen.DeletePumpLabel()).toBeVisible();
     });
 };

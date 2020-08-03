@@ -4,7 +4,7 @@ var settingsScreen = (test) => {
         settingsScreen = await test.OpenSettingsScreen();
     });
     afterAll(async () => {
-        await settingsScreen.ScrollToTop();
+        await settingsScreen.ScrollToTopAction();
         await settingsScreen.Close();
     });
     describe('top of screen', () => {
@@ -34,7 +34,7 @@ var settingsScreen = (test) => {
     });
     describe('bottom of screen', () => {
         beforeAll(async () => {
-            await settingsScreen.ScrollToBottom();
+            await settingsScreen.ScrollToBottomAction();
         });
         it('has a configuration header', async () => {
             await expect(settingsScreen.ConfigurationHeader()).toExist();
@@ -75,11 +75,11 @@ var settingsScreen = (test) => {
             await expect(settingsScreen.IssueReportLabel()).toExist();
         });
         it('has a services header', async () => {
-            //await settingsScreen.ScrollToBottom();
+            //await settingsScreen.ScrollToBottomAction();
             await expect(settingsScreen.ServicesHeader()).toExist();
         });
         it('has a support header', async () => {
-            //await settingsScreen.ScrollToBottom();
+            //await settingsScreen.ScrollToBottomAction();
             await expect(settingsScreen.SupportHeader()).toExist();
         });
     });

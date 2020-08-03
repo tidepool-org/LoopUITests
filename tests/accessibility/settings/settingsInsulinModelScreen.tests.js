@@ -9,7 +9,7 @@ var settingsInsulinModelScreen = (test) => {
         await expect(screen.Header()).toExist();
     });
     it('has a back button', async () => {
-        await expect(screen.BackButton()).toExist();
+        await expect(screen.BackButtonControl()).toExist();
     });
     it('close', async () => {
         await screen.Close();

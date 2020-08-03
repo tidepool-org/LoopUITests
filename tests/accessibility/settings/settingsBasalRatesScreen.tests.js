@@ -8,7 +8,7 @@ var settingsBasalRatesScreen = (test) => {
         screen = await settingsScreen.OpenBasalRatesScreen();
     });
     afterAll(async () => {
-        await screen.CancelAndClose();
+        await screen.CancelAndCloseAction();
         await settingsScreen.RemovePumpSimulator();
         await settingsScreen.Close();
     });
@@ -22,13 +22,13 @@ var settingsBasalRatesScreen = (test) => {
         await expect(screen.InfoButton()).toExist();
     });
     it('has a add button', async () => {
-        await expect(screen.AddButton()).toExist();
+        await expect(screen.AddButtonControl()).toExist();
     });
     it('has a edit button', async () => {
-        await expect(screen.EditButton()).toExist();
+        await expect(screen.EditButtonControl()).toExist();
     });
     it('has a cancel button', async () => {
-        await expect(screen.BackButton()).toExist();
+        await expect(screen.BackButtonControl()).toExist();
     });
     it('has a save button', async () => {
         await expect(screen.SaveButton()).toExist();

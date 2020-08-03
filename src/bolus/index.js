@@ -16,9 +16,9 @@ class BolusScreen extends base.Screen {
         });
     }
     /**
-     * @override Screen.BackButton()
+     * @override Screen.BackButtonControl()
      * */
-    BackButton() {
+    BackButtonControl() {
         return match.accessible.ButtonBarButton(this.backLabel);
     }
     async Deliver() {

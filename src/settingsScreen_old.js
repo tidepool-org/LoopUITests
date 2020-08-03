@@ -16,7 +16,7 @@ class SettingsScreen_Old {
         this.suspendThresholdScreen = new settingsSubScreen.SuspendThresholdScreen(language, screenDefaults.suspendThreshold);
         this.carbRatioScreen = new settingsSubScreen.CarbRatioScreen(language, screenDefaults.carbRatio);
     }
-    async Open() {
+    async OpenAction() {
         await match.accessible.ButtonBarButton(this.language.settingsScreen.Settings).tap();
     }
     async Close() {
@@ -27,7 +27,7 @@ class SettingsScreen_Old {
         return this.insulinModelScreen;
     }
     async OpenIssueReportScreen() {
-        await this.ScrollToBottom();
+        await this.ScrollToBottomAction();
         await this.IssueReportLabel().tap();
         return this.issueReportScreen;
     }
@@ -36,12 +36,12 @@ class SettingsScreen_Old {
         return this.basalRatesScreen;
     }
     async OpenPumpSimulatorScreen() {
-        await this.ScrollToTop();
+        await this.ScrollToTopAction();
         await this.PumpSimulatorLabel().tap();
         return this.pumpSimulatorScreen;
     }
     async OpenCGMSimulatorScreen() {
-        await this.ScrollToTop();
+        await this.ScrollToTopAction();
         await this.CGMSimulatorLabel().tap();
         return this.cgmSimulatorScreen;
     }
@@ -50,17 +50,17 @@ class SettingsScreen_Old {
         return this.deliveryLimitsScreen;
     }
     async OpenInsulinSensitivitiesScreen() {
-        await this.ScrollToBottom();
+        await this.ScrollToBottomAction();
         await this.InsulinSensitivitiesLabel().tap();
         return this.insulinSensitivitiesScreen;
     }
     async OpenCorrectionRangeScreen() {
-        await this.ScrollToTop();
+        await this.ScrollToTopAction();
         await this.CorrectionRangeLabel().tap();
         return this.correctionRangeScreen;
     }
     async OpenCarbRatioScreen() {
-        await this.ScrollToBottom();
+        await this.ScrollToBottomAction();
         await this.CarbRatiosLabel().tap();
         return this.carbRatioScreen;
     }
@@ -152,18 +152,18 @@ class SettingsScreen_Old {
             }
         }
     }
-    async ScrollToBottom() {
+    async ScrollToBottomAction() {
         try {
             await expect(this.ServicesHeader()).toBeVisible();
         } catch (err) {
-            await action.ScrollToBottom();
+            await action.ScrollToBottomAction();
         }
     }
-    async ScrollToTop() {
+    async ScrollToTopAction() {
         try {
             await expect(this.PumpHeader()).toBeVisible();
         } catch (err) {
-            await action.ScrollToTop();
+            await action.ScrollToTopAction();
         }
     }
     /**
@@ -227,7 +227,7 @@ class SettingsScreen_Old {
         }
     }
     async SetClosedLoop() {
-        await this.ScrollToTop();
+        await this.ScrollToTopAction();
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
             await this.ClosedLoopButton().tap();
@@ -237,7 +237,7 @@ class SettingsScreen_Old {
         }
     }
     async SetOpenLoop() {
-        await this.ScrollToTop();
+        await this.ScrollToTopAction();
         //NOTE: not elegant but try catch approach is used by others in detox tests
         try {
             await this.ClosedLoopButton().tap();
@@ -251,7 +251,7 @@ class SettingsScreen_Old {
         await match.accessible.Button(this.language.settingsScreen.Simulator).tap();
     }
     async RemoveCGMData() {
-        await this.ScrollToBottom();
+        await this.ScrollToBottomAction();
         //TODO static text and not a button?
         await this.RemoveCGMDataLabel().tap();
         await this.RemoveCGMDataConfirmationLabel().tap();
@@ -266,7 +266,7 @@ class SettingsScreen_Old {
         await screen.RemoveSimulator();
     }
     async RemovePumpData() {
-        await this.ScrollToBottom();
+        await this.ScrollToBottomAction();
         //TODO static text and not a button?
         await this.RemovePumpDataLabel().tap();
         await this.RemovePumpDataConfirmationLabel().tap();

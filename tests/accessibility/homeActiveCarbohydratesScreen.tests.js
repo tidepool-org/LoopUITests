@@ -6,7 +6,7 @@ var homeActiveCarbohydratesScreen = (test) => {
         screen = await homeScreen.OpenActiveCarbohydratesChart();
     });
     afterAll(async () => {
-        await screen.Back();
+        await screen.BackAction();
     });
     it('has a header', async () => {
         await expect(screen.Header()).toBeVisible();
@@ -27,7 +27,7 @@ var homeActiveCarbohydratesScreen = (test) => {
         await expect(screen.PredictedLabel()).toBeVisible();
     });
     it('has a Back Button', async () => {
-        await expect(screen.BackButton()).toBeVisible();
+        await expect(screen.BackButtonControl()).toBeVisible();
     });
 };
 

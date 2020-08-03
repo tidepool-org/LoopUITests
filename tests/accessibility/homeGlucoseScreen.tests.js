@@ -4,7 +4,7 @@ var homeGlucoseScreen = (test) => {
         glucoseScreen = await test.homeScreen.OpenGlucoseChart();
     });
     afterAll(async () => {
-        await glucoseScreen.Back();
+        await glucoseScreen.BackAction();
     });
     it('has a header', async () => {
         await expect(glucoseScreen.Header()).toBeVisible();
@@ -22,7 +22,7 @@ var homeGlucoseScreen = (test) => {
         await expect(glucoseScreen.RetrospectiveCorrectionLabel()).toBeVisible();
     });
     it('has a Back Button', async () => {
-        await expect(glucoseScreen.BackButton()).toBeVisible();
+        await expect(glucoseScreen.BackButtonControl()).toBeVisible();
     });
 };
 

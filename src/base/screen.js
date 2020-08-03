@@ -45,34 +45,34 @@ class Screen {
     Header() {
         return match.accessible.Header(this.screenText.Header);
     }
-    BackButton() {
+    BackButtonControl() {
         // Might be `Done`, `Cancel`, `Status` or the previous
         return match.accessible.BackButton(this.backLabel);
     }
-    AddButton() {
+    AddButtonControl() {
         return match.accessible.ButtonBarButton(this.generalText.Add);
     }
-    EditButton() {
+    EditButtonControl() {
         return match.accessible.ButtonBarButton(this.generalText.Edit);
     }
-    async Add() {
-        if (this.isEditable) {
-            await this.AddButton().tap();
-        }
-    }
-    async Edit() {
-        if (this.isEditable) {
-            await this.EditButton().tap();
-        }
-    }
-    ContinueButton() {
+    ContinueButtonControl() {
         return match.accessible.ButtonBarButton(this.generalText.Continue);
     }
-    OpenButton() {
+    OpenButtonControl() {
         if (this.openBtn) {
             return match.accessible.Button(this.openBtn);
         }
         return match.accessible.ClickableLabel(this.openLabel);
+    }
+    async AddAction() {
+        if (this.isEditable) {
+            await this.AddButtonControl().tap();
+        }
+    }
+    async EditAction() {
+        if (this.isEditable) {
+            await this.EditButtonControl().tap();
+        }
     }
     async IsOn(buttonElement) {
         try {
@@ -82,23 +82,23 @@ class Screen {
             return true;
         }
     }
-    async Open() {
-        return this.OpenButton().tap();
+    async OpenAction() {
+        return this.OpenButtonControl().tap();
     }
-    async CancelAndClose() {
-        return this.Back();
+    async CancelAndCloseAction() {
+        return this.BackAction();
     }
-    async Back() {
+    async BackAction() {
         try {
-            return this.BackButton().tap();
+            return this.BackButtonControl().tap();
         } catch (err) {
             return match.accessible.ButtonBarButton(this.backLabel).tap();
         }
     }
-    async Continue() {
-        return this.ContinueButton().tap();
+    async ContinueAction() {
+        return this.ContinueButtonControl().tap();
     }
-    async ScrollToBottom() {
+    async ScrollToBottomAction() {
         if (this.visibleBottomLabel == null) {
             return;
         }
@@ -108,7 +108,7 @@ class Screen {
             await action.ScrollToBottom();
         }
     }
-    async ScrollToTop() {
+    async ScrollToTopAction() {
         if (this.visibleTopLabel == null) {
             return;
         }

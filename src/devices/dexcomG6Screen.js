@@ -12,9 +12,9 @@ class DexcomG6Screen extends base.Screen {
         });
     }
     /**
-     * @override Screen.BackButton()
+     * @override Screen.BackButtonControl()
      **/
-    BackButton() {
+    BackButtonControl() {
         return match.accessible.Button(this.backLabel);
     }
     DeviceImage() {

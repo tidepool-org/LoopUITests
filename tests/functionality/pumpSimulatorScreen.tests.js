@@ -52,7 +52,7 @@ var pumpSimulatorScreen = (test) => {
         await pumpSimulatorScreen.RemoveSimulator();
     });
     it('return to start', async () => {
-        await settingsScreen.Back();
+        await settingsScreen.BackAction();
     });
 };
 

@@ -19,7 +19,7 @@ var deliveryLimitsScreen = (test) => {
         await screen.OpenBolusPicker();
     });
     it('cleanup and close', async () => {
-        await screen.CancelAndClose();
+        await screen.CancelAndCloseAction();
         await settingsScreen.RemovePumpSimulator();
         await settingsScreen.Close();
     });

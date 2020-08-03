@@ -6,13 +6,13 @@ var g6ScreenTests = (test) => {
         screen = await homeScreen.HeaderSection().Devices().AddG6();
     });
     afterAll(async () => {
-        await screen.Back();
+        await screen.BackAction();
     });
     it('has a header', async () => {
         await expect(screen.Header()).toBeVisible();
     });
     it('has a back button', async () => {
-        await expect(screen.BackButton()).toBeVisible();
+        await expect(screen.BackButtonControl()).toBeVisible();
     });
     it('has a enter code button', async () => {
         await expect(screen.EnterCodeButton()).toBeVisible();

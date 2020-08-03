@@ -43,7 +43,7 @@ var suspendThreshold = (test) => {
         await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
     });
     it('can close screen', async () => {
-        await screen.CancelAndClose();
+        await screen.CancelAndCloseAction();
     });
 };
 

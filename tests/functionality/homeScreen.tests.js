@@ -5,19 +5,19 @@ var homeScreen = (test) => {
     });
     it('has Active Carbohydrates section', async () => {
         var screen = await homeScreen.OpenActiveCarbohydratesChart();
-        await screen.Back();
+        await screen.BackAction();
     });
     it('has Active Insulin section', async () => {
         var screen = await homeScreen.OpenActiveInsulinChart();
-        await screen.Back();
+        await screen.BackAction();
     });
     it('has Insulin Delivery section', async () => {
         var screen = await homeScreen.OpenInsulinDeliveryChart();
-        await screen.Back();
+        await screen.BackAction();
     });
     it('has Glucose section', async () => {
         var screen = await homeScreen.OpenGlucoseChart();
-        await screen.Back();
+        await screen.BackAction();
     });
     describe('header', () => {
         it('can add pump', async () => {
@@ -36,7 +36,7 @@ var homeScreen = (test) => {
         });
         it('can add G6', async () => {
             let g6 = await homeScreen.HeaderSection().Devices().AddG6();
-            await g6.Back();
+            await g6.BackAction();
         });
         it('can check loop status', async () => {
             await homeScreen.HeaderSection().Loop();

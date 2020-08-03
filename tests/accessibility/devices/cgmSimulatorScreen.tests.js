@@ -12,7 +12,7 @@ var cgmSimulatorScreenTests = (test) => {
         await expect(screen.Header()).toBeVisible();
     });
     it('has a back button', async () => {
-        await expect(screen.BackButton()).toBeVisible();
+        await expect(screen.BackButtonControl()).toBeVisible();
     });
     it('has a model header', async () => {
         await expect(screen.ModelHeader()).toBeVisible();
@@ -42,7 +42,7 @@ var cgmSimulatorScreenTests = (test) => {
         await expect(screen.RandomLowOutlierEffectLabel()).toBeVisible();
     });
     it('has a history header', async () => {
-        await screen.ScrollToBottom();
+        await screen.ScrollToBottomAction();
         await expect(screen.HistoryHeader()).toBeVisible();
     });
     it('has a trend label', async () => {

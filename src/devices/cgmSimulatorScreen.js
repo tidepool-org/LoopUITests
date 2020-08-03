@@ -17,9 +17,9 @@ class CGMSimulatorScreen extends base.Screen {
         });
     }
     /**
-     * @override Screen.BackButton()
+     * @override Screen.BackButtonControl()
      **/
-    BackButton() {
+    BackButtonControl() {
         return match.accessible.ButtonBarButton(this.backLabel);
     }
     CGMSettingsButton() {
@@ -111,14 +111,14 @@ class CGMSimulatorScreen extends base.Screen {
             var noiseField = match.UIEditableTextField();
             await noiseField.clearText();
             await noiseField.typeText('100');
-            await this.Back();
+            await this.BackAction();
         }
         if (effect === this.screenText.Effect.RandomError) {
             await this.RandomErrorEffectLabel().tap();
             var randomField = match.UIEditableTextField();
             await randomField.clearText();
             await randomField.typeText('10');
-            await this.Back();
+            await this.BackAction();
         }
         if (effect === this.screenText.Effect.RandomHighOutlier) {
             await this.RandomHighOutlierEffectLabel().tap();
@@ -162,7 +162,7 @@ class CGMSimulatorScreen extends base.Screen {
         if (history == null) {
             return;
         }
-        await this.ScrollToBottom();
+        await this.ScrollToBottomAction();
         if (history.name === this.screenText.History.BackfillGlucose) {
             await this.BackfillGlucoseHistoryLabel().tap();
             await action.SetPickerValue(0, `${history.backfillHours}`);
@@ -172,13 +172,13 @@ class CGMSimulatorScreen extends base.Screen {
             await this.TrendHistoryLabel().tap();
             await match.accessible.ClickableLabel(history.trend).tap();
         }
-        await this.ScrollToTop();
+        await this.ScrollToTopAction();
     }
     async _setAlerts(alerts) {
         if (alerts == null) {
             return;
         }
-        await this.ScrollToBottom();
+        await this.ScrollToBottomAction();
         await this.IssueAlertsLabel().tap();
         if (general.Alert.name === this.screenText.Alerts.DelayedAlert) {
             await match.accessible.ClickableLabel(this.screenText.Alerts.DelayedAlert).tap();
@@ -186,10 +186,10 @@ class CGMSimulatorScreen extends base.Screen {
         if (general.Alert.name === this.screenText.Alerts.ReapeatingAlert) {
             await match.accessible.ClickableLabel(this.screenText.Alerts.ReapeatingAlert).tap();
         }
-        await this.ScrollToTop();
+        await this.ScrollToTopAction();
     }
     async RemoveSimulator() {
-        await this.ScrollToBottom();
+        await this.ScrollToBottomAction();
         await this.DeleteCGMLabel().tap();
         await this.DeleteCGMConfirmationLabel().tap();
     }

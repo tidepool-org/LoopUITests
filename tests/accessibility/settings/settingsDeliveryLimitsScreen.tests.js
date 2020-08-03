@@ -10,7 +10,7 @@ var settingsDeliveryLimitsScreen = (test) => {
         await expect(screen.Header()).toExist();
     });
     it('has a cancel button', async () => {
-        await expect(screen.BackButton()).toExist();
+        await expect(screen.BackButtonControl()).toExist();
     });
     it('has a save button', async () => {
         await expect(screen.SaveButton()).toExist();
@@ -28,7 +28,7 @@ var settingsDeliveryLimitsScreen = (test) => {
         await expect(screen.MaxBasalRateInfo()).toExist();
     });
     it('cleanup and close', async () => {
-        await screen.CancelAndClose();
+        await screen.CancelAndCloseAction();
         await settingsScreen.RemovePumpSimulator();
         await settingsScreen.Close();
     });

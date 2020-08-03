@@ -20,7 +20,7 @@ describe('Bolus not given when settings are applied with correction ranges below
         await test.homeScreen.ExpectLoopStatusCarbsAlert();
     });
     it('should only enter carbs', async () => {
-        await test.carbEntryScreen.Open();
+        await test.carbEntryScreen.OpenAction();
         await test.carbEntryScreen.SetCarbs('30');
     });
     it('should then only be given option to save without bolus and warn about predicted glucose', async () => {

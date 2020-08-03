@@ -7,7 +7,7 @@ var settingsSuspendThresholdScreen = (test) => {
         screen = await settingsScreen.OpenSuspendThresholdScreen();
     });
     afterAll(async () => {
-        await screen.CancelAndClose();
+        await screen.CancelAndCloseAction();
         await settingsScreen.Close();
     });
     //TODO: should be a header but is a label
@@ -21,7 +21,7 @@ var settingsSuspendThresholdScreen = (test) => {
         await expect(screen.InfoButton()).toExist();
     });
     it('has a cancel button', async () => {
-        await expect(screen.BackButton()).toExist();
+        await expect(screen.BackButtonControl()).toExist();
     });
     it('has a save button', async () => {
         await expect(screen.SaveButton()).toExist();

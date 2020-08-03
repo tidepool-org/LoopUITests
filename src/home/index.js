@@ -29,28 +29,28 @@ class HomeScreen {
         return this.header;
     }
     ActiveCarbohydratesLabel() {
-        return this.activeCarbohydratesScreen.OpenButton();
+        return this.activeCarbohydratesScreen.OpenButtonControl();
     }
     ActiveInsulinLabel() {
-        return this.activeInsulinScreen.OpenButton();
+        return this.activeInsulinScreen.OpenButtonControl();
     }
     InsulinDeliveryLabel() {
-        return this.insulinDeliveryScreen.OpenButton();
+        return this.insulinDeliveryScreen.OpenButtonControl();
     }
     GlucoseLabel() {
-        return this.glucoseScreen.OpenButton();
+        return this.glucoseScreen.OpenButtonControl();
     }
     SettingsButton() {
         return match.accessible.Button(this.language.settingsScreen.Settings);
     }
     CustomPresetButton() {
-        return this.customPresetScreen.OpenButton();
+        return this.customPresetScreen.OpenButtonControl();
     }
     AddMealButton() {
-        return this.carbEntryScreen.OpenButton();
+        return this.carbEntryScreen.OpenButtonControl();
     }
     BolusButton() {
-        return this.bolusScreen.OpenButton();
+        return this.bolusScreen.OpenButtonControl();
     }
     async OpenActiveCarbohydratesChart() {
         await this.ActiveCarbohydratesLabel().tap();
@@ -70,7 +70,7 @@ class HomeScreen {
     }
     async OpenSettingsScreen() {
         await this.SettingsButton().tap();
-        await this.settingsScreen.Open();
+        await this.settingsScreen.OpenAction();
         return this.settingsScreen;
     }
     async OpenCarbEntryScreen() {
@@ -82,7 +82,7 @@ class HomeScreen {
         return this.bolusScreen;
     }
     async OpenCustomPresetScreen() {
-        await this.customPresetScreen.Open();;
+        await this.customPresetScreen.OpenAction();;
         return this.customPresetScreen;
     }
 }

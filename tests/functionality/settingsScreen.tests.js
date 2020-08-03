@@ -15,7 +15,7 @@ var settingsScreen = (test) => {
             screen = await settingsScreen.OpenSupport();
         });
         it('closed', async () => {
-            await screen.Back();
+            await screen.BackAction();
         });
     });
     describe('alert permissons', () => {
@@ -24,7 +24,7 @@ var settingsScreen = (test) => {
             screen = await settingsScreen.OpenAlerts();
         });
         it('closed', async () => {
-            await screen.Back();
+            await screen.BackAction();
         });
     });
     describe.skip('therapy settings', () => {
@@ -33,7 +33,7 @@ var settingsScreen = (test) => {
             screen = await settingsScreen.OpenTherapySettings();
         });
         it('closed', async () => {
-            await screen.Back();
+            await screen.BackAction();
         });
     });
     it('can close', async () => {

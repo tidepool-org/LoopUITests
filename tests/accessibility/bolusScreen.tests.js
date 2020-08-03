@@ -7,7 +7,7 @@ var bolusScreen = (test) => {
         await expect(bolusScreen.Header()).toBeVisible();
     });
     it('has a Cancel Header Button', async () => {
-        await expect(bolusScreen.BackButton()).toBeVisible();
+        await expect(bolusScreen.BackButtonControl()).toBeVisible();
     });
     it('has a Save and Deliver Button', async () => {
         await expect(bolusScreen.SaveAndDeliverButton()).toBeVisible();
@@ -31,7 +31,7 @@ var bolusScreen = (test) => {
         await expect(bolusScreen.GlucoseHeader()).toBeVisible();
     });
     it('can cancel and then close the bolus screen', async () => {
-        await bolusScreen.CancelAndClose();
+        await bolusScreen.CancelAndCloseAction();
     });
 };
 

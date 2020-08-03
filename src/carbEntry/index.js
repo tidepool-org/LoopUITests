@@ -18,9 +18,9 @@ class CarbEntryScreen extends base.Screen {
         this.mealBolusScreen = new MealBolusScreen(language);
     }
     /**
-     * @override Screen.BackButton()
+     * @override Screen.BackButtonControl()
      * */
-    BackButton() {
+    BackButtonControl() {
         return match.accessible.ButtonBarButton(this.backLabel);
     }
     AmountConsumedLabel() {
@@ -38,7 +38,7 @@ class CarbEntryScreen extends base.Screen {
     ContinueMainButton() {
         return match.accessible.Button(this.generalText.Continue).atIndex(2);
     }
-    async Continue() {
+    async ContinueAction() {
         await this.ContinueMainButton().tap();
         return this.mealBolusScreen;
     }

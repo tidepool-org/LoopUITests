@@ -4,7 +4,7 @@ var homeActiveInsulinScreen = (test) => {
         activeInsulinScreen = await test.homeScreen.OpenActiveInsulinChart();
     });
     afterAll(async () => {
-        await activeInsulinScreen.Back();
+        await activeInsulinScreen.BackAction();
     });
     it('has a header', async () => {
         await expect(activeInsulinScreen.Header()).toBeVisible();
@@ -22,7 +22,7 @@ var homeActiveInsulinScreen = (test) => {
         await expect(activeInsulinScreen.ReservoirLabel()).toBeVisible();
     });
     it('has a Back Button', async () => {
-        await expect(activeInsulinScreen.BackButton()).toBeVisible();
+        await expect(activeInsulinScreen.BackButtonControl()).toBeVisible();
     });
 };
 
