@@ -1,16 +1,16 @@
 const match = require('../match');
 
-const { GlucoseScreen } = require('./glucoseScreen');
-const { ActiveInsulinScreen } = require('./activeInsulinScreen');
-const { InsulinDeliveryScreen } = require('./insulinDeliveryScreen');
-const { ActiveCarbohydratesScreen } = require('./activeCarbohydratesScreen');
-const { Header } = require('./header');
-const { SettingsScreen } = require('../settings/index');
-const { CarbEntryScreen } = require('../carbEntry/index');
-const { BolusScreen } = require('../bolus/index');
-const { CustomPresetScreen } = require('../customPreset/index');
+const GlucoseScreen = require('./glucoseScreen');
+const ActiveInsulinScreen = require('./activeInsulinScreen');
+const InsulinDeliveryScreen = require('./insulinDeliveryScreen');
+const ActiveCarbohydratesScreen = require('./activeCarbohydratesScreen');
+const Header = require('./header');
+const SettingsScreen = require('../settings/index');
+const CarbEntryScreen = require('../carbEntry/index');
+const BolusScreen = require('../bolus/index');
+const CustomPresetScreen = require('../customPreset/index');
 
-const { Devices } = require('../devices/index');
+const Devices = require('../devices/index');
 
 class HomeScreen {
     constructor(language, settingsScreenDefaults) {
@@ -87,4 +87,4 @@ class HomeScreen {
     }
 }
 
-module.exports = { HomeScreen };
+module.exports = HomeScreen;

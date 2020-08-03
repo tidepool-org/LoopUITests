@@ -58,6 +58,4 @@ class Header {
     }
 }
 
-module.exports = {
-    Header
-};
+module.exports = Header;

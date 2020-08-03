@@ -1,6 +1,6 @@
 const action = require('../action');
 const match = require('../match');
-const { base } = require('../base/index');
+const base = require('../base/index');
 
 const pickerID = 'quantity_picker';
 
@@ -63,6 +63,4 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
     }
 }
 
-module.exports = {
-    InsulinSensitivitiesScreen
-};
+module.exports = InsulinSensitivitiesScreen;

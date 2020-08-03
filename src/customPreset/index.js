@@ -1,7 +1,7 @@
 
 const match = require('../match');
-const { base } = require('../base/index');
-const { AddPresetScreen } = require('./addPresetScreen');
+const base = require('../base/index');
+const AddPresetScreen = require('./addPresetScreen');
 
 class CustomPresetScreen extends base.Screen {
     constructor(language) {
@@ -27,4 +27,4 @@ class CustomPresetScreen extends base.Screen {
     }
 }
 
-module.exports = { CustomPresetScreen };
+module.exports = CustomPresetScreen;

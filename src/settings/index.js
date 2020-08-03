@@ -8,11 +8,10 @@ const match = require('../match');
 // const { IssueReportScreen } = require('./issueReportScreen');
 // const { InsulinModelScreen } = require('./insulinModelScreen');
 
-const { AlertScreen } = require('./alertScreen');
-const { SupportScreen } = require('./supportScreen');
-const { TherapyScreen } = require('./therapyScreen');
-
-const { base } = require('../base/index');
+const AlertScreen = require('./alertScreen');
+const SupportScreen = require('./supportScreen');
+const TherapyScreen = require('./therapyScreen');
+const base = require('../base/index');
 
 class SettingsScreen extends base.Screen {
     constructor(language, devices) {
@@ -105,6 +104,4 @@ class SettingsScreen extends base.Screen {
     }
 }
 
-module.exports = {
-    SettingsScreen
-};
+module.exports = SettingsScreen;

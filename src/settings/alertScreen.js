@@ -1,4 +1,4 @@
-const { base } = require('../base/index');
+const base = require('../base/index');
 const match = require('../match');
 
 class AlertScreen extends base.Screen {
@@ -19,6 +19,4 @@ class AlertScreen extends base.Screen {
     }
 }
 
-module.exports = {
-    AlertScreen
-};
+module.exports = AlertScreen;

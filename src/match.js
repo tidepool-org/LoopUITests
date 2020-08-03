@@ -3,7 +3,6 @@ const element = require('detox').element;
 const staticTextTrait = 'text';
 const buttonTrait = 'button';
 const imageTrait = 'image';
-const disabledTrait = 'disabled';
 
 const match = {
     /**

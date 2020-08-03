@@ -1,4 +1,4 @@
-const { HomeScreen } = require('./home/index');
+const HomeScreen = require('./home/index');
 const exec = require('child_process').exec;
 const match = require('./match');
 const { screenName, settingType } = require('./properties');

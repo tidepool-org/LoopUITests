@@ -1,4 +1,4 @@
-const { base } = require('../base/index');
+const base = require('../base/index');
 
 class TherapyScreen extends base.Screen {
     constructor(language) {
@@ -16,6 +16,4 @@ class TherapyScreen extends base.Screen {
     }
 }
 
-module.exports = {
-    TherapyScreen
-};
+module.exports = TherapyScreen;

@@ -1,6 +1,5 @@
-const action = require('../action');
 const match = require('../match');
-const { base } = require('../base/index');
+const base = require('../base/index');
 
 class DeliveryLimitsScreen extends base.EntryScreen {
     constructor(language, config) {
@@ -87,6 +86,4 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     }
 }
 
-module.exports = {
-    DeliveryLimitsScreen
-};
+module.exports = DeliveryLimitsScreen;

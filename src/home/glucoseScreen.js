@@ -1,6 +1,6 @@
 const match = require('../match');
 
-const { base } = require('../base/index');
+const base = require('../base/index');
 
 class GlucoseScreen extends base.Screen {
     constructor(language) {
@@ -45,6 +45,4 @@ class GlucoseScreen extends base.Screen {
     }
 }
 
-module.exports = {
-    GlucoseScreen
-};
+module.exports = GlucoseScreen;

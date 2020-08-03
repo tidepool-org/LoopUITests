@@ -1,7 +1,6 @@
 const match = require('../match');
-
-const { base } = require('../base/index');
-const { MealBolusScreen } = require('./mealBolusScreen');
+const base = require('../base/index');
+const MealBolusScreen = require('./mealBolusScreen');
 
 class CarbEntryScreen extends base.Screen {
     constructor(language) {
@@ -70,4 +69,4 @@ class CarbEntryScreen extends base.Screen {
     }
 }
 
-module.exports = { CarbEntryScreen };
+module.exports = CarbEntryScreen;

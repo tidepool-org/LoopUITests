@@ -120,6 +120,4 @@ class Screen {
     }
 }
 
-module.exports = {
-    Screen
-};
+module.exports = Screen;

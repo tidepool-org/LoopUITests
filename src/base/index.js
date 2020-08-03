@@ -1,6 +1,6 @@
-const { Screen } = require('./screen');
-const { EntriesScreen } = require('./entriesScreen');
-const { EntryScreen } = require('./entryScreen');
+const Screen = require('./screen');
+const EntriesScreen = require('./entriesScreen');
+const EntryScreen = require('./entryScreen');
 
 var base = {
     Screen,
@@ -8,6 +8,4 @@ var base = {
     EntryScreen,
 };
 
-module.exports = {
-    base,
-};
+module.exports = base;

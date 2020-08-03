@@ -1,7 +1,7 @@
 const match = require('../match');
-const { base } = require('../base/index');
+const base = require('../base/index');
 
-class DexcomG6 extends base.Screen {
+class DexcomG6Screen extends base.Screen {
     constructor(language) {
         super({
             screenText: language.settingsScreen.G6Screen,
@@ -28,6 +28,4 @@ class DexcomG6 extends base.Screen {
     }
 }
 
-module.exports = {
-    DexcomG6
-};
+module.exports = DexcomG6Screen;

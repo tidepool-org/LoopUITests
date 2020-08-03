@@ -1,8 +1,8 @@
 const match = require('../match');
 const action = require('../action');
-const { base } = require('../base/index');
+const base = require('../base/index');
 
-class CGMSimulator extends base.Screen {
+class CGMSimulatorScreen extends base.Screen {
     constructor(language) {
         super({
             screenText: language.settingsScreen.CGMSimulatorScreen,
@@ -195,6 +195,4 @@ class CGMSimulator extends base.Screen {
     }
 }
 
-module.exports = {
-    CGMSimulator
-};
+module.exports = CGMSimulatorScreen;

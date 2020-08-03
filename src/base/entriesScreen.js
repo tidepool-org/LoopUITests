@@ -1,5 +1,5 @@
 const match = require('../match');
-const { Screen } = require('./screen');
+const Screen = require('./screen');
 
 
 class EntriesScreen extends Screen {
@@ -48,6 +48,4 @@ class EntriesScreen extends Screen {
     }
 }
 
-module.exports = {
-    EntriesScreen
-};
+module.exports = EntriesScreen;

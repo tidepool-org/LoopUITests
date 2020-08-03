@@ -1,6 +1,6 @@
 const match = require('../match');
 const action = require('../action');
-const { base } = require('../base/index');
+const base = require('../base/index');
 
 class SuspendThresholdScreen extends base.EntryScreen {
     constructor(language, config) {
@@ -54,6 +54,4 @@ class SuspendThresholdScreen extends base.EntryScreen {
     }
 }
 
-module.exports = {
-    SuspendThresholdScreen
-};
+module.exports = SuspendThresholdScreen;

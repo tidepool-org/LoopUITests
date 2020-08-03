@@ -1,15 +1,15 @@
 const match = require('../match');
 
-const { PumpSimulator } = require('./pumpSimulator');
-const { CGMSimulator } = require('./cgmSimulator');
-const { DexcomG6 } = require('./dexcomG6');
+const PumpSimulatorScreen = require('./pumpSimulatorScreen');
+const CGMSimulatorScreen = require('./cgmSimulatorScreen');
+const DexcomG6Screen = require('./dexcomG6Screen');
 
 class Devices {
     constructor(language, header) {
         this.generalText = language.general;
-        this.cgmSimulator = new CGMSimulator(language);
-        this.pumpSimulator = new PumpSimulator(language);
-        this.g6 = new DexcomG6(language);
+        this.cgmSimulator = new CGMSimulatorScreen(language);
+        this.pumpSimulator = new PumpSimulatorScreen(language);
+        this.g6 = new DexcomG6Screen(language);
         if (header) {
             this.isHeader = true;
         }
@@ -58,6 +58,4 @@ class Devices {
     }
 }
 
-module.exports = {
-    Devices
-};
+module.exports = Devices;
