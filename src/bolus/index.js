@@ -51,10 +51,6 @@ class BolusScreen extends base.Screen {
     GlucoseHeader() {
         return match.accessible.TextLabel(this.screenText.Glucose).atIndex(1);
     }
-    async ExpectCannotDeliverBolus() {
-        await expect(match.accessible.DisabledButton(this.screenText.Deliver)).toExist();
-    }
-
     async SetBolusAmount(units) {
         var bolusAmountField = match.UITextField();
         await bolusAmountField.clearText();

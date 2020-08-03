@@ -37,7 +37,7 @@ class CarbEntryScreen extends base.Screen {
         return match.accessible.ClickableLabel(this.screenText.AbsorptionTime);
     }
     ContinueMainButton() {
-        return match.accessible.SetupButton(this.generalText.Continue);
+        return match.accessible.Button(this.generalText.Continue).atIndex(2);
     }
     async Continue() {
         await this.ContinueMainButton().tap();
