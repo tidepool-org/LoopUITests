@@ -12,23 +12,23 @@ Loop end-to-end automated tests using `detox`
 
 All tests
 
-`npm run all-test`
+`npm run test-all`
 
 ### Smoke test
 Accessibility tests that run through the screen elements making sure the are present
 
-- `npm run smoke1-test`
-- `npm run smoke2-test`
+- `npm run test-smoke1`
+- `npm run test-smoke2`
 
 ### Functional test
 Test basic functionality of the app. Opening, closing of screens, adding and removeing devices, clicking buttons etc ...
 
-- `npm run functional-test`
+- `npm run test-functional`
 
 ### Guardrails test
 Test the loop app settings guardrails limits
 
-- `npm run guardrails-test`
+- `npm run test-guardrails`
 
 ## Debugging
 
