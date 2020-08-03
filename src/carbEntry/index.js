@@ -12,7 +12,7 @@ class CarbEntryScreen extends base.Screen {
                 backLabel: language.general.Cancel,
             },
             open: {
-                isBtn: false,
+                isBtn: true,
                 label: language.carbEntryScreen.AddMeal,
             },
         });
