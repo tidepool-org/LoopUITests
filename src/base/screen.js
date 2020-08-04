@@ -50,10 +50,26 @@ class Screen {
         return match.accessible.BackButton(this.backLabel);
     }
     AddButton() {
-        return match.accessible.ButtonBarButton(this.generalText.Add);
+        return match.accessible.Button(this.generalText.Add);
+    }
+    PlusButton() {
+        return match.accessible.Button(this.generalText.ButtonLabel.Plus);
     }
     EditButton() {
         return match.accessible.ButtonBarButton(this.generalText.Edit);
+    }
+    SaveButton() {
+        return match.accessible.Button(this.generalText.Save);
+    }
+    async SaveAndClose() {
+        if (this.isEditable) {
+            await this.SaveButton().tap();
+        }
+    }
+    async Plus() {
+        if (this.isEditable) {
+            await this.PlusButton().tap();
+        }
     }
     async Add() {
         if (this.isEditable) {

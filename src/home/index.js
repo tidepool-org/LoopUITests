@@ -18,7 +18,7 @@ class HomeScreen {
         this.activeInsulinScreen = new ActiveInsulinScreen(language);
         this.insulinDeliveryScreen = new InsulinDeliveryScreen(language);
         this.activeCarbohydratesScreen = new ActiveCarbohydratesScreen(language);
-        this.settingsScreen = new SettingsScreen(language, new Devices(language, false));
+        this.settingsScreen = new SettingsScreen(language, new Devices(language, false), settingsScreenDefaults);
         this.bolusScreen = new BolusScreen(language);
         this.carbEntryScreen = new CarbEntryScreen(language);
         this.header = new Header(language, new Devices(language, true));

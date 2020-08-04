@@ -1,8 +1,8 @@
 const match = require('../match');
 // const { BasalRatesScreen } = require('./basalRatesScreen');
 // const { CarbRatioScreen } = require('./carbRatioScreen');
-// const { CorrectionRangeScreen } = require('./correctionRangeScreen');
-// const { DeliveryLimitsScreen } = require('./deliveryLimitsScreen');
+const CorrectionRangeScreen = require('./correctionRangeScreen');
+const DeliveryLimitsScreen = require('./deliveryLimitsScreen');
 // const { InsulinSensitivitiesScreen } = require('./insulinSensitivitiesScreen');
 // const { SuspendThresholdScreen } = require('./suspendThresholdScreen');
 // const { IssueReportScreen } = require('./issueReportScreen');
@@ -14,7 +14,7 @@ const TherapyScreen = require('./therapyScreen');
 const base = require('../base/index');
 
 class SettingsScreen extends base.Screen {
-    constructor(language, devices) {
+    constructor(language, devices, config) {
         super({
             screenText: language.settingsScreen,
             generalText: language.general,
@@ -34,6 +34,8 @@ class SettingsScreen extends base.Screen {
         this.alertScreen = new AlertScreen(language);
         this.therapyScreen = new TherapyScreen(language);
         this.supportScreen = new SupportScreen(language);
+        this.deliveryLimitsScreen = new DeliveryLimitsScreen(language, config.deliveryLimit);
+        this.correctionRangeScreen = new CorrectionRangeScreen(language, config.correctionRange);
     }
     Devices() {
         return this.devices;
@@ -101,6 +103,34 @@ class SettingsScreen extends base.Screen {
     async OpenAlerts() {
         await this.alertScreen.Open();
         return this.alertScreen;
+    }
+    async setDeliveryLimits() {
+        await match.accessible.Button(this.generalText.Done).atIndex(2).tap();
+        var limits = await this.deliveryLimitsScreen.Open();
+        await limits.Plus();
+        await limits.ApplyOne({
+            expected: {
+                basal: { rate: 35.00 },
+                bolus: { amount: 19.00 },
+            }
+        });
+        await correction.Add();
+        await limits.SaveAndClose();
+        await match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0).tap();
+    }
+    async setCorrectionRange() {
+        await match.accessible.Button(this.generalText.Done).atIndex(2).tap();
+        var correction = await this.correctionRangeScreen.Open();
+        await correction.Plus();
+        await correction.ApplyOne({
+            expected: {
+                min: 100,
+                max: 120,
+            }
+        });
+        await correction.Add();
+        await correction.SaveAndClose();
+        await match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0).tap();
     }
 }
 

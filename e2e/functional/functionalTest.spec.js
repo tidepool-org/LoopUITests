@@ -10,23 +10,24 @@ describe('functional test', () => {
             .withLimits(config.limits)
             .withScreenDefaults(config.screenDefaults)
             .withSettingDefault(config.settingDefault)
-            .withStartScreen('home');
+            .withStartScreen('home')
+            .withAuth();
         await test.prepare();
     });
-    describe('home screen', () => {
+    describe.skip('home screen', () => {
         functionalityTests.homeScreen(test);
     });
     //TODO: requires pump setup now
-    describe.skip('carb entry screen', () => {
+    describe('carb entry screen', () => {
         functionalityTests.carbEntryScreen(test);
     });
-    describe('settings screen', () => {
+    describe.skip('settings screen', () => {
         functionalityTests.settingsScreen(test);
     });
-    describe('pump simulator screen', () => {
+    describe.skip('pump simulator screen', () => {
         functionalityTests.pumpSimulatorScreen(test);
     });
-    describe('cgm simulator screen', () => {
+    describe.skip('cgm simulator screen', () => {
         functionalityTests.cgmSimulatorScreen(test);
     });
 });

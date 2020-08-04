@@ -36,6 +36,10 @@ class Test {
         this.filter = filter;
         return this;
     }
+    withAuth() {
+        this.authenticate = true;
+        return this;
+    }
     /**
      *
      * @param {object} simulators
@@ -102,6 +106,10 @@ class Test {
             }
         }
 
+        if (this.authenticate) {
+            await device.setBiometricEnrollment(true);
+        }
+
         this.homeScreen = new HomeScreen(this.language, this.screenDefaults);
 
         await device.launchApp({
@@ -151,6 +159,21 @@ class Test {
         await match.accessible.SwipeButton('Advance ⏭').tap();
         await match.UITextField().typeText(cycles);
         await match.accessible.Button(this.language.general.OK).tap();
+    }
+
+    async authorize() {
+        if (this.authenticate) {
+            return await device.matchFace();
+        }
+        return await device.unmatchFace();
+    }
+
+    async addConfiguredPump() {
+        await this.homeScreen.HeaderSection().Devices().AddPump();
+        var settings = await this.OpenSettingsScreen();
+        //await settings.setCorrectionRange();
+        await settings.setDeliveryLimits();
+        //await settings.BackToHome();
     }
 
     async OpenSettingsScreen() {
