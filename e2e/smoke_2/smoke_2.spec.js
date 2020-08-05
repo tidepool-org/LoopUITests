@@ -12,33 +12,39 @@ describe('accessibility', () => {
             .withStartScreen('home');
         await test.prepare();
     });
+    describe('devices', () => {
+        describe('g6 screen', () => {
+            accessibilityTests.g6ScreenTests(test);
+        });
+        describe('pump screen', () => {
+            accessibilityTests.pumpSimulatorScreenTests(test);
+        });
+        describe('cgm screen', () => {
+            accessibilityTests.cgmSimulatorScreenTests(test);
+        });
+    });
     describe('settings', () => {
         describe('overview screen', () => {
             accessibilityTests.threapySettings(test);
         });
-        // describe('delivery limits', () => {
-        //     accessibilityTests.settingsDeliveryLimitsScreen(test);
-        // });
-        // describe('insulin sensitivities', () => {
-        //     accessibilityTests.settingsInsulinSensitivitiesScreen(test);
-        // });
-        // describe('correction range', () => {
-        //     accessibilityTests.settingsCorrectionRangeScreen(test);
-        // });
-        // describe('suspend threshold', () => {
-        //     accessibilityTests.settingsSuspendThresholdScreen(test);
-        // });
-        // describe('CGM simulator', () => {
-        //     accessibilityTests.settingsCGMSimulatorScreenTests(test);
-        // });
-        // describe('pump simulator', () => {
-        //     accessibilityTests.settingsPumpSimulatorScreenTests(test);
-        // });
-        // describe('basal rates', () => {
-        //     accessibilityTests.settingsBasalRatesScreen(test);
-        // });
-        // describe('carb ratios', () => {
-        //     accessibilityTests.settingsCarbRatioScreen(test);
-        // });
+        //TODO: the following require settings and pump setup once ready
+        describe.skip('delivery limits', () => {
+            accessibilityTests.settingsDeliveryLimitsScreen(test);
+        });
+        describe.skip('insulin sensitivities', () => {
+            accessibilityTests.settingsInsulinSensitivitiesScreen(test);
+        });
+        describe.skip('correction range', () => {
+            accessibilityTests.settingsCorrectionRangeScreen(test);
+        });
+        describe.skip('suspend threshold', () => {
+            accessibilityTests.settingsSuspendThresholdScreen(test);
+        });
+        describe.skip('basal rates', () => {
+            accessibilityTests.settingsBasalRatesScreen(test);
+        });
+        describe.skip('carb ratios', () => {
+            accessibilityTests.settingsCarbRatioScreen(test);
+        });
     });
 });

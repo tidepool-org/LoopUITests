@@ -5,8 +5,8 @@ var carbEntryScreen = (test) => {
     });
     it('set carbs and save without a bolus', async () => {
         await carbEntryScreen.SetCarbs(30);
-        await carbEntryScreen.ContinueToBolus();
-        await carbEntryScreen.SaveWithoutBolus();
+        var bolusScreen = await carbEntryScreen.Continue();
+        await bolusScreen.SaveWithoutBolus();
     });
     it('can cancel open screen', async () => {
         carbEntryScreen = await test.OpenCarbEntryScreen();

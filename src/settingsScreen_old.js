@@ -118,7 +118,7 @@ class SettingsScreen_Old {
         return match.accessible.Button(this.language.settingsScreen.ClosedLoop).atIndex(2);
     }
     IssueReportLabel() {
-        return match.accessible.Label(this.language.settingsScreen.IssueReport);
+        return match.accessible.Label(this.language.settingsScreen.IssueReportScreen.Header);
     }
     AddPumpLabel() {
         return match.accessible.Label(this.language.settingsScreen.AddPump).atIndex(0);

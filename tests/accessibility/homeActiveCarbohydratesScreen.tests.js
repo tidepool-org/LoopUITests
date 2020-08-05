@@ -9,25 +9,25 @@ var homeActiveCarbohydratesScreen = (test) => {
         await screen.Back();
     });
     it('has a header', async () => {
-        await expect(screen.Header()).toExist();
+        await expect(screen.Header()).toBeVisible();
     });
     it('has a COB Label', async () => {
-        await expect(screen.COBLabel()).toExist();
+        await expect(screen.COBLabel()).toBeVisible();
     });
     it('has a Total Label', async () => {
-        await expect(screen.TotalLabel()).toExist();
+        await expect(screen.TotalLabel()).toBeVisible();
     });
     it('has an Glucose Change Label', async () => {
-        await expect(screen.GlucoseChangeLabel()).toExist();
+        await expect(screen.GlucoseChangeLabel()).toBeVisible();
     });
     it('has a Observed Label', async () => {
-        await expect(screen.ObservedLabel()).toExist();
+        await expect(screen.ObservedLabel()).toBeVisible();
     });
     it('has a Predicted Label', async () => {
-        await expect(screen.PredictedLabel()).toExist();
+        await expect(screen.PredictedLabel()).toBeVisible();
     });
     it('has a Back Button', async () => {
-        await expect(screen.BackButton()).toExist();
+        await expect(screen.BackButton()).toBeVisible();
     });
 };
 

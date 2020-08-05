@@ -1,5 +1,5 @@
 const match = require('../match');
-const { Screen } = require('./screen');
+const Screen = require('./screen');
 
 class EntryScreen extends Screen {
     /**
@@ -10,6 +10,7 @@ class EntryScreen extends Screen {
      * @param {object} parentScreen.generalText
      */
     constructor(parentScreen) {
+        parentScreen.isEditable = true;
         super(parentScreen);
     }
     InfoLabel() {
@@ -29,6 +30,4 @@ class EntryScreen extends Screen {
     }
 }
 
-module.exports = {
-    EntryScreen
-};
+module.exports = EntryScreen;

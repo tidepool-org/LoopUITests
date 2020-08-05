@@ -13,7 +13,7 @@ var correctionRangeSchedule = (test) => {
                 max: screenLimit.max.limit,
             }
         });
-        await screen.AddNewEntry();
+        await screen.Add();
         await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
     });
     it('can set max units with warning', async () => {
@@ -28,7 +28,7 @@ var correctionRangeSchedule = (test) => {
                 max: screenLimit.max.limit,
             }
         });
-        await screen.AddNewEntry();
+        await screen.Add();
         await expect(screen.GuardrailWarningIconPicker({ index: 1 })).toBeVisible();
     });
     it('can set max units with no warning', async () => {
@@ -43,7 +43,7 @@ var correctionRangeSchedule = (test) => {
                 max: screenLimit.max.warning,
             }
         });
-        await screen.AddNewEntry();
+        await screen.Add();
         await expect(screen.GuardrailWarningIconPicker({ index: 2 })).toBeNotVisible();
     });
     it('can set min units with no warning', async () => {
@@ -59,7 +59,7 @@ var correctionRangeSchedule = (test) => {
                 max: screenLimit.max.noWarning,
             }
         });
-        await screen.AddNewEntry();
+        await screen.Add();
         await expect(screen.GuardrailWarningIconPicker({ index: 3 })).toBeNotVisible();
     });
     it('can set min units with warning', async () => {
@@ -74,7 +74,7 @@ var correctionRangeSchedule = (test) => {
                 max: screenLimit.max.noWarning,
             }
         });
-        await screen.AddNewEntry();
+        await screen.Add();
         await expect(screen.GuardrailWarningIconPicker({ index: 4 })).toBeVisible();
     });
     it('can set min units at limit', async () => {
@@ -89,7 +89,7 @@ var correctionRangeSchedule = (test) => {
                 max: screenLimit.max.noWarning,
             }
         });
-        await screen.AddNewEntry();
+        await screen.Add();
         await expect(screen.GuardrailWarningIconPicker({ index: 5 })).toBeVisible();
     });
     it('can close screen', async () => {

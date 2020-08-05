@@ -9,6 +9,10 @@ var General = {
     Edit: 'Edit',
     Status: 'Status',
     OK: 'OK',
+    AddPump: 'Add Pump',
+    AddCGM: 'Add CGM',
+    Simulator: 'Simulator',
+    SimulatorPump: 'Simulator Small',
     ButtonLabel: {
         Plus: 'plus',
         InfoCircle: 'info.circle',
@@ -77,17 +81,34 @@ var CarbEntryScreen = {
     Date: 'Date',
     FoodType: 'Food Type',
     AbsorptionTime: 'Absorption Time',
-    AbsorptionMessage: 'Choose a longer absorption time for larger meals, or those containing fats and proteins. This is only guidance to the algorithm and need not be exact.'
+    AbsorptionMessage: 'Choose a longer absorption time for larger meals, or those containing fats and proteins. This is only guidance to the algorithm and need not be exact.',
+    MealBolusScreen: {
+        Header: 'Meal Bolus',
+        CarbEntry: 'Carb Entry',
+        Unit: 'U',
+        RecommendedBolus: 'Recommended Bolus',
+        BolusSummary: 'Bolus Summary',
+        Bolus: 'Bolus',
+        ActiveCarbs: 'Active Carbs',
+        SaveDeliver: 'Save and Deliver',
+        Glucose: 'Glucose',
+        SaveWithoutBolusing: 'Save without Bolusing',
+    },
 };
 
 var BolusScreen = {
     Header: 'Bolus',
     Deliver: 'Deliver',
-    Recommended: 'Recommended',
-    Entered: 'Entered'
+    Unit: 'U',
+    RecommendedBolus: 'Recommended Bolus',
+    BolusSummary: 'Bolus Summary',
+    ActiveCarbs: 'Active Carbs',
+    SaveDeliver: 'Save and Deliver',
+    Glucose: 'Glucose',
 };
 
 var CustomPresetScreen = {
+    WorkoutTargets: 'Workout Targets',
     Header: 'Custom Preset',
     Info: "Tap '+' to create a new preset",
     Presets: 'Presets',
@@ -105,7 +126,6 @@ var SettingsScreen = {
     Pump: 'PUMP',
     AddService: 'Add Service',
     Simulator: 'Simulator',
-    IssueReport: 'Issue Report',
     SaveToSimulator: 'Save to simulator',
     DeliveryLimits: 'Delivery Limits',
     InsulinModel: 'Insulin Model',
@@ -118,6 +138,9 @@ var SettingsScreen = {
     DeletePump: 'Delete Pump',
     DeletePumpData: 'Delete Pump Data',
     PreMeal: 'Pre-Meal',
+    IssueReportScreen: {
+        Header: 'Issue Report',
+    },
     InsulinModelScreen: {
         Header: 'Insulin Model',
         Info: 'Loop assumes insulin is activley working for 6 hours...',
@@ -149,6 +172,12 @@ var SettingsScreen = {
         BGUnits: 'mg/dL',
         Header: 'Suspend Threshold',
         Info: 'When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/h and will not recommend a bolus.',
+    },
+    G6Screen: {
+        Header: 'Sensor Code',
+        EnterCode: 'Enter Code',
+        NoCode: 'No Code',
+        DeviceImage: 'sensor-code',
     },
     CGMSimulatorScreen: {
         Header: 'CGM Settings',

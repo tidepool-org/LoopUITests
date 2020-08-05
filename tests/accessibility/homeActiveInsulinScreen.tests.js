@@ -7,22 +7,22 @@ var homeActiveInsulinScreen = (test) => {
         await activeInsulinScreen.Back();
     });
     it('has a header', async () => {
-        await expect(activeInsulinScreen.Header()).toExist();
+        await expect(activeInsulinScreen.Header()).toBeVisible();
     });
     it('has a IOB Label', async () => {
-        await expect(activeInsulinScreen.IOBLabel()).toExist();
+        await expect(activeInsulinScreen.IOBLabel()).toBeVisible();
     });
     it('has a Total Label', async () => {
-        await expect(activeInsulinScreen.TotalLabel()).toExist();
+        await expect(activeInsulinScreen.TotalLabel()).toBeVisible();
     });
     it('has an Event History Label', async () => {
-        await expect(activeInsulinScreen.EventHistoryLabel()).toExist();
+        await expect(activeInsulinScreen.EventHistoryLabel()).toBeVisible();
     });
     it('has a Reservoir Label', async () => {
-        await expect(activeInsulinScreen.ReservoirLabel()).toExist();
+        await expect(activeInsulinScreen.ReservoirLabel()).toBeVisible();
     });
     it('has a Back Button', async () => {
-        await expect(activeInsulinScreen.BackButton()).toExist();
+        await expect(activeInsulinScreen.BackButton()).toBeVisible();
     });
 };
 

@@ -1,13 +1,11 @@
-const { Screen } = require('./screen');
-const { EntriesScreen } = require('./entriesScreen');
-const { EntryScreen } = require('./entryScreen');
+const Screen = require('./screen');
+const EntriesScreen = require('./entriesScreen');
+const EntryScreen = require('./entryScreen');
 
 var base = {
     Screen,
     EntriesScreen,
-    EntryScreen
+    EntryScreen,
 };
 
-module.exports = {
-    base,
-};
+module.exports = base;

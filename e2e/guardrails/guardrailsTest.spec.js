@@ -1,7 +1,8 @@
 const { Test, Config } = require('../../src/index');
 const guardrailsTests = require('../../tests/guardrails/index');
 
-describe('guardrails test', () => {
+//TODO: the following require settings and pump setup once ready
+describe.skip('guardrails test', () => {
     var test = new Test();
     var config = new Config();
     it('prepare test', async () => {
@@ -31,8 +32,7 @@ describe('guardrails test', () => {
     describe('basal rate schedule', () => {
         guardrailsTests.basalRateSchedule(test);
     });
-    //TODO: resolve isssue with picker interaction for this screen
-    describe.skip('delivery limits', () => {
+    describe('delivery limits', () => {
         guardrailsTests.deliveryLimits(test);
     });
 });

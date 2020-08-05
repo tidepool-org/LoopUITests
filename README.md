@@ -6,23 +6,29 @@ Loop end-to-end automated tests using `detox`
 
 
 ## Build
-
-- `detox build -c ios.sim.debug`
-- `detox build -c ios.sim.release`
+- `npm run build`
 
 ## Test
 
 All tests
 
-`detox test -c ios.sim.debug`
+`npm run test-all`
 
 ### Smoke test
+Accessibility tests that run through the screen elements making sure the are present
 
-`detox test e2e/smoke -c ios.sim.debug`
+- `npm run test-smoke1`
+- `npm run test-smoke2`
 
-### Regression test
+### Functional test
+Test basic functionality of the app. Opening, closing of screens, adding and removeing devices, clicking buttons etc ...
 
-`detox test e2e/regression -c ios.sim.debug`
+- `npm run test-functional`
+
+### Guardrails test
+Test the loop app settings guardrails limits
+
+- `npm run test-guardrails`
 
 ## Debugging
 

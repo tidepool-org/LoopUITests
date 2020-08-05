@@ -19,14 +19,14 @@ var settingsInsulinSensitivitiesScreen = (test) => {
     it('has an info button', async () => {
         await expect(screen.InfoButton()).toExist();
     });
-    it('has a plus button', async () => {
-        await expect(screen.PlusButton()).toExist();
+    it('has a add button', async () => {
+        await expect(screen.AddButton()).toExist();
     });
     it('has a edit button', async () => {
         await expect(screen.EditButton()).toExist();
     });
     it('has a cancel button', async () => {
-        await expect(screen.CancelButton()).toExist();
+        await expect(screen.BackButton()).toExist();
     });
     it('has a save button', async () => {
         await expect(screen.SaveButton()).toExist();

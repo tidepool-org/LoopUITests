@@ -13,10 +13,12 @@ const { settingsCorrectionRangeScreen } = require('./settings/settingsCorrection
 const { settingsIssueReportScreen } = require('./settings/settingsIssueReportScreen.tests');
 const { settingsInsulinModelScreen } = require('./settings/settingsInsulinModelScreen.tests');
 const { settingsSuspendThresholdScreen } = require('./settings/settingsSuspendThresholdScreen.tests');
-const { settingsCGMSimulatorScreenTests } = require('./settings/settingsCGMSimulatorScreen.tests');
-const { settingsPumpSimulatorScreenTests } = require('./settings/settingsPumpSimulatorScreen.tests');
+const { cgmSimulatorScreenTests } = require('./devices/cgmSimulatorScreen.tests');
+const { pumpSimulatorScreenTests } = require('./devices/pumpSimulatorScreen.tests');
+const { g6ScreenTests } = require('./devices/g6Screen.tests');
 const { threapySettings } = require('./settings/threapySettings.tests');
 const { homeActiveCarbohydratesScreen } = require('./homeActiveCarbohydratesScreen.tests');
+const { customPresetsScreen } = require('./customPresetsScreen.tests');
 
 module.exports = {
     homeScreen,
@@ -35,7 +37,9 @@ module.exports = {
     settingsIssueReportScreen,
     settingsInsulinModelScreen,
     settingsSuspendThresholdScreen,
-    settingsCGMSimulatorScreenTests,
-    settingsPumpSimulatorScreenTests,
+    cgmSimulatorScreenTests,
+    pumpSimulatorScreenTests,
+    g6ScreenTests,
     threapySettings,
+    customPresetsScreen,
 };

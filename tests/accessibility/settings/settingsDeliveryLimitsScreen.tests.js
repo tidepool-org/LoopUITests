@@ -10,7 +10,7 @@ var settingsDeliveryLimitsScreen = (test) => {
         await expect(screen.Header()).toExist();
     });
     it('has a cancel button', async () => {
-        await expect(screen.CancelButton()).toExist();
+        await expect(screen.BackButton()).toExist();
     });
     it('has a save button', async () => {
         await expect(screen.SaveButton()).toExist();

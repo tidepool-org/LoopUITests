@@ -4,24 +4,33 @@ var bolusScreen = (test) => {
         bolusScreen = await test.OpenBolusScreen();
     });
     it('has a Header', async () => {
-        await expect(bolusScreen.Header()).toExist();
-    });
-    it('has a Deliver Button', async () => {
-        await expect(bolusScreen.DeliverButton()).toExist();
-    });
-    it('has a Disabled Deliver Button', async () => {
-        await expect(bolusScreen.DisabledDeliverButton()).toExist();
-    });
-    it('has a Recommended Label', async () => {
-        await expect(bolusScreen.RecommendedLabel()).toExist();
-    });
-    it('has a Entered Label', async () => {
-        await expect(bolusScreen.EnteredLabel()).toExist();
+        await expect(bolusScreen.Header()).toBeVisible();
     });
     it('has a Cancel Header Button', async () => {
-        await expect(bolusScreen.CancelButton()).toExist();
+        await expect(bolusScreen.BackButton()).toBeVisible();
     });
-    it('has to close the bolus screen', async () => {
+    it('has a Save and Deliver Button', async () => {
+        await expect(bolusScreen.SaveAndDeliverButton()).toBeVisible();
+    });
+    it('has a Recommended Bolus Label', async () => {
+        await expect(bolusScreen.RecommendedBolusLabel()).toBeVisible();
+    });
+    it('has a Recommended Bolus Units Label', async () => {
+        await expect(bolusScreen.RecommendedBolusUnits()).toBeVisible();
+    });
+    it('has a Bolus Label', async () => {
+        await expect(bolusScreen.BolusLabel()).toBeVisible();
+    });
+    it('has a Bolus Units Label', async () => {
+        await expect(bolusScreen.BolusUnits()).toBeVisible();
+    });
+    it('has a Bolus Summary Header', async () => {
+        await expect(bolusScreen.BolusSummaryHeader()).toBeVisible();
+    });
+    it('has a Glucose Header', async () => {
+        await expect(bolusScreen.GlucoseHeader()).toBeVisible();
+    });
+    it('can cancel and then close the bolus screen', async () => {
         await bolusScreen.CancelAndClose();
     });
 };

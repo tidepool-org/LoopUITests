@@ -5,10 +5,10 @@ var pumpSimulatorScreen = (test) => {
         settingsScreen = await test.OpenSettingsScreen();
     });
     it('add simulator', async () => {
-        await settingsScreen.AddPump();
+        await settingsScreen.Devices().AddPump();
     });
     it('open simulator', async () => {
-        pumpSimulatorScreen = await settingsScreen.OpenPumpScreen();
+        pumpSimulatorScreen = await settingsScreen.Devices().OpenPumpScreen();
     });
     it('set errorOnBolus to true', async () => {
         await pumpSimulatorScreen.Apply({ errorOnBolus: true });

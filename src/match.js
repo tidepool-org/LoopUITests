@@ -3,7 +3,6 @@ const element = require('detox').element;
 const staticTextTrait = 'text';
 const buttonTrait = 'button';
 const imageTrait = 'image';
-const disabledTrait = 'disabled';
 
 const match = {
     /**
@@ -13,20 +12,8 @@ const match = {
         ButtonBarButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('_UIButtonBarButton'))));
         },
-        DisabledButtonBarButton(label) {
-            return element(by.label(label).and(by.traits([buttonTrait, disabledTrait]).and(by.type('_UIButtonBarButton'))));
-        },
-        SetupButton(label) {
-            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('LoopKitUI.SetupButton'))));
-        },
-        DisabledSetupButton(label) {
-            return element(by.label(label).and(by.traits([buttonTrait, disabledTrait]).and(by.type('LoopKitUI.SetupButton'))));
-        },
         Button(label) {
             return element(by.label(label).and(by.traits([buttonTrait])));
-        },
-        DisabledButton(label) {
-            return element(by.label(label).and(by.traits([buttonTrait, disabledTrait])));
         },
         Id(theId) {
             return element(by.id(theId));
@@ -170,6 +157,9 @@ const match = {
     },
     Text(theText) {
         return element(by.text(theText));
+    },
+    Label(label) {
+        return element(by.label(label));
     }
 };
 
