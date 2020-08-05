@@ -159,7 +159,6 @@ class Test {
         await match.UITextField().typeText(cycles);
         await match.accessible.Button(this.language.general.OK).tap();
     }
-
     async authorize() {
         if (this.authenticate) {
             await device.matchFace();
@@ -167,7 +166,6 @@ class Test {
             await device.unmatchFace();
         }
     }
-
     /**
      * @param {object} pumpConfig
      * @param {object} pumpConfig.correctionRange
