@@ -52,6 +52,9 @@ const match = {
                         .and(by.traits([staticTextTrait])))
             ).atIndex(pickerNumber);
         },
+        PickerItem(itemID) {
+            return element(by.type('UIPickerTableViewWrapperCell').withDescendant(by.id(itemID)));
+        },
         QuantityPickerItemLabel(itemLabel, pickerID) {
             return element(
                 by.type('SwiftUI.AccessibilityNode')
@@ -66,7 +69,7 @@ const match = {
                     .and(by.id(itemID)
                         .and(by.traits([staticTextTrait])))
                     .withAncestor(by.id(pickerID))
-            ).atIndex(2);
+            );
         },
         QuantityPickerItemID_v2(itemID) {
             return element(by.id(itemID).and(by.traits([staticTextTrait])));

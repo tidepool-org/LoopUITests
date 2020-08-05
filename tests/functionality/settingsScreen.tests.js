@@ -1,4 +1,4 @@
-var settingsScreen = (test) => {
+module.exports = settingsScreen = (test) => {
     var settingsScreen;
     it('can open', async () => {
         settingsScreen = await test.OpenSettingsScreen();
@@ -39,8 +39,4 @@ var settingsScreen = (test) => {
     it('can close', async () => {
         await settingsScreen.BackToHome();
     });
-};
-
-module.exports = {
-    settingsScreen
 };

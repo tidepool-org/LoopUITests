@@ -13,21 +13,37 @@ describe('functional test', () => {
             .withStartScreen('home')
             .withAuth();
         await test.prepare();
+
     });
-    describe.skip('home screen', () => {
+    describe('home screen', () => {
         functionalityTests.homeScreen(test);
     });
-    //TODO: requires pump setup now
-    describe('carb entry screen', () => {
-        functionalityTests.carbEntryScreen(test);
+    describe('cgm simulator screen', () => {
+        functionalityTests.cgmSimulatorScreen(test);
     });
-    describe.skip('settings screen', () => {
+    describe('settings screen', () => {
         functionalityTests.settingsScreen(test);
     });
-    describe.skip('pump simulator screen', () => {
+    describe('pump simulator screen', () => {
         functionalityTests.pumpSimulatorScreen(test);
     });
-    describe.skip('cgm simulator screen', () => {
-        functionalityTests.cgmSimulatorScreen(test);
+    describe('configured pump', () => {
+        it('add pump', async () => {
+            await test.addConfiguredPump({
+                correctionRange: {
+                    expected: { min: 100, max: 120, }
+                },
+                deliveryLimits: {
+                    basal: { expected: { rate: 34.00 }, },
+                    bolus: { expected: { amount: 18.00 }, },
+                }
+            });
+        });
+        describe('carb entry screen', () => {
+            functionalityTests.carbEntryScreen(test);
+        });
+        describe('bolus screen', () => {
+            functionalityTests.bolusScreen(test);
+        });
     });
 });

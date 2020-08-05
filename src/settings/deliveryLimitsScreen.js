@@ -1,4 +1,5 @@
 const match = require('../match');
+const action = require('../action');
 const base = require('../base/index');
 
 class DeliveryLimitsScreen extends base.EntryScreen {
@@ -8,7 +9,7 @@ class DeliveryLimitsScreen extends base.EntryScreen {
             generalText: language.general,
             open: {
                 isBtn: false,
-                label: language.settingsScreen.SuspendThresholdScreen.Header,
+                label: language.settingsScreen.DeliveryLimitsScreen.Header,
             },
             header: {
                 backLabel: language.general.Cancel,
@@ -31,13 +32,13 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     _limitParts(limitAmount) {
         return String(limitAmount).split('.');
     }
-    async _set(expected, current) {
+    async _set(expected, current, id) {
         //TODO: need to sort out interaction with app
-        // await action.ScrollQuantityPicker(
-        //     current[0],
-        //     expected[0],
-        //     { pickerID: 'quantity_picker', useItemID: true, smallStep: true }
-        // );
+        await action.ScrollQuantityPicker(
+            current[0],
+            expected[0],
+            { pickerID: id, useItemID: true, smallStep: false }
+        );
     }
     MaxBasalRateLabel() {
         return match.accessible.TextLabel(this.screenText.MaxBasalRate);
@@ -51,6 +52,10 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     MaxBolusInfo() {
         return match.accessible.TextLabel(this.screenText.MaxBolusInfo);
     }
+    async Open() {
+        await super.Open();
+        return this;
+    }
     async OpenBasalRatePicker() {
         await this.MaxBasalRateLabel().tap();
     }
@@ -58,31 +63,30 @@ class DeliveryLimitsScreen extends base.EntryScreen {
         await this.MaxBolusLabel().tap();
     }
     /**
-     * @param {Object} limits
-     * @param {Object} limits.basal
-     * @param {String} limits.basal.expected.rate
-     * @param {String} limits.basal.current.rate optional
-     * @param {Object} limits.bolus
-     * @param {String} limits.bolus.expected.amount
-     * @param {String} limits.bolus.current.amount optional
+     * @param {Object} bolus
+     * @param {String} bolus.expected.amount
+     * @param {String} bolus.current.amount optional
      */
-    async ApplyOne(limits) {
-        if (limits.basal) {
-            let currentParts = [this.config.basalRate.startWhole];
-            if (limits.basal.current) {
-                currentParts = this._limitParts(limits.basal.current.rate);
-            }
-            let expectedParts = this._limitParts(limits.basal.expected.rate);
-            await this._set(expectedParts, currentParts);
+    async ApplyBolus(bolus) {
+        let currentParts = [this.config.bolus.startWhole];
+        if (bolus.current) {
+            currentParts = this._limitParts(bolus.current.amount);
         }
-        if (limits.bolus) {
-            let currentParts = [this.config.bolus.startWhole];
-            if (limits.bolus.current) {
-                currentParts = this._limitParts(limits.bolus.current.amount);
-            }
-            let expectedParts = this._limitParts(limits.bolus.expected.amount);
-            await this._set(expectedParts, currentParts);
+        let expectedParts = this._limitParts(bolus.expected.amount);
+        await this._set(expectedParts, currentParts, 'max_bolus_picker');
+    }
+    /**
+     * @param {Object} basal
+     * @param {String} basal.expected.rate
+     * @param {String} basal.current.rate optional
+     */
+    async ApplyBasal(basal) {
+        let currentParts = [this.config.basalRate.startWhole];
+        if (basal.current) {
+            currentParts = this._limitParts(basal.current.rate);
         }
+        let expectedParts = this._limitParts(basal.expected.rate);
+        await this._set(expectedParts, currentParts, 'max_basal_picker');
     }
 }
 

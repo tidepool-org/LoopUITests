@@ -92,7 +92,6 @@ class Test {
         }
         return filtered;
     }
-
     async prepare() {
         if (!this.language) {
             throw 'language is required!';
@@ -114,7 +113,7 @@ class Test {
 
         await device.launchApp({
             newInstance: true,
-            permissions: { notifications: 'YES', health: 'YES' },
+            permissions: { notifications: 'YES', health: 'YES', faceid: 'YES' },
         });
 
         if (this.scenario) {
@@ -163,19 +162,28 @@ class Test {
 
     async authorize() {
         if (this.authenticate) {
-            return await device.matchFace();
+            await device.matchFace();
+        } else {
+            await device.unmatchFace();
         }
-        return await device.unmatchFace();
     }
 
-    async addConfiguredPump() {
+    /**
+     * @param {object} pumpConfig
+     * @param {object} pumpConfig.correctionRange
+     * @param {object} pumpConfig.deliveryLimits
+     */
+    async addConfiguredPump(pumpConfig) {
         await this.homeScreen.HeaderSection().Devices().AddPump();
         var settings = await this.OpenSettingsScreen();
-        //await settings.setCorrectionRange();
-        await settings.setDeliveryLimits();
-        //await settings.BackToHome();
+        await settings.setCorrectionRange(pumpConfig.correctionRange);
+        await settings.setDeliveryLimits(pumpConfig.deliveryLimits);
+        await settings.BackToHome();
     }
-
+    async removePump() {
+        let pump = await this.homeScreen.HeaderSection().Devices().OpenPumpScreen();
+        await pump.RemoveSimulator();
+    }
     async OpenSettingsScreen() {
         this.settingsOpen = true;
         return this.homeScreen.OpenSettingsScreen();

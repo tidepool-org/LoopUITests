@@ -104,30 +104,28 @@ class SettingsScreen extends base.Screen {
         await this.alertScreen.Open();
         return this.alertScreen;
     }
-    async setDeliveryLimits() {
+    async setDeliveryLimits(deliveryLimits) {
         await match.accessible.Button(this.generalText.Done).atIndex(2).tap();
         var limits = await this.deliveryLimitsScreen.Open();
-        await limits.Plus();
-        await limits.ApplyOne({
-            expected: {
-                basal: { rate: 35.00 },
-                bolus: { amount: 19.00 },
-            }
-        });
-        await correction.Add();
+        await limits.OpenBasalRatePicker();
+        await limits.ApplyBasal(deliveryLimits.basal);
+        await limits.OpenBasalRatePicker();
+        await limits.OpenBolusPicker();
+        await limits.ApplyBolus(deliveryLimits.bolus);
         await limits.SaveAndClose();
         await match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0).tap();
     }
-    async setCorrectionRange() {
+    /**
+     * @param {object} correctionRange
+     * @param {object} correctionRange.expected
+     * @param {number} correctionRange.expected.max
+     * @param {number} correctionRange.expected.min
+     */
+    async setCorrectionRange(correctionRange) {
         await match.accessible.Button(this.generalText.Done).atIndex(2).tap();
         var correction = await this.correctionRangeScreen.Open();
         await correction.Plus();
-        await correction.ApplyOne({
-            expected: {
-                min: 100,
-                max: 120,
-            }
-        });
+        await correction.ApplyOne(correctionRange);
         await correction.Add();
         await correction.SaveAndClose();
         await match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0).tap();
