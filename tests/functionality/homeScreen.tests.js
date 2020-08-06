@@ -1,4 +1,4 @@
-module.exports = homeScreen = (test) => {
+module.exports = (test) => {
     var homeScreen;
     it('get home screen', async () => {
         homeScreen = await test.OpenHomeScreen();

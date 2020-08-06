@@ -1,4 +1,4 @@
-module.exports = pumpSimulatorScreen = (test) => {
+module.exports = (test) => {
     var pumpSimulatorScreen;
     var settingsScreen;
     beforeAll(async () => {

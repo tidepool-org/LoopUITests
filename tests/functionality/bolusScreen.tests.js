@@ -1,4 +1,4 @@
-module.exports = bolusScreen = (test) => {
+module.exports = (test) => {
     var screen;
     it('open screen', async () => {
         screen = await test.OpenBolusScreen();

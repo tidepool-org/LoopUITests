@@ -1,4 +1,4 @@
-module.exports = carbEntryScreen = (test) => {
+module.exports = (test) => {
     var screen;
     it('can open screen', async () => {
         screen = await test.OpenCarbEntryScreen();

@@ -1,4 +1,4 @@
-module.exports = cgmSimulatorScreen = (test) => {
+module.exports = (test) => {
     var screen;
     var settingsScreen;
     beforeAll(async () => {

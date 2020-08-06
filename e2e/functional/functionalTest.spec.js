@@ -1,5 +1,5 @@
 const { Test, Config } = require('../../src/index');
-const functionalityTests = require('../../tests/functionality/index');
+const functionality = require('../../tests/functionality/index');
 
 describe('functional test', () => {
     var test = new Test();
@@ -16,16 +16,16 @@ describe('functional test', () => {
 
     });
     describe('home screen', () => {
-        functionalityTests.homeScreen(test);
+        functionality.homeScreenTests(test);
     });
     describe('cgm simulator screen', () => {
-        functionalityTests.cgmSimulatorScreen(test);
+        functionality.cgmSimulatorScreenTests(test);
     });
     describe('settings screen', () => {
-        functionalityTests.settingsScreen(test);
+        functionality.settingsScreenTests(test);
     });
     describe('pump simulator screen', () => {
-        functionalityTests.pumpSimulatorScreen(test);
+        functionality.pumpSimulatorScreenTests(test);
     });
     describe('configured pump', () => {
         it('add pump', async () => {
@@ -40,10 +40,10 @@ describe('functional test', () => {
             });
         });
         describe('carb entry screen', () => {
-            functionalityTests.carbEntryScreen(test);
+            functionality.carbEntryScreenTests(test);
         });
         describe('bolus screen', () => {
-            functionalityTests.bolusScreen(test);
+            functionality.bolusScreenTests(test);
         });
     });
 });

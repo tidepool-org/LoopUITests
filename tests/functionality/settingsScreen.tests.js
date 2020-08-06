@@ -1,4 +1,4 @@
-module.exports = settingsScreen = (test) => {
+module.exports = (test) => {
     var settingsScreen;
     it('can open', async () => {
         settingsScreen = await test.OpenSettingsScreen();
