@@ -106,9 +106,9 @@ class Screen {
     }
     async Back() {
         try {
-            return this.BackButton().tap();
+            await this.BackButton().tap();
         } catch (err) {
-            return match.accessible.ButtonBarButton(this.backLabel).tap();
+            await match.accessible.ButtonBarButton(this.backLabel).tap();
         }
     }
     async Continue() {

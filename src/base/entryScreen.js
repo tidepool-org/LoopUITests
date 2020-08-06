@@ -22,6 +22,9 @@ class EntryScreen extends Screen {
     GuardrailWarningIconPicker() {
         return match.accessible.Image(this.generalText.Alert.ExclamationMark).atIndex(0);
     }
+    GuardrailMessage(text) {
+        return match.accessible.TextLabel(text);
+    }
 }
 
 module.exports = EntryScreen;

@@ -18,12 +18,6 @@ class DeliveryLimitsScreen extends base.EntryScreen {
         this.config = config;
     }
     /**
-     * @override so we access the correct CancelButton
-     */
-    CancelButton() {
-        return match.accessible.ButtonBarButton(this.generalText.Cancel);
-    }
-    /**
      * @override so we access the header by label
      */
     Header() {
@@ -33,7 +27,6 @@ class DeliveryLimitsScreen extends base.EntryScreen {
         return String(limitAmount).split('.');
     }
     async _set(expected, current, id) {
-        //TODO: need to sort out interaction with app
         await action.ScrollQuantityPicker(
             current[0],
             expected[0],

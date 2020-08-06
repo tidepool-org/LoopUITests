@@ -37,6 +37,9 @@ class EntriesScreen extends Screen {
         let scheduleItemMask = `schedule_item_${entry.index}`;
         return match.accessible.ImageAndId(this.generalText.Alert.ExclamationMark, scheduleItemMask);
     }
+    GuardrailMessage(text) {
+        return match.accessible.TextLabel(text);
+    }
     async CancelNewEntry() {
         await this.CancelNewEntryButton().tap();
     }

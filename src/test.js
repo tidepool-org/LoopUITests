@@ -131,12 +131,11 @@ class Test {
             }
             await this.settingsScreen.Apply(this.settingsToApply);
         } else if (this.simulators) {
-            this.settingsScreen = await this.OpenSettingsScreen();
             if (this.simulators.cgm) {
-                await this.settingsScreen.AddCGMSimulator();
+                await this.homeScreen.HeaderSection().Devices().AddCGM();
             }
             if (this.simulators.pump) {
-                await this.settingsScreen.AddPumpSimulator();
+                await this.homeScreen.HeaderSection().Devices().AddPump();
             }
         }
         if (this.startScreen) {

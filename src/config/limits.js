@@ -69,12 +69,12 @@ var mgdL = {
         },
         bolus: {
             max: {
-                limit: 35.0,
+                limit: 25.0,
                 warning: 20.0,
                 noWarning: 19.95,
             },
             min: {
-                limit: 0.0,
+                limit: 0.1,
             },
         }
     }
