@@ -26,7 +26,7 @@ class SettingsScreen extends base.Screen {
         });
         this.devices = devices;
         this.alertScreen = new AlertScreen(language);
-        this.therapyScreen = new TherapyScreen(language);
+        this.therapyScreen = new TherapyScreen(language, config);
         this.supportScreen = new SupportScreen(language);
         this.deliveryLimitsScreen = new DeliveryLimitsScreen(language, config.deliveryLimit);
         this.correctionRangeScreen = new CorrectionRangeScreen(language, config.correctionRange);
