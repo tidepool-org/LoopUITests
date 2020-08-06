@@ -36,6 +36,10 @@ class Test {
         this.filter = filter;
         return this;
     }
+    withAuth() {
+        this.authenticate = true;
+        return this;
+    }
     /**
      *
      * @param {object} simulators
@@ -88,7 +92,6 @@ class Test {
         }
         return filtered;
     }
-
     async prepare() {
         if (!this.language) {
             throw 'language is required!';
@@ -102,11 +105,15 @@ class Test {
             }
         }
 
+        if (this.authenticate) {
+            await device.setBiometricEnrollment(true);
+        }
+
         this.homeScreen = new HomeScreen(this.language, this.screenDefaults);
 
         await device.launchApp({
             newInstance: true,
-            permissions: { notifications: 'YES', health: 'YES' },
+            permissions: { notifications: 'YES', health: 'YES', faceid: 'YES' },
         });
 
         if (this.scenario) {
@@ -124,12 +131,11 @@ class Test {
             }
             await this.settingsScreen.Apply(this.settingsToApply);
         } else if (this.simulators) {
-            this.settingsScreen = await this.OpenSettingsScreen();
             if (this.simulators.cgm) {
-                await this.settingsScreen.AddCGMSimulator();
+                await this.homeScreen.HeaderSection().Devices().AddCGM();
             }
             if (this.simulators.pump) {
-                await this.settingsScreen.AddPumpSimulator();
+                await this.homeScreen.HeaderSection().Devices().AddPump();
             }
         }
         if (this.startScreen) {
@@ -152,28 +158,45 @@ class Test {
         await match.UITextField().typeText(cycles);
         await match.accessible.Button(this.language.general.OK).tap();
     }
-
+    async authorize() {
+        if (this.authenticate) {
+            await device.matchFace();
+        } else {
+            await device.unmatchFace();
+        }
+    }
+    /**
+     * @param {object} pumpConfig
+     * @param {object} pumpConfig.correctionRange
+     * @param {object} pumpConfig.deliveryLimits
+     */
+    async addConfiguredPump(pumpConfig) {
+        await this.homeScreen.HeaderSection().Devices().AddPump();
+        var settings = await this.OpenSettingsScreen();
+        await settings.setCorrectionRange(pumpConfig.correctionRange);
+        await settings.setDeliveryLimits(pumpConfig.deliveryLimits);
+        await settings.BackToHome();
+    }
+    async removePump() {
+        let pump = await this.homeScreen.HeaderSection().Devices().OpenPumpScreen();
+        await pump.RemoveSimulator();
+    }
     async OpenSettingsScreen() {
         this.settingsOpen = true;
         return this.homeScreen.OpenSettingsScreen();
     }
-
     async OpenCarbEntryScreen() {
         return this.homeScreen.OpenCarbEntryScreen();
     }
-
     async OpenBolusScreen() {
         return this.homeScreen.OpenBolusScreen();
     }
-
     async OpenBolusScreen() {
         return this.homeScreen.OpenBolusScreen();
     }
-
     async OpenCustomPresetScreen() {
         return this.homeScreen.OpenCustomPresetScreen();
     }
-
     async OpenHomeScreen() {
         return this.homeScreen;
     }

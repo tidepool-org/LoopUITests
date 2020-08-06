@@ -1,4 +1,4 @@
-var homeScreen = (test) => {
+module.exports = (test) => {
     var homeScreen;
     it('get home screen', async () => {
         homeScreen = await test.OpenHomeScreen();
@@ -45,8 +45,4 @@ var homeScreen = (test) => {
             await homeScreen.HeaderSection().CloseLoopAlert();
         });
     });
-};
-
-module.exports = {
-    homeScreen
 };

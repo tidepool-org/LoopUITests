@@ -1,4 +1,4 @@
-var threapySettings = (test) => {
+module.exports = (test) => {
     var settingsScreen;
     it('open settings', async () => {
         settingsScreen = await test.OpenSettingsScreen();
@@ -35,8 +35,4 @@ var threapySettings = (test) => {
     it('close', async () => {
         await settingsScreen.BackToHome();
     });
-};
-
-module.exports = {
-    threapySettings
 };

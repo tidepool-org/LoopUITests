@@ -22,7 +22,11 @@ class BolusScreen extends base.Screen {
         return match.accessible.ButtonBarButton(this.backLabel);
     }
     async Deliver() {
-        await this.DeliverButton().tap();
+        await this.DoneButton().tap();
+        await this.SaveAndDeliverButton().tap();
+    }
+    DoneButton() {
+        return match.accessible.Button(this.generalText.Done).atIndex(0);
     }
     SaveAndDeliverButton() {
         return match.accessible.Button(this.screenText.SaveDeliver);
@@ -56,15 +60,6 @@ class BolusScreen extends base.Screen {
         await bolusAmountField.clearText();
         await bolusAmountField.typeText(String(units));
         await bolusAmountField.tapReturnKey();
-    }
-    AuthenticationLabel() {
-        return match.Text('Authenticate to bolus');
-    }
-    async SetAuthentication(passcode) {
-        var authField = match.UITextField();
-        await authField.clearText();
-        await authField.typeText(String(passcode));
-        await authField.tapReturnKey();
     }
 };
 

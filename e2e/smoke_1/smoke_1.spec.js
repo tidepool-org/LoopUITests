@@ -1,5 +1,5 @@
 const { Test, Config } = require('../../src/index');
-const accessibilityTests = require('../../tests/accessibility/index');
+const accessibility = require('../../tests/accessibility/index');
 
 describe('accessibility', () => {
     var test = new Test();
@@ -14,28 +14,28 @@ describe('accessibility', () => {
     });
     describe('main screens', () => {
         describe('home', () => {
-            accessibilityTests.homeScreen(test);
+            accessibility.homeScreenTest(test);
         });
         describe('home glucose', () => {
-            accessibilityTests.homeGlucoseScreen(test);
+            accessibility.homeGlucoseScreenTest(test);
         });
         describe('home active insulin', () => {
-            accessibilityTests.homeActiveInsulinScreen(test);
+            accessibility.homeActiveInsulinScreenTest(test);
         });
         describe('home insulin delivery', () => {
-            accessibilityTests.homeInsulinDeliveryScreen(test);
+            accessibility.homeInsulinDeliveryScreenTest(test);
         });
         describe('home active carbohydrates', () => {
-            accessibilityTests.homeActiveCarbohydratesScreen(test);
+            accessibility.homeActiveCarbohydratesScreenTest(test);
         });
         describe('carb entry', () => {
-            accessibilityTests.carbEntryScreen(test);
+            accessibility.carbEntryScreenTest(test);
         });
         describe('bolus', () => {
-            accessibilityTests.bolusScreen(test);
+            accessibility.bolusScreenTest(test);
         });
         describe('custom presets', () => {
-            accessibilityTests.customPresetsScreen(test);
+            accessibility.customPresetsScreenTest(test);
         });
     });
 });

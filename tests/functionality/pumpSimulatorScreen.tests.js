@@ -1,4 +1,4 @@
-var pumpSimulatorScreen = (test) => {
+module.exports = (test) => {
     var pumpSimulatorScreen;
     var settingsScreen;
     beforeAll(async () => {
@@ -54,8 +54,4 @@ var pumpSimulatorScreen = (test) => {
     it('return to start', async () => {
         await settingsScreen.Back();
     });
-};
-
-module.exports = {
-    pumpSimulatorScreen
 };

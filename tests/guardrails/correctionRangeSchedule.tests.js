@@ -1,4 +1,4 @@
-var correctionRangeSchedule = (test) => {
+module.exports = (test) => {
     var screen;
     var screenLimit;
     beforeAll(async () => {
@@ -96,5 +96,3 @@ var correctionRangeSchedule = (test) => {
         await screen.CancelAndClose();
     });
 };
-
-module.exports = { correctionRangeSchedule };

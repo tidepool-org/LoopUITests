@@ -1,19 +1,15 @@
-var carbEntryScreen = (test) => {
-    var carbEntryScreen;
+module.exports = (test) => {
+    var screen;
     it('can open screen', async () => {
-        carbEntryScreen = await test.OpenCarbEntryScreen();
+        screen = await test.OpenCarbEntryScreen();
     });
     it('set carbs and save without a bolus', async () => {
-        await carbEntryScreen.SetCarbs(30);
-        var bolusScreen = await carbEntryScreen.Continue();
+        await screen.SetCarbs(30);
+        var bolusScreen = await screen.Continue();
         await bolusScreen.SaveWithoutBolus();
     });
     it('can cancel open screen', async () => {
-        carbEntryScreen = await test.OpenCarbEntryScreen();
-        await carbEntryScreen.CancelAndClose();
+        screen = await test.OpenCarbEntryScreen();
+        await screen.CancelAndClose();
     });
-};
-
-module.exports = {
-    carbEntryScreen
 };

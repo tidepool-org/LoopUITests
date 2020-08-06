@@ -1,4 +1,4 @@
-var homeGlucoseScreen = (test) => {
+module.exports = (test) => {
     var glucoseScreen;
     beforeAll(async () => {
         glucoseScreen = await test.homeScreen.OpenGlucoseChart();
@@ -24,9 +24,4 @@ var homeGlucoseScreen = (test) => {
     it('has a Back Button', async () => {
         await expect(glucoseScreen.BackButton()).toBeVisible();
     });
-};
-
-
-module.exports = {
-    homeGlucoseScreen
 };

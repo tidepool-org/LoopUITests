@@ -12,21 +12,18 @@ class EntriesScreen extends Screen {
     * @param {object} config
     */
     constructor(parentScreen, config) {
-        parentScreen.isEditable = true;
+        parentScreen.header.editable = true;
         super(parentScreen);
         this.config = config;
     }
     InfoLabel() {
-        return match.accessible.Label(this.screenText.Info);
-    }
-    SaveButton() {
-        return match.accessible.Label(this.generalText.Save);
+        return match.accessible.TextLabel(this.screenText.Info);
     }
     CancelNewEntryButton() {
         return match.accessible.Button(this.generalText.Cancel);
     }
     NewEntryLabel() {
-        return match.accessible.Label(this.generalText.NewEntry);
+        return match.accessible.ClickableLabel(this.generalText.NewEntry);
     }
     InfoButton() {
         return match.accessible.Button(this.generalText.ButtonLabel.InfoCircle);
@@ -40,11 +37,11 @@ class EntriesScreen extends Screen {
         let scheduleItemMask = `schedule_item_${entry.index}`;
         return match.accessible.ImageAndId(this.generalText.Alert.ExclamationMark, scheduleItemMask);
     }
+    GuardrailMessage(text) {
+        return match.accessible.TextLabel(text);
+    }
     async CancelNewEntry() {
         await this.CancelNewEntryButton().tap();
-    }
-    async SaveAndClose() {
-        await this.SaveButton().tap();
     }
 }
 

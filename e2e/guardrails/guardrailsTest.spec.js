@@ -1,8 +1,8 @@
 const { Test, Config } = require('../../src/index');
-const guardrailsTests = require('../../tests/guardrails/index');
+const guardrails = require('../../tests/guardrails/index');
 
 //TODO: the following require settings and pump setup once ready
-describe.skip('guardrails test', () => {
+describe('guardrails test', () => {
     var test = new Test();
     var config = new Config();
     it('prepare test', async () => {
@@ -10,29 +10,26 @@ describe.skip('guardrails test', () => {
         test = test.withLanguage(config.text)
             .withLimits(config.limits)
             .withScreenDefaults(config.screenDefaults)
+            .withSimulators({ pump: true })
             .withStartScreen('home');
         await test.prepare();
     });
-    it('add required pump simulator', async () => {
-        let settings = await test.OpenSettingsScreen();
-        await settings.AddPumpSimulator();
+    describe.skip('insulin sensitivity schedule', () => {
+        guardrails.insulinSensitivityScheduleTest(test);
     });
-    describe('insulin sensitivity schedule', () => {
-        guardrailsTests.insulinSensitivitySchedule(test);
+    describe.skip('suspend threshold', () => {
+        guardrails.suspendThresholdTest(test);
     });
-    describe('suspend threshold', () => {
-        guardrailsTests.suspendThreshold(test);
+    describe.skip('insulin carb ratio', () => {
+        guardrails.insulinCarbRatioTest(test);
     });
-    describe('insulin carb ratio', () => {
-        guardrailsTests.insulinCarbRatio(test);
+    describe.skip('correction range schedule', () => {
+        guardrails.correctionRangeScheduleTest(test);
     });
-    describe('correction range schedule', () => {
-        guardrailsTests.correctionRangeSchedule(test);
-    });
-    describe('basal rate schedule', () => {
-        guardrailsTests.basalRateSchedule(test);
+    describe.skip('basal rate schedule', () => {
+        guardrails.basalRateScheduleTest(test);
     });
     describe('delivery limits', () => {
-        guardrailsTests.deliveryLimits(test);
+        guardrails.deliveryLimitsTest(test);
     });
 });

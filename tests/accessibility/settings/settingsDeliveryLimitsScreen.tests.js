@@ -1,4 +1,4 @@
-var settingsDeliveryLimitsScreen = (test) => {
+module.exports = (test) => {
     var screen;
     var settingsScreen;
     it('open', async () => {
@@ -32,8 +32,4 @@ var settingsDeliveryLimitsScreen = (test) => {
         await settingsScreen.RemovePumpSimulator();
         await settingsScreen.Close();
     });
-};
-
-module.exports = {
-    settingsDeliveryLimitsScreen
 };

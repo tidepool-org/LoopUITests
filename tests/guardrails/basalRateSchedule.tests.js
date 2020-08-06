@@ -1,4 +1,4 @@
-var basalRateSchedule = (test) => {
+module.exports = (test) => {
     var screen;
     var screenLimit;
     beforeAll(async () => {
@@ -68,5 +68,3 @@ var basalRateSchedule = (test) => {
         await screen.CancelAndClose();
     });
 };
-
-module.exports = { basalRateSchedule };

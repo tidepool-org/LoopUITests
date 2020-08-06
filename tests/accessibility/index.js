@@ -1,45 +1,46 @@
-const { homeScreen } = require('./homeScreen.tests');
-const { homeGlucoseScreen } = require('./homeGlucoseScreen.tests');
-const { homeActiveInsulinScreen } = require('./homeActiveInsulinScreen.tests');
-const { homeInsulinDeliveryScreen } = require('./homeInsulinDeliveryScreen.tests');
-const { bolusScreen } = require('./bolusScreen.tests');
-const { carbEntryScreen } = require('./carbEntryScreen.tests');
-const { settingsScreen } = require('./settings/settingsScreen.tests');
-const { settingsCarbRatioScreen } = require('./settings/settingsCarbRatioScreen.tests');
-const { settingsBasalRatesScreen } = require('./settings/settingsBasalRatesScreen.tests');
-const { settingsDeliveryLimitsScreen } = require('./settings/settingsDeliveryLimitsScreen.tests');
-const { settingsInsulinSensitivitiesScreen } = require('./settings/settingsInsulinSensitivitiesScreen.tests');
-const { settingsCorrectionRangeScreen } = require('./settings/settingsCorrectionRangeScreen.tests');
-const { settingsIssueReportScreen } = require('./settings/settingsIssueReportScreen.tests');
-const { settingsInsulinModelScreen } = require('./settings/settingsInsulinModelScreen.tests');
-const { settingsSuspendThresholdScreen } = require('./settings/settingsSuspendThresholdScreen.tests');
-const { cgmSimulatorScreenTests } = require('./devices/cgmSimulatorScreen.tests');
-const { pumpSimulatorScreenTests } = require('./devices/pumpSimulatorScreen.tests');
-const { g6ScreenTests } = require('./devices/g6Screen.tests');
-const { threapySettings } = require('./settings/threapySettings.tests');
-const { homeActiveCarbohydratesScreen } = require('./homeActiveCarbohydratesScreen.tests');
-const { customPresetsScreen } = require('./customPresetsScreen.tests');
+const homeScreenTest = require('./homeScreen.tests');
+const homeGlucoseScreenTest = require('./homeGlucoseScreen.tests');
+const homeActiveInsulinScreenTest = require('./homeActiveInsulinScreen.tests');
+const homeInsulinDeliveryScreenTest = require('./homeInsulinDeliveryScreen.tests');
+const bolusScreenTest = require('./bolusScreen.tests');
+const carbEntryScreenTest = require('./carbEntryScreen.tests');
+const homeActiveCarbohydratesScreenTest = require('./homeActiveCarbohydratesScreen.tests');
+const customPresetsScreenTest = require('./customPresetsScreen.tests');
+
+const settingsScreenTest = require('./settings/settingsScreen.tests');
+const settingsCarbRatioScreenTest = require('./settings/settingsCarbRatioScreen.tests');
+const settingsBasalRatesScreenTest = require('./settings/settingsBasalRatesScreen.tests');
+const settingsDeliveryLimitsScreenTest = require('./settings/settingsDeliveryLimitsScreen.tests');
+const settingsInsulinSensitivitiesScreenTest = require('./settings/settingsInsulinSensitivitiesScreen.tests');
+const settingsCorrectionRangeScreenTest = require('./settings/settingsCorrectionRangeScreen.tests');
+const settingsIssueReportScreenTest = require('./settings/settingsIssueReportScreen.tests');
+const settingsInsulinModelScreenTest = require('./settings/settingsInsulinModelScreen.tests');
+const settingsSuspendThresholdScreenTest = require('./settings/settingsSuspendThresholdScreen.tests');
+const cgmSimulatorScreenTest = require('./devices/cgmSimulatorScreen.tests');
+const pumpSimulatorScreenTest = require('./devices/pumpSimulatorScreen.tests');
+const g6ScreenTest = require('./devices/g6Screen.tests');
+const threapySettingsTest = require('./settings/threapySettings.tests');
 
 module.exports = {
-    homeScreen,
-    homeGlucoseScreen,
-    homeActiveInsulinScreen,
-    homeInsulinDeliveryScreen,
-    homeActiveCarbohydratesScreen,
-    bolusScreen,
-    carbEntryScreen,
-    settingsScreen,
-    settingsCarbRatioScreen,
-    settingsBasalRatesScreen,
-    settingsDeliveryLimitsScreen,
-    settingsInsulinSensitivitiesScreen,
-    settingsCorrectionRangeScreen,
-    settingsIssueReportScreen,
-    settingsInsulinModelScreen,
-    settingsSuspendThresholdScreen,
-    cgmSimulatorScreenTests,
-    pumpSimulatorScreenTests,
-    g6ScreenTests,
-    threapySettings,
-    customPresetsScreen,
+    homeScreenTest,
+    homeGlucoseScreenTest,
+    homeActiveInsulinScreenTest,
+    homeInsulinDeliveryScreenTest,
+    homeActiveCarbohydratesScreenTest,
+    bolusScreenTest,
+    carbEntryScreenTest,
+    customPresetsScreenTest,
+    settingsScreenTest,
+    settingsCarbRatioScreenTest,
+    settingsBasalRatesScreenTest,
+    settingsDeliveryLimitsScreenTest,
+    settingsInsulinSensitivitiesScreenTest,
+    settingsCorrectionRangeScreenTest,
+    settingsIssueReportScreenTest,
+    settingsInsulinModelScreenTest,
+    settingsSuspendThresholdScreenTest,
+    cgmSimulatorScreenTest,
+    pumpSimulatorScreenTest,
+    g6ScreenTest,
+    threapySettingsTest,
 };

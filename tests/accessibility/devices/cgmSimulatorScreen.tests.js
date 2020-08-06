@@ -1,4 +1,4 @@
-var cgmSimulatorScreenTests = (test) => {
+module.exports = (test) => {
     var screen;
     beforeAll(async () => {
         var homeScreen = await test.OpenHomeScreen();
@@ -57,8 +57,4 @@ var cgmSimulatorScreenTests = (test) => {
     it('has a issue alerts label', async () => {
         await expect(screen.IssueAlertsLabel()).toBeVisible();
     });
-};
-
-module.exports = {
-    cgmSimulatorScreenTests
 };

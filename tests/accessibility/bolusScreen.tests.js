@@ -1,4 +1,4 @@
-var bolusScreen = (test) => {
+module.exports = (test) => {
     var bolusScreen;
     it('has to open the bolus screen', async () => {
         bolusScreen = await test.OpenBolusScreen();
@@ -33,8 +33,4 @@ var bolusScreen = (test) => {
     it('can cancel and then close the bolus screen', async () => {
         await bolusScreen.CancelAndClose();
     });
-};
-
-module.exports = {
-    bolusScreen
 };

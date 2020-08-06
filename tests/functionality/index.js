@@ -1,15 +1,15 @@
-const { settingsScreen } = require('./settingsScreen.tests');
-const { homeScreen } = require('./homeScreen.tests');
-const { carbEntryScreen } = require('./carbEntryScreen.tests');
-const { pumpSimulatorScreen } = require('./pumpSimulatorScreen.tests');
-const { cgmSimulatorScreen } = require('./cgmSimulatorScreen.tests');
-const { deliveryLimitsScreen } = require('./deliveryLimitsScreen.tests');
+const settingsScreenTests = require('./settingsScreen.tests');
+const homeScreenTests = require('./homeScreen.tests');
+const carbEntryScreenTests = require('./carbEntryScreen.tests');
+const pumpSimulatorScreenTests = require('./pumpSimulatorScreen.tests');
+const cgmSimulatorScreenTests = require('./cgmSimulatorScreen.tests');
+const bolusScreenTests = require('./bolusScreen.tests');
 
 module.exports = {
-    settingsScreen,
-    homeScreen,
-    carbEntryScreen,
-    pumpSimulatorScreen,
-    cgmSimulatorScreen,
-    deliveryLimitsScreen,
+    settingsScreenTests,
+    homeScreenTests,
+    carbEntryScreenTests,
+    pumpSimulatorScreenTests,
+    cgmSimulatorScreenTests,
+    bolusScreenTests,
 };

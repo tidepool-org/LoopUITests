@@ -1,4 +1,4 @@
-var suspendThreshold = (test) => {
+module.exports = (test) => {
     var screen;
     var screenLimit;
     beforeAll(async () => {
@@ -46,5 +46,3 @@ var suspendThreshold = (test) => {
         await screen.CancelAndClose();
     });
 };
-
-module.exports = { suspendThreshold };

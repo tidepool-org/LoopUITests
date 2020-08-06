@@ -1,5 +1,5 @@
 const { Test, Config } = require('../../src/index');
-const functionalityTests = require('../../tests/functionality/index');
+const functionality = require('../../tests/functionality/index');
 
 describe('functional test', () => {
     var test = new Test();
@@ -10,23 +10,39 @@ describe('functional test', () => {
             .withLimits(config.limits)
             .withScreenDefaults(config.screenDefaults)
             .withSettingDefault(config.settingDefault)
-            .withStartScreen('home');
+            .withStartScreen('home')
+            .withAuth();
         await test.prepare();
     });
     describe('home screen', () => {
-        functionalityTests.homeScreen(test);
-    });
-    //TODO: requires pump setup now
-    describe.skip('carb entry screen', () => {
-        functionalityTests.carbEntryScreen(test);
-    });
-    describe('settings screen', () => {
-        functionalityTests.settingsScreen(test);
-    });
-    describe('pump simulator screen', () => {
-        functionalityTests.pumpSimulatorScreen(test);
+        functionality.homeScreenTests(test);
     });
     describe('cgm simulator screen', () => {
-        functionalityTests.cgmSimulatorScreen(test);
+        functionality.cgmSimulatorScreenTests(test);
+    });
+    describe('settings screen', () => {
+        functionality.settingsScreenTests(test);
+    });
+    describe('pump simulator screen', () => {
+        functionality.pumpSimulatorScreenTests(test);
+    });
+    describe('configured pump', () => {
+        it('add pump', async () => {
+            await test.addConfiguredPump({
+                correctionRange: {
+                    expected: { min: 100, max: 120, }
+                },
+                deliveryLimits: {
+                    basal: { expected: { rate: 34.00 }, },
+                    bolus: { expected: { amount: 18.00 }, },
+                }
+            });
+        });
+        describe('carb entry screen', () => {
+            functionality.carbEntryScreenTests(test);
+        });
+        describe('bolus screen', () => {
+            functionality.bolusScreenTests(test);
+        });
     });
 });

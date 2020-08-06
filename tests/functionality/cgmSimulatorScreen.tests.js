@@ -1,4 +1,4 @@
-var cgmSimulatorScreen = (test) => {
+module.exports = (test) => {
     var screen;
     var settingsScreen;
     beforeAll(async () => {
@@ -85,8 +85,4 @@ var cgmSimulatorScreen = (test) => {
     it('return to start', async () => {
         await settingsScreen.Back();
     });
-};
-
-module.exports = {
-    cgmSimulatorScreen
 };

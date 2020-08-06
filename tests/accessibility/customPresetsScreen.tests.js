@@ -1,4 +1,4 @@
-var customPresetsScreen = (test) => {
+module.exports = (test) => {
     var screen;
     it('has to open the screen', async () => {
         screen = await test.OpenCustomPresetScreen();
@@ -18,8 +18,4 @@ var customPresetsScreen = (test) => {
     it('can cancel and then close the screen', async () => {
         await screen.CancelAndClose();
     });
-};
-
-module.exports = {
-    customPresetsScreen
 };

@@ -1,12 +1,6 @@
 const match = require('../match');
-// const { BasalRatesScreen } = require('./basalRatesScreen');
-// const { CarbRatioScreen } = require('./carbRatioScreen');
-// const { CorrectionRangeScreen } = require('./correctionRangeScreen');
-// const { DeliveryLimitsScreen } = require('./deliveryLimitsScreen');
-// const { InsulinSensitivitiesScreen } = require('./insulinSensitivitiesScreen');
-// const { SuspendThresholdScreen } = require('./suspendThresholdScreen');
-// const { IssueReportScreen } = require('./issueReportScreen');
-// const { InsulinModelScreen } = require('./insulinModelScreen');
+const CorrectionRangeScreen = require('./correctionRangeScreen');
+const DeliveryLimitsScreen = require('./deliveryLimitsScreen');
 
 const AlertScreen = require('./alertScreen');
 const SupportScreen = require('./supportScreen');
@@ -14,7 +8,7 @@ const TherapyScreen = require('./therapyScreen');
 const base = require('../base/index');
 
 class SettingsScreen extends base.Screen {
-    constructor(language, devices) {
+    constructor(language, devices, config) {
         super({
             screenText: language.settingsScreen,
             generalText: language.general,
@@ -34,6 +28,8 @@ class SettingsScreen extends base.Screen {
         this.alertScreen = new AlertScreen(language);
         this.therapyScreen = new TherapyScreen(language);
         this.supportScreen = new SupportScreen(language);
+        this.deliveryLimitsScreen = new DeliveryLimitsScreen(language, config.deliveryLimit);
+        this.correctionRangeScreen = new CorrectionRangeScreen(language, config.correctionRange);
     }
     Devices() {
         return this.devices;
@@ -54,8 +50,11 @@ class SettingsScreen extends base.Screen {
      * @summary hack while we have two settings pages
      */
     async BackToHome() {
-        await match.accessible.Button(this.generalText.Done).atIndex(2).tap();
+        await this._closeNewSettings();
         await match.accessible.ButtonBarButton(this.generalText.Done).tap();
+    }
+    async _closeNewSettings() {
+        await match.accessible.Button(this.generalText.Done).atIndex(2).tap();
     }
     _closedLoopButton() {
         return match.accessible.Button(this.screenText.ClosedLoop).atIndex(4);
@@ -101,6 +100,37 @@ class SettingsScreen extends base.Screen {
     async OpenAlerts() {
         await this.alertScreen.Open();
         return this.alertScreen;
+    }
+    async OpenDeliveryLimitsScreen() {
+        await this._closeNewSettings();
+        await this.deliveryLimitsScreen.Open();
+        return this.deliveryLimitsScreen;
+    }
+    async setDeliveryLimits(deliveryLimits) {
+        await this._closeNewSettings();
+        var limits = await this.deliveryLimitsScreen.Open();
+        await limits.OpenBasalRatePicker();
+        await limits.ApplyBasal(deliveryLimits.basal);
+        await limits.OpenBasalRatePicker();
+        await limits.OpenBolusPicker();
+        await limits.ApplyBolus(deliveryLimits.bolus);
+        await limits.SaveAndClose();
+        await match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0).tap();
+    }
+    /**
+     * @param {object} correctionRange
+     * @param {object} correctionRange.expected
+     * @param {number} correctionRange.expected.max
+     * @param {number} correctionRange.expected.min
+     */
+    async setCorrectionRange(correctionRange) {
+        await this._closeNewSettings();
+        var correction = await this.correctionRangeScreen.Open();
+        await correction.Plus();
+        await correction.ApplyOne(correctionRange);
+        await correction.Add();
+        await correction.SaveAndClose();
+        await match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0).tap();
     }
 }
 
