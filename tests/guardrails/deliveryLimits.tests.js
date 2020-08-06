@@ -1,4 +1,4 @@
-var deliveryLimits = (test) => {
+module.exports = (test) => {
     var screen;
     var settings;
     var screenLimit;
@@ -72,5 +72,3 @@ var deliveryLimits = (test) => {
         });
     });
 }
-
-module.exports = { deliveryLimits };

@@ -1,5 +1,4 @@
-
-var settingsSuspendThresholdScreen = (test) => {
+module.exports = (test) => {
     var screen;
     var settingsScreen;
     beforeAll(async () => {
@@ -26,7 +25,4 @@ var settingsSuspendThresholdScreen = (test) => {
     it('has a save button', async () => {
         await expect(screen.SaveButton()).toExist();
     });
-};
-module.exports = {
-    settingsSuspendThresholdScreen
 };

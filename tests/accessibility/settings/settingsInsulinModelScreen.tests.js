@@ -1,4 +1,4 @@
-var settingsInsulinModelScreen = (test) => {
+module.exports = (test) => {
     var screen;
     var settingsScreen;
     it('open', async () => {
@@ -15,8 +15,4 @@ var settingsInsulinModelScreen = (test) => {
         await screen.Close();
         await settingsScreen.Close();
     });
-};
-
-module.exports = {
-    settingsInsulinModelScreen
 };

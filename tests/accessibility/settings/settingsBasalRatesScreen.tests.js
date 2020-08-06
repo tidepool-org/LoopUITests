@@ -1,4 +1,4 @@
-var settingsBasalRatesScreen = (test) => {
+module.exports = (test) => {
     var settingsScreen;
     var screen;
     var settingsScreen;
@@ -33,9 +33,4 @@ var settingsBasalRatesScreen = (test) => {
     it('has a save button', async () => {
         await expect(screen.SaveButton()).toExist();
     });
-
-};
-
-module.exports = {
-    settingsBasalRatesScreen
 };

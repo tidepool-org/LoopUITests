@@ -1,4 +1,4 @@
-var homeActiveCarbohydratesScreen = (test) => {
+module.exports = (test) => {
     var screen;
     var homeScreen;
     beforeAll(async () => {
@@ -29,8 +29,4 @@ var homeActiveCarbohydratesScreen = (test) => {
     it('has a Back Button', async () => {
         await expect(screen.BackButton()).toBeVisible();
     });
-};
-
-module.exports = {
-    homeActiveCarbohydratesScreen
 };

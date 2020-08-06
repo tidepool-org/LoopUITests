@@ -1,4 +1,4 @@
-var settingsIssueReportScreen = (test) => {
+module.exports = (test) => {
     var screen;
     var settingsScreen;
     it('open', async () => {
@@ -15,8 +15,4 @@ var settingsIssueReportScreen = (test) => {
         await screen.Close();
         await settingsScreen.Close();
     });
-};
-
-module.exports = {
-    settingsIssueReportScreen
 };

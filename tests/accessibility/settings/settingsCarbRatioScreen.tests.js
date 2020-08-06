@@ -1,4 +1,4 @@
-var settingsCarbRatioScreen = (test) => {
+module.exports = (test) => {
     var screen;
     var settingsScreen;
     beforeAll(async () => {
@@ -31,8 +31,4 @@ var settingsCarbRatioScreen = (test) => {
     it('has a save button', async () => {
         await expect(screen.SaveButton()).toExist();
     });
-};
-
-module.exports = {
-    settingsCarbRatioScreen
 };

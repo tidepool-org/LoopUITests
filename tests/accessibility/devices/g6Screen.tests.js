@@ -1,4 +1,4 @@
-var g6ScreenTests = (test) => {
+module.exports = (test) => {
     var screen;
     var homeScreen;
     beforeAll(async () => {
@@ -23,8 +23,4 @@ var g6ScreenTests = (test) => {
     it('has a device image', async () => {
         await expect(screen.DeviceImage()).toBeVisible();
     });
-};
-
-module.exports = {
-    g6ScreenTests
 };

@@ -115,7 +115,7 @@ class SettingsScreen extends base.Screen {
         await limits.OpenBolusPicker();
         await limits.ApplyBolus(deliveryLimits.bolus);
         await limits.SaveAndClose();
-        await this.Open();
+        await match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0).tap();
     }
     /**
      * @param {object} correctionRange
@@ -130,7 +130,7 @@ class SettingsScreen extends base.Screen {
         await correction.ApplyOne(correctionRange);
         await correction.Add();
         await correction.SaveAndClose();
-        await this.Open();
+        await match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0).tap();
     }
 }
 

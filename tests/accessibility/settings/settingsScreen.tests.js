@@ -1,4 +1,4 @@
-var settingsScreen = (test) => {
+module.exports = (test) => {
     var settingsScreen;
     beforeAll(async () => {
         settingsScreen = await test.OpenSettingsScreen();
@@ -83,9 +83,4 @@ var settingsScreen = (test) => {
             await expect(settingsScreen.SupportHeader()).toExist();
         });
     });
-};
-
-
-module.exports = {
-    settingsScreen
 };

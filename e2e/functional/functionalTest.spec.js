@@ -13,7 +13,6 @@ describe('functional test', () => {
             .withStartScreen('home')
             .withAuth();
         await test.prepare();
-
     });
     describe('home screen', () => {
         functionality.homeScreenTests(test);

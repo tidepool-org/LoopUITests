@@ -185,23 +185,18 @@ class Test {
         this.settingsOpen = true;
         return this.homeScreen.OpenSettingsScreen();
     }
-
     async OpenCarbEntryScreen() {
         return this.homeScreen.OpenCarbEntryScreen();
     }
-
     async OpenBolusScreen() {
         return this.homeScreen.OpenBolusScreen();
     }
-
     async OpenBolusScreen() {
         return this.homeScreen.OpenBolusScreen();
     }
-
     async OpenCustomPresetScreen() {
         return this.homeScreen.OpenCustomPresetScreen();
     }
-
     async OpenHomeScreen() {
         return this.homeScreen;
     }

@@ -1,12 +1,9 @@
-var pumpSimulatorScreenTests = (test) => {
+module.exports = (test) => {
     var screen;
     beforeAll(async () => {
         var homeScreen = await test.OpenHomeScreen();
         await homeScreen.HeaderSection().Devices().AddPump();
         screen = await homeScreen.HeaderSection().Devices().OpenPumpScreen();
-    });
-    afterAll(async () => {
-        await screen.RemoveSimulator();
     });
     it('has a header', async () => {
         await expect(screen.Header()).toBeVisible();
@@ -63,8 +60,7 @@ var pumpSimulatorScreenTests = (test) => {
         await screen.ScrollToBottom();
         await expect(screen.DeletePumpLabel()).toBeVisible();
     });
-};
-
-module.exports = {
-    pumpSimulatorScreenTests
+    it('remove', async () => {
+        await screen.RemoveSimulator();
+    });
 };

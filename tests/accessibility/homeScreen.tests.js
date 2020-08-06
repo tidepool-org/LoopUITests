@@ -1,4 +1,4 @@
-var homeScreen = (test) => {
+module.exports = (test) => {
     var screen;
     it('has a Active Carbohydrates Label', async () => {
         screen = await test.OpenHomeScreen();
@@ -35,9 +35,4 @@ var homeScreen = (test) => {
             await expect(screen.HeaderSection().LoopIcon()).toBeVisible();
         });
     });
-};
-
-
-module.exports = {
-    homeScreen
 };

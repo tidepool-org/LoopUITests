@@ -1,4 +1,4 @@
-var insulinCarbRatio = (test) => {
+module.exports = (test) => {
     var screen;
     var screenLimit;
     beforeAll(async () => {
@@ -90,5 +90,3 @@ var insulinCarbRatio = (test) => {
         await screen.CancelAndClose();
     });
 };
-
-module.exports = { insulinCarbRatio };

@@ -1,4 +1,4 @@
-var settingsCorrectionRangeScreen = (test) => {
+module.exports = (test) => {
     var screen;
     var settingsScreen;
     beforeAll(async () => {
@@ -31,7 +31,4 @@ var settingsCorrectionRangeScreen = (test) => {
     it('has a save button', async () => {
         await expect(screen.SaveButton()).toExist();
     });
-};
-module.exports = {
-    settingsCorrectionRangeScreen
 };

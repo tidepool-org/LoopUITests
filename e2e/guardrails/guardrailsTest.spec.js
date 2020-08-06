@@ -1,5 +1,5 @@
 const { Test, Config } = require('../../src/index');
-const guardrailsTests = require('../../tests/guardrails/index');
+const guardrails = require('../../tests/guardrails/index');
 
 //TODO: the following require settings and pump setup once ready
 describe('guardrails test', () => {
@@ -15,21 +15,21 @@ describe('guardrails test', () => {
         await test.prepare();
     });
     describe.skip('insulin sensitivity schedule', () => {
-        guardrailsTests.insulinSensitivitySchedule(test);
+        guardrails.insulinSensitivityScheduleTest(test);
     });
     describe.skip('suspend threshold', () => {
-        guardrailsTests.suspendThreshold(test);
+        guardrails.suspendThresholdTest(test);
     });
     describe.skip('insulin carb ratio', () => {
-        guardrailsTests.insulinCarbRatio(test);
+        guardrails.insulinCarbRatioTest(test);
     });
     describe.skip('correction range schedule', () => {
-        guardrailsTests.correctionRangeSchedule(test);
+        guardrails.correctionRangeScheduleTest(test);
     });
     describe.skip('basal rate schedule', () => {
-        guardrailsTests.basalRateSchedule(test);
+        guardrails.basalRateScheduleTest(test);
     });
     describe('delivery limits', () => {
-        guardrailsTests.deliveryLimits(test);
+        guardrails.deliveryLimitsTest(test);
     });
 });

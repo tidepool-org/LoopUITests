@@ -1,4 +1,4 @@
-var carbEntryScreen = (test) => {
+module.exports = (test) => {
     var carbEntryScreen;
     it('has to open the Carb Entry screen', async () => {
         carbEntryScreen = await test.OpenCarbEntryScreen();
@@ -66,9 +66,4 @@ var carbEntryScreen = (test) => {
     it('has to close the Carb Entry screen', async () => {
         await carbEntryScreen.CancelAndClose();
     });
-};
-
-
-module.exports = {
-    carbEntryScreen
 };
