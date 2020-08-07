@@ -4,11 +4,11 @@
   "scripts": {
     "test": "jest",
     "test-all": "detox test -c ios.sim.debug",
-    "test-error": "detox test e2e/error -c ios.sim.debug",
+    "test-error": "detox test e2e/error_1 -c ios.sim.debug",
     "test-smoke1": "detox test e2e/smoke_1 -c ios.sim.debug",
     "test-smoke2": "detox test e2e/smoke_2 -c ios.sim.debug",
-    "test-functional": "detox test e2e/functional -c ios.sim.debug",
-    "test-guardrails": "detox test e2e/guardrails -c ios.sim.debug",
+    "test-functional": "detox test e2e/functional_1 -c ios.sim.debug",
+    "test-guardrails": "detox test e2e/guardrails_1 -c ios.sim.debug",
     "build": "detox build -c ios.sim.debug",
     "lint": "eslint ."
   },
