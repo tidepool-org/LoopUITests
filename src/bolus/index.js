@@ -23,13 +23,19 @@ class BolusScreen extends base.Screen {
     }
     async Deliver() {
         await this.DoneButton().tap();
-        await this.SaveAndDeliverButton().tap();
+        await this.DeliverButton().tap();
+    }
+    async EnterBolus() {
+        await this.EnterBolus().tap();
     }
     DoneButton() {
         return match.accessible.Button(this.generalText.Done).atIndex(0);
     }
-    SaveAndDeliverButton() {
-        return match.accessible.Button(this.screenText.SaveDeliver);
+    DeliverButton() {
+        return match.accessible.Button(this.screenText.Deliver);
+    }
+    EnterBolusButton() {
+        return match.accessible.Button(this.screenText.EnterBolus);
     }
     BolusLabel() {
         return match.accessible.TextLabel(this.screenText.Header);

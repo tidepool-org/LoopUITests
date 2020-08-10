@@ -103,7 +103,8 @@ var BolusScreen = {
     RecommendedBolus: 'Recommended Bolus',
     BolusSummary: 'Bolus Summary',
     ActiveCarbs: 'Active Carbs',
-    SaveDeliver: 'Save and Deliver',
+    Deliver: 'Deliver',
+    EnterBolus: 'Enter Bolus',
     Glucose: 'Glucose',
 };
 

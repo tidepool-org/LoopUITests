@@ -9,8 +9,8 @@ module.exports = (test) => {
     it('has a Cancel Header Button', async () => {
         await expect(bolusScreen.BackButton()).toBeVisible();
     });
-    it('has a Save and Deliver Button', async () => {
-        await expect(bolusScreen.SaveAndDeliverButton()).toBeVisible();
+    it('has a Enter Bolus Button', async () => {
+        await expect(bolusScreen.EnterBolusButton()).toBeVisible();
     });
     it('has a Recommended Bolus Label', async () => {
         await expect(bolusScreen.RecommendedBolusLabel()).toBeVisible();
