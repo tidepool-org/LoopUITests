@@ -23,6 +23,7 @@ class SettingsScreen extends base.Screen {
                 visibleBottomLabel: language.settingsScreen.Supportv2,
                 visibleTopLabel: language.settingsScreen.ClosedLoop,
             },
+            authenticate: true,
         });
         this.devices = devices;
         this.alertScreen = new AlertScreen(language);
@@ -106,8 +107,11 @@ class SettingsScreen extends base.Screen {
         await this.deliveryLimitsScreen.Open();
         return this.deliveryLimitsScreen;
     }
+    _newSettingsLabel() {
+        return match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0);
+    }
     async setDeliveryLimits(deliveryLimits) {
-        await this._closeNewSettings();
+        //await this._closeNewSettings();
         var limits = await this.deliveryLimitsScreen.Open();
         await limits.OpenBasalRatePicker();
         await limits.ApplyBasal(deliveryLimits.basal);
@@ -115,7 +119,8 @@ class SettingsScreen extends base.Screen {
         await limits.OpenBolusPicker();
         await limits.ApplyBolus(deliveryLimits.bolus);
         await limits.SaveAndClose();
-        await match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0).tap();
+        //await this.Authenticate();
+        //await this._newSettingsLabel().tap();
     }
     /**
      * @param {object} correctionRange
@@ -130,7 +135,8 @@ class SettingsScreen extends base.Screen {
         await correction.ApplyOne(correctionRange);
         await correction.Add();
         await correction.SaveAndClose();
-        await match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0).tap();
+        //await this.Authenticate();
+        //await this._newSettingsLabel().tap();
     }
 }
 

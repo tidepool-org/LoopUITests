@@ -105,15 +105,18 @@ class Test {
             }
         }
 
+        this.homeScreen = new HomeScreen(this.language, this.screenDefaults);
+
+        var loopAppPermissions = { notifications: 'YES', health: 'YES', };
+
         if (this.authenticate) {
             await device.setBiometricEnrollment(true);
+            loopAppPermissions.faceid = 'YES';
         }
-
-        this.homeScreen = new HomeScreen(this.language, this.screenDefaults);
 
         await device.launchApp({
             newInstance: true,
-            permissions: { notifications: 'YES', health: 'YES', faceid: 'YES' },
+            permissions: loopAppPermissions,
         });
 
         if (this.scenario) {
@@ -158,13 +161,6 @@ class Test {
         await match.UITextField().typeText(cycles);
         await match.accessible.Button(this.language.general.OK).tap();
     }
-    async authorize() {
-        if (this.authenticate) {
-            await device.matchFace();
-        } else {
-            await device.unmatchFace();
-        }
-    }
     /**
      * @param {object} pumpConfig
      * @param {object} pumpConfig.correctionRange
@@ -174,7 +170,9 @@ class Test {
         await this.homeScreen.HeaderSection().Devices().AddPump();
         var settings = await this.OpenSettingsScreen();
         await settings.setCorrectionRange(pumpConfig.correctionRange);
+        await settings.Authenticate();
         await settings.setDeliveryLimits(pumpConfig.deliveryLimits);
+        await settings.Authenticate();
         await settings.BackToHome();
     }
     async removePump() {

@@ -14,18 +14,18 @@ describe('functional test', () => {
             .withAuth();
         await test.prepare();
     });
-    describe('home screen', () => {
-        functionality.homeScreenTests(test);
-    });
-    describe('cgm simulator screen', () => {
-        functionality.cgmSimulatorScreenTests(test);
-    });
-    describe('settings screen', () => {
-        functionality.settingsScreenTests(test);
-    });
-    describe('pump simulator screen', () => {
-        functionality.pumpSimulatorScreenTests(test);
-    });
+    // describe('home screen', () => {
+    //     functionality.homeScreenTests(test);
+    // });
+    // describe('cgm simulator screen', () => {
+    //     functionality.cgmSimulatorScreenTests(test);
+    // });
+    // describe('settings screen', () => {
+    //     functionality.settingsScreenTests(test);
+    // });
+    // describe('pump simulator screen', () => {
+    //     functionality.pumpSimulatorScreenTests(test);
+    // });
     describe('configured pump', () => {
         it('add pump', async () => {
             await test.addConfiguredPump({
@@ -38,10 +38,10 @@ describe('functional test', () => {
                 }
             });
         });
-        describe('carb entry screen', () => {
+        describe.skip('carb entry screen', () => {
             functionality.carbEntryScreenTests(test);
         });
-        describe('bolus screen', () => {
+        describe.skip('bolus screen', () => {
             functionality.bolusScreenTests(test);
         });
     });

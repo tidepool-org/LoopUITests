@@ -18,6 +18,8 @@ class Screen {
      * @param {object} parentScreen.scroll optional
      * @param {string} parentScreen.scroll.visibleBottomLabel label that should be visible if your at the bottom of the screen
      * @param {string} parentScreen.scroll.visibleTopLabel label that should be visible if your at the top of the screen
+     *
+     * @param {boolean} parentScreen.authenticate optional, passed if we need to authenicate on the screen
      */
     constructor(parentScreen) {
         this.screenText = parentScreen.screenText;
@@ -41,6 +43,9 @@ class Screen {
             this.visibleBottomLabel = parentScreen.scroll.visibleBottomLabel;
             this.visibleTopLabel = parentScreen.scroll.visibleTopLabel;
         }
+        if (parentScreen.authenticate) {
+            this.canAuthenticate = parentScreen.authenticate;
+        }
     }
     Header() {
         return match.accessible.Header(this.screenText.Header);
@@ -61,25 +66,34 @@ class Screen {
     SaveButton() {
         return match.accessible.Button(this.generalText.Save);
     }
+    async Authenticate() {
+        if (this.canAuthenticate) {
+            await device.matchFace();
+        }
+    }
     async SaveAndClose() {
         if (this.isEditable) {
             await this.SaveButton().tap();
         }
+        return null;
     }
     async Plus() {
         if (this.isEditable) {
             await this.PlusButton().tap();
         }
+        return null;
     }
     async Add() {
         if (this.isEditable) {
             await this.AddButton().tap();
         }
+        return null;
     }
     async Edit() {
         if (this.isEditable) {
             await this.EditButton().tap();
         }
+        return null;
     }
     ContinueButton() {
         return match.accessible.ButtonBarButton(this.generalText.Continue);

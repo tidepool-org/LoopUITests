@@ -13,6 +13,7 @@ class BolusScreen extends base.Screen {
                 isBtn: true,
                 label: language.bolusScreen.Header,
             },
+            authenticate: true,
         });
     }
     /**
