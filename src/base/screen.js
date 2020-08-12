@@ -1,6 +1,10 @@
 const match = require('../match');
 const action = require('../action');
 
+async function _sleep(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+}
+
 class Screen {
     /**
      * @param {object} parentScreen
@@ -19,11 +23,11 @@ class Screen {
      * @param {string} parentScreen.scroll.visibleBottomLabel label that should be visible if your at the bottom of the screen
      * @param {string} parentScreen.scroll.visibleTopLabel label that should be visible if your at the top of the screen
      *
-     * @param {boolean} parentScreen.authenticate optional, passed if we need to authenicate on the screen
      */
     constructor(parentScreen) {
         this.screenText = parentScreen.screenText;
         this.generalText = parentScreen.generalText;
+        this.isEditable = false;
 
         if (parentScreen.open) {
             if (parentScreen.open.isBtn) {
@@ -32,7 +36,6 @@ class Screen {
                 this.openLabel = parentScreen.open.label;
             }
         }
-        this.isEditable = false;
         if (parentScreen.header) {
             if (parentScreen.header.editable) {
                 this.isEditable = parentScreen.header.editable;
@@ -43,15 +46,11 @@ class Screen {
             this.visibleBottomLabel = parentScreen.scroll.visibleBottomLabel;
             this.visibleTopLabel = parentScreen.scroll.visibleTopLabel;
         }
-        if (parentScreen.authenticate) {
-            this.canAuthenticate = parentScreen.authenticate;
-        }
     }
     Header() {
         return match.accessible.Header(this.screenText.Header);
     }
     BackButton() {
-        // Might be `Done`, `Cancel`, `Status` or the previous
         return match.accessible.BackButton(this.backLabel);
     }
     AddButton() {
@@ -67,33 +66,33 @@ class Screen {
         return match.accessible.Button(this.generalText.Save);
     }
     async Authenticate() {
-        if (this.canAuthenticate) {
-            await device.matchFace();
-        }
+        await device.matchFace();
+        //HACK: the match can take some time so we need to wait
+        await _sleep(5000);
     }
     async SaveAndClose() {
-        if (this.isEditable) {
-            await this.SaveButton().tap();
+        if (this.isEditable == false) {
+            return;
         }
-        return null;
+        await this.SaveButton().tap();
     }
     async Plus() {
-        if (this.isEditable) {
-            await this.PlusButton().tap();
+        if (this.isEditable == false) {
+            return;
         }
-        return null;
+        await this.PlusButton().tap();
     }
     async Add() {
-        if (this.isEditable) {
-            await this.AddButton().tap();
+        if (this.isEditable == false) {
+            return;
         }
-        return null;
+        await this.AddButton().tap();
     }
     async Edit() {
-        if (this.isEditable) {
-            await this.EditButton().tap();
+        if (this.isEditable == false) {
+            return;
         }
-        return null;
+        await this.EditButton().tap();
     }
     ContinueButton() {
         return match.accessible.ButtonBarButton(this.generalText.Continue);
@@ -113,10 +112,10 @@ class Screen {
         }
     }
     async Open() {
-        return this.OpenButton().tap();
+        await this.OpenButton().tap();
     }
     async CancelAndClose() {
-        return this.Back();
+        await this.Back();
     }
     async Back() {
         try {
@@ -126,7 +125,7 @@ class Screen {
         }
     }
     async Continue() {
-        return this.ContinueButton().tap();
+        await this.ContinueButton().tap();
     }
     async ScrollToBottom() {
         if (this.visibleBottomLabel == null) {

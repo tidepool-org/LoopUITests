@@ -14,35 +14,16 @@ describe('functional test', () => {
             .withAuth();
         await test.prepare();
     });
-    // describe('home screen', () => {
-    //     functionality.homeScreenTests(test);
-    // });
-    // describe('cgm simulator screen', () => {
-    //     functionality.cgmSimulatorScreenTests(test);
-    // });
-    // describe('settings screen', () => {
-    //     functionality.settingsScreenTests(test);
-    // });
-    // describe('pump simulator screen', () => {
-    //     functionality.pumpSimulatorScreenTests(test);
-    // });
-    describe('configured pump', () => {
-        it('add pump', async () => {
-            await test.addConfiguredPump({
-                correctionRange: {
-                    expected: { min: 100, max: 120, }
-                },
-                deliveryLimits: {
-                    basal: { expected: { rate: 34.00 }, },
-                    bolus: { expected: { amount: 18.00 }, },
-                }
-            });
-        });
-        describe.skip('carb entry screen', () => {
-            functionality.carbEntryScreenTests(test);
-        });
-        describe.skip('bolus screen', () => {
-            functionality.bolusScreenTests(test);
-        });
+    describe('home screen', () => {
+        functionality.homeScreenTests(test);
+    });
+    describe('cgm simulator screen', () => {
+        functionality.cgmSimulatorScreenTests(test);
+    });
+    describe('settings screen', () => {
+        functionality.settingsScreenTests(test);
+    });
+    describe('pump simulator screen', () => {
+        functionality.pumpSimulatorScreenTests(test);
     });
 });

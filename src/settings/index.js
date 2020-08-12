@@ -23,7 +23,6 @@ class SettingsScreen extends base.Screen {
                 visibleBottomLabel: language.settingsScreen.Supportv2,
                 visibleTopLabel: language.settingsScreen.ClosedLoop,
             },
-            authenticate: true,
         });
         this.devices = devices;
         this.alertScreen = new AlertScreen(language);
@@ -103,24 +102,26 @@ class SettingsScreen extends base.Screen {
         return this.alertScreen;
     }
     async OpenDeliveryLimitsScreen() {
+        //await this._closeNewSettings();
+        return this.deliveryLimitsScreen.Open();
+    }
+    async OpenCorrectionRangeScreen() {
         await this._closeNewSettings();
-        await this.deliveryLimitsScreen.Open();
-        return this.deliveryLimitsScreen;
+        return this.correctionRangeScreen.Open();
     }
     _newSettingsLabel() {
         return match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0);
     }
     async setDeliveryLimits(deliveryLimits) {
-        //await this._closeNewSettings();
-        var limits = await this.deliveryLimitsScreen.Open();
+        var limits = await this.OpenDeliveryLimitsScreen();
         await limits.OpenBasalRatePicker();
         await limits.ApplyBasal(deliveryLimits.basal);
         await limits.OpenBasalRatePicker();
         await limits.OpenBolusPicker();
         await limits.ApplyBolus(deliveryLimits.bolus);
+        await limits.OpenBolusPicker();
         await limits.SaveAndClose();
-        //await this.Authenticate();
-        //await this._newSettingsLabel().tap();
+        await limits.Authenticate();
     }
     /**
      * @param {object} correctionRange
@@ -129,14 +130,12 @@ class SettingsScreen extends base.Screen {
      * @param {number} correctionRange.expected.min
      */
     async setCorrectionRange(correctionRange) {
-        await this._closeNewSettings();
-        var correction = await this.correctionRangeScreen.Open();
+        var correction = await this.OpenCorrectionRangeScreen();
         await correction.Plus();
         await correction.ApplyOne(correctionRange);
         await correction.Add();
         await correction.SaveAndClose();
-        //await this.Authenticate();
-        //await this._newSettingsLabel().tap();
+        await correction.Authenticate();
     }
 }
 

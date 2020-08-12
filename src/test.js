@@ -110,7 +110,6 @@ class Test {
         var loopAppPermissions = { notifications: 'YES', health: 'YES', };
 
         if (this.authenticate) {
-            await device.setBiometricEnrollment(true);
             loopAppPermissions.faceid = 'YES';
         }
 
@@ -119,6 +118,8 @@ class Test {
             permissions: loopAppPermissions,
         });
 
+        await device.setBiometricEnrollment(this.authenticate);
+
         if (this.scenario) {
             await _loadDeviceScenariosFromDisk(device.deviceId);
             await _loadScenario(this.scenario);
@@ -126,7 +127,6 @@ class Test {
                 this.settingsToApply = this._filterSettings(this.settingsToApply, [settingType.CGMSimulatorSettings, settingType.AddCGMSimulator, settingType.AddPumpSimulator]);
             }
         }
-
         if (this.settingsToApply) {
             this.settingsScreen = await this.OpenSettingsScreen();
             if (this.filter) {
@@ -145,14 +145,6 @@ class Test {
             await this._setStartScreen(this.startScreen);
         }
     }
-
-    async removeData() {
-        var screen = await this.OpenSettingsScreen();
-        await screen.RemoveCGMData();
-        await screen.RemovePumpData();
-        await screen.Close();
-    }
-
     async advanceScenario(cycles) {
         await device.shake();
         await expect(match.accessible.TextLabel(this.scenario)).toExist();
@@ -170,14 +162,8 @@ class Test {
         await this.homeScreen.HeaderSection().Devices().AddPump();
         var settings = await this.OpenSettingsScreen();
         await settings.setCorrectionRange(pumpConfig.correctionRange);
-        await settings.Authenticate();
         await settings.setDeliveryLimits(pumpConfig.deliveryLimits);
-        await settings.Authenticate();
-        await settings.BackToHome();
-    }
-    async removePump() {
-        let pump = await this.homeScreen.HeaderSection().Devices().OpenPumpScreen();
-        await pump.RemoveSimulator();
+        await match.accessible.ButtonBarButton(this.language.general.Done).tap();
     }
     async OpenSettingsScreen() {
         this.settingsOpen = true;
