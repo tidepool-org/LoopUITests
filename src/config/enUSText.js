@@ -116,15 +116,9 @@ var CustomPresetScreen = {
 };
 
 var SettingsScreen = {
-    Settings: 'Settings',
-    NewSettings: 'New Settings (under development)',
-    Configuration_old: 'CONFIGURATION',
-    Services_old: 'SERVICES',
-    Support_old: 'SUPPORT',
+    Settings: 'New Settings (under development)',
     Configuration: 'Configuration',
     Support: 'Support',
-    ContinuousGlucoseMonitor_old: 'CONTINUOUS GLUCOSE MONITOR',
-    Pump: 'PUMP',
     AddService: 'Add Service',
     Simulator: 'Simulator',
     SaveToSimulator: 'Save to simulator',

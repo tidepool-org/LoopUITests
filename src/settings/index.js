@@ -14,7 +14,7 @@ class SettingsScreen extends base.Screen {
             generalText: language.general,
             open: {
                 isBtn: true,
-                label: language.settingsScreen.NewSettings,
+                label: language.settingsScreen.Settings,
             },
             header: {
                 backLabel: language.general.Close,
@@ -44,7 +44,7 @@ class SettingsScreen extends base.Screen {
      * @override
      */
     OpenButton() {
-        return match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(2);
+        return match.accessible.ClickableLabel(this.screenText.Settings).atIndex(2);
     }
     /**
      * @summary hack while we have two settings pages
@@ -81,13 +81,13 @@ class SettingsScreen extends base.Screen {
         return this.therapyScreen;
     }
     SupportHeader() {
-        return match.accessible.Header('Support');
+        return match.accessible.Header(this.screenText.Support);
     }
     SupportLabel() {
         return this.supportScreen.OpenButton();
     }
     ConfigurationHeader() {
-        return match.accessible.Header('Configuration');
+        return match.accessible.Header(this.screenText.Configuration);
     }
     async OpenSupport() {
         await this.ScrollToBottom();
@@ -102,7 +102,6 @@ class SettingsScreen extends base.Screen {
         return this.alertScreen;
     }
     async OpenDeliveryLimitsScreen() {
-        //await this._closeNewSettings();
         return this.deliveryLimitsScreen.Open();
     }
     async OpenCorrectionRangeScreen() {
@@ -110,7 +109,7 @@ class SettingsScreen extends base.Screen {
         return this.correctionRangeScreen.Open();
     }
     _newSettingsLabel() {
-        return match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0);
+        return match.accessible.ClickableLabel(this.screenText.Settings).atIndex(0);
     }
     async setDeliveryLimits(deliveryLimits) {
         var limits = await this.OpenDeliveryLimitsScreen();
