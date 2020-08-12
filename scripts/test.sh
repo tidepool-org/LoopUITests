@@ -41,25 +41,24 @@ if [ ${#} -ne 0 ]; then
   error "Unexpected arguments: ${*}"
 fi
 
-if [[ "${TEST_TYPE}" != *"functional_"* -a "${TEST_TYPE}" != *"smoke_"* -a  "${TEST_TYPE}" != *"guardrails_"* ]]; then
-  error "Unexpected test type: ${TEST_TYPE}"
+if [ "${TEST_TYPE}" =~ "functional_" -a "${TEST_TYPE}" =~ *"smoke_"* -a  "${TEST_TYPE}" =~ *"guardrails_"* ]; then
+
+  cd "${TEST_DIRECTORY}"
+
+  info "Checking node version..."
+  node --version
+
+  if [ ! -d "node_modules" ]; then
+    info "Installing node dependencies..."
+    npm install
+  fi
+
+  info "Updating PATH..."
+  export PATH="${PWD}/bin:${PWD}/node_modules/.bin:${PATH}"
+
+  info "Creating build symlink to '${BUILD_ROOT}'..."
+  ln -sf "${BUILD_ROOT}" build
+
+  info "Running detox '${TEST_TYPE}' tests with configuration '${CONFIGURATION}'..."
+  detox test e2e/${TEST_TYPE} --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
 fi
-
-cd "${TEST_DIRECTORY}"
-
-info "Checking node version..."
-node --version
-
-if [ ! -d "node_modules" ]; then
-  info "Installing node dependencies..."
-  npm install
-fi
-
-info "Updating PATH..."
-export PATH="${PWD}/bin:${PWD}/node_modules/.bin:${PATH}"
-
-info "Creating build symlink to '${BUILD_ROOT}'..."
-ln -sf "${BUILD_ROOT}" build
-
-info "Running detox '${TEST_TYPE}' tests with configuration '${CONFIGURATION}'..."
-detox test e2e/${TEST_TYPE} --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
