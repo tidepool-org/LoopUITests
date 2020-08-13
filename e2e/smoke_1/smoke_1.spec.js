@@ -34,8 +34,5 @@ describe('accessibility', () => {
         describe('bolus', () => {
             accessibility.bolusScreenTest(test);
         });
-        describe('custom presets', () => {
-            accessibility.customPresetsScreenTest(test);
-        });
     });
 });

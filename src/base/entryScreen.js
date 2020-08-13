@@ -2,13 +2,6 @@ const match = require('../match');
 const Screen = require('./screen');
 
 class EntryScreen extends Screen {
-    /**
-     * @param {object} parentScreen
-     * @param {string} parentScreen.openLabel
-     * @param {string} parentScreen.backLabel
-     * @param {object} parentScreen.screenText
-     * @param {object} parentScreen.generalText
-     */
     constructor(parentScreen) {
         parentScreen.header.editable = true;
         super(parentScreen);

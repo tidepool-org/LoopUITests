@@ -105,16 +105,20 @@ class Test {
             }
         }
 
-        if (this.authenticate) {
-            await device.setBiometricEnrollment(true);
-        }
-
         this.homeScreen = new HomeScreen(this.language, this.screenDefaults);
+
+        var loopAppPermissions = { notifications: 'YES', health: 'YES' };
+
+        if (this.authenticate) {
+            loopAppPermissions.faceid = 'YES';
+        }
 
         await device.launchApp({
             newInstance: true,
-            permissions: { notifications: 'YES', health: 'YES', faceid: 'YES' },
+            permissions: loopAppPermissions,
         });
+
+        await device.setBiometricEnrollment(this.authenticate);
 
         if (this.scenario) {
             await _loadDeviceScenariosFromDisk(device.deviceId);
@@ -123,7 +127,6 @@ class Test {
                 this.settingsToApply = this._filterSettings(this.settingsToApply, [settingType.CGMSimulatorSettings, settingType.AddCGMSimulator, settingType.AddPumpSimulator]);
             }
         }
-
         if (this.settingsToApply) {
             this.settingsScreen = await this.OpenSettingsScreen();
             if (this.filter) {
@@ -142,14 +145,6 @@ class Test {
             await this._setStartScreen(this.startScreen);
         }
     }
-
-    async removeData() {
-        var screen = await this.OpenSettingsScreen();
-        await screen.RemoveCGMData();
-        await screen.RemovePumpData();
-        await screen.Close();
-    }
-
     async advanceScenario(cycles) {
         await device.shake();
         await expect(match.accessible.TextLabel(this.scenario)).toExist();
@@ -157,13 +152,6 @@ class Test {
         await match.accessible.SwipeButton('Advance ⏭').tap();
         await match.UITextField().typeText(cycles);
         await match.accessible.Button(this.language.general.OK).tap();
-    }
-    async authorize() {
-        if (this.authenticate) {
-            await device.matchFace();
-        } else {
-            await device.unmatchFace();
-        }
     }
     /**
      * @param {object} pumpConfig
@@ -175,11 +163,7 @@ class Test {
         var settings = await this.OpenSettingsScreen();
         await settings.setCorrectionRange(pumpConfig.correctionRange);
         await settings.setDeliveryLimits(pumpConfig.deliveryLimits);
-        await settings.BackToHome();
-    }
-    async removePump() {
-        let pump = await this.homeScreen.HeaderSection().Devices().OpenPumpScreen();
-        await pump.RemoveSimulator();
+        await match.accessible.ButtonBarButton(this.language.general.Done).tap();
     }
     async OpenSettingsScreen() {
         this.settingsOpen = true;

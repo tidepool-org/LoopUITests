@@ -41,8 +41,8 @@ if [ ${#} -ne 0 ]; then
   error "Unexpected arguments: ${*}"
 fi
 
-if [ "${TEST_TYPE}" != "functional" -a "${TEST_TYPE}" != "smoke" -a  "${TEST_TYPE}" != "guardrails" ]; then
-  error "Unexpected test type: ${TEST_TYPE}"
+if [[ ! ${TEST_TYPE} =~ "functional_" ]] && [[ ! ${TEST_TYPE} =~ "smoke_" ]] && [[ ! ${TEST_TYPE} =~ "guardrails_" ]]; then
+  error "Unexpected <type>: ${TEST_TYPE}"
 fi
 
 cd "${TEST_DIRECTORY}"
@@ -63,3 +63,4 @@ ln -sf "${BUILD_ROOT}" build
 
 info "Running detox '${TEST_TYPE}' tests with configuration '${CONFIGURATION}'..."
 detox test e2e/${TEST_TYPE} --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
+
