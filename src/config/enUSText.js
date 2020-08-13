@@ -103,7 +103,8 @@ var BolusScreen = {
     RecommendedBolus: 'Recommended Bolus',
     BolusSummary: 'Bolus Summary',
     ActiveCarbs: 'Active Carbs',
-    SaveDeliver: 'Save and Deliver',
+    Deliver: 'Deliver',
+    EnterBolus: 'Enter Bolus',
     Glucose: 'Glucose',
 };
 
@@ -115,15 +116,10 @@ var CustomPresetScreen = {
 };
 
 var SettingsScreen = {
-    Settings: 'Settings',
-    NewSettings: 'New Settings (under development)',
-    Configuration_old: 'CONFIGURATION',
-    Services_old: 'SERVICES',
-    Support_old: 'SUPPORT',
+    Settings_current: 'Settings',
+    Settings: 'New Settings (under development)',
     Configuration: 'Configuration',
     Support: 'Support',
-    ContinuousGlucoseMonitor_old: 'CONTINUOUS GLUCOSE MONITOR',
-    Pump: 'PUMP',
     AddService: 'Add Service',
     Simulator: 'Simulator',
     SaveToSimulator: 'Save to simulator',

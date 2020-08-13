@@ -26,23 +26,4 @@ describe('functional test', () => {
     describe('pump simulator screen', () => {
         functionality.pumpSimulatorScreenTests(test);
     });
-    describe('configured pump', () => {
-        it('add pump', async () => {
-            await test.addConfiguredPump({
-                correctionRange: {
-                    expected: { min: 100, max: 120, }
-                },
-                deliveryLimits: {
-                    basal: { expected: { rate: 34.00 }, },
-                    bolus: { expected: { amount: 18.00 }, },
-                }
-            });
-        });
-        describe('carb entry screen', () => {
-            functionality.carbEntryScreenTests(test);
-        });
-        describe('bolus screen', () => {
-            functionality.bolusScreenTests(test);
-        });
-    });
 });

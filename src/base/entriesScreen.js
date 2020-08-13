@@ -3,14 +3,6 @@ const Screen = require('./screen');
 
 
 class EntriesScreen extends Screen {
-    /**
-    * @param {object} parentScreen
-    * @param {string} parentScreen.openLabel
-    * @param {string} parentScreen.backLabel
-    * @param {object} parentScreen.screenText
-    * @param {object} parentScreen.generalText
-    * @param {object} config
-    */
     constructor(parentScreen, config) {
         parentScreen.header.editable = true;
         super(parentScreen);

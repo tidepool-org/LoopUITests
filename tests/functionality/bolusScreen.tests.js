@@ -6,6 +6,6 @@ module.exports = (test) => {
     it('bolus', async () => {
         await screen.SetBolusAmount(0.5);
         await screen.Deliver();
-        await test.authorize();
+        await screen.Authenticate();
     });
 };

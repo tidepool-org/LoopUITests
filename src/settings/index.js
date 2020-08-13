@@ -14,7 +14,7 @@ class SettingsScreen extends base.Screen {
             generalText: language.general,
             open: {
                 isBtn: true,
-                label: language.settingsScreen.NewSettings,
+                label: language.settingsScreen.Settings,
             },
             header: {
                 backLabel: language.general.Close,
@@ -44,7 +44,7 @@ class SettingsScreen extends base.Screen {
      * @override
      */
     OpenButton() {
-        return match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(2);
+        return match.accessible.ClickableLabel(this.screenText.Settings).atIndex(2);
     }
     /**
      * @summary hack while we have two settings pages
@@ -81,13 +81,13 @@ class SettingsScreen extends base.Screen {
         return this.therapyScreen;
     }
     SupportHeader() {
-        return match.accessible.Header('Support');
+        return match.accessible.Header(this.screenText.Support);
     }
     SupportLabel() {
         return this.supportScreen.OpenButton();
     }
     ConfigurationHeader() {
-        return match.accessible.Header('Configuration');
+        return match.accessible.Header(this.screenText.Configuration);
     }
     async OpenSupport() {
         await this.ScrollToBottom();
@@ -102,20 +102,25 @@ class SettingsScreen extends base.Screen {
         return this.alertScreen;
     }
     async OpenDeliveryLimitsScreen() {
+        return this.deliveryLimitsScreen.Open();
+    }
+    async OpenCorrectionRangeScreen() {
         await this._closeNewSettings();
-        await this.deliveryLimitsScreen.Open();
-        return this.deliveryLimitsScreen;
+        return this.correctionRangeScreen.Open();
+    }
+    _newSettingsLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Settings).atIndex(0);
     }
     async setDeliveryLimits(deliveryLimits) {
-        await this._closeNewSettings();
-        var limits = await this.deliveryLimitsScreen.Open();
+        var limits = await this.OpenDeliveryLimitsScreen();
         await limits.OpenBasalRatePicker();
         await limits.ApplyBasal(deliveryLimits.basal);
         await limits.OpenBasalRatePicker();
         await limits.OpenBolusPicker();
         await limits.ApplyBolus(deliveryLimits.bolus);
+        await limits.OpenBolusPicker();
         await limits.SaveAndClose();
-        await match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0).tap();
+        await limits.Authenticate();
     }
     /**
      * @param {object} correctionRange
@@ -124,13 +129,12 @@ class SettingsScreen extends base.Screen {
      * @param {number} correctionRange.expected.min
      */
     async setCorrectionRange(correctionRange) {
-        await this._closeNewSettings();
-        var correction = await this.correctionRangeScreen.Open();
+        var correction = await this.OpenCorrectionRangeScreen();
         await correction.Plus();
         await correction.ApplyOne(correctionRange);
         await correction.Add();
         await correction.SaveAndClose();
-        await match.accessible.ClickableLabel(this.screenText.NewSettings).atIndex(0).tap();
+        await correction.Authenticate();
     }
 }
 
