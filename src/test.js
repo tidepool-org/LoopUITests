@@ -107,7 +107,7 @@ class Test {
 
         this.homeScreen = new HomeScreen(this.language, this.screenDefaults);
 
-        var loopAppPermissions = { notifications: 'YES', health: 'YES', };
+        var loopAppPermissions = { notifications: 'YES', health: 'YES' };
 
         if (this.authenticate) {
             loopAppPermissions.faceid = 'YES';

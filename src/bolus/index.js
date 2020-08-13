@@ -26,7 +26,7 @@ class BolusScreen extends base.Screen {
         await this.DeliverButton().tap();
     }
     async EnterBolus() {
-        await this.EnterBolus().tap();
+        await this.EnterBolusButton().tap();
     }
     DoneButton() {
         return match.accessible.Button(this.generalText.Done).atIndex(0);
