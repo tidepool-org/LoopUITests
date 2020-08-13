@@ -41,7 +41,7 @@ class HomeScreen {
         return this.glucoseScreen.OpenButton();
     }
     SettingsButton() {
-        return match.accessible.Button(this.language.settingsScreen.Settings);
+        return match.accessible.Button(this.language.settingsScreen.Settings_current);
     }
     CustomPresetButton() {
         return this.customPresetScreen.OpenButton();
