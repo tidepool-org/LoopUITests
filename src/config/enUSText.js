@@ -116,6 +116,7 @@ var CustomPresetScreen = {
 };
 
 var SettingsScreen = {
+    Settings_current: 'Settings',
     Settings: 'New Settings (under development)',
     Configuration: 'Configuration',
     Support: 'Support',
