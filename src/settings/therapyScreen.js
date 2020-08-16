@@ -7,6 +7,7 @@ const BasalRatesScreen = require('./basalRatesScreen');
 const InsulinModelScreen = require('./insulinModelScreen');
 const SuspendThresholdScreen = require('./suspendThresholdScreen');
 const CarbRatioScreen = require('./carbRatioScreen');
+const InsulinSensitivitiesScreen = require('./insulinSensitivitiesScreen');
 
 module.exports = class TherapyScreen extends base.Screen {
     constructor(language, config) {

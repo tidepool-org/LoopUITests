@@ -163,7 +163,7 @@ class PumpSimulatorScreen extends base.Screen {
         }
     }
     async _backToPumpSimulator() {
-        await match.accessible.BackButton(this.screenText.PumpSettings).tap();
+        await match.accessible.ButtonBarButton(this.screenText.PumpSettings).tap();
     }
     async _setValue(val) {
         var valField = element(by.type('UITextField'));
