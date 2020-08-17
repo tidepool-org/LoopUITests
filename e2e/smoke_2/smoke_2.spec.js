@@ -1,5 +1,6 @@
 const { Test, Config } = require('../../src/index');
-const accessibility = require('../../tests/accessibility/index');
+const settingsAccessibility = require('../../tests/accessibility/settings/index');
+const deviceAccessibility = require('../../tests/accessibility/devices/index');
 
 describe('accessibility', () => {
     var test = new Test();
@@ -14,37 +15,37 @@ describe('accessibility', () => {
     });
     describe('devices', () => {
         describe('g6 screen', () => {
-            accessibility.g6ScreenTest(test);
+            deviceAccessibility.g6ScreenTest(test);
         });
         describe('pump screen', () => {
-            accessibility.pumpSimulatorScreenTest(test);
+            deviceAccessibility.pumpSimulatorScreenTest(test);
         });
         describe('cgm screen', () => {
-            accessibility.cgmSimulatorScreenTest(test);
+            deviceAccessibility.cgmSimulatorScreenTest(test);
         });
     });
     describe('settings', () => {
         describe('overview screen', () => {
-            accessibility.threapySettingsTest(test);
+            settingsAccessibility.threapyScreenTest(test);
         });
         //TODO: the following require settings and pump setup once ready
         describe.skip('delivery limits', () => {
-            accessibility.settingsDeliveryLimitsScreenTest(test);
+            settingsAccessibility.deliveryLimitsScreenTest(test);
         });
         describe.skip('insulin sensitivities', () => {
-            accessibility.settingsInsulinSensitivitiesScreenTest(test);
+            settingsAccessibility.insulinSensitivitiesScreenTest(test);
         });
         describe.skip('correction range', () => {
-            accessibility.settingsCorrectionRangeScreenTest(test);
+            settingsAccessibility.correctionRangeScreenTest(test);
         });
         describe.skip('suspend threshold', () => {
-            accessibility.settingsSuspendThresholdScreenTest(test);
+            settingsAccessibility.suspendThresholdScreenTest(test);
         });
         describe.skip('basal rates', () => {
-            accessibility.settingsBasalRatesScreenTest(test);
+            settingsAccessibility.basalRatesScreenTest(test);
         });
         describe.skip('carb ratios', () => {
-            accessibility.settingsCarbRatioScreenTest(test);
+            settingsAccessibility.carbRatioScreenTest(test);
         });
     });
 });

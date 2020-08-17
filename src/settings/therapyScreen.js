@@ -8,6 +8,9 @@ const InsulinModelScreen = require('./insulinModelScreen');
 const SuspendThresholdScreen = require('./suspendThresholdScreen');
 const CarbRatioScreen = require('./carbRatioScreen');
 const InsulinSensitivitiesScreen = require('./insulinSensitivitiesScreen');
+const PremealRangeScreen = require('./premealRangeScreen');
+const WorkoutRangeScreen = require('./workoutRangeScreen');
+
 
 module.exports = class TherapyScreen extends base.Screen {
     constructor(language, config) {
@@ -29,6 +32,8 @@ module.exports = class TherapyScreen extends base.Screen {
         this.insulinSensitivitiesScreen = new InsulinSensitivitiesScreen(language, config.insulinSensitivity);
         this.suspendThresholdScreen = new SuspendThresholdScreen(language, config.suspendThreshold);
         this.carbRatioScreen = new CarbRatioScreen(language, config.carbRatio);
+        this.workoutRangeScreen = new WorkoutRangeScreen(language);
+        this.premealRangeScreen = new PremealRangeScreen(language);
 
     }
     SuspendThresholdLabel() {
@@ -45,33 +50,56 @@ module.exports = class TherapyScreen extends base.Screen {
     CorrectionRangeLabel() {
         return this.correctionRangeScreen.OpenButton();
     }
+    CorrectionRangeInfo() {
+        return match.accessible.TextLabel(this.screenText.CorrectionRangeInfo);
+    }
     async OpenCorrectionRangeScreen() {
         await this.CorrectionRangeLabel().tap();
         return this.CorrectionRangeScreen;
     }
-    CorrectionRangeInfo() {
-        return match.accessible.TextLabel(this.screenText.CorrectionRangeInfo);
+
+    PreMealRangeLabel() {
+        return this.correctionRangeScreen.OpenButton();
     }
+    PreMealRangeInfo() {
+        return match.accessible.TextLabel(this.screenText.PreMealRangeInfo);
+    }
+    async OpenPreMealRangeScreen() {
+        await this.CorrectionRangeLabel().tap();
+        return this.CorrectionRangeScreen;
+    }
+
+    WorkoutRangeLabel() {
+        return this.correctionRangeScreen.OpenButton();
+    }
+    WorkoutRangeInfo() {
+        return match.accessible.TextLabel(this.screenText.WorkoutRangeInfo);
+    }
+    async OpenWorkoutRangeScreen() {
+        await this.CorrectionRangeLabel().tap();
+        return this.CorrectionRangeScreen;
+    }
+
     BasalRateLabel() {
         return this.basalRatesScreen.OpenButton();
+    }
+    BasalRateInfo() {
+        return match.accessible.TextLabel(this.screenText.BasalRateInfo);
     }
     async OpenBasalRateScreen() {
         await this.BasalRateLabel().tap();
         return this.basalRatesScreen;
     }
-    BasalRateInfo() {
-        return match.accessible.TextLabel(this.screenText.BasalRateInfo);
-    }
 
     DeliveryLimitsLabel() {
         return this.deliveryLimitsScreen.OpenButton();
     }
+    DeliveryLimitsInfo() {
+        return match.accessible.TextLabel(this.screenText.DeliveryLimitsInfo);
+    }
     async OpenDeliveryLimitsScreen() {
         await this.DeliveryLimitsLabel().tap();
         return this.deliveryLimitsScreen;
-    }
-    DeliveryLimitsInfo() {
-        return match.accessible.TextLabel(this.screenText.DeliveryLimitsInfo);
     }
 
     InsulinModelLabel() {
