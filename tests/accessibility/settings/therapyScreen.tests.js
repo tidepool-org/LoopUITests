@@ -46,6 +46,12 @@ module.exports = (test) => {
     it('has delivery limits info', async () => {
         await expect(screen.DeliveryLimitsInfo()).toBeVisible();
     });
+    it('has delivery limits max basal rate', async () => {
+        await expect(screen.DeliveryLimitsMaxBasalRateLabel()).toBeVisible();
+    });
+    it('has delivery limits max bolus', async () => {
+        await expect(screen.DeliveryLimitsMaxBolusLabel()).toBeVisible();
+    });
     it('has insulin model label', async () => {
         await expect(screen.InsulinModelLabel()).toBeVisible();
     });
@@ -64,8 +70,8 @@ module.exports = (test) => {
     it('has insulin sensitivities info', async () => {
         await expect(screen.InsulinSensitivitiesInfo()).toBeVisible();
     });
-    // it('close', async () => {
-    //     await screen.Back();
-    //     await settingsScreen.BackToHome();
-    // });
+    it('close', async () => {
+        await screen.Back();
+        await settingsScreen.BackToHome();
+    });
 };

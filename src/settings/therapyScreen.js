@@ -98,6 +98,12 @@ module.exports = class TherapyScreen extends base.Screen {
     DeliveryLimitsLabel() {
         return this.deliveryLimitsScreen.OpenButton();
     }
+    DeliveryLimitsMaxBasalRateLabel() {
+        return match.accessible.TextLabel(this.screenText.DeliveryLimitsScreen.MaxBasalRate);
+    }
+    DeliveryLimitsMaxBolusLabel() {
+        return match.accessible.TextLabel(this.screenText.DeliveryLimitsScreen.MaxBolus);
+    }
     DeliveryLimitsInfo() {
         return match.accessible.TextLabel(this.screenText.DeliveryLimitsScreen.Info).atIndex(0);
     }
