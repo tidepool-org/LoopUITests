@@ -13,7 +13,7 @@ describe('accessibility', () => {
             .withStartScreen('home');
         await test.prepare();
     });
-    describe.skip('devices', () => {
+    describe('devices', () => {
         describe('g6 screen', () => {
             deviceAccessibility.g6ScreenTest(test);
         });
@@ -24,7 +24,7 @@ describe('accessibility', () => {
             deviceAccessibility.cgmSimulatorScreenTest(test);
         });
     });
-    describe('settings', () => {
+    describe.skip('settings', () => {
         describe('overview screen', () => {
             settingsAccessibility.settingsScreenTest(test);
         });

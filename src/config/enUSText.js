@@ -9,10 +9,6 @@ var General = {
     Edit: 'Edit',
     Status: 'Status',
     OK: 'OK',
-    AddPump: 'Add Pump',
-    AddCGM: 'Add CGM',
-    Simulator: 'Simulator',
-    SimulatorPump: 'Simulator Small',
     ButtonLabel: {
         Plus: 'plus',
         InfoCircle: 'info.circle',
@@ -27,7 +23,21 @@ var General = {
     TimeSlot: [
         '12:00 AM', '12:30 AM', '1:00 AM', '1:30 AM', '2:00 AM', '2:30 AM', '3:00 AM', '3:30 AM', '4:00 AM', '4:30 AM', '5:00 AM', '5:30 AM', '6:00 AM', '6:30 AM', '7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
         '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM'
-    ]
+    ],
+};
+
+var Device = {
+    G6: 'Dexcom G6',
+    AddCGM: 'Add CGM',
+    AddCGMFull: 'Add CGM\nTap here to set up a CGM',
+    AddPump: 'Add Pump',
+    AddPumpFull: 'Add Pump\nTap here to set up a pump',
+    PumpStatus: 'Pump Status',
+    CGMStatus: 'CGM Status',
+    PumpSimulator: 'Insulin Pump Simulator',
+    PumpSimulatorId: 'Simulator Small',
+    CGMSimulator: 'CGM Simulator',
+    Simulator: 'Simulator',
 };
 
 var HomeScreen = {
@@ -121,16 +131,12 @@ var SettingsScreen = {
     Configuration: 'Configuration',
     Support: 'Support',
     AddService: 'Add Service',
-    Simulator: 'Simulator',
     SaveToSimulator: 'Save to simulator',
     DeliveryLimits: 'Delivery Limits',
     InsulinModel: 'Insulin Model',
     ClosedLoop: 'Closed Loop',
-    AddCGM: 'Add CGM\nTap here to set up a CGM',
     DeleteCGMData: 'Delete CGM Data',
     DeleteCGM: 'Delete CGM',
-    AddPump: 'Add Pump\nTap here to set up a pump',
-    SimulatorPump: 'Simulator Small',
     DeletePump: 'Delete Pump',
     DeletePumpData: 'Delete Pump Data',
     PreMeal: 'Pre-Meal',
@@ -259,8 +265,6 @@ var SettingsScreenNew = {
     Configuration: 'Configuration',
     Support: 'Support',
     ClosedLoop: 'Closed Loop',
-    AddCGM: 'Add CGM\nTap here to set up a CGM',
-    AddPump: 'Add Pump\nTap here to set up a pump',
     TherapySettingsScreen: {
         Header: 'Therapy Settings',
         Info: 'Diabetes Treatment',
@@ -385,6 +389,7 @@ var SettingsScreenNew = {
 
 module.exports = {
     general: General,
+    device: Device,
     bolusScreen: BolusScreen,
     carbEntryScreen: CarbEntryScreen,
     settingsScreen: SettingsScreen,
