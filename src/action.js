@@ -111,11 +111,14 @@ const action = {
     async ScrollToBottom() {
         await match.ScrollableView().atIndex(1).swipe('up');
     },
-    async SwipeUp() {
-        await match.ScrollableView().atIndex(1).swipe('up', 'fast', 0.2);
+    async SwipeUp(index) {
+        if (index == null) {
+            index = 1;
+        }
+        await match.ScrollableView().atIndex(index).swipe('up', 'slow', 0.4);
     },
     async SwipeDown() {
-        await match.ScrollableView().atIndex(1).swipe('down', 'fast', 0.2);
+        await match.ScrollableView().atIndex(1).swipe('down', 'slow', 0.4);
     },
     async ScrollToTop() {
         await match.ScrollableView().atIndex(1).swipe('down');

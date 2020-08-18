@@ -87,10 +87,10 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.basalRatesScreen.OpenButton();
     }
     BasalRateInfo() {
-        return match.accessible.TextLabel(this.screenText.BasalRateScreen.Info);
+        return match.accessible.TextLabel(this.screenText.BasalRateScreen.Info).atIndex(0);;
     }
     async OpenBasalRateScreen() {
-        await this.SwipeUp(this.screenText.BasalRateScreen.Header);
+        await this.SwipeUp(this.BasalRateLabel());
         await this.BasalRateLabel().tap();
         return this.basalRatesScreen;
     }
@@ -108,7 +108,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return match.accessible.TextLabel(this.screenText.DeliveryLimitsScreen.Info).atIndex(0);
     }
     async OpenDeliveryLimitsScreen() {
-        await this.SwipeUp(this.screenText.DeliveryLimitsScreen.Header);
+        await this.SwipeUp(this.DeliveryLimitsLabel());
         await this.DeliveryLimitsLabel().tap();
         return this.deliveryLimitsScreen;
     }
@@ -120,7 +120,8 @@ module.exports = class TherapyScreen extends base.Screen {
         return match.accessible.TextLabel(this.screenText.InsulinModelScreen.Info);
     }
     async OpenInsulinModelScreen() {
-        await this.InsulinModelLabel.tap();
+        await this.SwipeUp(this.InsulinModelLabel());
+        await this.InsulinModelLabel().tap();
         return this.insulinModelScreen;
     }
 
@@ -131,6 +132,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return match.accessible.TextLabel(this.screenText.CarbRatiosScreen.Info).atIndex(0);
     }
     async OpenCarbRatiosScreen() {
+        await this.SwipeUp(this.CarbRatiosLabel());
         await this.CarbRatiosLabel().tap();
         return this.carbRatioScreen;
     }
@@ -142,6 +144,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return match.accessible.TextLabel(this.screenText.InsulinSensitivitiesScreen.Info);
     }
     async OpenInsulinSensitivitiesScreen() {
+        await this.SwipeUp(this.InsulinSensitivitiesLabel());
         await this.InsulinSensitivitiesLabel().tap();
         return this.insulinSensitivitiesScreen;
     }

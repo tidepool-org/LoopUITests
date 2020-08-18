@@ -125,7 +125,7 @@ class Screen {
     }
     async ScrollToBottom() {
         if (this.visibleBottomLabel == null) {
-            return;
+            await action.ScrollToBottom();
         }
         try {
             await expect(match.accessible.TextLabel(this.visibleBottomLabel)).toBeVisible();
@@ -133,23 +133,23 @@ class Screen {
             await action.ScrollToBottom();
         }
     }
-    async SwipeUp(labelElement) {
+    async SwipeUp(labelElement, index) {
         try {
             await expect(labelElement).toBeVisible();
         } catch (err) {
-            await action.SwipeUp();
+            await action.SwipeUp(index);
         }
     }
-    async SwipeDown(label) {
+    async SwipeDown(labelElement, index) {
         try {
             await expect(labelElement).toBeVisible();
         } catch (err) {
-            await action.SwipeDown();
+            await action.SwipeDown(index);
         }
     }
     async ScrollToTop() {
         if (this.visibleTopLabel == null) {
-            return;
+            await action.ScrollToTop();
         }
         try {
             await expect(match.accessible.TextLabel(this.visibleTopLabel)).toBeVisible();
