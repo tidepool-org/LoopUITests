@@ -28,8 +28,8 @@ describe('accessibility', () => {
         describe('overview screen', () => {
             settingsAccessibility.settingsScreenTest(test);
         });
-        describe('threapy screen', () => {
-            settingsAccessibility.threapyScreenTest(test);
+        describe('therapy screen', () => {
+            settingsAccessibility.therapyScreenTest(test);
         });
         //TODO: the following require settings and pump setup once ready
         describe.skip('delivery limits', () => {

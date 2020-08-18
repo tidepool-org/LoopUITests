@@ -7,7 +7,7 @@ const correctionRangeScreenTest = require('./correctionRangeScreen.tests');
 const issueReportScreenTest = require('./issueReportScreen.tests');
 const insulinModelScreenTest = require('./insulinModelScreen.tests');
 const suspendThresholdScreenTest = require('./suspendThresholdScreen.tests');
-const threapyScreenTest = require('./threapyScreen.tests');
+const therapyScreenTest = require('./therapyScreen.tests');
 
 module.exports = {
     settingsScreenTest,
@@ -19,5 +19,5 @@ module.exports = {
     issueReportScreenTest,
     insulinModelScreenTest,
     suspendThresholdScreenTest,
-    threapyScreenTest,
+    therapyScreenTest,
 };
