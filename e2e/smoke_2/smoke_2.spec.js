@@ -13,7 +13,7 @@ describe('accessibility', () => {
             .withStartScreen('home');
         await test.prepare();
     });
-    describe('devices', () => {
+    describe.skip('devices', () => {
         describe('g6 screen', () => {
             deviceAccessibility.g6ScreenTest(test);
         });
@@ -26,6 +26,9 @@ describe('accessibility', () => {
     });
     describe('settings', () => {
         describe('overview screen', () => {
+            settingsAccessibility.settingsScreenTest(test);
+        });
+        describe('threapy screen', () => {
             settingsAccessibility.threapyScreenTest(test);
         });
         //TODO: the following require settings and pump setup once ready

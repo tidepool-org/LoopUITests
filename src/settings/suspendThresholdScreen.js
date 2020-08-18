@@ -18,11 +18,8 @@ class SuspendThresholdScreen extends base.EntryScreen {
         this.bgUnitsLabel = language.settingsScreen.SuspendThresholdScreen.BGUnits;
         this.config = config;
     }
-    /**
-     * @override so we access the correct CancelButton
-     */
-    CancelButton() {
-        return match.accessible.ButtonBarButton(this.generalText.Cancel);
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
     }
     /**
      * @override so we access the header by label

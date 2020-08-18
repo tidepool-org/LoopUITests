@@ -20,6 +20,9 @@ class InsulinModelScreen extends base.Screen {
             await match.accessible.ClickableLabel(model).tap();
         }
     }
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
+    }
 }
 
 module.exports = InsulinModelScreen;

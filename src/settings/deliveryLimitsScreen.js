@@ -17,6 +17,9 @@ class DeliveryLimitsScreen extends base.EntryScreen {
         });
         this.config = config;
     }
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
+    }
     /**
      * @override so we access the header by label
      */

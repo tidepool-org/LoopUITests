@@ -133,6 +133,20 @@ class Screen {
             await action.ScrollToBottom();
         }
     }
+    async SwipeUp(labelElement) {
+        try {
+            await expect(labelElement).toBeVisible();
+        } catch (err) {
+            await action.SwipeUp();
+        }
+    }
+    async SwipeDown(label) {
+        try {
+            await expect(labelElement).toBeVisible();
+        } catch (err) {
+            await action.SwipeDown();
+        }
+    }
     async ScrollToTop() {
         if (this.visibleTopLabel == null) {
             return;

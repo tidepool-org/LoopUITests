@@ -5,16 +5,19 @@ const base = require('../base/index');
 class CarbRatioScreen extends base.EntriesScreen {
     constructor(language, config) {
         super({
-            screenText: language.settingsScreen.CarbRatioScreen,
+            screenText: language.settingsScreen.CarbRatiosScreen,
             generalText: language.general,
             open: {
                 isBtn: false,
-                label: language.settingsScreen.CarbRatioScreen.Header,
+                label: language.settingsScreen.CarbRatiosScreen.Header,
             },
             header: {
                 backLabel: language.general.Cancel,
             },
         }, config);
+    }
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.openLabel).atIndex(0);
     }
     /**
      * @override so we access the header by label

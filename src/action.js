@@ -111,6 +111,12 @@ const action = {
     async ScrollToBottom() {
         await match.ScrollableView().atIndex(1).swipe('up');
     },
+    async SwipeUp() {
+        await match.ScrollableView().atIndex(1).swipe('up', 'fast', 0.2);
+    },
+    async SwipeDown() {
+        await match.ScrollableView().atIndex(1).swipe('down', 'fast', 0.2);
+    },
     async ScrollToTop() {
         await match.ScrollableView().atIndex(1).swipe('down');
     },
