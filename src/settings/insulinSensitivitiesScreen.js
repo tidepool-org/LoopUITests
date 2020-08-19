@@ -64,6 +64,10 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
             await this.Add();
         }
     }
+    async Open() {
+        await super.Open();
+        return this;
+    }
 }
 
 module.exports = InsulinSensitivitiesScreen;

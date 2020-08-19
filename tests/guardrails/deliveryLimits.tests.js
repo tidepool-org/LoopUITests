@@ -3,11 +3,11 @@ module.exports = (test) => {
     var settings;
     var screenLimit;
     beforeAll(async () => {
-        settings = await test.OpenSettingsScreen();
         screenLimit = test.limits.delivery;
     });
-    describe('max basal rate', () => {
+    describe.skip('max basal rate', () => {
         it('open screen', async () => {
+            settings = await test.OpenSettingsScreen();
             screen = await settings.OpenDeliveryLimitsScreen();
         });
         it('can open max basal rate picker', async () => {
@@ -33,32 +33,34 @@ module.exports = (test) => {
         });
         it('cancel and close', async () => {
             await screen.CancelAndClose();
+            await settings.BackToHome();
         });
     });
-    describe.skip('max bolus amount', () => {
+    describe('max bolus amount', () => {
         it('open screen', async () => {
+            settings = await test.OpenSettingsScreen();
             screen = await settings.OpenDeliveryLimitsScreen();
         });
         it('open picker', async () => {
             await screen.OpenBolusPicker();
         })
-        it('can set max bolus at limit', async () => {
+        it.skip('can set max bolus at limit', async () => {
             await screen.ApplyBolus({
                 expected: { amount: screenLimit.bolus.max.limit },
             });
-            await expect(screen.GuardrailMessage('?')).toBeVisible();
+            await expect(screen.GuardrailMessage('High Maximum Bolus')).toBeVisible();
         });
-        it('can set max bolus warning', async () => {
+        it.skip('can set max bolus warning', async () => {
             await screen.ApplyBolus({
                 expected: { amount: screenLimit.bolus.max.warning },
                 current: { amount: screenLimit.bolus.max.limit },
             });
-            await expect(screen.GuardrailMessage('??')).toBeVisible();
+            await expect(screen.GuardrailMessage('High Maximum Bolus')).toBeVisible();
         });
         it('can set max bolus no warning', async () => {
             await screen.ApplyBolus({
                 expected: { amount: screenLimit.bolus.max.noWarning },
-                current: { amount: screenLimit.bolus.max.warning },
+                //current: { amount: screenLimit.bolus.max.warning },
             });
         });
         it('can set min bolus limit', async () => {
@@ -67,8 +69,9 @@ module.exports = (test) => {
                 current: { amount: screenLimit.bolus.max.noWarning },
             });
         });
-        it('cancel and close', async () => {
-            await screen.CancelAndClose();
-        });
+        // it('cancel and close', async () => {
+        //     await screen.CancelAndClose();
+        //     await settings.BackToHome();
+        // });
     });
 }

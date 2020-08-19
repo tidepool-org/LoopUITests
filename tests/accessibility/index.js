@@ -7,9 +7,6 @@ const carbEntryScreenTest = require('./carbEntryScreen.tests');
 const homeActiveCarbohydratesScreenTest = require('./homeActiveCarbohydratesScreen.tests');
 const customPresetsScreenTest = require('./customPresetsScreen.tests');
 
-
-
-
 module.exports = {
     homeScreenTest,
     homeGlucoseScreenTest,

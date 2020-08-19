@@ -25,10 +25,10 @@ class SuspendThresholdScreen extends base.EntryScreen {
      * @override so we access the header by label
      */
     Header() {
-        return match.accessible.Label(this.screenText.Header).atIndex(1);
+        return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
     }
     async OpenPicker() {
-        await match.accessible.Label(this.bgUnitsLabel).atIndex(0).tap();
+        await match.accessible.TextLabel(this.bgUnitsLabel).atIndex(0).tap();
     }
     async SwipePickerToMaxValue() {
         await action.SwipePickerUp(3);
@@ -48,6 +48,10 @@ class SuspendThresholdScreen extends base.EntryScreen {
         } else {
             await action.ScrollPickerToValue(this.config.start, threshold.expected.value);
         }
+    }
+    async Open() {
+        await super.Open();
+        return this;
     }
 }
 

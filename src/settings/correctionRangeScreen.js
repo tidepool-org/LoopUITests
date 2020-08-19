@@ -65,7 +65,7 @@ class CorrectionRangeScreen extends base.EntriesScreen {
      * @param {Array} ranges
      */
     async ApplyAll(ranges) {
-        await this.Add();
+        await this.Plus();
         for (let index = 0; index < ranges.length; index++) {
             var current;
             let expected = ranges[index];

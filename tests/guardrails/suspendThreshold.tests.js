@@ -1,14 +1,17 @@
 module.exports = (test) => {
     var screen;
+    var settings;
     var screenLimit;
-    beforeAll(async () => {
-        screen = await test.settingsScreen.OpenSuspendThresholdScreen();
+    it('open screen', async () => {
+        settings = await test.OpenSettingsScreen();
+        screen = await settings.OpenSuspendThresholdScreen();
         screenLimit = test.limits.suspendThreshold;
         await screen.OpenPicker();
     });
     it('can set max units with warning', async () => {
         await screen.SwipePickerToMaxValue();
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
+        await expect(screen.GuardrailMessage('High Suspend Threshold')).toBeVisible();
     });
     it('can set max lower boundary units with warning', async () => {
         await screen.ApplyOne({
@@ -16,6 +19,7 @@ module.exports = (test) => {
             current: { value: screenLimit.max.limit },
         });
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
+        await expect(screen.GuardrailMessage('High Suspend Threshold')).toBeVisible();
     });
     it('can set below max lower boundary units without warning', async () => {
         await screen.ApplyOne({
@@ -27,6 +31,7 @@ module.exports = (test) => {
     it('can set min units with warning', async () => {
         await screen.SwipePickerToMinValue();
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
+        await expect(screen.GuardrailMessage('Low Suspend Threshold')).toBeVisible();
     });
     it('can set min upper boundary units with warning', async () => {
         await screen.ApplyOne({
@@ -34,6 +39,7 @@ module.exports = (test) => {
             current: { value: screenLimit.min.limit },
         });
         await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
+        await expect(screen.GuardrailMessage('Low Suspend Threshold')).toBeVisible();
     });
     it('can set above min upper boundary units with no warning', async () => {
         await screen.ApplyOne({
@@ -44,5 +50,6 @@ module.exports = (test) => {
     });
     it('can close screen', async () => {
         await screen.CancelAndClose();
+        await settings.BackToHome();
     });
 };

@@ -39,6 +39,12 @@ module.exports = class TherapyScreen extends base.Screen {
         this.workoutRangeScreen = new WorkoutRangeScreen(lang);
         this.premealRangeScreen = new PremealRangeScreen(lang);
     }
+
+    async _oldSettingsScreen() {
+        await this.Back();
+        await match.accessible.Button(this.generalText.Done).atIndex(2).tap();
+    }
+
     SuspendThresholdLabel() {
         return this.suspendThresholdScreen.OpenButton();
     }
@@ -58,7 +64,7 @@ module.exports = class TherapyScreen extends base.Screen {
     }
     async OpenCorrectionRangeScreen() {
         await this.CorrectionRangeLabel().tap();
-        return this.CorrectionRangeScreen;
+        return this.correctionRangeScreen;
     }
 
     PreMealRangeLabel() {
@@ -108,7 +114,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return match.accessible.TextLabel(this.screenText.DeliveryLimitsScreen.Info).atIndex(0);
     }
     async OpenDeliveryLimitsScreen() {
-        await this.SwipeUp(this.DeliveryLimitsLabel());
+        //await this.SwipeUp(this.DeliveryLimitsLabel());
         await this.DeliveryLimitsLabel().tap();
         return this.deliveryLimitsScreen;
     }
@@ -144,7 +150,8 @@ module.exports = class TherapyScreen extends base.Screen {
         return match.accessible.TextLabel(this.screenText.InsulinSensitivitiesScreen.Info);
     }
     async OpenInsulinSensitivitiesScreen() {
-        await this.SwipeUp(this.InsulinSensitivitiesLabel());
+        //await this._oldSettingsScreen();
+        //await this.SwipeUp(this.InsulinSensitivitiesLabel());
         await this.InsulinSensitivitiesLabel().tap();
         return this.insulinSensitivitiesScreen;
     }

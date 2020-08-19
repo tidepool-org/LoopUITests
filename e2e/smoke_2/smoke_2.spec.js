@@ -24,7 +24,7 @@ describe('accessibility', () => {
             deviceAccessibility.cgmSimulatorScreenTest(test);
         });
     });
-    describe.skip('settings', () => {
+    describe('settings', () => {
         describe('overview screen', () => {
             settingsAccessibility.settingsScreenTest(test);
         });

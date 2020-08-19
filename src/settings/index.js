@@ -1,6 +1,4 @@
 const match = require('../match');
-const CorrectionRangeScreen = require('./correctionRangeScreen');
-const DeliveryLimitsScreen = require('./deliveryLimitsScreen');
 
 const AlertScreen = require('./alertScreen');
 const SupportScreen = require('./supportScreen');
@@ -28,8 +26,6 @@ class SettingsScreen extends base.Screen {
         this.alertScreen = new AlertScreen(language);
         this.therapyScreen = new TherapyScreen(language, config);
         this.supportScreen = new SupportScreen(language);
-        this.deliveryLimitsScreen = new DeliveryLimitsScreen(language, config.deliveryLimit);
-        this.correctionRangeScreen = new CorrectionRangeScreen(language, config.correctionRange);
     }
     Devices() {
         return this.devices;
@@ -50,8 +46,13 @@ class SettingsScreen extends base.Screen {
      * @summary hack while we have two settings pages
      */
     async BackToHome() {
-        await this._closeNewSettings();
-        await match.accessible.ButtonBarButton(this.generalText.Done).tap();
+        try {
+            await this._closeNewSettings();
+        } catch (err) {
+            //pass through
+        } finally {
+            await match.accessible.ButtonBarButton(this.generalText.Done).tap();
+        }
     }
     async _closeNewSettings() {
         await match.accessible.Button(this.generalText.Done).atIndex(2).tap();
@@ -102,11 +103,23 @@ class SettingsScreen extends base.Screen {
         return this.alertScreen;
     }
     async OpenDeliveryLimitsScreen() {
-        return this.deliveryLimitsScreen.Open();
+        await this._closeNewSettings();
+        await this.SwipeUp();
+        return this.therapyScreen.OpenDeliveryLimitsScreen();
     }
     async OpenCorrectionRangeScreen() {
         await this._closeNewSettings();
-        return this.correctionRangeScreen.Open();
+        return this.therapyScreen.OpenCorrectionRangeScreen();
+    }
+    async OpenInsulinSensitivitiesScreen() {
+        await this._closeNewSettings();
+        await this.SwipeUp();
+        return this.therapyScreen.OpenInsulinSensitivitiesScreen();
+    }
+    async OpenSuspendThresholdScreen() {
+        await this._closeNewSettings();
+        await this.SwipeUp();
+        return this.therapyScreen.OpenSuspendThresholdScreen();
     }
     _newSettingsLabel() {
         return match.accessible.ClickableLabel(this.screenText.Settings).atIndex(0);

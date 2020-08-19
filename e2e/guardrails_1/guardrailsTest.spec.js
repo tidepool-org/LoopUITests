@@ -17,7 +17,10 @@ describe('guardrails test', () => {
     describe.skip('insulin sensitivity schedule', () => {
         guardrails.insulinSensitivityScheduleTest(test);
     });
-    describe.skip('suspend threshold', () => {
+    describe.skip('delivery limits', () => {
+        guardrails.deliveryLimitsTest(test);
+    });
+    describe('suspend threshold', () => {
         guardrails.suspendThresholdTest(test);
     });
     describe.skip('insulin carb ratio', () => {
@@ -28,8 +31,5 @@ describe('guardrails test', () => {
     });
     describe.skip('basal rate schedule', () => {
         guardrails.basalRateScheduleTest(test);
-    });
-    describe('delivery limits', () => {
-        guardrails.deliveryLimitsTest(test);
     });
 });
