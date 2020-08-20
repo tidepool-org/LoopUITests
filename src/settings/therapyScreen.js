@@ -96,7 +96,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return match.accessible.TextLabel(this.screenText.BasalRateScreen.Info).atIndex(0);;
     }
     async OpenBasalRateScreen() {
-        await this.SwipeUp(this.BasalRateLabel());
+        //await this.SwipeUp(this.BasalRateLabel());
         await this.BasalRateLabel().tap();
         return this.basalRatesScreen;
     }
@@ -137,8 +137,8 @@ module.exports = class TherapyScreen extends base.Screen {
     CarbRatiosInfo() {
         return match.accessible.TextLabel(this.screenText.CarbRatiosScreen.Info).atIndex(0);
     }
-    async OpenCarbRatiosScreen() {
-        await this.SwipeUp(this.CarbRatiosLabel());
+    async OpenCarbRatioScreen() {
+        //await this.SwipeUp(this.CarbRatiosLabel());
         await this.CarbRatiosLabel().tap();
         return this.carbRatioScreen;
     }

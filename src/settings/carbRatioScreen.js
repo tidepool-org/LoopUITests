@@ -25,6 +25,9 @@ class CarbRatioScreen extends base.EntriesScreen {
     Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
     }
+    _parts(ratio) {
+        return String(ratio).split('.');
+    }
     /**
      * @param {Object} ratio
      * @param {Object} ratio.expected
@@ -35,20 +38,19 @@ class CarbRatioScreen extends base.EntriesScreen {
     async ApplyOne(ratio) {
         const pickerID = 'quantity_picker'
         const wholePart = 0;
-        let expectedParts = this._unitParts(ratio.expected.carbGramsPerInsulinUnit);
-
+        let expectedParts = this._parts(ratio.expected.carbGramsPerInsulinUnit);
         if (ratio.current) {
-            let currentParts = this._unitParts(ratio.current.carbGramsPerInsulinUnit);
-            await action.ScrollQuantityPicker(Number(currentParts[wholePart]), Number(expectedParts[wholePart]), { pickerID: pickerID, useItemID: false, smallStep: false });
+            let currentParts = this._parts(ratio.current.carbGramsPerInsulinUnit);
+            await action.ScrollQuantityPicker(Number(currentParts[wholePart]), Number(expectedParts[wholePart]), { pickerID: pickerID, useItemID: true });
         } else {
-            await action.ScrollQuantityPicker(this.config.startWhole, Number(expectedParts[wholePart]), { pickerID: pickerID, useItemID: false, smallStep: false });
+            await action.ScrollQuantityPicker(this.config.startWhole, Number(expectedParts[wholePart]), { pickerID: pickerID, useItemID: true });
         }
     }
     /**
      * @param {Array} ratios
      */
     async ApplyAll(ratios) {
-        await this.Add();
+        await this.Plus();
         for (let index = 0; index < ratios.length; index++) {
             var current;
             let expected = ratios[index];

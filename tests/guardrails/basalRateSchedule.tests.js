@@ -1,70 +1,83 @@
 module.exports = (test) => {
     var screen;
+    var settings;
     var screenLimit;
     beforeAll(async () => {
-        screen = await test.settingsScreen.OpenBasalRatesScreen();
+        settings = await test.OpenSettingsScreen();
+        screen = await settings.OpenBasalRateScreen();
         screenLimit = test.limits.basalRates;
     });
-    it('can set max units at limit', async () => {
-        await screen.Add();
-        await screen.ApplyOne({
-            expected: {
-                time: '12:00 AM',
-                unitsPerHour: screenLimit.max.limit,
-            }
+    describe('max units at limit', () => {
+        it('can set units', async () => {
+            await screen.Plus();
+            await screen.ApplyOne({
+                expected: { time: '12:00 AM', unitsPerHour: screenLimit.max.limit }
+            });
+            await screen.Add();
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        it('check no guardrail warning icon', async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
+        });
+        it('reset', async () => {
+            await screen.CancelAndClose();
+            await settings.BackToHome();
+            settings = await test.OpenSettingsScreen();
+            screen = await settings.OpenBasalRateScreen();
+        });
     });
-    it('can set max units with no warning', async () => {
-        await screen.Add();
-        await screen.ApplyOne({
-            expected:
-            {
-                time: '12:00 AM',
-                unitsPerHour: screenLimit.max.noWarning,
-            },
-            current: {
-                time: '12:00 AM',
-                unitsPerHour: screenLimit.max.limit,
-            },
+    describe('max units with no warning', () => {
+        it('can set units', async () => {
+            await screen.Plus();
+            await screen.ApplyOne({
+                expected: { time: '12:00 AM', unitsPerHour: screenLimit.max.noWarning },
+            });
+            await screen.Add();
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 1 })).toBeNotVisible();
+        it('check no guardrail warning icon', async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
+        });
+        it('reset', async () => {
+            await screen.CancelAndClose();
+            await settings.BackToHome();
+            settings = await test.OpenSettingsScreen();
+            screen = await settings.OpenBasalRateScreen();
+        });
     });
-    it('can set min units with no warning', async () => {
-        await screen.Add();
-        await screen.ApplyOne({
-            expected:
-            {
-                time: '12:00 AM',
-                unitsPerHour: screenLimit.min.noWarning,
-            },
-            current: {
-                time: '12:00 AM',
-                unitsPerHour: screenLimit.max.noWarning,
-            }
+    describe('min units with no warning', () => {
+        it('can set units', async () => {
+            await screen.Plus();
+            await screen.ApplyOne({
+                expected: { time: '12:00 AM', unitsPerHour: screenLimit.min.noWarning },
+            });
+            await screen.Add();
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 2 })).toBeNotVisible();
+        it('check no guardrail warning icon', async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
+        });
+        it('reset', async () => {
+            await screen.CancelAndClose();
+            await settings.BackToHome();
+            settings = await test.OpenSettingsScreen();
+            screen = await settings.OpenBasalRateScreen();
+        });
     });
-    it('can set min units at limit', async () => {
-        await screen.Add();
-        await screen.ApplyOne({
-            expected:
-            {
-                time: '12:00 AM',
-                unitsPerHour: screenLimit.min.limit,
-            },
-            current: {
-                time: '12:00 AM',
-                unitsPerHour: screenLimit.min.noWarning,
-            }
+    describe('min units at limit', () => {
+        it('can set units', async () => {
+            await screen.Plus();
+            await screen.ApplyOne({
+                expected: { time: '12:00 AM', unitsPerHour: screenLimit.min.limit }
+            });
+            await screen.Add();
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 3 })).toBeVisible();
+        it('check for guardrail warning icon', async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        });
+        it('check for guardrail message', async () => {
+            await expect(screen.GuardrailMessage('No Basal Insulin')).toBeVisible();
+        });
     });
     it('can close screen', async () => {
         await screen.CancelAndClose();
+        await settings.BackToHome();
     });
 };

@@ -121,6 +121,22 @@ class SettingsScreen extends base.Screen {
         await this.SwipeUp();
         return this.therapyScreen.OpenSuspendThresholdScreen();
     }
+    async OpenSuspendThresholdScreen() {
+        await this._closeNewSettings();
+        await this.SwipeUp();
+        return this.therapyScreen.OpenSuspendThresholdScreen();
+    }
+    async OpenCarbRatioScreen() {
+        await this._closeNewSettings();
+        await this.SwipeUp();
+        return this.therapyScreen.OpenCarbRatioScreen();
+    }
+    async OpenBasalRateScreen() {
+        await this._closeNewSettings();
+        await this.SwipeUp();
+        return this.therapyScreen.OpenBasalRateScreen();
+    }
+
     _newSettingsLabel() {
         return match.accessible.ClickableLabel(this.screenText.Settings).atIndex(0);
     }

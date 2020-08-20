@@ -9,7 +9,8 @@
     "test-smoke2": "detox test e2e/smoke_2 -c ios.sim.debug",
     "test-functional1": "detox test e2e/functional_1 -c ios.sim.debug",
     "test-functional2": "detox test e2e/functional_2 -c ios.sim.debug",
-    "test-guardrails": "detox test e2e/guardrails_1 -c ios.sim.debug",
+    "test-guardrail1": "detox test e2e/guardrails_1 -c ios.sim.debug",
+    "test-guardrail2": "detox test e2e/guardrails_2 -c ios.sim.debug",
     "build": "detox build -c ios.sim.debug",
     "lint": "eslint ."
   },

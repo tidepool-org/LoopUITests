@@ -299,7 +299,7 @@ var SettingsScreenNew = {
             Info: 'Temporarily lower your glucose target before a meal to impact post-meal glucose spikes. This range can be set anywhere from your suspend threshold on the low end to the top of your regular correction range on the high end.',
         },
         BasalRateScreen: {
-            Header: 'Basal Rate',
+            Header: 'Basal Rates',
             Info: 'Your basal rate of insulin is the number of units per hour that you want to use to cover your background insulin needs.',
             Units: 'U/hr',
         },

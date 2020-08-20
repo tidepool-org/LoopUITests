@@ -26,6 +26,9 @@ class BasalRatesScreen extends base.EntriesScreen {
     Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
     }
+    _parts(rate) {
+        return String(rate).split('.');
+    }
     /**
      * @param {Object} rate
      * @param {Object} rate.expected
@@ -36,10 +39,10 @@ class BasalRatesScreen extends base.EntriesScreen {
     async ApplyOne(rate) {
         const pickerID = 'quantity_picker'
         const wholePart = 0;
-        let expectedParts = String(rate.expected.unitsPerHour).split('.');
+        let expectedParts = this._parts(rate.expected.unitsPerHour);
 
         if (rate.current) {
-            let currentParts = String(rate.current.unitsPerHour).split('.');
+            let currentParts = this._parts(rate.current.unitsPerHour);
             await action.ScrollQuantityPicker(
                 Number(currentParts[wholePart]),
                 Number(expectedParts[wholePart]),
@@ -58,6 +61,10 @@ class BasalRatesScreen extends base.EntriesScreen {
      */
     async ApplyAll(rates) {
         await super.ApplyAll(rates, this.ApplyOne);
+    }
+    async Open() {
+        await super.Open();
+        return this;
     }
 }
 
