@@ -123,7 +123,6 @@ class SettingsScreen extends base.Screen {
     }
     async OpenSuspendThresholdScreen() {
         await this._closeNewSettings();
-        await this.SwipeUp();
         return this.therapyScreen.OpenSuspendThresholdScreen();
     }
     async OpenCarbRatioScreen() {

@@ -281,6 +281,8 @@ var SettingsScreenNew = {
             MaxBolus: 'Maximum Bolus',
             MaxBolusInfo: 'Maximum bolus is the highest bolus amount you can deliver at one time.',
             BolusUnits: 'U',
+            LowMaxBasalRateGuardrail: 'Low Maximum Basal Rate',
+            HighMaxBolusGuardrail: 'High Maximum Bolus',
         },
         InsulinSensitivitiesScreen: {
             Header: 'Insulin Sensitivities',
@@ -307,6 +309,8 @@ var SettingsScreenNew = {
             BGUnits: 'mg/dL',
             Header: 'Suspend Threshold',
             Info: 'When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/hr and will not recommend a bolus.',
+            HighSuspendThresholdGuardrail: 'High Suspend Threshold',
+            LowSuspendThresholdGuardrail: 'Low Suspend Threshold',
         },
         InsulinModelScreen: {
             Header: 'Insulin Model',

@@ -1,8 +1,9 @@
 module.exports = (test) => {
     var screen;
+    var settingsScreen;
     var screenLimit;
     it('open screen', async () => {
-        var settingsScreen = await test.OpenSettingsScreen();
+        settingsScreen = await test.OpenSettingsScreen();
         screen = await settingsScreen.OpenInsulinSensitivitiesScreen();
         screenLimit = test.limits.insulinSensitivities;
     });
@@ -61,5 +62,6 @@ module.exports = (test) => {
     });
     it('can close screen', async () => {
         await screen.CancelAndClose();
+        await settingsScreen.BackToHome();
     });
 };

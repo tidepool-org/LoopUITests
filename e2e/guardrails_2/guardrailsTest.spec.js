@@ -16,7 +16,7 @@ describe('guardrails test', () => {
     describe('insulin sensitivity schedule', () => {
         guardrails.insulinSensitivityScheduleTest(test);
     });
-    describe.skip('delivery limits', () => {
+    describe('delivery limits', () => {
         guardrails.deliveryLimitsTest(test);
     });
     describe('suspend threshold', () => {

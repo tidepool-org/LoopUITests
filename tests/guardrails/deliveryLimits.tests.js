@@ -5,7 +5,7 @@ module.exports = (test) => {
     beforeAll(async () => {
         screenLimit = test.limits.delivery;
     });
-    describe.skip('max basal rate', () => {
+    describe('max basal rate', () => {
         it('open screen', async () => {
             settings = await test.OpenSettingsScreen();
             screen = await settings.OpenDeliveryLimitsScreen();
@@ -36,7 +36,8 @@ module.exports = (test) => {
             await settings.BackToHome();
         });
     });
-    describe('max bolus amount', () => {
+    //TODO: usability issue that hides the picker when a Guardrail threshold is met
+    describe.skip('max bolus amount', () => {
         it('open screen', async () => {
             settings = await test.OpenSettingsScreen();
             screen = await settings.OpenDeliveryLimitsScreen();
@@ -44,13 +45,13 @@ module.exports = (test) => {
         it('open picker', async () => {
             await screen.OpenBolusPicker();
         })
-        it.skip('can set max bolus at limit', async () => {
+        it('can set max bolus at limit', async () => {
             await screen.ApplyBolus({
                 expected: { amount: screenLimit.bolus.max.limit },
             });
             await expect(screen.GuardrailMessage('High Maximum Bolus')).toBeVisible();
         });
-        it.skip('can set max bolus warning', async () => {
+        it('can set max bolus warning', async () => {
             await screen.ApplyBolus({
                 expected: { amount: screenLimit.bolus.max.warning },
                 current: { amount: screenLimit.bolus.max.limit },
@@ -60,7 +61,7 @@ module.exports = (test) => {
         it('can set max bolus no warning', async () => {
             await screen.ApplyBolus({
                 expected: { amount: screenLimit.bolus.max.noWarning },
-                //current: { amount: screenLimit.bolus.max.warning },
+                current: { amount: screenLimit.bolus.max.warning },
             });
         });
         it('can set min bolus limit', async () => {
@@ -69,9 +70,9 @@ module.exports = (test) => {
                 current: { amount: screenLimit.bolus.max.noWarning },
             });
         });
-        // it('cancel and close', async () => {
-        //     await screen.CancelAndClose();
-        //     await settings.BackToHome();
-        // });
+        it('cancel and close', async () => {
+            await screen.CancelAndClose();
+            await settings.BackToHome();
+        });
     });
 }
