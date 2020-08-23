@@ -14,7 +14,7 @@ module.exports = (test) => {
     it('has an info button', async () => {
         await expect(screen.InfoButton()).toBeVisible();
     });
-    it('has a add button', async () => {
+    it('has a + button', async () => {
         await expect(screen.PlusButton()).toBeVisible();
     });
     it('has a edit button', async () => {

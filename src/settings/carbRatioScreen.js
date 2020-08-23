@@ -26,7 +26,7 @@ class CarbRatioScreen extends base.EntriesScreen {
      * @override so we access the header by label
      */
     Header() {
-        return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
+        return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
     }
     _parts(ratio) {
         return String(ratio).split('.');
