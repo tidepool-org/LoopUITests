@@ -1,34 +1,33 @@
 module.exports = (test) => {
     var screen;
     var settingsScreen;
-    beforeAll(async () => {
+    it('open', async () => {
         settingsScreen = await test.OpenSettingsScreen();
         screen = await settingsScreen.OpenInsulinSensitivitiesScreen();
     });
-    afterAll(async () => {
-        await screen.CancelAndClose();
-        await settingsScreen.Close();
-    });
-    //TODO: should be a header but is a label
     it('has a header', async () => {
-        await expect(screen.Header()).toExist();
+        await expect(screen.Header()).toBeVisible();
     });
     it('has an info label', async () => {
-        await expect(screen.InfoLabel()).toExist();
+        await expect(screen.InfoLabel()).toBeVisible();
     });
     it('has an info button', async () => {
-        await expect(screen.InfoButton()).toExist();
+        await expect(screen.InfoButton()).toBeVisible();
     });
     it('has a add button', async () => {
-        await expect(screen.AddButton()).toExist();
+        await expect(screen.PlusButton()).toBeVisible();
     });
     it('has a edit button', async () => {
-        await expect(screen.EditButton()).toExist();
+        await expect(screen.EditButton()).toBeVisible();
     });
     it('has a cancel button', async () => {
-        await expect(screen.BackButton()).toExist();
+        await expect(screen.BackButton()).toBeVisible();
     });
     it('has a save button', async () => {
-        await expect(screen.SaveButton()).toExist();
+        await expect(screen.SaveButton()).toBeVisible();
+    });
+    it('clean up and close', async () => {
+        await screen.CancelAndClose();
+        await settingsScreen.BackToHome();
     });
 };

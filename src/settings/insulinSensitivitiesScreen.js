@@ -56,7 +56,7 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
      * @param {Array} sensitivities
      */
     async ApplyAll(sensitivities) {
-        await this.Add();
+        await this.Plus();
         for (let index = 0; index < sensitivities.length; index++) {
             var current;
             let expected = sensitivities[index];
