@@ -5,14 +5,14 @@ const base = require('../base/index');
 class CGMSimulatorScreen extends base.Screen {
     constructor(language) {
         super({
-            screenText: language.settingsScreen.CGMSimulatorScreen,
+            screenText: language.device.CGMSimulatorScreen,
             generalText: language.general,
             header: {
                 backLabel: language.general.Done,
             },
             scroll: {
-                visibleBottomLabel: language.settingsScreen.CGMSimulatorScreen.DeleteCGM,
-                visibleTopLabel: language.settingsScreen.CGMSimulatorScreen.Model.Constant,
+                visibleBottomLabel: language.device.CGMSimulatorScreen.DeleteCGM,
+                visibleTopLabel: language.device.CGMSimulatorScreen.Model.Constant,
             },
         });
     }

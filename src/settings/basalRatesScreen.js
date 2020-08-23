@@ -5,20 +5,23 @@ const base = require('../base/index');
 class BasalRatesScreen extends base.EntriesScreen {
     constructor(language, config) {
         super({
-            screenText: language.settingsScreen.BasalRateScreen,
+            screenText: language.settingsScreen.BasalRatesScreen,
             generalText: language.general,
             open: {
                 isBtn: false,
-                label: language.settingsScreen.BasalRateScreen.Header,
+                label: language.settingsScreen.BasalRatesScreen.Header,
             },
             header: {
                 backLabel: language.general.Cancel,
             },
         }, config);
-        this.unitsLabel = language.settingsScreen.BasalRateScreen.Units;
+        this.unitsLabel = language.settingsScreen.BasalRatesScreen.Units;
     }
     OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(0);
+    }
+    InfoLabel() {
+        return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
     }
     /**
      * @override so we access the header by label

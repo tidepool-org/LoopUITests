@@ -15,7 +15,7 @@ const WorkoutRangeScreen = require('./workoutRangeScreen');
 module.exports = class TherapyScreen extends base.Screen {
     constructor(language, config) {
         super({
-            screenText: language.settingsScreen_new.TherapySettingsScreen,
+            screenText: language.settingsScreen.TherapySettingsScreen,
             generalText: language.general,
             header: {
                 backLabel: 'Settings',
@@ -25,19 +25,15 @@ module.exports = class TherapyScreen extends base.Screen {
                 label: 'chevron.right',
             },
         });
-        var lang = {
-            general: language.general,
-            settingsScreen: language.settingsScreen_new.TherapySettingsScreen,
-        };
-        this.deliveryLimitsScreen = new DeliveryLimitsScreen(lang, config.deliveryLimit);
-        this.correctionRangeScreen = new CorrectionRangeScreen(lang, config.correctionRange);
-        this.basalRatesScreen = new BasalRatesScreen(lang, config.basalRate);
-        this.insulinModelScreen = new InsulinModelScreen(lang);
-        this.insulinSensitivitiesScreen = new InsulinSensitivitiesScreen(lang, config.insulinSensitivity);
-        this.suspendThresholdScreen = new SuspendThresholdScreen(lang, config.suspendThreshold);
-        this.carbRatioScreen = new CarbRatioScreen(lang, config.carbRatio);
-        this.workoutRangeScreen = new WorkoutRangeScreen(lang);
-        this.premealRangeScreen = new PremealRangeScreen(lang);
+        this.deliveryLimitsScreen = new DeliveryLimitsScreen(language, config.deliveryLimit);
+        this.correctionRangeScreen = new CorrectionRangeScreen(language, config.correctionRange);
+        this.basalRatesScreen = new BasalRatesScreen(language, config.basalRate);
+        this.insulinModelScreen = new InsulinModelScreen(language);
+        this.insulinSensitivitiesScreen = new InsulinSensitivitiesScreen(language, config.insulinSensitivity);
+        this.suspendThresholdScreen = new SuspendThresholdScreen(language, config.suspendThreshold);
+        this.carbRatioScreen = new CarbRatioScreen(language, config.carbRatio);
+        this.workoutRangeScreen = new WorkoutRangeScreen(language);
+        this.premealRangeScreen = new PremealRangeScreen(language);
     }
 
     async _oldSettingsScreen() {
@@ -49,7 +45,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.suspendThresholdScreen.OpenButton();
     }
     SuspendThresholdInfo() {
-        return match.accessible.TextLabel(this.screenText.SuspendThresholdScreen.Info);
+        return this.suspendThresholdScreen.InfoLabel();
     }
     async OpenSuspendThresholdScreen() {
         await this.SuspendThresholdLabel().tap();
@@ -60,7 +56,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.correctionRangeScreen.OpenButton();
     }
     CorrectionRangeInfo() {
-        return match.accessible.TextLabel(this.screenText.CorrectionRangeScreen.Info);
+        return this.correctionRangeScreen.InfoLabel();
     }
     async OpenCorrectionRangeScreen() {
         await this.CorrectionRangeLabel().tap();
@@ -71,7 +67,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.premealRangeScreen.OpenButton();
     }
     PreMealRangeInfo() {
-        return match.accessible.TextLabel(this.screenText.PremealRangeScreen.Info);
+        return this.premealRangeScreen.InfoLabel();
     }
     async OpenPreMealRangeScreen() {
         await this.PreMealRangeLabel().tap();
@@ -82,7 +78,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.workoutRangeScreen.OpenButton();
     }
     WorkoutRangeInfo() {
-        return match.accessible.TextLabel(this.screenText.WorkoutRangeScreen.Info);
+        return this.workoutRangeScreen.InfoLabel();
     }
     async OpenWorkoutRangeScreen() {
         await this.WorkoutRangeLabel().tap();
@@ -93,7 +89,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.basalRatesScreen.OpenButton();
     }
     BasalRateInfo() {
-        return match.accessible.TextLabel(this.screenText.BasalRateScreen.Info).atIndex(0);;
+        return this.basalRatesScreen.InfoLabel();
     }
     async OpenBasalRateScreen() {
         //await this.SwipeUp(this.BasalRateLabel());
@@ -105,13 +101,13 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.deliveryLimitsScreen.OpenButton();
     }
     DeliveryLimitsMaxBasalRateLabel() {
-        return match.accessible.TextLabel(this.screenText.DeliveryLimitsScreen.MaxBasalRate);
+        return this.deliveryLimitsScreen.MaxBasalRateLabel();
     }
     DeliveryLimitsMaxBolusLabel() {
-        return match.accessible.TextLabel(this.screenText.DeliveryLimitsScreen.MaxBolus);
+        return this.deliveryLimitsScreen.MaxBolusLabel();
     }
     DeliveryLimitsInfo() {
-        return match.accessible.TextLabel(this.screenText.DeliveryLimitsScreen.Info).atIndex(0);
+        return this.deliveryLimitsScreen.InfoLabel();
     }
     async OpenDeliveryLimitsScreen() {
         //await this.SwipeUp(this.DeliveryLimitsLabel());
@@ -123,7 +119,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.insulinModelScreen.OpenButton();
     }
     InsulinModelInfo() {
-        return match.accessible.TextLabel(this.screenText.InsulinModelScreen.Info);
+        return this.insulinModelScreen.InfoLabel();
     }
     async OpenInsulinModelScreen() {
         await this.SwipeUp(this.InsulinModelLabel());
@@ -135,7 +131,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.carbRatioScreen.OpenButton();
     }
     CarbRatiosInfo() {
-        return match.accessible.TextLabel(this.screenText.CarbRatiosScreen.Info).atIndex(0);
+        return this.carbRatioScreen.InfoLabel();
     }
     async OpenCarbRatioScreen() {
         //await this.SwipeUp(this.CarbRatiosLabel());
@@ -147,7 +143,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.insulinSensitivitiesScreen.OpenButton();
     }
     InsulinSensitivitiesInfo() {
-        return match.accessible.TextLabel(this.screenText.InsulinSensitivitiesScreen.Info);
+        return this.insulinSensitivitiesScreen.InfoLabel();
     }
     async OpenInsulinSensitivitiesScreen() {
         //await this._oldSettingsScreen();

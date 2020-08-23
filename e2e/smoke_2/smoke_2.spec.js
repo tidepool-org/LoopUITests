@@ -13,42 +13,41 @@ describe('accessibility', () => {
             .withStartScreen('home');
         await test.prepare();
     });
-    describe('devices', () => {
-        describe('g6 screen', () => {
-            deviceAccessibility.g6ScreenTest(test);
-        });
-        describe('pump screen', () => {
-            deviceAccessibility.pumpSimulatorScreenTest(test);
-        });
-        describe('cgm screen', () => {
-            deviceAccessibility.cgmSimulatorScreenTest(test);
-        });
-    });
+    // describe('devices', () => {
+    //     describe('g6 screen', () => {
+    //         deviceAccessibility.g6ScreenTest(test);
+    //     });
+    //     describe('pump screen', () => {
+    //         deviceAccessibility.pumpSimulatorScreenTest(test);
+    //     });
+    //     describe('cgm screen', () => {
+    //         deviceAccessibility.cgmSimulatorScreenTest(test);
+    //     });
+    // });
     describe('settings', () => {
-        describe('overview screen', () => {
-            settingsAccessibility.settingsScreenTest(test);
-        });
-        describe('therapy screen', () => {
-            settingsAccessibility.therapyScreenTest(test);
-        });
-        //TODO: the following require settings and pump setup once ready
-        describe.skip('delivery limits', () => {
+        // describe('overview screen', () => {
+        //     settingsAccessibility.settingsScreenTest(test);
+        // });
+        // describe('therapy screen', () => {
+        //     settingsAccessibility.therapyScreenTest(test);
+        // });
+        describe('delivery limits', () => {
             settingsAccessibility.deliveryLimitsScreenTest(test);
         });
-        describe.skip('insulin sensitivities', () => {
-            settingsAccessibility.insulinSensitivitiesScreenTest(test);
-        });
-        describe.skip('correction range', () => {
-            settingsAccessibility.correctionRangeScreenTest(test);
-        });
-        describe.skip('suspend threshold', () => {
-            settingsAccessibility.suspendThresholdScreenTest(test);
-        });
-        describe.skip('basal rates', () => {
-            settingsAccessibility.basalRatesScreenTest(test);
-        });
-        describe.skip('carb ratios', () => {
-            settingsAccessibility.carbRatioScreenTest(test);
-        });
+        // describe('insulin sensitivities', () => {
+        //     settingsAccessibility.insulinSensitivitiesScreenTest(test);
+        // });
+        // describe('correction range', () => {
+        //     settingsAccessibility.correctionRangeScreenTest(test);
+        // });
+        // describe('suspend threshold', () => {
+        //     settingsAccessibility.suspendThresholdScreenTest(test);
+        // });
+        // describe('basal rates', () => {
+        //     settingsAccessibility.basalRatesScreenTest(test);
+        // });
+        // describe('carb ratios', () => {
+        //     settingsAccessibility.carbRatioScreenTest(test);
+        // });
     });
 });

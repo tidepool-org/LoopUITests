@@ -4,7 +4,7 @@ const base = require('../base/index');
 class DexcomG6Screen extends base.Screen {
     constructor(language) {
         super({
-            screenText: language.settingsScreen.G6Screen,
+            screenText: language.device.G6Screen,
             generalText: language.general,
             header: {
                 backLabel: language.general.Cancel,

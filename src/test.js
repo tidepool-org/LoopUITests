@@ -135,10 +135,10 @@ class Test {
             await this.settingsScreen.Apply(this.settingsToApply);
         } else if (this.simulators) {
             if (this.simulators.cgm) {
-                await this.homeScreen.HeaderSection().Devices().AddCGM();
+                await this.addCGM();
             }
             if (this.simulators.pump) {
-                await this.homeScreen.HeaderSection().Devices().AddPump();
+                await this.addUnconfiguredPump();
             }
         }
         if (this.startScreen) {
@@ -159,11 +159,25 @@ class Test {
      * @param {object} pumpConfig.deliveryLimits
      */
     async addConfiguredPump(pumpConfig) {
-        await this.homeScreen.HeaderSection().Devices().AddPump();
+        await this.addUnconfiguredPump();
         var settings = await this.OpenSettingsScreen();
         await settings.setCorrectionRange(pumpConfig.correctionRange);
         await settings.setDeliveryLimits(pumpConfig.deliveryLimits);
         await match.accessible.ButtonBarButton(this.language.general.Done).tap();
+    }
+    async addUnconfiguredPump() {
+        await this.homeScreen.HeaderSection().Devices().AddPump();
+    }
+    async addCGM() {
+        await this.homeScreen.HeaderSection().Devices().AddCGM();
+    }
+    async openPumpScreen() {
+        var screen = await this.homeScreen.HeaderSection().Devices().OpenPumpScreen();
+        return screen;
+    }
+    async openCGMScreen() {
+        var screen = await this.homeScreen.HeaderSection().Devices().OpenCGMScreen();
+        return screen;
     }
     async OpenSettingsScreen() {
         this.settingsOpen = true;

@@ -2,8 +2,8 @@ module.exports = (test) => {
     var screen;
     var settingsScreen;
     it('open', async () => {
+        await test.addUnconfiguredPump();
         settingsScreen = await test.OpenSettingsScreen();
-        await settingsScreen.AddPumpSimulator();
         screen = await settingsScreen.OpenDeliveryLimitsScreen();
     });
     it('has a header', async () => {
@@ -29,7 +29,8 @@ module.exports = (test) => {
     });
     it('cleanup and close', async () => {
         await screen.CancelAndClose();
-        await settingsScreen.RemovePumpSimulator();
-        await settingsScreen.Close();
+        await settingsScreen.BackToHome();
+        var pumpScreen = await test.openPumpScreen();
+        await pumpScreen.RemoveSimulator();
     });
 };

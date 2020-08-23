@@ -22,6 +22,9 @@ class CorrectionRangeScreen extends base.EntriesScreen {
     OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
     }
+    InfoLabel() {
+        return match.accessible.TextLabel(this.screenText.Info);
+    }
     /**
      * @override so we access the header by label
      */

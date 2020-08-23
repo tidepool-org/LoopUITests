@@ -15,13 +15,16 @@ class InsulinModelScreen extends base.Screen {
             },
         });
     }
+    InfoLabel() {
+        return match.accessible.TextLabel(this.screenText.Info);
+    }
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
+    }
     async Apply(model) {
         if (model) {
             await match.accessible.ClickableLabel(model).tap();
         }
-    }
-    OpenButton() {
-        return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
     }
 }
 
