@@ -92,8 +92,8 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.basalRatesScreen.InfoLabel();
     }
     async OpenBasalRateScreen() {
-        //await this.SwipeUp(this.BasalRateLabel());
-        await this.BasalRateLabel().tap();
+        //`Basal Rate` vs `Basal Rates` on settings screen versions
+        await match.accessible.ClickableLabel('Basal Rates').tap();
         return this.basalRatesScreen;
     }
 
@@ -110,7 +110,6 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.deliveryLimitsScreen.InfoLabel();
     }
     async OpenDeliveryLimitsScreen() {
-        //await this.SwipeUp(this.DeliveryLimitsLabel());
         await this.DeliveryLimitsLabel().tap();
         return this.deliveryLimitsScreen;
     }
@@ -134,7 +133,6 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.carbRatioScreen.InfoLabel();
     }
     async OpenCarbRatioScreen() {
-        //await this.SwipeUp(this.CarbRatiosLabel());
         await this.CarbRatiosLabel().tap();
         return this.carbRatioScreen;
     }
@@ -146,8 +144,6 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.insulinSensitivitiesScreen.InfoLabel();
     }
     async OpenInsulinSensitivitiesScreen() {
-        //await this._oldSettingsScreen();
-        //await this.SwipeUp(this.InsulinSensitivitiesLabel());
         await this.InsulinSensitivitiesLabel().tap();
         return this.insulinSensitivitiesScreen;
     }

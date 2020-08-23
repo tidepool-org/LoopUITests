@@ -9,7 +9,7 @@ class BasalRatesScreen extends base.EntriesScreen {
             generalText: language.general,
             open: {
                 isBtn: false,
-                label: language.settingsScreen.BasalRatesScreen.Header_old,
+                label: language.settingsScreen.BasalRatesScreen.Header,
             },
             header: {
                 backLabel: language.general.Cancel,
