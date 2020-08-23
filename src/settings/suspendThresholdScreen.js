@@ -28,7 +28,7 @@ class SuspendThresholdScreen extends base.EntryScreen {
      * @override so we access the header by label
      */
     Header() {
-        return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
+        return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
     }
     async OpenPicker() {
         await match.accessible.TextLabel(this.bgUnitsLabel).atIndex(0).tap();
