@@ -2,7 +2,6 @@ module.exports = (test) => {
     var screen;
     var settingsScreen;
     it('open', async () => {
-        await test.addUnconfiguredPump();
         settingsScreen = await test.OpenSettingsScreen();
         screen = await settingsScreen.OpenDeliveryLimitsScreen();
     });
@@ -30,7 +29,5 @@ module.exports = (test) => {
     it('cleanup and close', async () => {
         await screen.CancelAndClose();
         await settingsScreen.BackToHome();
-        var pumpScreen = await test.openPumpScreen();
-        await pumpScreen.RemoveSimulator();
     });
 };
