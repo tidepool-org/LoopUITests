@@ -17,11 +17,20 @@ class BasalRatesScreen extends base.EntriesScreen {
         }, config);
         this.unitsLabel = language.settingsScreen.BasalRatesScreen.Units;
     }
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.openLabel).atIndex(0);
+    }
+    InfoLabel() {
+        return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
+    }
     /**
      * @override so we access the header by label
      */
     Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
+    }
+    _parts(rate) {
+        return String(rate).split('.');
     }
     /**
      * @param {Object} rate
@@ -31,30 +40,27 @@ class BasalRatesScreen extends base.EntriesScreen {
      * @param {Object} rate.current optional
      */
     async ApplyOne(rate) {
-        const pickerID = 'quantity_picker'
         const wholePart = 0;
-        let expectedParts = String(rate.expected.unitsPerHour).split('.');
-
+        let expectedParts = this._parts(rate.expected.unitsPerHour);
+        let currentValue = this.config.startWhole;
         if (rate.current) {
-            let currentParts = String(rate.current.unitsPerHour).split('.');
-            await action.ScrollQuantityPicker(
-                Number(currentParts[wholePart]),
-                Number(expectedParts[wholePart]),
-                { pickerID: pickerID, useItemID: false, smallStep: false }
-            );
-        } else {
-            await action.ScrollQuantityPicker(
-                this.config.startWhole,
-                Number(expectedParts[wholePart]),
-                { pickerID: pickerID, useItemID: false, smallStep: false }
-            );
+            let currentParts = this._parts(rate.current.unitsPerHour);
+            currentValue = Number(currentParts[wholePart])
         }
+        await action.ScrollQuantityPicker(
+            currentValue,
+            Number(expectedParts[wholePart]),
+        );
     }
     /**
      * @param {Array} rates
      */
     async ApplyAll(rates) {
         await super.ApplyAll(rates, this.ApplyOne);
+    }
+    async Open() {
+        await super.Open();
+        return this;
     }
 }
 

@@ -1,98 +1,122 @@
 module.exports = (test) => {
     var screen;
+    var settings;
     var screenLimit;
     beforeAll(async () => {
-        screen = await test.settingsScreen.OpenCorrectionRangeScreen();
+        settings = await test.OpenSettingsScreen();
+        screen = await settings.OpenCorrectionRangeScreen();
         screenLimit = test.limits.correctionRange;
     });
-    it('can set max units at limit', async () => {
-        await screen.Add();
-        await screen.ApplyOne({
-            expected: {
-                min: 100,
-                max: screenLimit.max.limit,
-            }
+    describe('max units at limit', () => {
+        it('can set units', async () => {
+            await screen.Plus();
+            await screen.ApplyOne({
+                expected: {
+                    min: 100,
+                    max: screenLimit.max.limit,
+                }
+            });
+            await screen.Add();
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        it('check for guardrail warning icon', async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        });
+        it('check for guardrail message', async () => {
+            await expect(screen.GuardrailMessage('High Correction Value')).toBeVisible();
+        });
+        it('reset', async () => {
+            await screen.CancelAndClose();
+            await settings.Back();
+            settings = await test.OpenSettingsScreen();
+            screen = await settings.OpenCorrectionRangeScreen();
+        });
     });
-    it('can set max units with warning', async () => {
-        await screen.Add();
-        await screen.ApplyOne({
-            expected: {
-                min: 100,
-                max: screenLimit.max.warning,
-            },
-            current: {
-                min: 100,
-                max: screenLimit.max.limit,
-            }
+    describe('max units with warning', () => {
+        it('can set units', async () => {
+            await screen.Plus();
+            await screen.ApplyOne({
+                expected: {
+                    min: 100,
+                    max: screenLimit.max.warning,
+                },
+            });
+            await screen.Add();
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 1 })).toBeVisible();
+        it('check for guardrail warning icon', async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        });
+        it('check for guardrail message', async () => {
+            await expect(screen.GuardrailMessage('High Correction Value')).toBeVisible();
+        });
+        it('reset', async () => {
+            await screen.CancelAndClose();
+            await settings.Back();
+            settings = await test.OpenSettingsScreen();
+            screen = await settings.OpenCorrectionRangeScreen();
+        });
     });
-    it('can set max units with no warning', async () => {
-        await screen.Add();
-        await screen.ApplyOne({
-            expected: {
-                min: 100,
-                max: screenLimit.max.noWarning,
-            },
-            current: {
-                min: 100,
-                max: screenLimit.max.warning,
-            }
+    describe('max units with no warning', () => {
+        it('can set units', async () => {
+            await screen.Plus();
+            await screen.ApplyOne({
+                expected: {
+                    min: 100,
+                    max: screenLimit.max.noWarning,
+                },
+            });
+            await screen.Add();
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 2 })).toBeNotVisible();
+        it('check there is no guardrail warning icon', async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
+        });
+        it('reset', async () => {
+            await screen.CancelAndClose();
+            await settings.Back();
+            settings = await test.OpenSettingsScreen();
+            screen = await settings.OpenCorrectionRangeScreen();
+        });
     });
-    it('can set min units with no warning', async () => {
-        await screen.Add();
-        await screen.ApplyOne({
-            expected: {
-
-                min: screenLimit.min.noWarning,
-                max: screenLimit.max.noWarning,
-            },
-            current: {
-                min: 100,
-                max: screenLimit.max.noWarning,
-            }
+    describe('min units with no warning', () => {
+        it('can set units', async () => {
+            await screen.Plus();
+            await screen.ApplyOne({
+                expected: {
+                    min: screenLimit.min.noWarning,
+                    max: screenLimit.max.noWarning,
+                },
+            });
+            await screen.Add();
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 3 })).toBeNotVisible();
+        it('check there is no guardrail warning icon', async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
+        });
+        it('reset', async () => {
+            await screen.CancelAndClose();
+            await settings.Back();
+            settings = await test.OpenSettingsScreen();
+            screen = await settings.OpenCorrectionRangeScreen();
+        });
     });
-    it('can set min units with warning', async () => {
-        await screen.Add();
-        await screen.ApplyOne({
-            expected: {
-                min: screenLimit.min.warning,
-                max: screenLimit.max.noWarning,
-            },
-            current: {
-                min: screenLimit.min.noWarning,
-                max: screenLimit.max.noWarning,
-            }
+    describe('min units at limit', () => {
+        it('can set units', async () => {
+            await screen.Plus();
+            await screen.ApplyOne({
+                expected: {
+                    min: screenLimit.min.limit,
+                    max: screenLimit.max.noWarning,
+                },
+            });
+            await screen.Add();
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 4 })).toBeVisible();
-    });
-    it('can set min units at limit', async () => {
-        await screen.Add();
-        await screen.ApplyOne({
-            expected: {
-                min: screenLimit.min.limit,
-                max: screenLimit.max.noWarning,
-            },
-            current: {
-                min: screenLimit.min.warning,
-                max: screenLimit.max.noWarning,
-            }
+        it('check there a guardrail warning icon', async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 5 })).toBeVisible();
+        it('check for guardrail message', async () => {
+            await expect(screen.GuardrailMessage('Low Correction Value')).toBeVisible();
+        });
     });
     it('can close screen', async () => {
         await screen.CancelAndClose();
+        await settings.Back();
     });
 };

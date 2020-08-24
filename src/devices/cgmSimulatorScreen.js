@@ -5,25 +5,19 @@ const base = require('../base/index');
 class CGMSimulatorScreen extends base.Screen {
     constructor(language) {
         super({
-            screenText: language.settingsScreen.CGMSimulatorScreen,
+            screenText: language.device.CGMSimulatorScreen,
             generalText: language.general,
             header: {
                 backLabel: language.general.Done,
             },
             scroll: {
-                visibleBottomLabel: language.settingsScreen.CGMSimulatorScreen.DeleteCGM,
-                visibleTopLabel: language.settingsScreen.CGMSimulatorScreen.Model.Constant,
+                visibleBottomLabel: language.device.CGMSimulatorScreen.DeleteCGM,
+                visibleTopLabel: language.device.CGMSimulatorScreen.Model.Constant,
             },
         });
     }
-    /**
-     * @override Screen.BackButton()
-     **/
-    BackButton() {
-        return match.accessible.ButtonBarButton(this.backLabel);
-    }
     CGMSettingsButton() {
-        return match.accessible.BackButton(this.screenText.Header);
+        return match.accessible.ButtonBarButton(this.screenText.Header);
     }
     async BackToCGMSettings() {
         return this.CGMSettingsButton().tap();
@@ -146,12 +140,12 @@ class CGMSimulatorScreen extends base.Screen {
             var baseGlucoseField = match.UIEditableTextField();
             await baseGlucoseField.clearText();
             await baseGlucoseField.typeText(String(model.bgValues[0]));
-            await match.accessible.BackButton(this.screenText.Model.SineCurve).tap();
+            await match.accessible.ButtonBarButton(this.screenText.Model.SineCurve).tap();
             await match.accessible.ClickableLabel(this.screenText.Amplitude).tap();
             var amplitudeField = match.UIEditableTextField();
             await amplitudeField.clearText();
             await amplitudeField.typeText(String(model.bgValues[1]));
-            await match.accessible.BackButton(this.screenText.Model.SineCurve).tap();
+            await match.accessible.ButtonBarButton(this.screenText.Model.SineCurve).tap();
             await this.BackToCGMSettings();
         }
         if (model.name === this.screenText.Model.None) {

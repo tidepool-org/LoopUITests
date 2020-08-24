@@ -20,6 +20,9 @@ class EntriesScreen extends Screen {
     InfoButton() {
         return match.accessible.Button(this.generalText.ButtonLabel.InfoCircle);
     }
+    BackButton() {
+        return match.accessible.Button(this.backLabel);
+    }
     /**
      *
      * @param {object} entry

@@ -1,14 +1,11 @@
 module.exports = (test) => {
     var screen;
     var settingsScreen;
-    beforeAll(async () => {
-        settingsScreen = await test.OpenSettingsScreen();
-    });
     it('add simulator', async () => {
-        await settingsScreen.Devices().AddCGM();
+        await test.addCGM();
     });
     it('open simulator', async () => {
-        screen = await settingsScreen.Devices().OpenCGMScreen();
+        screen = await test.openCGMScreen();
     });
     it('set effect as Glucose Noise', async () => {
         await screen.Apply({
@@ -81,8 +78,5 @@ module.exports = (test) => {
     });
     it('can remove simulator', async () => {
         await screen.RemoveSimulator();
-    });
-    it('return to start', async () => {
-        await settingsScreen.Back();
     });
 };

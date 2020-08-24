@@ -7,6 +7,7 @@ const DexcomG6Screen = require('./dexcomG6Screen');
 class Devices {
     constructor(language, header) {
         this.generalText = language.general;
+        this.screenText = language.device;
         this.cgmSimulator = new CGMSimulatorScreen(language);
         this.pumpSimulator = new PumpSimulatorScreen(language);
         this.g6 = new DexcomG6Screen(language);
@@ -16,43 +17,43 @@ class Devices {
     }
     AddPumpButton() {
         if (this.isHeader) {
-            return match.accessible.TextLabel(this.generalText.AddPump);
+            return match.accessible.TextLabel(this.screenText.AddPump);
         }
-        return match.accessible.TextLabel('Add Pump\nTap here to set up a pump');
+        return match.accessible.TextLabel(this.screenText.AddPumpFull);
     }
     AddCGMButton() {
         if (this.isHeader) {
-            return match.accessible.TextLabel(this.generalText.AddCGM);
+            return match.accessible.TextLabel(this.screenText.AddCGM);
         }
-        return match.accessible.TextLabel('Add CGM\nTap here to set up a CGM');
+        return match.accessible.TextLabel(this.screenText.AddCGMFull);
     }
     async AddPump() {
         await this.AddPumpButton().tap();
-        await match.accessible.Button(this.generalText.Simulator).tap();
+        await match.accessible.Button(this.screenText.PumpSimulator).tap();
         await match.accessible.Button(this.generalText.Continue).tap();
     }
     async OpenPumpScreen() {
         try {
-            await match.accessible.Id(this.generalText.SimulatorPump).tap();
+            await match.accessible.Id(this.screenText.PumpSimulatorId).tap();
         } catch (err) {
-            await match.Label('Pump Status').tap();
+            await match.Label(this.screenText.PumpStatus).tap();
         }
         return this.pumpSimulator;
     }
     async AddCGM() {
         await this.AddCGMButton().tap();
-        await match.accessible.Button(this.generalText.Simulator).tap();
+        await match.accessible.Button(this.screenText.CGMSimulator).tap();
     }
     async AddG6() {
         await this.AddCGMButton().tap();
-        await match.accessible.Button('Dexcom G6').tap();
+        await match.accessible.Button(this.screenText.G6).tap();
         return this.g6;
     }
     async OpenCGMScreen() {
         try {
-            await match.accessible.ClickableLabel(this.generalText.Simulator).atIndex(1).tap();
+            await match.accessible.ClickableLabel(this.screenText.Simulator).atIndex(1).tap();
         } catch (err) {
-            await match.Label('CGM Status').tap();
+            await match.Label(this.screenText.CGMStatus).tap();
         }
         return this.cgmSimulator;
     }

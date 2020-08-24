@@ -3,11 +3,11 @@ module.exports = (test) => {
     var settings;
     var screenLimit;
     beforeAll(async () => {
-        settings = await test.OpenSettingsScreen();
         screenLimit = test.limits.delivery;
     });
     describe('max basal rate', () => {
         it('open screen', async () => {
+            settings = await test.OpenSettingsScreen();
             screen = await settings.OpenDeliveryLimitsScreen();
         });
         it('can open max basal rate picker', async () => {
@@ -33,10 +33,13 @@ module.exports = (test) => {
         });
         it('cancel and close', async () => {
             await screen.CancelAndClose();
+            await settings.Back();
         });
     });
+    //TODO: usability issue that hides the picker when a Guardrail threshold is met
     describe.skip('max bolus amount', () => {
         it('open screen', async () => {
+            settings = await test.OpenSettingsScreen();
             screen = await settings.OpenDeliveryLimitsScreen();
         });
         it('open picker', async () => {
@@ -46,14 +49,14 @@ module.exports = (test) => {
             await screen.ApplyBolus({
                 expected: { amount: screenLimit.bolus.max.limit },
             });
-            await expect(screen.GuardrailMessage('?')).toBeVisible();
+            await expect(screen.GuardrailMessage('High Maximum Bolus')).toBeVisible();
         });
         it('can set max bolus warning', async () => {
             await screen.ApplyBolus({
                 expected: { amount: screenLimit.bolus.max.warning },
                 current: { amount: screenLimit.bolus.max.limit },
             });
-            await expect(screen.GuardrailMessage('??')).toBeVisible();
+            await expect(screen.GuardrailMessage('High Maximum Bolus')).toBeVisible();
         });
         it('can set max bolus no warning', async () => {
             await screen.ApplyBolus({
@@ -69,6 +72,7 @@ module.exports = (test) => {
         });
         it('cancel and close', async () => {
             await screen.CancelAndClose();
+            await settings.Back();
         });
     });
 }

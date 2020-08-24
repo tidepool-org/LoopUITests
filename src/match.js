@@ -10,16 +10,13 @@ const match = {
      */
     accessible: {
         ButtonBarButton(label) {
-            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('_UIButtonBarButton'))));
+            return element(by.type('_UIButtonBarButton').withDescendant(by.label(label).and(by.traits([buttonTrait]))));
         },
         Button(label) {
             return element(by.label(label).and(by.traits([buttonTrait])));
         },
         Id(theId) {
             return element(by.id(theId));
-        },
-        BackButton(label) {
-            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UIAccessibilityBackButtonElement'))));
         },
         SwipeButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwipeActionStandardButton'))));

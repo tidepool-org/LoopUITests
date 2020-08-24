@@ -39,7 +39,7 @@ class Config {
             AddPumpSimulator: true,
             CGMSimulatorSettings: {
                 model: {
-                    name: text.settingsScreen.CGMSimulatorScreen.Model.Constant,
+                    name: text.device.CGMSimulatorScreen.Model.Constant,
                     bgValues: [110],
                 },
                 backfillHours: '6',

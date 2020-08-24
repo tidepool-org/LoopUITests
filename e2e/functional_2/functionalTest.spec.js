@@ -25,7 +25,7 @@ describe('functional test with configured pump', () => {
             }
         });
     });
-    describe('carb entry screen', () => {
+    describe.skip('carb entry screen', () => {
         functionality.carbEntryScreenTests(test);
     });
     describe('bolus screen', () => {

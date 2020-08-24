@@ -5,14 +5,14 @@ const base = require('../base/index');
 class PumpSimulatorScreen extends base.Screen {
     constructor(language) {
         super({
-            screenText: language.settingsScreen.PumpSimulatorScreen,
+            screenText: language.device.PumpSimulatorScreen,
             generalText: language.general,
             header: {
                 backLabel: language.general.Done,
             },
             scroll: {
-                visibleBottomLabel: language.settingsScreen.PumpSimulatorScreen.DeletePump,
-                visibleTopLabel: language.settingsScreen.PumpSimulatorScreen.SuspendDelivery,
+                visibleBottomLabel: language.device.PumpSimulatorScreen.DeletePump,
+                visibleTopLabel: language.device.PumpSimulatorScreen.SuspendDelivery,
             },
         });
     }
@@ -163,7 +163,7 @@ class PumpSimulatorScreen extends base.Screen {
         }
     }
     async _backToPumpSimulator() {
-        await match.accessible.BackButton(this.screenText.PumpSettings).tap();
+        await match.accessible.ButtonBarButton(this.screenText.PumpSettings).tap();
     }
     async _setValue(val) {
         var valField = element(by.type('UITextField'));

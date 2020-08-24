@@ -13,13 +13,13 @@ describe('guardrails test', () => {
             .withStartScreen('home');
         await test.prepare();
     });
-    describe('insulin carb ratio', () => {
-        guardrails.insulinCarbRatioTest(test);
+    describe('insulin sensitivity schedule', () => {
+        guardrails.insulinSensitivityScheduleTest(test);
     });
-    describe('correction range schedule', () => {
-        guardrails.correctionRangeScheduleTest(test);
+    describe('delivery limits', () => {
+        guardrails.deliveryLimitsTest(test);
     });
-    describe('basal rate schedule', () => {
-        guardrails.basalRateScheduleTest(test);
+    describe('suspend threshold', () => {
+        guardrails.suspendThresholdTest(test);
     });
 });

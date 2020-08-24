@@ -3,7 +3,6 @@ module.exports = (test) => {
     var settingsScreen;
     it('open', async () => {
         settingsScreen = await test.OpenSettingsScreen();
-        await settingsScreen.AddPumpSimulator();
         screen = await settingsScreen.OpenDeliveryLimitsScreen();
     });
     it('has a header', async () => {
@@ -29,7 +28,6 @@ module.exports = (test) => {
     });
     it('cleanup and close', async () => {
         await screen.CancelAndClose();
-        await settingsScreen.RemovePumpSimulator();
-        await settingsScreen.Close();
+        await settingsScreen.BackToHome();
     });
 };

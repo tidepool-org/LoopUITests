@@ -51,7 +51,7 @@ class Screen {
         return match.accessible.Header(this.screenText.Header);
     }
     BackButton() {
-        return match.accessible.BackButton(this.backLabel);
+        return match.accessible.ButtonBarButton(this.backLabel);
     }
     AddButton() {
         return match.accessible.Button(this.generalText.Add);
@@ -60,7 +60,7 @@ class Screen {
         return match.accessible.Button(this.generalText.ButtonLabel.Plus);
     }
     EditButton() {
-        return match.accessible.ButtonBarButton(this.generalText.Edit);
+        return match.accessible.Button(this.generalText.Edit);
     }
     SaveButton() {
         return match.accessible.Button(this.generalText.Save);
@@ -118,18 +118,14 @@ class Screen {
         await this.Back();
     }
     async Back() {
-        try {
-            await this.BackButton().tap();
-        } catch (err) {
-            await match.accessible.ButtonBarButton(this.backLabel).tap();
-        }
+        await this.BackButton().tap();
     }
     async Continue() {
         await this.ContinueButton().tap();
     }
     async ScrollToBottom() {
         if (this.visibleBottomLabel == null) {
-            return;
+            await action.ScrollToBottom();
         }
         try {
             await expect(match.accessible.TextLabel(this.visibleBottomLabel)).toBeVisible();
@@ -137,9 +133,23 @@ class Screen {
             await action.ScrollToBottom();
         }
     }
+    async SwipeUp(labelElement, index) {
+        try {
+            await expect(labelElement).toBeVisible();
+        } catch (err) {
+            await action.SwipeUp(index);
+        }
+    }
+    async SwipeDown(labelElement, index) {
+        try {
+            await expect(labelElement).toBeVisible();
+        } catch (err) {
+            await action.SwipeDown(index);
+        }
+    }
     async ScrollToTop() {
         if (this.visibleTopLabel == null) {
-            return;
+            await action.ScrollToTop();
         }
         try {
             await expect(match.accessible.TextLabel(this.visibleTopLabel)).toBeVisible();

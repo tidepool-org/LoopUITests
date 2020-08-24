@@ -18,20 +18,20 @@ class SuspendThresholdScreen extends base.EntryScreen {
         this.bgUnitsLabel = language.settingsScreen.SuspendThresholdScreen.BGUnits;
         this.config = config;
     }
-    /**
-     * @override so we access the correct CancelButton
-     */
-    CancelButton() {
-        return match.accessible.ButtonBarButton(this.generalText.Cancel);
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
+    }
+    InfoLabel() {
+        return match.accessible.TextLabel(this.screenText.Info);
     }
     /**
      * @override so we access the header by label
      */
     Header() {
-        return match.accessible.Label(this.screenText.Header).atIndex(1);
+        return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
     }
     async OpenPicker() {
-        await match.accessible.Label(this.bgUnitsLabel).atIndex(0).tap();
+        await match.accessible.TextLabel(this.bgUnitsLabel).atIndex(0).tap();
     }
     async SwipePickerToMaxValue() {
         await action.SwipePickerUp(3);
@@ -46,11 +46,16 @@ class SuspendThresholdScreen extends base.EntryScreen {
      * @param {object} threshold.current optional
      **/
     async ApplyOne(threshold) {
+        let currentValue = this.config.start;
         if (threshold.current) {
-            await action.ScrollPickerToValue(threshold.current.value, threshold.expected.value);
-        } else {
-            await action.ScrollPickerToValue(this.config.start, threshold.expected.value);
+            currentValue = threshold.current.value;
         }
+        await action.ScrollQuantityPicker(currentValue, threshold.expected.value);
+
+    }
+    async Open() {
+        await super.Open();
+        return this;
     }
 }
 

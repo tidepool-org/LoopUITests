@@ -18,6 +18,12 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
             },
         }, config);
     }
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
+    }
+    InfoLabel() {
+        return match.accessible.TextLabel(this.screenText.Info);
+    }
     /**
      * @override so we access the header by label
      */
@@ -32,25 +38,20 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
      * @param {Object} sensitivity.current optional
      */
     async ApplyOne(sensitivity) {
+        let currentValuePerInsulinUnit = this.config.start;
         if (sensitivity.current) {
-            await action.ScrollQuantityPicker(
-                sensitivity.current.bgValuePerInsulinUnit,
-                sensitivity.expected.bgValuePerInsulinUnit,
-                { pickerID: pickerID, useItemID: true, smallStep: false }
-            );
-        } else {
-            await action.ScrollQuantityPicker(
-                this.config.start,
-                sensitivity.expected.bgValuePerInsulinUnit,
-                { pickerID: pickerID, useItemID: true, smallStep: false }
-            );
+            currentValuePerInsulinUnit = sensitivity.current.bgValuePerInsulinUnit;
         }
+        await action.ScrollQuantityPicker(
+            currentValuePerInsulinUnit,
+            sensitivity.expected.bgValuePerInsulinUnit
+        );
     }
     /**
      * @param {Array} sensitivities
      */
     async ApplyAll(sensitivities) {
-        await this.Add();
+        await this.Plus();
         for (let index = 0; index < sensitivities.length; index++) {
             var current;
             let expected = sensitivities[index];
@@ -60,6 +61,10 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
             await this.ApplyOne({ expected, current });
             await this.Add();
         }
+    }
+    async Open() {
+        await super.Open();
+        return this;
     }
 }
 

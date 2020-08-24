@@ -16,11 +16,20 @@ class CarbRatioScreen extends base.EntriesScreen {
             },
         }, config);
     }
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.openLabel).atIndex(0);
+    }
+    InfoLabel() {
+        return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
+    }
     /**
      * @override so we access the header by label
      */
     Header() {
-        return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
+        return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
+    }
+    _parts(ratio) {
+        return String(ratio).split('.');
     }
     /**
      * @param {Object} ratio
@@ -30,22 +39,20 @@ class CarbRatioScreen extends base.EntriesScreen {
      * @param {Object} ratio.current optional
      */
     async ApplyOne(ratio) {
-        const pickerID = 'quantity_picker'
         const wholePart = 0;
-        let expectedParts = this._unitParts(ratio.expected.carbGramsPerInsulinUnit);
-
+        let expectedParts = this._parts(ratio.expected.carbGramsPerInsulinUnit);
+        let currentValue = this.config.startWhole;
         if (ratio.current) {
-            let currentParts = this._unitParts(ratio.current.carbGramsPerInsulinUnit);
-            await action.ScrollQuantityPicker(Number(currentParts[wholePart]), Number(expectedParts[wholePart]), { pickerID: pickerID, useItemID: false, smallStep: false });
-        } else {
-            await action.ScrollQuantityPicker(this.config.startWhole, Number(expectedParts[wholePart]), { pickerID: pickerID, useItemID: false, smallStep: false });
+            let currentParts = this._parts(ratio.current.carbGramsPerInsulinUnit);
+            currentValue = Number(currentParts[wholePart]);
         }
+        await action.ScrollQuantityPicker(currentValue, Number(expectedParts[wholePart]));
     }
     /**
      * @param {Array} ratios
      */
     async ApplyAll(ratios) {
-        await this.Add();
+        await this.Plus();
         for (let index = 0; index < ratios.length; index++) {
             var current;
             let expected = ratios[index];

@@ -1,5 +1,6 @@
 const { Test, Config } = require('../../src/index');
-const accessibility = require('../../tests/accessibility/index');
+const settingsAccessibility = require('../../tests/accessibility/settings/index');
+const deviceAccessibility = require('../../tests/accessibility/devices/index');
 
 describe('accessibility', () => {
     var test = new Test();
@@ -14,37 +15,44 @@ describe('accessibility', () => {
     });
     describe('devices', () => {
         describe('g6 screen', () => {
-            accessibility.g6ScreenTest(test);
+            deviceAccessibility.g6ScreenTest(test);
         });
         describe('pump screen', () => {
-            accessibility.pumpSimulatorScreenTest(test);
+            deviceAccessibility.pumpSimulatorScreenTest(test);
         });
         describe('cgm screen', () => {
-            accessibility.cgmSimulatorScreenTest(test);
+            deviceAccessibility.cgmSimulatorScreenTest(test);
+        });
+    });
+    describe('settings overview', () => {
+        describe('overview screen', () => {
+            settingsAccessibility.settingsScreenTest(test);
+        });
+        describe('therapy screen', () => {
+            settingsAccessibility.therapyScreenTest(test);
         });
     });
     describe('settings', () => {
-        describe('overview screen', () => {
-            accessibility.threapySettingsTest(test);
+        it('add pump', async () => {
+            await test.addUnconfiguredPump();
         });
-        //TODO: the following require settings and pump setup once ready
-        describe.skip('delivery limits', () => {
-            accessibility.settingsDeliveryLimitsScreenTest(test);
+        describe('delivery limits', () => {
+            settingsAccessibility.deliveryLimitsScreenTest(test);
         });
-        describe.skip('insulin sensitivities', () => {
-            accessibility.settingsInsulinSensitivitiesScreenTest(test);
+        describe('insulin sensitivities', () => {
+            settingsAccessibility.insulinSensitivitiesScreenTest(test);
         });
-        describe.skip('correction range', () => {
-            accessibility.settingsCorrectionRangeScreenTest(test);
+        describe('correction range', () => {
+            settingsAccessibility.correctionRangeScreenTest(test);
         });
-        describe.skip('suspend threshold', () => {
-            accessibility.settingsSuspendThresholdScreenTest(test);
+        describe('suspend threshold', () => {
+            settingsAccessibility.suspendThresholdScreenTest(test);
         });
-        describe.skip('basal rates', () => {
-            accessibility.settingsBasalRatesScreenTest(test);
+        describe('basal rates', () => {
+            settingsAccessibility.basalRatesScreenTest(test);
         });
-        describe.skip('carb ratios', () => {
-            accessibility.settingsCarbRatioScreenTest(test);
+        describe('carb ratios', () => {
+            settingsAccessibility.carbRatioScreenTest(test);
         });
     });
 });

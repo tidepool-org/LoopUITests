@@ -19,11 +19,17 @@ class CorrectionRangeScreen extends base.EntriesScreen {
             },
         }, config);
     }
+    OpenButton() {
+        return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
+    }
+    InfoLabel() {
+        return match.accessible.TextLabel(this.screenText.Info);
+    }
     /**
      * @override so we access the header by label
      */
     Header() {
-        return match.accessible.TextLabel(this.screenText.Header);
+        return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
     }
     /**
      * @param {Object} range
@@ -34,35 +40,27 @@ class CorrectionRangeScreen extends base.EntriesScreen {
      * @param {Object} range.current optional
      */
     async ApplyOne(range) {
+        let currentMax = this.config.maxStart;
+        let currentMin = this.config.minStart;
+
         if (range.current) {
-            await action.ScrollQuantityPicker(
-                range.current.max,
-                range.expected.max,
-                { pickerID: maxGlucosePickerID, useItemID: false, smallStep: false }
-            );
-            await action.ScrollQuantityPicker(
-                range.current.min,
-                range.expected.min,
-                { pickerID: minGlucosePickerID, useItemID: false, smallStep: false }
-            );
-        } else {
-            await action.ScrollQuantityPicker(
-                this.config.maxStart,
-                range.expected.max,
-                { pickerID: maxGlucosePickerID, useItemID: false, smallStep: false }
-            );
-            await action.ScrollQuantityPicker(
-                this.config.minStart,
-                range.expected.min,
-                { pickerID: minGlucosePickerID, useItemID: false, smallStep: false }
-            );
+            currentMax = range.current.max;
+            currentMin = range.current.min;
         }
+        await action.ScrollQuantityPicker(
+            currentMax,
+            range.expected.max,
+        );
+        await action.ScrollQuantityPicker(
+            currentMin,
+            range.expected.min,
+        );
     }
     /**
      * @param {Array} ranges
      */
     async ApplyAll(ranges) {
-        await this.Add();
+        await this.Plus();
         for (let index = 0; index < ranges.length; index++) {
             var current;
             let expected = ranges[index];

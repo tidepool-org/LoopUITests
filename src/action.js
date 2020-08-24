@@ -1,12 +1,10 @@
 const match = require('./match');
 const element = require('detox').element;
 
-var _nextPickerStep = function (currentValue, expectedValue, smallStep) {
+var _nextPickerStep = function (currentValue, expectedValue) {
     let step = 1;
-    if (smallStep == false) {
-        if (Math.abs(currentValue - expectedValue) >= 2) {
-            step = 2;
-        }
+    if (Math.abs(currentValue - expectedValue) >= 2) {
+        step = 2;
     }
     if (currentValue > expectedValue) {
         return currentValue - step;
@@ -18,49 +16,17 @@ var _nextPickerStep = function (currentValue, expectedValue, smallStep) {
 
 const action = {
     /**
-     * @summary scroll the picker to the given `expectedValue`
-     */
-    async ScrollPickerToValue(currentValue, expectedValue) {
-        if (currentValue == expectedValue) {
-            return;
-        }
-        do {
-            currentValue = _nextPickerStep(currentValue, expectedValue, false);
-            //NOTE: the tree expands when you traverse through a picker. This works but is hideous!!
-            try {
-                await match.accessible.PickerItem_v2(1, `${currentValue}`).tap();
-            } catch (error) {
-                try {
-                    await match.accessible.PickerItem_v2(0, `${currentValue}`).tap();
-                } catch (error) {
-                    await match.accessible.PickerItem_v2(2, `${currentValue}`).tap();
-                }
-            }
-        } while (currentValue != expectedValue);
-    },
-    /**
      *
      * @param {string} currentValue
      * @param {string} expectedValue
-     * @param {object} config
-     * @param {string} config.pickerID
-     * @param {boolean} config.useItemID
-     * @param {boolean} config.smallStep
      */
-    async ScrollQuantityPicker(currentValue, expectedValue, config) {
+    async ScrollQuantityPicker(currentValue, expectedValue) {
         if (currentValue == expectedValue) {
             return;
         }
         do {
-            currentValue = _nextPickerStep(currentValue, expectedValue, config.smallStep);
-            if (config.useItemID) {
-                await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
-            } else {
-                await match.accessible.QuantityPickerItemLabel(
-                    `${currentValue}`,
-                    config.pickerID,
-                ).tap();
-            }
+            currentValue = _nextPickerStep(currentValue, expectedValue);
+            await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
         } while (currentValue != expectedValue);
     },
     /**
@@ -110,6 +76,15 @@ const action = {
     },
     async ScrollToBottom() {
         await match.ScrollableView().atIndex(1).swipe('up');
+    },
+    async SwipeUp(index) {
+        if (index == null) {
+            index = 1;
+        }
+        await match.ScrollableView().atIndex(index).swipe('up', 'slow', 0.4);
+    },
+    async SwipeDown() {
+        await match.ScrollableView().atIndex(1).swipe('down', 'slow', 0.4);
     },
     async ScrollToTop() {
         await match.ScrollableView().atIndex(1).swipe('down');
