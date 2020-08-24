@@ -161,7 +161,9 @@ class Test {
     async addConfiguredPump(pumpConfig) {
         await this.addUnconfiguredPump();
         var settings = await this.OpenSettingsScreen();
+        await settings._closeNewSettings();
         await settings.setCorrectionRange(pumpConfig.correctionRange);
+        await settings.SwipeUp();
         await settings.setDeliveryLimits(pumpConfig.deliveryLimits);
         await match.accessible.ButtonBarButton(this.language.general.Done).tap();
     }

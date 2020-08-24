@@ -55,7 +55,11 @@ class SettingsScreen extends base.Screen {
         }
     }
     async _closeNewSettings() {
-        await match.accessible.Button(this.generalText.Done).atIndex(2).tap();
+        try {
+            await match.accessible.Button(this.generalText.Done).atIndex(2).tap()
+        } catch (err) {
+            await match.accessible.Button(this.generalText.Done).atIndex(1).tap();
+        }
     }
     _closedLoopButton() {
         return match.accessible.Button(this.screenText.ClosedLoop).atIndex(4);
@@ -135,12 +139,11 @@ class SettingsScreen extends base.Screen {
         await this.SwipeUp();
         return this.therapyScreen.OpenBasalRateScreen();
     }
-
     _newSettingsLabel() {
         return match.accessible.ClickableLabel(this.screenText.Settings).atIndex(0);
     }
     async setDeliveryLimits(deliveryLimits) {
-        var limits = await this.OpenDeliveryLimitsScreen();
+        var limits = await this.therapyScreen.OpenDeliveryLimitsScreen();
         await limits.OpenBasalRatePicker();
         await limits.ApplyBasal(deliveryLimits.basal);
         await limits.OpenBasalRatePicker();
@@ -157,7 +160,7 @@ class SettingsScreen extends base.Screen {
      * @param {number} correctionRange.expected.min
      */
     async setCorrectionRange(correctionRange) {
-        var correction = await this.OpenCorrectionRangeScreen();
+        var correction = await this.therapyScreen.OpenCorrectionRangeScreen();
         await correction.Plus();
         await correction.ApplyOne(correctionRange);
         await correction.Add();
