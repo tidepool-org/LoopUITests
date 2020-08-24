@@ -91,7 +91,7 @@ class SettingsScreen extends base.Screen {
         return match.accessible.Header(this.screenText.Configuration);
     }
     async OpenSupport() {
-        await this.ScrollToBottom();
+        await this.SwipeUp();
         await this.supportScreen.Open();
         return this.supportScreen;
     }
