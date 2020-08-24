@@ -38,19 +38,14 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
      * @param {Object} sensitivity.current optional
      */
     async ApplyOne(sensitivity) {
+        let currentValuePerInsulinUnit = this.config.start;
         if (sensitivity.current) {
-            await action.ScrollQuantityPicker(
-                sensitivity.current.bgValuePerInsulinUnit,
-                sensitivity.expected.bgValuePerInsulinUnit,
-                { pickerID: pickerID, useItemID: true, smallStep: false }
-            );
-        } else {
-            await action.ScrollQuantityPicker(
-                this.config.start,
-                sensitivity.expected.bgValuePerInsulinUnit,
-                { pickerID: pickerID, useItemID: true, smallStep: false }
-            );
+            currentValuePerInsulinUnit = sensitivity.current.bgValuePerInsulinUnit;
         }
+        await action.ScrollQuantityPicker(
+            currentValuePerInsulinUnit,
+            sensitivity.expected.bgValuePerInsulinUnit
+        );
     }
     /**
      * @param {Array} sensitivities

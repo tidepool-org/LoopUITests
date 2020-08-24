@@ -40,24 +40,17 @@ class BasalRatesScreen extends base.EntriesScreen {
      * @param {Object} rate.current optional
      */
     async ApplyOne(rate) {
-        const pickerID = 'quantity_picker'
         const wholePart = 0;
         let expectedParts = this._parts(rate.expected.unitsPerHour);
-
+        let currentValue = this.config.startWhole;
         if (rate.current) {
             let currentParts = this._parts(rate.current.unitsPerHour);
-            await action.ScrollQuantityPicker(
-                Number(currentParts[wholePart]),
-                Number(expectedParts[wholePart]),
-                { pickerID: pickerID, useItemID: false, smallStep: false }
-            );
-        } else {
-            await action.ScrollQuantityPicker(
-                this.config.startWhole,
-                Number(expectedParts[wholePart]),
-                { pickerID: pickerID, useItemID: false, smallStep: false }
-            );
+            currentValue = Number(currentParts[wholePart])
         }
+        await action.ScrollQuantityPicker(
+            currentValue,
+            Number(expectedParts[wholePart]),
+        );
     }
     /**
      * @param {Array} rates

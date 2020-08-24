@@ -39,15 +39,14 @@ class CarbRatioScreen extends base.EntriesScreen {
      * @param {Object} ratio.current optional
      */
     async ApplyOne(ratio) {
-        const pickerID = 'quantity_picker'
         const wholePart = 0;
         let expectedParts = this._parts(ratio.expected.carbGramsPerInsulinUnit);
+        let currentValue = this.config.startWhole;
         if (ratio.current) {
             let currentParts = this._parts(ratio.current.carbGramsPerInsulinUnit);
-            await action.ScrollQuantityPicker(Number(currentParts[wholePart]), Number(expectedParts[wholePart]), { pickerID: pickerID, useItemID: true });
-        } else {
-            await action.ScrollQuantityPicker(this.config.startWhole, Number(expectedParts[wholePart]), { pickerID: pickerID, useItemID: true });
+            currentValue = Number(currentParts[wholePart]);
         }
+        await action.ScrollQuantityPicker(currentValue, Number(expectedParts[wholePart]));
     }
     /**
      * @param {Array} ratios

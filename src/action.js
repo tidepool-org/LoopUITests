@@ -15,49 +15,18 @@ var _nextPickerStep = function (currentValue, expectedValue) {
 }
 
 const action = {
-    // /**
-    //  * @summary scroll the picker to the given `expectedValue`
-    //  */
-    // async ScrollPickerToValue(currentValue, expectedValue) {
-    //     if (currentValue == expectedValue) {
-    //         return;
-    //     }
-    //     do {
-    //         currentValue = _nextPickerStep(currentValue, expectedValue);
-    //         //NOTE: the tree expands when you traverse through a picker. This works but is hideous!!
-    //         try {
-    //             await match.accessible.PickerItem_v2(1, `${currentValue}`).tap();
-    //         } catch (error) {
-    //             try {
-    //                 await match.accessible.PickerItem_v2(0, `${currentValue}`).tap();
-    //             } catch (error) {
-    //                 await match.accessible.PickerItem_v2(2, `${currentValue}`).tap();
-    //             }
-    //         }
-    //     } while (currentValue != expectedValue);
-    // },
     /**
      *
      * @param {string} currentValue
      * @param {string} expectedValue
-     * @param {object} config
-     * @param {string} config.pickerID
-     * @param {boolean} config.useItemID
      */
-    async ScrollQuantityPicker(currentValue, expectedValue, config) {
+    async ScrollQuantityPicker(currentValue, expectedValue) {
         if (currentValue == expectedValue) {
             return;
         }
         do {
             currentValue = _nextPickerStep(currentValue, expectedValue);
-            //if (config.useItemID) {
             await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
-            // } else {
-            //     await match.accessible.QuantityPickerItemLabel(
-            //         `${currentValue}`,
-            //         config.pickerID,
-            //     ).tap();
-            // }
         } while (currentValue != expectedValue);
     },
     /**

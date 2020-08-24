@@ -40,29 +40,21 @@ class CorrectionRangeScreen extends base.EntriesScreen {
      * @param {Object} range.current optional
      */
     async ApplyOne(range) {
+        let currentMax = this.config.maxStart;
+        let currentMin = this.config.minStart;
+
         if (range.current) {
-            await action.ScrollQuantityPicker(
-                range.current.max,
-                range.expected.max,
-                { pickerID: maxGlucosePickerID, useItemID: false, smallStep: false }
-            );
-            await action.ScrollQuantityPicker(
-                range.current.min,
-                range.expected.min,
-                { pickerID: minGlucosePickerID, useItemID: false, smallStep: false }
-            );
-        } else {
-            await action.ScrollQuantityPicker(
-                this.config.maxStart,
-                range.expected.max,
-                { pickerID: maxGlucosePickerID, useItemID: false, smallStep: false }
-            );
-            await action.ScrollQuantityPicker(
-                this.config.minStart,
-                range.expected.min,
-                { pickerID: minGlucosePickerID, useItemID: false, smallStep: false }
-            );
+            currentMax = range.current.max;
+            currentMin = range.current.min;
         }
+        await action.ScrollQuantityPicker(
+            currentMax,
+            range.expected.max,
+        );
+        await action.ScrollQuantityPicker(
+            currentMin,
+            range.expected.min,
+        );
     }
     /**
      * @param {Array} ranges

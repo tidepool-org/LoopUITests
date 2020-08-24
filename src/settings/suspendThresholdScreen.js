@@ -46,11 +46,12 @@ class SuspendThresholdScreen extends base.EntryScreen {
      * @param {object} threshold.current optional
      **/
     async ApplyOne(threshold) {
+        let currentValue = this.config.start;
         if (threshold.current) {
-            await action.ScrollQuantityPicker(threshold.current.value, threshold.expected.value);
-        } else {
-            await action.ScrollQuantityPicker(this.config.start, threshold.expected.value);
+            currentValue = threshold.current.value;
         }
+        await action.ScrollQuantityPicker(currentValue, threshold.expected.value);
+
     }
     async Open() {
         await super.Open();
