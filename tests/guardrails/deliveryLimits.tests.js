@@ -33,7 +33,7 @@ module.exports = (test) => {
         });
         it('cancel and close', async () => {
             await screen.CancelAndClose();
-            await settings.BackToHome();
+            await settings.Back();
         });
     });
     //TODO: usability issue that hides the picker when a Guardrail threshold is met
@@ -72,7 +72,7 @@ module.exports = (test) => {
         });
         it('cancel and close', async () => {
             await screen.CancelAndClose();
-            await settings.BackToHome();
+            await settings.Back();
         });
     });
 }

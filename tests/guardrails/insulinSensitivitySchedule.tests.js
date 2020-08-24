@@ -62,6 +62,6 @@ module.exports = (test) => {
     });
     it('can close screen', async () => {
         await screen.CancelAndClose();
-        await settingsScreen.BackToHome();
+        await settingsScreen.Back();
     });
 };

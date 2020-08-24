@@ -61,8 +61,8 @@ module.exports = (test) => {
         await screen.Add();
         await expect(screen.GuardrailWarningIconPicker({ index: 5 })).toBeVisible();
     });
-    it('can canel and close screen', async () => {
+    it('can cancel and close screen', async () => {
         await screen.CancelAndClose();
-        await settings.BackToHome();
+        await settings.Back();
     });
 };
