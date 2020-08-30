@@ -10,10 +10,12 @@ describe('accessibility', () => {
         test = test.withLanguage(config.text)
             .withSettingDefault(config.settingDefault)
             .withScreenDefaults(config.screenDefaults)
+            .withTherapySettings()
+            .withSimulators({ cgm: true, pump: true })
             .withStartScreen('home');
         await test.prepare();
     });
-    describe('devices', () => {
+    describe.skip('devices', () => {
         describe('g6 screen', () => {
             deviceAccessibility.g6ScreenTest(test);
         });
@@ -24,7 +26,7 @@ describe('accessibility', () => {
             deviceAccessibility.cgmSimulatorScreenTest(test);
         });
     });
-    describe('settings overview', () => {
+    describe.skip('settings overview', () => {
         describe('overview screen', () => {
             settingsAccessibility.settingsScreenTest(test);
         });
@@ -32,7 +34,7 @@ describe('accessibility', () => {
             settingsAccessibility.therapyScreenTest(test);
         });
     });
-    describe('settings', () => {
+    describe.skip('settings', () => {
         it('add pump', async () => {
             await test.addUnconfiguredPump();
         });
