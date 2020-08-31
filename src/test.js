@@ -98,6 +98,7 @@ class Test {
     }
     async _loadTherapySettings() {
         await device.shake();
+        await match.accessible.TextLabel('Mock Therapy Settings').tap();
     }
     async prepare() {
         if (!this.language) {
@@ -126,12 +127,8 @@ class Test {
 
         await device.setBiometricEnrollment(this.authenticate);
 
-        console.log("device ", device.id)
-
         if (this.therapySettings) {
-            await this._loadDeviceScenariosFromDisk(device.id);
             await this._loadTherapySettings();
-            //await this._loadScenario('sine_curve.json');
         }
 
         if (this.scenario) {

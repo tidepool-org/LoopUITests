@@ -13,6 +13,4 @@ applicationId="$(ls -t | head -n1)"
 
 cd $workingDir
 
-mkdir $appDir/$applicationId/Documents/scenarios
-
 cp "$(pwd)"/scenarios/*  $appDir/$applicationId/Documents/scenarios/

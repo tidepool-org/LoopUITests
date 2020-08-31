@@ -41,7 +41,7 @@
     "configurations": {
       "ios.sim.debug-11pro": {
         "binaryPath": "build/Debug-iphonesimulator/Loop.app",
-        "build": "source ./scripts/build_loop.dev.sh dev",
+        "build": "source ./scripts/build_loop.dev.sh",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11 Pro"
@@ -49,7 +49,7 @@
       },
       "ios.sim.debug-6": {
         "binaryPath": "build/Debug-iphonesimulator/Loop.app",
-        "build": "source ./scripts/build_loop.dev.sh dev",
+        "build": "source ./scripts/build_loop.dev.sh",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 6"
@@ -57,7 +57,7 @@
       },
       "ios.sim.debug-se": {
         "binaryPath": "build/Debug-iphonesimulator/Loop.app",
-        "build": "source ./scripts/build_loop.dev.sh dev",
+        "build": "source ./scripts/build_loop.dev.sh",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone SE (2nd generation)"

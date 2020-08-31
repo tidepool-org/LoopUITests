@@ -1,23 +1,20 @@
 #!/bin/bash
 
-buildType="Debug"
-branch="dev"
-
 if [ "$1" != "" ]; then
     branch="$1"
+    echo "Get latest from $branch"
+    rm -rf build
+    mkdir build
+    cd build
+    git clone --branch="$branch" --recurse-submodules git@github.com:tidepool-org/LoopWorkspace.git
+else
+    cd build
 fi
 
-if [ "$2" != "" ]; then
-    buildType="$2"
-fi
+LoopWorkspace/Scripts/workspace-prepare.sh Tidepool
 
+## TODO LoopOverride.xcconfig with no `CRITICAL_ALERTS_ENABLED`
 
-echo "Building as $buildType build"
-echo "Build branch $branch"
+LoopWorkspace/Scripts/workspace-build.sh -o "$(pwd)" Tidepool
 
-rm -rf build
-mkdir build
-cd  build
-git clone --branch="$branch" --recurse-submodules git@github.com:tidepool-org/LoopWorkspace.git
-
-xcodebuild -workspace ./LoopWorkspace/Tidepool/Tidepool.xcworkspace -scheme 'Tidepool Loop' -configuration "$buildType" -destination 'name=iPhone 11 Pro' build SYMROOT="$(pwd)"
+cp -r "$(pwd)"/Build/Products/*  "$(pwd)"
