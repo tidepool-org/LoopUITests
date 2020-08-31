@@ -14,6 +14,12 @@ All tests
 
 `npm run test-all`
 
+## Device Configurations
+
+- iPhone 11 Pro `ios.sim.debug-11pro`
+- iPhone 6 `ios.sim.debug-6`
+- iPhone SE (2nd generation) `ios.sim.debug-se`
+
 ### Smoke test
 Accessibility tests that run through the screen elements making sure the are present
 
