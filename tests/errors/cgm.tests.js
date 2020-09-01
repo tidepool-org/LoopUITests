@@ -31,6 +31,31 @@ module.exports = (test) => {
             await home.HeaderSection().ExpectLoopStatusGlucoseDataAlert();
         });
     });
+    describe('random error', () => {
+        it('get constant data', async () => {
+            await screen.Apply({
+                model: { name: screen.screenText.Model.Constant, bgValues: [99] }
+            });
+            await screen.Back();
+        });
+        it('backfill data', async () => {
+            screen = await test.openCGMScreen();
+            await screen.Apply({
+                history: { name: screen.screenText.History.BackfillGlucose, backfillHours: 4, }
+            });
+        });
+        it('and error on 100% of readings', async () => {
+            screen = await test.openCGMScreen();
+            await screen.Apply({
+                effect: { randomErrorPercent: 100 }
+            });
+            await screen.Back();
+        });
+        it('should show error', async () => {
+            let home = await test.OpenHomeScreen();
+            await home.HeaderSection().ExpectLoopAlert();
+        });
+    });
     it('remove simulator', async () => {
         screen = await test.openCGMScreen();
         await screen.RemoveSimulator();

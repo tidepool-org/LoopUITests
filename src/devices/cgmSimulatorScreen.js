@@ -79,7 +79,9 @@ class CGMSimulatorScreen extends base.Screen {
     /**
      * @param {object} settings
      * @param {object} settings.effect
-     * @param {object} settings.effect.name
+     * @param {number} settings.effect.glucoseNoiseValue
+     * @param {number} settings.effect.randomErrorPercent
+     *
      * @param {object} settings.model
      * @param {string} settings.model.name
      * @param {array} settings.model.bgValues
@@ -100,27 +102,19 @@ class CGMSimulatorScreen extends base.Screen {
         if (effect == null) {
             return;
         }
-        if (effect === this.screenText.Effect.GlucoseNoise) {
+        if (effect.glucoseNoiseValue) {
             await this.GlucoseNoiseEffectLabel().tap();
             var noiseField = match.UIEditableTextField();
             await noiseField.clearText();
-            await noiseField.typeText('100');
-            await this.Back();
+            await noiseField.typeText(String(effect.glucoseNoiseValue));
+            await match.accessible.ButtonBarButton(this.generalText.Back).tap();
         }
-        if (effect === this.screenText.Effect.RandomError) {
+        if (effect.randomErrorPercent) {
             await this.RandomErrorEffectLabel().tap();
             var randomField = match.UIEditableTextField();
             await randomField.clearText();
-            await randomField.typeText('10');
-            await this.Back();
-        }
-        if (effect === this.screenText.Effect.RandomHighOutlier) {
-            await this.RandomHighOutlierEffectLabel().tap();
-            await this.BackToCGMSettings();
-        }
-        if (effect === this.screenText.Effect.RandomLowOutlier) {
-            await this.RandomLowOutlierEffectLabel().tap();
-            await this.BackToCGMSettings();
+            await randomField.typeText(String(effect.randomErrorPercent));
+            await match.accessible.ButtonBarButton(this.generalText.Back).tap();
         }
     }
     async _setModel(model) {
