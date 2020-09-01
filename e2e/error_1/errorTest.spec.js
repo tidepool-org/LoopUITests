@@ -7,11 +7,13 @@ describe('error test', () => {
     it('prepare test', async () => {
         config = await config.prepare();
         test = test.withLanguage(config.text)
-            .withLimits(config.limits)
-            .withScreenDefaults(config.screenDefaults)
             .withSettingDefault(config.settingDefault)
+            .withScreenDefaults(config.screenDefaults)
             .withStartScreen('home');
         await test.prepare();
+    });
+    describe('pump', () => {
+        errorsTests.pumpTests(test);
     });
     describe('pump', () => {
         errorsTests.pumpTests(test);
