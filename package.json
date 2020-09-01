@@ -4,18 +4,18 @@
   "scripts": {
     "test": "jest",
     "test_all": "detox test -c ios.sim.debug",
-    "test_error": "detox test e2e/error_1 -c ios.sim.debug-11pro",
-    "test_smoke_1": "detox test e2e/smoke_1 -c ios.sim.debug-11pro",
-    "test_smoke_1_iphone6": "detox test e2e/smoke_1 -c ios.sim.debug-6",
-    "test_smoke_1_iphoneSE2": "detox test e2e/smoke_1 -c ios.sim.debug-se-2",
-    "test_smoke_2": "detox test e2e/smoke_2 -c ios.sim.debug-11pro",
-    "test_smoke_2_iphone6": "detox test e2e/smoke_1 -c ios.sim.debug-6",
-    "test_smoke_2_iphoneSE2": "detox test e2e/smoke_1 -c ios.sim.debug-se-2",
-    "test_functional_1": "detox test e2e/functional_1 -c ios.sim.debug-11pro",
-    "test_functional_2": "detox test e2e/functional_2 -c ios.sim.debug-11pro",
-    "test_guardrail_1": "detox test e2e/guardrails_1 -c ios.sim.debug-11pro",
-    "test_guardrail_2": "detox test e2e/guardrails_2 -c ios.sim.debug-11pro",
-    "build": "detox build -c ios.sim.debug-11pro",
+    "test_error": "detox test e2e/error_1 -c ios.sim.debug.iphone-11pro",
+    "test_smoke_1": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-11pro",
+    "test_smoke_1_iphone6": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-6",
+    "test_smoke_1_iphoneSE2": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-se-2",
+    "test_smoke_2": "detox test e2e/smoke_2 -c ios.sim.debug.iphone-11pro",
+    "test_smoke_2_iphone6": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-6",
+    "test_smoke_2_iphoneSE2": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-se-2",
+    "test_functional_1": "detox test e2e/functional_1 -c ios.sim.debug.iphone-11pro",
+    "test_functional_2": "detox test e2e/functional_2 -c ios.sim.debug.iphone-11pro",
+    "test_guardrail_1": "detox test e2e/guardrails_1 -c ios.sim.debug.iphone-11pro",
+    "test_guardrail_2": "detox test e2e/guardrails_2 -c ios.sim.debug.iphone-11pro",
+    "build": "detox build -c ios.sim.debug.iphone-11pro",
     "lint": "eslint ."
   },
   "devDependencies": {
@@ -39,7 +39,7 @@
       }
     },
     "configurations": {
-      "ios.sim.debug-11pro": {
+      "ios.sim.debug.iphone-11pro": {
         "binaryPath": "build/Debug-iphonesimulator/Loop.app",
         "build": "source ./scripts/build_loop.dev.sh",
         "type": "ios.simulator",
@@ -47,7 +47,7 @@
           "type": "iPhone 11 Pro"
         }
       },
-      "ios.sim.debug-6": {
+      "ios.sim.debug.iphone-6": {
         "binaryPath": "build/Debug-iphonesimulator/Loop.app",
         "build": "source ./scripts/build_loop.dev.sh",
         "type": "ios.simulator",
@@ -55,7 +55,7 @@
           "type": "iPhone 6"
         }
       },
-      "ios.sim.debug-se-2": {
+      "ios.sim.debug.iphone-se-2": {
         "binaryPath": "build/Debug-iphonesimulator/Loop.app",
         "build": "source ./scripts/build_loop.dev.sh",
         "type": "ios.simulator",
