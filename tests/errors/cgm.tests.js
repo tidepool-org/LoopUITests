@@ -7,6 +7,6 @@ module.exports = (test) => {
         screen = await test.openCGMScreen();
     });
     it('remove simulator', async () => {
-        screen.RemoveSimulator();
+        await screen.RemoveSimulator();
     });
 };

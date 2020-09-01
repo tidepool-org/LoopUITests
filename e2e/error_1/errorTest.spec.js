@@ -12,10 +12,10 @@ describe('error test', () => {
             .withStartScreen('home');
         await test.prepare();
     });
-    describe('pump', () => {
+    describe.skip('pump', () => {
         errorsTests.pumpTests(test);
     });
-    describe('pump', () => {
-        errorsTests.pumpTests(test);
+    describe('cgm', () => {
+        errorsTests.cgmTests(test);
     });
 });
