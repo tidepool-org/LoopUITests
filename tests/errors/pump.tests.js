@@ -1,11 +1,12 @@
-var pumpTests = (test) => {
+module.exports = (test) => {
     var screen;
-    var settingsScreen;
-    beforeAll(async () => {
-        settingsScreen = await test.OpenSettingsScreen();
-        await settingsScreen.AddPumpSimulator();
-        screen = await settingsScreen.OpenPumpSimulatorScreen();
+    it('add simulator', async () => {
+        await test.addUnconfiguredPump();
     });
+    it('open simulator', async () => {
+        screen = await test.openPumpScreen();
+    });
+
     it('create pump error on suspend', async () => {
         await screen.Apply({ errorOnSuspend: true });
         await screen.SuspendDelivery();
@@ -23,14 +24,10 @@ var pumpTests = (test) => {
     // });
     it('create general pump error', async () => {
         await screen.CausePumpError();
-        await screen.Close();
-        await settingsScreen.Close();
+        await screen.Back();
         var home = await test.OpenHomeScreen();
         await home.Header().PumpError();
+        screen = await test.openPumpScreen();
         await screen.ResolvePumpError();
     });
-};
-
-module.exports = {
-    pumpTests
 };

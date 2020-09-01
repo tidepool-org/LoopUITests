@@ -160,7 +160,7 @@ class CGMSimulatorScreen extends base.Screen {
         if (history.name === this.screenText.History.BackfillGlucose) {
             await this.BackfillGlucoseHistoryLabel().tap();
             await action.SetPickerValue(0, `${history.backfillHours}`);
-            await this.BackToCGMSettings();
+            await this.SaveAndClose();
         }
         if (history.name === this.screenText.History.Trend) {
             await this.TrendHistoryLabel().tap();
