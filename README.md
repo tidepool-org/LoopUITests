@@ -14,6 +14,12 @@ All tests
 
 `npm run test-all`
 
+## Device Configurations
+
+- iPhone 11 Pro `ios.sim.debug-11pro`
+- iPhone 6 `ios.sim.debug-6`
+- iPhone SE (2nd generation) `ios.sim.debug-se`
+
 ### Smoke test
 Accessibility tests that run through the screen elements making sure the are present
 
@@ -46,3 +52,12 @@ A recent version of `node` must be installed to run these tests.
 ## Apple Simulator Utils
 
 Do *not* install `applesimutils` from Homebrew. Use the custom, pre-built binary found at `bin/applesimutils`. This binary includes additional functionality to automate allowing or disallowing Critical Alert notifications. This binary was built using Xcode 11.3 from the Tidepool fork found at https://github.com/tidepool-org/AppleSimulatorUtils using the `add-critical-alerts-notification-permission` branch.
+
+
+## Scenarios
+
+[Scenarios Docs](https://github.com/LoopKit/Loop/blob/master/Documentation/Testing/Scenarios.md)
+
+### Scenarios
+
+- `./scenarios/flat_cgm_trace.json` flat cgm trace, no insulin or carb events

@@ -11,11 +11,11 @@ module.exports = (test) => {
     it('has a header', async () => {
         await expect(screen.Header()).toBeVisible();
     });
-    it('has a COB Label', async () => {
-        await expect(screen.COBLabel()).toBeVisible();
+    it('has a Grams Active Carbs Label', async () => {
+        await expect(screen.GramsActiveCarbsLabel()).toBeVisible();
     });
-    it('has a Total Label', async () => {
-        await expect(screen.TotalLabel()).toBeVisible();
+    it('has a Grams Total Carbs Label', async () => {
+        await expect(screen.GramsTotalCarbsLabel()).toBeVisible();
     });
     it('has an Glucose Change Label', async () => {
         await expect(screen.GlucoseChangeLabel()).toBeVisible();

@@ -36,6 +36,10 @@ class Test {
         this.filter = filter;
         return this;
     }
+    withTherapySettings() {
+        this.therapySettings = true;
+        return this;
+    }
     withAuth() {
         this.authenticate = true;
         return this;
@@ -92,6 +96,10 @@ class Test {
         }
         return filtered;
     }
+    async _loadTherapySettings() {
+        await device.shake();
+        await match.accessible.TextLabel('Mock Therapy Settings').tap();
+    }
     async prepare() {
         if (!this.language) {
             throw 'language is required!';
@@ -104,7 +112,6 @@ class Test {
                 this.startScreen = screenName.home;
             }
         }
-
         this.homeScreen = new HomeScreen(this.language, this.screenDefaults);
 
         var loopAppPermissions = { notifications: 'YES', health: 'YES' };
@@ -120,9 +127,13 @@ class Test {
 
         await device.setBiometricEnrollment(this.authenticate);
 
+        if (this.therapySettings) {
+            await this._loadTherapySettings();
+        }
+
         if (this.scenario) {
-            await _loadDeviceScenariosFromDisk(device.deviceId);
-            await _loadScenario(this.scenario);
+            await this._loadDeviceScenariosFromDisk(device.id);
+            await this._loadScenario(this.scenario);
             if (this.settingsToApply) {
                 this.settingsToApply = this._filterSettings(this.settingsToApply, [settingType.CGMSimulatorSettings, settingType.AddCGMSimulator, settingType.AddPumpSimulator]);
             }

@@ -16,11 +16,11 @@ class ActiveCarbohydratesScreen extends base.Screen {
             },
         });
     }
-    COBLabel() {
-        return match.accessible.TextLabel(this.screenText.COB);
+    GramsActiveCarbsLabel() {
+        return match.accessible.TextLabel(this.screenText.GramsActiveCarbs);
     }
-    TotalLabel() {
-        return match.accessible.TextLabel(this.screenText.Total);
+    GramsTotalCarbsLabel() {
+        return match.accessible.TextLabel(this.screenText.GramsTotalCarbs);
     }
     GlucoseChangeLabel() {
         return match.accessible.TextLabel(this.screenText.GlucoseChange);
