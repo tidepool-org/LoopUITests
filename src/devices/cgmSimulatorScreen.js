@@ -25,14 +25,17 @@ class CGMSimulatorScreen extends base.Screen {
     ModelHeader() {
         return match.accessible.Header(this.screenText.Model.Header);
     }
-    ConstantModelLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Model.Constant);
+    MeasurementFrequencyLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Frequency.MeasurementFrequency);
     }
     SineCurveModelLabel() {
         return match.accessible.ClickableLabel(this.screenText.Model.SineCurve).atIndex(0);
     }
     NoDataModelLabel() {
         return match.accessible.ClickableLabel(this.screenText.Model.None).atIndex(0);
+    }
+    ConstantModelLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Model.Constant);
     }
     EffectsHeader() {
         return match.accessible.Header(this.screenText.Effect.Header);
@@ -81,7 +84,9 @@ class CGMSimulatorScreen extends base.Screen {
      * @param {object} settings.effect
      * @param {number} settings.effect.glucoseNoiseValue
      * @param {number} settings.effect.randomErrorPercent
-     *
+     * @param {object} settings.frequency
+     * @param {boolean} settings.frequency.minutes
+     * @param {boolean} settings.frequency.seconds
      * @param {object} settings.model
      * @param {string} settings.model.name
      * @param {array} settings.model.bgValues
@@ -93,6 +98,7 @@ class CGMSimulatorScreen extends base.Screen {
      * @param {string} settings.general.Alert.name
      */
     async Apply(settings) {
+        await this._setFrequency(settings.frequency);
         await this._setEffect(settings.effect);
         await this._setModel(settings.model);
         await this._setHistory(settings.history);
@@ -145,6 +151,18 @@ class CGMSimulatorScreen extends base.Screen {
         if (model.name === this.screenText.Model.None) {
             await this.NoDataModelLabel().tap();
         }
+    }
+    async _setFrequency(frequency) {
+        if (frequency == null) {
+            return;
+        }
+        await this.MeasurementFrequencyLabel().tap();
+        if (frequency.minutes) {
+            await match.accessible.ClickableLabel(this.screenText.Frequency.Minutes).tap();
+        } else if (frequency.seconds) {
+            await match.accessible.ClickableLabel(this.screenText.Frequency.Seconds).tap();
+        }
+        await match.accessible.ButtonBarButton(this.generalText.Back).tap();
     }
     async _setHistory(history) {
         if (history == null) {

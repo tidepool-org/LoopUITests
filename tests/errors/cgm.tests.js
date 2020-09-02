@@ -1,25 +1,26 @@
 module.exports = (test) => {
     var screen;
+
     it('add simulator', async () => {
         await test.addCGM();
     });
     it('open simulator', async () => {
         screen = await test.openCGMScreen();
     });
+    it('get constant data', async () => {
+        await screen.Apply({
+            model: { name: screen.screenText.Model.Constant, bgValues: [99] }
+        });
+        await screen.Back();
+    });
+    it('backfill data', async () => {
+        screen = await test.openCGMScreen();
+        await screen.Apply({
+            history: { name: screen.screenText.History.BackfillGlucose, backfillHours: 5, }
+        });
+    });
     describe('no data error', () => {
-        it('get constant data', async () => {
-            await screen.Apply({
-                model: { name: screen.screenText.Model.Constant, bgValues: [99] }
-            });
-            await screen.Back();
-        });
-        it('backfill data', async () => {
-            screen = await test.openCGMScreen();
-            await screen.Apply({
-                history: { name: screen.screenText.History.BackfillGlucose, backfillHours: 5, }
-            });
-        });
-        it('and then stop', async () => {
+        it('stop data', async () => {
             screen = await test.openCGMScreen();
             await screen.Apply({
                 model: { name: screen.screenText.Model.None, }
@@ -30,21 +31,23 @@ module.exports = (test) => {
             let home = await test.OpenHomeScreen();
             await home.HeaderSection().ExpectLoopStatusGlucoseDataAlert();
         });
-    });
-    describe('random error', () => {
-        it('get constant data', async () => {
+        it('reset to constant data', async () => {
+            screen = await test.openCGMScreen();
             await screen.Apply({
                 model: { name: screen.screenText.Model.Constant, bgValues: [99] }
             });
             await screen.Back();
         });
-        it('backfill data', async () => {
+    });
+    describe('random error', () => {
+        it('set data frequency', async () => {
             screen = await test.openCGMScreen();
             await screen.Apply({
-                history: { name: screen.screenText.History.BackfillGlucose, backfillHours: 4, }
+                frequency: { seconds: true }
             });
+            await screen.Back();
         });
-        it('and error on 100% of readings', async () => {
+        it('apply error on 100% of readings', async () => {
             screen = await test.openCGMScreen();
             await screen.Apply({
                 effect: { randomErrorPercent: 100 }
