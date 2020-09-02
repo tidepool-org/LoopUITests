@@ -80,6 +80,11 @@ var Device = {
             Constant: 'Constant',
             SineCurve: 'Sine Curve',
             None: 'No Data',
+        },
+        Frequency: {
+            MeasurementFrequency: 'Measurement Frequency',
+            Minutes: '5 minutes',
+            Seconds: '5 seconds',
         }
     },
     PumpSimulatorScreen: {

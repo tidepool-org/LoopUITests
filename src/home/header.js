@@ -52,6 +52,11 @@ class Header {
         await expect(match.accessible.AlertLabel(this.language.general.Alert.MissingGlucoseData)).toExist();
         await this.CloseLoopAlert();
     }
+    async ExpectLoopAlert() {
+        await this.Loop();
+        await expect(match.accessible.Button(this.language.general.OK)).toBeVisible();
+        await this.CloseLoopAlert();
+    }
     async ExpectSuccessfulLoop() {
         await this.Loop();
         await expect(match.accessible.Alert()).toNotExist();
