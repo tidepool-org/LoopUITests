@@ -193,8 +193,7 @@ var CustomPresetScreen = {
 };
 
 var SettingsScreen = {
-    Settings_current: 'Settings',
-    Settings: 'New Settings (under development)',
+    Settings: 'Settings',
     Configuration: 'Configuration',
     Support: 'Support',
     ClosedLoop: 'Closed Loop',

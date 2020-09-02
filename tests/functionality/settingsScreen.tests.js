@@ -37,6 +37,6 @@ module.exports = (test) => {
         });
     });
     it('can close', async () => {
-        await settingsScreen.BackToHome();
+        await settingsScreen.Back();
     });
 };

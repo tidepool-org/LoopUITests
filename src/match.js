@@ -21,6 +21,9 @@ const match = {
         SwipeButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwipeActionStandardButton'))));
         },
+        SwitchButton(label) {
+            return element(by.type('UISwitch').and(by.label(label).and(by.traits([buttonTrait]))));
+        },
         TextLabel(label) {
             return element(by.label(label).and(by.traits([staticTextTrait])));
         },

@@ -32,6 +32,6 @@ module.exports = (test) => {
         await expect(screen.Devices().AddCGMButton()).toBeVisible();
     });
     it('close', async () => {
-        await screen.BackToHome();
+        await screen.Back();
     });
 };

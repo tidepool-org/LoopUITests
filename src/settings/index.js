@@ -15,7 +15,7 @@ class SettingsScreen extends base.Screen {
                 label: language.settingsScreen.Settings,
             },
             header: {
-                backLabel: language.general.Close,
+                backLabel: language.general.Done,
             },
             scroll: {
                 visibleBottomLabel: language.settingsScreen.Supportv2,
@@ -34,25 +34,7 @@ class SettingsScreen extends base.Screen {
      * @override
      */
     BackButton() {
-        return match.accessible.ButtonBarButton(this.generalText.Done);
-    }
-    /**
-     * @override
-     */
-    OpenButton() {
-        return match.accessible.ClickableLabel(this.screenText.Settings).atIndex(2);
-    }
-    /**
-     * @summary hack while we have two settings pages
-     */
-    async BackToHome() {
-        try {
-            await this._closeNewSettings();
-        } catch (err) {
-            //pass through
-        } finally {
-            await match.accessible.ButtonBarButton(this.generalText.Done).tap();
-        }
+        return match.accessible.Button(this.generalText.Done);
     }
     async _closeNewSettings() {
         try {
@@ -62,7 +44,7 @@ class SettingsScreen extends base.Screen {
         }
     }
     _closedLoopButton() {
-        return match.accessible.Button(this.screenText.ClosedLoop).atIndex(4);
+        return match.accessible.SwitchButton(this.screenText.ClosedLoop);
     }
     async ClosedLoop() {
         var btn = this._closedLoopButton()

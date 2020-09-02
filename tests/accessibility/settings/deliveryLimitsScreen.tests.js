@@ -28,6 +28,6 @@ module.exports = (test) => {
     });
     it('cleanup and close', async () => {
         await screen.CancelAndClose();
-        await settingsScreen.BackToHome();
+        await settingsScreen.Back();
     });
 };

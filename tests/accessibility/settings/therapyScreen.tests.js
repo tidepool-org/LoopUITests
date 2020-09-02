@@ -75,6 +75,6 @@ module.exports = (test) => {
     });
     it('close', async () => {
         await screen.Back();
-        await settingsScreen.BackToHome();
+        await settingsScreen.Back();
     });
 };
