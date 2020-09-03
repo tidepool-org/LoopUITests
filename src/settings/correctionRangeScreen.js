@@ -11,13 +11,16 @@ class CorrectionRangeScreen extends base.EntriesScreen {
             screenText: language.settingsScreen.CorrectionRangeScreen,
             generalText: language.general,
             header: {
-                backLabel: language.general.Cancel,
+                backLabel: language.settingsScreen.TherapySettingsScreen.Header,
             },
             open: {
                 isBtn: false,
                 label: language.settingsScreen.CorrectionRangeScreen.Header,
             },
         }, config);
+    }
+    BackButton() {
+        return match.accessible.Button(this.backLabel).atIndex(0);
     }
     OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);

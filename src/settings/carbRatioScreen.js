@@ -12,7 +12,7 @@ class CarbRatioScreen extends base.EntriesScreen {
                 label: language.settingsScreen.CarbRatioScreen.Header,
             },
             header: {
-                backLabel: language.general.Cancel,
+                backLabel: language.settingsScreen.TherapySettingsScreen.Header,
             },
         }, config);
     }

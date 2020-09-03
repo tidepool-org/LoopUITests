@@ -18,11 +18,11 @@ module.exports = class TherapyScreen extends base.Screen {
             screenText: language.settingsScreen.TherapySettingsScreen,
             generalText: language.general,
             header: {
-                backLabel: 'Settings',
+                backLabel: language.general.Done,
             },
             open: {
                 isBtn: true,
-                label: 'chevron.right',
+                label: language.settingsScreen.TherapySettingsScreen.Header + '\n' + language.settingsScreen.TherapySettingsScreen.Info,
             },
         });
         this.deliveryLimitsScreen = new DeliveryLimitsScreen(language, config.deliveryLimit);
@@ -35,12 +35,16 @@ module.exports = class TherapyScreen extends base.Screen {
         this.workoutRangeScreen = new WorkoutRangeScreen(language);
         this.premealRangeScreen = new PremealRangeScreen(language);
     }
-
-    async _oldSettingsScreen() {
-        await this.Back();
-        await match.accessible.Button(this.generalText.Done).atIndex(2).tap();
+    /**
+     * @override
+     */
+    BackButton() {
+        return match.accessible.Button(this.generalText.Done).atIndex(0);
     }
-
+    async ReturnToHomeScreen() {
+        await this.Back();
+        await match.accessible.Button(this.generalText.Done).tap();
+    }
     SuspendThresholdLabel() {
         return this.suspendThresholdScreen.OpenButton();
     }
@@ -144,6 +148,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.insulinSensitivitiesScreen.InfoLabel();
     }
     async OpenInsulinSensitivitiesScreen() {
+        await this.ScrollToBottom();
         await this.InsulinSensitivitiesLabel().tap();
         return this.insulinSensitivitiesScreen;
     }

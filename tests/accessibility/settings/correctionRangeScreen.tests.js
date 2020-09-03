@@ -1,9 +1,9 @@
 module.exports = (test) => {
     var screen;
-    var settingsScreen;
+    var therapyScreen;
     it('open', async () => {
-        settingsScreen = await test.OpenSettingsScreen();
-        screen = await settingsScreen.OpenCorrectionRangeScreen();
+        therapyScreen = await test.OpenTherapySettingsScreen();
+        screen = await therapyScreen.OpenCorrectionRangeScreen();
     });
     it('has a header', async () => {
         await expect(screen.Header()).toBeVisible();
@@ -20,7 +20,7 @@ module.exports = (test) => {
     it('has a edit button', async () => {
         await expect(screen.EditButton()).toBeVisible();
     });
-    it('has a cancel button', async () => {
+    it('has a back button', async () => {
         await expect(screen.BackButton()).toBeVisible();
     });
     it('has a save button', async () => {
@@ -28,6 +28,6 @@ module.exports = (test) => {
     });
     it('clean up and close', async () => {
         await screen.CancelAndClose();
-        await settingsScreen.Back();
+        await therapyScreen.ReturnToHomeScreen();
     });
 };

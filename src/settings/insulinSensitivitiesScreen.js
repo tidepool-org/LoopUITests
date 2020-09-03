@@ -14,9 +14,12 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
                 label: language.settingsScreen.InsulinSensitivitiesScreen.Header,
             },
             header: {
-                backLabel: language.general.Cancel,
+                backLabel: language.settingsScreen.TherapySettingsScreen.Header,
             },
         }, config);
+    }
+    BackButton() {
+        return match.accessible.Button(this.backLabel).atIndex(0);
     }
     OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);

@@ -96,7 +96,7 @@ class Test {
         }
         return filtered;
     }
-    async _loadTherapySettings() {
+    async loadTherapySettings() {
         await device.shake();
         await match.accessible.TextLabel('Mock Therapy Settings').tap();
     }
@@ -128,7 +128,7 @@ class Test {
         await device.setBiometricEnrollment(this.authenticate);
 
         if (this.therapySettings) {
-            await this._loadTherapySettings();
+            await this.loadTherapySettings();
         }
 
         if (this.scenario) {
@@ -172,7 +172,6 @@ class Test {
     async addConfiguredPump(pumpConfig) {
         await this.addUnconfiguredPump();
         var settings = await this.OpenSettingsScreen();
-        await settings._closeNewSettings();
         await settings.setCorrectionRange(pumpConfig.correctionRange);
         await settings.SwipeUp();
         await settings.setDeliveryLimits(pumpConfig.deliveryLimits);
@@ -195,6 +194,10 @@ class Test {
     async OpenSettingsScreen() {
         this.settingsOpen = true;
         return this.homeScreen.OpenSettingsScreen();
+    }
+    async OpenTherapySettingsScreen() {
+        var settings = await this.OpenSettingsScreen();
+        return settings.OpenTherapySettings();
     }
     async OpenCarbEntryScreen() {
         return this.homeScreen.OpenCarbEntryScreen();

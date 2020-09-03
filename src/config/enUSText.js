@@ -200,7 +200,6 @@ var SettingsScreen = {
     TherapySettingsScreen: {
         Header: 'Therapy Settings',
         Info: 'Diabetes Treatment',
-
     },
     InsulinModelScreen: {
         Header: 'Insulin Model',
@@ -234,15 +233,14 @@ var SettingsScreen = {
     },
     WorkoutRangeScreen: {
         Header: 'Workout Range',
-        Info: 'Temporarily raise your glucose target before, during, or after physical activity to reduce the risk of low glucose events. This range can be set anywhere from the top of your regular correction range on the low end to 180 mg/dL (10 mmol/L) on the high end.',
+        Info: 'Temporarily raise your glucose target before, during, or after physical activity to reduce the risk of low glucose events.',
     },
     PremealRangeScreen: {
         Header: 'Pre-Meal Range',
-        Info: 'Temporarily lower your glucose target before a meal to impact post-meal glucose spikes. This range can be set anywhere from your suspend threshold on the low end to the top of your regular correction range on the high end.',
+        Info: 'Temporarily lower your glucose target before a meal to impact post-meal glucose spikes.',
     },
     BasalRatesScreen: {
-        Header: 'Basal Rate',
-        Header_old: 'Basal Rates',
+        Header: 'Basal Rates',
         Info: 'Your basal rate of insulin is the number of units per hour that you want to use to cover your background insulin needs.',
         Units: 'U/hr',
     },

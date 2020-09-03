@@ -36,13 +36,6 @@ class SettingsScreen extends base.Screen {
     BackButton() {
         return match.accessible.Button(this.generalText.Done);
     }
-    async _closeNewSettings() {
-        try {
-            await match.accessible.Button(this.generalText.Done).atIndex(2).tap()
-        } catch (err) {
-            await match.accessible.Button(this.generalText.Done).atIndex(1).tap();
-        }
-    }
     _closedLoopButton() {
         return match.accessible.SwitchButton(this.screenText.ClosedLoop);
     }
@@ -89,35 +82,28 @@ class SettingsScreen extends base.Screen {
         return this.alertScreen;
     }
     async OpenDeliveryLimitsScreen() {
-        await this._closeNewSettings();
         await this.SwipeUp();
         return this.therapyScreen.OpenDeliveryLimitsScreen();
     }
     async OpenCorrectionRangeScreen() {
-        await this._closeNewSettings();
         return this.therapyScreen.OpenCorrectionRangeScreen();
     }
     async OpenInsulinSensitivitiesScreen() {
-        await this._closeNewSettings();
         await this.SwipeUp();
         return this.therapyScreen.OpenInsulinSensitivitiesScreen();
     }
     async OpenSuspendThresholdScreen() {
-        await this._closeNewSettings();
         await this.SwipeUp();
         return this.therapyScreen.OpenSuspendThresholdScreen();
     }
     async OpenSuspendThresholdScreen() {
-        await this._closeNewSettings();
         return this.therapyScreen.OpenSuspendThresholdScreen();
     }
     async OpenCarbRatioScreen() {
-        await this._closeNewSettings();
         await this.SwipeUp();
         return this.therapyScreen.OpenCarbRatioScreen();
     }
     async OpenBasalRateScreen() {
-        await this._closeNewSettings();
         await this.SwipeUp();
         return this.therapyScreen.OpenBasalRateScreen();
     }

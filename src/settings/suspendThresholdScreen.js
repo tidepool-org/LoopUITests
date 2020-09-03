@@ -8,7 +8,7 @@ class SuspendThresholdScreen extends base.EntryScreen {
             screenText: language.settingsScreen.SuspendThresholdScreen,
             generalText: language.general,
             header: {
-                backLabel: language.general.Cancel,
+                backLabel: language.settingsScreen.TherapySettingsScreen.Header,
             },
             open: {
                 isBtn: false,
