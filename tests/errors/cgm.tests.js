@@ -1,5 +1,6 @@
 module.exports = (test) => {
     var screen;
+
     it('add simulator', async () => {
         await test.addCGM();
     });
