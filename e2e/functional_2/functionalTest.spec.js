@@ -7,15 +7,21 @@ describe('functional test with configured pump', () => {
     it('prepare test', async () => {
         config = await config.prepare();
         var cgmText = config.text.device.CGMSimulatorScreen;
-        test = test.setRequired({ language: config.text, screenDefaults: config.screenDefaults })
-            .addTherapySettings()
-            .addSimulators({ cgm: true, pump: true })
-            .addCGMData({
+        test = test.setup({
+            language: config.text,
+            screenDefaults: config.screenDefaults,
+            limits: config.limits,
+            settingDefault: config.settingDefault,
+            authentication: { faceid: true },
+            enableClosedLoop: true,
+            enableTherapySettings: true,
+            simulators: { cgm: true, pump: true },
+            cgmData: {
                 model: { name: cgmText.Model.Constant, bgValues: [110] },
                 frequency: { seconds: true },
                 history: { name: cgmText.History.BackfillGlucose, backfillHours: 4 },
-            })
-            .allowAuthentication({ faceid: true });
+            }
+        });
         await test.prepare();
     });
     describe('enter carbs and deliver bolus', () => {

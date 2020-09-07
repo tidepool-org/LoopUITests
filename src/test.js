@@ -5,83 +5,56 @@ const { screenName, settingType } = require('./properties');
 
 class Test {
     /**
-     * @summary test requirements
-     * @param {object} required
-     * @param {object} required.language
-     * @param {object} required.screenDefaults
+     * @summary test setup configuration
+     * @param {object} setup
+     * @param {object} setup.language required
+     * @param {object} setup.screenDefaults required
+     *
+     * @param {object} setup.limits optional
+     * @param {object} setup.scenario optional
+     * @param {object} setup.settingDefault optional
+     * @param {boolean} setup.enableTherapySettings optional
+     *
+     * @param {object} setup.authentication optional
+     * @param {boolean} setup.authentication.faceid
+     * @param {boolean} setup.authentication.fingerid
+     *
+     * @param {object} setup.simulators optional
+     * @param {boolean} setup.simulators.cgm
+     * @param {boolean} setup.simulators.pump
+     *
+     * @param {boolean} setup.enableClosedLoop optional
+     *
+     * @param {object} setup.cgmData optional
+     * @param {object} setup.cgmData.model
+     * @param {atring} setup.cgmData.model.name
+     * @param {array} setup.cgmData.model.bgValues
+     * @param {object} setup.cgmData.frequency
+     * @param {boolean} setup.cgmData.frequency.seconds
+     * @param {boolean} setup.cgmData.frequency.minutes
+     * @param {object} setup.cgmData.history
+     * @param {string} setup.cgmData.history.name
+     * @param {number} setup.cgmData.history.backfillHours
      */
-    setRequired(required) {
-        this.language = required.language;
-        this.screenDefaults = required.screenDefaults;
-        return this;
-    }
-    addLimits(limits) {
-        this.limits = limits;
-        return this;
-    }
-    addScenario(scenario) {
-        this.scenario = scenario;
-        return this;
-    }
-    addSettingsToApply(settingsToApply) {
-        this.settingsToApply = settingsToApply;
-        return this;
-    }
-    addSettingDefault(settingDefault) {
-        this.settingDefault = settingDefault;
-        return this;
-    }
-    addSettingsFilter(filter) {
-        this.filter = filter;
-        return this;
-    }
-    addTherapySettings() {
-        this.therapySettings = true;
-        return this;
-    }
-    /**
-     *
-     * @param {object} authenticationType
-     * @param {boolean} authenticationType.faceid optional
-     * @param {boolean} authenticationType.fingerid optional
-     */
-    allowAuthentication(authenticationType) {
-        this.authenticate = authenticationType;
-        return this;
-    }
-    /**
-     *
-     * @param {object} simulators
-     * @param simulators.cgm
-     * @param simulators.pump
-     */
-    addSimulators(simulators) {
-        this.simulators = simulators;
-        return this;
-    }
-    /**
-     *
-     * @param {object} cgmData
-     *
-     * @param {object} cgmData.model
-     * @param {atring} cgmData.model.name
-     * @param {array} cgmData.model.bgValues
-     *
-     * @param {object} cgmData.frequency
-     * @param {boolean} cgmData.frequency.seconds
-     * @param {boolean} cgmData.frequency.minutes
-     *
-     * @param {object} cgmData.history
-     * @param {string} cgmData.history.name
-     * @param {number} cgmData.history.backfillHours
-     */
-    addCGMData(cgmData) {
-        this.cgmData = cgmData;
+    setup(setup) {
+        this.language = setup.language;
+        this.screenDefaults = setup.screenDefaults;
+        this.limits = setup.limits;
+        this.scenario = setup.scenario;
+        this.settingDefault = setup.settingDefault;
+        this.therapySettings = setup.enableTherapySettings;
+        this.authenticate = setup.authentication;
+        this.simulators = setup.simulators;
+        this.closedLoop = setup.enableClosedLoop;
+        this.cgmData = setup.cgmData;
+        this.startScreen = screenName.home;
         return this;
     }
     async _setupCGMData() {
-        let cgmScreen = await this.openCGMScreen();
-        await cgmScreen.Apply(this.cgmData);
+        if (this.cgmData) {
+            let cgmScreen = await this.openCGMScreen();
+            await cgmScreen.Apply(this.cgmData);
+        }
     }
     async _loadDeviceScenariosFromDisk(deviceId) {
         const _loadDeviceScenariosFromDiskShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
@@ -92,29 +65,48 @@ class Test {
             throw Error(data);
         });
     }
-    async _loadScenario(scenarioName) {
-        await device.shake();
-        await expect(match.accessible.TextLabel(scenarioName)).toExist();
-        await match.accessible.TextLabel(scenarioName).tap();
-        await match.accessible.ButtonBarButton('Load').tap();
+    async _loadScenario() {
+        if (this.scenario) {
+            await this._loadDeviceScenariosFromDisk(device.id);
+            await device.shake();
+            await expect(match.accessible.TextLabel(this.scenario)).toExist();
+            await match.accessible.TextLabel(this.scenario).tap();
+            await match.accessible.ButtonBarButton('Load').tap();
+        }
     }
-    async _setStartScreen(start) {
-        if (start != screenName.settings && this.settingsOpen) {
-            await this.settingsScreen.Close();
+    async _setStartScreen() {
+        if (this.startScreen) {
+            switch (this.startScreen) {
+                case screenName.settings:
+                    await this.OpenSettingsScreen();
+                    break;
+                case screenName.bolus:
+                    await this.OpenBolusScreen();
+                    break;
+                case screenName.carbEntry:
+                    await this.OpenCarbEntryScreen();
+                    break;
+                default:
+                    break;
+            }
         }
-        switch (start) {
-            case screenName.settings:
-                await this.OpenSettingsScreen();
-                break;
-            case screenName.bolus:
-                await this.OpenBolusScreen();
-                break;
-            case screenName.carbEntry:
-                await this.OpenCarbEntryScreen();
-                break;
-            default:
-                break;
+    }
+    async _launchLoop() {
+        var loopAppPermissions = { notifications: 'YES', health: 'YES' };
+        var biometricEnrollment = false;
+        if (this.authenticate) {
+            biometricEnrollment = true;
+            if (this.authenticate.fingerid) {
+                loopAppPermissions.fingerid = 'YES';
+            } else {
+                loopAppPermissions.faceid = 'YES';
+            }
         }
+        await device.launchApp({
+            newInstance: true,
+            permissions: loopAppPermissions,
+        });
+        await device.setBiometricEnrollment(biometricEnrollment);
     }
     _filterSettings(values, types) {
         const filtered = values;
@@ -125,76 +117,43 @@ class Test {
         }
         return filtered;
     }
-    async loadTherapySettings() {
-        await device.shake();
-        await match.accessible.TextLabel('Mock Therapy Settings').tap();
+    async loadTherapySettings(load) {
+        if (load) {
+            await device.shake();
+            await match.accessible.TextLabel('Mock Therapy Settings').tap();
+        }
     }
     async prepare() {
         if (!this.language) {
             throw 'language is required!';
         }
         if (!this.screenDefaults) {
-            throw 'screenDefaults is required!';
-        }
-        if (!this.startScreen) {
-            if (this.settingsToApply || this.simulators) {
-                this.startScreen = screenName.home;
-            }
+            throw 'screenDefaults are required!';
         }
         this.homeScreen = new HomeScreen(this.language, this.screenDefaults);
-
-        var loopAppPermissions = { notifications: 'YES', health: 'YES' };
-
-        if (this.authenticate) {
-            if (this.authenticate.fingerid) {
-                loopAppPermissions.fingerid = 'YES';
-            } else {
-                loopAppPermissions.faceid = 'YES';
-            }
+        await this._launchLoop();
+        await this.loadTherapySettings(this.therapySettings);
+        await this._setSimulators();
+        await this._loadScenario();
+        await this._setupCGMData();
+        await this._setLoopMode();
+        await this._setStartScreen();
+    }
+    async _setLoopMode() {
+        if (this.closedLoop) {
+            var screen = await this.OpenSettingsScreen();
+            await screen.ClosedLoop();
+            await screen.Back();
         }
-
-        await device.launchApp({
-            newInstance: true,
-            permissions: loopAppPermissions,
-        });
-
-        await device.setBiometricEnrollment(this.authenticate);
-
-        if (this.therapySettings) {
-            await this.loadTherapySettings();
-        }
-
-        if (this.scenario) {
-            await this._loadDeviceScenariosFromDisk(device.id);
-            await this._loadScenario(this.scenario);
-            if (this.settingsToApply) {
-                this.settingsToApply = this._filterSettings(this.settingsToApply, [settingType.CGMSimulatorSettings, settingType.AddCGMSimulator, settingType.AddPumpSimulator]);
-            }
-        }
-        var cgmAdded = false;
-        if (this.settingsToApply) {
-            this.settingsScreen = await this.OpenSettingsScreen();
-            if (this.filter) {
-                this.settingsToApply = this._filterSettings(this.settingsToApply, this.filter)
-            }
-            await this.settingsScreen.Apply(this.settingsToApply);
-        } else if (this.simulators) {
+    }
+    async _setSimulators() {
+        if (this.simulators) {
             if (this.simulators.cgm) {
                 await this.addCGM();
-                cgmAdded = true;
             }
             if (this.simulators.pump) {
                 await this.addUnconfiguredPump();
             }
-        }
-        if (this.cgmData) {
-            if (!cgmAdded) {
-                await this.addCGM();
-            }
-            await this._setupCGMData();
-        }
-        if (this.startScreen) {
-            await this._setStartScreen(this.startScreen);
         }
     }
     async advanceScenario(cycles) {
@@ -210,18 +169,13 @@ class Test {
      */
     async addConfiguredPump() {
         await this.addUnconfiguredPump();
-        await this.loadTherapySettings();
+        await this.loadTherapySettings(true);
     }
     async addUnconfiguredPump() {
         await this.homeScreen.HeaderSection().Devices().AddPump();
     }
     async addCGM() {
         await this.homeScreen.HeaderSection().Devices().AddCGM();
-    }
-    async addConfiguredCGM() {
-        await this.addCGM();
-        let cgmScreen = await this.openCGMScreen();
-        await cgmScreen.Apply(this.cgmData);
     }
     async openPumpScreen() {
         var screen = await this.homeScreen.HeaderSection().Devices().OpenPumpScreen();

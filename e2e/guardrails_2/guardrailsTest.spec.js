@@ -6,9 +6,12 @@ describe('guardrails test', () => {
     var config = new Config();
     it('prepare test', async () => {
         config = await config.prepare();
-        test = test.setRequired({ language: config.text, screenDefaults: config.screenDefaults })
-            .addLimits(config.limits)
-            .addSimulators({ pump: true });
+        test = test.setup({
+            language: config.text,
+            screenDefaults: config.screenDefaults,
+            limits: config.limits,
+            simulators: { pump: true },
+        });
         await test.prepare();
     });
     describe('insulin sensitivity schedule', () => {

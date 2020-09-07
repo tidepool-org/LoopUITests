@@ -6,10 +6,13 @@ describe('functional test', () => {
     var config = new Config();
     it('prepare test', async () => {
         config = await config.prepare();
-        test = test.setRequired({ language: config.text, screenDefaults: config.screenDefaults })
-            .addLimits(config.limits)
-            .addSettingDefault(config.settingDefault)
-            .allowAuthentication({ faceid: true });
+        test = test.setup({
+            language: config.text,
+            screenDefaults: config.screenDefaults,
+            limits: config.limits,
+            settingDefault: config.settingDefault,
+            authentication: { faceid: true },
+        });
         await test.prepare();
     });
     describe('home screen', () => {

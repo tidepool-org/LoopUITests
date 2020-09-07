@@ -7,8 +7,11 @@ describe('accessibility', () => {
     var config = new Config();
     it('prepare test', async () => {
         config = await config.prepare();
-        test = test.setRequired({ language: config.text, screenDefaults: config.screenDefaults })
-            .addSettingDefault(config.settingDefault);
+        test = test.setup({
+            language: config.text,
+            screenDefaults: config.screenDefaults,
+            settingDefault: config.settingDefault,
+        });
         await test.prepare();
     });
     describe('devices', () => {
@@ -32,7 +35,7 @@ describe('accessibility', () => {
     });
     describe('settings', () => {
         it('enable settings', async () => {
-            await test.loadTherapySettings();
+            await test.loadTherapySettings(true);
         });
         describe.skip('delivery limits', () => {
             settingsAccessibility.deliveryLimitsScreenTest(test);
