@@ -9,8 +9,7 @@ describe('guardrails test', () => {
         test = test.withLanguage(config.text)
             .withLimits(config.limits)
             .withScreenDefaults(config.screenDefaults)
-            .withSimulators({ pump: true })
-            .withStartScreen('home');
+            .withSimulators({ pump: true });
         await test.prepare();
     });
     describe('insulin sensitivity schedule', () => {

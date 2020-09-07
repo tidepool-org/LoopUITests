@@ -20,10 +20,6 @@ class Test {
         this.scenario = scenario;
         return this;
     }
-    withStartScreen(startScreen) {
-        this.startScreen = startScreen;
-        return this;
-    }
     withSettingsToApply(settingsToApply) {
         this.settingsToApply = settingsToApply;
         return this;
@@ -40,8 +36,14 @@ class Test {
         this.therapySettings = true;
         return this;
     }
-    withAuth() {
-        this.authenticate = true;
+    /**
+     *
+     * @param {object} authenticationType
+     * @param {boolean} authenticationType.faceid optional
+     * @param {boolean} authenticationType.fingerid optional
+     */
+    withAuthentication(authenticationType) {
+        this.authenticate = authenticationType;
         return this;
     }
     /**
@@ -53,6 +55,30 @@ class Test {
     withSimulators(simulators) {
         this.simulators = simulators;
         return this;
+    }
+    /**
+     *
+     * @param {object} cgmData
+     *
+     * @param {object} cgmData.model
+     * @param {atring} cgmData.model.name
+     * @param {array} cgmData.model.bgValues
+     *
+     * @param {object} cgmData.frequency
+     * @param {boolean} cgmData.frequency.seconds
+     * @param {boolean} cgmData.frequency.minutes
+     *
+     * @param {object} cgmData.history
+     * @param {string} cgmData.history.name
+     * @param {number} cgmData.history.backfillHours
+     */
+    withCGMData(cgmData) {
+        this.cgmData = cgmData;
+        return this;
+    }
+    async _setupCGMData() {
+        let cgmScreen = await this.openCGMScreen();
+        await cgmScreen.Apply(this.cgmData);
     }
     async _loadDeviceScenariosFromDisk(deviceId) {
         const _loadDeviceScenariosFromDiskShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
@@ -117,7 +143,11 @@ class Test {
         var loopAppPermissions = { notifications: 'YES', health: 'YES' };
 
         if (this.authenticate) {
-            loopAppPermissions.faceid = 'YES';
+            if (this.authenticate.fingerid) {
+                loopAppPermissions.fingerid = 'YES';
+            } else {
+                loopAppPermissions.faceid = 'YES';
+            }
         }
 
         await device.launchApp({
@@ -138,6 +168,7 @@ class Test {
                 this.settingsToApply = this._filterSettings(this.settingsToApply, [settingType.CGMSimulatorSettings, settingType.AddCGMSimulator, settingType.AddPumpSimulator]);
             }
         }
+        var cgmAdded = false;
         if (this.settingsToApply) {
             this.settingsScreen = await this.OpenSettingsScreen();
             if (this.filter) {
@@ -147,10 +178,17 @@ class Test {
         } else if (this.simulators) {
             if (this.simulators.cgm) {
                 await this.addCGM();
+                cgmAdded = true;
             }
             if (this.simulators.pump) {
                 await this.addUnconfiguredPump();
             }
+        }
+        if (this.cgmData) {
+            if (!cgmAdded) {
+                await this.addCGM();
+            }
+            await this._setupCGMData();
         }
         if (this.startScreen) {
             await this._setStartScreen(this.startScreen);
@@ -165,23 +203,22 @@ class Test {
         await match.accessible.Button(this.language.general.OK).tap();
     }
     /**
-     * @param {object} pumpConfig
-     * @param {object} pumpConfig.correctionRange
-     * @param {object} pumpConfig.deliveryLimits
+     * @summary will load the mocked therapy settings
      */
-    async addConfiguredPump(pumpConfig) {
+    async addConfiguredPump() {
         await this.addUnconfiguredPump();
-        var settings = await this.OpenSettingsScreen();
-        await settings.setCorrectionRange(pumpConfig.correctionRange);
-        await settings.SwipeUp();
-        await settings.setDeliveryLimits(pumpConfig.deliveryLimits);
-        await match.accessible.ButtonBarButton(this.language.general.Done).tap();
+        await this.loadTherapySettings();
     }
     async addUnconfiguredPump() {
         await this.homeScreen.HeaderSection().Devices().AddPump();
     }
     async addCGM() {
         await this.homeScreen.HeaderSection().Devices().AddCGM();
+    }
+    async addConfiguredCGM() {
+        await this.addCGM();
+        let cgmScreen = await this.openCGMScreen();
+        await cgmScreen.Apply(this.cgmData);
     }
     async openPumpScreen() {
         var screen = await this.homeScreen.HeaderSection().Devices().OpenPumpScreen();

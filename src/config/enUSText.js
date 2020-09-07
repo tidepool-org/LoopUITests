@@ -167,7 +167,7 @@ var CarbEntryScreen = {
         BolusSummary: 'Bolus Summary',
         Bolus: 'Bolus',
         ActiveCarbs: 'Active Carbs',
-        SaveDeliver: 'Save and Deliver',
+        SaveAndDeliver: 'Save and Deliver',
         Glucose: 'Glucose',
         SaveWithoutBolusing: 'Save without Bolusing',
     },
@@ -175,7 +175,6 @@ var CarbEntryScreen = {
 
 var BolusScreen = {
     Header: 'Bolus',
-    Deliver: 'Deliver',
     Unit: 'U',
     RecommendedBolus: 'Recommended Bolus',
     BolusSummary: 'Bolus Summary',

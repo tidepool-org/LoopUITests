@@ -9,7 +9,6 @@ describe('error test', () => {
         test = test.withLanguage(config.text)
             .withSettingDefault(config.settingDefault)
             .withScreenDefaults(config.screenDefaults)
-            .withStartScreen('home');
         await test.prepare();
     });
     describe.skip('pump', () => {

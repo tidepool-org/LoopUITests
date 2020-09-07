@@ -10,8 +10,7 @@ describe('functional test', () => {
             .withLimits(config.limits)
             .withScreenDefaults(config.screenDefaults)
             .withSettingDefault(config.settingDefault)
-            .withStartScreen('home')
-            .withAuth();
+            .withAuthentication({ faceid: true });
         await test.prepare();
     });
     describe('home screen', () => {

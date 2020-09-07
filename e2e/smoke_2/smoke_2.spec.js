@@ -9,8 +9,7 @@ describe('accessibility', () => {
         config = await config.prepare();
         test = test.withLanguage(config.text)
             .withSettingDefault(config.settingDefault)
-            .withScreenDefaults(config.screenDefaults)
-            .withStartScreen('home');
+            .withScreenDefaults(config.screenDefaults);
         await test.prepare();
     });
     describe('devices', () => {

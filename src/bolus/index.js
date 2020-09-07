@@ -31,8 +31,8 @@ class BolusScreen extends base.Screen {
     DoneButton() {
         return match.accessible.Button(this.generalText.Done).atIndex(0);
     }
-    DeliverButton() {
-        return match.accessible.Button(this.screenText.Deliver);
+    SaveAndDeliverButton() {
+        return match.accessible.Button(this.screenText.SaveAndDeliver);
     }
     EnterBolusButton() {
         return match.accessible.Button(this.screenText.EnterBolus);

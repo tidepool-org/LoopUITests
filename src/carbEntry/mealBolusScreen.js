@@ -42,11 +42,17 @@ class MealBolusScreen extends base.Screen {
     GlucoseHeader() {
         return match.accessible.TextLabel(this.screenText.Glucose).atIndex(1);
     }
+    SaveAndDeliverButton() {
+        return match.accessible.Button(this.screenText.SaveAndDeliver);
+    }
     SaveWithoutBolusButton() {
         return match.accessible.Button(this.screenText.SaveWithoutBolusing);
     }
     async SaveWithoutBolus() {
         await this.SaveWithoutBolusButton().tap();
+    }
+    async SaveAndDeliver() {
+        await this.SaveAndDeliverButton().tap();
     }
     async ExpectPredictedGlucoseWarning(glucoseValueAndUnits) {
         const predictedGlucoseWarning = `⚠ Predicted glucose of ${glucoseValueAndUnits} is below your suspend threshold setting.`;

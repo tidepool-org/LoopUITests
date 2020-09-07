@@ -10,7 +10,6 @@ describe('guardrails test', () => {
             .withLimits(config.limits)
             .withScreenDefaults(config.screenDefaults)
             .withSimulators({ pump: true })
-            .withStartScreen('home');
         await test.prepare();
     });
     describe('insulin carb ratio', () => {

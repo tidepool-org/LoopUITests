@@ -11,8 +11,7 @@ describe('loop smoke test', () => {
             .withSettingDefault(config.settingDefault)
             .withScreenDefaults(config.screenDefaults)
             .withTherapySettings()
-            .withSimulators({ cgm: true, pump: true })
-            .withStartScreen('home');
+            .withSimulators({ cgm: true, pump: true });
         await test.prepare();
     });
     describe('go into closed loop', () => {
