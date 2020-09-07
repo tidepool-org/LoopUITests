@@ -6,9 +6,8 @@ describe('accessibility', () => {
     var config = new Config();
     it('prepare test', async () => {
         config = await config.prepare();
-        test = test.withLanguage(config.text)
-            .withSettingDefault(config.settingDefault)
-            .withScreenDefaults(config.screenDefaults);
+        test = test.setRequired({ language: config.text, screenDefaults: config.screenDefaults })
+            .addSettingDefault(config.settingDefault);
         await test.prepare();
     });
     describe('main screens', () => {

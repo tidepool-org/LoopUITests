@@ -5,7 +5,7 @@ describe('Closed loop is not allowed when settings are not applied for delivery 
     it('should without delivery limits applied', async () => {
         test = new Test()
             .withSettings(setting.default)
-            .withSettingsFilter([setting.type.DeliveryLimits]);
+            .addSettingsFilter([setting.type.DeliveryLimits]);
         await test.prepare();
     });
     it('should not be in closed loop mode', async () => {

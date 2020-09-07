@@ -4,7 +4,7 @@ describe.skip('Closed loop is allowed when', () => {
     var test;
     it('should launch with all settings applied', async () => {
         loopTest = new Test()
-            .withScenario('flat_cgm_trace_with_basal')
+            .addScenario('flat_cgm_trace_with_basal')
             .withSettings(setting.default)
             .withStartScreen(screenName.home);
 

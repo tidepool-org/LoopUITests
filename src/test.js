@@ -4,35 +4,38 @@ const match = require('./match');
 const { screenName, settingType } = require('./properties');
 
 class Test {
-    withLanguage(language) {
-        this.language = language;
+    /**
+     * @summary test requirements
+     * @param {object} required
+     * @param {object} required.language
+     * @param {object} required.screenDefaults
+     */
+    setRequired(required) {
+        this.language = required.language;
+        this.screenDefaults = required.screenDefaults;
         return this;
     }
-    withLimits(limits) {
+    addLimits(limits) {
         this.limits = limits;
         return this;
     }
-    withScreenDefaults(screenDefaults) {
-        this.screenDefaults = screenDefaults;
-        return this;
-    }
-    withScenario(scenario) {
+    addScenario(scenario) {
         this.scenario = scenario;
         return this;
     }
-    withSettingsToApply(settingsToApply) {
+    addSettingsToApply(settingsToApply) {
         this.settingsToApply = settingsToApply;
         return this;
     }
-    withSettingDefault(settingDefault) {
+    addSettingDefault(settingDefault) {
         this.settingDefault = settingDefault;
         return this;
     }
-    withSettingsFilter(filter) {
+    addSettingsFilter(filter) {
         this.filter = filter;
         return this;
     }
-    withTherapySettings() {
+    addTherapySettings() {
         this.therapySettings = true;
         return this;
     }
@@ -42,7 +45,7 @@ class Test {
      * @param {boolean} authenticationType.faceid optional
      * @param {boolean} authenticationType.fingerid optional
      */
-    withAuthentication(authenticationType) {
+    allowAuthentication(authenticationType) {
         this.authenticate = authenticationType;
         return this;
     }
@@ -52,7 +55,7 @@ class Test {
      * @param simulators.cgm
      * @param simulators.pump
      */
-    withSimulators(simulators) {
+    addSimulators(simulators) {
         this.simulators = simulators;
         return this;
     }
@@ -72,7 +75,7 @@ class Test {
      * @param {string} cgmData.history.name
      * @param {number} cgmData.history.backfillHours
      */
-    withCGMData(cgmData) {
+    addCGMData(cgmData) {
         this.cgmData = cgmData;
         return this;
     }
