@@ -23,6 +23,12 @@ class CarbRatioScreen extends base.EntriesScreen {
         return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
     }
     /**
+     * @override
+     */
+    BackButton() {
+        return match.accessible.BackButton(this.backLabel);
+    }
+    /**
      * @override so we access the header by label
      */
     Header() {

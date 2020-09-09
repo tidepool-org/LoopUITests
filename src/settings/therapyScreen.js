@@ -52,6 +52,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.suspendThresholdScreen.InfoLabel();
     }
     async OpenSuspendThresholdScreen() {
+        await this.SwipeDown(this.SuspendThresholdLabel());
         await this.SuspendThresholdLabel().tap();
         return this.suspendThresholdScreen;
     }
@@ -74,6 +75,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.premealRangeScreen.InfoLabel();
     }
     async OpenPreMealRangeScreen() {
+        await this.SwipeUp(this.PreMealRangeLabel());
         await this.PreMealRangeLabel().tap();
         return this.premealRangeScreen;
     }
@@ -96,8 +98,8 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.basalRatesScreen.InfoLabel();
     }
     async OpenBasalRateScreen() {
-        //`Basal Rate` vs `Basal Rates` on settings screen versions
-        await match.accessible.ClickableLabel('Basal Rates').tap();
+        await this.SwipeUp(this.BasalRateLabel());
+        await this.BasalRateLabel().tap();
         return this.basalRatesScreen;
     }
 
@@ -114,6 +116,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.deliveryLimitsScreen.InfoLabel();
     }
     async OpenDeliveryLimitsScreen() {
+        await this.SwipeUp(this.DeliveryLimitsLabel());
         await this.DeliveryLimitsLabel().tap();
         return this.deliveryLimitsScreen;
     }
@@ -137,6 +140,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.carbRatioScreen.InfoLabel();
     }
     async OpenCarbRatioScreen() {
+        await this.ScrollToBottom();
         await this.CarbRatiosLabel().tap();
         return this.carbRatioScreen;
     }

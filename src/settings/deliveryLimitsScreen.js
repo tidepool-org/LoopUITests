@@ -12,10 +12,13 @@ class DeliveryLimitsScreen extends base.EntryScreen {
                 label: language.settingsScreen.DeliveryLimitsScreen.Header,
             },
             header: {
-                backLabel: language.general.Cancel,
+                backLabel: language.settingsScreen.TherapySettingsScreen.Header,
             },
         });
         this.config = config;
+    }
+    BackButton() {
+        return match.accessible.BackButton(this.backLabel);
     }
     OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);

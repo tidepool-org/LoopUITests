@@ -12,10 +12,16 @@ class BasalRatesScreen extends base.EntriesScreen {
                 label: language.settingsScreen.BasalRatesScreen.Header,
             },
             header: {
-                backLabel: language.general.Cancel,
+                backLabel: language.settingsScreen.TherapySettingsScreen.Header,
             },
         }, config);
         this.unitsLabel = language.settingsScreen.BasalRatesScreen.Units;
+    }
+    /**
+     * @override
+     */
+    BackButton() {
+        return match.accessible.BackButton(this.backLabel);
     }
     OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(0);

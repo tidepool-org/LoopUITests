@@ -10,6 +10,8 @@ describe('guardrails test', () => {
             language: config.text,
             screenDefaults: config.screenDefaults,
             limits: config.limits,
+            authentication: { faceid: true },
+            enableTherapySettings: true,
             simulators: { pump: true },
         });
         await test.prepare();

@@ -19,7 +19,7 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
         }, config);
     }
     BackButton() {
-        return match.accessible.Button(this.backLabel).atIndex(0);
+        return match.accessible.BackButton(this.backLabel);
     }
     OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
