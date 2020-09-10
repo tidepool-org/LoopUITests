@@ -45,8 +45,11 @@ const match = {
         PickerItem(itemID) {
             return element(by.type('UIPickerTableViewWrapperCell').withDescendant(by.id(itemID)));
         },
-        Picker() {
-            return element(by.type('UIPickerView')).atIndex(1);
+        Picker(index) {
+            if (index == null) {
+                index = 1;
+            }
+            return element(by.type('UIPickerView')).atIndex(index);
         },
         QuantityPicker(id) {
             return element(by.label('Quantity').and(by.id(id)));

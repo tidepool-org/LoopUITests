@@ -41,10 +41,10 @@ const action = {
     /**
      * @summary sets the pickers column to the given value
      */
-    async SwipePickerUp(times) {
+    async SwipePickerUp(times, index) {
         let count = 1;
         do {
-            await match.accessible.Picker().swipe('up');
+            await match.accessible.Picker(index).swipe('up');
             count++;
         } while (count <= times);
 

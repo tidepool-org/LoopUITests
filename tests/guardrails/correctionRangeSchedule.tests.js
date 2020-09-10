@@ -1,3 +1,5 @@
+const name = require('./testNames');
+
 module.exports = (test) => {
     var screen;
     var therapyScreen;
@@ -8,8 +10,8 @@ module.exports = (test) => {
         await screen.OpenPicker('12:00 AM');
         screenLimit = test.limits.correctionRange;
     });
-    describe('min limit', () => {
-        it('set units', async () => {
+    describe(name.MinimumLimit, () => {
+        it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: {
                     min: screenLimit.min.limit,
@@ -21,15 +23,15 @@ module.exports = (test) => {
                 }
             });
         });
-        it('check for guardrail warning icon', async () => {
+        it(name.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it('check for guardrail message', async () => {
+        it(name.HasGuardrailMessage, async () => {
             await expect(screen.GuardrailMessage('Low Correction Value')).toBeNotVisible();
         });
     });
-    describe('max units with no warning', () => {
-        it('set units', async () => {
+    describe(name.MaximumNoWarning, () => {
+        it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: {
                     min: screenLimit.min.limit,
@@ -41,15 +43,15 @@ module.exports = (test) => {
                 },
             });
         });
-        it('check for guardrail warning icon', async () => {
+        it(name.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it('check for guardrail message', async () => {
+        it(name.HasGuardrailMessage, async () => {
             await expect(screen.GuardrailMessage('Low Correction Value')).toBeNotVisible();
         });
     });
-    describe('max units with warning', () => {
-        it('set units', async () => {
+    describe(name.MaximumWarning, () => {
+        it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: {
                     min: screenLimit.min.limit,
@@ -61,15 +63,15 @@ module.exports = (test) => {
                 },
             });
         });
-        it('check for guardrail warning icon', async () => {
+        it(name.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it('check for guardrail message', async () => {
+        it(name.HasGuardrailMessage, async () => {
             await expect(screen.GuardrailMessage('High Correction Value')).toBeVisible();
         });
     });
-    describe('max units at limit', () => {
-        it('set units', async () => {
+    describe(name.MaximumLimit, () => {
+        it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: {
                     min: screenLimit.min.limit,
@@ -81,10 +83,10 @@ module.exports = (test) => {
                 },
             });
         });
-        it('check for guardrail warning icon', async () => {
+        it(name.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it('check for guardrail message', async () => {
+        it(name.HasGuardrailMessage, async () => {
             await expect(screen.GuardrailMessage('High Correction Value')).toBeVisible();
         });
     });

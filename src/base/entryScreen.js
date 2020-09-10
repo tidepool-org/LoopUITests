@@ -18,6 +18,15 @@ class EntryScreen extends Screen {
     GuardrailMessage(text) {
         return match.accessible.TextLabel(text);
     }
+    CancelNewEntryButton() {
+        return match.accessible.Button(this.generalText.Cancel);
+    }
+    async OpenPicker(value) {
+        await match.accessible.TextLabel(String(value)).tap();
+    }
+    async CancelNewEntry() {
+        await this.CancelNewEntryButton().tap();
+    }
 }
 
 module.exports = EntryScreen;

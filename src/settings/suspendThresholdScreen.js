@@ -30,9 +30,9 @@ class SuspendThresholdScreen extends base.EntryScreen {
     Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
     }
-    async OpenPicker() {
-        await match.accessible.TextLabel(this.bgUnitsLabel).atIndex(0).tap();
-    }
+    // async OpenPicker() {
+    //     await match.accessible.TextLabel(this.bgUnitsLabel).atIndex(0).tap();
+    // }
     async SwipePickerToMaxValue() {
         await action.SwipePickerUp(3);
     }

@@ -1,3 +1,5 @@
+const name = require('./testNames');
+
 module.exports = (test) => {
     const therapySettingsRatio = 10;
     var screen;
@@ -9,87 +11,87 @@ module.exports = (test) => {
         await screen.OpenPicker(therapySettingsRatio);
         screenLimit = test.limits.insulinCarbRatio;
     });
-    describe('minimum limit', () => {
-        it('set value', async () => {
+    describe(name.MinimumLimit, () => {
+        it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { carbGramsPerInsulinUnit: screenLimit.min.limit },
                 current: { carbGramsPerInsulinUnit: therapySettingsRatio }
             });
         });
-        it('check for guardrail icon', async () => {
+        it(name.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it('check for guardrail message', async () => {
+        it(name.HasGuardrailMessage, async () => {
             await expect(screen.GuardrailMessage('Low Carb Ratio')).toBeVisible();
         });
     });
-    describe('minimum warning', () => {
-        it('set value', async () => {
+    describe(name.MinimumWarning, () => {
+        it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { carbGramsPerInsulinUnit: screenLimit.min.warning },
                 current: { carbGramsPerInsulinUnit: screenLimit.min.limit }
             });
         });
-        it('check for guardrail icon', async () => {
+        it(name.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it('check for guardrail message', async () => {
+        it(name.HasGuardrailMessage, async () => {
             await expect(screen.GuardrailMessage('Low Carb Ratio')).toBeVisible();
         });
     });
-    describe('minimum no warning', () => {
-        it('set value', async () => {
+    describe(name.MinimumNoWarning, () => {
+        it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { carbGramsPerInsulinUnit: screenLimit.min.noWarning },
                 current: { carbGramsPerInsulinUnit: screenLimit.min.warning }
             });
         });
-        it('check there is NO guardrail icon', async () => {
+        it(name.HasNoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it('check there is NO guardrail message', async () => {
+        it(name.HasNoGuardrailMessage, async () => {
             await expect(screen.GuardrailMessage('Low Carb Ratio')).toBeNotVisible();
         });
     });
-    describe('maximum no warning', () => {
-        it('set value', async () => {
+    describe(name.MaximumNoWarning, () => {
+        it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { carbGramsPerInsulinUnit: screenLimit.max.noWarning },
                 current: { carbGramsPerInsulinUnit: screenLimit.min.noWarning }
             });
         });
-        it('check there is NO guardrail icon', async () => {
+        it(name.HasNoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it('check there is NO guardrail message', async () => {
+        it(name.HasNoGuardrailMessage, async () => {
             await expect(screen.GuardrailMessage('Low Carb Ratio')).toBeNotVisible();
         });
     });
-    describe('maximum warning', () => {
-        it('set value', async () => {
+    describe(name.MaximumWarning, () => {
+        it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { carbGramsPerInsulinUnit: screenLimit.max.warning },
                 current: { carbGramsPerInsulinUnit: screenLimit.max.noWarning }
             });
         });
-        it('check for guardrail icon', async () => {
+        it(name.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it('check for guardrail message', async () => {
+        it(name.HasGuardrailMessage, async () => {
             await expect(screen.GuardrailMessage('High Carb Ratio')).toBeVisible();
         });
     });
-    describe('maximum limit', () => {
-        it('set value', async () => {
+    describe(name.MaximumLimit, () => {
+        it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { carbGramsPerInsulinUnit: screenLimit.max.limit },
                 current: { carbGramsPerInsulinUnit: screenLimit.max.warning }
             });
         });
-        it('check for guardrail icon', async () => {
+        it(name.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it('check for guardrail message', async () => {
+        it(name.HasGuardrailMessage, async () => {
             await expect(screen.GuardrailMessage('High Carb Ratio')).toBeVisible();
         });
     });
