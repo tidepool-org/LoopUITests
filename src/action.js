@@ -2,16 +2,18 @@ const match = require('./match');
 const element = require('detox').element;
 
 var _nextPickerStep = function (currentValue, expectedValue) {
+    let current = Number(currentValue);
+    let expected = Number(expectedValue);
     let step = 1;
-    if (Math.abs(currentValue - expectedValue) >= 2) {
+    if (Math.abs(current - expected) >= 2) {
         step = 2;
     }
-    if (currentValue > expectedValue) {
-        return currentValue - step;
-    } else if (currentValue < expectedValue) {
-        return currentValue + step;
+    if (current > expected) {
+        return current - step;
+    } else if (current < expected) {
+        return current + step;
     }
-    return currentValue;
+    return current;
 }
 
 const action = {
@@ -26,7 +28,12 @@ const action = {
         }
         do {
             currentValue = _nextPickerStep(currentValue, expectedValue);
-            await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
+            //NOTE: on the very odd occasion we need the first item. Not happy but works for now
+            try {
+                await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
+            } catch (err) {
+                await match.accessible.PickerItem(`${currentValue}`).atIndex(0).tap();
+            }
         } while (currentValue != expectedValue);
     },
     /**

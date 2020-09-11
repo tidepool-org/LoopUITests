@@ -3,8 +3,10 @@ module.exports = (test) => {
     it('open screen', async () => {
         screen = await test.OpenBolusScreen();
     });
-    it('bolus', async () => {
-        await screen.SetBolusAmount(0.5);
+    it('set bolus amount ', async () => {
+        await screen.SetBolusAmount(0.2);
+    });
+    it('deliver bolus', async () => {
         await screen.Deliver();
         await screen.Authenticate();
     });

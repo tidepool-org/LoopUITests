@@ -19,12 +19,12 @@ describe('functional test with configured pump', () => {
             cgmData: {
                 model: { name: cgmText.Model.Constant, bgValues: [110] },
                 frequency: { seconds: true },
-                history: { name: cgmText.History.BackfillGlucose, backfillHours: 4 },
+                history: { name: cgmText.History.BackfillGlucose, backfillHours: 6 },
             }
         });
         await test.prepare();
     });
-    describe('enter carbs and deliver bolus', () => {
-        functionality.carbEntryScreenTests(test);
+    describe('bolus', () => {
+        functionality.bolusScreenTests(test);
     });
 });

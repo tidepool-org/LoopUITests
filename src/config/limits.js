@@ -7,8 +7,6 @@ var mgdL = {
             noWarning: 120,
         },
         min: {
-            // noWarning: 100,
-            // warning: 69,
             limit: 75,
         },
     },
@@ -27,7 +25,6 @@ var mgdL = {
     basalRates: {
         max: {
             limit: 5.0,
-            //noWarning: 34.0,
         },
         min: {
             limit: 0.0,

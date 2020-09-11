@@ -16,13 +16,13 @@ describe('guardrails test', () => {
         });
         await test.prepare();
     });
-    describe.skip('insulin sensitivity schedule', () => {
+    describe('insulin sensitivity schedule', () => {
         guardrails.insulinSensitivityScheduleTest(test);
     });
     describe('delivery limits', () => {
         guardrails.deliveryLimitsTest(test);
     });
-    describe.skip('suspend threshold', () => {
+    describe('suspend threshold', () => {
         guardrails.suspendThresholdTest(test);
     });
 });

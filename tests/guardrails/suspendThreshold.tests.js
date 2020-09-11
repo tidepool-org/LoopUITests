@@ -25,7 +25,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailMessage('Low Suspend Threshold')).toBeVisible();
         });
     });
-    describe.skip(name.MinimumWarning, () => {
+    describe(name.MinimumWarning, () => {
         it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { value: screenLimit.min.warning },
@@ -43,7 +43,7 @@ module.exports = (test) => {
         it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { value: screenLimit.min.noWarning },
-                current: { value: screenLimit.min.limit },
+                current: { value: screenLimit.min.warning },
             });
         });
         it(name.HasNoGuardrailIcon, async () => {

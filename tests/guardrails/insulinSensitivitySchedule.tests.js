@@ -11,7 +11,7 @@ module.exports = (test) => {
         await screen.OpenPicker('12:00 AM');
         screenLimit = test.limits.insulinSensitivities;
     });
-    describe.skip(name.MinimumLimit, () => {
+    describe(name.MinimumLimit, () => {
         it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.limit },
@@ -25,7 +25,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailMessage('Low Insulin Sensitivity')).toBeVisible();
         });
     });
-    describe.skip(name.MinimumWarning, () => {
+    describe(name.MinimumWarning, () => {
         it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.warning },
@@ -39,7 +39,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailMessage('Low Insulin Sensitivity')).toBeVisible();
         });
     });
-    describe.skip(name.MinimumNoWarning, () => {
+    describe(name.MinimumNoWarning, () => {
         it(name.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.noWarning },
@@ -56,7 +56,7 @@ module.exports = (test) => {
 
     describe(name.MaximumLimit, () => {
         it(name.SetValue, async () => {
-            await action.SwipePickerUp(10, 0);
+            await action.SwipePickerUp(12, 0);
         });
         it(name.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
