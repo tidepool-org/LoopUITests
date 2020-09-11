@@ -50,6 +50,18 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     MaxBolusInfo() {
         return match.accessible.TextLabel(this.screenText.MaxBolusInfo);
     }
+    LowMaxBasalRateGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.LowMaxBasalRateGuardrailMessage);
+    }
+    HighMaxBasalRateGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.HighMaxBasalRateGuardrailMessage);
+    }
+    LowBolusAmountGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.LowBolusAmountGuardrailMessage);
+    }
+    HighBolusAmountGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.HighBolusAmountGuardrailMessage);
+    }
     async Open() {
         await super.Open();
         return this;

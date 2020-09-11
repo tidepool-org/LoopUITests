@@ -34,6 +34,12 @@ class CorrectionRangeScreen extends base.EntriesScreen {
     Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
     }
+    LowCorrectionValueGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.LowCorrectionValueGuardrailMessage);
+    }
+    HighCorrectionValueGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.HighCorrectionValueGuardrailMessage);
+    }
     /**
      * @param {Object} range
      * @param {Object} range.expected

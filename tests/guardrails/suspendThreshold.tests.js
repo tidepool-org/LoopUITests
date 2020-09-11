@@ -1,74 +1,74 @@
-const name = require('./testNames');
+const description = require('./testDescriptions');
 
 module.exports = (test) => {
     var screen;
-    var therapyScreen;
+    var therapySettingsScreen;
     var screenLimit;
     const therapySettingsValue = 75;
     it('open screen', async () => {
-        therapyScreen = await test.OpenTherapySettingsScreen();
-        screen = await therapyScreen.OpenSuspendThresholdScreen();
+        therapySettingsScreen = await test.OpenTherapySettingsScreen();
+        screen = await therapySettingsScreen.OpenSuspendThresholdScreen();
         screenLimit = test.limits.suspendThreshold;
         await screen.OpenPicker(therapySettingsValue);
     });
-    describe(name.MinimumLimit, () => {
-        it(name.SetValue, async () => {
+    describe(description.MinimumLimit, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { value: screenLimit.min.limit },
                 current: { value: therapySettingsValue },
             });
         });
-        it(name.HasGuardrailIcon, async () => {
+        it(description.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
         });
-        it(name.HasGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('Low Suspend Threshold')).toBeVisible();
+        it(description.HasGuardrailMessage, async () => {
+            await expect(screen.LowSuspendThresholdGuardrailMessage()).toBeVisible();
         });
     });
-    describe(name.MinimumWarning, () => {
-        it(name.SetValue, async () => {
+    describe(description.MinimumWarning, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { value: screenLimit.min.warning },
                 current: { value: screenLimit.min.limit },
             });
         });
-        it(name.HasGuardrailIcon, async () => {
+        it(description.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
         });
-        it(name.HasGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('Low Suspend Threshold')).toBeVisible();
+        it(description.HasGuardrailMessage, async () => {
+            await expect(screen.LowSuspendThresholdGuardrailMessage()).toBeVisible();
         });
     });
-    describe(name.MinimumNoWarning, () => {
-        it(name.SetValue, async () => {
+    describe(description.MinimumNoWarning, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { value: screenLimit.min.noWarning },
                 current: { value: screenLimit.min.warning },
             });
         });
-        it(name.HasNoGuardrailIcon, async () => {
+        it(description.HasNoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
         });
-        it(name.HasNoGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('Low Suspend Threshold')).toBeNotVisible();
+        it(description.HasNoGuardrailMessage, async () => {
+            await expect(screen.LowSuspendThresholdGuardrailMessage()).toBeNotVisible();
         });
     });
-    describe(name.MaximumLimit, () => {
-        it(name.SetValue, async () => {
+    describe(description.MaximumLimit, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { value: screenLimit.max.limit },
                 current: { value: screenLimit.min.noWarning },
             });
         });
-        it(name.HasNoGuardrailIcon, async () => {
+        it(description.HasNoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
         });
-        it(name.HasNoGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('High Suspend Threshold')).toBeNotVisible();
+        it(description.HasNoGuardrailMessage, async () => {
+            await expect(screen.HighSuspendThresholdGuardrailMessage()).toBeNotVisible();
         });
     });
     it('can close screen', async () => {
         await screen.CancelNewEntry();
-        await therapyScreen.ReturnToHomeScreen();
+        await therapySettingsScreen.ReturnToHomeScreen();
     });
 };

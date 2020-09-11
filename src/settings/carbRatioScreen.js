@@ -34,6 +34,12 @@ class CarbRatioScreen extends base.EntriesScreen {
     Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
     }
+    HighCarbRatioGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.HighCarbRatioGuardrailMessage);
+    }
+    LowCarbRatioGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.LowCarbRatioGuardrailMessage);
+    }
     _parts(ratio) {
         return String(ratio).split('.');
     }

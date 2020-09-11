@@ -219,16 +219,22 @@ var SettingsScreen = {
         MaxBolus: 'Maximum Bolus',
         MaxBolusInfo: 'Maximum bolus is the highest bolus amount you can deliver at one time to cover carbs or bring down high glucose.',
         BolusUnits: 'U',
-        LowMaxBasalRateGuardrail: 'Low Maximum Basal Rate',
-        HighMaxBolusGuardrail: 'High Maximum Bolus',
+        LowMaxBasalRateGuardrailMessage: 'Low Maximum Basal Rate',
+        HighMaxBasalRateGuardrailMessage: 'High Maximum Basal Rate',
+        LowBolusAmountGuardrailMessage: 'Low Bolus Amount',
+        HighBolusAmountGuardrailMessage: 'High Bolus Amount'
     },
     InsulinSensitivitiesScreen: {
         Header: 'Insulin Sensitivities',
         Info: 'Your insulin sensitivities refer to the drop in glucose expected from one unit of insulin.',
+        LowInsulinSensitivityGuardrailMessage: 'Low Insulin Sensitivity',
+        HighInsulinSensitivityGuardrailMessage: 'High Insulin Sensitivity',
     },
     CorrectionRangeScreen: {
         Header: 'Correction Range',
         Info: 'Correction range is the glucose value (or range of values) that you want Tidepool Loop to aim for in adjusting your basal insulin.',
+        LowCorrectionValueGuardrailMessage: 'Low Correction Value',
+        HighCorrectionValueGuardrailMessage: 'High Correction Value',
     },
     WorkoutRangeScreen: {
         Header: 'Workout Range',
@@ -242,13 +248,14 @@ var SettingsScreen = {
         Header: 'Basal Rates',
         Info: 'Your basal rate of insulin is the number of units per hour that you want to use to cover your background insulin needs.',
         Units: 'U/hr',
+        NoBasalInsulinGuardrailMessage: 'No Basal Insulin'
     },
     SuspendThresholdScreen: {
         BGUnits: 'mg/dL',
         Header: 'Suspend Threshold',
         Info: 'When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/hr and will not recommend a bolus.',
-        HighSuspendThresholdGuardrail: 'High Suspend Threshold',
-        LowSuspendThresholdGuardrail: 'Low Suspend Threshold',
+        HighSuspendThresholdGuardrailMessage: 'High Suspend Threshold',
+        LowSuspendThresholdGuardrailMessage: 'Low Suspend Threshold',
     },
     InsulinModelScreen: {
         Header: 'Insulin Model',
@@ -263,6 +270,8 @@ var SettingsScreen = {
     CarbRatioScreen: {
         Header: 'Carb Ratios',
         Info: 'Your carb ratio is the number of grams of carbohydrate covered by one unit of insulin.',
+        HighCarbRatioGuardrailMessage: 'High Carb Ratio',
+        LowCarbRatioGuardrailMessage: 'Low Carb Ratio'
     },
 };
 

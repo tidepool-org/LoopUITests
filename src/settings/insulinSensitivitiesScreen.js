@@ -33,6 +33,12 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
     Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
     }
+    LowInsulinSensitivityGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.LowInsulinSensitivityGuardrailMessage);
+    }
+    HighInsulinSensitivityGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.HighInsulinSensitivityGuardrailMessage);
+    }
     /**
      * @param {Object} sensitivity
      * @param {Object} sensitivity.expected

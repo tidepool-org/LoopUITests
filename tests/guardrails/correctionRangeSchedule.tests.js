@@ -1,17 +1,17 @@
-const name = require('./testNames');
+const description = require('./testDescriptions');
 
 module.exports = (test) => {
     var screen;
-    var therapyScreen;
+    var therapySettingsScreen;
     var screenLimit;
     it('open correction range', async () => {
-        therapyScreen = await test.OpenTherapySettingsScreen();
-        screen = await therapyScreen.OpenCorrectionRangeScreen();
+        therapySettingsScreen = await test.OpenTherapySettingsScreen();
+        screen = await therapySettingsScreen.OpenCorrectionRangeScreen();
         await screen.OpenPicker('12:00 AM');
         screenLimit = test.limits.correctionRange;
     });
-    describe(name.MinimumLimit, () => {
-        it(name.SetValue, async () => {
+    describe(description.MinimumLimit, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: {
                     min: screenLimit.min.limit,
@@ -23,15 +23,15 @@ module.exports = (test) => {
                 }
             });
         });
-        it(name.HasGuardrailIcon, async () => {
+        it(description.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it(name.HasGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('Low Correction Value')).toBeNotVisible();
+        it(description.HasGuardrailMessage, async () => {
+            await expect(screen.LowCorrectionValueGuardrailMessage()).toBeNotVisible();
         });
     });
-    describe(name.MaximumNoWarning, () => {
-        it(name.SetValue, async () => {
+    describe(description.MaximumNoWarning, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: {
                     min: screenLimit.min.limit,
@@ -43,15 +43,15 @@ module.exports = (test) => {
                 },
             });
         });
-        it(name.HasGuardrailIcon, async () => {
+        it(description.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it(name.HasGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('Low Correction Value')).toBeNotVisible();
+        it(description.HasGuardrailMessage, async () => {
+            await expect(screen.LowCorrectionValueGuardrailMessage()).toBeNotVisible();
         });
     });
-    describe(name.MaximumWarning, () => {
-        it(name.SetValue, async () => {
+    describe(description.MaximumWarning, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: {
                     min: screenLimit.min.limit,
@@ -63,15 +63,15 @@ module.exports = (test) => {
                 },
             });
         });
-        it(name.HasGuardrailIcon, async () => {
+        it(description.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(name.HasGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('High Correction Value')).toBeVisible();
+        it(description.HasGuardrailMessage, async () => {
+            await expect(screen.HighCorrectionValueGuardrailMessage()).toBeVisible();
         });
     });
-    describe(name.MaximumLimit, () => {
-        it(name.SetValue, async () => {
+    describe(description.MaximumLimit, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: {
                     min: screenLimit.min.limit,
@@ -83,15 +83,15 @@ module.exports = (test) => {
                 },
             });
         });
-        it(name.HasGuardrailIcon, async () => {
+        it(description.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(name.HasGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('High Correction Value')).toBeVisible();
+        it(description.HasGuardrailMessage, async () => {
+            await expect(screen.HighCorrectionValueGuardrailMessage()).toBeVisible();
         });
     });
     it('can close screen', async () => {
         await screen.CancelNewEntry();
-        await therapyScreen.ReturnToHomeScreen();
+        await therapySettingsScreen.ReturnToHomeScreen();
     });
 };

@@ -1,102 +1,102 @@
-const name = require('./testNames');
+const description = require('./testDescriptions');
 
 module.exports = (test) => {
     var screen;
-    var therapyScreen;
+    var therapySettingsScreen;
     var screenLimit;
     it('open screen', async () => {
-        therapyScreen = await test.OpenTherapySettingsScreen();
-        screen = await therapyScreen.OpenInsulinSensitivitiesScreen();
+        therapySettingsScreen = await test.OpenTherapySettingsScreen();
+        screen = await therapySettingsScreen.OpenInsulinSensitivitiesScreen();
         await screen.OpenPicker('12:00 AM');
         screenLimit = test.limits.insulinSensitivities;
     });
-    describe(name.MinimumLimit, () => {
-        it(name.SetValue, async () => {
+    describe(description.MinimumLimit, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.limit },
                 current: { time: '12:00 AM', bgValuePerInsulinUnit: 45 }
             });
         });
-        it(name.HasGuardrailIcon, async () => {
+        it(description.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(name.HasGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('Low Insulin Sensitivity')).toBeVisible();
+        it(description.HasGuardrailMessage, async () => {
+            await expect(screen.LowInsulinSensitivityGuardrailMessage()).toBeVisible();
         });
     });
-    describe(name.MinimumWarning, () => {
-        it(name.SetValue, async () => {
+    describe(description.MinimumWarning, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.warning },
                 current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.limit }
             });
         });
-        it(name.HasGuardrailIcon, async () => {
+        it(description.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(name.HasGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('Low Insulin Sensitivity')).toBeVisible();
+        it(description.HasGuardrailMessage, async () => {
+            await expect(screen.LowInsulinSensitivityGuardrailMessage()()).toBeVisible();
         });
     });
-    describe(name.MinimumNoWarning, () => {
-        it(name.SetValue, async () => {
+    describe(description.MinimumNoWarning, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.noWarning },
                 current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.warning }
             });
         });
-        it(name.HasNoGuardrailIcon, async () => {
+        it(description.HasNoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it(name.HasNoGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('Low Insulin Sensitivity')).toBeNotVisible();
+        it(description.HasNoGuardrailMessage, async () => {
+            await expect(screen.LowInsulinSensitivityGuardrailMessage()).toBeNotVisible();
         });
     });
-    describe(name.MaximumNoWarning, () => {
-        it(name.SetValue, async () => {
+    describe(description.MaximumNoWarning, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.noWarning },
                 current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.noWarning }
             });
         });
-        it(name.HasNoGuardrailIcon, async () => {
+        it(description.HasNoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it(name.HasNoGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('High Insulin Sensitivity')).toBeNotVisible();
+        it(description.HasNoGuardrailMessage, async () => {
+            await expect(screen.HighInsulinSensitivityGuardrailMessage()).toBeNotVisible();
         });
     });
-    describe(name.MaximumWarning, () => {
-        it(name.SetValue, async () => {
+    describe(description.MaximumWarning, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.warning },
                 current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.noWarning }
             });
         });
-        it(name.HasGuardrailIcon, async () => {
+        it(description.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(name.HasGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('High Insulin Sensitivity')).toBeVisible();
+        it(description.HasGuardrailMessage, async () => {
+            await expect(screen.HighInsulinSensitivityGuardrailMessage()).toBeVisible();
         });
     });
-    describe(name.MaximumLimit, () => {
-        it(name.SetValue, async () => {
+    describe(description.MaximumLimit, () => {
+        it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.limit },
                 current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.warning },
 
             });
         });
-        it(name.HasGuardrailIcon, async () => {
+        it(description.HasGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(name.HasGuardrailMessage, async () => {
-            await expect(screen.GuardrailMessage('High Insulin Sensitivity')).toBeVisible();
+        it(description.HasGuardrailMessage, async () => {
+            await expect(screen.HighInsulinSensitivityGuardrailMessage()).toBeVisible();
         });
     });
     it('can close screen', async () => {
         await screen.CancelNewEntry();
-        await therapyScreen.ReturnToHomeScreen();
+        await therapySettingsScreen.ReturnToHomeScreen();
     });
 };

@@ -1,4 +1,4 @@
-const name = require('./testNames');
+const description = require('./testDescriptions');
 
 module.exports = (test) => {
     var screen;
@@ -14,60 +14,60 @@ module.exports = (test) => {
             screen = await therapyScreen.OpenDeliveryLimitsScreen();
             await screen.OpenBasalRatePicker();
         });
-        describe(name.MinimumLimit, () => {
-            it(name.SetValue, async () => {
+        describe(description.MinimumLimit, () => {
+            it(description.SetValue, async () => {
                 await screen.ApplyBasal({
                     expected: { rate: screenLimit.basalRate.min.limit },
                     current: { rate: therapySettingsMaxBasalRate },
                 });
             });
-            it(name.HasNoGuardrailIcon, async () => {
+            it(description.HasNoGuardrailIcon, async () => {
                 await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
             });
-            it(name.HasNoGuardrailMessage, async () => {
-                await expect(screen.GuardrailMessage('Low Maximum Basal Rate')).toBeNotVisible();
+            it(description.HasNoGuardrailMessage, async () => {
+                await expect(screen.LowMaxBasalRateGuardrailMessage()).toBeNotVisible();
             });
         });
-        describe(name.MaximumNoWarning, () => {
-            it(name.SetValue, async () => {
+        describe(description.MaximumNoWarning, () => {
+            it(description.SetValue, async () => {
                 await screen.ApplyBasal({
                     expected: { rate: screenLimit.basalRate.max.noWarning },
                     current: { rate: screenLimit.basalRate.min.limit },
                 });
             });
-            it(name.HasNoGuardrailIcon, async () => {
+            it(description.HasNoGuardrailIcon, async () => {
                 await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
             });
-            it(name.HasNoGuardrailMessage, async () => {
-                await expect(screen.GuardrailMessage('High Maximum Basal Rate')).toBeNotVisible();
+            it(description.HasNoGuardrailMessage, async () => {
+                await expect(screen.HighMaxBasalRateGuardrailMessage()).toBeNotVisible();
             });
         });
-        describe(name.MaximumWarning, () => {
-            it(name.SetValue, async () => {
+        describe(description.MaximumWarning, () => {
+            it(description.SetValue, async () => {
                 await screen.ApplyBasal({
                     expected: { rate: screenLimit.basalRate.max.warning },
                     current: { rate: screenLimit.basalRate.max.noWarning },
                 });
             });
-            it(name.HasGuardrailIcon, async () => {
+            it(description.HasGuardrailIcon, async () => {
                 await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
             });
-            it(name.HasGuardrailMessage, async () => {
-                await expect(screen.GuardrailMessage('High Maximum Basal Rate')).toBeVisible();
+            it(description.HasGuardrailMessage, async () => {
+                await expect(screen.HighMaxBasalRateGuardrailMessage()).toBeVisible();
             });
         });
-        describe(name.MaximumLimit, () => {
-            it(name.SetValue, async () => {
+        describe(description.MaximumLimit, () => {
+            it(description.SetValue, async () => {
                 await screen.ApplyBasal({
                     expected: { rate: screenLimit.basalRate.max.limit },
                     current: { rate: screenLimit.basalRate.max.warning },
                 });
             });
-            it(name.HasGuardrailIcon, async () => {
+            it(description.HasGuardrailIcon, async () => {
                 await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
             });
-            it(name.HasGuardrailMessage, async () => {
-                await expect(screen.GuardrailMessage('High Maximum Basal Rate')).toBeVisible();
+            it(description.HasGuardrailMessage, async () => {
+                await expect(screen.HighMaxBasalRateGuardrailMessage()).toBeVisible();
             });
         });
 
@@ -83,18 +83,18 @@ module.exports = (test) => {
             screen = await therapyScreen.OpenDeliveryLimitsScreen();
             await screen.OpenBolusPicker();
         });
-        describe(name.MinimumLimit, () => {
-            it(name.SetValue, async () => {
+        describe(description.MinimumLimit, () => {
+            it(description.SetValue, async () => {
                 await screen.ApplyBolus({
                     expected: { amount: screenLimit.bolus.min.limit },
                     current: { amount: therapySettingsMaxBolusAmount },
                 });
             });
-            it(name.HasNoGuardrailIcon, async () => {
+            it(description.HasNoGuardrailIcon, async () => {
                 await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
             });
-            it(name.HasNoGuardrailMessage, async () => {
-                await expect(screen.GuardrailMessage('Low Bolus Amount')).toBeNotVisible();
+            it(description.HasNoGuardrailMessage, async () => {
+                await expect(screen.LowBolusAmountGuardrailMessage()).toBeNotVisible();
             });
         });
         it('cancel and close', async () => {

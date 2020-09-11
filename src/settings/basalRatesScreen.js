@@ -68,6 +68,9 @@ class BasalRatesScreen extends base.EntriesScreen {
         await super.Open();
         return this;
     }
+    NoBasalInsulinGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.NoBasalInsulinGuardrailMessage);
+    }
 }
 
 module.exports = BasalRatesScreen;
