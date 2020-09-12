@@ -32,7 +32,11 @@ const action = {
             try {
                 await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
             } catch (err) {
-                await match.accessible.PickerItem(`${currentValue}`).atIndex(0).tap();
+                try {
+                    await match.accessible.PickerItem(`${currentValue}`).atIndex(0).tap();
+                } catch (err) {
+                    await match.accessible.PickerItem(`${currentValue}`).atIndex(2).tap();
+                }
             }
         } while (currentValue != expectedValue);
     },
