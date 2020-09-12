@@ -35,7 +35,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.HasGuardrailMessage, async () => {
-            await expect(screen.LowInsulinSensitivityGuardrailMessage()()).toBeVisible();
+            await expect(screen.LowInsulinSensitivityGuardrailMessage()).toBeVisible();
         });
     });
     describe(description.MinimumNoWarning, () => {
