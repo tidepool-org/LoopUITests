@@ -21,10 +21,10 @@ module.exports = (test) => {
                     current: { rate: therapySettingsMaxBasalRate },
                 });
             });
-            it(description.HasNoGuardrailIcon, async () => {
+            it(description.NoGuardrailIcon, async () => {
                 await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
             });
-            it(description.HasNoGuardrailMessage, async () => {
+            it(description.NoGuardrailMessage, async () => {
                 await expect(screen.LowMaxBasalRateGuardrailMessage()).toBeNotVisible();
             });
         });
@@ -35,10 +35,10 @@ module.exports = (test) => {
                     current: { rate: screenLimit.basalRate.min.limit },
                 });
             });
-            it(description.HasNoGuardrailIcon, async () => {
+            it(description.NoGuardrailIcon, async () => {
                 await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
             });
-            it(description.HasNoGuardrailMessage, async () => {
+            it(description.NoGuardrailMessage, async () => {
                 await expect(screen.HighMaxBasalRateGuardrailMessage()).toBeNotVisible();
             });
         });
@@ -49,10 +49,10 @@ module.exports = (test) => {
                     current: { rate: screenLimit.basalRate.max.noWarning },
                 });
             });
-            it(description.HasGuardrailIcon, async () => {
+            it(description.GuardrailIcon, async () => {
                 await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
             });
-            it(description.HasGuardrailMessage, async () => {
+            it(description.GuardrailMessage, async () => {
                 await expect(screen.HighMaxBasalRateGuardrailMessage()).toBeVisible();
             });
         });
@@ -63,10 +63,10 @@ module.exports = (test) => {
                     current: { rate: screenLimit.basalRate.max.warning },
                 });
             });
-            it(description.HasGuardrailIcon, async () => {
+            it(description.GuardrailIcon, async () => {
                 await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
             });
-            it(description.HasGuardrailMessage, async () => {
+            it(description.GuardrailMessage, async () => {
                 await expect(screen.HighMaxBasalRateGuardrailMessage()).toBeVisible();
             });
         });
@@ -90,10 +90,10 @@ module.exports = (test) => {
                     current: { amount: therapySettingsMaxBolusAmount },
                 });
             });
-            it(description.HasNoGuardrailIcon, async () => {
+            it(description.NoGuardrailIcon, async () => {
                 await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
             });
-            it(description.HasNoGuardrailMessage, async () => {
+            it(description.NoGuardrailMessage, async () => {
                 await expect(screen.LowBolusAmountGuardrailMessage()).toBeNotVisible();
             });
         });

@@ -23,10 +23,10 @@ module.exports = (test) => {
                 }
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.NoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.NoGuardrailMessage, async () => {
             await expect(screen.LowCorrectionValueGuardrailMessage()).toBeNotVisible();
         });
     });
@@ -43,10 +43,10 @@ module.exports = (test) => {
                 },
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.NoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.NoGuardrailMessage, async () => {
             await expect(screen.LowCorrectionValueGuardrailMessage()).toBeNotVisible();
         });
     });
@@ -63,10 +63,10 @@ module.exports = (test) => {
                 },
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.HighCorrectionValueGuardrailMessage()).toBeVisible();
         });
     });
@@ -83,10 +83,10 @@ module.exports = (test) => {
                 },
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.HighCorrectionValueGuardrailMessage()).toBeVisible();
         });
     });

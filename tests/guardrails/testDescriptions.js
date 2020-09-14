@@ -5,9 +5,9 @@ module.exports = {
     MinimumLimit: 'minimum at limit with warning',
     MinimumWarning: 'minimum with warning',
     MinimumNoWarning: 'minimum with no warning',
-    HasGuardrailIcon: 'has guardrail icon',
-    HasNoGuardrailIcon: 'does not have guardrail icon',
-    HasGuardrailMessage: 'has guardrail message',
-    HasNoGuardrailMessage: 'does not have guardrail message',
+    GuardrailIcon: 'has guardrail icon',
+    GuardrailMessage: 'has guardrail message',
+    NoGuardrailMessage: 'does not have guardrail message',
+    NoGuardrailIcon: 'does not have guardrail icon',
     SetValue: 'set value'
 };

@@ -18,10 +18,10 @@ module.exports = (test) => {
                 current: { carbGramsPerInsulinUnit: therapySettingsRatio }
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.LowCarbRatioGuardrailMessage()).toBeVisible();
         });
     });
@@ -32,10 +32,10 @@ module.exports = (test) => {
                 current: { carbGramsPerInsulinUnit: screenLimit.min.limit }
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.LowCarbRatioGuardrailMessage()).toBeVisible();
         });
     });
@@ -46,10 +46,10 @@ module.exports = (test) => {
                 current: { carbGramsPerInsulinUnit: screenLimit.min.warning }
             });
         });
-        it(description.HasNoGuardrailIcon, async () => {
+        it(description.NoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it(description.HasNoGuardrailMessage, async () => {
+        it(description.NoGuardrailMessage, async () => {
             await expect(screen.LowCarbRatioGuardrailMessage()).toBeNotVisible();
         });
     });
@@ -60,10 +60,10 @@ module.exports = (test) => {
                 current: { carbGramsPerInsulinUnit: screenLimit.min.noWarning }
             });
         });
-        it(description.HasNoGuardrailIcon, async () => {
+        it(description.NoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it(description.HasNoGuardrailMessage, async () => {
+        it(description.NoGuardrailMessage, async () => {
             await expect(screen.LowCarbRatioGuardrailMessage()).toBeNotVisible();
         });
     });
@@ -74,10 +74,10 @@ module.exports = (test) => {
                 current: { carbGramsPerInsulinUnit: screenLimit.max.noWarning }
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.HighCarbRatioGuardrailMessage()).toBeVisible();
         });
     });
@@ -88,10 +88,10 @@ module.exports = (test) => {
                 current: { carbGramsPerInsulinUnit: screenLimit.max.warning }
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.HighCarbRatioGuardrailMessage()).toBeVisible();
         });
     });

@@ -17,10 +17,10 @@ module.exports = (test) => {
                 current: { time: '12:00 AM', unitsPerHour: 1 }
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.NoBasalInsulinGuardrailMessage()).toBeVisible();
         });
     });
@@ -31,10 +31,10 @@ module.exports = (test) => {
                 current: { time: '12:00 AM', unitsPerHour: screenLimit.min.limit }
             });
         });
-        it(description.HasNoGuardrailIcon, async () => {
+        it(description.NoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it(description.HasNoGuardrailMessage, async () => {
+        it(description.NoGuardrailMessage, async () => {
             await expect(screen.NoBasalInsulinGuardrailMessage()).toBeNotVisible();
         });
     });
@@ -45,10 +45,10 @@ module.exports = (test) => {
                 current: { time: '12:00 AM', unitsPerHour: screenLimit.min.noWarning }
             });
         });
-        it(description.HasNoGuardrailIcon, async () => {
+        it(description.NoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it(description.HasNoGuardrailMessage, async () => {
+        it(description.NoGuardrailMessage, async () => {
             await expect(screen.NoBasalInsulinGuardrailMessage()).toBeNotVisible();
         });
     });

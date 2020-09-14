@@ -53,7 +53,10 @@ class SuspendThresholdScreen extends base.EntryScreen {
         if (threshold.current) {
             currentValue = threshold.current.value;
         }
-        await action.ScrollQuantityPicker(currentValue, threshold.expected.value);
+        await action.ScrollIntegerPicker(
+            currentValue,
+            threshold.expected.value,
+        );
 
     }
     async Open() {

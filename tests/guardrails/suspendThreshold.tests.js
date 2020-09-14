@@ -18,10 +18,10 @@ module.exports = (test) => {
                 current: { value: therapySettingsValue },
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.LowSuspendThresholdGuardrailMessage()).toBeVisible();
         });
     });
@@ -32,10 +32,10 @@ module.exports = (test) => {
                 current: { value: screenLimit.min.limit },
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.LowSuspendThresholdGuardrailMessage()).toBeVisible();
         });
     });
@@ -46,10 +46,10 @@ module.exports = (test) => {
                 current: { value: screenLimit.min.warning },
             });
         });
-        it(description.HasNoGuardrailIcon, async () => {
+        it(description.NoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
         });
-        it(description.HasNoGuardrailMessage, async () => {
+        it(description.NoGuardrailMessage, async () => {
             await expect(screen.LowSuspendThresholdGuardrailMessage()).toBeNotVisible();
         });
     });
@@ -60,10 +60,10 @@ module.exports = (test) => {
                 current: { value: screenLimit.min.noWarning },
             });
         });
-        it(description.HasNoGuardrailIcon, async () => {
+        it(description.NoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
         });
-        it(description.HasNoGuardrailMessage, async () => {
+        it(description.NoGuardrailMessage, async () => {
             await expect(screen.HighSuspendThresholdGuardrailMessage()).toBeNotVisible();
         });
     });

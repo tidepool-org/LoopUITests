@@ -35,9 +35,6 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     _limitParts(limitAmount) {
         return String(limitAmount).split('.');
     }
-    async _set(expected, current) {
-        await action.ScrollQuantityPicker(current[0], expected[0]);
-    }
     MaxBasalRateLabel() {
         return match.accessible.TextLabel(this.screenText.MaxBasalRate);
     }
@@ -83,7 +80,10 @@ class DeliveryLimitsScreen extends base.EntryScreen {
             currentParts = this._limitParts(bolus.current.amount);
         }
         let expectedParts = this._limitParts(bolus.expected.amount);
-        await this._set(expectedParts, currentParts);
+        await action.ScrollDecimalPicker(
+            currentParts[0],
+            expectedParts[0],
+        );
     }
     /**
      * @param {Object} basal
@@ -96,7 +96,10 @@ class DeliveryLimitsScreen extends base.EntryScreen {
             currentParts = this._limitParts(basal.current.rate);
         }
         let expectedParts = this._limitParts(basal.expected.rate);
-        await this._set(expectedParts, currentParts);
+        await action.ScrollDecimalPicker(
+            currentParts[0],
+            expectedParts[0],
+        );
     }
 }
 

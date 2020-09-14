@@ -58,7 +58,10 @@ class CarbRatioScreen extends base.EntriesScreen {
             let currentParts = this._parts(ratio.current.carbGramsPerInsulinUnit);
             currentValue = Number(currentParts[wholePart]);
         }
-        await action.ScrollQuantityPicker(currentValue, Number(expectedParts[wholePart]));
+        await action.ScrollDecimalPicker(
+            currentValue,
+            Number(expectedParts[wholePart]),
+        );
     }
     /**
      * @param {Array} ratios

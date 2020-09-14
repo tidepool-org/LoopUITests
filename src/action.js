@@ -21,24 +21,56 @@ const action = {
      *
      * @param {string} currentValue
      * @param {string} expectedValue
+     * @param {boolean} isMinValue, optional - default is true
      */
-    async ScrollQuantityPicker(currentValue, expectedValue) {
+    async ScrollMaxMinPicker(currentValue, expectedValue, isMinValue = true) {
         if (currentValue == expectedValue) {
             return;
         }
         do {
             currentValue = _nextPickerStep(currentValue, expectedValue);
-            //NOTE: on the very odd occasion we need the first item. Not happy but works for now
-            try {
-                await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
-            } catch (err) {
+            if (isMinValue) {
                 try {
-                    await match.accessible.PickerItem(`${currentValue}`).atIndex(0).tap();
-                } catch (err) {
                     await match.accessible.PickerItem(`${currentValue}`).atIndex(2).tap();
+                } catch (err) {
+                    await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
+                }
+            } else {
+                await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
+            }
+        }
+        while (currentValue != expectedValue);
+    },
+    /**
+     *
+     * @param {string} currentValue
+     * @param {string} expectedValue
+     * @param {boolean} isWholePart, optional - default is true
+     */
+    async ScrollDecimalPicker(currentValue, expectedValue, isWholePart = true) {
+        if (currentValue == expectedValue) {
+            return;
+        }
+        do {
+            currentValue = _nextPickerStep(currentValue, expectedValue);
+
+            if (isWholePart) {
+                try {
+                    await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
+                } catch (err) {
+                    console.log('## FAILED currentValue:', currentValue, ' expectedValue:', expectedValue);
                 }
             }
-        } while (currentValue != expectedValue);
+        }
+        while (currentValue != expectedValue);
+    },
+    /**
+     *
+     * @param {string} currentValue
+     * @param {string} expectedValue
+     */
+    async ScrollIntegerPicker(currentValue, expectedValue) {
+        return this.ScrollDecimalPicker(currentValue, expectedValue, true);
     },
     /**
      * @summary sets the pickers column to the given value
@@ -58,7 +90,6 @@ const action = {
             await match.accessible.Picker(index).swipe('up');
             count++;
         } while (count <= times);
-
     },
     async SwipeQuantityPickerUp(times, id) {
         let count = 1;
@@ -66,7 +97,6 @@ const action = {
             await match.accessible.QuantityPicker(id).swipe('up');
             count++;
         } while (count <= times);
-
     },
     /**
      * @summary sets the pickers column to the given value

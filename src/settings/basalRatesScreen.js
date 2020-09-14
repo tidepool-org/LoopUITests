@@ -53,7 +53,7 @@ class BasalRatesScreen extends base.EntriesScreen {
             let currentParts = this._parts(rate.current.unitsPerHour);
             currentValue = Number(currentParts[wholePart])
         }
-        await action.ScrollQuantityPicker(
+        await action.ScrollDecimalPicker(
             currentValue,
             Number(expectedParts[wholePart]),
         );

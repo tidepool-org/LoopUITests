@@ -17,10 +17,10 @@ module.exports = (test) => {
                 current: { time: '12:00 AM', bgValuePerInsulinUnit: 45 }
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.LowInsulinSensitivityGuardrailMessage()).toBeVisible();
         });
     });
@@ -31,10 +31,10 @@ module.exports = (test) => {
                 current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.limit }
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.LowInsulinSensitivityGuardrailMessage()).toBeVisible();
         });
     });
@@ -45,10 +45,10 @@ module.exports = (test) => {
                 current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.warning }
             });
         });
-        it(description.HasNoGuardrailIcon, async () => {
+        it(description.NoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it(description.HasNoGuardrailMessage, async () => {
+        it(description.NoGuardrailMessage, async () => {
             await expect(screen.LowInsulinSensitivityGuardrailMessage()).toBeNotVisible();
         });
     });
@@ -59,10 +59,10 @@ module.exports = (test) => {
                 current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.noWarning }
             });
         });
-        it(description.HasNoGuardrailIcon, async () => {
+        it(description.NoGuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
-        it(description.HasNoGuardrailMessage, async () => {
+        it(description.NoGuardrailMessage, async () => {
             await expect(screen.HighInsulinSensitivityGuardrailMessage()).toBeNotVisible();
         });
     });
@@ -73,10 +73,10 @@ module.exports = (test) => {
                 current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.noWarning }
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.HighInsulinSensitivityGuardrailMessage()).toBeVisible();
         });
     });
@@ -88,10 +88,10 @@ module.exports = (test) => {
 
             });
         });
-        it(description.HasGuardrailIcon, async () => {
+        it(description.GuardrailIcon, async () => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
-        it(description.HasGuardrailMessage, async () => {
+        it(description.GuardrailMessage, async () => {
             await expect(screen.HighInsulinSensitivityGuardrailMessage()).toBeVisible();
         });
     });

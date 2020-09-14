@@ -51,7 +51,7 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
         if (sensitivity.current) {
             currentValuePerInsulinUnit = sensitivity.current.bgValuePerInsulinUnit;
         }
-        await action.ScrollQuantityPicker(
+        await action.ScrollIntegerPicker(
             currentValuePerInsulinUnit,
             sensitivity.expected.bgValuePerInsulinUnit
         );

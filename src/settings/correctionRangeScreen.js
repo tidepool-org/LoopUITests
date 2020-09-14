@@ -56,13 +56,15 @@ class CorrectionRangeScreen extends base.EntriesScreen {
             currentMax = range.current.max;
             currentMin = range.current.min;
         }
-        await action.ScrollQuantityPicker(
+        await action.ScrollMaxMinPicker(
             currentMax,
             range.expected.max,
+            false,
         );
-        await action.ScrollQuantityPicker(
+        await action.ScrollMaxMinPicker(
             currentMin,
             range.expected.min,
+            true,
         );
     }
     /**
