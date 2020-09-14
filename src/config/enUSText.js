@@ -145,7 +145,7 @@ var HomeScreen = {
         GlucoseChange: 'Glucose Change',
         Predicted: 'Predicted',
         Observed: 'Observed',
-        GramsActiveCarbs: 'g Active Carbs',
+        GramsActiveCarbs: 'g COB',
         GramsTotalCarbs: 'g Total',
     }
 };
