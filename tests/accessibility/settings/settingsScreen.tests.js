@@ -10,9 +10,6 @@ module.exports = (test) => {
         await screen.ClosedLoop();
         await expect(screen._closedLoopButton()).toHaveValue('1');
     });
-    it('has alert permissons label', async () => {
-        await expect(screen.AlertPermissonsLabel()).toBeVisible();
-    });
     it('has configuration header', async () => {
         await expect(screen.ConfigurationHeader()).toBeVisible();
     });
