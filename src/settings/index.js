@@ -15,7 +15,7 @@ class SettingsScreen extends base.Screen {
                 label: language.settingsScreen.Settings,
             },
             header: {
-                backLabel: language.general.Close,
+                backLabel: language.general.Done,
             },
             scroll: {
                 visibleBottomLabel: language.settingsScreen.Supportv2,
@@ -34,35 +34,10 @@ class SettingsScreen extends base.Screen {
      * @override
      */
     BackButton() {
-        return match.accessible.ButtonBarButton(this.generalText.Done);
-    }
-    /**
-     * @override
-     */
-    OpenButton() {
-        return match.accessible.ClickableLabel(this.screenText.Settings).atIndex(2);
-    }
-    /**
-     * @summary hack while we have two settings pages
-     */
-    async BackToHome() {
-        try {
-            await this._closeNewSettings();
-        } catch (err) {
-            //pass through
-        } finally {
-            await match.accessible.ButtonBarButton(this.generalText.Done).tap();
-        }
-    }
-    async _closeNewSettings() {
-        try {
-            await match.accessible.Button(this.generalText.Done).atIndex(2).tap()
-        } catch (err) {
-            await match.accessible.Button(this.generalText.Done).atIndex(1).tap();
-        }
+        return match.accessible.Button(this.generalText.Done);
     }
     _closedLoopButton() {
-        return match.accessible.Button(this.screenText.ClosedLoop).atIndex(4);
+        return match.accessible.SwitchButton(this.screenText.ClosedLoop);
     }
     async ClosedLoop() {
         var btn = this._closedLoopButton()
@@ -107,35 +82,28 @@ class SettingsScreen extends base.Screen {
         return this.alertScreen;
     }
     async OpenDeliveryLimitsScreen() {
-        await this._closeNewSettings();
         await this.SwipeUp();
         return this.therapyScreen.OpenDeliveryLimitsScreen();
     }
     async OpenCorrectionRangeScreen() {
-        await this._closeNewSettings();
         return this.therapyScreen.OpenCorrectionRangeScreen();
     }
     async OpenInsulinSensitivitiesScreen() {
-        await this._closeNewSettings();
         await this.SwipeUp();
         return this.therapyScreen.OpenInsulinSensitivitiesScreen();
     }
     async OpenSuspendThresholdScreen() {
-        await this._closeNewSettings();
         await this.SwipeUp();
         return this.therapyScreen.OpenSuspendThresholdScreen();
     }
     async OpenSuspendThresholdScreen() {
-        await this._closeNewSettings();
         return this.therapyScreen.OpenSuspendThresholdScreen();
     }
     async OpenCarbRatioScreen() {
-        await this._closeNewSettings();
         await this.SwipeUp();
         return this.therapyScreen.OpenCarbRatioScreen();
     }
     async OpenBasalRateScreen() {
-        await this._closeNewSettings();
         await this.SwipeUp();
         return this.therapyScreen.OpenBasalRateScreen();
     }

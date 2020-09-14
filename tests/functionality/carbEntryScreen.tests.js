@@ -3,14 +3,10 @@ module.exports = (test) => {
     it('can open screen', async () => {
         screen = await test.OpenCarbEntryScreen();
     });
-    //TODO: cannot save without bolus
-    it.skip('set carbs and save without a bolus', async () => {
-        await screen.SetCarbs(30);
+    it('set carbs and then save with bolus', async () => {
+        await screen.SetCarbs(5);
         var bolusScreen = await screen.Continue();
-        await bolusScreen.SaveWithoutBolus();
-    });
-    it('can cancel open screen', async () => {
-        screen = await test.OpenCarbEntryScreen();
-        await screen.CancelAndClose();
+        await bolusScreen.SaveAndDeliver();
+        await bolusScreen.Authenticate();
     });
 };

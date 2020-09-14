@@ -1,67 +1,102 @@
+const description = require('./testDescriptions');
+
 module.exports = (test) => {
     var screen;
-    var settingsScreen;
+    var therapySettingsScreen;
     var screenLimit;
     it('open screen', async () => {
-        settingsScreen = await test.OpenSettingsScreen();
-        screen = await settingsScreen.OpenInsulinSensitivitiesScreen();
+        therapySettingsScreen = await test.OpenTherapySettingsScreen();
+        screen = await therapySettingsScreen.OpenInsulinSensitivitiesScreen();
+        await screen.OpenPicker('12:00 AM');
         screenLimit = test.limits.insulinSensitivities;
     });
-    it('can set max units with warning', async () => {
-        await screen.Plus();
-        await screen.ApplyOne({
-            expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.limit }
+    describe(description.MinimumLimit, () => {
+        it(description.SetValue, async () => {
+            await screen.ApplyOne({
+                expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.limit },
+                current: { time: '12:00 AM', bgValuePerInsulinUnit: 45 }
+            });
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        it(description.GuardrailIcon, async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        });
+        it(description.GuardrailMessage, async () => {
+            await expect(screen.LowInsulinSensitivityGuardrailMessage()).toBeVisible();
+        });
     });
-    it('can set max lower boundary units with warning', async () => {
-        await screen.Plus();
-        await screen.ApplyOne({
-            expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.warning },
-            current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.limit }
+    describe(description.MinimumWarning, () => {
+        it(description.SetValue, async () => {
+            await screen.ApplyOne({
+                expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.warning },
+                current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.limit }
+            });
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 1 })).toBeVisible();
+        it(description.GuardrailIcon, async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        });
+        it(description.GuardrailMessage, async () => {
+            await expect(screen.LowInsulinSensitivityGuardrailMessage()).toBeVisible();
+        });
     });
-    it('can set below max lower boundary units without warning', async () => {
-        await screen.Plus();
-        await screen.ApplyOne({
-            expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.noWarning },
-            current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.warning },
+    describe(description.MinimumNoWarning, () => {
+        it(description.SetValue, async () => {
+            await screen.ApplyOne({
+                expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.noWarning },
+                current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.warning }
+            });
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 2 })).toBeNotVisible();
+        it(description.NoGuardrailIcon, async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
+        });
+        it(description.NoGuardrailMessage, async () => {
+            await expect(screen.LowInsulinSensitivityGuardrailMessage()).toBeNotVisible();
+        });
     });
-    it('can set above min lower boundary units without warning', async () => {
-        await screen.Plus();
-        await screen.ApplyOne({
-            expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.noWarning },
-            current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.noWarning },
+    describe(description.MaximumNoWarning, () => {
+        it(description.SetValue, async () => {
+            await screen.ApplyOne({
+                expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.noWarning },
+                current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.noWarning }
+            });
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 3 })).toBeNotVisible();
+        it(description.NoGuardrailIcon, async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
+        });
+        it(description.NoGuardrailMessage, async () => {
+            await expect(screen.HighInsulinSensitivityGuardrailMessage()).toBeNotVisible();
+        });
     });
-    it('can set at min lower boundary units with warning', async () => {
-        await screen.Plus();
-        await screen.ApplyOne({
-            expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.warning },
-            current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.noWarning },
+    describe(description.MaximumWarning, () => {
+        it(description.SetValue, async () => {
+            await screen.ApplyOne({
+                expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.warning },
+                current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.noWarning }
+            });
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 4 })).toBeVisible();
+        it(description.GuardrailIcon, async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        });
+        it(description.GuardrailMessage, async () => {
+            await expect(screen.HighInsulinSensitivityGuardrailMessage()).toBeVisible();
+        });
     });
-    it('can set at min limit with warning', async () => {
-        await screen.Plus();
-        await screen.ApplyOne({
-            expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.limit },
-            current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.min.warning },
+    describe(description.MaximumLimit, () => {
+        it(description.SetValue, async () => {
+            await screen.ApplyOne({
+                expected: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.limit },
+                current: { time: '12:00 AM', bgValuePerInsulinUnit: screenLimit.max.warning },
+
+            });
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 5 })).toBeVisible();
+        it(description.GuardrailIcon, async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        });
+        it(description.GuardrailMessage, async () => {
+            await expect(screen.HighInsulinSensitivityGuardrailMessage()).toBeVisible();
+        });
     });
     it('can close screen', async () => {
-        await screen.CancelAndClose();
-        await settingsScreen.Back();
+        await screen.CancelNewEntry();
+        await therapySettingsScreen.ReturnToHomeScreen();
     });
 };

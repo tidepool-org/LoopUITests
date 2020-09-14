@@ -5,7 +5,7 @@ describe('Closed loop is not allowed when settings', () => {
     it('should without carb ratios applied', async () => {
         test = new Test()
             .withSettings(setting.default)
-            .withSettingsFilter([setting.type.CarbRatios]);
+            .addSettingsFilter([setting.type.CarbRatios]);
         await test.prepare();
     });
     it('should not be in closed loop mode', async () => {

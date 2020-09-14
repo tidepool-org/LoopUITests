@@ -53,6 +53,9 @@ class Screen {
     BackButton() {
         return match.accessible.ButtonBarButton(this.backLabel);
     }
+    CancelButton() {
+        return match.accessible.ButtonBarButton(this.generalText.Cancel);
+    }
     AddButton() {
         return match.accessible.Button(this.generalText.Add);
     }
@@ -115,7 +118,11 @@ class Screen {
         await this.OpenButton().tap();
     }
     async CancelAndClose() {
-        await this.Back();
+        try {
+            await this.CancelButton().tap();
+        } catch (err) {
+            await this.Back();
+        }
     }
     async Back() {
         await this.BackButton().tap();

@@ -41,7 +41,7 @@ class HomeScreen {
         return this.glucoseScreen.OpenButton();
     }
     SettingsButton() {
-        return match.accessible.Button(this.language.settingsScreen.Settings_current);
+        return this.settingsScreen.OpenButton();
     }
     CustomPresetButton() {
         return this.customPresetScreen.OpenButton();
@@ -70,7 +70,6 @@ class HomeScreen {
     }
     async OpenSettingsScreen() {
         await this.SettingsButton().tap();
-        await this.settingsScreen.Open();
         return this.settingsScreen;
     }
     async OpenCarbEntryScreen() {

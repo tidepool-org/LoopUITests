@@ -5,7 +5,7 @@ describe('Closed loop is not allowed when settings are not applied for basal rat
     it('should without basal rates applied', async () => {
         test = new Test()
             .withSettings(setting.default)
-            .withSettingsFilter([setting.type.BasalRates]);
+            .addSettingsFilter([setting.type.BasalRates]);
         await test.prepare();
     });
     afterAll(async () => {

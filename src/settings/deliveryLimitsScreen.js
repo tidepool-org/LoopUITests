@@ -12,10 +12,13 @@ class DeliveryLimitsScreen extends base.EntryScreen {
                 label: language.settingsScreen.DeliveryLimitsScreen.Header,
             },
             header: {
-                backLabel: language.general.Cancel,
+                backLabel: language.settingsScreen.TherapySettingsScreen.Header,
             },
         });
         this.config = config;
+    }
+    BackButton() {
+        return match.accessible.BackButton(this.backLabel);
     }
     OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
@@ -32,9 +35,6 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     _limitParts(limitAmount) {
         return String(limitAmount).split('.');
     }
-    async _set(expected, current) {
-        await action.ScrollQuantityPicker(current[0], expected[0]);
-    }
     MaxBasalRateLabel() {
         return match.accessible.TextLabel(this.screenText.MaxBasalRate);
     }
@@ -46,6 +46,18 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     }
     MaxBolusInfo() {
         return match.accessible.TextLabel(this.screenText.MaxBolusInfo);
+    }
+    LowMaxBasalRateGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.LowMaxBasalRateGuardrailMessage);
+    }
+    HighMaxBasalRateGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.HighMaxBasalRateGuardrailMessage);
+    }
+    LowBolusAmountGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.LowBolusAmountGuardrailMessage);
+    }
+    HighBolusAmountGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.HighBolusAmountGuardrailMessage);
     }
     async Open() {
         await super.Open();
@@ -68,7 +80,10 @@ class DeliveryLimitsScreen extends base.EntryScreen {
             currentParts = this._limitParts(bolus.current.amount);
         }
         let expectedParts = this._limitParts(bolus.expected.amount);
-        await this._set(expectedParts, currentParts);
+        await action.ScrollDecimalPicker(
+            currentParts[0],
+            expectedParts[0],
+        );
     }
     /**
      * @param {Object} basal
@@ -81,7 +96,10 @@ class DeliveryLimitsScreen extends base.EntryScreen {
             currentParts = this._limitParts(basal.current.rate);
         }
         let expectedParts = this._limitParts(basal.expected.rate);
-        await this._set(expectedParts, currentParts);
+        await action.ScrollDecimalPicker(
+            currentParts[0],
+            expectedParts[0],
+        );
     }
 }
 

@@ -11,13 +11,16 @@ class CorrectionRangeScreen extends base.EntriesScreen {
             screenText: language.settingsScreen.CorrectionRangeScreen,
             generalText: language.general,
             header: {
-                backLabel: language.general.Cancel,
+                backLabel: language.settingsScreen.TherapySettingsScreen.Header,
             },
             open: {
                 isBtn: false,
                 label: language.settingsScreen.CorrectionRangeScreen.Header,
             },
         }, config);
+    }
+    BackButton() {
+        return match.accessible.Button(this.backLabel).atIndex(0);
     }
     OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
@@ -30,6 +33,12 @@ class CorrectionRangeScreen extends base.EntriesScreen {
      */
     Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
+    }
+    LowCorrectionValueGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.LowCorrectionValueGuardrailMessage);
+    }
+    HighCorrectionValueGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.HighCorrectionValueGuardrailMessage);
     }
     /**
      * @param {Object} range
@@ -47,13 +56,15 @@ class CorrectionRangeScreen extends base.EntriesScreen {
             currentMax = range.current.max;
             currentMin = range.current.min;
         }
-        await action.ScrollQuantityPicker(
+        await action.ScrollMaxMinPicker(
             currentMax,
             range.expected.max,
+            false,
         );
-        await action.ScrollQuantityPicker(
+        await action.ScrollMaxMinPicker(
             currentMin,
             range.expected.min,
+            true,
         );
     }
     /**

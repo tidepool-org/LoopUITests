@@ -1,68 +1,102 @@
+const description = require('./testDescriptions');
+
 module.exports = (test) => {
+    const therapySettingsRatio = 10;
     var screen;
-    var settings;
+    var therapySettingsScreen;
     var screenLimit;
-    it('open screen', async () => {
-        settings = await test.OpenSettingsScreen();
-        screen = await settings.OpenCarbRatioScreen();
+    it('open carb ratio screen', async () => {
+        therapySettingsScreen = await test.OpenTherapySettingsScreen();
+        screen = await therapySettingsScreen.OpenCarbRatioScreen();
+        await screen.OpenPicker(therapySettingsRatio);
         screenLimit = test.limits.insulinCarbRatio;
     });
-    it('can set max units at limit', async () => {
-        await screen.Plus();
-        await screen.ApplyOne({
-            expected: { carbGramsPerInsulinUnit: screenLimit.max.limit }
+    describe(description.MinimumLimit, () => {
+        it(description.SetValue, async () => {
+            await screen.ApplyOne({
+                expected: { carbGramsPerInsulinUnit: screenLimit.min.limit },
+                current: { carbGramsPerInsulinUnit: therapySettingsRatio }
+            });
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
-        await expect(screen.GuardrailMessage('High Carb Ratio')).toBeVisible();
+        it(description.GuardrailIcon, async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        });
+        it(description.GuardrailMessage, async () => {
+            await expect(screen.LowCarbRatioGuardrailMessage()).toBeVisible();
+        });
     });
-    it('can set max units with warning', async () => {
-        await screen.Plus();
-        await screen.ApplyOne({
-            expected: { carbGramsPerInsulinUnit: screenLimit.max.warning },
-            current: { carbGramsPerInsulinUnit: screenLimit.max.limit },
+    describe(description.MinimumWarning, () => {
+        it(description.SetValue, async () => {
+            await screen.ApplyOne({
+                expected: { carbGramsPerInsulinUnit: screenLimit.min.warning },
+                current: { carbGramsPerInsulinUnit: screenLimit.min.limit }
+            });
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 1 })).toBeVisible();
+        it(description.GuardrailIcon, async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        });
+        it(description.GuardrailMessage, async () => {
+            await expect(screen.LowCarbRatioGuardrailMessage()).toBeVisible();
+        });
     });
-    it('can set max units with no warning', async () => {
-        await screen.Plus();
-        await screen.ApplyOne({
-            expected: { carbGramsPerInsulinUnit: screenLimit.max.noWarning },
-            current: { carbGramsPerInsulinUnit: screenLimit.max.warning },
+    describe(description.MinimumNoWarning, () => {
+        it(description.SetValue, async () => {
+            await screen.ApplyOne({
+                expected: { carbGramsPerInsulinUnit: screenLimit.min.noWarning },
+                current: { carbGramsPerInsulinUnit: screenLimit.min.warning }
+            });
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 2 })).toBeNotVisible();
+        it(description.NoGuardrailIcon, async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
+        });
+        it(description.NoGuardrailMessage, async () => {
+            await expect(screen.LowCarbRatioGuardrailMessage()).toBeNotVisible();
+        });
     });
-    it('can set min units with no warning', async () => {
-        await screen.Plus();
-        await screen.ApplyOne({
-            expected: { carbGramsPerInsulinUnit: screenLimit.min.noWarning },
-            current: { carbGramsPerInsulinUnit: screenLimit.max.noWarning }
+    describe(description.MaximumNoWarning, () => {
+        it(description.SetValue, async () => {
+            await screen.ApplyOne({
+                expected: { carbGramsPerInsulinUnit: screenLimit.max.noWarning },
+                current: { carbGramsPerInsulinUnit: screenLimit.min.noWarning }
+            });
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 3 })).toBeNotVisible();
+        it(description.NoGuardrailIcon, async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
+        });
+        it(description.NoGuardrailMessage, async () => {
+            await expect(screen.LowCarbRatioGuardrailMessage()).toBeNotVisible();
+        });
     });
-    it('can set min units with warning', async () => {
-        await screen.Plus();
-        await screen.ApplyOne({
-            expected: { carbGramsPerInsulinUnit: screenLimit.min.warning },
-            current: { carbGramsPerInsulinUnit: screenLimit.min.noWarning }
+    describe(description.MaximumWarning, () => {
+        it(description.SetValue, async () => {
+            await screen.ApplyOne({
+                expected: { carbGramsPerInsulinUnit: screenLimit.max.warning },
+                current: { carbGramsPerInsulinUnit: screenLimit.max.noWarning }
+            });
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 4 })).toBeVisible();
+        it(description.GuardrailIcon, async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        });
+        it(description.GuardrailMessage, async () => {
+            await expect(screen.HighCarbRatioGuardrailMessage()).toBeVisible();
+        });
     });
-    it('can set min units at limit', async () => {
-        await screen.Plus();
-        await screen.ApplyOne({
-            expected: { carbGramsPerInsulinUnit: screenLimit.min.limit },
-            current: { carbGramsPerInsulinUnit: screenLimit.min.warning }
+    describe(description.MaximumLimit, () => {
+        it(description.SetValue, async () => {
+            await screen.ApplyOne({
+                expected: { carbGramsPerInsulinUnit: screenLimit.max.limit },
+                current: { carbGramsPerInsulinUnit: screenLimit.max.warning }
+            });
         });
-        await screen.Add();
-        await expect(screen.GuardrailWarningIconPicker({ index: 5 })).toBeVisible();
+        it(description.GuardrailIcon, async () => {
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+        });
+        it(description.GuardrailMessage, async () => {
+            await expect(screen.HighCarbRatioGuardrailMessage()).toBeVisible();
+        });
     });
     it('can cancel and close screen', async () => {
-        await screen.CancelAndClose();
-        await settings.Back();
+        await screen.CancelNewEntry();
+        await therapySettingsScreen.ReturnToHomeScreen();
     });
 };

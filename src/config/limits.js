@@ -1,3 +1,4 @@
+//update based on therapy settings
 var mgdL = {
     correctionRange: {
         max: {
@@ -6,9 +7,7 @@ var mgdL = {
             noWarning: 120,
         },
         min: {
-            noWarning: 100,
-            warning: 69,
-            limit: 60,
+            limit: 75,
         },
     },
     insulinSensitivities: {
@@ -25,8 +24,7 @@ var mgdL = {
     },
     basalRates: {
         max: {
-            limit: 35.0,
-            noWarning: 34.0,
+            limit: 5.0,
         },
         min: {
             limit: 0.0,
@@ -35,13 +33,11 @@ var mgdL = {
     },
     suspendThreshold: {
         max: {
-            limit: 180,
-            warning: 121,
-            noWarning: 120,
+            limit: 80,
         },
         min: {
             noWarning: 71,
-            warning: 70,
+            warning: 55,
             limit: 54,
         },
     },
@@ -61,10 +57,11 @@ var mgdL = {
         basalRate: {
             max: {
                 limit: 35.0,
+                warning: 7.0,
+                noWarning: 6.0,
             },
             min: {
-                noWarning: 0.05,
-                limit: 0.0,
+                limit: 1.0,
             },
         },
         bolus: {

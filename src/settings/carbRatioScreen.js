@@ -12,7 +12,7 @@ class CarbRatioScreen extends base.EntriesScreen {
                 label: language.settingsScreen.CarbRatioScreen.Header,
             },
             header: {
-                backLabel: language.general.Cancel,
+                backLabel: language.settingsScreen.TherapySettingsScreen.Header,
             },
         }, config);
     }
@@ -23,10 +23,22 @@ class CarbRatioScreen extends base.EntriesScreen {
         return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
     }
     /**
+     * @override
+     */
+    BackButton() {
+        return match.accessible.BackButton(this.backLabel);
+    }
+    /**
      * @override so we access the header by label
      */
     Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
+    }
+    HighCarbRatioGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.HighCarbRatioGuardrailMessage);
+    }
+    LowCarbRatioGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.LowCarbRatioGuardrailMessage);
     }
     _parts(ratio) {
         return String(ratio).split('.');
@@ -46,7 +58,10 @@ class CarbRatioScreen extends base.EntriesScreen {
             let currentParts = this._parts(ratio.current.carbGramsPerInsulinUnit);
             currentValue = Number(currentParts[wholePart]);
         }
-        await action.ScrollQuantityPicker(currentValue, Number(expectedParts[wholePart]));
+        await action.ScrollDecimalPicker(
+            currentValue,
+            Number(expectedParts[wholePart]),
+        );
     }
     /**
      * @param {Array} ratios

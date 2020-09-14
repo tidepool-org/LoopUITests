@@ -38,6 +38,9 @@ class EntriesScreen extends Screen {
     async CancelNewEntry() {
         await this.CancelNewEntryButton().tap();
     }
+    async OpenPicker(value) {
+        await match.accessible.TextLabel(String(value)).tap();
+    }
 }
 
 module.exports = EntriesScreen;

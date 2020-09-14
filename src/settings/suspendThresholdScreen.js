@@ -8,7 +8,7 @@ class SuspendThresholdScreen extends base.EntryScreen {
             screenText: language.settingsScreen.SuspendThresholdScreen,
             generalText: language.general,
             header: {
-                backLabel: language.general.Cancel,
+                backLabel: language.settingsScreen.TherapySettingsScreen.Header,
             },
             open: {
                 isBtn: false,
@@ -30,8 +30,11 @@ class SuspendThresholdScreen extends base.EntryScreen {
     Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
     }
-    async OpenPicker() {
-        await match.accessible.TextLabel(this.bgUnitsLabel).atIndex(0).tap();
+    LowSuspendThresholdGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.LowSuspendThresholdGuardrailMessage);
+    }
+    HighSuspendThresholdGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.HighSuspendThresholdGuardrailMessage);
     }
     async SwipePickerToMaxValue() {
         await action.SwipePickerUp(3);
@@ -50,7 +53,10 @@ class SuspendThresholdScreen extends base.EntryScreen {
         if (threshold.current) {
             currentValue = threshold.current.value;
         }
-        await action.ScrollQuantityPicker(currentValue, threshold.expected.value);
+        await action.ScrollIntegerPicker(
+            currentValue,
+            threshold.expected.value,
+        );
 
     }
     async Open() {

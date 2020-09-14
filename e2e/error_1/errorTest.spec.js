@@ -6,10 +6,11 @@ describe('error test', () => {
     var config = new Config();
     it('prepare test', async () => {
         config = await config.prepare();
-        test = test.withLanguage(config.text)
-            .withSettingDefault(config.settingDefault)
-            .withScreenDefaults(config.screenDefaults)
-            .withStartScreen('home');
+        test = test.setup({
+            language: config.text,
+            screenDefaults: config.screenDefaults,
+            settingDefault: config.settingDefault,
+        });
         await test.prepare();
     });
     describe.skip('pump', () => {

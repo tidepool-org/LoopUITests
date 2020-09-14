@@ -14,9 +14,12 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
                 label: language.settingsScreen.InsulinSensitivitiesScreen.Header,
             },
             header: {
-                backLabel: language.general.Cancel,
+                backLabel: language.settingsScreen.TherapySettingsScreen.Header,
             },
         }, config);
+    }
+    BackButton() {
+        return match.accessible.BackButton(this.backLabel);
     }
     OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
@@ -30,6 +33,12 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
     Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
     }
+    LowInsulinSensitivityGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.LowInsulinSensitivityGuardrailMessage);
+    }
+    HighInsulinSensitivityGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.HighInsulinSensitivityGuardrailMessage);
+    }
     /**
      * @param {Object} sensitivity
      * @param {Object} sensitivity.expected
@@ -42,7 +51,7 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
         if (sensitivity.current) {
             currentValuePerInsulinUnit = sensitivity.current.bgValuePerInsulinUnit;
         }
-        await action.ScrollQuantityPicker(
+        await action.ScrollIntegerPicker(
             currentValuePerInsulinUnit,
             sensitivity.expected.bgValuePerInsulinUnit
         );

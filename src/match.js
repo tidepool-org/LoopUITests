@@ -12,14 +12,20 @@ const match = {
         ButtonBarButton(label) {
             return element(by.type('_UIButtonBarButton').withDescendant(by.label(label).and(by.traits([buttonTrait]))));
         },
+        BackButton(label) {
+            return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UIAccessibilityBackButtonElement'))));
+        },
         Button(label) {
             return element(by.label(label).and(by.traits([buttonTrait])));
         },
-        Id(theId) {
-            return element(by.id(theId));
-        },
         SwipeButton(label) {
             return element(by.label(label).and(by.traits([buttonTrait]).and(by.type('UISwipeActionStandardButton'))));
+        },
+        SwitchButton(label) {
+            return element(by.type('UISwitch').and(by.label(label).and(by.traits([buttonTrait]))));
+        },
+        Id(theId) {
+            return element(by.id(theId));
         },
         TextLabel(label) {
             return element(by.label(label).and(by.traits([staticTextTrait])));
@@ -36,43 +42,14 @@ const match = {
         Header(label) {
             return element(by.label(label).and(by.traits(['header'])));
         },
-        /**
-         * @summary returns Picker item(s) for given label and index
-         * @param {Integer} pickerNumber
-         * @param {string} itemLabel
-         * @returns {Detox.Element}
-         */
-        PickerItem_v2(pickerNumber, itemLabel) {
-            return element(
-                by.type('SwiftUI.AccessibilityNode')
-                    .and(by.label(itemLabel)
-                        .and(by.traits([staticTextTrait])))
-            ).atIndex(pickerNumber);
-        },
         PickerItem(itemID) {
             return element(by.type('UIPickerTableViewWrapperCell').withDescendant(by.id(itemID)));
         },
-        QuantityPickerItemLabel(itemLabel, pickerID) {
-            return element(
-                by.type('SwiftUI.AccessibilityNode')
-                    .and(by.label(itemLabel)
-                        .and(by.traits([staticTextTrait])))
-                    .withAncestor(by.id(pickerID))
-            ).atIndex(2);
-        },
-        QuantityPickerItemID(itemID, pickerID) {
-            return element(
-                by.type('SwiftUI.AccessibilityNode')
-                    .and(by.id(itemID)
-                        .and(by.traits([staticTextTrait])))
-                    .withAncestor(by.id(pickerID))
-            );
-        },
-        QuantityPickerItemID_v2(itemID) {
-            return element(by.id(itemID).and(by.traits([staticTextTrait])));
-        },
-        Picker() {
-            return element(by.type('UIPickerView')).atIndex(1);
+        Picker(index) {
+            if (index == null) {
+                index = 1;
+            }
+            return element(by.type('UIPickerView')).atIndex(index);
         },
         QuantityPicker(id) {
             return element(by.label('Quantity').and(by.id(id)));

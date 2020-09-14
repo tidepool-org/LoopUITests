@@ -5,7 +5,7 @@ describe('Closed loop is not allowed when settings are not applied for correctio
     it('should without correction ranges applied', async () => {
         test = new Test()
             .withSettings(setting.default)
-            .withSettingsFilter([setting.type.CorrectionRanges]);;
+            .addSettingsFilter([setting.type.CorrectionRanges]);;
         await test.prepare();
     });
     it('should not be in closed loop mode', async () => {

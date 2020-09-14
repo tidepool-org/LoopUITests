@@ -101,8 +101,9 @@ class CGMSimulatorScreen extends base.Screen {
         await this._setFrequency(settings.frequency);
         await this._setEffect(settings.effect);
         await this._setModel(settings.model);
-        await this._setHistory(settings.history);
         await this._setAlerts(settings.alerts);
+        //last as we have to 'Save' which will close the screen
+        await this._setHistory(settings.history);
     }
     async _setEffect(effect) {
         if (effect == null) {

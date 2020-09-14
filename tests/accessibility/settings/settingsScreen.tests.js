@@ -13,12 +13,6 @@ module.exports = (test) => {
     it('has alert permissons label', async () => {
         await expect(screen.AlertPermissonsLabel()).toBeVisible();
     });
-    it('has support label', async () => {
-        await expect(screen.SupportLabel()).toBeVisible();
-    });
-    it('has support header', async () => {
-        await expect(screen.SupportHeader()).toBeVisible();
-    });
     it('has configuration header', async () => {
         await expect(screen.ConfigurationHeader()).toBeVisible();
     });
@@ -31,7 +25,14 @@ module.exports = (test) => {
     it('add CGM button', async () => {
         await expect(screen.Devices().AddCGMButton()).toBeVisible();
     });
+    it('has support label', async () => {
+        await screen.SwipeUp();
+        await expect(screen.SupportLabel()).toBeVisible();
+    });
+    it('has support header', async () => {
+        await expect(screen.SupportHeader()).toBeVisible();
+    });
     it('close', async () => {
-        await screen.BackToHome();
+        await screen.Back();
     });
 };

@@ -7,15 +7,14 @@ describe('accessibility', () => {
     var config = new Config();
     it('prepare test', async () => {
         config = await config.prepare();
-        test = test.withLanguage(config.text)
-            .withSettingDefault(config.settingDefault)
-            .withScreenDefaults(config.screenDefaults)
-            .withTherapySettings()
-            .withSimulators({ cgm: true, pump: true })
-            .withStartScreen('home');
+        test = test.setup({
+            language: config.text,
+            screenDefaults: config.screenDefaults,
+            settingDefault: config.settingDefault,
+        });
         await test.prepare();
     });
-    describe.skip('devices', () => {
+    describe('devices', () => {
         describe('g6 screen', () => {
             deviceAccessibility.g6ScreenTest(test);
         });
@@ -26,7 +25,7 @@ describe('accessibility', () => {
             deviceAccessibility.cgmSimulatorScreenTest(test);
         });
     });
-    describe.skip('settings overview', () => {
+    describe('settings overview', () => {
         describe('overview screen', () => {
             settingsAccessibility.settingsScreenTest(test);
         });
@@ -34,27 +33,27 @@ describe('accessibility', () => {
             settingsAccessibility.therapyScreenTest(test);
         });
     });
-    describe.skip('settings', () => {
-        it('add pump', async () => {
-            await test.addUnconfiguredPump();
+    describe('settings', () => {
+        it('enable settings', async () => {
+            await test.loadTherapySettings(true);
         });
-        describe('delivery limits', () => {
+        describe.skip('delivery limits', () => {
             settingsAccessibility.deliveryLimitsScreenTest(test);
-        });
-        describe('insulin sensitivities', () => {
-            settingsAccessibility.insulinSensitivitiesScreenTest(test);
-        });
-        describe('correction range', () => {
-            settingsAccessibility.correctionRangeScreenTest(test);
         });
         describe('suspend threshold', () => {
             settingsAccessibility.suspendThresholdScreenTest(test);
         });
-        describe('basal rates', () => {
+        describe('correction range', () => {
+            settingsAccessibility.correctionRangeScreenTest(test);
+        });
+        describe.skip('basal rates', () => {
             settingsAccessibility.basalRatesScreenTest(test);
         });
-        describe('carb ratios', () => {
+        describe.skip('carb ratios', () => {
             settingsAccessibility.carbRatioScreenTest(test);
+        });
+        describe('insulin sensitivities', () => {
+            settingsAccessibility.insulinSensitivitiesScreenTest(test);
         });
     });
 });

@@ -2,16 +2,18 @@ const match = require('./match');
 const element = require('detox').element;
 
 var _nextPickerStep = function (currentValue, expectedValue) {
+    let current = Number(currentValue);
+    let expected = Number(expectedValue);
     let step = 1;
-    if (Math.abs(currentValue - expectedValue) >= 2) {
+    if (Math.abs(current - expected) >= 2) {
         step = 2;
     }
-    if (currentValue > expectedValue) {
-        return currentValue - step;
-    } else if (currentValue < expectedValue) {
-        return currentValue + step;
+    if (current > expected) {
+        return current - step;
+    } else if (current < expected) {
+        return current + step;
     }
-    return currentValue;
+    return current;
 }
 
 const action = {
@@ -19,15 +21,56 @@ const action = {
      *
      * @param {string} currentValue
      * @param {string} expectedValue
+     * @param {boolean} isMinValue, optional - default is true
      */
-    async ScrollQuantityPicker(currentValue, expectedValue) {
+    async ScrollMaxMinPicker(currentValue, expectedValue, isMinValue = true) {
         if (currentValue == expectedValue) {
             return;
         }
         do {
             currentValue = _nextPickerStep(currentValue, expectedValue);
-            await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
-        } while (currentValue != expectedValue);
+            if (isMinValue) {
+                try {
+                    await match.accessible.PickerItem(`${currentValue}`).atIndex(2).tap();
+                } catch (err) {
+                    await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
+                }
+            } else {
+                await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
+            }
+        }
+        while (currentValue != expectedValue);
+    },
+    /**
+     *
+     * @param {string} currentValue
+     * @param {string} expectedValue
+     * @param {boolean} isWholePart, optional - default is true
+     */
+    async ScrollDecimalPicker(currentValue, expectedValue, isWholePart = true) {
+        if (currentValue == expectedValue) {
+            return;
+        }
+        do {
+            currentValue = _nextPickerStep(currentValue, expectedValue);
+
+            if (isWholePart) {
+                try {
+                    await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
+                } catch (err) {
+                    console.log('## FAILED currentValue:', currentValue, ' expectedValue:', expectedValue);
+                }
+            }
+        }
+        while (currentValue != expectedValue);
+    },
+    /**
+     *
+     * @param {string} currentValue
+     * @param {string} expectedValue
+     */
+    async ScrollIntegerPicker(currentValue, expectedValue) {
+        return this.ScrollDecimalPicker(currentValue, expectedValue, true);
     },
     /**
      * @summary sets the pickers column to the given value
@@ -41,13 +84,12 @@ const action = {
     /**
      * @summary sets the pickers column to the given value
      */
-    async SwipePickerUp(times) {
+    async SwipePickerUp(times, index) {
         let count = 1;
         do {
-            await match.accessible.Picker().swipe('up');
+            await match.accessible.Picker(index).swipe('up');
             count++;
         } while (count <= times);
-
     },
     async SwipeQuantityPickerUp(times, id) {
         let count = 1;
@@ -55,7 +97,6 @@ const action = {
             await match.accessible.QuantityPicker(id).swipe('up');
             count++;
         } while (count <= times);
-
     },
     /**
      * @summary sets the pickers column to the given value
