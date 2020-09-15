@@ -34,26 +34,26 @@ class PumpSimulatorScreen extends base.Screen {
     ErrorOnTempBasalLabel() {
         return match.accessible.TextLabel(this.screenText.ErrorOnTempBasal);
     }
-    ErrorOnTempBasalToggel() {
-        return match.accessible.Button(this.screenText.ErrorOnTempBasal);
+    ErrorOnTempBasalSwitch() {
+        return match.accessible.SwitchButton(this.screenText.ErrorOnTempBasal);
     }
     ErrorOnBolusLabel() {
         return match.accessible.TextLabel(this.screenText.ErrorOnBolus);
     }
-    ErrorOnBolusToggel() {
-        return match.accessible.Button(this.screenText.ErrorOnBolus);
+    ErrorOnBolusSwitch() {
+        return match.accessible.SwitchButton(this.screenText.ErrorOnBolus);
     }
     ErrorOnSuspendLabel() {
         return match.accessible.TextLabel(this.screenText.ErrorOnSuspend);
     }
-    ErrorOnSuspendToggel() {
-        return match.accessible.Button(this.screenText.ErrorOnSuspend);
+    ErrorOnSuspendSwitch() {
+        return match.accessible.SwitchButton(this.screenText.ErrorOnSuspend);
     }
     ErrorOnResumeLabel() {
         return match.accessible.TextLabel(this.screenText.ErrorOnResume);
     }
-    ErrorOnResumeToggel() {
-        return match.accessible.Button(this.screenText.ErrorOnResume);
+    ErrorOnResumeSwitch() {
+        return match.accessible.SwitchButton(this.screenText.ErrorOnResume);
     }
     DeletePumpLabel() {
         return match.accessible.TextLabel(this.screenText.DeletePump);
@@ -106,14 +106,14 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this.IsOn(this.ErrorOnBolusToggel());
+        let allReadyOn = await this.IsOn(this.ErrorOnBolusSwitch());
         if (turnOn == true) {
             if (allReadyOn == false) {
-                await this.ErrorOnBolusToggel().tap();
+                await this.ErrorOnBolusSwitch().tap();
             }
         } else if (turnOn == false) {
             if (allReadyOn == true) {
-                await this.ErrorOnBolusToggel().tap();
+                await this.ErrorOnBolusSwitch().tap();
             }
         }
     }
@@ -121,14 +121,14 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this.IsOn(this.ErrorOnTempBasalToggel());
+        let allReadyOn = await this.IsOn(this.ErrorOnTempBasalSwitch());
         if (turnOn == true) {
             if (allReadyOn == false) {
-                await this.ErrorOnTempBasalToggel().tap();
+                await this.ErrorOnTempBasalSwitch().tap();
             }
         } else if (turnOn == false) {
             if (allReadyOn == true) {
-                await this.ErrorOnTempBasalToggel().tap();
+                await this.ErrorOnTempBasalSwitch().tap();
             }
         }
     }
@@ -136,14 +136,14 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this.IsOn(this.ErrorOnSuspendToggel());
+        let allReadyOn = await this.IsOn(this.ErrorOnSuspendSwitch());
         if (turnOn == true) {
             if (allReadyOn == false) {
-                await this.ErrorOnSuspendToggel().tap();
+                await this.ErrorOnSuspendSwitch().tap();
             }
         } else if (turnOn == false) {
             if (allReadyOn == true) {
-                await this.ErrorOnSuspendToggel().tap();
+                await this.ErrorOnSuspendSwitch().tap();
             }
         }
     }
@@ -151,14 +151,14 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this.IsOn(this.ErrorOnResumeToggel());
+        let allReadyOn = await this.IsOn(this.ErrorOnResumeSwitch());
         if (turnOn == true) {
             if (allReadyOn == false) {
-                await this.ErrorOnResumeToggel().tap();
+                await this.ErrorOnResumeSwitch().tap();
             }
         } else if (turnOn == false) {
             if (allReadyOn == true) {
-                await this.ErrorOnResumeToggel().tap();
+                await this.ErrorOnResumeSwitch().tap();
             }
         }
     }

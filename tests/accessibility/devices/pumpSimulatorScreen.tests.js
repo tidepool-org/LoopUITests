@@ -24,31 +24,31 @@ module.exports = (test) => {
         await expect(screen.CausePumpErrorButton()).toBeVisible();
     });
     it('has a error on suspend toggle', async () => {
-        await expect(screen.ErrorOnSuspendToggel()).toBeVisible();
+        await expect(screen.ErrorOnSuspendSwitch()).toBeVisible();
     });
     it('has a error on suspend label', async () => {
         await expect(screen.ErrorOnSuspendLabel()).toBeVisible();
     });
     it('has a error on bolus toggle', async () => {
-        await expect(screen.ErrorOnBolusToggel()).toBeVisible();
+        await expect(screen.ErrorOnBolusSwitch()).toBeVisible();
     });
     it('has a error on bolus label', async () => {
         await expect(screen.ErrorOnBolusLabel()).toBeVisible();
     });
     it('has a error on resume toggle', async () => {
-        await expect(screen.ErrorOnResumeToggel()).toBeVisible();
+        await expect(screen.ErrorOnResumeSwitch()).toBeVisible();
     });
     it('has a error on resume label', async () => {
         await expect(screen.ErrorOnResumeLabel()).toBeVisible();
     });
     it('has a error on temp basal toggle', async () => {
-        await expect(screen.ErrorOnTempBasalToggel()).toBeVisible();
+        await expect(screen.ErrorOnTempBasalSwitch()).toBeVisible();
     });
     it('has a error on temp basal label', async () => {
         await expect(screen.ErrorOnTempBasalLabel()).toBeVisible();
     });
     it('has a error on temp basal toggle', async () => {
-        await expect(screen.ErrorOnTempBasalToggel()).toBeVisible();
+        await expect(screen.ErrorOnTempBasalSwitch()).toBeVisible();
     });
     it('has a remaining battery label', async () => {
         await expect(screen.BatteryRemainingLabel()).toBeVisible();

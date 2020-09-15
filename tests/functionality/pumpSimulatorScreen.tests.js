@@ -8,35 +8,35 @@ module.exports = (test) => {
     });
     it('set errorOnBolus to true', async () => {
         await screen.Apply({ errorOnBolus: true });
-        await expect(screen.ErrorOnBolusToggel()).toHaveValue('1');
+        await expect(screen.ErrorOnBolusSwitch()).toHaveValue('1');
     });
     it('set errorOnBolus to false', async () => {
         await screen.Apply({ errorOnBolus: false });
-        await expect(screen.ErrorOnBolusToggel()).toHaveValue('0');
+        await expect(screen.ErrorOnBolusSwitch()).toHaveValue('0');
     });
     it('set errorOnTempBasal to true', async () => {
         await screen.Apply({ errorOnTempBasal: true });
-        await expect(screen.ErrorOnTempBasalToggel()).toHaveValue('1');
+        await expect(screen.ErrorOnTempBasalSwitch()).toHaveValue('1');
     });
     it('set errorOnTempBasal to false', async () => {
         await screen.Apply({ errorOnTempBasal: false });
-        await expect(screen.ErrorOnTempBasalToggel()).toHaveValue('0');
+        await expect(screen.ErrorOnTempBasalSwitch()).toHaveValue('0');
     });
     it('set errorOnSuspend to true', async () => {
         await screen.Apply({ errorOnSuspend: true });
-        await expect(screen.ErrorOnSuspendToggel()).toHaveValue('1');
+        await expect(screen.ErrorOnSuspendSwitch()).toHaveValue('1');
     });
     it('set errorOnSuspend to false', async () => {
         await screen.Apply({ errorOnSuspend: false });
-        await expect(screen.ErrorOnSuspendToggel()).toHaveValue('0');
+        await expect(screen.ErrorOnSuspendSwitch()).toHaveValue('0');
     });
     it('set errorOnResume to true', async () => {
         await screen.Apply({ errorOnResume: true });
-        await expect(screen.ErrorOnResumeToggel()).toHaveValue('1');
+        await expect(screen.ErrorOnResumeSwitch()).toHaveValue('1');
     });
     it('set errorOnResume to false', async () => {
         await screen.Apply({ errorOnResume: false });
-        await expect(screen.ErrorOnResumeToggel()).toHaveValue('0');
+        await expect(screen.ErrorOnResumeSwitch()).toHaveValue('0');
     });
     it('set battery percent', async () => {
         await screen.Apply({ batteryRemaining: 80 });
