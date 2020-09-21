@@ -35,9 +35,9 @@ describe('accessibility', () => {
     });
     describe('settings', () => {
         it('enable settings', async () => {
-            await test.loadTherapySettings(true);
+            await test.addConfiguredPump();
         });
-        describe.skip('delivery limits', () => {
+        describe('delivery limits', () => {
             settingsAccessibility.deliveryLimitsScreenTest(test);
         });
         describe('suspend threshold', () => {
@@ -46,10 +46,10 @@ describe('accessibility', () => {
         describe('correction range', () => {
             settingsAccessibility.correctionRangeScreenTest(test);
         });
-        describe.skip('basal rates', () => {
+        describe('basal rates', () => {
             settingsAccessibility.basalRatesScreenTest(test);
         });
-        describe.skip('carb ratios', () => {
+        describe('carb ratios', () => {
             settingsAccessibility.carbRatioScreenTest(test);
         });
         describe('insulin sensitivities', () => {

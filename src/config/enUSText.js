@@ -145,7 +145,7 @@ var HomeScreen = {
         GlucoseChange: 'Glucose Change',
         Predicted: 'Predicted',
         Observed: 'Observed',
-        GramsActiveCarbs: 'g Active Carbs',
+        GramsActiveCarbs: 'g COB',
         GramsTotalCarbs: 'g Total',
     }
 };
@@ -212,9 +212,9 @@ var SettingsScreen = {
     },
     DeliveryLimitsScreen: {
         Header: 'Delivery Limits',
-        Info: 'Maximum basal rate is the highest temporary basal rate Tidepool Loop is allowed to set automatically.\n\nMaximum bolus is the highest bolus amount you can deliver at one time to cover carbs or bring down high glucose.',
+        Info: 'Maximum basal rate is the highest temporary basal rate Loop is allowed to set automatically.\n\nMaximum bolus is the highest bolus amount you can deliver at one time to cover carbs or bring down high glucose.',
         MaxBasalRate: 'Maximum Basal Rate',
-        MaxBasalRateInfo: 'Maximum basal rate is the highest temporary basal rate Tidepool Loop is allowed to set automatically.',
+        MaxBasalRateInfo: 'Maximum basal rate is the highest temporary basal rate Loop is allowed to set automatically.',
         BasalRateUnits: 'U/hr',
         MaxBolus: 'Maximum Bolus',
         MaxBolusInfo: 'Maximum bolus is the highest bolus amount you can deliver at one time to cover carbs or bring down high glucose.',
@@ -232,7 +232,7 @@ var SettingsScreen = {
     },
     CorrectionRangeScreen: {
         Header: 'Correction Range',
-        Info: 'Correction range is the glucose value (or range of values) that you want Tidepool Loop to aim for in adjusting your basal insulin.',
+        Info: 'Correction range is the glucose value (or range of values) that you want Loop to aim for in adjusting your basal insulin.',
         LowCorrectionValueGuardrailMessage: 'Low Correction Value',
         HighCorrectionValueGuardrailMessage: 'High Correction Value',
     },

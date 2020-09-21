@@ -1,6 +1,5 @@
 const match = require('../match');
 
-const AlertScreen = require('./alertScreen');
 const SupportScreen = require('./supportScreen');
 const TherapyScreen = require('./therapyScreen');
 const base = require('../base/index');
@@ -23,7 +22,6 @@ class SettingsScreen extends base.Screen {
             },
         });
         this.devices = devices;
-        this.alertScreen = new AlertScreen(language);
         this.therapyScreen = new TherapyScreen(language, config);
         this.supportScreen = new SupportScreen(language);
     }
@@ -73,13 +71,6 @@ class SettingsScreen extends base.Screen {
         await this.SwipeUp();
         await this.supportScreen.Open();
         return this.supportScreen;
-    }
-    AlertPermissonsLabel() {
-        return this.alertScreen.OpenButton();
-    }
-    async OpenAlerts() {
-        await this.alertScreen.Open();
-        return this.alertScreen;
     }
     async OpenDeliveryLimitsScreen() {
         await this.SwipeUp();

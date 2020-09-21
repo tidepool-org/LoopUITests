@@ -18,16 +18,7 @@ module.exports = (test) => {
             await screen.Back();
         });
     });
-    describe('alert permissons', () => {
-        var screen;
-        it('opened', async () => {
-            screen = await settingsScreen.OpenAlerts();
-        });
-        it('closed', async () => {
-            await screen.Back();
-        });
-    });
-    describe.skip('therapy settings', () => {
+    describe('therapy settings', () => {
         var screen;
         it('opened', async () => {
             screen = await settingsScreen.OpenTherapySettings();

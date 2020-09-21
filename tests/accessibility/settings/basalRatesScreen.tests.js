@@ -1,10 +1,9 @@
 module.exports = (test) => {
-    var settingsScreen;
+    var therapySettingsScreen;
     var screen;
-    var settingsScreen;
     it('open', async () => {
-        settingsScreen = await test.OpenSettingsScreen();
-        screen = await settingsScreen.OpenBasalRateScreen();
+        therapySettingsScreen = await test.OpenTherapySettingsScreen();
+        screen = await therapySettingsScreen.OpenBasalRateScreen();
     });
     it('has a header', async () => {
         await expect(screen.Header()).toBeVisible();
@@ -29,6 +28,6 @@ module.exports = (test) => {
     });
     it('cleanup and close', async () => {
         await screen.CancelAndClose();
-        await settingsScreen.Back();
+        await therapySettingsScreen.ReturnToHomeScreen();
     });
 };
