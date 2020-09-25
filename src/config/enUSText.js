@@ -98,6 +98,7 @@ var Device = {
         ErrorOnBolus: 'Error on Bolus',
         ErrorOnSuspend: 'Error on Suspend',
         ErrorOnResume: 'Error on Resume',
+        NextDeliveryCommandUncertain: 'Next Delivery Command Uncertain',
         DeletePump: 'Delete Pump',
         SuspendDelivery: 'Suspend Delivery',
         ResumeDelivery: 'Resume Delivery',

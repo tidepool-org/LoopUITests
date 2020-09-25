@@ -80,4 +80,26 @@ module.exports = (test) => {
             await expect(home.Alert(bolusErrorText)).toBeVisible();
         });
     });
+    describe('comms error on bolus', () => {
+        var bolusScreen;
+        it('set simulator to create error', async () => {
+            screen = await test.openPumpScreen();
+            await screen.Apply({ nextDeliveryCommandUncertain: true });
+            await screen.Back();
+        });
+        it('open bolus screen', async () => {
+            bolusScreen = await test.OpenBolusScreen();
+        });
+        it('set bolus amount ', async () => {
+            await bolusScreen.SetBolusAmount(0.5);
+        });
+        it('deliver the bolus', async () => {
+            await bolusScreen.Deliver();
+            await bolusScreen.Authenticate();
+        });
+        it('check error dialog is shown in loop', async () => {
+            home = await test.OpenHomeScreen();
+            await expect(home.Alert('Unable To Reach Pump')).toBeVisible();
+        });
+    });
 };
