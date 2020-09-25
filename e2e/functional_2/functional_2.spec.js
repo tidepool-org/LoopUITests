@@ -17,7 +17,7 @@ describe('functional test with configured pump', () => {
             enableTherapySettings: true,
             simulators: { cgm: true, pump: true },
             cgmData: {
-                model: { name: cgmText.Model.Constant, bgValues: [110] },
+                model: { name: cgmText.Model.Constant, bgValues: [93] },
                 frequency: { seconds: true },
                 history: { name: cgmText.History.BackfillGlucose, backfillHours: 6 },
             }

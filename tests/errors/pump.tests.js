@@ -1,33 +1,83 @@
 module.exports = (test) => {
     var screen;
-    it('add simulator', async () => {
-        await test.addUnconfiguredPump();
-    });
     it('open simulator', async () => {
         screen = await test.openPumpScreen();
     });
-
-    it('create pump error on suspend', async () => {
-        await screen.Apply({ errorOnSuspend: true });
-        await screen.SuspendDelivery();
-        await screen.HasAlert();
-        await screen.DismissAlert();
+    describe('error on suspend', () => {
+        it('set to error', async () => {
+            await screen.Apply({ errorOnSuspend: true });
+        });
+        it('suspend delivery', async () => {
+            await screen.SuspendDelivery();
+        });
+        it('check the error is shown in loop', async () => {
+            await screen.HasAlert();
+        });
+        it('dismiss the error', async () => {
+            await screen.DismissAlert();
+            await screen.Apply({ errorOnSuspend: false });
+        });
+        it('check no error on home screen', async () => {
+            await screen.Back();
+            home = await test.OpenHomeScreen();
+            await home.HeaderSection().NoPumpError();
+        });
     });
-    // TODO: cannot interact with screen and enter passcode
-    // it.skip('create pump error on bolus', async () => {
-    //     await screen.Apply({ errorOnBolus: true });
-    //     await screen.Close();
-    //     await settingsScreen.Close();
-    //     var bolusScreen = await test.OpenBolusScreen();
-    //     await bolusScreen.SetBolusAmount(1);
-    //     await bolusScreen.Deliver();
-    // });
-    it('create general pump error', async () => {
-        await screen.CausePumpError();
-        await screen.Back();
-        var home = await test.OpenHomeScreen();
-        await home.Header().PumpError();
-        screen = await test.openPumpScreen();
-        await screen.ResolvePumpError();
+    describe('detect pump error', () => {
+        var home;
+        it('error is generated', async () => {
+            screen = await test.openPumpScreen();
+            await screen.CausePumpError();
+        });
+        it('then we return to home screen', async () => {
+            await screen.Back();
+            home = await test.OpenHomeScreen();
+        });
+        it('and check the error is shown in loop', async () => {
+            await home.HeaderSection().PumpError();
+        });
+        it('now resolve the error', async () => {
+            screen = await test.openPumpScreen();
+            await screen.ResolvePumpError();
+        });
+    });
+    describe('detect occlusion error', () => {
+        var home;
+        it('error is generated', async () => {
+            await screen.DetectOcclusionError();
+        });
+        it('then we return to home screen', async () => {
+            await screen.Back();
+            home = await test.OpenHomeScreen();
+        });
+        it('and check the occlusion error is shown in loop', async () => {
+            await home.HeaderSection().PumpOcclusionError();
+        });
+        it('now resolve the error', async () => {
+            screen = await test.openPumpScreen();
+            await screen.ResolveOcclusionError();
+        });
+    });
+    describe('error on bolus', () => {
+        var bolusScreen;
+        it('set simulator to create error', async () => {
+            await screen.Apply({ errorOnBolus: true });
+            await screen.Back();
+        });
+        it('open bolus screen', async () => {
+            bolusScreen = await test.OpenBolusScreen();
+        });
+        it('set bolus amount ', async () => {
+            await bolusScreen.SetBolusAmount(0.5);
+        });
+        it('deliver the bolus', async () => {
+            await bolusScreen.Deliver();
+            await bolusScreen.Authenticate();
+        });
+        it.skip('check error dialog is shown', async () => {
+            let bolusErrorText = test.language.general.Alert.BolusError;
+            home = await test.OpenHomeScreen();
+            await expect(home.Alert(bolusErrorText)).toBeVisible();
+        });
     });
 };

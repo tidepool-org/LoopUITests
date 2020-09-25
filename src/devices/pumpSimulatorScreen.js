@@ -16,12 +16,6 @@ class PumpSimulatorScreen extends base.Screen {
             },
         });
     }
-    /**
-     * @override Screen.BackButton()
-     **/
-    BackButton() {
-        return match.accessible.ButtonBarButton(this.backLabel);
-    }
     ConfigurationHeader() {
         return match.accessible.Header(this.screenText.ConfigurationHeader).atIndex(0);
     }
@@ -70,8 +64,14 @@ class PumpSimulatorScreen extends base.Screen {
     DetectOcclusionButton() {
         return match.accessible.TextLabel(this.screenText.DetectOcclusion);
     }
+    async DetectOcclusionError() {
+        return this.DetectOcclusionButton().tap();
+    }
     ResolveOcclusionButton() {
         return match.accessible.TextLabel(this.screenText.ResolveOcclusion);
+    }
+    async ResolveOcclusionError() {
+        return this.ResolveOcclusionButton().tap();
     }
     CausePumpErrorButton() {
         return match.accessible.TextLabel(this.screenText.CausePumpError);

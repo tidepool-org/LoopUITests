@@ -11,9 +11,23 @@ class Header {
     PumpErrorButton() {
         return match.accessible.ClickableLabel(this.language.homeScreen.PumpError);
     }
+    async NoPumpError() {
+        await expect(this.PumpErrorButton()).toBeNotVisible();
+    }
     async PumpError() {
         await this.PumpErrorButton().tap();
     }
+    PumpOcclusionLabel() {
+        return match.accessible.ClickableLabel(this.language.homeScreen.PumpOcclusion);
+    }
+    async NoPumpOcclusionError() {
+        await expect(this.PumpOcclusionLabel()).toBeNotVisible();
+    }
+    async PumpOcclusionError() {
+        await expect(this.PumpOcclusionLabel()).toBeVisible();
+    }
+
+
     CGMErrorButton() {
         return match.accessible.ClickableLabel(this.language.homeScreen.CGMError);
     }

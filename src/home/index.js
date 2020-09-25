@@ -52,6 +52,9 @@ class HomeScreen {
     BolusButton() {
         return this.bolusScreen.OpenButton();
     }
+    Alert(label) {
+        return match.accessible.AlertLabel(label);
+    }
     async OpenActiveCarbohydratesChart() {
         await this.ActiveCarbohydratesLabel().tap();
         return this.activeCarbohydratesScreen;

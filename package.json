@@ -4,7 +4,7 @@
   "scripts": {
     "test": "jest",
     "test_all": "detox test -c ios.sim.debug",
-    "test_error": "detox test e2e/error_1 -c ios.sim.debug.iphone-11pro",
+    "test_error_1": "detox test e2e/error_1 -c ios.sim.debug.iphone-11pro",
     "test_smoke_1": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-11pro",
     "test_smoke_1_iphone6": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-6",
     "test_smoke_1_iphoneSE2": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-se-2",
