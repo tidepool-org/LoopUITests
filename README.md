@@ -61,3 +61,15 @@ Do *not* install `applesimutils` from Homebrew. Use the custom, pre-built binary
 ### Scenarios
 
 - `./scenarios/flat_cgm_trace.json` flat cgm trace, no insulin or carb events
+
+## Functionality
+
+- [x] open / close loop
+- [x] add devices
+- [x] numeric picker
+- date picker
+- navigation
+    - [x] open
+    - [x] close
+    - [x] save
+    - [x] cancel

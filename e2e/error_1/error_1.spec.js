@@ -1,5 +1,5 @@
 const { Test, Config } = require('../../src/index');
-const errorsTests = require('../../tests/errors/index');
+const pumpTests = require('../../tests/errors/pump.tests');
 
 describe('errors', () => {
     var test = new Test();
@@ -25,9 +25,6 @@ describe('errors', () => {
         await test.prepare();
     });
     describe('from pump', () => {
-        errorsTests.pumpTests(test);
+        pumpTests(test);
     });
-    // describe.skip('cgm', () => {
-    //     errorsTests.cgmTests(test);
-    // });
 });

@@ -2,10 +2,10 @@ module.exports = (test) => {
     var screen;
     var settingsScreen;
     it('add simulator', async () => {
-        await test.addCGM();
+        await test.LoopUtilities().addCGM();
     });
     it('open simulator', async () => {
-        screen = await test.openCGMScreen();
+        screen = await test.OpenCGMScreen();
     });
     it('set effect as Glucose Noise', async () => {
         await screen.Apply({

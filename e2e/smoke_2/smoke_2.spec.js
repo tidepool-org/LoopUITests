@@ -35,7 +35,7 @@ describe('accessibility', () => {
     });
     describe('settings', () => {
         it('enable settings', async () => {
-            await test.addConfiguredPump();
+            await test.LoopUtilities().addConfiguredPump();
         });
         describe('delivery limits', () => {
             settingsAccessibility.deliveryLimitsScreenTest(test);
