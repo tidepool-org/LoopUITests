@@ -18,12 +18,6 @@ describe('accessibility', () => {
         describe('g6 screen', () => {
             deviceAccessibility.g6ScreenTest(test);
         });
-        describe('pump screen', () => {
-            deviceAccessibility.pumpSimulatorScreenTest(test);
-        });
-        describe('cgm screen', () => {
-            deviceAccessibility.cgmSimulatorScreenTest(test);
-        });
     });
     describe('settings overview', () => {
         describe('overview screen', () => {
