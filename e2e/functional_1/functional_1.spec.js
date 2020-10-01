@@ -1,5 +1,5 @@
 const { Test, Config } = require('../../src/index');
-const loopFunctionality = require('../../tests/functionality/index');
+const functional = require('../../tests/functional/index');
 
 describe('loop functional test', () => {
     var test = new Test();
@@ -25,6 +25,6 @@ describe('loop functional test', () => {
         await test.prepare();
     });
     describe('run', () => {
-        loopFunctionality(test);
+        functional(test);
     });
 });

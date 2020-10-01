@@ -67,8 +67,7 @@ module.exports = (test) => {
     });
     describe('carb entry', () => {
         it('set to open loop', async () => {
-            let settingsScreen = await test.OpenSettingsScreen();
-            await settingsScreen.OpenLoop();
+            await test.LoopUtilities.openLoop();
         });
         it('can add carbs', async () => {
             await test.LoopUtilities.addCarbohydrates(5);
