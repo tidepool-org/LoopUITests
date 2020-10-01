@@ -16,12 +16,6 @@ class PumpSimulatorScreen extends base.Screen {
             },
         });
     }
-    /**
-     * @override Screen.BackButton()
-     **/
-    BackButton() {
-        return match.accessible.ButtonBarButton(this.backLabel);
-    }
     ConfigurationHeader() {
         return match.accessible.Header(this.screenText.ConfigurationHeader).atIndex(0);
     }
@@ -55,6 +49,9 @@ class PumpSimulatorScreen extends base.Screen {
     ErrorOnResumeSwitch() {
         return match.accessible.SwitchButton(this.screenText.ErrorOnResume);
     }
+    NextDeliveryCommandUncertainSwitch() {
+        return match.accessible.SwitchButton(this.screenText.NextDeliveryCommandUncertain);
+    }
     DeletePumpLabel() {
         return match.accessible.TextLabel(this.screenText.DeletePump);
     }
@@ -70,8 +67,14 @@ class PumpSimulatorScreen extends base.Screen {
     DetectOcclusionButton() {
         return match.accessible.TextLabel(this.screenText.DetectOcclusion);
     }
+    async DetectOcclusionError() {
+        return this.DetectOcclusionButton().tap();
+    }
     ResolveOcclusionButton() {
         return match.accessible.TextLabel(this.screenText.ResolveOcclusion);
+    }
+    async ResolveOcclusionError() {
+        return this.ResolveOcclusionButton().tap();
     }
     CausePumpErrorButton() {
         return match.accessible.TextLabel(this.screenText.CausePumpError);
@@ -91,6 +94,7 @@ class PumpSimulatorScreen extends base.Screen {
      * @param {boolean} settings.errorOnTempBasal
      * @param {boolean} settings.errorOnSuspend
      * @param {boolean} settings.errorOnResume
+     * @param {boolean} settings.nextDeliveryCommandUncertain
      * @param {number} settings.reservoirRemaining
      * @param {number} settings.batteryRemaining
      */
@@ -99,6 +103,7 @@ class PumpSimulatorScreen extends base.Screen {
         await this.SetErrorOnTempBasal(settings.errorOnTempBasal);
         await this.SetErrorOnSuspend(settings.errorOnSuspend);
         await this.SetErrorOnResume(settings.errorOnResume);
+        await this.SetNextDeliveryCommandUncertain(settings.nextDeliveryCommandUncertain);
         await this.ApplyBatteryRemaining(settings.batteryRemaining);
         await this.ApplyReservoirRemaining(settings.reservoirRemaining);
     }
@@ -159,6 +164,21 @@ class PumpSimulatorScreen extends base.Screen {
         } else if (turnOn == false) {
             if (allReadyOn == true) {
                 await this.ErrorOnResumeSwitch().tap();
+            }
+        }
+    }
+    async SetNextDeliveryCommandUncertain(turnOn) {
+        if (turnOn == null) {
+            return;
+        }
+        let allReadyOn = await this.IsOn(this.NextDeliveryCommandUncertainSwitch());
+        if (turnOn == true) {
+            if (allReadyOn == false) {
+                await this.NextDeliveryCommandUncertainSwitch().tap();
+            }
+        } else if (turnOn == false) {
+            if (allReadyOn == true) {
+                await this.NextDeliveryCommandUncertainSwitch().tap();
             }
         }
     }

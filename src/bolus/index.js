@@ -15,18 +15,12 @@ class BolusScreen extends base.Screen {
             },
         });
     }
-    /**
-     * @override Screen.BackButton()
-     * */
-    BackButton() {
-        return match.accessible.ButtonBarButton(this.backLabel);
-    }
     async Deliver() {
         await this.DoneButton().tap();
         await this.DeliverButton().tap();
     }
     async EnterBolus() {
-        await this.EnterBolusButton().tap();
+        await this.EnterBolusButton().tapReturnKey();
     }
     DoneButton() {
         return match.accessible.Button(this.generalText.Done).atIndex(0);

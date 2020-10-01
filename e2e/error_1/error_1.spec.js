@@ -1,7 +1,7 @@
 const { Test, Config } = require('../../src/index');
-const functionality = require('../../tests/functionality/index');
+const pumpTests = require('../../tests/errors/pump.tests');
 
-describe('functional test with configured pump', () => {
+describe('errors', () => {
     var test = new Test();
     var config = new Config();
     it('prepare test', async () => {
@@ -17,14 +17,14 @@ describe('functional test with configured pump', () => {
             enableTherapySettings: true,
             simulators: { cgm: true, pump: true },
             cgmData: {
-                model: { name: cgmText.Model.Constant, bgValues: [110] },
+                model: { name: cgmText.Model.Constant, bgValues: [85] },
                 frequency: { seconds: true },
                 history: { name: cgmText.History.BackfillGlucose, backfillHours: 6 },
             }
         });
         await test.prepare();
     });
-    describe('bolus', () => {
-        functionality.bolusScreenTests(test);
+    describe('from pump', () => {
+        pumpTests(test);
     });
 });

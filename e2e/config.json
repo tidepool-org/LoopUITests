@@ -8,10 +8,13 @@
         [
             "jest-junit",
             {
-                "suiteName": "loop UI tests",
+                "suiteName": "Loop UI",
                 "outputDirectory": "./artifacts",
                 "outputName": "loopUITests.xml",
-                "ancestorSeparator": " › "
+                "ancestorSeparator": " › ",
+                "suiteNameTemplate": "{filename}",
+                "classNameTemplate": "{classname}",
+                "titleTemplate": "{title}"
             }
         ]
     ],

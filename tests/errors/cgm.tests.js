@@ -1,11 +1,10 @@
 module.exports = (test) => {
     var screen;
-
     it('add simulator', async () => {
-        await test.addCGM();
+        await test.LoopUtilities.addCGM();
     });
     it('open simulator', async () => {
-        screen = await test.openCGMScreen();
+        screen = await test.OpenCGMScreen();
     });
     it('get constant data', async () => {
         await screen.Apply({
@@ -14,14 +13,14 @@ module.exports = (test) => {
         await screen.Back();
     });
     it('backfill data', async () => {
-        screen = await test.openCGMScreen();
+        screen = await test.OpenCGMScreen();
         await screen.Apply({
             history: { name: screen.screenText.History.BackfillGlucose, backfillHours: 5, }
         });
     });
     describe('no data error', () => {
         it('stop data', async () => {
-            screen = await test.openCGMScreen();
+            screen = await test.OpenCGMScreen();
             await screen.Apply({
                 model: { name: screen.screenText.Model.None, }
             });
@@ -32,7 +31,7 @@ module.exports = (test) => {
             await home.HeaderSection().ExpectLoopStatusGlucoseDataAlert();
         });
         it('reset to constant data', async () => {
-            screen = await test.openCGMScreen();
+            screen = await test.OpenCGMScreen();
             await screen.Apply({
                 model: { name: screen.screenText.Model.Constant, bgValues: [99] }
             });
@@ -41,14 +40,14 @@ module.exports = (test) => {
     });
     describe('random error', () => {
         it('set data frequency', async () => {
-            screen = await test.openCGMScreen();
+            screen = await test.OpenCGMScreen();
             await screen.Apply({
                 frequency: { seconds: true }
             });
             await screen.Back();
         });
         it('apply error on 100% of readings', async () => {
-            screen = await test.openCGMScreen();
+            screen = await test.OpenCGMScreen();
             await screen.Apply({
                 effect: { randomErrorPercent: 100 }
             });
@@ -60,7 +59,7 @@ module.exports = (test) => {
         });
     });
     it('remove simulator', async () => {
-        screen = await test.openCGMScreen();
+        screen = await test.OpenCGMScreen();
         await screen.RemoveSimulator();
     });
 };

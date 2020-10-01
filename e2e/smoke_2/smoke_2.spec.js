@@ -18,12 +18,6 @@ describe('accessibility', () => {
         describe('g6 screen', () => {
             deviceAccessibility.g6ScreenTest(test);
         });
-        describe('pump screen', () => {
-            deviceAccessibility.pumpSimulatorScreenTest(test);
-        });
-        describe('cgm screen', () => {
-            deviceAccessibility.cgmSimulatorScreenTest(test);
-        });
     });
     describe('settings overview', () => {
         describe('overview screen', () => {
@@ -34,8 +28,8 @@ describe('accessibility', () => {
         });
     });
     describe('settings', () => {
-        it('enable settings', async () => {
-            await test.addConfiguredPump();
+        it('add configured pump', async () => {
+            await test.LoopUtilities.addConfiguredPump();
         });
         describe('delivery limits', () => {
             settingsAccessibility.deliveryLimitsScreenTest(test);

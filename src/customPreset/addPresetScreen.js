@@ -17,12 +17,6 @@ class AddPresetScreen extends base.Screen {
             },
         });
     }
-    /**
-     * @override Screen.BackButton()
-     * */
-    BackButton() {
-        return match.accessible.ButtonBarButton(this.backLabel);
-    }
 }
 
 module.exports = AddPresetScreen;

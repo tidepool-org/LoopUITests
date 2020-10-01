@@ -8,12 +8,32 @@ class Header {
     Devices() {
         return this.devices;
     }
-    PumpErrorButton() {
+    _pumpErrorButton() {
         return match.accessible.ClickableLabel(this.language.homeScreen.PumpError);
     }
-    async PumpError() {
-        await this.PumpErrorButton().tap();
+    async NoPumpError() {
+        await expect(this._pumpErrorButton()).toBeNotVisible();
     }
+    async PumpError() {
+        await this._pumpErrorButton().tap();
+    }
+    _pumpOcclusionLabel() {
+        return match.accessible.ClickableLabel(this.language.homeScreen.PumpOcclusion);
+    }
+    async NoPumpOcclusionError() {
+        await expect(this._pumpOcclusionLabel()).toBeNotVisible();
+    }
+    async PumpOcclusionError() {
+        await expect(this._pumpOcclusionLabel()).toBeVisible();
+    }
+    _commsIssueLabel() {
+        return match.accessible.ClickableLabel('Comms Issue');
+    }
+    async PumpCommsError() {
+        await expect(this._commsIssueLabel()).toBeVisible();
+    }
+
+
     CGMErrorButton() {
         return match.accessible.ClickableLabel(this.language.homeScreen.CGMError);
     }

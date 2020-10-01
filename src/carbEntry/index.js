@@ -17,12 +17,6 @@ class CarbEntryScreen extends base.Screen {
         });
         this.mealBolusScreen = new MealBolusScreen(language);
     }
-    /**
-     * @override Screen.BackButton()
-     * */
-    BackButton() {
-        return match.accessible.ButtonBarButton(this.backLabel);
-    }
     AmountConsumedLabel() {
         return match.accessible.TextLabel(this.screenText.AmountConsumed);
     }

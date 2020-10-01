@@ -13,7 +13,8 @@ fi
 
 LoopWorkspace/Scripts/workspace-prepare.sh Tidepool
 
-## TODO LoopOverride.xcconfig with no `CRITICAL_ALERTS_ENABLED`
+## LoopOverride.xcconfig with no `CRITICAL_ALERTS_ENABLED`
+sed -i '' 's/CRITICAL_ALERTS_ENABLED//g' LoopWorkspace/Tidepool/Loop/LoopOverride.xcconfig
 
 LoopWorkspace/Scripts/workspace-build.sh -o "$(pwd)" Tidepool
 

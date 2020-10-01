@@ -1,10 +1,10 @@
 module.exports = (test) => {
     var screen;
     it('add simulator', async () => {
-        await test.addUnconfiguredPump();
+        await test.LoopUtilities.addUnconfiguredPump();
     });
     it('open simulator', async () => {
-        screen = await test.openPumpScreen();
+        screen = await test.OpenPumpScreen();
     });
     //Skip while investiagting timing issue on CI builds
     it.skip('switch errorOnBolus on and off', async () => {
