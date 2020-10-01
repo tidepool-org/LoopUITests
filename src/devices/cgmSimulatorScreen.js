@@ -172,14 +172,14 @@ class CGMSimulatorScreen extends base.Screen {
         await this.ScrollToBottom();
         if (history.name === this.screenText.History.BackfillGlucose) {
             await this.BackfillGlucoseHistoryLabel().tap();
-            await action.SetPickerValue(0, `${history.backfillHours}`);
-            await this.SaveAndClose();
+            await action.SetDatePicker(`${history.backfillHours} hours`);
+            await this.BackfillSaveAndClose();
         }
         if (history.name === this.screenText.History.Trend) {
             await this.TrendHistoryLabel().tap();
             await match.accessible.ClickableLabel(history.trend).tap();
+            await this.ScrollToTop();
         }
-        await this.ScrollToTop();
     }
     async _setAlerts(alerts) {
         if (alerts == null) {

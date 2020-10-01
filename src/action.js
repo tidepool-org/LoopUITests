@@ -66,54 +66,18 @@ const action = {
     },
     /**
      *
+     * @param {string} expected
+     */
+    async SetDatePicker(expected) {
+        await element(by.type('UIDatePickerContentView').and(by.label(expected))).tap();
+    },
+    /**
+     *
      * @param {string} currentValue
      * @param {string} expectedValue
      */
     async ScrollIntegerPicker(currentValue, expectedValue) {
         return this.ScrollDecimalPicker(currentValue, expectedValue, true);
-    },
-    /**
-     * @summary sets the pickers column to the given value
-     */
-    async SetPickerValue(column, value) {
-        const currentPicker = 0;
-        return element(
-            by.type('UIPickerView')
-        ).atIndex(currentPicker).setColumnToValue(column, String(value))
-    },
-    /**
-     * @summary sets the pickers column to the given value
-     */
-    async SwipePickerUp(times, index) {
-        let count = 1;
-        do {
-            await match.accessible.Picker(index).swipe('up');
-            count++;
-        } while (count <= times);
-    },
-    async SwipeQuantityPickerUp(times, id) {
-        let count = 1;
-        do {
-            await match.accessible.QuantityPicker(id).swipe('up');
-            count++;
-        } while (count <= times);
-    },
-    /**
-     * @summary sets the pickers column to the given value
-     */
-    async SwipePickerDown(times) {
-        let count = 1;
-        do {
-            await match.accessible.Picker().swipe('down');
-            count++;
-        } while (count <= times);
-    },
-    async SwipeQuantityPickerDown(times, id) {
-        let count = 1;
-        do {
-            await match.accessible.QuantityPicker(id).swipe('down');
-            count++;
-        } while (count <= times);
     },
     async ScrollToBottom() {
         await match.ScrollableView().atIndex(1).swipe('up');
