@@ -1,7 +1,7 @@
 module.exports = (test) => {
     var screen;
     it('add simulator', async () => {
-        await test.LoopUtilities().addUnconfiguredPump();
+        await test.LoopUtilities.addUnconfiguredPump();
     });
     it('open simulator', async () => {
         screen = await test.OpenPumpScreen();

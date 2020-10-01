@@ -18,7 +18,7 @@ error() {
   echo "Parameters:" >&2
   echo "  <build-root>      root of the build that contains the app" >&2
   echo "  <configuration>   detox configuration to use" >&2
-  echo "  <type>            type of tests to run, 'functional' or 'smoke' or 'guardrails' " >&2
+  echo "  <type>            type of tests to run, 'functional' or 'smoke' or 'guardrails' or 'error' " >&2
   exit 1
 }
 
@@ -41,7 +41,7 @@ if [ ${#} -ne 0 ]; then
   error "Unexpected arguments: ${*}"
 fi
 
-if [[ ! ${TEST_TYPE} =~ "functional_" ]] && [[ ! ${TEST_TYPE} =~ "smoke_" ]] && [[ ! ${TEST_TYPE} =~ "guardrails_" ]]; then
+if [[ ! ${TEST_TYPE} =~ "functional_" ]] && [[ ! ${TEST_TYPE} =~ "smoke_" ]] && [[ ! ${TEST_TYPE} =~ "guardrails_" ]] && [[ ! ${TEST_TYPE} =~ "error_" ]]; then
   error "Unexpected <type>: ${TEST_TYPE}"
 fi
 

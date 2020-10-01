@@ -2,7 +2,7 @@ module.exports = (test) => {
     var screen;
     var settingsScreen;
     it('add simulator', async () => {
-        await test.LoopUtilities().addCGM();
+        await test.LoopUtilities.addCGM();
     });
     it('open simulator', async () => {
         screen = await test.OpenCGMScreen();

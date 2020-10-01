@@ -7,19 +7,13 @@ module.exports = (test) => {
     });
     describe('bolus', () => {
         it('can deliver bolus', async () => {
-            await test.LoopUtilities().deliverBolus(0.2);
+            await test.LoopUtilities.deliverBolus(0.5);
         });
     });
     describe('settings', () => {
         var settingsScreen;
         it('can open', async () => {
             settingsScreen = await test.OpenSettingsScreen();
-        });
-        it('can set to closed loop', async () => {
-            await settingsScreen.ClosedLoop();
-        });
-        it('can set to open loop', async () => {
-            await settingsScreen.OpenLoop();
         });
         describe('threapy settings', () => {
             var therapySettingsScreen;
@@ -72,8 +66,12 @@ module.exports = (test) => {
         });
     });
     describe('carb entry', () => {
-        it('can add carbs and deliver bolus', async () => {
-            await test.LoopUtilities().addCarbohydratesAndDeliverBolus(5);
+        it('set to open loop', async () => {
+            let settingsScreen = await test.OpenSettingsScreen();
+            await settingsScreen.OpenLoop();
+        });
+        it('can add carbs', async () => {
+            await test.LoopUtilities.addCarbohydrates(5);
         });
     });
 };

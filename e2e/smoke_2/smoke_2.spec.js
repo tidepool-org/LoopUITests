@@ -28,8 +28,8 @@ describe('accessibility', () => {
         });
     });
     describe('settings', () => {
-        it('enable settings', async () => {
-            await test.LoopUtilities().addConfiguredPump();
+        it('add configured pump', async () => {
+            await test.LoopUtilities.addConfiguredPump();
         });
         describe('delivery limits', () => {
             settingsAccessibility.deliveryLimitsScreenTest(test);

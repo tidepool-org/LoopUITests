@@ -11,7 +11,7 @@ module.exports = (test) => {
             await pumpScreen.Back();
         });
         it('attempt to deliver bolus', async () => {
-            await test.LoopUtilities().deliverBolus(0.7);
+            await test.LoopUtilities.deliverBolus(0.7);
         });
         it.skip('and check error dialog is shown', async () => {
             let homeScreen = await test.OpenHomeScreen();
@@ -76,13 +76,13 @@ module.exports = (test) => {
     });
     describe.skip('generate error on bolus when no insulin', () => {
         beforeAll(async () => {
-            await test.LoopUtilities().updateInsulinReservoir(5);
+            await test.LoopUtilities.updateInsulinReservoir(5);
         });
         afterAll(async () => {
-            await test.LoopUtilities().updateInsulinReservoir(150);
+            await test.LoopUtilities.updateInsulinReservoir(150);
         });
         it('attempt to deliver bolus that is greater than is in the reservoir', async () => {
-            await test.LoopUtilities().deliverBolus(10);
+            await test.LoopUtilities.deliverBolus(10);
         });
         it('and check the error is shown in loop', async () => {
             let homeScreen = await test.OpenHomeScreen();
@@ -90,10 +90,10 @@ module.exports = (test) => {
     });
     describe('generate error when pump battery is flat', () => {
         beforeAll(async () => {
-            await test.LoopUtilities().updatePumpBattery(0);
+            await test.LoopUtilities.updatePumpBattery(0);
         });
         afterAll(async () => {
-            await test.LoopUtilities().updatePumpBattery(85);
+            await test.LoopUtilities.updatePumpBattery(85);
         });
         it.skip('and check the error is shown in loop', async () => {
             let homeScreen = await test.OpenHomeScreen();
@@ -108,7 +108,7 @@ module.exports = (test) => {
             await pumpScreen.Back();
         });
         it('attempt to deliver bolus', async () => {
-            await test.LoopUtilities().deliverBolus(0.2);
+            await test.LoopUtilities.deliverBolus(0.2);
         });
         it('and check the alert dialog in loop', async () => {
             homeScreen = await test.OpenHomeScreen();

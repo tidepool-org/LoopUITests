@@ -1,8 +1,6 @@
 const HomeScreen = require('./home/index');
-const exec = require('child_process').exec;
-const match = require('./match');
 const { screenName } = require('./properties');
-const LoopUtilities = require('./loopUtilities');
+const Utilities = require('./utilities');
 
 class Test {
     /**
@@ -57,24 +55,6 @@ class Test {
             await cgmScreen.Apply(this.cgmData);
         }
     }
-    // async _loadDeviceScenariosFromDisk(deviceId) {
-    //     const _loadDeviceScenariosFromDiskShellScript = exec(`${__dirname}/../scripts/load_scenarios.sh ${deviceId}`);
-    //     _loadDeviceScenariosFromDiskShellScript.stdout.on('data', () => {
-    //         return null;
-    //     });
-    //     _loadDeviceScenariosFromDiskShellScript.stderr.on('data', (data) => {
-    //         throw Error(data);
-    //     });
-    // }
-    // async _loadScenario() {
-    //     if (this.scenario) {
-    //         await this._loadDeviceScenariosFromDisk(device.id);
-    //         await device.shake();
-    //         await expect(match.accessible.TextLabel(this.scenario)).toExist();
-    //         await match.accessible.TextLabel(this.scenario).tap();
-    //         await match.accessible.ButtonBarButton('Load').tap();
-    //     }
-    // }
     async _setStartScreen() {
         if (this.startScreen) {
             switch (this.startScreen) {
@@ -127,14 +107,14 @@ class Test {
             throw 'screenDefaults are required!';
         }
         this.homeScreen = new HomeScreen(this.language, this.screenDefaults);
-        this.loopUtilities = new LoopUtilities(this);
+        this.LoopUtilities = new Utilities(this);
         await this._launchLoop();
         if (this.therapySettings) {
-            await this.LoopUtilities().loadTherapySettings();
+            await this.LoopUtilities.loadTherapySettings();
         }
         await this._setSimulators();
         if (this.scenario) {
-            await this.LoopUtilities().loadScenario(this.scenario);
+            await this.LoopUtilities.loadScenario(this.scenario);
         }
         await this._setupCGMData();
         await this._setLoopMode();
@@ -143,51 +123,18 @@ class Test {
     }
     async _setLoopMode() {
         if (this.closedLoop) {
-            await this.LoopUtilities().closeLoop();
+            await this.LoopUtilities.closeLoop();
         }
     }
     async _setSimulators() {
         if (this.simulators) {
             if (this.simulators.cgm) {
-                await this.LoopUtilities().addCGM();
+                await this.LoopUtilities.addCGM();
             }
             if (this.simulators.pump) {
-                await this.LoopUtilities().addUnconfiguredPump();
+                await this.LoopUtilities.addUnconfiguredPump();
             }
         }
-    }
-    // async advanceScenario(cycles) {
-    //     await device.shake();
-    //     await expect(match.accessible.TextLabel(this.scenario)).toExist();
-    //     await match.accessible.TextLabel(this.scenario).swipe('left');
-    //     await match.accessible.SwipeButton('Advance ⏭').tap();
-    //     await match.UITextField().typeText(cycles);
-    //     await match.accessible.Button(this.language.general.OK).tap();
-    // }
-    /**
-     * @summary will load the mocked therapy settings
-     */
-    // async addConfiguredPump() {
-    //     await this.useCases.addConfiguredPump();
-    //     // await this.addUnconfiguredPump();
-    //     // await this.loadTherapySettings(true);
-    // }
-    // async addUnconfiguredPump() {
-    //     await this.useCases.addConfiguredPump();
-    //     // await this.homeScreen.HeaderSection().Devices().AddPump();
-    // }
-    // async addCGM() {
-    //     await this.useCases.addCGM();
-    //     //await this.homeScreen.HeaderSection().Devices().AddCGM();
-    // }
-    // async loadTherapySettings(load) {
-    //     if (load) {
-    //         await device.shake();
-    //         await match.accessible.TextLabel('Mock Therapy Settings').tap();
-    //     }
-    // }
-    LoopUtilities() {
-        return this.loopUtilities;
     }
     async OpenPumpScreen() {
         var screen = await this.homeScreen.HeaderSection().Devices().OpenPumpScreen();
@@ -198,7 +145,6 @@ class Test {
         return screen;
     }
     async OpenSettingsScreen() {
-        this.settingsOpen = true;
         return this.homeScreen.OpenSettingsScreen();
     }
     async OpenTherapySettingsScreen() {

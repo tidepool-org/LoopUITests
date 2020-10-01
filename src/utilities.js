@@ -1,6 +1,7 @@
 const match = require('./match');
+const exec = require('child_process').exec;
 
-module.exports = class LoopUtilities {
+module.exports = class Utilities {
     constructor(testApp) {
         this._testApp = testApp;
         this._language = testApp.language;
@@ -51,6 +52,13 @@ module.exports = class LoopUtilities {
         await carbEntryScreen.SetCarbs(carbohydratesAmount);
         let bolusScreen = await carbEntryScreen.Continue();
         await bolusScreen.SaveAndDeliver();
+        await bolusScreen.Authenticate();
+    }
+    async addCarbohydrates(carbohydratesAmount) {
+        let carbEntryScreen = await this._testApp.OpenCarbEntryScreen();
+        await carbEntryScreen.SetCarbs(carbohydratesAmount);
+        let bolusScreen = await carbEntryScreen.Continue();
+        await bolusScreen.SaveWithoutBolus();
         await bolusScreen.Authenticate();
     }
     async updateInsulinReservoir(remainingUnits) {
