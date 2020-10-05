@@ -107,7 +107,6 @@ const action = {
     async SwipeDownUntilVisible(desiredLabel) {
         await _swipeUntilVisible(desiredLabel, 'down');
     },
-
     async ScrollToTop() {
         await match.TopScrollableView().swipe('down');
     },
