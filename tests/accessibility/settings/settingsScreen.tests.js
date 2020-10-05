@@ -23,7 +23,7 @@ module.exports = (test) => {
         await expect(screen.Devices().AddCGMButton()).toBeVisible();
     });
     it('has support label', async () => {
-        await screen.SwipeUp();
+        await screen.SwipeUpUntilVisible(screen.SupportHeader());
         await expect(screen.SupportLabel()).toBeVisible();
     });
     it('has support header', async () => {

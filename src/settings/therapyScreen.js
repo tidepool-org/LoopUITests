@@ -52,7 +52,6 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.suspendThresholdScreen.InfoLabel();
     }
     async OpenSuspendThresholdScreen() {
-        await this.SwipeDown(this.SuspendThresholdLabel());
         await this.SuspendThresholdLabel().tap();
         return this.suspendThresholdScreen;
     }
@@ -75,7 +74,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.premealRangeScreen.InfoLabel();
     }
     async OpenPreMealRangeScreen() {
-        await this.SwipeUp(this.PreMealRangeLabel());
+        await this.SwipeUpUntilVisible(this.PreMealRangeLabel());
         await this.PreMealRangeLabel().tap();
         return this.premealRangeScreen;
     }
@@ -87,6 +86,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.workoutRangeScreen.InfoLabel();
     }
     async OpenWorkoutRangeScreen() {
+        await this.SwipeUpUntilVisible(this.WorkoutRangeLabel());
         await this.WorkoutRangeLabel().tap();
         return this.workoutRangeScreen;
     }
@@ -98,7 +98,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.basalRatesScreen.InfoLabel();
     }
     async OpenBasalRateScreen() {
-        await this.SwipeUp(this.BasalRateLabel());
+        await this.SwipeUpUntilVisible(this.BasalRateLabel());
         await this.BasalRateLabel().tap();
         return this.basalRatesScreen;
     }
@@ -116,7 +116,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.deliveryLimitsScreen.InfoLabel();
     }
     async OpenDeliveryLimitsScreen() {
-        await this.SwipeUp(this.DeliveryLimitsLabel());
+        await this.SwipeUpUntilVisible(this.DeliveryLimitsMaxBolusLabel());
         await this.DeliveryLimitsLabel().tap();
         return this.deliveryLimitsScreen;
     }
@@ -128,7 +128,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.insulinModelScreen.InfoLabel();
     }
     async OpenInsulinModelScreen() {
-        await this.SwipeUp(this.InsulinModelLabel());
+        await this.SwipeUpUntilVisible(this.InsulinModelLabel());
         await this.InsulinModelLabel().tap();
         return this.insulinModelScreen;
     }
@@ -140,7 +140,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.carbRatioScreen.InfoLabel();
     }
     async OpenCarbRatioScreen() {
-        await this.ScrollToBottom();
+        await this.SwipeUpUntilVisible(this.CarbRatiosLabel());
         await this.CarbRatiosLabel().tap();
         return this.carbRatioScreen;
     }

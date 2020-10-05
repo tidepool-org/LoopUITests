@@ -1,6 +1,5 @@
 module.exports = (test) => {
     var screen;
-    var settingsScreen;
     it('add simulator', async () => {
         await test.LoopUtilities.addCGM();
     });
@@ -59,16 +58,15 @@ module.exports = (test) => {
             }
         });
     });
-    it.skip('set history as Backfill Glucose for 5 hours', async () => {
+    it('set history as Backfill Glucose for 5 hours', async () => {
         await screen.Apply({
             history: {
                 name: screen.screenText.History.BackfillGlucose,
                 backfillHours: 5,
             }
         });
-        await screen.BackToCGMSettings();
     });
-    it.skip('set history as Trend', async () => {
+    it('set history as Trend', async () => {
         await screen.Apply({
             history: {
                 name: screen.screenText.History.Trend,

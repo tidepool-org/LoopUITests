@@ -45,15 +45,6 @@ const match = {
         PickerItem(itemID) {
             return element(by.type('UIPickerTableViewWrapperCell').withDescendant(by.id(itemID)));
         },
-        Picker(index) {
-            if (index == null) {
-                index = 1;
-            }
-            return element(by.type('UIPickerView')).atIndex(index);
-        },
-        QuantityPicker(id) {
-            return element(by.label('Quantity').and(by.id(id)));
-        },
         AlertLabel(label) {
             return element(by.label(label).and(by.traits([staticTextTrait])).withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView')));
         },
@@ -129,8 +120,8 @@ const match = {
     UITextField() {
         return element(by.type('UITextField'));
     },
-    ScrollableView() {
-        return element(by.type('UITableView'));
+    TopScrollableView() {
+        return element(by.type('UITableView')).atIndex(1);
     },
     Text(theText) {
         return element(by.text(theText));

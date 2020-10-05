@@ -77,11 +77,8 @@ class Test {
         var biometricEnrollment = false;
         if (this.authenticate) {
             biometricEnrollment = true;
-            if (this.authenticate.fingerid) {
-                loopAppPermissions.fingerid = 'YES';
-            } else {
-                loopAppPermissions.faceid = 'YES';
-            }
+            loopAppPermissions.fingerid = 'YES';
+            loopAppPermissions.faceid = 'YES';
         }
         await device.launchApp({
             newInstance: true,
@@ -119,7 +116,6 @@ class Test {
         await this._setupCGMData();
         await this._setLoopMode();
         await this._setStartScreen();
-
     }
     async _setLoopMode() {
         if (this.closedLoop) {

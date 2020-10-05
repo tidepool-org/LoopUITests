@@ -36,12 +36,6 @@ class SuspendThresholdScreen extends base.EntryScreen {
     HighSuspendThresholdGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.HighSuspendThresholdGuardrailMessage);
     }
-    async SwipePickerToMaxValue() {
-        await action.SwipePickerUp(3);
-    }
-    async SwipePickerToMinValue() {
-        await action.SwipePickerDown(3);
-    }
     /**
      * @param {object} threshold
      * @param {object} threshold.expected

@@ -17,7 +17,7 @@ describe('errors', () => {
             enableTherapySettings: true,
             simulators: { cgm: true, pump: true },
             cgmData: {
-                model: { name: cgmText.Model.Constant, bgValues: [85] },
+                model: { name: cgmText.Model.Constant, bgValues: [101] },
                 frequency: { seconds: true },
                 history: { name: cgmText.History.BackfillGlucose, backfillHours: 6 },
             }
