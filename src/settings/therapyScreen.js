@@ -74,7 +74,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.premealRangeScreen.InfoLabel();
     }
     async OpenPreMealRangeScreen() {
-        await this.SwipeUpUntil(this.PreMealRangeLabel());
+        await this.SwipeUpUntilVisible(this.PreMealRangeLabel());
         await this.PreMealRangeLabel().tap();
         return this.premealRangeScreen;
     }
@@ -86,7 +86,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.workoutRangeScreen.InfoLabel();
     }
     async OpenWorkoutRangeScreen() {
-        await this.SwipeUpUntil(this.WorkoutRangeLabel());
+        await this.SwipeUpUntilVisible(this.WorkoutRangeLabel());
         await this.WorkoutRangeLabel().tap();
         return this.workoutRangeScreen;
     }
@@ -98,7 +98,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.basalRatesScreen.InfoLabel();
     }
     async OpenBasalRateScreen() {
-        await this.SwipeUpUntil(this.BasalRateLabel());
+        await this.SwipeUpUntilVisible(this.BasalRateLabel());
         await this.BasalRateLabel().tap();
         return this.basalRatesScreen;
     }
@@ -116,7 +116,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.deliveryLimitsScreen.InfoLabel();
     }
     async OpenDeliveryLimitsScreen() {
-        await this.SwipeUpUntil(this.DeliveryLimitsMaxBolusLabel());
+        await this.SwipeUpUntilVisible(this.DeliveryLimitsMaxBolusLabel());
         await this.DeliveryLimitsLabel().tap();
         return this.deliveryLimitsScreen;
     }
@@ -128,7 +128,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.insulinModelScreen.InfoLabel();
     }
     async OpenInsulinModelScreen() {
-        await this.SwipeUpUntil(this.InsulinModelLabel());
+        await this.SwipeUpUntilVisible(this.InsulinModelLabel());
         await this.InsulinModelLabel().tap();
         return this.insulinModelScreen;
     }
@@ -140,7 +140,7 @@ module.exports = class TherapyScreen extends base.Screen {
         return this.carbRatioScreen.InfoLabel();
     }
     async OpenCarbRatioScreen() {
-        await this.SwipeUpUntil(this.CarbRatiosLabel());
+        await this.SwipeUpUntilVisible(this.CarbRatiosLabel());
         await this.CarbRatiosLabel().tap();
         return this.carbRatioScreen;
     }

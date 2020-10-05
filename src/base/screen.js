@@ -60,6 +60,7 @@ class Screen {
             this.visibleBottomLabel = parentScreen.scroll.visibleBottomLabel;
             this.visibleTopLabel = parentScreen.scroll.visibleTopLabel;
         }
+        this._deviceInfo = _deviceInfo();
     }
     Header() {
         return match.accessible.Header(this.screenText.Header);
@@ -83,7 +84,7 @@ class Screen {
         return match.accessible.Button(this.generalText.Save);
     }
     async Authenticate() {
-        if (_deviceInfo().useFaceID) {
+        if (this._deviceInfo.useFaceID) {
             await device.matchFace();
         } else {
             await device.matchFinger();
@@ -165,11 +166,11 @@ class Screen {
             await action.SwipeUp(index);
         }
     }
-    async SwipeUpUntil(labelToSee) {
-        await action.SwipeUpUntil(labelToSee);
+    async SwipeUpUntilVisible(labelToSee) {
+        await action.SwipeUpUntilVisible(labelToSee);
     }
-    async SwipeDownUntil(labelToSee) {
-        await action.SwipeDownUntil(labelToSee);
+    async SwipeDownUntilVisible(labelToSee) {
+        await action.SwipeDownUntilVisible(labelToSee);
     }
     async ScrollToTop() {
         if (this.visibleTopLabel == null) {

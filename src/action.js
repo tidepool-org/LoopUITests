@@ -16,23 +16,23 @@ var _nextPickerStep = function (currentValue, expectedValue) {
     return current;
 }
 
-var _swipeUntil = async function (desiredLabel, direction) {
-    let labelNotSeen = true;
+var _swipeUntilVisible = async function (desiredLabel, direction) {
+    let labelVisible = false;
     let timesSwiped = 0;
-    const maxSwips = 15;
+    const maxSwipes = 15;
     do {
-        if (timesSwiped >= maxSwips) {
+        if (timesSwiped >= maxSwipes) {
             throw `Swiped screen ${direction} maximum times, check setup as there may be an issue`;
         }
         try {
             await expect(desiredLabel).toBeVisible();
-            labelNotSeen = false;
+            labelVisible = true;
         } catch (err) {
             await match.TopScrollableView().swipe(direction, 'slow', 0.2);
             ++timesSwiped;
         }
     }
-    while (labelNotSeen);
+    while (!labelVisible);
 }
 
 const action = {
@@ -101,11 +101,11 @@ const action = {
     async ScrollToBottom() {
         await match.TopScrollableView().swipe('up');
     },
-    async SwipeUpUntil(desiredLabel) {
-        await _swipeUntil(desiredLabel, 'up');
+    async SwipeUpUntilVisible(desiredLabel) {
+        await _swipeUntilVisible(desiredLabel, 'up');
     },
-    async SwipeDownUntil(desiredLabel) {
-        await _swipeUntil(desiredLabel, 'down');
+    async SwipeDownUntilVisible(desiredLabel) {
+        await _swipeUntilVisible(desiredLabel, 'down');
     },
 
     async ScrollToTop() {
