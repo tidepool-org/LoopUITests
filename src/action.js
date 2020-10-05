@@ -16,6 +16,25 @@ var _nextPickerStep = function (currentValue, expectedValue) {
     return current;
 }
 
+var _swipeUntil = async function (desiredLabel, direction) {
+    let labelNotSeen = true;
+    let timesSwiped = 0;
+    const maxSwips = 15;
+    do {
+        if (timesSwiped >= maxSwips) {
+            throw `Swiped screen ${direction} maximum times, check setup as there may be an issue`;
+        }
+        try {
+            await expect(desiredLabel).toBeVisible();
+            labelNotSeen = false;
+        } catch (err) {
+            await match.TopScrollableView().swipe(direction, 'slow', 0.2);
+            ++timesSwiped;
+        }
+    }
+    while (labelNotSeen);
+}
+
 const action = {
     /**
      *
@@ -80,19 +99,17 @@ const action = {
         return this.ScrollDecimalPicker(currentValue, expectedValue, true);
     },
     async ScrollToBottom() {
-        await match.ScrollableView().atIndex(1).swipe('up');
+        await match.TopScrollableView().swipe('up');
     },
-    async SwipeUp(index) {
-        if (index == null) {
-            index = 1;
-        }
-        await match.ScrollableView().atIndex(index).swipe('up', 'slow', 0.4);
+    async SwipeUpUntil(desiredLabel) {
+        await _swipeUntil(desiredLabel, 'up');
     },
-    async SwipeDown() {
-        await match.ScrollableView().atIndex(1).swipe('down', 'slow', 0.4);
+    async SwipeDownUntil(desiredLabel) {
+        await _swipeUntil(desiredLabel, 'down');
     },
+
     async ScrollToTop() {
-        await match.ScrollableView().atIndex(1).swipe('down');
+        await match.TopScrollableView().swipe('down');
     },
 };
 

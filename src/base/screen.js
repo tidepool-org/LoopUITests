@@ -5,6 +5,20 @@ async function _sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time));
 }
 
+function _deviceInfo() {
+    let deviceName = device.name;
+    if (deviceName.includes('iPhone SE')) {
+        return deviceInfo = {
+            smallScreen: true,
+            useFaceID: false,
+        }
+    }
+    return deviceInfo = {
+        smallScreen: false,
+        useFaceID: true,
+    }
+}
+
 class Screen {
     /**
      * @param {object} parentScreen
@@ -69,7 +83,13 @@ class Screen {
         return match.accessible.Button(this.generalText.Save);
     }
     async Authenticate() {
-        await device.matchFace();
+        if (_deviceInfo().useFaceID) {
+            console.log('FACE ...')
+            await device.matchFace();
+        } else {
+            console.log('FINGER ...');
+            await device.matchFinger();
+        }
         //HACK: the match can take some time so we need to wait
         await _sleep(5000);
     }
@@ -147,12 +167,11 @@ class Screen {
             await action.SwipeUp(index);
         }
     }
-    async SwipeDown(labelElement, index) {
-        try {
-            await expect(labelElement).toBeVisible();
-        } catch (err) {
-            await action.SwipeDown(index);
-        }
+    async SwipeUpUntil(labelToSee) {
+        await action.SwipeUpUntil(labelToSee);
+    }
+    async SwipeDownUntil(labelToSee) {
+        await action.SwipeDownUntil(labelToSee);
     }
     async ScrollToTop() {
         if (this.visibleTopLabel == null) {

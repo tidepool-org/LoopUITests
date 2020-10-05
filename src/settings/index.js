@@ -68,38 +68,30 @@ class SettingsScreen extends base.Screen {
         return match.accessible.Header(this.screenText.Configuration);
     }
     async OpenSupport() {
-        await this.SwipeUp();
+        await this.SwipeUpUntil(this.SupportLabel());
         await this.supportScreen.Open();
         return this.supportScreen;
     }
     async OpenDeliveryLimitsScreen() {
-        await this.SwipeUp();
         return this.therapyScreen.OpenDeliveryLimitsScreen();
     }
     async OpenCorrectionRangeScreen() {
         return this.therapyScreen.OpenCorrectionRangeScreen();
     }
     async OpenInsulinSensitivitiesScreen() {
-        await this.SwipeUp();
         return this.therapyScreen.OpenInsulinSensitivitiesScreen();
     }
     async OpenSuspendThresholdScreen() {
-        await this.SwipeUp();
         return this.therapyScreen.OpenSuspendThresholdScreen();
     }
     async OpenSuspendThresholdScreen() {
         return this.therapyScreen.OpenSuspendThresholdScreen();
     }
     async OpenCarbRatioScreen() {
-        await this.SwipeUp();
         return this.therapyScreen.OpenCarbRatioScreen();
     }
     async OpenBasalRateScreen() {
-        await this.SwipeUp();
         return this.therapyScreen.OpenBasalRateScreen();
-    }
-    _newSettingsLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Settings).atIndex(0);
     }
     async setDeliveryLimits(deliveryLimits) {
         var limits = await this.therapyScreen.OpenDeliveryLimitsScreen();

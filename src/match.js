@@ -120,8 +120,8 @@ const match = {
     UITextField() {
         return element(by.type('UITextField'));
     },
-    ScrollableView() {
-        return element(by.type('UITableView'));
+    TopScrollableView() {
+        return element(by.type('UITableView')).atIndex(1);
     },
     Text(theText) {
         return element(by.text(theText));
