@@ -16,7 +16,6 @@ class Test {
      *
      * @param {object} setup.authentication optional
      * @param {boolean} setup.authentication.faceid
-     * @param {boolean} setup.authentication.fingerid
      *
      * @param {object} setup.simulators optional
      * @param {boolean} setup.simulators.cgm
@@ -77,7 +76,6 @@ class Test {
         var biometricEnrollment = false;
         if (this.authenticate) {
             biometricEnrollment = true;
-            loopAppPermissions.fingerid = 'YES';
             loopAppPermissions.faceid = 'YES';
         }
         await device.launchApp({

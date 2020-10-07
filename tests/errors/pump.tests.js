@@ -1,5 +1,5 @@
 module.exports = (test) => {
-    describe('generate error on bolus', () => {
+    describe.skip('generate error on bolus', () => {
         beforeAll(async () => {
             let pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.Apply({ errorOnBolus: true });
@@ -18,7 +18,7 @@ module.exports = (test) => {
             await expect(homeScreen.Alert('todo')).toBeVisible();
         });
     });
-    describe('generate error on suspend', () => {
+    describe.skip('generate error on suspend', () => {
         var pumpScreen;
         beforeAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
@@ -30,6 +30,8 @@ module.exports = (test) => {
         });
         it('then dismiss the error', async () => {
             await pumpScreen.DismissAlert();
+        });
+        it('and reset error on suspend', async () => {
             await pumpScreen.Apply({ errorOnSuspend: false });
             await pumpScreen.Back();
         });
@@ -55,8 +57,11 @@ module.exports = (test) => {
         it('and check the error is shown in loop', async () => {
             await homeScreen.HeaderSection().PumpError();
         });
+        it('and that bolus cannot be delivered', async () => {
+            await test.LoopUtilities.deliverBolus(0.2);
+        });
     });
-    describe('generate occlusion error', () => {
+    describe.skip('generate occlusion error', () => {
         var homeScreen;
         var pumpScreen;
         beforeAll(async () => {
@@ -73,6 +78,9 @@ module.exports = (test) => {
         it('and check the error is shown in loop', async () => {
             await homeScreen.HeaderSection().PumpOcclusionError();
         });
+        it('and that bolus cannot be delivered', async () => {
+            await test.LoopUtilities.deliverBolus(0.2);
+        });
     });
     describe.skip('generate error on bolus when no insulin', () => {
         beforeAll(async () => {
@@ -88,7 +96,7 @@ module.exports = (test) => {
             let homeScreen = await test.OpenHomeScreen();
         });
     });
-    describe('generate error when pump battery is flat', () => {
+    describe.skip('generate error when pump battery is flat', () => {
         beforeAll(async () => {
             await test.LoopUtilities.updatePumpBattery(0);
         });
@@ -99,8 +107,11 @@ module.exports = (test) => {
             let homeScreen = await test.OpenHomeScreen();
             await expect(homeScreen.Alert('Pump Battery Low')).toBeVisible();
         });
+        it('and that bolus cannot be delivered', async () => {
+            await test.LoopUtilities.deliverBolus(0.2);
+        });
     });
-    describe('generate comms error on bolus', () => {
+    describe.skip('generate comms error on bolus', () => {
         var homeScreen;
         beforeAll(async () => {
             let pumpScreen = await test.OpenPumpScreen();

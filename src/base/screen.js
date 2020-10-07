@@ -85,9 +85,13 @@ class Screen {
     }
     async Authenticate() {
         if (this._deviceInfo.useFaceID) {
+            console.log('matching face ...');
             await device.matchFace();
+            console.log('matched face');
         } else {
+            console.log('matching finger ...');
             await device.matchFinger();
+            console.log('matched finger');
         }
         //HACK: the match can take some time so we need to wait
         await _sleep(5000);

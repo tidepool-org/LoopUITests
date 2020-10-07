@@ -1,15 +1,4 @@
 module.exports = (test) => {
-    describe('home', () => {
-        it('can check loop status', async () => {
-            var homeScreen = await test.OpenHomeScreen();
-            await homeScreen.HeaderSection().Loop();
-        });
-    });
-    describe('bolus', () => {
-        it('can deliver bolus', async () => {
-            await test.LoopUtilities.deliverBolus(0.5);
-        });
-    });
     describe('settings', () => {
         var settingsScreen;
         it('can open', async () => {
@@ -63,6 +52,17 @@ module.exports = (test) => {
             it('can close', async () => {
                 await therapySettingsScreen.ReturnToHomeScreen();
             });
+        });
+    });
+    describe('home', () => {
+        it('can check loop status', async () => {
+            var homeScreen = await test.OpenHomeScreen();
+            await homeScreen.HeaderSection().Loop();
+        });
+    });
+    describe('bolus', () => {
+        it('can be delivered', async () => {
+            await test.LoopUtilities.deliverBolus(0.5);
         });
     });
     describe('carb entry', () => {
