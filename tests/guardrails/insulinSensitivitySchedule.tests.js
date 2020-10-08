@@ -8,7 +8,7 @@ module.exports = (test) => {
         therapySettingsScreen = await test.OpenTherapySettingsScreen();
         screen = await therapySettingsScreen.OpenInsulinSensitivitiesScreen();
         await screen.OpenPicker('12:00 AM');
-        screenLimit = test.limits.insulinSensitivities;
+        screenLimit = test.getLimitsForSetting('insulinSensitivities');
     });
     describe(description.MinimumLimit, () => {
         it(description.SetValue, async () => {

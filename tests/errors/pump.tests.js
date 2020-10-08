@@ -1,31 +1,13 @@
 module.exports = (test) => {
-    describe.skip('generate error on bolus', () => {
-        beforeAll(async () => {
-            let pumpScreen = await test.OpenPumpScreen();
-            await pumpScreen.Apply({ errorOnBolus: true });
-            await pumpScreen.Back();
-        });
-        afterAll(async () => {
-            let pumpScreen = await test.OpenPumpScreen();
-            await pumpScreen.Apply({ errorOnBolus: false });
-            await pumpScreen.Back();
-        });
-        it('attempt to deliver bolus', async () => {
-            await test.LoopUtilities.deliverBolus(0.7);
-        });
-        it.skip('and check error dialog is shown', async () => {
-            let homeScreen = await test.OpenHomeScreen();
-            await expect(homeScreen.Alert('todo')).toBeVisible();
-        });
-    });
-    describe.skip('generate error on suspend', () => {
-        var pumpScreen;
+    describe('generate error on suspend', () => {
+        let pumpScreen;
+        let homeScreen;
         beforeAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.Apply({ errorOnSuspend: true });
             await pumpScreen.SuspendDelivery();
         });
-        it('and check the error is shown in loop', async () => {
+        it('and check error shown on home screen', async () => {
             await pumpScreen.HasAlert();
         });
         it('then dismiss the error', async () => {
@@ -36,13 +18,16 @@ module.exports = (test) => {
             await pumpScreen.Back();
         });
         it('and check no error on home screen', async () => {
-            let home = await test.OpenHomeScreen();
-            await home.HeaderSection().NoPumpError();
+            homeScreen = await test.OpenHomeScreen();
+            await homeScreen.HeaderSection.NoPumpError();
+        });
+        it('and check no loop icon error', async () => {
+            await homeScreen.HeaderSection.ExpectNoLoopIconAlert();
         });
     });
     describe('generate general pump error', () => {
-        var homeScreen;
-        var pumpScreen;
+        let homeScreen;
+        let pumpScreen;
         beforeAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.CausePumpError();
@@ -54,16 +39,16 @@ module.exports = (test) => {
             await pumpScreen.ResolvePumpError();
             await pumpScreen.Back();
         });
-        it('and check the error is shown in loop', async () => {
-            await homeScreen.HeaderSection().PumpError();
+        it('and check error shown on home screen', async () => {
+            await homeScreen.HeaderSection.PumpError();
         });
-        it('and that bolus cannot be delivered', async () => {
-            await test.LoopUtilities.deliverBolus(0.2);
+        it('and check no loop icon error', async () => {
+            await homeScreen.HeaderSection.ExpectNoLoopIconAlert();
         });
     });
-    describe.skip('generate occlusion error', () => {
-        var homeScreen;
-        var pumpScreen;
+    describe('generate occlusion error', () => {
+        let homeScreen;
+        let pumpScreen;
         beforeAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.DetectOcclusionError();
@@ -75,43 +60,60 @@ module.exports = (test) => {
             await pumpScreen.ResolveOcclusionError();
             await pumpScreen.Back();
         });
-        it('and check the error is shown in loop', async () => {
-            await homeScreen.HeaderSection().PumpOcclusionError();
+        it('and check error shown on home screen', async () => {
+            await homeScreen.HeaderSection.PumpOcclusionError();
         });
-        it('and that bolus cannot be delivered', async () => {
-            await test.LoopUtilities.deliverBolus(0.2);
+        it('and check no loop icon error', async () => {
+            await homeScreen.HeaderSection.ExpectNoLoopIconAlert();
         });
     });
-    describe.skip('generate error on bolus when no insulin', () => {
+    describe('generate error when no insulin', () => {
         beforeAll(async () => {
-            await test.LoopUtilities.updateInsulinReservoir(5);
+            await test.LoopUtilities.updateInsulinReservoir(0);
         });
         afterAll(async () => {
             await test.LoopUtilities.updateInsulinReservoir(150);
         });
-        it('attempt to deliver bolus that is greater than is in the reservoir', async () => {
-            await test.LoopUtilities.deliverBolus(10);
+        it('and check error shown on home screen', async () => {
+            homeScreen = await test.OpenHomeScreen();
+            await homeScreen.HeaderSection.PumpNoInsulinError();
         });
-        it('and check the error is shown in loop', async () => {
-            let homeScreen = await test.OpenHomeScreen();
-        });
-    });
-    describe.skip('generate error when pump battery is flat', () => {
-        beforeAll(async () => {
-            await test.LoopUtilities.updatePumpBattery(0);
-        });
-        afterAll(async () => {
-            await test.LoopUtilities.updatePumpBattery(85);
-        });
-        it.skip('and check the error is shown in loop', async () => {
-            let homeScreen = await test.OpenHomeScreen();
-            await expect(homeScreen.Alert('Pump Battery Low')).toBeVisible();
-        });
-        it('and that bolus cannot be delivered', async () => {
-            await test.LoopUtilities.deliverBolus(0.2);
+        it('and check no loop icon error', async () => {
+            await homeScreen.HeaderSection.ExpectNoLoopIconAlert();
         });
     });
-    describe.skip('generate comms error on bolus', () => {
+    // describe('generate error when pump battery is flat', () => {
+    //     beforeAll(async () => {
+    //         await test.LoopUtilities.updatePumpBattery(0);
+    //     });
+    //     afterAll(async () => {
+    //         await test.LoopUtilities.updatePumpBattery(85);
+    //     });
+    //     it('and check error shown on home screen', async () => {
+    //         let homeScreen = await test.OpenHomeScreen();
+    //         await expect(homeScreen.Alert('Pump Battery Low')).toBeVisible();
+    //     });
+    // });
+    // describe.skip('generate error on bolus', () => {
+    //     beforeAll(async () => {
+    //         let pumpScreen = await test.OpenPumpScreen();
+    //         await pumpScreen.Apply({ errorOnBolus: true });
+    //         await pumpScreen.Back();
+    //     });
+    //     afterAll(async () => {
+    //         let pumpScreen = await test.OpenPumpScreen();
+    //         await pumpScreen.Apply({ errorOnBolus: false });
+    //         await pumpScreen.Back();
+    //     });
+    //     it('attempt to deliver bolus', async () => {
+    //         await test.LoopUtilities.deliverBolus(0.7);
+    //     });
+    //     it.skip('and check error dialog is shown', async () => {
+    //         let homeScreen = await test.OpenHomeScreen();
+    //         await expect(homeScreen.Alert('todo')).toBeVisible();
+    //     });
+    // });
+    describe('generate comms error on bolus', () => {
         var homeScreen;
         beforeAll(async () => {
             let pumpScreen = await test.OpenPumpScreen();
@@ -125,8 +127,8 @@ module.exports = (test) => {
             homeScreen = await test.OpenHomeScreen();
             await expect(homeScreen.Alert('Unable To Reach Pump')).toBeVisible();
         });
-        it('and check the error is shown in loop', async () => {
-            await homeScreen.HeaderSection().PumpCommsError();
+        it('and check error shown on home screen', async () => {
+            await homeScreen.HeaderSection.PumpCommsError();
         });
     });
 };

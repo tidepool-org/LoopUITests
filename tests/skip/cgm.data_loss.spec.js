@@ -18,7 +18,7 @@ describe.skip('Closed loop is stopped when we have cgm data loss', () => {
         await test.advanceScenario('1');
     });
     it('should have no status alert', async () => {
-        await test.homeScreen.ExpectSuccessfulLoop();
+        await test.homeScreen.ExpectNoLoopIconAlert();
     });
     it('cgm data is turned off', async () => {
         await test.settingsScreen.SetCGMSimulatorSettings({ modelData: { bgValues: [], model: loop.settings.cgmModel.None } })

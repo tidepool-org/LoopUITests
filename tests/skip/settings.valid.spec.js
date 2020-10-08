@@ -17,6 +17,6 @@ describe.skip('Closed loop is allowed when', () => {
         await loop.advanceScenario('1');
     });
     it('should have no status alert', async () => {
-        await test.homeScreen.ExpectSuccessfulLoop();
+        await test.homeScreen.ExpectNoLoopIconAlert();
     });
 });

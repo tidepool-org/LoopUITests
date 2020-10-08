@@ -28,7 +28,7 @@ module.exports = (test) => {
         });
         it('should show missing glucose data error', async () => {
             let home = await test.OpenHomeScreen();
-            await home.HeaderSection().ExpectLoopStatusGlucoseDataAlert();
+            await home.HeaderSection.ExpectLoopStatusGlucoseDataAlert();
         });
         it('reset to constant data', async () => {
             screen = await test.OpenCGMScreen();
@@ -55,7 +55,7 @@ module.exports = (test) => {
         });
         it('should show error', async () => {
             let home = await test.OpenHomeScreen();
-            await home.HeaderSection().ExpectLoopAlert();
+            await home.HeaderSection.ExpectLoopIconAlert();
         });
     });
     it('remove simulator', async () => {

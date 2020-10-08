@@ -2,8 +2,8 @@ module.exports = (test) => {
     var screen;
     beforeAll(async () => {
         var homeScreen = await test.OpenHomeScreen();
-        await homeScreen.HeaderSection().Devices().AddCGM();
-        screen = await homeScreen.HeaderSection().Devices().OpenCGMScreen();
+        await homeScreen.HeaderSection.Devices.AddCGM();
+        screen = await homeScreen.HeaderSection.Devices.OpenCGMScreen();
     });
     afterAll(async () => {
         await screen.RemoveSimulator();

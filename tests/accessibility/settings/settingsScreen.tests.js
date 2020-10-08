@@ -17,10 +17,10 @@ module.exports = (test) => {
         await expect(screen.TherapySettingsLabel()).toBeVisible();
     });
     it('add pump button', async () => {
-        await expect(screen.Devices().AddPumpButton()).toBeVisible();
+        await expect(screen.Devices.AddPumpButton()).toBeVisible();
     });
     it('add CGM button', async () => {
-        await expect(screen.Devices().AddCGMButton()).toBeVisible();
+        await expect(screen.Devices.AddCGMButton()).toBeVisible();
     });
     it('has support label', async () => {
         await screen.SwipeUpUntilVisible(screen.SupportHeader());

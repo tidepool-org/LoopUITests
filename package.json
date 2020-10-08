@@ -16,7 +16,7 @@
     "test_guardrail_2": "detox test e2e/guardrails_2 -c ios.sim.debug.iphone-11pro",
     "test_guardrail_2_iphoneSE2": "detox test e2e/guardrails_2 -c ios.sim.debug.iphone-se-2",
     "build": "detox build -c ios.sim.debug.iphone-11pro",
-    "fetch_build": "source ./scripts/build_loop.dev.sh build-267",
+    "fetch_build": "source ./scripts/build_loop.dev.sh build-269",
     "lint": "eslint ."
   },
   "devDependencies": {
@@ -41,7 +41,7 @@
     },
     "configurations": {
       "ios.sim.debug.iphone-11pro": {
-        "binaryPath": "build/Debug-iphonesimulator/Loop.app",
+        "binaryPath": "build_263/Debug-iphonesimulator/Loop.app",
         "build": "source ./scripts/build_loop.dev.sh",
         "type": "ios.simulator",
         "device": {
@@ -49,7 +49,7 @@
         }
       },
       "ios.sim.debug.iphone-se-2": {
-        "binaryPath": "build_263/Debug-iphonesimulator/Loop.app",
+        "binaryPath": "build/Debug-iphonesimulator/Loop.app",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone SE (2nd generation)"

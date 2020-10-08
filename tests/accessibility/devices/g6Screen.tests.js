@@ -3,7 +3,7 @@ module.exports = (test) => {
     var homeScreen;
     beforeAll(async () => {
         homeScreen = await test.OpenHomeScreen();
-        screen = await homeScreen.HeaderSection().Devices().AddG6();
+        screen = await homeScreen.HeaderSection.Devices.AddG6();
     });
     afterAll(async () => {
         await screen.Back();

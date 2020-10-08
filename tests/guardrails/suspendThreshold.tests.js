@@ -8,7 +8,7 @@ module.exports = (test) => {
     it('open screen', async () => {
         therapySettingsScreen = await test.OpenTherapySettingsScreen();
         screen = await therapySettingsScreen.OpenSuspendThresholdScreen();
-        screenLimit = test.limits.suspendThreshold;
+        screenLimit = test.getLimitsForSetting('suspendThreshold');
         await screen.OpenPicker(therapySettingsValue);
     });
     describe(description.MinimumLimit, () => {

@@ -8,7 +8,7 @@ module.exports = (test) => {
         therapySettingsScreen = await test.OpenTherapySettingsScreen();
         screen = await therapySettingsScreen.OpenCorrectionRangeScreen();
         await screen.OpenPicker('12:00 AM');
-        screenLimit = test.limits.correctionRange;
+        screenLimit = test.getLimitsForSetting('correctionRange');
     });
     describe(description.MinimumLimit, () => {
         it(description.SetValue, async () => {

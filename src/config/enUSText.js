@@ -158,7 +158,7 @@ var CarbEntryScreen = {
     AddMeal: 'Add Meal',
     SaveWithoutBolusing: 'Save without Bolusing',
     AmountConsumed: 'Amount Consumed',
-    Date: 'Date',
+    Time: 'Time',
     FoodType: 'Food Type',
     AbsorptionTime: 'Absorption Time',
     AbsorptionMessage: 'Choose a longer absorption time for larger meals, or those containing fats and proteins. This is only guidance to the algorithm and need not be exact.',

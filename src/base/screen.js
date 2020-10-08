@@ -94,7 +94,9 @@ class Screen {
             console.log('matched finger');
         }
         //HACK: the match can take some time so we need to wait
+        console.log('authenticate wait');
         await _sleep(5000);
+        console.log('authenticate completed');
     }
     async SaveAndClose() {
         if (this.isEditable == false) {

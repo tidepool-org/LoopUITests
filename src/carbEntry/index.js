@@ -20,8 +20,8 @@ class CarbEntryScreen extends base.Screen {
     AmountConsumedLabel() {
         return match.accessible.TextLabel(this.screenText.AmountConsumed);
     }
-    DateLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Date);
+    TimeLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Time);
     }
     FoodTypeLabel() {
         return match.accessible.ClickableLabel(this.screenText.FoodType);

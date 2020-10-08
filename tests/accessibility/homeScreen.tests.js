@@ -26,13 +26,13 @@ module.exports = (test) => {
     });
     describe('header', () => {
         it('add pump button', async () => {
-            await expect(screen.HeaderSection().Devices().AddPumpButton()).toBeVisible();
+            await expect(screen.HeaderSection.Devices.AddPumpButton()).toBeVisible();
         });
         it('add CGM button', async () => {
-            await expect(screen.HeaderSection().Devices().AddCGMButton()).toBeVisible();
+            await expect(screen.HeaderSection.Devices.AddCGMButton()).toBeVisible();
         });
         it('Loop button', async () => {
-            await expect(screen.HeaderSection().LoopIcon()).toBeVisible();
+            await expect(screen.HeaderSection.LoopIcon()).toBeVisible();
         });
     });
 };

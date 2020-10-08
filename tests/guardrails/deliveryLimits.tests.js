@@ -5,7 +5,7 @@ module.exports = (test) => {
     var therapyScreen;
     var screenLimit;
     beforeAll(async () => {
-        screenLimit = test.limits.delivery;
+        screenLimit = test.getLimitsForSetting('delivery');
     });
     describe('max basal rate', () => {
         const therapySettingsMaxBasalRate = 5.0;

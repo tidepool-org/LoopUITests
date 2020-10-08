@@ -3,10 +3,7 @@ const match = require('../match');
 class Header {
     constructor(language, devices) {
         this.language = language;
-        this.devices = devices;
-    }
-    Devices() {
-        return this.devices;
+        this.Devices = devices;
     }
     _pumpErrorButton() {
         return match.accessible.ClickableLabel(this.language.homeScreen.PumpError);
@@ -30,10 +27,15 @@ class Header {
         return match.accessible.ClickableLabel('Comms Issue');
     }
     async PumpCommsError() {
-        await expect(this._commsIssueLabel()).toBeVisible();
+        //as exposed benath an other error
+        await expect(this._commsIssueLabel()).toExist();
     }
-
-
+    _pumpNoInsulinLabel() {
+        return match.accessible.ClickableLabel('No Insulin');
+    }
+    async PumpNoInsulinError() {
+        await expect(this._pumpNoInsulinLabel()).toBeVisible();
+    }
     CGMErrorButton() {
         return match.accessible.ClickableLabel(this.language.homeScreen.CGMError);
     }
@@ -51,6 +53,9 @@ class Header {
     }
     async ExpectLoopNotYetRun() {
         await expect(match.loop.Icon()).toHaveLabel(this.language.homeScreen.LoopWaitingForFirstRun);
+    }
+    async ExpectLoopIcon(label) {
+        await expect(match.loop.Icon()).toHaveLabel(label);
     }
     async ExpectLoopStatusCarbsAlert() {
         await this.Loop();
@@ -72,12 +77,12 @@ class Header {
         await expect(match.accessible.AlertLabel(this.language.general.Alert.MissingGlucoseData)).toExist();
         await this.CloseLoopAlert();
     }
-    async ExpectLoopAlert() {
+    async ExpectLoopIconAlert() {
         await this.Loop();
         await expect(match.accessible.Button(this.language.general.OK)).toBeVisible();
         await this.CloseLoopAlert();
     }
-    async ExpectSuccessfulLoop() {
+    async ExpectNoLoopIconAlert() {
         await this.Loop();
         await expect(match.accessible.Alert()).toNotExist();
     }

@@ -14,7 +14,7 @@ module.exports = (test) => {
                 var correctionRangeScreenLimits;
                 it('open ', async () => {
                     correctionRangeScreen = await therapySettingsScreen.OpenCorrectionRangeScreen();
-                    correctionRangeScreenLimits = test.limits.correctionRange;
+                    correctionRangeScreenLimits = test.getLimitsForSetting('correctionRange');
                 });
                 it('can change the time ', async () => {
                     await correctionRangeScreen.OpenPicker('12:00 AM');
@@ -57,7 +57,7 @@ module.exports = (test) => {
     describe('home', () => {
         it('can check loop status', async () => {
             var homeScreen = await test.OpenHomeScreen();
-            await homeScreen.HeaderSection().Loop();
+            await homeScreen.HeaderSection.Loop();
         });
     });
     describe('bolus', () => {

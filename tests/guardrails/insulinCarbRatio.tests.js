@@ -9,7 +9,7 @@ module.exports = (test) => {
         therapySettingsScreen = await test.OpenTherapySettingsScreen();
         screen = await therapySettingsScreen.OpenCarbRatioScreen();
         await screen.OpenPicker(therapySettingsRatio);
-        screenLimit = test.limits.insulinCarbRatio;
+        screenLimit = test.getLimitsForSetting('insulinCarbRatio');
     });
     describe(description.MinimumLimit, () => {
         it(description.SetValue, async () => {

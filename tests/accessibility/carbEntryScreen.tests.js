@@ -18,8 +18,8 @@ module.exports = (test) => {
     it('has a Absorption Time Label', async () => {
         await expect(carbEntryScreen.AbsorptionTimeLabel()).toBeVisible();
     });
-    it('has a Date Label', async () => {
-        await expect(carbEntryScreen.DateLabel()).toBeVisible();
+    it('has a Time Label', async () => {
+        await expect(carbEntryScreen.TimeLabel()).toBeVisible();
     });
     it('has a Amount Consumed Label', async () => {
         await expect(carbEntryScreen.AmountConsumedLabel()).toBeVisible();

@@ -11,15 +11,15 @@ describe('errors', () => {
             language: config.text,
             screenDefaults: config.screenDefaults,
             limits: config.limits,
-            settingDefault: config.settingDefault,
             authentication: { faceid: true },
             enableClosedLoop: true,
+            warmupPeriod: { milliseconds: 10000 },
             enableTherapySettings: true,
             simulators: { cgm: true, pump: true },
             cgmData: {
-                model: { name: cgmText.Model.Constant, bgValues: [101] },
+                model: { name: cgmText.Model.Constant, bgValues: [97] },
                 frequency: { seconds: true },
-                history: { name: cgmText.History.BackfillGlucose, backfillHours: 6 },
+                history: { name: cgmText.History.BackfillGlucose, backfillHours: 5 },
             }
         });
         await test.prepare();

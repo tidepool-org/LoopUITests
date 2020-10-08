@@ -17,7 +17,7 @@ class BolusScreen extends base.Screen {
     }
     async Deliver() {
         await this.DoneButton().tap();
-        await this.DeliverButton().tap();
+        await this.DeliverButton().multiTap(2);
     }
     async EnterBolus() {
         await this.EnterBolusButton().tapReturnKey();

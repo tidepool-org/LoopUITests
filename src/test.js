@@ -2,6 +2,10 @@ const HomeScreen = require('./home/index');
 const { screenName } = require('./properties');
 const Utilities = require('./utilities');
 
+async function _warmup(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+}
+
 class Test {
     /**
      * @summary test setup configuration
@@ -9,9 +13,11 @@ class Test {
      * @param {object} setup.language required
      * @param {object} setup.screenDefaults required
      *
-     * @param {object} setup.limits optional
+     * @param {boolean} setup.reuseApp optional
+     * @param {object} setup.warmupPeriod optional
+     * @param {numeber} setup.warmupPeriod.milliseconds optional
+     *
      * @param {object} setup.scenario optional
-     * @param {object} setup.settingDefault optional
      * @param {boolean} setup.enableTherapySettings optional
      *
      * @param {object} setup.authentication optional
@@ -36,27 +42,28 @@ class Test {
      */
     setup(setup) {
         this.language = setup.language;
-        this.screenDefaults = setup.screenDefaults;
-        this.limits = setup.limits;
-        this.scenario = setup.scenario;
-        this.settingDefault = setup.settingDefault;
-        this.therapySettings = setup.enableTherapySettings;
-        this.authenticate = setup.authentication;
-        this.simulators = setup.simulators;
-        this.closedLoop = setup.enableClosedLoop;
-        this.cgmData = setup.cgmData;
-        this.startScreen = screenName.home;
+
+        this._limits = setup.limits;
+        this._warmupPeriod = setup.warmupPeriod;
+        this._screenDefaults = setup.screenDefaults;
+        this._scenario = setup.scenario;
+        this._therapySettings = setup.enableTherapySettings;
+        this._authenticate = setup.authentication;
+        this._simulators = setup.simulators;
+        this._closedLoop = setup.enableClosedLoop;
+        this._cgmData = setup.cgmData;
+        this._startScreen = screenName.home;
         return this;
     }
     async _setupCGMData() {
-        if (this.cgmData) {
+        if (this._cgmData) {
             let cgmScreen = await this.OpenCGMScreen();
-            await cgmScreen.Apply(this.cgmData);
+            await cgmScreen.Apply(this._cgmData);
         }
     }
     async _setStartScreen() {
-        if (this.startScreen) {
-            switch (this.startScreen) {
+        if (this._startScreen) {
+            switch (this._startScreen) {
                 case screenName.settings:
                     await this.OpenSettingsScreen();
                     break;
@@ -72,77 +79,88 @@ class Test {
         }
     }
     async _launchLoop() {
-        var loopAppPermissions = { notifications: 'YES', health: 'YES' };
-        var biometricEnrollment = false;
-        if (this.authenticate) {
+        let loopAppPermissions = { notifications: 'YES', health: 'YES' };
+        let biometricEnrollment = false;
+        if (this._authenticate) {
             biometricEnrollment = true;
             loopAppPermissions.faceid = 'YES';
         }
-        await device.launchApp({
-            newInstance: true,
-            permissions: loopAppPermissions,
-        });
+        await device.launchApp({ permissions: loopAppPermissions });
         await device.setBiometricEnrollment(biometricEnrollment);
     }
     _filterSettings(values, types) {
         const filtered = values;
         if (types) {
-            for (const type of types) {
-                delete filtered[type];
+            for (const settingType of types) {
+                delete filtered[settingType];
             }
         }
         return filtered;
     }
-
     async prepare() {
         if (!this.language) {
             throw 'language is required!';
         }
-        if (!this.screenDefaults) {
+        if (!this._screenDefaults) {
             throw 'screenDefaults are required!';
         }
-        this.homeScreen = new HomeScreen(this.language, this.screenDefaults);
+        this.homeScreen = new HomeScreen(this.language, this._screenDefaults);
         this.LoopUtilities = new Utilities(this);
         await this._launchLoop();
-        if (this.therapySettings) {
+        if (this._therapySettings) {
             await this.LoopUtilities.loadTherapySettings();
         }
         await this._setSimulators();
-        if (this.scenario) {
-            await this.LoopUtilities.loadScenario(this.scenario);
+        if (this._scenario) {
+            await this.LoopUtilities.loadScenario(this._scenario);
         }
-        await this._setupCGMData();
+        await this._holdForWarmup();
         await this._setLoopMode();
         await this._setStartScreen();
     }
     async _setLoopMode() {
-        if (this.closedLoop) {
+        if (this._closedLoop) {
             await this.LoopUtilities.closeLoop();
         }
     }
     async _setSimulators() {
-        if (this.simulators) {
-            if (this.simulators.cgm) {
+        if (this._simulators) {
+            if (this._simulators.cgm) {
                 await this.LoopUtilities.addCGM();
+                await this._setupCGMData();
             }
-            if (this.simulators.pump) {
+            if (this._simulators.pump) {
                 await this.LoopUtilities.addUnconfiguredPump();
             }
         }
     }
+    async _holdForWarmup() {
+        console.log('holding ....');
+        if (this._warmupPeriod) {
+            await _warmup(this._warmupPeriod.milliseconds);
+        }
+        console.log('ready');
+    }
+    /**
+     * @param {string} settingType
+     * @summary one of 'correctionRange', 'insulinSensitivities', 'basalRates', 'suspendThreshold', 'insulinCarbRatio', 'delivery'
+     */
+    getLimitsForSetting(settingType) {
+        return this._limits[settingType];
+    }
     async OpenPumpScreen() {
-        var screen = await this.homeScreen.HeaderSection().Devices().OpenPumpScreen();
+        let screen = await this.homeScreen.HeaderSection.Devices.OpenPumpScreen();
         return screen;
     }
     async OpenCGMScreen() {
-        var screen = await this.homeScreen.HeaderSection().Devices().OpenCGMScreen();
+        let screen = await this.homeScreen.HeaderSection.Devices.OpenCGMScreen();
         return screen;
     }
     async OpenSettingsScreen() {
         return this.homeScreen.OpenSettingsScreen();
     }
     async OpenTherapySettingsScreen() {
-        var settings = await this.OpenSettingsScreen();
+        let settings = await this.OpenSettingsScreen();
         return settings.OpenTherapySettings();
     }
     async OpenCarbEntryScreen() {

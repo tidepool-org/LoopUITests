@@ -81,10 +81,10 @@ module.exports = class Utilities {
     }
     async addUnconfiguredPump() {
         let homeScreen = await this._testApp.OpenHomeScreen();
-        await homeScreen.HeaderSection().Devices().AddPump();
+        await homeScreen.HeaderSection.Devices.AddPump();
     }
     async addCGM() {
         let homeScreen = await this._testApp.OpenHomeScreen();
-        await homeScreen.HeaderSection().Devices().AddCGM();
+        await homeScreen.HeaderSection.Devices.AddCGM();
     }
 }

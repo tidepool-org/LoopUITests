@@ -2,8 +2,8 @@ module.exports = (test) => {
     var screen;
     beforeAll(async () => {
         var homeScreen = await test.OpenHomeScreen();
-        await homeScreen.HeaderSection().Devices().AddPump();
-        screen = await homeScreen.HeaderSection().Devices().OpenPumpScreen();
+        await homeScreen.HeaderSection.Devices.AddPump();
+        screen = await homeScreen.HeaderSection.Devices.OpenPumpScreen();
     });
     it('has a header', async () => {
         await expect(screen.Header()).toBeVisible();
