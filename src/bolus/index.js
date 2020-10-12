@@ -61,6 +61,6 @@ class BolusScreen extends base.Screen {
         await bolusAmountField.typeText(String(units));
         await bolusAmountField.tapReturnKey();
     }
-};
+}
 
 module.exports = BolusScreen;

@@ -2,8 +2,6 @@ const action = require('../action');
 const match = require('../match');
 const base = require('../base/index');
 
-const pickerID = 'quantity_picker';
-
 class InsulinSensitivitiesScreen extends base.EntriesScreen {
     constructor(language, config) {
         super({

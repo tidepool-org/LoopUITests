@@ -2,9 +2,6 @@ const action = require('../action');
 const match = require('../match');
 const base = require('../base/index');
 
-const maxGlucosePickerID = 'max_glucose_picker';
-const minGlucosePickerID = 'min_glucose_picker';
-
 class CorrectionRangeScreen extends base.EntriesScreen {
     constructor(language, config) {
         super({

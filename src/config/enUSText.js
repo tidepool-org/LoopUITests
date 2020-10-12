@@ -209,16 +209,6 @@ var SettingsScreen = {
         Header: 'Therapy Settings',
         Info: 'Diabetes Treatment',
     },
-    InsulinModelScreen: {
-        Header: 'Insulin Model',
-        Info: 'Loop assumes insulin is activley working for 6 hours...',
-        Model: {
-            Walsh: 'Walsh',
-            RapidAdults: 'Rapid-Acting – Adults',
-            RapidChildren: 'Rapid-Acting – Children',
-            Fiasp: 'Fiasp'
-        }
-    },
     DeliveryLimitsScreen: {
         Header: 'Delivery Limits',
         Info: 'Maximum basal rate is the highest temporary basal rate Loop is allowed to set automatically.\n\nMaximum bolus is the highest bolus amount you can deliver at one time to cover carbs or bring down high glucose.',

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const match = require('../match');
 const action = require('../action');
 
@@ -8,12 +9,12 @@ async function _sleep(time) {
 function _deviceInfo() {
     let deviceName = device.name;
     if (deviceName.includes('iPhone SE')) {
-        return deviceInfo = {
+        return {
             smallScreen: true,
             useFaceID: false,
         }
     }
-    return deviceInfo = {
+    return {
         smallScreen: false,
         useFaceID: true,
     }
@@ -88,18 +89,12 @@ class Screen {
     }
     async Authenticate() {
         if (this._deviceInfo.useFaceID) {
-            console.log('matching face ...');
             await device.matchFace();
-            console.log('matched face');
         } else {
-            console.log('matching finger ...');
             await device.matchFinger();
-            console.log('matched finger');
         }
         //HACK: the match can take some time so we need to wait
-        console.log('authenticate wait');
         await _sleep(5000);
-        console.log('authenticate completed');
     }
     async wait(millisecs) {
         await _sleep(millisecs);

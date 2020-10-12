@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const match = require('./match');
 const element = require('detox').element;
 

@@ -80,7 +80,7 @@ class HomeScreen {
         return this.bolusScreen;
     }
     async OpenCustomPresetScreen() {
-        await this.customPresetScreen.Open();;
+        await this.customPresetScreen.Open();
         return this.customPresetScreen;
     }
 }

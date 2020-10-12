@@ -68,6 +68,7 @@ module.exports = (test) => {
         });
     });
     describe('generate error when no insulin', () => {
+        let homeScreen;
         beforeAll(async () => {
             await test.LoopUtilities.updateInsulinReservoir(0);
         });

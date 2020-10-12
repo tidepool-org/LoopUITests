@@ -1,5 +1,4 @@
 
-const match = require('../match');
 const base = require('../base/index');
 
 class AddPresetScreen extends base.Screen {

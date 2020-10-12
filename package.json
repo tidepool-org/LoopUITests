@@ -17,10 +17,11 @@
     "test_guardrail_2_iphoneSE2": "detox test e2e/guardrails_2 -c ios.sim.debug.iphone-se-2",
     "build": "detox build -c ios.sim.debug.iphone-11pro",
     "fetch_build": "source ./scripts/build_loop.dev.sh build-269",
-    "lint": "eslint ."
+    "lint": "eslint 'src/**'"
   },
   "devDependencies": {
     "detox": "^16.9.2",
+    "eslint": "^7.11.0",
     "jest": "^25.5.4",
     "jest-junit": "^10.0.0"
   },

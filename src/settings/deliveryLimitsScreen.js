@@ -24,7 +24,7 @@ class DeliveryLimitsScreen extends base.EntryScreen {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
     }
     InfoLabel() {
-        return match.accessible.TextLabel(this.screenText.Info).atIndex(0);;
+        return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
     }
     /**
      * @override so we access the header by label

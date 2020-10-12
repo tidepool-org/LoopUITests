@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const HomeScreen = require('./home/index');
 const { screenName } = require('./properties');
 const Utilities = require('./utilities');
@@ -164,9 +165,6 @@ class Test {
     }
     async OpenCarbEntryScreen() {
         return this.homeScreen.OpenCarbEntryScreen();
-    }
-    async OpenBolusScreen() {
-        return this.homeScreen.OpenBolusScreen();
     }
     async OpenBolusScreen() {
         return this.homeScreen.OpenBolusScreen();

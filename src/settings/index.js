@@ -81,9 +81,6 @@ class SettingsScreen extends base.Screen {
     async OpenSuspendThresholdScreen() {
         return this._therapyScreen.OpenSuspendThresholdScreen();
     }
-    async OpenSuspendThresholdScreen() {
-        return this._therapyScreen.OpenSuspendThresholdScreen();
-    }
     async OpenCarbRatioScreen() {
         return this._therapyScreen.OpenCarbRatioScreen();
     }

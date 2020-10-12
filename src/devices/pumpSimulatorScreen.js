@@ -1,4 +1,3 @@
-const element = require('detox').element;
 const match = require('../match');
 const base = require('../base/index');
 
@@ -186,7 +185,7 @@ class PumpSimulatorScreen extends base.Screen {
         await match.accessible.ButtonBarButton(this.screenText.PumpSettings).tap();
     }
     async _setValue(val) {
-        var valField = element(by.type('UITextField'));
+        var valField = match.UITextField();
         await valField.clearText();
         await valField.typeText(String(val));
     }
