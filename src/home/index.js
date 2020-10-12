@@ -22,7 +22,6 @@ class HomeScreen {
         this.bolusScreen = new BolusScreen(language);
         this.carbEntryScreen = new CarbEntryScreen(language);
         this.customPresetScreen = new CustomPresetScreen(language);
-        this.language = language;
         this.HeaderSection = new Header(language, new Devices(language, true));
     }
     ActiveCarbohydratesLabel() {

@@ -1,65 +1,40 @@
-module.exports = (test) => {
-    var screen;
-    it('add simulator', async () => {
-        await test.LoopUtilities.addCGM();
-    });
-    it('open simulator', async () => {
-        screen = await test.OpenCGMScreen();
-    });
-    it('get constant data', async () => {
-        await screen.Apply({
-            model: { name: screen.screenText.Model.Constant, bgValues: [99] }
+module.exports = (test, cmgData) => {
+    describe('signal loss', () => {
+        let cgmScreen;
+        let homeScreen;
+        beforeAll(async () => {
+            cgmScreen = await test.OpenCGMScreen();
+            await cgmScreen.Apply({ model: { name: cgmScreen.screenText.Model.SignalLoss } });
         });
-        await screen.Back();
-    });
-    it('backfill data', async () => {
-        screen = await test.OpenCGMScreen();
-        await screen.Apply({
-            history: { name: screen.screenText.History.BackfillGlucose, backfillHours: 5, }
+        afterAll(async () => {
+            cgmScreen = await test.OpenCGMScreen();
+            await cgmScreen.Apply(cmgData);
+            await cgmScreen.Back();
         });
-    });
-    describe('no data error', () => {
-        it('stop data', async () => {
-            screen = await test.OpenCGMScreen();
-            await screen.Apply({
-                model: { name: screen.screenText.Model.None, }
-            });
-            await screen.Back();
+        it('dimiss signal loss alert', async () => {
+            await cgmScreen.DismissAlert(cgmScreen.generalText.Dismiss);
+            await cgmScreen.Back();
         });
-        it('should show missing glucose data error', async () => {
-            let home = await test.OpenHomeScreen();
-            await home.HeaderSection.ExpectLoopStatusGlucoseDataAlert();
-        });
-        it('reset to constant data', async () => {
-            screen = await test.OpenCGMScreen();
-            await screen.Apply({
-                model: { name: screen.screenText.Model.Constant, bgValues: [99] }
-            });
-            await screen.Back();
+        it('and check error shown on home screen', async () => {
+            homeScreen = await test.OpenHomeScreen();
+            expect(homeScreen.HeaderSection.CGMSignalLossLabel()).toBeVisible();
         });
     });
-    describe('random error', () => {
-        it('set data frequency', async () => {
-            screen = await test.OpenCGMScreen();
-            await screen.Apply({
-                frequency: { seconds: true }
-            });
-            await screen.Back();
+    describe('immediate alert', () => {
+        beforeAll(async () => {
+            let cgmScreen = await test.OpenCGMScreen();
+            await cgmScreen.Apply({ alert: { name: cgmScreen.screenText.Alerts.ImmediateAlert } });
+            await cgmScreen.DismissAlert('FG OK');
+            await cgmScreen.Back();
         });
-        it('apply error on 100% of readings', async () => {
-            screen = await test.OpenCGMScreen();
-            await screen.Apply({
-                effect: { randomErrorPercent: 100 }
-            });
-            await screen.Back();
+        afterAll(async () => {
+            let cgmScreen = await test.OpenCGMScreen();
+            await cgmScreen.Apply({ alert: { name: cgmScreen.screenText.Alerts.RetractAlertAbove } });
+            await cgmScreen.Back();
         });
-        it('should show error', async () => {
-            let home = await test.OpenHomeScreen();
-            await home.HeaderSection.ExpectLoopIconAlert();
+        it('and check error shown on home screen', async () => {
+            let homeScreen = await test.OpenHomeScreen();
+            expect(homeScreen.HeaderSection.CGMAlertLabel()).toBeVisible();
         });
-    });
-    it('remove simulator', async () => {
-        screen = await test.OpenCGMScreen();
-        await screen.RemoveSimulator();
     });
 };

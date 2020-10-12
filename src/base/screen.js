@@ -83,6 +83,9 @@ class Screen {
     SaveButton() {
         return match.accessible.Button(this.generalText.Save);
     }
+    async Select(element) {
+        await element.tap();
+    }
     async Authenticate() {
         if (this._deviceInfo.useFaceID) {
             console.log('matching face ...');
@@ -97,6 +100,9 @@ class Screen {
         console.log('authenticate wait');
         await _sleep(5000);
         console.log('authenticate completed');
+    }
+    async wait(millisecs) {
+        await _sleep(millisecs);
     }
     async SaveAndClose() {
         if (this.isEditable == false) {
@@ -187,6 +193,9 @@ class Screen {
         } catch (err) {
             await action.ScrollToTop();
         }
+    }
+    async DismissAlert(label) {
+        await match.accessible.Button(label).tap();
     }
 }
 

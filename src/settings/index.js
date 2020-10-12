@@ -21,12 +21,9 @@ class SettingsScreen extends base.Screen {
                 visibleTopLabel: language.settingsScreen.ClosedLoop,
             },
         });
-        this.devices = devices;
-        this.therapyScreen = new TherapyScreen(language, config);
-        this.supportScreen = new SupportScreen(language);
-    }
-    Devices() {
-        return this.devices;
+        this.Devices = devices;
+        this._therapyScreen = new TherapyScreen(language, config);
+        this._supportScreen = new SupportScreen(language);
     }
     /**
      * @override
@@ -52,49 +49,49 @@ class SettingsScreen extends base.Screen {
         }
     }
     TherapySettingsLabel() {
-        return this.therapyScreen.OpenButton();
+        return this._therapyScreen.OpenButton();
     }
     async OpenTherapySettings() {
-        await this.therapyScreen.Open();
-        return this.therapyScreen;
+        await this._therapyScreen.Open();
+        return this._therapyScreen;
     }
     SupportHeader() {
         return match.accessible.Header(this.screenText.Support);
     }
     SupportLabel() {
-        return this.supportScreen.OpenButton();
+        return this._supportScreen.OpenButton();
     }
     ConfigurationHeader() {
         return match.accessible.Header(this.screenText.Configuration);
     }
     async OpenSupport() {
         await this.SwipeUpUntilVisible(this.SupportLabel());
-        await this.supportScreen.Open();
-        return this.supportScreen;
+        await this._supportScreen.Open();
+        return this._supportScreen;
     }
     async OpenDeliveryLimitsScreen() {
-        return this.therapyScreen.OpenDeliveryLimitsScreen();
+        return this._therapyScreen.OpenDeliveryLimitsScreen();
     }
     async OpenCorrectionRangeScreen() {
-        return this.therapyScreen.OpenCorrectionRangeScreen();
+        return this._therapyScreen.OpenCorrectionRangeScreen();
     }
     async OpenInsulinSensitivitiesScreen() {
-        return this.therapyScreen.OpenInsulinSensitivitiesScreen();
+        return this._therapyScreen.OpenInsulinSensitivitiesScreen();
     }
     async OpenSuspendThresholdScreen() {
-        return this.therapyScreen.OpenSuspendThresholdScreen();
+        return this._therapyScreen.OpenSuspendThresholdScreen();
     }
     async OpenSuspendThresholdScreen() {
-        return this.therapyScreen.OpenSuspendThresholdScreen();
+        return this._therapyScreen.OpenSuspendThresholdScreen();
     }
     async OpenCarbRatioScreen() {
-        return this.therapyScreen.OpenCarbRatioScreen();
+        return this._therapyScreen.OpenCarbRatioScreen();
     }
     async OpenBasalRateScreen() {
-        return this.therapyScreen.OpenBasalRateScreen();
+        return this._therapyScreen.OpenBasalRateScreen();
     }
     async setDeliveryLimits(deliveryLimits) {
-        var limits = await this.therapyScreen.OpenDeliveryLimitsScreen();
+        var limits = await this._therapyScreen.OpenDeliveryLimitsScreen();
         await limits.OpenBasalRatePicker();
         await limits.ApplyBasal(deliveryLimits.basal);
         await limits.OpenBasalRatePicker();
@@ -111,7 +108,7 @@ class SettingsScreen extends base.Screen {
      * @param {number} correctionRange.expected.min
      */
     async setCorrectionRange(correctionRange) {
-        var correction = await this.therapyScreen.OpenCorrectionRangeScreen();
+        var correction = await this._therapyScreen.OpenCorrectionRangeScreen();
         await correction.Plus();
         await correction.ApplyOne(correctionRange);
         await correction.Add();

@@ -34,6 +34,9 @@ class CGMSimulatorScreen extends base.Screen {
     NoDataModelLabel() {
         return match.accessible.ClickableLabel(this.screenText.Model.None).atIndex(0);
     }
+    SignalLossModelLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Model.SignalLoss);
+    }
     ConstantModelLabel() {
         return match.accessible.ClickableLabel(this.screenText.Model.Constant);
     }
@@ -94,14 +97,14 @@ class CGMSimulatorScreen extends base.Screen {
      * @param {string} settings.history.name
      * @param {number} settings.history.backfillHours required if name is 'Backfill Glucose'
      * @param {string} settings.history.trendName required if name is 'Backfill Glucose'
-     * @param {object} settings.alerts
-     * @param {string} settings.general.Alert.name
+     * @param {object} settings.alert
+     * @param {string} settings.alert.name
      */
     async Apply(settings) {
         await this._setFrequency(settings.frequency);
         await this._setEffect(settings.effect);
         await this._setModel(settings.model);
-        await this._setAlerts(settings.alerts);
+        await this._setAlerts(settings.alert);
         //last as we have to 'Save' which will close the screen
         await this._setHistory(settings.history);
     }
@@ -128,40 +131,45 @@ class CGMSimulatorScreen extends base.Screen {
         if (model == null) {
             return;
         }
-        if (model.name === this.screenText.Model.Constant) {
+        let modelText = this.screenText.Model;
+        if (model.name === modelText.Constant) {
             await this.ConstantModelLabel().tap();
             var constantField = match.UIEditableTextField();
             await constantField.clearText();
             await constantField.typeText(String(model.bgValues[0]));
             await this.BackToCGMSettings();
         }
-        if (model.name === this.screenText.Model.SineCurve) {
+        if (model.name === modelText.SineCurve) {
             await this.SineCurveModelLabel().tap();
             await match.accessible.ClickableLabel(this.screenText.BaseGlucose).tap();
             var baseGlucoseField = match.UIEditableTextField();
             await baseGlucoseField.clearText();
             await baseGlucoseField.typeText(String(model.bgValues[0]));
-            await match.accessible.ButtonBarButton(this.screenText.Model.SineCurve).tap();
+            await match.accessible.ButtonBarButton(modelText.SineCurve).tap();
             await match.accessible.ClickableLabel(this.screenText.Amplitude).tap();
             var amplitudeField = match.UIEditableTextField();
             await amplitudeField.clearText();
             await amplitudeField.typeText(String(model.bgValues[1]));
-            await match.accessible.ButtonBarButton(this.screenText.Model.SineCurve).tap();
+            await match.accessible.ButtonBarButton(modelText.SineCurve).tap();
             await this.BackToCGMSettings();
         }
-        if (model.name === this.screenText.Model.None) {
+        if (model.name === modelText.None) {
             await this.NoDataModelLabel().tap();
+        }
+        if (model.name === modelText.SignalLoss) {
+            await this.SignalLossModelLabel().tap();
         }
     }
     async _setFrequency(frequency) {
         if (frequency == null) {
             return;
         }
+        let frequencyText = this.screenText.Frequency;
         await this.MeasurementFrequencyLabel().tap();
         if (frequency.minutes) {
-            await match.accessible.ClickableLabel(this.screenText.Frequency.Minutes).tap();
+            await match.accessible.ClickableLabel(frequencyText.Minutes).tap();
         } else if (frequency.seconds) {
-            await match.accessible.ClickableLabel(this.screenText.Frequency.Seconds).tap();
+            await match.accessible.ClickableLabel(frequencyText.Seconds).tap();
         }
         await match.accessible.ButtonBarButton(this.generalText.Back).tap();
     }
@@ -169,29 +177,36 @@ class CGMSimulatorScreen extends base.Screen {
         if (history == null) {
             return;
         }
+        let historyText = this.screenText.History;
         await this.ScrollToBottom();
-        if (history.name === this.screenText.History.BackfillGlucose) {
+        if (history.name === historyText.BackfillGlucose) {
             await this.BackfillGlucoseHistoryLabel().tap();
-            await action.SetDatePicker(`${history.backfillHours} hours`);
+            await action.SetDatePicker(`${history.backfillHours} ${historyText.Hours}`);
             await this.BackfillSaveAndClose();
         }
-        if (history.name === this.screenText.History.Trend) {
+        if (history.name === historyText.Trend) {
             await this.TrendHistoryLabel().tap();
             await match.accessible.ClickableLabel(history.trend).tap();
             await this.ScrollToTop();
         }
     }
-    async _setAlerts(alerts) {
-        if (alerts == null) {
+    async _setAlerts(alert) {
+        if (alert == null) {
             return;
         }
+        let alertText = this.screenText.Alerts;
         await this.ScrollToBottom();
         await this.IssueAlertsLabel().tap();
-        if (general.Alert.name === this.screenText.Alerts.DelayedAlert) {
-            await match.accessible.ClickableLabel(this.screenText.Alerts.DelayedAlert).tap();
-        }
-        if (general.Alert.name === this.screenText.Alerts.ReapeatingAlert) {
-            await match.accessible.ClickableLabel(this.screenText.Alerts.ReapeatingAlert).tap();
+        switch (alert.name) {
+            case alertText.DelayedAlert,
+                alertText.ReapeatingAlert,
+                alertText.RetractAlertAbove,
+                alertText.ImmediateAlert:
+                await match.accessible.ClickableLabel(alert.name).tap();
+                break;
+            default:
+                console.log('no match ', alert.name);
+                break;
         }
         await this.ScrollToTop();
     }

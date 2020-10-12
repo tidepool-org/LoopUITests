@@ -4,7 +4,7 @@ const exec = require('child_process').exec;
 module.exports = class Utilities {
     constructor(testApp) {
         this._testApp = testApp;
-        this._language = testApp.language;
+        this._language = testApp._language;
     }
     async _loadDeviceScenariosFromDisk() {
         let deviceId = device.id;

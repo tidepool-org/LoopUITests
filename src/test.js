@@ -41,8 +41,7 @@ class Test {
      * @param {number} setup.cgmData.history.backfillHours
      */
     setup(setup) {
-        this.language = setup.language;
-
+        this._language = setup.language;
         this._limits = setup.limits;
         this._warmupPeriod = setup.warmupPeriod;
         this._screenDefaults = setup.screenDefaults;
@@ -98,13 +97,13 @@ class Test {
         return filtered;
     }
     async prepare() {
-        if (!this.language) {
+        if (!this._language) {
             throw 'language is required!';
         }
         if (!this._screenDefaults) {
             throw 'screenDefaults are required!';
         }
-        this.homeScreen = new HomeScreen(this.language, this._screenDefaults);
+        this.homeScreen = new HomeScreen(this._language, this._screenDefaults);
         this.LoopUtilities = new Utilities(this);
         await this._launchLoop();
         if (this._therapySettings) {
