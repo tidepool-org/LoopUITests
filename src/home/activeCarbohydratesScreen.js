@@ -16,19 +16,19 @@ class ActiveCarbohydratesScreen extends base.Screen {
             },
         });
     }
-    GramsActiveCarbsLabel() {
+    get GramsActiveCarbsLabel() {
         return match.accessible.TextLabel(this.screenText.GramsActiveCarbs);
     }
-    GramsTotalCarbsLabel() {
+    get GramsTotalCarbsLabel() {
         return match.accessible.TextLabel(this.screenText.GramsTotalCarbs);
     }
-    GlucoseChangeLabel() {
+    get GlucoseChangeLabel() {
         return match.accessible.TextLabel(this.screenText.GlucoseChange);
     }
-    ObservedLabel() {
+    get ObservedLabel() {
         return match.accessible.TextLabel(this.screenText.Observed);
     }
-    PredictedLabel() {
+    get PredictedLabel() {
         return match.accessible.TextLabel(this.screenText.Predicted);
     }
 }

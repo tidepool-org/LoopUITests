@@ -42,7 +42,7 @@
     },
     "configurations": {
       "ios.sim.debug.iphone-11pro": {
-        "binaryPath": "build_263/Debug-iphonesimulator/Loop.app",
+        "binaryPath": "build/Debug-iphonesimulator/Loop.app",
         "build": "source ./scripts/build_loop.dev.sh",
         "type": "ios.simulator",
         "device": {

@@ -16,56 +16,54 @@ class SettingsScreen extends base.Screen {
             header: {
                 backLabel: language.general.Done,
             },
-            scroll: {
-                visibleBottomLabel: language.settingsScreen.Supportv2,
-                visibleTopLabel: language.settingsScreen.ClosedLoop,
-            },
         });
-        this.Devices = devices;
+        this._devices = devices;
         this._therapyScreen = new TherapyScreen(language, config);
         this._supportScreen = new SupportScreen(language);
+    }
+    get Devices() {
+        return this._devices;
     }
     /**
      * @override
      */
-    BackButton() {
+    get BackButton() {
         return match.accessible.Button(this.generalText.Done);
     }
-    _closedLoopButton() {
+    get LoopSwitchButton() {
         return match.accessible.SwitchButton(this.screenText.ClosedLoop);
     }
+    get TherapySettingsLabel() {
+        return this._therapyScreen.OpenButton;
+    }
+    get SupportHeader() {
+        return match.accessible.Header(this.screenText.Support);
+    }
+    get SupportLabel() {
+        return this._supportScreen.OpenButton;
+    }
+    get ConfigurationHeader() {
+        return match.accessible.Header(this.screenText.Configuration);
+    }
+
     async ClosedLoop() {
-        var btn = this._closedLoopButton()
-        var isOn = await this.IsOn(btn);
+        var isOn = await this.IsOn(this.LoopSwitchButton);
         if (isOn == false) {
-            await btn.longPress();
+            await this.LoopSwitchButton.longPress();
         }
     }
     async OpenLoop() {
-        var btn = this._closedLoopButton()
-        var isOn = await this.IsOn(btn);
+        var isOn = await this.IsOn(this.LoopSwitchButton);
         if (isOn == true) {
-            await btn.longPress();
+            await this.LoopSwitchButton.longPress();
         }
-    }
-    TherapySettingsLabel() {
-        return this._therapyScreen.OpenButton();
     }
     async OpenTherapySettings() {
         await this._therapyScreen.Open();
         return this._therapyScreen;
     }
-    SupportHeader() {
-        return match.accessible.Header(this.screenText.Support);
-    }
-    SupportLabel() {
-        return this._supportScreen.OpenButton();
-    }
-    ConfigurationHeader() {
-        return match.accessible.Header(this.screenText.Configuration);
-    }
     async OpenSupport() {
-        await this.SwipeUpUntilVisible(this.SupportLabel());
+        await this.SwipeUpUntilVisible(this.SupportLabel);
         await this._supportScreen.Open();
         return this._supportScreen;
     }
@@ -106,7 +104,7 @@ class SettingsScreen extends base.Screen {
      */
     async setCorrectionRange(correctionRange) {
         var correction = await this._therapyScreen.OpenCorrectionRangeScreen();
-        await correction.Plus();
+        await correction.PlusButton.tap();
         await correction.ApplyOne(correctionRange);
         await correction.Add();
         await correction.SaveAndClose();

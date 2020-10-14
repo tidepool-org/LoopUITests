@@ -72,7 +72,7 @@ module.exports = (test) => {
         });
 
         it('cancel and close', async () => {
-            await screen.CancelNewEntry();
+            await screen.CancelNewEntryButton.tap();
             await therapyScreen.ReturnToHomeScreen();
         });
     });
@@ -98,7 +98,7 @@ module.exports = (test) => {
             });
         });
         it('cancel and close', async () => {
-            await screen.CancelNewEntry();
+            await screen.CancelNewEntryButton.tap();
             await therapyScreen.ReturnToHomeScreen();
         });
     });

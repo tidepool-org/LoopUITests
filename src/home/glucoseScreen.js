@@ -16,33 +16,34 @@ class GlucoseScreen extends base.Screen {
             },
         });
     }
-    CarbohydratesLabel() {
+    get CarbohydratesLabel() {
         return match.accessible.ClickableLabel(this.screenText.Carbohydrates);
     }
-    InsulinLabel() {
+    get InsulinLabel() {
         return match.accessible.ClickableLabel(this.screenText.Insulin);
+    }
+    get GlucoseMomentumLabel() {
+        return match.accessible.ClickableLabel(this.screenText.GlucoseMomentum);
+    }
+    get RetrospectiveCorrectionLabel() {
+        return match.accessible.ClickableLabel(this.screenText.RetrospectiveCorrection);
     }
     async SetInsulin(turnOn) {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this.IsOn(this.InsulinLabel());
+        let allReadyOn = await this.IsOn(this.InsulinLabel);
         if (turnOn == true) {
             if (allReadyOn == false) {
-                await this.InsulinLabel().tap();
+                await this.InsulinLabel.tap();
             }
         } else if (turnOn == false) {
             if (allReadyOn == true) {
-                await this.InsulinLabel().tap();
+                await this.InsulinLabel.tap();
             }
         }
     }
-    GlucoseMomentumLabel() {
-        return match.accessible.ClickableLabel(this.screenText.GlucoseMomentum);
-    }
-    RetrospectiveCorrectionLabel() {
-        return match.accessible.ClickableLabel(this.screenText.RetrospectiveCorrection);
-    }
+
 }
 
 module.exports = GlucoseScreen;

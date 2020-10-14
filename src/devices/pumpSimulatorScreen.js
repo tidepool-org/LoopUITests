@@ -9,10 +9,6 @@ class PumpSimulatorScreen extends base.Screen {
             header: {
                 backLabel: language.general.Done,
             },
-            scroll: {
-                visibleBottomLabel: language.device.PumpSimulatorScreen.DeletePump,
-                visibleTopLabel: language.device.PumpSimulatorScreen.SuspendDelivery,
-            },
         });
     }
     ConfigurationHeader() {
@@ -220,7 +216,7 @@ class PumpSimulatorScreen extends base.Screen {
         await this.SuspendDeliveryButton().tap();
     }
     async RemoveSimulator() {
-        await this.ScrollToBottom();
+        await this.SwipeUpUntilVisible(this.DeletePumpLabel());
         await this.DeletePumpLabel().tap();
         await this.DeletePumpConfirmationLabel().tap();
     }

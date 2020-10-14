@@ -1,6 +1,7 @@
 const action = require('../action');
 const match = require('../match');
 const base = require('../base/index');
+const { numericPartsFromString } = require('./utils');
 
 class CarbRatioScreen extends base.EntriesScreen {
     constructor(language, config) {
@@ -16,32 +17,29 @@ class CarbRatioScreen extends base.EntriesScreen {
             },
         }, config);
     }
-    OpenButton() {
+    get OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(0);
     }
-    InfoLabel() {
+    get InfoLabel() {
         return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
     }
     /**
      * @override
      */
-    BackButton() {
+    get BackButton() {
         return match.accessible.BackButton(this.backLabel);
     }
     /**
      * @override so we access the header by label
      */
-    Header() {
+    get Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
     }
-    HighCarbRatioGuardrailMessage() {
+    get HighCarbRatioGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.HighCarbRatioGuardrailMessage);
     }
-    LowCarbRatioGuardrailMessage() {
+    get LowCarbRatioGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.LowCarbRatioGuardrailMessage);
-    }
-    _parts(ratio) {
-        return String(ratio).split('.');
     }
     /**
      * @param {Object} ratio
@@ -52,10 +50,10 @@ class CarbRatioScreen extends base.EntriesScreen {
      */
     async ApplyOne(ratio) {
         const wholePart = 0;
-        let expectedParts = this._parts(ratio.expected.carbGramsPerInsulinUnit);
+        let expectedParts = numericPartsFromString(ratio.expected.carbGramsPerInsulinUnit);
         let currentValue = this.config.startWhole;
         if (ratio.current) {
-            let currentParts = this._parts(ratio.current.carbGramsPerInsulinUnit);
+            let currentParts = numericPartsFromString(ratio.current.carbGramsPerInsulinUnit);
             currentValue = Number(currentParts[wholePart]);
         }
         await action.ScrollDecimalPicker(
@@ -67,7 +65,7 @@ class CarbRatioScreen extends base.EntriesScreen {
      * @param {Array} ratios
      */
     async ApplyAll(ratios) {
-        await this.Plus();
+        await this.PlusButton.tap();
         for (let index = 0; index < ratios.length; index++) {
             var current;
             let expected = ratios[index];

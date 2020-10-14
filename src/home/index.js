@@ -14,74 +14,77 @@ const Devices = require('../devices/index');
 
 class HomeScreen {
     constructor(language, settingsScreenDefaults) {
-        this.glucoseScreen = new GlucoseScreen(language);
-        this.activeInsulinScreen = new ActiveInsulinScreen(language);
-        this.insulinDeliveryScreen = new InsulinDeliveryScreen(language);
-        this.activeCarbohydratesScreen = new ActiveCarbohydratesScreen(language);
-        this.settingsScreen = new SettingsScreen(language, new Devices(language, false), settingsScreenDefaults);
-        this.bolusScreen = new BolusScreen(language);
-        this.carbEntryScreen = new CarbEntryScreen(language);
-        this.customPresetScreen = new CustomPresetScreen(language);
-        this.HeaderSection = new Header(language, new Devices(language, true));
+        this._glucoseScreen = new GlucoseScreen(language);
+        this._activeInsulinScreen = new ActiveInsulinScreen(language);
+        this._insulinDeliveryScreen = new InsulinDeliveryScreen(language);
+        this._activeCarbohydratesScreen = new ActiveCarbohydratesScreen(language);
+        this._settingsScreen = new SettingsScreen(language, new Devices(language, false), settingsScreenDefaults);
+        this._bolusScreen = new BolusScreen(language);
+        this._carbEntryScreen = new CarbEntryScreen(language);
+        this._customPresetScreen = new CustomPresetScreen(language);
+        this._headerSection = new Header(language, new Devices(language, true));
     }
-    ActiveCarbohydratesLabel() {
-        return this.activeCarbohydratesScreen.OpenButton();
+    get HeaderSection() {
+        return this._headerSection;
     }
-    ActiveInsulinLabel() {
-        return this.activeInsulinScreen.OpenButton();
+    get ActiveCarbohydratesLabel() {
+        return this._activeCarbohydratesScreen.OpenButton;
     }
-    InsulinDeliveryLabel() {
-        return this.insulinDeliveryScreen.OpenButton();
+    get ActiveInsulinLabel() {
+        return this._activeInsulinScreen.OpenButton;
     }
-    GlucoseLabel() {
-        return this.glucoseScreen.OpenButton();
+    get InsulinDeliveryLabel() {
+        return this._insulinDeliveryScreen.OpenButton;
     }
-    SettingsButton() {
-        return this.settingsScreen.OpenButton();
+    get GlucoseLabel() {
+        return this._glucoseScreen.OpenButton;
     }
-    CustomPresetButton() {
-        return this.customPresetScreen.OpenButton();
+    get SettingsButton() {
+        return this._settingsScreen.OpenButton;
     }
-    AddMealButton() {
-        return this.carbEntryScreen.OpenButton();
+    get CustomPresetButton() {
+        return this._customPresetScreen.OpenButton;
     }
-    BolusButton() {
-        return this.bolusScreen.OpenButton();
+    get AddMealButton() {
+        return this._carbEntryScreen.OpenButton;
+    }
+    get BolusButton() {
+        return this._bolusScreen.OpenButton;
     }
     Alert(label) {
         return match.accessible.AlertLabel(label);
     }
     async OpenActiveCarbohydratesChart() {
-        await this.ActiveCarbohydratesLabel().tap();
-        return this.activeCarbohydratesScreen;
+        await this.ActiveCarbohydratesLabel.tap();
+        return this._activeCarbohydratesScreen;
     }
     async OpenActiveInsulinChart() {
-        await this.ActiveInsulinLabel().tap();
-        return this.activeInsulinScreen;
+        await this.ActiveInsulinLabel.tap();
+        return this._activeInsulinScreen;
     }
     async OpenInsulinDeliveryChart() {
-        await this.InsulinDeliveryLabel().tap();
-        return this.insulinDeliveryScreen;
+        await this.InsulinDeliveryLabel.tap();
+        return this._insulinDeliveryScreen;
     }
     async OpenGlucoseChart() {
-        await this.GlucoseLabel().tap();
-        return this.glucoseScreen;
+        await this.GlucoseLabel.tap();
+        return this._glucoseScreen;
     }
     async OpenSettingsScreen() {
-        await this.SettingsButton().tap();
-        return this.settingsScreen;
+        await this.SettingsButton.tap();
+        return this._settingsScreen;
     }
     async OpenCarbEntryScreen() {
-        await this.AddMealButton().tap();
-        return this.carbEntryScreen;
+        await this.AddMealButton.tap();
+        return this._carbEntryScreen;
     }
     async OpenBolusScreen() {
-        await this.BolusButton().tap();
-        return this.bolusScreen;
+        await this.BolusButton.tap();
+        return this._bolusScreen;
     }
     async OpenCustomPresetScreen() {
-        await this.customPresetScreen.Open();
-        return this.customPresetScreen;
+        await this.CustomPresetButton.tap();
+        return this._customPresetScreen;
     }
 }
 

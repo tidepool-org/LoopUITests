@@ -5,32 +5,32 @@ class Header {
         this._language = language;
         this.Devices = devices;
     }
-    PumpErrorLabel() {
+    get PumpErrorLabel() {
         return match.accessible.ClickableLabel(this._language.homeScreen.PumpError);
     }
-    PumpOcclusionLabel() {
+    get PumpOcclusionLabel() {
         return match.accessible.ClickableLabel(this._language.homeScreen.PumpOcclusion);
     }
-    CGMSignalLossLabel() {
+    get CGMSignalLossLabel() {
         return match.accessible.ClickableLabel('Signal Loss');
     }
-    PumpCommsIssueLabel() {
+    get PumpCommsIssueLabel() {
         return match.accessible.ClickableLabel('Comms Issue');
     }
-    PumpNoInsulinLabel() {
+    get PumpNoInsulinLabel() {
         return match.accessible.ClickableLabel('No Insulin');
     }
-    CGMErrorLabel() {
+    get CGMErrorLabel() {
         return match.accessible.ClickableLabel(this._language.homeScreen.CGMError);
     }
-    CGMAlertLabel() {
+    get CGMAlertLabel() {
         return match.accessible.ClickableLabel('Alert: FG Title');
     }
-    LoopIcon() {
+    get LoopIcon() {
         return match.loop.Icon();
     }
     async Loop() {
-        await this.LoopIcon().tap();
+        await this.LoopIcon.tap();
     }
     async CloseLoopAlert() {
         await match.accessible.Button(this._language.general.OK).tap();

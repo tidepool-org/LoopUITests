@@ -1,6 +1,7 @@
 const match = require('../match');
 const action = require('../action');
 const base = require('../base/index');
+const { numericPartsFromString } = require('./utils');
 
 class DeliveryLimitsScreen extends base.EntryScreen {
     constructor(language, config) {
@@ -17,46 +18,43 @@ class DeliveryLimitsScreen extends base.EntryScreen {
         });
         this.config = config;
     }
-    BackButton() {
+    get BackButton() {
         return match.accessible.BackButton(this.backLabel);
     }
-    OpenButton() {
+    get OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
     }
-    InfoLabel() {
+    get InfoLabel() {
         return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
     }
     /**
      * @override so we access the header by label
      */
-    Header() {
+    get Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
     }
-    _limitParts(limitAmount) {
-        return String(limitAmount).split('.');
-    }
-    MaxBasalRateLabel() {
+    get MaxBasalRateLabel() {
         return match.accessible.TextLabel(this.screenText.MaxBasalRate);
     }
-    MaxBasalRateInfo() {
+    get MaxBasalRateInfo() {
         return match.accessible.TextLabel(this.screenText.MaxBasalRateInfo);
     }
-    MaxBolusLabel() {
+    get MaxBolusLabel() {
         return match.accessible.TextLabel(this.screenText.MaxBolus);
     }
-    MaxBolusInfo() {
+    get MaxBolusInfo() {
         return match.accessible.TextLabel(this.screenText.MaxBolusInfo);
     }
-    LowMaxBasalRateGuardrailMessage() {
+    get LowMaxBasalRateGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.LowMaxBasalRateGuardrailMessage);
     }
-    HighMaxBasalRateGuardrailMessage() {
+    get HighMaxBasalRateGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.HighMaxBasalRateGuardrailMessage);
     }
-    LowBolusAmountGuardrailMessage() {
+    get LowBolusAmountGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.LowBolusAmountGuardrailMessage);
     }
-    HighBolusAmountGuardrailMessage() {
+    get HighBolusAmountGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.HighBolusAmountGuardrailMessage);
     }
     async Open() {
@@ -64,10 +62,10 @@ class DeliveryLimitsScreen extends base.EntryScreen {
         return this;
     }
     async OpenBasalRatePicker() {
-        await this.MaxBasalRateLabel().tap();
+        await this.MaxBasalRateLabel.tap();
     }
     async OpenBolusPicker() {
-        await this.MaxBolusLabel().tap();
+        await this.MaxBolusLabel.tap();
     }
     /**
      * @param {Object} bolus
@@ -77,9 +75,9 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     async ApplyBolus(bolus) {
         let currentParts = [this.config.bolus.startWhole];
         if (bolus.current) {
-            currentParts = this._limitParts(bolus.current.amount);
+            currentParts = numericPartsFromString(bolus.current.amount);
         }
-        let expectedParts = this._limitParts(bolus.expected.amount);
+        let expectedParts = numericPartsFromString(bolus.expected.amount);
         await action.ScrollDecimalPicker(
             currentParts[0],
             expectedParts[0],
@@ -93,9 +91,9 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     async ApplyBasal(basal) {
         let currentParts = [this.config.basalRate.startWhole];
         if (basal.current) {
-            currentParts = this._limitParts(basal.current.rate);
+            currentParts = numericPartsFromString(basal.current.rate);
         }
-        let expectedParts = this._limitParts(basal.expected.rate);
+        let expectedParts = numericPartsFromString(basal.expected.rate);
         await action.ScrollDecimalPicker(
             currentParts[0],
             expectedParts[0],

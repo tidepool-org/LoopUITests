@@ -1,6 +1,10 @@
 const action = require('../action');
 const match = require('../match');
 const base = require('../base/index');
+const { numericPartsFromString } = require('./utils');
+
+
+
 
 class BasalRatesScreen extends base.EntriesScreen {
     constructor(language, config) {
@@ -20,24 +24,25 @@ class BasalRatesScreen extends base.EntriesScreen {
     /**
      * @override
      */
-    BackButton() {
+    get BackButton() {
         return match.accessible.BackButton(this.backLabel);
     }
-    OpenButton() {
+    get OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(0);
     }
-    InfoLabel() {
+    get InfoLabel() {
         return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
     }
     /**
      * @override so we access the header by label
      */
-    Header() {
+    get Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
     }
-    _parts(rate) {
-        return String(rate).split('.');
+    get NoBasalInsulinGuardrailMessage() {
+        return this.GuardrailMessage(this.screenText.NoBasalInsulinGuardrailMessage);
     }
+
     /**
      * @param {Object} rate
      * @param {Object} rate.expected
@@ -47,10 +52,10 @@ class BasalRatesScreen extends base.EntriesScreen {
      */
     async ApplyOne(rate) {
         const wholePart = 0;
-        let expectedParts = this._parts(rate.expected.unitsPerHour);
+        let expectedParts = numericPartsFromString(rate.expected.unitsPerHour);
         let currentValue = this.config.startWhole;
         if (rate.current) {
-            let currentParts = this._parts(rate.current.unitsPerHour);
+            let currentParts = numericPartsFromString(rate.current.unitsPerHour);
             currentValue = Number(currentParts[wholePart])
         }
         await action.ScrollDecimalPicker(
@@ -68,9 +73,7 @@ class BasalRatesScreen extends base.EntriesScreen {
         await super.Open();
         return this;
     }
-    NoBasalInsulinGuardrailMessage() {
-        return this.GuardrailMessage(this.screenText.NoBasalInsulinGuardrailMessage);
-    }
+
 }
 
 module.exports = BasalRatesScreen;

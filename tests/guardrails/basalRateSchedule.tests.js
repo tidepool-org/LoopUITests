@@ -53,7 +53,7 @@ module.exports = (test) => {
         });
     });
     it('can close screen', async () => {
-        await screen.CancelNewEntry();
+        await screen.CancelNewEntryButton.tap();
         await therapySettingsScreen.ReturnToHomeScreen();
     });
 };

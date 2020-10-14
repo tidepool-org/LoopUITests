@@ -4,18 +4,19 @@ module.exports = (test) => {
         screen = await test.OpenCustomPresetScreen();
     });
     it('has a Header', async () => {
-        await expect(screen.Header()).toBeVisible();
+        await expect(screen.Header).toBeVisible();
     });
     it('has a Cancel Header Button', async () => {
-        await expect(screen.BackButton()).toBeVisible();
+        await expect(screen.BackButton).toBeVisible();
     });
     it('has a Edit Header Button', async () => {
-        await expect(screen.EditButton()).toBeVisible();
+        await expect(screen.EditButton).toBeVisible();
     });
     it('has a Add Header Button', async () => {
-        await expect(screen.AddButton()).toBeVisible();
+        await expect(screen.AddButton).toBeVisible();
     });
     it('can cancel and then close the screen', async () => {
         await screen.CancelAndClose();
     });
 };
+

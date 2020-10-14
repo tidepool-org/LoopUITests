@@ -96,7 +96,7 @@ module.exports = (test) => {
         });
     });
     it('can cancel and close screen', async () => {
-        await screen.CancelNewEntry();
+        await screen.CancelNewEntryButton.tap();
         await therapySettingsScreen.ReturnToHomeScreen();
     });
 };

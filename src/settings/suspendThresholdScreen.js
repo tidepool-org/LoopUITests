@@ -18,22 +18,22 @@ class SuspendThresholdScreen extends base.EntryScreen {
         this.bgUnitsLabel = language.settingsScreen.SuspendThresholdScreen.BGUnits;
         this.config = config;
     }
-    OpenButton() {
+    get OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
     }
-    InfoLabel() {
+    get InfoLabel() {
         return match.accessible.TextLabel(this.screenText.Info);
     }
     /**
      * @override so we access the header by label
      */
-    Header() {
+    get Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
     }
-    LowSuspendThresholdGuardrailMessage() {
+    get LowSuspendThresholdGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.LowSuspendThresholdGuardrailMessage);
     }
-    HighSuspendThresholdGuardrailMessage() {
+    get HighSuspendThresholdGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.HighSuspendThresholdGuardrailMessage);
     }
     /**

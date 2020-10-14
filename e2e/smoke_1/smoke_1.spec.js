@@ -1,5 +1,5 @@
 const { Test, Config } = require('../../src/index');
-const accessibility = require('../../tests/accessibility/index');
+const settingTests = require('../../tests/accessibility/settings.tests');
 
 describe('accessibility', () => {
     var test = new Test();
@@ -9,30 +9,9 @@ describe('accessibility', () => {
         test = test.setup({
             language: config.text,
             screenDefaults: config.screenDefaults,
+            enableTherapySettings: true,
         });
         await test.prepare();
     });
-    describe('main screens', () => {
-        describe('home', () => {
-            accessibility.homeScreenTest(test);
-        });
-        describe('home glucose', () => {
-            accessibility.homeGlucoseScreenTest(test);
-        });
-        describe('home active insulin', () => {
-            accessibility.homeActiveInsulinScreenTest(test);
-        });
-        describe('home insulin delivery', () => {
-            accessibility.homeInsulinDeliveryScreenTest(test);
-        });
-        describe('home active carbohydrates', () => {
-            accessibility.homeActiveCarbohydratesScreenTest(test);
-        });
-        describe('carb entry', () => {
-            accessibility.carbEntryScreenTest(test);
-        });
-        describe('bolus', () => {
-            accessibility.bolusScreenTest(test);
-        });
-    });
+    settingTests(test, false);
 });

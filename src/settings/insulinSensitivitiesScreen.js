@@ -16,25 +16,25 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
             },
         }, config);
     }
-    BackButton() {
+    get BackButton() {
         return match.accessible.BackButton(this.backLabel);
     }
-    OpenButton() {
+    get OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
     }
-    InfoLabel() {
+    get InfoLabel() {
         return match.accessible.TextLabel(this.screenText.Info);
     }
     /**
      * @override so we access the header by label
      */
-    Header() {
+    get Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
     }
-    LowInsulinSensitivityGuardrailMessage() {
+    get LowInsulinSensitivityGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.LowInsulinSensitivityGuardrailMessage);
     }
-    HighInsulinSensitivityGuardrailMessage() {
+    get HighInsulinSensitivityGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.HighInsulinSensitivityGuardrailMessage);
     }
     /**
@@ -58,7 +58,7 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
      * @param {Array} sensitivities
      */
     async ApplyAll(sensitivities) {
-        await this.Plus();
+        await this.PlusButton.tap();
         for (let index = 0; index < sensitivities.length; index++) {
             var current;
             let expected = sensitivities[index];

@@ -10,10 +10,6 @@ class CGMSimulatorScreen extends base.Screen {
             header: {
                 backLabel: language.general.Done,
             },
-            scroll: {
-                visibleBottomLabel: language.device.CGMSimulatorScreen.DeleteCGM,
-                visibleTopLabel: language.device.CGMSimulatorScreen.Model.Constant,
-            },
         });
     }
     CGMSettingsButton() {
@@ -178,7 +174,7 @@ class CGMSimulatorScreen extends base.Screen {
             return;
         }
         let historyText = this.screenText.History;
-        await this.ScrollToBottom();
+        await this.SwipeUpUntilVisible(this.BackfillGlucoseHistoryLabel());
         if (history.name === historyText.BackfillGlucose) {
             await this.BackfillGlucoseHistoryLabel().tap();
             await action.SetDatePicker(`${history.backfillHours} ${historyText.Hours}`);
@@ -187,7 +183,7 @@ class CGMSimulatorScreen extends base.Screen {
         if (history.name === historyText.Trend) {
             await this.TrendHistoryLabel().tap();
             await match.accessible.ClickableLabel(history.trend).tap();
-            await this.ScrollToTop();
+            await this.SwipeDownUntilVisible(this.ModelHeader());
         }
     }
     async _setAlerts(alert) {
@@ -195,7 +191,7 @@ class CGMSimulatorScreen extends base.Screen {
             return;
         }
         let alertText = this.screenText.Alerts;
-        await this.ScrollToBottom();
+        await this.SwipeUpUntilVisible(this.IssueAlertsLabel());
         await this.IssueAlertsLabel().tap();
         switch (alert.name) {
             case alertText.DelayedAlert,
@@ -208,10 +204,10 @@ class CGMSimulatorScreen extends base.Screen {
                 console.log('no match ', alert.name);
                 break;
         }
-        await this.ScrollToTop();
+        await this.SwipeDownUntilVisible(this.ModelHeader());
     }
     async RemoveSimulator() {
-        await this.ScrollToBottom();
+        await this.SwipeUpUntilVisible(this.DeleteCGMLabel());
         await this.DeleteCGMLabel().tap();
         await this.DeleteCGMConfirmationLabel().tap();
     }

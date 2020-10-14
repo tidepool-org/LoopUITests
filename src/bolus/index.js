@@ -15,45 +15,46 @@ class BolusScreen extends base.Screen {
             },
         });
     }
-    async Deliver() {
-        await this.DoneButton().tap();
-        await this.DeliverButton().longPress();
-    }
-    async EnterBolus() {
-        await this.EnterBolusButton().tapReturnKey();
-    }
-    DoneButton() {
+    get DoneButton() {
         return match.accessible.Button(this.generalText.Done).atIndex(0);
     }
-    DeliverButton() {
+    get DeliverButton() {
         return match.accessible.Button(this.screenText.Deliver);
     }
-    EnterBolusButton() {
+    get EnterBolusButton() {
         return match.accessible.Button(this.screenText.EnterBolus);
     }
-    BolusLabel() {
+    get BolusLabel() {
         return match.accessible.TextLabel(this.screenText.Header);
     }
-    BolusUnits() {
+    get BolusUnits() {
         return match.accessible.TextLabel(this.screenText.Unit).atIndex(0);
     }
-    RecommendedLabel() {
+    get RecommendedLabel() {
         return match.accessible.TextLabel(this.screenText.Recommended);
     }
-    RecommendedBolusLabel() {
+    get RecommendedBolusLabel() {
         return match.accessible.TextLabel(this.screenText.RecommendedBolus);
     }
-    RecommendedBolusUnits() {
+    get RecommendedBolusUnits() {
         return match.accessible.TextLabel(this.screenText.Unit).atIndex(1);
     }
-    ActiveCarbsLabel() {
+    get ActiveCarbsLabel() {
         return match.accessible.TextLabel(this.screenText.ActiveCarbs);
     }
-    BolusSummaryHeader() {
+    get BolusSummaryHeader() {
         return match.accessible.TextLabel(this.screenText.BolusSummary);
     }
-    GlucoseHeader() {
+    get GlucoseHeader() {
         return match.accessible.TextLabel(this.screenText.Glucose).atIndex(1);
+    }
+
+    async Deliver() {
+        await this.DoneButton.tap();
+        await this.DeliverButton.longPress();
+    }
+    async EnterBolus() {
+        await this.EnterBolusButton.tapReturnKey();
     }
     async SetBolusAmount(units) {
         var bolusAmountField = match.UITextField();

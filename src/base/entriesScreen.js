@@ -8,19 +8,19 @@ class EntriesScreen extends Screen {
         super(parentScreen);
         this.config = config;
     }
-    InfoLabel() {
+    get InfoLabel() {
         return match.accessible.TextLabel(this.screenText.Info);
     }
-    CancelNewEntryButton() {
+    get CancelNewEntryButton() {
         return match.accessible.Button(this.generalText.Cancel);
     }
-    NewEntryLabel() {
+    get NewEntryLabel() {
         return match.accessible.ClickableLabel(this.generalText.NewEntry);
     }
-    InfoButton() {
+    get InfoButton() {
         return match.accessible.Button(this.generalText.ButtonLabel.InfoCircle);
     }
-    BackButton() {
+    get BackButton() {
         return match.accessible.Button(this.backLabel);
     }
     /**
@@ -34,9 +34,6 @@ class EntriesScreen extends Screen {
     }
     GuardrailMessage(text) {
         return match.accessible.TextLabel(text);
-    }
-    async CancelNewEntry() {
-        await this.CancelNewEntryButton().tap();
     }
     async OpenPicker(value) {
         await match.accessible.TextLabel(String(value)).tap();

@@ -15,7 +15,7 @@ module.exports = (test) => {
         });
         it('and reset error on suspend', async () => {
             await pumpScreen.Apply({ errorOnSuspend: false });
-            await pumpScreen.Back();
+            await pumpScreen.BackButton.tap();
         });
         it('and check no error on home screen', async () => {
             homeScreen = await test.OpenHomeScreen();
@@ -31,13 +31,13 @@ module.exports = (test) => {
         beforeAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.CausePumpError();
-            await pumpScreen.Back();
+            await pumpScreen.BackButton.tap();
             homeScreen = await test.OpenHomeScreen();
         });
         afterAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.ResolvePumpError();
-            await pumpScreen.Back();
+            await pumpScreen.BackButton.tap();
         });
         it('and check error shown on home screen', async () => {
             await expect(homeScreen.HeaderSection.PumpErrorLabel()).toBeVisible();
@@ -52,13 +52,13 @@ module.exports = (test) => {
         beforeAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.DetectOcclusionError();
-            await pumpScreen.Back();
+            await pumpScreen.BackButton.tap();
             homeScreen = await test.OpenHomeScreen();
         });
         afterAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.ResolveOcclusionError();
-            await pumpScreen.Back();
+            await pumpScreen.BackButton.tap();
         });
         it('and check error shown on home screen', async () => {
             await expect(homeScreen.HeaderSection.PumpOcclusionLabel()).toBeNotVisible();

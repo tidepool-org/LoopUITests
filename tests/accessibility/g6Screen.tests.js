@@ -6,7 +6,7 @@ module.exports = (test) => {
         screen = await homeScreen.HeaderSection.Devices.AddG6();
     });
     afterAll(async () => {
-        await screen.Back();
+        await screen.BackButton.tap();
     });
     it('has a header', async () => {
         await expect(screen.Header()).toBeVisible();

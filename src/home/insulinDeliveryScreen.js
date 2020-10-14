@@ -15,16 +15,16 @@ class InsulinDeliveryScreen extends base.Screen {
             },
         });
     }
-    IOBLabel() {
+    get IOBLabel() {
         return match.accessible.TextLabel(this.screenText.IOB);
     }
-    TotalLabel() {
+    get TotalLabel() {
         return match.accessible.TextLabel(this.screenText.Total);
     }
-    EventHistoryLabel() {
+    get EventHistoryLabel() {
         return match.accessible.TextLabel(this.screenText.EventHistory);
     }
-    ReservoirLabel() {
+    get ReservoirLabel() {
         return match.accessible.TextLabel(this.screenText.Reservoir);
     }
 }
