@@ -16,7 +16,7 @@
     "test_guardrail_2": "detox test e2e/guardrails_2 -c ios.sim.debug.iphone-11pro",
     "test_guardrail_2_iphoneSE2": "detox test e2e/guardrails_2 -c ios.sim.debug.iphone-se-2",
     "build": "detox build -c ios.sim.debug.iphone-11pro",
-    "fetch_build": "source ./scripts/build_loop.dev.sh build-269",
+    "fetch_build": "source ./scripts/build_loop.dev.sh build-272",
     "lint": "eslint 'src/**'"
   },
   "devDependencies": {
