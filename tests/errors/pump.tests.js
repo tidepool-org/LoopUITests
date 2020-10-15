@@ -5,13 +5,13 @@ module.exports = (test) => {
         beforeAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.Apply({ errorOnSuspend: true });
-            await pumpScreen.SuspendDelivery();
+            await pumpScreen.SuspendDeliveryButton.tap();
         });
         it('and check error shown on status screen', async () => {
             await pumpScreen.HasAlert();
         });
         it('then dismiss the error', async () => {
-            await pumpScreen.DismissAlert();
+            await pumpScreen.OKDismissAlertButton.tap();
         });
         it('and reset error on suspend', async () => {
             await pumpScreen.Apply({ errorOnSuspend: false });
@@ -30,17 +30,17 @@ module.exports = (test) => {
         let pumpScreen;
         beforeAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
-            await pumpScreen.CausePumpError();
+            await pumpScreen.CausePumpErrorButton.tap();
             await pumpScreen.BackButton.tap();
             statusScreen = await test.OpenStatusScreen();
         });
         afterAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
-            await pumpScreen.ResolvePumpError();
+            await pumpScreen.ResolvePumpErrorButton.tap();
             await pumpScreen.BackButton.tap();
         });
         it('and check error shown on status screen', async () => {
-            await expect(statusScreen.HeaderSection.PumpErrorLabel()).toBeVisible();
+            await expect(statusScreen.HeaderSection.PumpErrorLabel).toBeVisible();
         });
         it('and check no loop icon error', async () => {
             await statusScreen.HeaderSection.ExpectNoLoopIconAlert();
@@ -51,17 +51,17 @@ module.exports = (test) => {
         let pumpScreen;
         beforeAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
-            await pumpScreen.DetectOcclusionError();
+            await pumpScreen.DetectOcclusionButton.tap();
             await pumpScreen.BackButton.tap();
             statusScreen = await test.OpenStatusScreen();
         });
         afterAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
-            await pumpScreen.ResolveOcclusionError();
+            await pumpScreen.ResolveOcclusionButton.tap();
             await pumpScreen.BackButton.tap();
         });
         it('and check error shown on status screen', async () => {
-            await expect(statusScreen.HeaderSection.PumpOcclusionLabel).toBeNotVisible();
+            await expect(statusScreen.HeaderSection.PumpOcclusionLabel).toBeVisible();
         });
         it('and check no loop icon error', async () => {
             await statusScreen.HeaderSection.ExpectNoLoopIconAlert();

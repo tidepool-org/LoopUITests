@@ -12,71 +12,65 @@ class CGMSimulatorScreen extends base.Screen {
             },
         });
     }
-    CGMSettingsButton() {
+    get _cgmSettingsButton() {
         return match.accessible.ButtonBarButton(this.screenText.Header);
     }
-    async BackToCGMSettings() {
-        return this.CGMSettingsButton().tap();
-    }
-    ModelHeader() {
+    get _modelHeader() {
         return match.accessible.Header(this.screenText.Model.Header);
     }
-    MeasurementFrequencyLabel() {
+    get _measurementFrequencyLabel() {
         return match.accessible.ClickableLabel(this.screenText.Frequency.MeasurementFrequency);
     }
-    SineCurveModelLabel() {
+    get _sineCurveModelLabel() {
         return match.accessible.ClickableLabel(this.screenText.Model.SineCurve).atIndex(0);
     }
-    NoDataModelLabel() {
+    get _noDataModelLabel() {
         return match.accessible.ClickableLabel(this.screenText.Model.None).atIndex(0);
     }
-    SignalLossModelLabel() {
+    get _signalLossModelLabel() {
         return match.accessible.ClickableLabel(this.screenText.Model.SignalLoss);
     }
-    ConstantModelLabel() {
+    get _constantModelLabel() {
         return match.accessible.ClickableLabel(this.screenText.Model.Constant);
     }
-    EffectsHeader() {
+    get _effectsHeader() {
         return match.accessible.Header(this.screenText.Effect.Header);
     }
-    RandomErrorEffectLabel() {
+    get _randomErrorEffectLabel() {
         return match.accessible.ClickableLabel(this.screenText.Effect.RandomError);
     }
-    GlucoseNoiseEffectLabel() {
+    get _glucoseNoiseEffectLabel() {
         return match.accessible.ClickableLabel(this.screenText.Effect.GlucoseNoise);
     }
-    RandomHighOutlierEffectLabel() {
+    get _randomHighOutlierEffectLabel() {
         return match.accessible.ClickableLabel(this.screenText.Effect.RandomHighOutlier);
     }
-    RandomLowOutlierEffectLabel() {
+    get _randomLowOutlierEffectLabel() {
         return match.accessible.ClickableLabel(this.screenText.Effect.RandomLowOutlier);
     }
-    BackfillGlucoseHistoryLabel() {
+    get _backfillGlucoseHistoryLabel() {
         return match.accessible.ClickableLabel(this.screenText.History.BackfillGlucose);
     }
-    TrendHistoryLabel() {
+    get _trendHistoryLabel() {
         return match.accessible.ClickableLabel(this.screenText.History.Trend).atIndex(0);
     }
-    HistoryHeader() {
+    get _historyHeader() {
         return match.accessible.Header(this.screenText.History.Header);
     }
-    AlertsHeader() {
+    get _alertsHeader() {
         return match.accessible.Header(this.screenText.Alerts.Header);
     }
-    IssueAlertsLabel() {
+    get _issueAlertsLabel() {
         return match.accessible.ClickableLabel(this.screenText.Alerts.IssueAlerts);
     }
-    DeleteCGMLabel() {
+    get _deleteCGMLabel() {
         return match.accessible.ClickableLabel(this.screenText.DeleteCGM);
     }
-    DeleteCGMConfirmationLabel() {
+    get _deleteCGMConfirmationLabel() {
         return match.accessible.AlertButton(this.screenText.DeleteCGM);
     }
-    async BackfillSaveAndClose() {
-        await match.accessible.ButtonBarButton(this.generalText.Save).tap();
-    }
-    async AlertSaveAndClose() {
-        await match.accessible.ButtonBarButton(this.generalText.Done).tap();
+    get _backfillSaveAndCloseButton() {
+        return match.accessible.ButtonBarButton(this.generalText.Save);
     }
     /**
      * @param {object} settings
@@ -109,14 +103,14 @@ class CGMSimulatorScreen extends base.Screen {
             return;
         }
         if (effect.glucoseNoiseValue) {
-            await this.GlucoseNoiseEffectLabel().tap();
+            await this._glucoseNoiseEffectLabel.tap();
             var noiseField = match.UIEditableTextField();
             await noiseField.clearText();
             await noiseField.typeText(String(effect.glucoseNoiseValue));
             await match.accessible.ButtonBarButton(this.generalText.Back).tap();
         }
         if (effect.randomErrorPercent) {
-            await this.RandomErrorEffectLabel().tap();
+            await this._randomErrorEffectLabel.tap();
             var randomField = match.UIEditableTextField();
             await randomField.clearText();
             await randomField.typeText(String(effect.randomErrorPercent));
@@ -129,14 +123,14 @@ class CGMSimulatorScreen extends base.Screen {
         }
         let modelText = this.screenText.Model;
         if (model.name === modelText.Constant) {
-            await this.ConstantModelLabel().tap();
+            await this._constantModelLabel.tap();
             var constantField = match.UIEditableTextField();
             await constantField.clearText();
             await constantField.typeText(String(model.bgValues[0]));
-            await this.BackToCGMSettings();
+            await this._cgmSettingsButton.tap();
         }
         if (model.name === modelText.SineCurve) {
-            await this.SineCurveModelLabel().tap();
+            await this._sineCurveModelLabel.tap();
             await match.accessible.ClickableLabel(this.screenText.BaseGlucose).tap();
             var baseGlucoseField = match.UIEditableTextField();
             await baseGlucoseField.clearText();
@@ -147,13 +141,13 @@ class CGMSimulatorScreen extends base.Screen {
             await amplitudeField.clearText();
             await amplitudeField.typeText(String(model.bgValues[1]));
             await match.accessible.ButtonBarButton(modelText.SineCurve).tap();
-            await this.BackToCGMSettings();
+            await this._cgmSettingsButton.tap();
         }
         if (model.name === modelText.None) {
-            await this.NoDataModelLabel().tap();
+            await this._noDataModelLabel.tap();
         }
         if (model.name === modelText.SignalLoss) {
-            await this.SignalLossModelLabel().tap();
+            await this._signalLossModelLabel.tap();
         }
     }
     async _setFrequency(frequency) {
@@ -161,7 +155,7 @@ class CGMSimulatorScreen extends base.Screen {
             return;
         }
         let frequencyText = this.screenText.Frequency;
-        await this.MeasurementFrequencyLabel().tap();
+        await this._measurementFrequencyLabel.tap();
         if (frequency.minutes) {
             await match.accessible.ClickableLabel(frequencyText.Minutes).tap();
         } else if (frequency.seconds) {
@@ -174,16 +168,16 @@ class CGMSimulatorScreen extends base.Screen {
             return;
         }
         let historyText = this.screenText.History;
-        await this.SwipeUpUntilVisible(this.BackfillGlucoseHistoryLabel());
+        await this.SwipeUpUntilVisible(this._backfillGlucoseHistoryLabel);
         if (history.name === historyText.BackfillGlucose) {
-            await this.BackfillGlucoseHistoryLabel().tap();
+            await this._backfillGlucoseHistoryLabel.tap();
             await action.SetDatePicker(`${history.backfillHours} ${historyText.Hours}`);
-            await this.BackfillSaveAndClose();
+            await this._backfillSaveAndCloseButton.tap();
         }
         if (history.name === historyText.Trend) {
-            await this.TrendHistoryLabel().tap();
+            await this._trendHistoryLabel.tap();
             await match.accessible.ClickableLabel(history.trend).tap();
-            await this.SwipeDownUntilVisible(this.ModelHeader());
+            await this.SwipeDownUntilVisible(this._modelHeader);
         }
     }
     async _setAlerts(alert) {
@@ -191,8 +185,8 @@ class CGMSimulatorScreen extends base.Screen {
             return;
         }
         let alertText = this.screenText.Alerts;
-        await this.SwipeUpUntilVisible(this.IssueAlertsLabel());
-        await this.IssueAlertsLabel().tap();
+        await this.SwipeUpUntilVisible(this._issueAlertsLabel);
+        await this._issueAlertsLabel.tap();
         switch (alert.name) {
             case alertText.DelayedAlert,
                 alertText.ReapeatingAlert,
@@ -204,12 +198,12 @@ class CGMSimulatorScreen extends base.Screen {
                 console.log('no match ', alert.name);
                 break;
         }
-        await this.SwipeDownUntilVisible(this.ModelHeader());
+        await this.SwipeDownUntilVisible(this._modelHeader);
     }
     async RemoveSimulator() {
-        await this.SwipeUpUntilVisible(this.DeleteCGMLabel());
-        await this.DeleteCGMLabel().tap();
-        await this.DeleteCGMConfirmationLabel().tap();
+        await this.SwipeUpUntilVisible(this._deleteCGMLabel);
+        await this._deleteCGMLabel.tap();
+        await this._deleteCGMConfirmationLabel.tap();
     }
 }
 
