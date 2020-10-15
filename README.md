@@ -62,14 +62,43 @@ Do *not* install `applesimutils` from Homebrew. Use the custom, pre-built binary
 
 - `./scenarios/flat_cgm_trace.json` flat cgm trace, no insulin or carb events
 
-## Functionality
+## Testing guidelines
 
-- [x] open / close loop
-- [x] add devices
-- [x] numeric picker
-- date picker
-- navigation
-    - [x] open
-    - [x] close
-    - [x] save
-    - [x] cancel
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/Mobile_accessibility_checklist
+http://pauljadam.com/demos/mobilechecklist.html
+
+
+
+https://martinfowler.com/articles/practical-test-pyramid.html#UiTests
+
+> With web interfaces there's multiple aspects that you probably want to test around your UI: behaviour, layout, usability
+
+1)  - language (enUS, multiple over time ...)
+    - units (mgdL, mgL)
+    - device format (touch, )
+
+https://martinfowler.com/articles/practical-test-pyramid.html#End-to-endTests
+
+> Think about the high-value interactions users will have with your application. Try to come up with user journeys that define the core value of your product and translate the most important steps of these user journeys into automated end-to-end tests.
+
+1)
+- initial setup of loop
+    - threapy settings (via persription service)
+    - add CGM
+    - add pump
+
+2)
+- day to day use of loop
+    - add meal
+    - bolus for meal
+    - update a setting
+
+3)
+- errors
+
+
+https://martinfowler.com/articles/practical-test-pyramid.html#AvoidTestDuplication
+
+> If a higher-level test spots an error and there's no lower-level test failing, you need to write a lower-level test
+> Push your tests as far down the test pyramid as you can
+

@@ -6,26 +6,23 @@ class EntryScreen extends Screen {
         parentScreen.header.editable = true;
         super(parentScreen);
     }
-    InfoLabel() {
+    get InfoLabel() {
         return match.accessible.TextLabel(this.screenText.Info);
     }
-    InfoButton() {
+    get InfoButton() {
         return match.accessible.Button(this.generalText.ButtonLabel.InfoCircle);
     }
-    GuardrailWarningIconPicker() {
+    get GuardrailWarningIconPicker() {
         return match.accessible.Image(this.generalText.Alert.ExclamationMark).atIndex(0);
+    }
+    get CancelNewEntryButton() {
+        return match.accessible.Button(this.generalText.Cancel);
     }
     GuardrailMessage(text) {
         return match.accessible.TextLabel(text);
     }
-    CancelNewEntryButton() {
-        return match.accessible.Button(this.generalText.Cancel);
-    }
     async OpenPicker(value) {
         await match.accessible.TextLabel(String(value)).tap();
-    }
-    async CancelNewEntry() {
-        await this.CancelNewEntryButton().tap();
     }
 }
 

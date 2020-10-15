@@ -15,21 +15,17 @@ class WorkoutRangeScreen extends base.EntriesScreen {
             },
         }, config);
     }
-    OpenButton() {
+    get OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
     }
-    InfoLabel() {
+    get InfoLabel() {
         return match.accessible.TextLabel(this.screenText.Info);
     }
     /**
      * @override so we access the header by label
      */
-    Header() {
+    get Header() {
         return match.accessible.TextLabel(this.screenText.Header);
-    }
-    async Open() {
-        await super.Open();
-        return this;
     }
 }
 

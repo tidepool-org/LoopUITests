@@ -1,5 +1,3 @@
-
-const match = require('../match');
 const base = require('../base/index');
 const AddPresetScreen = require('./addPresetScreen');
 

@@ -11,7 +11,6 @@ describe('loop functional test', () => {
             language: config.text,
             screenDefaults: config.screenDefaults,
             limits: config.limits,
-            settingDefault: config.settingDefault,
             authentication: { faceid: true },
             enableClosedLoop: true,
             enableTherapySettings: true,

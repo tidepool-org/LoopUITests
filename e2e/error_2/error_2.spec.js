@@ -1,5 +1,5 @@
 const { Test, Config } = require('../../src/index');
-const cgmTests = require('../../tests/errors/cgm.tests');
+const pumpTests = require('../../tests/errors/pump.tests');
 
 describe('errors', () => {
     var test = new Test();
@@ -28,7 +28,7 @@ describe('errors', () => {
         });
         await test.prepare();
     });
-    describe('from cgm', () => {
-        cgmTests(test);
+    describe('from pump', () => {
+        pumpTests(test);
     });
 });

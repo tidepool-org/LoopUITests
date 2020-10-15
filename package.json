@@ -5,6 +5,8 @@
     "test": "jest",
     "test_error_1": "detox test e2e/error_1 -c ios.sim.debug.iphone-11pro",
     "test_error_1_iphoneSE2": "detox test e2e/error_1 -c ios.sim.debug.iphone-se-2",
+    "test_error_2": "detox test e2e/error_2 -c ios.sim.debug.iphone-11pro",
+    "test_error_2_iphoneSE2": "detox test e2e/error_2 -c ios.sim.debug.iphone-se-2",
     "test_smoke_1": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-11pro",
     "test_smoke_1_iphoneSE2": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-se-2",
     "test_smoke_2": "detox test e2e/smoke_2 -c ios.sim.debug.iphone-11pro",
@@ -16,11 +18,12 @@
     "test_guardrail_2": "detox test e2e/guardrails_2 -c ios.sim.debug.iphone-11pro",
     "test_guardrail_2_iphoneSE2": "detox test e2e/guardrails_2 -c ios.sim.debug.iphone-se-2",
     "build": "detox build -c ios.sim.debug.iphone-11pro",
-    "fetch_build": "source ./scripts/build_loop.dev.sh dev",
-    "lint": "eslint ."
+    "fetch_build": "source ./scripts/build_loop.dev.sh build-272",
+    "lint": "eslint 'src/**'"
   },
   "devDependencies": {
     "detox": "^16.9.2",
+    "eslint": "^7.11.0",
     "jest": "^25.5.4",
     "jest-junit": "^10.0.0"
   },

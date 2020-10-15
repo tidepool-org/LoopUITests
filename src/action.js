@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const match = require('./match');
 const element = require('detox').element;
 
@@ -98,17 +99,11 @@ const action = {
     async ScrollIntegerPicker(currentValue, expectedValue) {
         return this.ScrollDecimalPicker(currentValue, expectedValue, true);
     },
-    async ScrollToBottom() {
-        await match.TopScrollableView().swipe('up');
-    },
     async SwipeUpUntilVisible(desiredLabel) {
         await _swipeUntilVisible(desiredLabel, 'up');
     },
     async SwipeDownUntilVisible(desiredLabel) {
         await _swipeUntilVisible(desiredLabel, 'down');
-    },
-    async ScrollToTop() {
-        await match.TopScrollableView().swipe('down');
     },
 };
 

@@ -5,30 +5,33 @@ const base = require('../base/index');
 class ActiveCarbohydratesScreen extends base.Screen {
     constructor(language) {
         super({
-            screenText: language.homeScreen.ActiveCarbohydratesScreen,
+            screenText: language.statusScreen.ActiveCarbohydratesScreen,
             generalText: language.general,
             header: {
                 backLabel: language.general.Status,
             },
             open: {
                 isBtn: false,
-                label: language.homeScreen.ActiveCarbohydratesScreen.ActiveCarbohydrates,
+                label: language.statusScreen.ActiveCarbohydratesScreen.ActiveCarbohydrates,
             },
         });
     }
-    GramsActiveCarbsLabel() {
+    get OpenButton() {
+        return match.accessible.TextLabel(this.screenText.ActiveCarbohydrates);
+    }
+    get GramsActiveCarbsLabel() {
         return match.accessible.TextLabel(this.screenText.GramsActiveCarbs);
     }
-    GramsTotalCarbsLabel() {
+    get GramsTotalCarbsLabel() {
         return match.accessible.TextLabel(this.screenText.GramsTotalCarbs);
     }
-    GlucoseChangeLabel() {
+    get GlucoseChangeLabel() {
         return match.accessible.TextLabel(this.screenText.GlucoseChange);
     }
-    ObservedLabel() {
+    get ObservedLabel() {
         return match.accessible.TextLabel(this.screenText.Observed);
     }
-    PredictedLabel() {
+    get PredictedLabel() {
         return match.accessible.TextLabel(this.screenText.Predicted);
     }
 }

@@ -5,44 +5,45 @@ const base = require('../base/index');
 class GlucoseScreen extends base.Screen {
     constructor(language) {
         super({
-            screenText: language.homeScreen.GlucoseScreen,
+            screenText: language.statusScreen.GlucoseScreen,
             generalText: language.general,
             header: {
                 backLabel: language.general.Status,
             },
             open: {
                 isBtn: false,
-                label: language.homeScreen.GlucoseScreen.Glucose,
+                label: language.statusScreen.GlucoseScreen.Glucose,
             },
         });
     }
-    CarbohydratesLabel() {
+    get CarbohydratesLabel() {
         return match.accessible.ClickableLabel(this.screenText.Carbohydrates);
     }
-    InsulinLabel() {
+    get InsulinLabel() {
         return match.accessible.ClickableLabel(this.screenText.Insulin);
+    }
+    get GlucoseMomentumLabel() {
+        return match.accessible.ClickableLabel(this.screenText.GlucoseMomentum);
+    }
+    get RetrospectiveCorrectionLabel() {
+        return match.accessible.ClickableLabel(this.screenText.RetrospectiveCorrection);
     }
     async SetInsulin(turnOn) {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this.IsOn(this.InsulinLabel());
+        let allReadyOn = await this.IsOn(this.InsulinLabel);
         if (turnOn == true) {
             if (allReadyOn == false) {
-                await this.InsulinLabel().tap();
+                await this.InsulinLabel.tap();
             }
         } else if (turnOn == false) {
             if (allReadyOn == true) {
-                await this.InsulinLabel().tap();
+                await this.InsulinLabel.tap();
             }
         }
     }
-    GlucoseMomentumLabel() {
-        return match.accessible.ClickableLabel(this.screenText.GlucoseMomentum);
-    }
-    RetrospectiveCorrectionLabel() {
-        return match.accessible.ClickableLabel(this.screenText.RetrospectiveCorrection);
-    }
+
 }
 
 module.exports = GlucoseScreen;

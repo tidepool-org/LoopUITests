@@ -1,15 +1,4 @@
 module.exports = (test) => {
-    describe('home', () => {
-        it('can check loop status', async () => {
-            var homeScreen = await test.OpenHomeScreen();
-            await homeScreen.HeaderSection().Loop();
-        });
-    });
-    describe('bolus', () => {
-        it('can deliver bolus', async () => {
-            await test.LoopUtilities.deliverBolus(0.5);
-        });
-    });
     describe('settings', () => {
         var settingsScreen;
         it('can open', async () => {
@@ -25,7 +14,7 @@ module.exports = (test) => {
                 var correctionRangeScreenLimits;
                 it('open ', async () => {
                     correctionRangeScreen = await therapySettingsScreen.OpenCorrectionRangeScreen();
-                    correctionRangeScreenLimits = test.limits.correctionRange;
+                    correctionRangeScreenLimits = test.getLimitsForSetting('correctionRange');
                 });
                 it('can change the time ', async () => {
                     await correctionRangeScreen.OpenPicker('12:00 AM');
@@ -56,13 +45,24 @@ module.exports = (test) => {
                     });
                 });
                 it('can save and authenticate', async () => {
-                    await correctionRangeScreen.SaveAndClose();
+                    await correctionRangeScreen.SaveButton.tap();
                     await correctionRangeScreen.Authenticate();
                 });
             });
             it('can close', async () => {
                 await therapySettingsScreen.ReturnToHomeScreen();
             });
+        });
+    });
+    describe('status', () => {
+        it('can check loop status', async () => {
+            var statusScreen = await test.OpenStatusScreen();
+            await statusScreen.HeaderSection.Loop();
+        });
+    });
+    describe('bolus', () => {
+        it('can be delivered', async () => {
+            await test.LoopUtilities.deliverBolus(0.5);
         });
     });
     describe('carb entry', () => {

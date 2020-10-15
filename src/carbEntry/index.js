@@ -15,32 +15,32 @@ class CarbEntryScreen extends base.Screen {
                 label: language.carbEntryScreen.AddMeal,
             },
         });
-        this.mealBolusScreen = new MealBolusScreen(language);
+        this._mealBolusScreen = new MealBolusScreen(language);
     }
-    AmountConsumedLabel() {
+    get AmountConsumedLabel() {
         return match.accessible.TextLabel(this.screenText.AmountConsumed);
     }
-    DateLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Date);
+    get TimeLabel() {
+        return match.accessible.ClickableLabel(this.screenText.Time);
     }
-    FoodTypeLabel() {
+    get FoodTypeLabel() {
         return match.accessible.ClickableLabel(this.screenText.FoodType);
     }
-    AbsorptionTimeLabel() {
+    get AbsorptionTimeLabel() {
         return match.accessible.ClickableLabel(this.screenText.AbsorptionTime);
     }
-    ContinueMainButton() {
+    get ContinueMainButton() {
         return match.accessible.Button(this.generalText.Continue).atIndex(2);
     }
-    async Continue() {
-        await this.ContinueMainButton().tap();
-        return this.mealBolusScreen;
-    }
-    AbsorptionTimeMessage() {
+    get AbsorptionTimeMessage() {
         return match.accessible.TextLabel(this.screenText.AbsorptionMessage);
     }
+    async ContinueToBolus() {
+        await this.ContinueMainButton.tap();
+        return this._mealBolusScreen;
+    }
     async ExpectAbsorptionTimeMessage() {
-        await expect(this.AbsorptionTimeMessage()).toExist();
+        await expect(this.AbsorptionTimeMessage).toExist();
     }
     async SetCarbs(amount) {
         var carbsField = match.UITextField();

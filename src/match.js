@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const element = require('detox').element;
 
 const staticTextTrait = 'text';

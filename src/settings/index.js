@@ -16,92 +16,84 @@ class SettingsScreen extends base.Screen {
             header: {
                 backLabel: language.general.Done,
             },
-            scroll: {
-                visibleBottomLabel: language.settingsScreen.Supportv2,
-                visibleTopLabel: language.settingsScreen.ClosedLoop,
-            },
         });
-        this.devices = devices;
-        this.therapyScreen = new TherapyScreen(language, config);
-        this.supportScreen = new SupportScreen(language);
+        this._devices = devices;
+        this._therapyScreen = new TherapyScreen(language, config);
+        this._supportScreen = new SupportScreen(language);
     }
-    Devices() {
-        return this.devices;
+    get Devices() {
+        return this._devices;
     }
     /**
      * @override
      */
-    BackButton() {
+    get BackButton() {
         return match.accessible.Button(this.generalText.Done);
     }
-    _closedLoopButton() {
+    get LoopSwitchButton() {
         return match.accessible.SwitchButton(this.screenText.ClosedLoop);
     }
+    get TherapySettingsLabel() {
+        return this._therapyScreen.OpenButton;
+    }
+    get SupportHeader() {
+        return match.accessible.Header(this.screenText.Support);
+    }
+    get SupportLabel() {
+        return this._supportScreen.OpenButton;
+    }
+    get ConfigurationHeader() {
+        return match.accessible.Header(this.screenText.Configuration);
+    }
+
     async ClosedLoop() {
-        var btn = this._closedLoopButton()
-        var isOn = await this.IsOn(btn);
+        var isOn = await this.IsOn(this.LoopSwitchButton);
         if (isOn == false) {
-            await btn.longPress();
+            await this.LoopSwitchButton.longPress();
         }
     }
     async OpenLoop() {
-        var btn = this._closedLoopButton()
-        var isOn = await this.IsOn(btn);
+        var isOn = await this.IsOn(this.LoopSwitchButton);
         if (isOn == true) {
-            await btn.longPress();
+            await this.LoopSwitchButton.longPress();
         }
     }
-    TherapySettingsLabel() {
-        return this.therapyScreen.OpenButton();
-    }
     async OpenTherapySettings() {
-        await this.therapyScreen.Open();
-        return this.therapyScreen;
-    }
-    SupportHeader() {
-        return match.accessible.Header(this.screenText.Support);
-    }
-    SupportLabel() {
-        return this.supportScreen.OpenButton();
-    }
-    ConfigurationHeader() {
-        return match.accessible.Header(this.screenText.Configuration);
+        await this._therapyScreen.OpenButton.tap();
+        return this._therapyScreen;
     }
     async OpenSupport() {
-        await this.SwipeUpUntilVisible(this.SupportLabel());
-        await this.supportScreen.Open();
-        return this.supportScreen;
+        await this.SwipeUpUntilVisible(this.SupportLabel);
+        await this._supportScreen.OpenButton.tap();
+        return this._supportScreen;
     }
     async OpenDeliveryLimitsScreen() {
-        return this.therapyScreen.OpenDeliveryLimitsScreen();
+        return this._therapyScreen.OpenDeliveryLimitsScreen();
     }
     async OpenCorrectionRangeScreen() {
-        return this.therapyScreen.OpenCorrectionRangeScreen();
+        return this._therapyScreen.OpenCorrectionRangeScreen();
     }
     async OpenInsulinSensitivitiesScreen() {
-        return this.therapyScreen.OpenInsulinSensitivitiesScreen();
+        return this._therapyScreen.OpenInsulinSensitivitiesScreen();
     }
     async OpenSuspendThresholdScreen() {
-        return this.therapyScreen.OpenSuspendThresholdScreen();
-    }
-    async OpenSuspendThresholdScreen() {
-        return this.therapyScreen.OpenSuspendThresholdScreen();
+        return this._therapyScreen.OpenSuspendThresholdScreen();
     }
     async OpenCarbRatioScreen() {
-        return this.therapyScreen.OpenCarbRatioScreen();
+        return this._therapyScreen.OpenCarbRatioScreen();
     }
     async OpenBasalRateScreen() {
-        return this.therapyScreen.OpenBasalRateScreen();
+        return this._therapyScreen.OpenBasalRateScreen();
     }
     async setDeliveryLimits(deliveryLimits) {
-        var limits = await this.therapyScreen.OpenDeliveryLimitsScreen();
+        var limits = await this._therapyScreen.OpenDeliveryLimitsScreen();
         await limits.OpenBasalRatePicker();
         await limits.ApplyBasal(deliveryLimits.basal);
         await limits.OpenBasalRatePicker();
         await limits.OpenBolusPicker();
         await limits.ApplyBolus(deliveryLimits.bolus);
         await limits.OpenBolusPicker();
-        await limits.SaveAndClose();
+        await limits.SaveButton.tap();
         await limits.Authenticate();
     }
     /**
@@ -111,11 +103,11 @@ class SettingsScreen extends base.Screen {
      * @param {number} correctionRange.expected.min
      */
     async setCorrectionRange(correctionRange) {
-        var correction = await this.therapyScreen.OpenCorrectionRangeScreen();
-        await correction.Plus();
+        var correction = await this._therapyScreen.OpenCorrectionRangeScreen();
+        await correction.PlusButton.tap();
         await correction.ApplyOne(correctionRange);
-        await correction.Add();
-        await correction.SaveAndClose();
+        await correction.AddButton.tap();
+        await correction.SaveButton.tap();
         await correction.Authenticate();
     }
 }

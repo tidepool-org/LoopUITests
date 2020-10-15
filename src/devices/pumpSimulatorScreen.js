@@ -1,4 +1,3 @@
-const element = require('detox').element;
 const match = require('../match');
 const base = require('../base/index');
 
@@ -10,83 +9,67 @@ class PumpSimulatorScreen extends base.Screen {
             header: {
                 backLabel: language.general.Done,
             },
-            scroll: {
-                visibleBottomLabel: language.device.PumpSimulatorScreen.DeletePump,
-                visibleTopLabel: language.device.PumpSimulatorScreen.SuspendDelivery,
-            },
         });
     }
-    ConfigurationHeader() {
+    get ConfigurationHeader() {
         return match.accessible.Header(this.screenText.ConfigurationHeader).atIndex(0);
     }
-    ReservoirRemainingLabel() {
+    get ReservoirRemainingLabel() {
         return match.accessible.TextLabel(this.screenText.ReservoirRemaining);
     }
-    BatteryRemainingLabel() {
+    get BatteryRemainingLabel() {
         return match.accessible.TextLabel(this.screenText.BatteryRemaining);
     }
-    ErrorOnTempBasalLabel() {
+    get ErrorOnTempBasalLabel() {
         return match.accessible.TextLabel(this.screenText.ErrorOnTempBasal);
     }
-    ErrorOnTempBasalSwitch() {
+    get ErrorOnTempBasalSwitch() {
         return match.accessible.SwitchButton(this.screenText.ErrorOnTempBasal);
     }
-    ErrorOnBolusLabel() {
+    get ErrorOnBolusLabel() {
         return match.accessible.TextLabel(this.screenText.ErrorOnBolus);
     }
-    ErrorOnBolusSwitch() {
+    get ErrorOnBolusSwitch() {
         return match.accessible.SwitchButton(this.screenText.ErrorOnBolus);
     }
-    ErrorOnSuspendLabel() {
+    get ErrorOnSuspendLabel() {
         return match.accessible.TextLabel(this.screenText.ErrorOnSuspend);
     }
-    ErrorOnSuspendSwitch() {
+    get ErrorOnSuspendSwitch() {
         return match.accessible.SwitchButton(this.screenText.ErrorOnSuspend);
     }
-    ErrorOnResumeLabel() {
+    get ErrorOnResumeLabel() {
         return match.accessible.TextLabel(this.screenText.ErrorOnResume);
     }
-    ErrorOnResumeSwitch() {
+    get ErrorOnResumeSwitch() {
         return match.accessible.SwitchButton(this.screenText.ErrorOnResume);
     }
-    NextDeliveryCommandUncertainSwitch() {
+    get NextDeliveryCommandUncertainSwitch() {
         return match.accessible.SwitchButton(this.screenText.NextDeliveryCommandUncertain);
     }
-    DeletePumpLabel() {
+    get DeletePumpLabel() {
         return match.accessible.TextLabel(this.screenText.DeletePump);
     }
-    DeletePumpConfirmationLabel() {
+    get DeletePumpConfirmationLabel() {
         return match.accessible.AlertButton(this.screenText.DeletePump);
     }
-    SuspendDeliveryButton() {
+    get SuspendDeliveryButton() {
         return match.accessible.TextLabel(this.screenText.SuspendDelivery);
     }
-    ResumeDeliveryButton() {
+    get ResumeDeliveryButton() {
         return match.accessible.TextLabel(this.screenText.ResumeDelivery);
     }
-    DetectOcclusionButton() {
+    get DetectOcclusionButton() {
         return match.accessible.TextLabel(this.screenText.DetectOcclusion);
     }
-    async DetectOcclusionError() {
-        return this.DetectOcclusionButton().tap();
-    }
-    ResolveOcclusionButton() {
+    get ResolveOcclusionButton() {
         return match.accessible.TextLabel(this.screenText.ResolveOcclusion);
     }
-    async ResolveOcclusionError() {
-        return this.ResolveOcclusionButton().tap();
-    }
-    CausePumpErrorButton() {
+    get CausePumpErrorButton() {
         return match.accessible.TextLabel(this.screenText.CausePumpError);
     }
-    async CausePumpError() {
-        return this.CausePumpErrorButton().tap();
-    }
-    ResolvePumpErrorButton() {
+    get ResolvePumpErrorButton() {
         return match.accessible.TextLabel(this.screenText.ResolvePumpError);
-    }
-    async ResolvePumpError() {
-        return this.ResolvePumpErrorButton().tap();
     }
     /**
      * @param {object} settings
@@ -111,14 +94,14 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this.IsOn(this.ErrorOnBolusSwitch());
+        let allReadyOn = await this.IsOn(this.ErrorOnBolusSwitch);
         if (turnOn == true) {
             if (allReadyOn == false) {
-                await this.ErrorOnBolusSwitch().tap();
+                await this.ErrorOnBolusSwitch.tap();
             }
         } else if (turnOn == false) {
             if (allReadyOn == true) {
-                await this.ErrorOnBolusSwitch().tap();
+                await this.ErrorOnBolusSwitch.tap();
             }
         }
     }
@@ -141,14 +124,14 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this.IsOn(this.ErrorOnSuspendSwitch());
+        let allReadyOn = await this.IsOn(this.ErrorOnSuspendSwitch);
         if (turnOn == true) {
             if (allReadyOn == false) {
-                await this.ErrorOnSuspendSwitch().tap();
+                await this.ErrorOnSuspendSwitch.tap();
             }
         } else if (turnOn == false) {
             if (allReadyOn == true) {
-                await this.ErrorOnSuspendSwitch().tap();
+                await this.ErrorOnSuspendSwitch.tap();
             }
         }
     }
@@ -156,14 +139,14 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this.IsOn(this.ErrorOnResumeSwitch());
+        let allReadyOn = await this.IsOn(this.ErrorOnResumeSwitch);
         if (turnOn == true) {
             if (allReadyOn == false) {
-                await this.ErrorOnResumeSwitch().tap();
+                await this.ErrorOnResumeSwitch.tap();
             }
         } else if (turnOn == false) {
             if (allReadyOn == true) {
-                await this.ErrorOnResumeSwitch().tap();
+                await this.ErrorOnResumeSwitch.tap();
             }
         }
     }
@@ -171,14 +154,14 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this.IsOn(this.NextDeliveryCommandUncertainSwitch());
+        let allReadyOn = await this.IsOn(this.NextDeliveryCommandUncertainSwitch);
         if (turnOn == true) {
             if (allReadyOn == false) {
-                await this.NextDeliveryCommandUncertainSwitch().tap();
+                await this.NextDeliveryCommandUncertainSwitch.tap();
             }
         } else if (turnOn == false) {
             if (allReadyOn == true) {
-                await this.NextDeliveryCommandUncertainSwitch().tap();
+                await this.NextDeliveryCommandUncertainSwitch.tap();
             }
         }
     }
@@ -186,7 +169,7 @@ class PumpSimulatorScreen extends base.Screen {
         await match.accessible.ButtonBarButton(this.screenText.PumpSettings).tap();
     }
     async _setValue(val) {
-        var valField = element(by.type('UITextField'));
+        var valField = match.UITextField();
         await valField.clearText();
         await valField.typeText(String(val));
     }
@@ -198,7 +181,7 @@ class PumpSimulatorScreen extends base.Screen {
             console.log('battery remaining percent must be in the range of 0-100');
             return;
         }
-        await this.BatteryRemainingLabel().tap();
+        await this.BatteryRemainingLabel.tap();
         await this._setValue(percent);
         await this._backToPumpSimulator();
     }
@@ -210,26 +193,20 @@ class PumpSimulatorScreen extends base.Screen {
             console.log('reservoir remaining units must be in the range of 0-200');
             return;
         }
-        await this.ReservoirRemainingLabel().tap();
+        await this.ReservoirRemainingLabel.tap();
         await this._setValue(units);
         await this._backToPumpSimulator();
     }
-    async ResumeDelivery() {
-        await this.ResumeDeliveryButton().tap();
-    }
-    async SuspendDelivery() {
-        await this.SuspendDeliveryButton().tap();
-    }
     async RemoveSimulator() {
-        await this.ScrollToBottom();
-        await this.DeletePumpLabel().tap();
-        await this.DeletePumpConfirmationLabel().tap();
+        await this.SwipeUpUntilVisible(this.DeletePumpLabel);
+        await this.DeletePumpLabel.tap();
+        await this.DeletePumpConfirmationLabel.tap();
     }
     async HasAlert() {
         await expect(match.accessible.Alert()).toExist();
     }
-    async DismissAlert() {
-        await match.accessible.AlertButton(this.generalText.OK).tap();
+    get OKDismissAlertButton() {
+        return match.accessible.AlertButton(this.generalText.OK);
     }
 }
 

@@ -1,6 +1,6 @@
 var screenName = {
     settings: 'settings',
-    home: 'home',
+    status: 'status',
     bolus: 'bolus',
     carbEntry: 'carbEntry',
 };

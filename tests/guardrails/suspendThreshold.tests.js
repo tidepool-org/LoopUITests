@@ -8,7 +8,7 @@ module.exports = (test) => {
     it('open screen', async () => {
         therapySettingsScreen = await test.OpenTherapySettingsScreen();
         screen = await therapySettingsScreen.OpenSuspendThresholdScreen();
-        screenLimit = test.limits.suspendThreshold;
+        screenLimit = test.getLimitsForSetting('suspendThreshold');
         await screen.OpenPicker(therapySettingsValue);
     });
     describe(description.MinimumLimit, () => {
@@ -19,10 +19,10 @@ module.exports = (test) => {
             });
         });
         it(description.GuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
+            await expect(screen.GuardrailWarningIconPicker).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.LowSuspendThresholdGuardrailMessage()).toBeVisible();
+            await expect(screen.LowSuspendThresholdGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MinimumWarning, () => {
@@ -33,10 +33,10 @@ module.exports = (test) => {
             });
         });
         it(description.GuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker()).toBeVisible();
+            await expect(screen.GuardrailWarningIconPicker).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.LowSuspendThresholdGuardrailMessage()).toBeVisible();
+            await expect(screen.LowSuspendThresholdGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MinimumNoWarning, () => {
@@ -47,10 +47,10 @@ module.exports = (test) => {
             });
         });
         it(description.NoGuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
+            await expect(screen.GuardrailWarningIconPicker).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.LowSuspendThresholdGuardrailMessage()).toBeNotVisible();
+            await expect(screen.LowSuspendThresholdGuardrailMessage).toBeNotVisible();
         });
     });
     describe(description.MaximumLimit, () => {
@@ -61,14 +61,14 @@ module.exports = (test) => {
             });
         });
         it(description.NoGuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker()).toBeNotVisible();
+            await expect(screen.GuardrailWarningIconPicker).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.HighSuspendThresholdGuardrailMessage()).toBeNotVisible();
+            await expect(screen.HighSuspendThresholdGuardrailMessage).toBeNotVisible();
         });
     });
     it('can close screen', async () => {
-        await screen.CancelNewEntry();
+        await screen.CancelNewEntryButton.tap();
         await therapySettingsScreen.ReturnToHomeScreen();
     });
 };

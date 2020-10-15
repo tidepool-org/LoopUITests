@@ -14,7 +14,7 @@ class AlertScreen extends base.Screen {
             },
         });
     }
-    OpenButton() {
+    get OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
     }
 }

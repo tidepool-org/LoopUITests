@@ -8,6 +8,7 @@ var General = {
     Add: 'Add',
     Edit: 'Edit',
     Status: 'Status',
+    Dismiss: 'Dismiss',
     OK: 'OK',
     ButtonLabel: {
         Plus: 'plus',
@@ -20,6 +21,7 @@ var General = {
         ConfigurationError: 'Configuration Error: Check Settings',
         MissingGlucoseData: 'Missing Data: Glucose Data Not Available',
         BolusError: 'Bolus\nCommunication Failure',
+
     },
     TimeSlot: [
         '12:00 AM', '12:30 AM', '1:00 AM', '1:30 AM', '2:00 AM', '2:30 AM', '3:00 AM', '3:30 AM', '4:00 AM', '4:30 AM', '5:00 AM', '5:30 AM', '6:00 AM', '6:30 AM', '7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
@@ -54,13 +56,16 @@ var Device = {
         Alerts: {
             Header: 'ALERTS',
             IssueAlerts: 'Issue Alerts',
-            DelayedAlert: 'Issue a "delayed 30.0 seconds" alert',
-            ReapeatingAlert: 'Issue a "repeating every 30.0 seconds" alert',
+            ImmediateAlert: 'Issue an immediate alert',
+            DelayedAlert: 'Issue a "delayed 60.0 seconds" alert',
+            ReapeatingAlert: 'Issue a "repeating every 60.0 seconds" alert',
+            RetractAlertAbove: 'Retract any alert above',
         },
         History: {
             Header: 'HISTORY',
             BackfillGlucose: 'Backfill Glucose',
             Trend: 'Trend',
+            Hours: 'hours',
             RisingVeryFastTrend: '⇈  Rising very fast',
             RisingFastTrend: '↑  Rising fast',
             RisingTrend: '↗︎  Rising',
@@ -81,6 +86,7 @@ var Device = {
             Constant: 'Constant',
             SineCurve: 'Sine Curve',
             None: 'No Data',
+            SignalLoss: 'Signal Loss',
         },
         Frequency: {
             MeasurementFrequency: 'Measurement Frequency',
@@ -109,7 +115,7 @@ var Device = {
     }
 };
 
-var HomeScreen = {
+var StatusScreen = {
     AddPump: 'Add Pump',
     PumpError: 'Pump Error',
     PumpOcclusion: 'Pump Occlusion',
@@ -150,7 +156,15 @@ var HomeScreen = {
         Observed: 'Observed',
         GramsActiveCarbs: 'g COB',
         GramsTotalCarbs: 'g Total',
-    }
+    },
+    HUD: {
+        CGMSignalLoss: 'Signal Loss',
+        CGMGenericAlert: 'Alert: FG Title',
+        PumpCommsIssue: 'Comms Issue',
+        PumpNoInsulin: 'No Insulin',
+        BGTapToAdd: 'Tap to Add',
+        BGNoRecent: 'No Recent Glucose',
+    },
 };
 
 var CarbEntryScreen = {
@@ -158,7 +172,7 @@ var CarbEntryScreen = {
     AddMeal: 'Add Meal',
     SaveWithoutBolusing: 'Save without Bolusing',
     AmountConsumed: 'Amount Consumed',
-    Date: 'Date',
+    Time: 'Time',
     FoodType: 'Food Type',
     AbsorptionTime: 'Absorption Time',
     AbsorptionMessage: 'Choose a longer absorption time for larger meals, or those containing fats and proteins. This is only guidance to the algorithm and need not be exact.',
@@ -202,16 +216,6 @@ var SettingsScreen = {
     TherapySettingsScreen: {
         Header: 'Therapy Settings',
         Info: 'Diabetes Treatment',
-    },
-    InsulinModelScreen: {
-        Header: 'Insulin Model',
-        Info: 'Loop assumes insulin is activley working for 6 hours...',
-        Model: {
-            Walsh: 'Walsh',
-            RapidAdults: 'Rapid-Acting – Adults',
-            RapidChildren: 'Rapid-Acting – Children',
-            Fiasp: 'Fiasp'
-        }
     },
     DeliveryLimitsScreen: {
         Header: 'Delivery Limits',
@@ -285,5 +289,5 @@ module.exports = {
     carbEntryScreen: CarbEntryScreen,
     settingsScreen: SettingsScreen,
     customPresetScreen: CustomPresetScreen,
-    homeScreen: HomeScreen,
+    statusScreen: StatusScreen,
 };

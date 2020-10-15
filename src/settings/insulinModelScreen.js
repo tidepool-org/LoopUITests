@@ -7,7 +7,7 @@ class InsulinModelScreen extends base.Screen {
             screenText: language.settingsScreen.InsulinModelScreen,
             generalText: language.general,
             header: {
-                backLabel: language.general.Close,
+                backLabel: language.general.Back,
             },
             open: {
                 isBtn: false,
@@ -15,10 +15,10 @@ class InsulinModelScreen extends base.Screen {
             },
         });
     }
-    InfoLabel() {
+    get InfoLabel() {
         return match.accessible.TextLabel(this.screenText.Info);
     }
-    OpenButton() {
+    get OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
     }
     async Apply(model) {

@@ -4,27 +4,27 @@ const base = require('../base/index');
 class InsulinDeliveryScreen extends base.Screen {
     constructor(language) {
         super({
-            screenText: language.homeScreen.InsulinDeliveryScreen,
+            screenText: language.statusScreen.InsulinDeliveryScreen,
             generalText: language.general,
             header: {
                 backLabel: language.general.Status,
             },
             open: {
                 isBtn: false,
-                label: language.homeScreen.InsulinDeliveryScreen.Header,
+                label: language.statusScreen.InsulinDeliveryScreen.Header,
             },
         });
     }
-    IOBLabel() {
+    get IOBLabel() {
         return match.accessible.TextLabel(this.screenText.IOB);
     }
-    TotalLabel() {
+    get TotalLabel() {
         return match.accessible.TextLabel(this.screenText.Total);
     }
-    EventHistoryLabel() {
+    get EventHistoryLabel() {
         return match.accessible.TextLabel(this.screenText.EventHistory);
     }
-    ReservoirLabel() {
+    get ReservoirLabel() {
         return match.accessible.TextLabel(this.screenText.Reservoir);
     }
 }

@@ -8,7 +8,7 @@ module.exports = (test) => {
         therapySettingsScreen = await test.OpenTherapySettingsScreen();
         screen = await therapySettingsScreen.OpenBasalRateScreen();
         await screen.OpenPicker('12:00 AM');
-        screenLimit = test.limits.basalRates;
+        screenLimit = test.getLimitsForSetting('basalRates');
     });
     describe(description.MinimumLimit, () => {
         it(description.SetValue, async () => {
@@ -21,7 +21,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.NoBasalInsulinGuardrailMessage()).toBeVisible();
+            await expect(screen.NoBasalInsulinGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MaximumNoWarning, () => {
@@ -35,7 +35,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.NoBasalInsulinGuardrailMessage()).toBeNotVisible();
+            await expect(screen.NoBasalInsulinGuardrailMessage).toBeNotVisible();
         });
     });
     describe(description.MaximumLimit, () => {
@@ -49,11 +49,11 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.NoBasalInsulinGuardrailMessage()).toBeNotVisible();
+            await expect(screen.NoBasalInsulinGuardrailMessage).toBeNotVisible();
         });
     });
     it('can close screen', async () => {
-        await screen.CancelNewEntry();
+        await screen.CancelNewEntryButton.tap();
         await therapySettingsScreen.ReturnToHomeScreen();
     });
 };

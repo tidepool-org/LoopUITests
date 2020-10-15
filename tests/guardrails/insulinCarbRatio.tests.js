@@ -9,7 +9,7 @@ module.exports = (test) => {
         therapySettingsScreen = await test.OpenTherapySettingsScreen();
         screen = await therapySettingsScreen.OpenCarbRatioScreen();
         await screen.OpenPicker(therapySettingsRatio);
-        screenLimit = test.limits.insulinCarbRatio;
+        screenLimit = test.getLimitsForSetting('insulinCarbRatio');
     });
     describe(description.MinimumLimit, () => {
         it(description.SetValue, async () => {
@@ -22,7 +22,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.LowCarbRatioGuardrailMessage()).toBeVisible();
+            await expect(screen.LowCarbRatioGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MinimumWarning, () => {
@@ -36,7 +36,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.LowCarbRatioGuardrailMessage()).toBeVisible();
+            await expect(screen.LowCarbRatioGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MinimumNoWarning, () => {
@@ -50,7 +50,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.LowCarbRatioGuardrailMessage()).toBeNotVisible();
+            await expect(screen.LowCarbRatioGuardrailMessage).toBeNotVisible();
         });
     });
     describe(description.MaximumNoWarning, () => {
@@ -64,7 +64,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.LowCarbRatioGuardrailMessage()).toBeNotVisible();
+            await expect(screen.LowCarbRatioGuardrailMessage).toBeNotVisible();
         });
     });
     describe(description.MaximumWarning, () => {
@@ -78,7 +78,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.HighCarbRatioGuardrailMessage()).toBeVisible();
+            await expect(screen.HighCarbRatioGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MaximumLimit, () => {
@@ -92,11 +92,11 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.HighCarbRatioGuardrailMessage()).toBeVisible();
+            await expect(screen.HighCarbRatioGuardrailMessage).toBeVisible();
         });
     });
     it('can cancel and close screen', async () => {
-        await screen.CancelNewEntry();
+        await screen.CancelNewEntryButton.tap();
         await therapySettingsScreen.ReturnToHomeScreen();
     });
 };

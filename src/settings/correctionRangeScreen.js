@@ -2,9 +2,6 @@ const action = require('../action');
 const match = require('../match');
 const base = require('../base/index');
 
-const maxGlucosePickerID = 'max_glucose_picker';
-const minGlucosePickerID = 'min_glucose_picker';
-
 class CorrectionRangeScreen extends base.EntriesScreen {
     constructor(language, config) {
         super({
@@ -19,25 +16,25 @@ class CorrectionRangeScreen extends base.EntriesScreen {
             },
         }, config);
     }
-    BackButton() {
+    get BackButton() {
         return match.accessible.Button(this.backLabel).atIndex(0);
     }
-    OpenButton() {
+    get OpenButton() {
         return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
     }
-    InfoLabel() {
+    get InfoLabel() {
         return match.accessible.TextLabel(this.screenText.Info);
     }
     /**
      * @override so we access the header by label
      */
-    Header() {
+    get Header() {
         return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
     }
-    LowCorrectionValueGuardrailMessage() {
+    get LowCorrectionValueGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.LowCorrectionValueGuardrailMessage);
     }
-    HighCorrectionValueGuardrailMessage() {
+    get HighCorrectionValueGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.HighCorrectionValueGuardrailMessage);
     }
     /**
@@ -71,7 +68,7 @@ class CorrectionRangeScreen extends base.EntriesScreen {
      * @param {Array} ranges
      */
     async ApplyAll(ranges) {
-        await this.Plus();
+        await this.PlusButton.tap();
         for (let index = 0; index < ranges.length; index++) {
             var current;
             let expected = ranges[index];
@@ -79,12 +76,8 @@ class CorrectionRangeScreen extends base.EntriesScreen {
                 current = ranges[index - 1];
             }
             await this.ApplyOne({ expected, current });
-            await this.Add();
+            await this.AddButton.tap();
         }
-    }
-    async Open() {
-        await super.Open();
-        return this;
     }
 }
 

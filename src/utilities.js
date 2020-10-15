@@ -1,10 +1,11 @@
+/* eslint-disable no-undef */
 const match = require('./match');
 const exec = require('child_process').exec;
 
 module.exports = class Utilities {
     constructor(testApp) {
         this._testApp = testApp;
-        this._language = testApp.language;
+        this._language = testApp._language;
     }
     async _loadDeviceScenariosFromDisk() {
         let deviceId = device.id;
@@ -26,12 +27,12 @@ module.exports = class Utilities {
     async closeLoop() {
         let settingsScreen = await this._testApp.OpenSettingsScreen();
         await settingsScreen.ClosedLoop();
-        await settingsScreen.Back();
+        await settingsScreen.BackButton.tap();
     }
     async openLoop() {
         let settingsScreen = await this._testApp.OpenSettingsScreen();
         await settingsScreen.OpenLoop();
-        await settingsScreen.Back();
+        await settingsScreen.BackButton.tap();
     }
     async advanceScenario(scenarioName, cycles) {
         await device.shake();
@@ -50,26 +51,26 @@ module.exports = class Utilities {
     async addCarbohydratesAndDeliverBolus(carbohydratesAmount) {
         let carbEntryScreen = await this._testApp.OpenCarbEntryScreen();
         await carbEntryScreen.SetCarbs(carbohydratesAmount);
-        let bolusScreen = await carbEntryScreen.Continue();
-        await bolusScreen.SaveAndDeliver();
+        let bolusScreen = await carbEntryScreen.ContinueToBolus();
+        await bolusScreen.SaveAndDeliverButton.tap();
         await bolusScreen.Authenticate();
     }
     async addCarbohydrates(carbohydratesAmount) {
         let carbEntryScreen = await this._testApp.OpenCarbEntryScreen();
         await carbEntryScreen.SetCarbs(carbohydratesAmount);
-        let bolusScreen = await carbEntryScreen.Continue();
-        await bolusScreen.SaveWithoutBolus();
+        let bolusScreen = await carbEntryScreen.ContinueToBolus();
+        await bolusScreen.SaveWithoutBolusButton.tap();
         await bolusScreen.Authenticate();
     }
     async updateInsulinReservoir(remainingUnits) {
         let pumpScreen = await this._testApp.OpenPumpScreen();
         await pumpScreen.Apply({ reservoirRemaining: remainingUnits });
-        await pumpScreen.Back();
+        await pumpScreen.BackButton.tap();
     }
     async updatePumpBattery(percentRemaining) {
         let pumpScreen = await this._testApp.OpenPumpScreen();
         await pumpScreen.Apply({ batteryRemaining: percentRemaining });
-        await pumpScreen.Back();
+        await pumpScreen.BackButton.tap();
     }
     async loadTherapySettings() {
         await device.shake();
@@ -80,11 +81,11 @@ module.exports = class Utilities {
         await this.loadTherapySettings();
     }
     async addUnconfiguredPump() {
-        let homeScreen = await this._testApp.OpenHomeScreen();
-        await homeScreen.HeaderSection().Devices().AddPump();
+        let statusScreen = await this._testApp.OpenStatusScreen();
+        await statusScreen.HeaderSection.Devices.AddPump();
     }
     async addCGM() {
-        let homeScreen = await this._testApp.OpenHomeScreen();
-        await homeScreen.HeaderSection().Devices().AddCGM();
+        let statusScreen = await this._testApp.OpenStatusScreen();
+        await statusScreen.HeaderSection.Devices.AddCGM();
     }
 }

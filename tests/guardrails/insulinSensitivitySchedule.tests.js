@@ -8,7 +8,7 @@ module.exports = (test) => {
         therapySettingsScreen = await test.OpenTherapySettingsScreen();
         screen = await therapySettingsScreen.OpenInsulinSensitivitiesScreen();
         await screen.OpenPicker('12:00 AM');
-        screenLimit = test.limits.insulinSensitivities;
+        screenLimit = test.getLimitsForSetting('insulinSensitivities');
     });
     describe(description.MinimumLimit, () => {
         it(description.SetValue, async () => {
@@ -21,7 +21,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.LowInsulinSensitivityGuardrailMessage()).toBeVisible();
+            await expect(screen.LowInsulinSensitivityGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MinimumWarning, () => {
@@ -35,7 +35,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.LowInsulinSensitivityGuardrailMessage()).toBeVisible();
+            await expect(screen.LowInsulinSensitivityGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MinimumNoWarning, () => {
@@ -49,7 +49,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.LowInsulinSensitivityGuardrailMessage()).toBeNotVisible();
+            await expect(screen.LowInsulinSensitivityGuardrailMessage).toBeNotVisible();
         });
     });
     describe(description.MaximumNoWarning, () => {
@@ -63,7 +63,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.HighInsulinSensitivityGuardrailMessage()).toBeNotVisible();
+            await expect(screen.HighInsulinSensitivityGuardrailMessage).toBeNotVisible();
         });
     });
     describe(description.MaximumWarning, () => {
@@ -77,7 +77,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.HighInsulinSensitivityGuardrailMessage()).toBeVisible();
+            await expect(screen.HighInsulinSensitivityGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MaximumLimit, () => {
@@ -92,11 +92,11 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.HighInsulinSensitivityGuardrailMessage()).toBeVisible();
+            await expect(screen.HighInsulinSensitivityGuardrailMessage).toBeVisible();
         });
     });
     it('can close screen', async () => {
-        await screen.CancelNewEntry();
+        await screen.CancelNewEntryButton.tap();
         await therapySettingsScreen.ReturnToHomeScreen();
     });
 };

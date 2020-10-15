@@ -8,7 +8,7 @@ module.exports = (test) => {
         therapySettingsScreen = await test.OpenTherapySettingsScreen();
         screen = await therapySettingsScreen.OpenCorrectionRangeScreen();
         await screen.OpenPicker('12:00 AM');
-        screenLimit = test.limits.correctionRange;
+        screenLimit = test.getLimitsForSetting('correctionRange');
     });
     describe(description.MinimumLimit, () => {
         it(description.SetValue, async () => {
@@ -27,7 +27,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.LowCorrectionValueGuardrailMessage()).toBeNotVisible();
+            await expect(screen.LowCorrectionValueGuardrailMessage).toBeNotVisible();
         });
     });
     describe(description.MaximumNoWarning, () => {
@@ -47,7 +47,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.LowCorrectionValueGuardrailMessage()).toBeNotVisible();
+            await expect(screen.LowCorrectionValueGuardrailMessage).toBeNotVisible();
         });
     });
     describe(description.MaximumWarning, () => {
@@ -67,7 +67,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.HighCorrectionValueGuardrailMessage()).toBeVisible();
+            await expect(screen.HighCorrectionValueGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MaximumLimit, () => {
@@ -87,11 +87,11 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.HighCorrectionValueGuardrailMessage()).toBeVisible();
+            await expect(screen.HighCorrectionValueGuardrailMessage).toBeVisible();
         });
     });
     it('can close screen', async () => {
-        await screen.CancelNewEntry();
+        await screen.CancelNewEntryButton.tap();
         await therapySettingsScreen.ReturnToHomeScreen();
     });
 };
