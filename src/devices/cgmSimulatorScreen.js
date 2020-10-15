@@ -198,7 +198,6 @@ class CGMSimulatorScreen extends base.Screen {
                 console.log('no match ', alert.name);
                 break;
         }
-        await this.SwipeDownUntilVisible(this._modelHeader);
     }
     async RemoveSimulator() {
         await this.SwipeUpUntilVisible(this._deleteCGMLabel);

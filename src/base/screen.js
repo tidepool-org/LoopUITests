@@ -105,7 +105,10 @@ class Screen {
         await action.SwipeDownUntilVisible(labelToSee);
     }
     async DismissAlert(label) {
-        await match.accessible.Button(label).tap();
+        await this.Alert(label).tap();
+    }
+    Alert(buttonText) {
+        return match.accessible.Button(buttonText);
     }
 }
 

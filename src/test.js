@@ -175,6 +175,9 @@ class Test {
     async OpenStatusScreen() {
         return this.statusScreen;
     }
+    get CGMData() {
+        return this._cgmData;
+    }
 }
 
 module.exports = {

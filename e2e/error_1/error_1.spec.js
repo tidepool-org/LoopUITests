@@ -29,6 +29,6 @@ describe('errors', () => {
         await test.prepare();
     });
     describe('from cgm', () => {
-        cgmTests(test, cgmData);
+        cgmTests(test);
     });
 });

@@ -1,4 +1,4 @@
-module.exports = (test, cmgData) => {
+module.exports = (test) => {
     describe('signal loss', () => {
         let cgmScreen;
         let statusScreen;
@@ -8,7 +8,7 @@ module.exports = (test, cmgData) => {
         });
         afterAll(async () => {
             cgmScreen = await test.OpenCGMScreen();
-            await cgmScreen.Apply(cmgData);
+            await cgmScreen.Apply(test.CGMData);
             await cgmScreen.BackButton.tap();
         });
         it('dimiss signal loss alert', async () => {
@@ -21,15 +21,19 @@ module.exports = (test, cmgData) => {
         });
     });
     describe('immediate alert', () => {
+        let cgmScreen;
         beforeAll(async () => {
-            let cgmScreen = await test.OpenCGMScreen();
+            cgmScreen = await test.OpenCGMScreen();
             await cgmScreen.Apply({ alert: { name: cgmScreen.screenText.Alerts.ImmediateAlert } });
-            await cgmScreen.DismissAlert('FG OK');
-            await cgmScreen.BackButton.tap();
         });
         afterAll(async () => {
-            let cgmScreen = await test.OpenCGMScreen();
+            cgmScreen = await test.OpenCGMScreen();
             await cgmScreen.Apply({ alert: { name: cgmScreen.screenText.Alerts.RetractAlertAbove } });
+            await cgmScreen.BackButton.tap();
+        });
+        it('dismiss immediate alert', async () => {
+            await waitFor(cgmScreen.Alert('FG OK')).toBeVisible().withTimeout(2000);
+            await cgmScreen.DismissAlert('FG OK');
             await cgmScreen.BackButton.tap();
         });
         it('and check error shown on status screen', async () => {
