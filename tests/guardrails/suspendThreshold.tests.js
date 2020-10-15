@@ -64,7 +64,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.HighSuspendThresholdGuardrailMessage()).toBeNotVisible();
+            await expect(screen.HighSuspendThresholdGuardrailMessage).toBeNotVisible();
         });
     });
     it('can close screen', async () => {

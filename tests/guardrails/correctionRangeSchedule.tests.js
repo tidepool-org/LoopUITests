@@ -67,7 +67,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.HighCorrectionValueGuardrailMessage()).toBeVisible();
+            await expect(screen.HighCorrectionValueGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MaximumLimit, () => {

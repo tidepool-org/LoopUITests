@@ -78,7 +78,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.HighCarbRatioGuardrailMessage()).toBeVisible();
+            await expect(screen.HighCarbRatioGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MaximumLimit, () => {
@@ -92,7 +92,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.HighCarbRatioGuardrailMessage()).toBeVisible();
+            await expect(screen.HighCarbRatioGuardrailMessage).toBeVisible();
         });
     });
     it('can cancel and close screen', async () => {

@@ -94,7 +94,7 @@ module.exports = (test) => {
                 await expect(screen.GuardrailWarningIconPicker).toBeNotVisible();
             });
             it(description.NoGuardrailMessage, async () => {
-                await expect(screen.LowBolusAmountGuardrailMessage()).toBeNotVisible();
+                await expect(screen.LowBolusAmountGuardrailMessage).toBeNotVisible();
             });
         });
         it('cancel and close', async () => {
