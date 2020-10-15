@@ -115,7 +115,7 @@ var Device = {
     }
 };
 
-var HomeScreen = {
+var StatusScreen = {
     AddPump: 'Add Pump',
     PumpError: 'Pump Error',
     PumpOcclusion: 'Pump Occlusion',
@@ -156,7 +156,15 @@ var HomeScreen = {
         Observed: 'Observed',
         GramsActiveCarbs: 'g COB',
         GramsTotalCarbs: 'g Total',
-    }
+    },
+    HUD: {
+        CGMSignalLoss: 'Signal Loss',
+        CGMGenericAlert: 'Alert: FG Title',
+        PumpCommsIssue: 'Comms Issue',
+        PumpNoInsulin: 'No Insulin',
+        BGTapToAdd: 'Tap to Add',
+        BGNoRecent: 'No Recent Glucose',
+    },
 };
 
 var CarbEntryScreen = {
@@ -281,5 +289,5 @@ module.exports = {
     carbEntryScreen: CarbEntryScreen,
     settingsScreen: SettingsScreen,
     customPresetScreen: CustomPresetScreen,
-    homeScreen: HomeScreen,
+    statusScreen: StatusScreen,
 };

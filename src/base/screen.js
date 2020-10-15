@@ -60,9 +60,6 @@ class Screen {
     get BackButton() {
         return match.accessible.ButtonBarButton(this.backLabel);
     }
-    get CancelButton() {
-        return match.accessible.ButtonBarButton(this.generalText.Cancel);
-    }
     get AddButton() {
         return match.accessible.Button(this.generalText.Add);
     }
@@ -84,38 +81,6 @@ class Screen {
         }
         return match.accessible.ClickableLabel(this.openLabel);
     }
-
-    async SaveAndClose() {
-        if (this.isEditable == false) {
-            return;
-        }
-        await this.SaveButton.tap();
-    }
-    async Add() {
-        if (this.isEditable == false) {
-            return;
-        }
-        await this.AddButton.tap();
-    }
-    async Edit() {
-        if (this.isEditable == false) {
-            return;
-        }
-        await this.EditButton.tap();
-    }
-
-
-    async Open() {
-        await this.OpenButton.tap();
-    }
-    async CancelAndClose() {
-        try {
-            await this.CancelButton.tap();
-        } catch (err) {
-            await this.BackButton.tap();
-        }
-    }
-
     async Authenticate() {
         if (this._deviceInfo.useFaceID) {
             await device.matchFace();

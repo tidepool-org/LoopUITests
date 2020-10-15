@@ -66,12 +66,8 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
                 current = sensitivities[index - 1];
             }
             await this.ApplyOne({ expected, current });
-            await this.Add();
+            await this.AddButton.tap();
         }
-    }
-    async Open() {
-        await super.Open();
-        return this;
     }
 }
 

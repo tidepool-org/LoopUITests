@@ -1,7 +1,7 @@
 module.exports = (test, cmgData) => {
     describe('signal loss', () => {
         let cgmScreen;
-        let homeScreen;
+        let statusScreen;
         beforeAll(async () => {
             cgmScreen = await test.OpenCGMScreen();
             await cgmScreen.Apply({ model: { name: cgmScreen.screenText.Model.SignalLoss } });
@@ -15,9 +15,9 @@ module.exports = (test, cmgData) => {
             await cgmScreen.DismissAlert(cgmScreen.generalText.Dismiss);
             await cgmScreen.BackButton.tap();
         });
-        it('and check error shown on home screen', async () => {
-            homeScreen = await test.OpenHomeScreen();
-            expect(homeScreen.HeaderSection.CGMSignalLossLabel()).toBeVisible();
+        it('and check error shown on status screen', async () => {
+            statusScreen = await test.OpenStatusScreen();
+            expect(statusScreen.HeaderSection.CGMSignalLossLabel).toBeVisible();
         });
     });
     describe('immediate alert', () => {
@@ -32,9 +32,9 @@ module.exports = (test, cmgData) => {
             await cgmScreen.Apply({ alert: { name: cgmScreen.screenText.Alerts.RetractAlertAbove } });
             await cgmScreen.BackButton.tap();
         });
-        it('and check error shown on home screen', async () => {
-            let homeScreen = await test.OpenHomeScreen();
-            expect(homeScreen.HeaderSection.CGMAlertLabel()).toBeVisible();
+        it('and check error shown on status screen', async () => {
+            let statusScreen = await test.OpenStatusScreen();
+            expect(statusScreen.HeaderSection.CGMAlertLabel).toBeVisible();
         });
     });
 };

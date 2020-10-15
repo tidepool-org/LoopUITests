@@ -22,7 +22,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.LowCarbRatioGuardrailMessage()).toBeVisible();
+            await expect(screen.LowCarbRatioGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MinimumWarning, () => {
@@ -36,7 +36,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.LowCarbRatioGuardrailMessage()).toBeVisible();
+            await expect(screen.LowCarbRatioGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MinimumNoWarning, () => {
@@ -50,7 +50,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.LowCarbRatioGuardrailMessage()).toBeNotVisible();
+            await expect(screen.LowCarbRatioGuardrailMessage).toBeNotVisible();
         });
     });
     describe(description.MaximumNoWarning, () => {
@@ -64,7 +64,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.LowCarbRatioGuardrailMessage()).toBeNotVisible();
+            await expect(screen.LowCarbRatioGuardrailMessage).toBeNotVisible();
         });
     });
     describe(description.MaximumWarning, () => {

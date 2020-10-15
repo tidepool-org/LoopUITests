@@ -1,47 +1,53 @@
 module.exports = (test) => {
-    describe('Home', () => {
-        var screen;
+    describe('Status', () => {
+        var statusScreen;
         it('has a Active Carbohydrates Label', async () => {
-            screen = await test.OpenHomeScreen();
+            statusScreen = await test.OpenStatusScreen();
         });
         it('has a Active Carbohydrates Label', async () => {
-            await expect(screen.ActiveCarbohydratesLabel).toBeVisible();
+            await expect(statusScreen.ActiveCarbohydratesLabel).toBeVisible();
         });
         it('has a Active Insulin Label', async () => {
-            await expect(screen.ActiveInsulinLabel).toBeVisible();
+            await expect(statusScreen.ActiveInsulinLabel).toBeVisible();
         });
         it('has a Insulin Delivery Label', async () => {
-            await expect(screen.InsulinDeliveryLabel).toBeVisible();
+            await expect(statusScreen.InsulinDeliveryLabel).toBeVisible();
         });
         it('has a Glucose Label', async () => {
-            await expect(screen.GlucoseLabel).toBeVisible();
+            await expect(statusScreen.GlucoseLabel).toBeVisible();
         });
         it('has a Settings Button', async () => {
-            await expect(screen.SettingsButton).toBeVisible();
+            await expect(statusScreen.SettingsButton).toBeVisible();
         });
         it('has a Add Meal Button', async () => {
-            await expect(screen.AddMealButton).toBeVisible();
+            await expect(statusScreen.AddMealButton).toBeVisible();
         });
         it('has a Bolus Button', async () => {
-            await expect(screen.BolusButton).toBeVisible();
+            await expect(statusScreen.BolusButton).toBeVisible();
         });
         describe('HUD', () => {
             it('add pump button', async () => {
-                await expect(screen.HeaderSection.Devices.AddPumpButton()).toBeVisible();
+                await expect(statusScreen.HeaderSection.Devices.AddPumpButton()).toBeVisible();
             });
             it('add CGM button', async () => {
-                await expect(screen.HeaderSection.Devices.AddCGMButton()).toBeVisible();
+                await expect(statusScreen.HeaderSection.Devices.AddCGMButton()).toBeVisible();
             });
             it('Loop button', async () => {
-                await expect(screen.HeaderSection.LoopIcon).toBeVisible();
+                await expect(statusScreen.HeaderSection.LoopIcon).toBeVisible();
+            });
+            it('Tap to add blood glucose button', async () => {
+                await expect(statusScreen.HeaderSection.EnterBloodGlucoseButton).toBeVisible();
+            });
+            it('No recent blood glucose label', async () => {
+                await expect(statusScreen.HeaderSection.NoRecentBloodGlucoseLabel).toBeVisible();
             });
         });
     });
     describe('Insulin Delivery Chart', () => {
         var insulinDeliveryChart;
         beforeAll(async () => {
-            let homeScreen = await test.OpenHomeScreen();
-            insulinDeliveryChart = await homeScreen.OpenInsulinDeliveryChart();
+            let statusScreen = await test.OpenStatusScreen();
+            insulinDeliveryChart = await statusScreen.OpenInsulinDeliveryChart();
         });
         it('has a header', async () => {
             await expect(insulinDeliveryChart.Header).toBeVisible();
@@ -65,8 +71,8 @@ module.exports = (test) => {
     describe('Active Carbohydrates Chart', () => {
         let activeCarbohydratesChart;
         beforeAll(async () => {
-            let homeScreen = await test.OpenHomeScreen();
-            activeCarbohydratesChart = await homeScreen.OpenActiveCarbohydratesChart();
+            let statusScreen = await test.OpenStatusScreen();
+            activeCarbohydratesChart = await statusScreen.OpenActiveCarbohydratesChart();
         });
         it('has a header', async () => {
             await expect(activeCarbohydratesChart.Header).toBeVisible();
@@ -93,8 +99,8 @@ module.exports = (test) => {
     describe('Active Insulin Chart', () => {
         let activeInsulinChart;
         beforeAll(async () => {
-            let homeScreen = await test.OpenHomeScreen();
-            activeInsulinChart = await homeScreen.OpenActiveInsulinChart();
+            let statusScreen = await test.OpenStatusScreen();
+            activeInsulinChart = await statusScreen.OpenActiveInsulinChart();
         });
         it('has a header', async () => {
             await expect(activeInsulinChart.Header).toBeVisible();
@@ -118,8 +124,8 @@ module.exports = (test) => {
     describe('Glucose Chart', () => {
         let glucoseChart;
         beforeAll(async () => {
-            let homeScreen = await test.OpenHomeScreen();
-            glucoseChart = await homeScreen.OpenGlucoseChart();
+            let statusScreen = await test.OpenStatusScreen();
+            glucoseChart = await statusScreen.OpenGlucoseChart();
         });
         it('has a header', async () => {
             await expect(glucoseChart.Header).toBeVisible();

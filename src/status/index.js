@@ -12,7 +12,7 @@ const CustomPresetScreen = require('../customPreset/index');
 
 const Devices = require('../devices/index');
 
-class HomeScreen {
+class StatusScreen {
     constructor(language, settingsScreenDefaults) {
         this._glucoseScreen = new GlucoseScreen(language);
         this._activeInsulinScreen = new ActiveInsulinScreen(language);
@@ -88,4 +88,4 @@ class HomeScreen {
     }
 }
 
-module.exports = HomeScreen;
+module.exports = StatusScreen;

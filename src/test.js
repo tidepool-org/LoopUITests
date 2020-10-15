@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const HomeScreen = require('./home/index');
+const StatusScreen = require('./status/index');
 const { screenName } = require('./properties');
 const Utilities = require('./utilities');
 
@@ -52,7 +52,7 @@ class Test {
         this._simulators = setup.simulators;
         this._closedLoop = setup.enableClosedLoop;
         this._cgmData = setup.cgmData;
-        this._startScreen = screenName.home;
+        this._startScreen = screenName.status;
         return this;
     }
     async _setupCGMData() {
@@ -104,7 +104,7 @@ class Test {
         if (!this._screenDefaults) {
             throw 'screenDefaults are required!';
         }
-        this.homeScreen = new HomeScreen(this._language, this._screenDefaults);
+        this.statusScreen = new StatusScreen(this._language, this._screenDefaults);
         this.LoopUtilities = new Utilities(this);
         await this._launchLoop();
         if (this._therapySettings) {
@@ -149,31 +149,31 @@ class Test {
         return this._limits[settingType];
     }
     async OpenPumpScreen() {
-        let screen = await this.homeScreen.HeaderSection.Devices.OpenPumpScreen();
+        let screen = await this.statusScreen.HeaderSection.Devices.OpenPumpScreen();
         return screen;
     }
     async OpenCGMScreen() {
-        let screen = await this.homeScreen.HeaderSection.Devices.OpenCGMScreen();
+        let screen = await this.statusScreen.HeaderSection.Devices.OpenCGMScreen();
         return screen;
     }
     async OpenSettingsScreen() {
-        return this.homeScreen.OpenSettingsScreen();
+        return this.statusScreen.OpenSettingsScreen();
     }
     async OpenTherapySettingsScreen() {
         let settings = await this.OpenSettingsScreen();
         return settings.OpenTherapySettings();
     }
     async OpenCarbEntryScreen() {
-        return this.homeScreen.OpenCarbEntryScreen();
+        return this.statusScreen.OpenCarbEntryScreen();
     }
     async OpenBolusScreen() {
-        return this.homeScreen.OpenBolusScreen();
+        return this.statusScreen.OpenBolusScreen();
     }
     async OpenCustomPresetScreen() {
-        return this.homeScreen.OpenCustomPresetScreen();
+        return this.statusScreen.OpenCustomPresetScreen();
     }
-    async OpenHomeScreen() {
-        return this.homeScreen;
+    async OpenStatusScreen() {
+        return this.statusScreen;
     }
 }
 

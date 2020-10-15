@@ -27,7 +27,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.LowCorrectionValueGuardrailMessage()).toBeNotVisible();
+            await expect(screen.LowCorrectionValueGuardrailMessage).toBeNotVisible();
         });
     });
     describe(description.MaximumNoWarning, () => {
@@ -47,7 +47,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.LowCorrectionValueGuardrailMessage()).toBeNotVisible();
+            await expect(screen.LowCorrectionValueGuardrailMessage).toBeNotVisible();
         });
     });
     describe(description.MaximumWarning, () => {
@@ -87,7 +87,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.HighCorrectionValueGuardrailMessage()).toBeVisible();
+            await expect(screen.HighCorrectionValueGuardrailMessage).toBeVisible();
         });
     });
     it('can close screen', async () => {

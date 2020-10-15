@@ -1,9 +1,9 @@
 module.exports = (test) => {
     var screen;
-    var homeScreen;
+    var statusScreen;
     beforeAll(async () => {
-        homeScreen = await test.OpenHomeScreen();
-        screen = await homeScreen.HeaderSection.Devices.AddG6();
+        statusScreen = await test.OpenStatusScreen();
+        screen = await statusScreen.HeaderSection.Devices.AddG6();
     });
     afterAll(async () => {
         await screen.BackButton.tap();

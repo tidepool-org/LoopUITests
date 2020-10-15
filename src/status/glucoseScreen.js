@@ -5,14 +5,14 @@ const base = require('../base/index');
 class GlucoseScreen extends base.Screen {
     constructor(language) {
         super({
-            screenText: language.homeScreen.GlucoseScreen,
+            screenText: language.statusScreen.GlucoseScreen,
             generalText: language.general,
             header: {
                 backLabel: language.general.Status,
             },
             open: {
                 isBtn: false,
-                label: language.homeScreen.GlucoseScreen.Glucose,
+                label: language.statusScreen.GlucoseScreen.Glucose,
             },
         });
     }

@@ -81,11 +81,11 @@ module.exports = class Utilities {
         await this.loadTherapySettings();
     }
     async addUnconfiguredPump() {
-        let homeScreen = await this._testApp.OpenHomeScreen();
-        await homeScreen.HeaderSection.Devices.AddPump();
+        let statusScreen = await this._testApp.OpenStatusScreen();
+        await statusScreen.HeaderSection.Devices.AddPump();
     }
     async addCGM() {
-        let homeScreen = await this._testApp.OpenHomeScreen();
-        await homeScreen.HeaderSection.Devices.AddCGM();
+        let statusScreen = await this._testApp.OpenStatusScreen();
+        await statusScreen.HeaderSection.Devices.AddCGM();
     }
 }

@@ -3,9 +3,6 @@ const match = require('../match');
 const base = require('../base/index');
 const { numericPartsFromString } = require('./utils');
 
-
-
-
 class BasalRatesScreen extends base.EntriesScreen {
     constructor(language, config) {
         super({
@@ -69,11 +66,6 @@ class BasalRatesScreen extends base.EntriesScreen {
     async ApplyAll(rates) {
         await super.ApplyAll(rates, this.ApplyOne);
     }
-    async Open() {
-        await super.Open();
-        return this;
-    }
-
 }
 
 module.exports = BasalRatesScreen;

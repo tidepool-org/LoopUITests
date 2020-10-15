@@ -73,7 +73,7 @@ class CarbRatioScreen extends base.EntriesScreen {
                 current = ratios[index - 1];
             }
             await this.ApplyOne({ expected, current });
-            await this.Add();
+            await this.AddButton.tap();
         }
     }
 }

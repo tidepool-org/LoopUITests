@@ -45,7 +45,7 @@ module.exports = (test) => {
                     });
                 });
                 it('can save and authenticate', async () => {
-                    await correctionRangeScreen.SaveAndClose();
+                    await correctionRangeScreen.SaveButton.tap();
                     await correctionRangeScreen.Authenticate();
                 });
             });
@@ -54,10 +54,10 @@ module.exports = (test) => {
             });
         });
     });
-    describe('home', () => {
+    describe('status', () => {
         it('can check loop status', async () => {
-            var homeScreen = await test.OpenHomeScreen();
-            await homeScreen.HeaderSection.Loop();
+            var statusScreen = await test.OpenStatusScreen();
+            await statusScreen.HeaderSection.Loop();
         });
     });
     describe('bolus', () => {

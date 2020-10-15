@@ -1,17 +1,17 @@
 const match = require('../match');
 const base = require('../base/index');
 
-class InsulinDeliveryScreen extends base.Screen {
+class ActiveInsulinScreen extends base.Screen {
     constructor(language) {
         super({
-            screenText: language.homeScreen.InsulinDeliveryScreen,
+            screenText: language.statusScreen.ActiveInsulinScreen,
             generalText: language.general,
             header: {
                 backLabel: language.general.Status,
             },
             open: {
                 isBtn: false,
-                label: language.homeScreen.InsulinDeliveryScreen.Header,
+                label: language.statusScreen.ActiveInsulinScreen.Header,
             },
         });
     }
@@ -29,4 +29,4 @@ class InsulinDeliveryScreen extends base.Screen {
     }
 }
 
-module.exports = InsulinDeliveryScreen;
+module.exports = ActiveInsulinScreen;

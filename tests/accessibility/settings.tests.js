@@ -1,3 +1,15 @@
+var _testDescription = {
+    hasHeader: 'has a header element',
+    hasInfoLabel: 'has an information label',
+    hasInfoButton: 'has more information button',
+    hasPlusButton: "has a '+' button",
+    hasBackButton: 'has a back button',
+    hasSaveButton: 'has a save button',
+    hasEditButton: 'has an edit button',
+    closeScreen: 'close the screen without saving',
+    openScreen: 'open therapy setting'
+};
+
 module.exports = (test, quick) => {
     let settingsScreen;
     describe('Settings', () => {
@@ -119,109 +131,109 @@ module.exports = (test, quick) => {
             describe('Settings from bottom', () => {
                 describe('1 - Insulin Sensitivities', () => {
                     let insulinSensitivitiesScreen;
-                    it('open', async () => {
+                    it(_testDescription.openScreen, async () => {
                         therapySettingsScreen = await settingsScreen.OpenTherapySettings();
                         await therapySettingsScreen.SwipeUpUntilVisible(therapySettingsScreen.InsulinSensitivitiesLabel);
                         insulinSensitivitiesScreen = await therapySettingsScreen.OpenInsulinSensitivitiesScreen();
                     });
                     if (!quick) {
-                        it('has a header', async () => {
+                        it(_testDescription.hasHeader, async () => {
                             await expect(insulinSensitivitiesScreen.Header).toBeVisible();
                         });
-                        it('has an info label', async () => {
+                        it(_testDescription.hasInfoLabel, async () => {
                             await expect(insulinSensitivitiesScreen.InfoLabel).toBeVisible();
                         });
-                        it('has an info button', async () => {
+                        it(_testDescription.hasInfoButton, async () => {
                             await expect(insulinSensitivitiesScreen.InfoButton).toBeVisible();
                         });
-                        it('has a + button', async () => {
+                        it(_testDescription.hasPlusButton, async () => {
                             await expect(insulinSensitivitiesScreen.PlusButton).toBeVisible();
                         });
-                        it('has a edit button', async () => {
+                        it(_testDescription.hasEditButton, async () => {
                             await expect(insulinSensitivitiesScreen.EditButton).toBeVisible();
                         });
-                        it('has a back button', async () => {
+                        it(_testDescription.hasBackButton, async () => {
                             await expect(insulinSensitivitiesScreen.BackButton).toBeVisible();
                         });
-                        it('has a save button', async () => {
+                        it(_testDescription.hasSaveButton, async () => {
                             await expect(insulinSensitivitiesScreen.SaveButton).toBeVisible();
                         });
                     }
-                    it('cancel and close', async () => {
-                        await insulinSensitivitiesScreen.CancelAndClose();
+                    it(_testDescription.closeScreen, async () => {
+                        await insulinSensitivitiesScreen.BackButton.tap();
                         await therapySettingsScreen.BackButton.tap();
                     });
                 });
                 describe('2 - Carb Ratio', () => {
                     let carbRatioScreen;
-                    it('open', async () => {
+                    it(_testDescription.openScreen, async () => {
                         therapySettingsScreen = await settingsScreen.OpenTherapySettings();
                         await therapySettingsScreen.SwipeUpUntilVisible(therapySettingsScreen.CarbRatiosLabel);
                         carbRatioScreen = await therapySettingsScreen.OpenCarbRatioScreen();
                     });
                     if (!quick) {
-                        it('has a header', async () => {
+                        it(_testDescription.hasHeader, async () => {
                             await expect(carbRatioScreen.Header).toBeVisible();
                         });
-                        it('has an info label', async () => {
+                        it(_testDescription.hasInfoLabel, async () => {
                             await expect(carbRatioScreen.InfoLabel).toBeVisible();
                         });
-                        it('has an info button', async () => {
+                        it(_testDescription.hasInfoButton, async () => {
                             await expect(carbRatioScreen.InfoButton).toBeVisible();
                         });
-                        it('has a + button', async () => {
+                        it(_testDescription.hasPlusButton, async () => {
                             await expect(carbRatioScreen.PlusButton).toBeVisible();
                         });
-                        it('has a edit button', async () => {
+                        it(_testDescription.hasEditButton, async () => {
                             await expect(carbRatioScreen.EditButton).toBeVisible();
                         });
-                        it('has a cancel button', async () => {
+                        it(_testDescription.hasBackButton, async () => {
                             await expect(carbRatioScreen.BackButton).toBeVisible();
                         });
-                        it('has a save button', async () => {
+                        it(_testDescription.hasSaveButton, async () => {
                             await expect(carbRatioScreen.SaveButton).toBeVisible();
                         });
                     }
-                    it('cancel and close', async () => {
-                        await carbRatioScreen.CancelAndClose();
+                    it(_testDescription.closeScreen, async () => {
+                        await carbRatioScreen.BackButton.tap();
                         await therapySettingsScreen.BackButton.tap();
                     });
                 });
                 describe('3 - Insulin Model', () => {
                     let insulinModelScreen;
-                    it('open', async () => {
+                    it(_testDescription.openScreen, async () => {
                         therapySettingsScreen = await settingsScreen.OpenTherapySettings();
                         await therapySettingsScreen.SwipeUpUntilVisible(therapySettingsScreen.InsulinModelLabel);
                         insulinModelScreen = await therapySettingsScreen.OpenInsulinModelScreen();
                     });
                     if (!quick) {
-                        it('has a header', async () => {
+                        it(_testDescription.hasHeader, async () => {
                             await expect(insulinModelScreen.Header).toExist();
                         });
-                        it('has a back button', async () => {
+                        it(_testDescription.hasBackButton, async () => {
                             await expect(insulinModelScreen.BackButton).toExist();
                         });
                     }
-                    it('close', async () => {
+                    it(_testDescription.closeScreen, async () => {
                         await insulinModelScreen.BackButton.tap();
                         await therapySettingsScreen.BackButton.tap();
                     });
                 });
                 describe('4 - Delivery Limits', () => {
                     var deliveryLimitsScreen;
-                    it('open', async () => {
+                    it(_testDescription.openScreen, async () => {
                         therapySettingsScreen = await settingsScreen.OpenTherapySettings();
                         await therapySettingsScreen.SwipeUpUntilVisible(therapySettingsScreen.DeliveryLimitsLabel);
                         deliveryLimitsScreen = await therapySettingsScreen.OpenDeliveryLimitsScreen();
                     });
                     if (!quick) {
-                        it('has a header', async () => {
+                        it(_testDescription.hasHeader, async () => {
                             await expect(deliveryLimitsScreen.Header).toExist();
                         });
-                        it('has a cancel button', async () => {
+                        it(_testDescription.hasBackButton, async () => {
                             await expect(deliveryLimitsScreen.BackButton).toExist();
                         });
-                        it('has a save button', async () => {
+                        it(_testDescription.hasSaveButton, async () => {
                             await expect(deliveryLimitsScreen.SaveButton).toExist();
                         });
                         it('has a max bolus label ', async () => {
@@ -237,107 +249,107 @@ module.exports = (test, quick) => {
                             await expect(deliveryLimitsScreen.MaxBasalRateInfo).toExist();
                         });
                     }
-                    it('cancel and close', async () => {
-                        await deliveryLimitsScreen.CancelAndClose();
+                    it(_testDescription.closeScreen, async () => {
+                        await deliveryLimitsScreen.BackButton.tap();
                         await therapySettingsScreen.BackButton.tap();
                     });
                 });
                 describe('5 - Basal Rate', () => {
                     let basalRateScreen;
-                    it('open', async () => {
+                    it(_testDescription.openScreen, async () => {
                         therapySettingsScreen = await settingsScreen.OpenTherapySettings();
                         await therapySettingsScreen.SwipeUpUntilVisible(therapySettingsScreen.BasalRateLabel);
                         basalRateScreen = await therapySettingsScreen.OpenBasalRateScreen();
                     });
                     if (!quick) {
-                        it('has a header', async () => {
+                        it(_testDescription.hasHeader, async () => {
                             await expect(basalRateScreen.Header).toBeVisible();
                         });
-                        it('has an info label', async () => {
+                        it(_testDescription.hasInfoLabel, async () => {
                             await expect(basalRateScreen.InfoLabel).toBeVisible();
                         });
-                        it('has an info button', async () => {
+                        it(_testDescription.hasInfoButton, async () => {
                             await expect(basalRateScreen.InfoButton).toBeVisible();
                         });
-                        it('has a + button', async () => {
+                        it(_testDescription.hasPlusButton, async () => {
                             await expect(basalRateScreen.PlusButton).toBeVisible();
                         });
-                        it('has a edit button', async () => {
+                        it(_testDescription.hasEditButton, async () => {
                             await expect(basalRateScreen.EditButton).toBeVisible();
                         });
-                        it('has a cancel button', async () => {
+                        it(_testDescription.hasBackButton, async () => {
                             await expect(basalRateScreen.BackButton).toBeVisible();
                         });
-                        it('has a save button', async () => {
+                        it(_testDescription.hasSaveButton, async () => {
                             await expect(basalRateScreen.SaveButton).toBeVisible();
                         });
                     }
-                    it('cancel and close', async () => {
-                        await basalRateScreen.CancelAndClose();
+                    it(_testDescription.closeScreen, async () => {
+                        await basalRateScreen.BackButton.tap();
                         await therapySettingsScreen.BackButton.tap();
                     });
                 });
                 describe('6 - Correction Range', () => {
                     let correctionRangeScreen;
-                    it('open', async () => {
+                    it(_testDescription.openScreen, async () => {
                         therapySettingsScreen = await settingsScreen.OpenTherapySettings();
                         await therapySettingsScreen.SwipeUpUntilVisible(therapySettingsScreen.CorrectionRangeLabel);
                         correctionRangeScreen = await therapySettingsScreen.OpenCorrectionRangeScreen();
                     });
                     if (!quick) {
-                        it('has a header', async () => {
+                        it(_testDescription.hasHeader, async () => {
                             await expect(correctionRangeScreen.Header).toBeVisible();
                         });
-                        it('has an info label', async () => {
+                        it(_testDescription.hasInfoLabel, async () => {
                             await expect(correctionRangeScreen.InfoLabel).toBeVisible();
                         });
-                        it('has an info button', async () => {
+                        it(_testDescription.hasInfoButton, async () => {
                             await expect(correctionRangeScreen.InfoButton).toBeVisible();
                         });
-                        it('has a + button', async () => {
+                        it(_testDescription.hasPlusButton, async () => {
                             await expect(correctionRangeScreen.PlusButton).toBeVisible();
                         });
-                        it('has a edit button', async () => {
+                        it(_testDescription.hasEditButton, async () => {
                             await expect(correctionRangeScreen.EditButton).toBeVisible();
                         });
-                        it('has a back button', async () => {
+                        it(_testDescription.hasBackButton, async () => {
                             await expect(correctionRangeScreen.BackButton).toBeVisible();
                         });
-                        it('has a save button', async () => {
+                        it(_testDescription.hasSaveButton, async () => {
                             await expect(correctionRangeScreen.SaveButton).toBeVisible();
                         });
                     }
-                    it('clean up and close', async () => {
-                        await correctionRangeScreen.CancelAndClose();
+                    it(_testDescription.closeScreen, async () => {
+                        await correctionRangeScreen.BackButton.tap();
                         await therapySettingsScreen.BackButton.tap();
                     });
                 });
                 describe('7 - Suspend Threshold', () => {
                     let suspendThresholdScreen;
-                    it('open', async () => {
+                    it(_testDescription.openScreen, async () => {
                         therapySettingsScreen = await settingsScreen.OpenTherapySettings();
                         await therapySettingsScreen.SwipeUpUntilVisible(therapySettingsScreen.SuspendThresholdLabel);
                         suspendThresholdScreen = await therapySettingsScreen.OpenSuspendThresholdScreen();
                     });
                     if (!quick) {
-                        it('has a header', async () => {
+                        it(_testDescription.hasHeader, async () => {
                             await expect(suspendThresholdScreen.Header).toBeVisible();
                         });
-                        it('has an info label', async () => {
+                        it(_testDescription.hasInfoLabel, async () => {
                             await expect(suspendThresholdScreen.InfoLabel).toBeVisible();
                         });
-                        it('has an info button', async () => {
+                        it(_testDescription.hasInfoButton, async () => {
                             await expect(suspendThresholdScreen.InfoButton).toBeVisible();
                         });
-                        it('has a back button', async () => {
+                        it(_testDescription.hasBackButton, async () => {
                             await expect(suspendThresholdScreen.BackButton).toBeVisible();
                         });
-                        it('has a save button', async () => {
+                        it(_testDescription.hasSaveButton, async () => {
                             await expect(suspendThresholdScreen.SaveButton).toBeVisible();
                         });
                     }
-                    it('clean up and close', async () => {
-                        await suspendThresholdScreen.CancelAndClose();
+                    it(_testDescription.closeScreen, async () => {
+                        await suspendThresholdScreen.BackButton.tap();
                         await therapySettingsScreen.BackButton.tap();
                     });
                 });

@@ -1,13 +1,13 @@
 module.exports = (test) => {
     describe('generate error on suspend', () => {
         let pumpScreen;
-        let homeScreen;
+        let statusScreen;
         beforeAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.Apply({ errorOnSuspend: true });
             await pumpScreen.SuspendDelivery();
         });
-        it('and check error shown on home screen', async () => {
+        it('and check error shown on status screen', async () => {
             await pumpScreen.HasAlert();
         });
         it('then dismiss the error', async () => {
@@ -17,70 +17,70 @@ module.exports = (test) => {
             await pumpScreen.Apply({ errorOnSuspend: false });
             await pumpScreen.BackButton.tap();
         });
-        it('and check no error on home screen', async () => {
-            homeScreen = await test.OpenHomeScreen();
-            await expect(homeScreen.HeaderSection.PumpErrorLabel()).toBeNotVisible();
+        it('and check no error on status screen', async () => {
+            statusScreen = await test.OpenStatusScreen();
+            await expect(statusScreen.HeaderSection.PumpErrorLabel).toBeNotVisible();
         });
         it('and check no loop icon error', async () => {
-            await homeScreen.HeaderSection.ExpectNoLoopIconAlert();
+            await statusScreen.HeaderSection.ExpectNoLoopIconAlert();
         });
     });
     describe('generate general pump error', () => {
-        let homeScreen;
+        let statusScreen;
         let pumpScreen;
         beforeAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.CausePumpError();
             await pumpScreen.BackButton.tap();
-            homeScreen = await test.OpenHomeScreen();
+            statusScreen = await test.OpenStatusScreen();
         });
         afterAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.ResolvePumpError();
             await pumpScreen.BackButton.tap();
         });
-        it('and check error shown on home screen', async () => {
-            await expect(homeScreen.HeaderSection.PumpErrorLabel()).toBeVisible();
+        it('and check error shown on status screen', async () => {
+            await expect(statusScreen.HeaderSection.PumpErrorLabel()).toBeVisible();
         });
         it('and check no loop icon error', async () => {
-            await homeScreen.HeaderSection.ExpectNoLoopIconAlert();
+            await statusScreen.HeaderSection.ExpectNoLoopIconAlert();
         });
     });
     describe('generate occlusion error', () => {
-        let homeScreen;
+        let statusScreen;
         let pumpScreen;
         beforeAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.DetectOcclusionError();
             await pumpScreen.BackButton.tap();
-            homeScreen = await test.OpenHomeScreen();
+            statusScreen = await test.OpenStatusScreen();
         });
         afterAll(async () => {
             pumpScreen = await test.OpenPumpScreen();
             await pumpScreen.ResolveOcclusionError();
             await pumpScreen.BackButton.tap();
         });
-        it('and check error shown on home screen', async () => {
-            await expect(homeScreen.HeaderSection.PumpOcclusionLabel()).toBeNotVisible();
+        it('and check error shown on status screen', async () => {
+            await expect(statusScreen.HeaderSection.PumpOcclusionLabel).toBeNotVisible();
         });
         it('and check no loop icon error', async () => {
-            await homeScreen.HeaderSection.ExpectNoLoopIconAlert();
+            await statusScreen.HeaderSection.ExpectNoLoopIconAlert();
         });
     });
     describe('generate error when no insulin', () => {
-        let homeScreen;
+        let statusScreen;
         beforeAll(async () => {
             await test.LoopUtilities.updateInsulinReservoir(0);
         });
         afterAll(async () => {
             await test.LoopUtilities.updateInsulinReservoir(150);
         });
-        it('and check error shown on home screen', async () => {
-            homeScreen = await test.OpenHomeScreen();
-            await expect(homeScreen.HeaderSection.PumpNoInsulinLabel()).toBeVisible();
+        it('and check error shown on status screen', async () => {
+            statusScreen = await test.OpenStatusScreen();
+            await expect(statusScreen.HeaderSection.PumpNoInsulinLabel).toBeVisible();
         });
         it('and check no loop icon error', async () => {
-            await homeScreen.HeaderSection.ExpectNoLoopIconAlert();
+            await statusScreen.HeaderSection.ExpectNoLoopIconAlert();
         });
     });
 };

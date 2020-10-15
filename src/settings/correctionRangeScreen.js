@@ -76,12 +76,8 @@ class CorrectionRangeScreen extends base.EntriesScreen {
                 current = ranges[index - 1];
             }
             await this.ApplyOne({ expected, current });
-            await this.Add();
+            await this.AddButton.tap();
         }
-    }
-    async Open() {
-        await super.Open();
-        return this;
     }
 }
 

@@ -57,10 +57,6 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     get HighBolusAmountGuardrailMessage() {
         return this.GuardrailMessage(this.screenText.HighBolusAmountGuardrailMessage);
     }
-    async Open() {
-        await super.Open();
-        return this;
-    }
     async OpenBasalRatePicker() {
         await this.MaxBasalRateLabel.tap();
     }

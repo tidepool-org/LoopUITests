@@ -27,10 +27,6 @@ class PremealRangeScreen extends base.EntriesScreen {
     get Header() {
         return match.accessible.TextLabel(this.screenText.Header);
     }
-    async Open() {
-        await super.Open();
-        return this;
-    }
 }
 
 module.exports = PremealRangeScreen;

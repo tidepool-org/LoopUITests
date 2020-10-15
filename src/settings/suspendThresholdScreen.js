@@ -53,10 +53,6 @@ class SuspendThresholdScreen extends base.EntryScreen {
         );
 
     }
-    async Open() {
-        await super.Open();
-        return this;
-    }
 }
 
 module.exports = SuspendThresholdScreen;

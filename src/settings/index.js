@@ -59,12 +59,12 @@ class SettingsScreen extends base.Screen {
         }
     }
     async OpenTherapySettings() {
-        await this._therapyScreen.Open();
+        await this._therapyScreen.OpenButton.tap();
         return this._therapyScreen;
     }
     async OpenSupport() {
         await this.SwipeUpUntilVisible(this.SupportLabel);
-        await this._supportScreen.Open();
+        await this._supportScreen.OpenButton.tap();
         return this._supportScreen;
     }
     async OpenDeliveryLimitsScreen() {
@@ -93,7 +93,7 @@ class SettingsScreen extends base.Screen {
         await limits.OpenBolusPicker();
         await limits.ApplyBolus(deliveryLimits.bolus);
         await limits.OpenBolusPicker();
-        await limits.SaveAndClose();
+        await limits.SaveButton.tap();
         await limits.Authenticate();
     }
     /**
@@ -106,8 +106,8 @@ class SettingsScreen extends base.Screen {
         var correction = await this._therapyScreen.OpenCorrectionRangeScreen();
         await correction.PlusButton.tap();
         await correction.ApplyOne(correctionRange);
-        await correction.Add();
-        await correction.SaveAndClose();
+        await correction.AddButton.tap();
+        await correction.SaveButton.tap();
         await correction.Authenticate();
     }
 }
