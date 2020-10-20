@@ -118,6 +118,10 @@ class Test {
         await this._setLoopMode();
         await this._setStartScreen();
     }
+    async closeAndRelaunch() {
+        await device.sendToHome();
+        await device.launchApp({ newInstance: false });
+    }
     async _setLoopMode() {
         if (this._closedLoop) {
             await this.LoopUtilities.closeLoop();

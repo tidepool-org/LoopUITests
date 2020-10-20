@@ -1,3 +1,5 @@
+const match = require("../../src/match");
+
 module.exports = (test) => {
     describe('signal loss', () => {
         let cgmScreen;
@@ -32,7 +34,7 @@ module.exports = (test) => {
             await cgmScreen.BackButton.tap();
         });
         it('dismiss immediate alert', async () => {
-            await waitFor(cgmScreen.Alert('FG OK')).toBeVisible().withTimeout(2000);
+            match.ElementIsVisible(cgmScreen.Alert('FG OK'));
             await cgmScreen.DismissAlert('FG OK');
             await cgmScreen.BackButton.tap();
         });
