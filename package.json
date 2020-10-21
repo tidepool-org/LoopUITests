@@ -27,6 +27,7 @@
     "detox": "^16.9.2",
     "eslint": "^7.11.0",
     "jest": "^25.5.4",
+    "jest-html-reporters": "^2.1.0",
     "jest-junit": "^10.0.0"
   },
   "detox": {
