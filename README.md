@@ -16,25 +16,36 @@ All tests
 
 ## Device Configurations
 
+[Comparison iPhone SE 2 vs iPhone 6 vs iPhone 11 pro](https://www.apple.com/iphone/compare/?device1=iphone6&device2=iphoneSE2ndgen&device3=iphone12)
+
 - iPhone 11 Pro `ios.sim.debug.iphone-11pro`
-- iPhone 6 `ios.sim.debug.iphone-6`
 - iPhone SE (2nd generation) `ios.sim.debug.iphone-se-2`
+- iPhone Touch (7th generation) `ios.sim.debug.iphone-touch-7`
 
 ### Smoke test
-Accessibility tests that run through the screen elements making sure the are present
+Accessibility and tests that run through the screen elements making sure the are present
 
-- `npm run test-smoke1`
-- `npm run test-smoke2`
+- `npm run test_smoke1`
+- `npm run test_smoke2`
+- `npm run test_smoke3`
 
 ### Functional test
 Test basic functionality of the app. Opening, closing of screens, adding and removeing devices, clicking buttons etc ...
 
-- `npm run test-functional`
+- `npm run test_functional_1`
+- `npm run test_functional_2`
 
 ### Guardrails test
 Test the loop app settings guardrails limits
 
-- `npm run test-guardrails`
+- `npm run test_guardrail_1`
+- `npm run test_guardrail_2`
+
+### Errors test
+Test the loop app interacts with device errors
+
+- `npm run test_error_1`
+- `npm run test_error_2`
 
 ## Debugging
 
@@ -58,18 +69,19 @@ Do *not* install `applesimutils` from Homebrew. Use the custom, pre-built binary
 
 [Scenarios Docs](https://github.com/LoopKit/Loop/blob/master/Documentation/Testing/Scenarios.md)
 
-### Scenarios
-
 - `./scenarios/flat_cgm_trace.json` flat cgm trace, no insulin or carb events
 
 ## Testing guidelines
 
-https://developer.mozilla.org/en-US/docs/Web/Accessibility/Mobile_accessibility_checklist
+
+### Mobile
+
 http://pauljadam.com/demos/mobilechecklist.html
 
 
+### Practicle test pyramid
 
-https://martinfowler.com/articles/practical-test-pyramid.html#UiTests
+[UI Tests](https://martinfowler.com/articles/practical-test-pyramid.html#UiTests)
 
 > With web interfaces there's multiple aspects that you probably want to test around your UI: behaviour, layout, usability
 
@@ -77,7 +89,7 @@ https://martinfowler.com/articles/practical-test-pyramid.html#UiTests
     - units (mgdL, mgL)
     - device format (touch, )
 
-https://martinfowler.com/articles/practical-test-pyramid.html#End-to-endTests
+[End to end tests](https://martinfowler.com/articles/practical-test-pyramid.html#End-to-endTests)
 
 > Think about the high-value interactions users will have with your application. Try to come up with user journeys that define the core value of your product and translate the most important steps of these user journeys into automated end-to-end tests.
 
@@ -96,8 +108,7 @@ https://martinfowler.com/articles/practical-test-pyramid.html#End-to-endTests
 3)
 - errors
 
-
-https://martinfowler.com/articles/practical-test-pyramid.html#AvoidTestDuplication
+[Avoid duplication](https://martinfowler.com/articles/practical-test-pyramid.html#AvoidTestDuplication)
 
 > If a higher-level test spots an error and there's no lower-level test failing, you need to write a lower-level test
 > Push your tests as far down the test pyramid as you can
