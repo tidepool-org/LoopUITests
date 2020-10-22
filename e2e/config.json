@@ -16,6 +16,14 @@
                 "classNameTemplate": "{classname}",
                 "titleTemplate": "{title}"
             }
+        ],
+        [
+            "jest-html-reporters",
+            {
+                "publicPath": "./artifacts",
+                "filename": "loopUITests.html",
+                "expand": true
+            }
         ]
     ],
     "verbose": true

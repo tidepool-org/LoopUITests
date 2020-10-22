@@ -11,6 +11,8 @@
     "test_smoke_1_iphoneSE2": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-se-2",
     "test_smoke_2": "detox test e2e/smoke_2 -c ios.sim.debug.iphone-11pro",
     "test_smoke_2_iphoneSE2": "detox test e2e/smoke_2 -c ios.sim.debug.iphone-se-2",
+    "test_smoke_3": "detox test e2e/smoke_3 -c ios.sim.debug.iphone-11pro",
+    "test_smoke_3_iphoneSE2": "detox test e2e/smoke_3 -c ios.sim.debug.iphone-se-2",
     "test_functional_1": "detox test e2e/functional_1 -c ios.sim.debug.iphone-11pro",
     "test_functional_1_iphoneSE2": "detox test e2e/functional_1 -c ios.sim.debug.iphone-se-2",
     "test_guardrail_1": "detox test e2e/guardrails_1 -c ios.sim.debug.iphone-11pro",
@@ -25,6 +27,7 @@
     "detox": "^16.9.2",
     "eslint": "^7.11.0",
     "jest": "^25.5.4",
+    "jest-html-reporters": "^2.1.0",
     "jest-junit": "^10.0.0"
   },
   "detox": {

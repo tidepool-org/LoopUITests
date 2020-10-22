@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 module.exports = (test) => {
     describe('signal loss', () => {
         let cgmScreen;
@@ -12,6 +13,7 @@ module.exports = (test) => {
             await cgmScreen.BackButton.tap();
         });
         it('dimiss signal loss alert', async () => {
+            await waitFor(cgmScreen.Alert(cgmScreen.generalText.Dismiss)).toBeVisible().withTimeout(2000);
             await cgmScreen.DismissAlert(cgmScreen.generalText.Dismiss);
             await cgmScreen.BackButton.tap();
         });
@@ -35,6 +37,7 @@ module.exports = (test) => {
             await waitFor(cgmScreen.Alert('FG OK')).toBeVisible().withTimeout(2000);
             await cgmScreen.DismissAlert('FG OK');
             await cgmScreen.BackButton.tap();
+
         });
         it('and check error shown on status screen', async () => {
             let statusScreen = await test.OpenStatusScreen();
