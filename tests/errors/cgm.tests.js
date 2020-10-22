@@ -13,7 +13,7 @@ module.exports = (test) => {
             await cgmScreen.BackButton.tap();
         });
         it('dimiss signal loss alert', async () => {
-            waitFor(cgmScreen.Alert(cgmScreen.generalText.Dismiss)).toBeVisible().withTimeout(3000);
+            await waitFor(cgmScreen.Alert(cgmScreen.generalText.Dismiss)).toBeVisible().withTimeout(2000);
             await cgmScreen.DismissAlert(cgmScreen.generalText.Dismiss);
             await cgmScreen.BackButton.tap();
         });
@@ -34,7 +34,7 @@ module.exports = (test) => {
             await cgmScreen.BackButton.tap();
         });
         it('dismiss immediate alert', async () => {
-            waitFor(cgmScreen.Alert('FG OK')).toBeVisible().withTimeout(3000);
+            await waitFor(cgmScreen.Alert('FG OK')).toBeVisible().withTimeout(2000);
             await cgmScreen.DismissAlert('FG OK');
             await cgmScreen.BackButton.tap();
 

@@ -129,9 +129,6 @@ const match = {
     },
     Label(label) {
         return element(by.label(label));
-    },
-    async ElementIsVisible(desiredElement) {
-        await waitFor(desiredElement).toBeVisible().withTimeout(2000);
     }
 };
 
