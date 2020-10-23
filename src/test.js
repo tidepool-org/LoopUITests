@@ -139,16 +139,10 @@ class Test {
         }
     }
     async _holdForWarmup() {
-        console.log('holding ....');
         if (this._warmupPeriod) {
             await _warmup(this._warmupPeriod.milliseconds);
         }
-        console.log('ready');
     }
-    /**
-     * @param {string} settingType
-     * @summary one of 'correctionRange', 'insulinSensitivities', 'basalRates', 'suspendThreshold', 'insulinCarbRatio', 'delivery'
-     */
     getLimitsForSetting(settingType) {
         return this._limits[settingType];
     }

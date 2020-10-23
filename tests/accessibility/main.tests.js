@@ -211,7 +211,7 @@ module.exports = (test) => {
         it('has a Food Type Label', async () => {
             await expect(carbEntryScreen.FoodTypeLabel).toBeVisible();
         });
-        describe('meal bolus', () => {
+        describe.skip('meal bolus', () => {
             var mealBolusScreen;
             it('add carbs', async () => {
                 await carbEntryScreen.SetCarbs(10);
