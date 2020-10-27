@@ -47,7 +47,7 @@
     },
     "configurations": {
       "ios.sim.debug.iphone-11pro": {
-        "binaryPath": "build-272/Debug-iphonesimulator/Loop.app",
+        "binaryPath": "build/Debug-iphonesimulator/Loop.app",
         "build": "source ./scripts/build_loop.dev.sh --build-only",
         "type": "ios.simulator",
         "device": {
@@ -55,7 +55,7 @@
         }
       },
       "ios.sim.debug.iphone-se-2": {
-        "binaryPath": "build-272/Debug-iphonesimulator/Loop.app",
+        "binaryPath": "build/Debug-iphonesimulator/Loop.app",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone SE (2nd generation)"
