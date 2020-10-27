@@ -5,22 +5,23 @@ Loop end-to-end automated tests using `detox`
  - [Background reading](https://hackernoon.com/detox-gray-box-end-to-end-testing-framework-for-mobile-apps-196ccd9564ce)
 
 
-## Build
-- `npm run build`
+## Loop Build
+Save the current build (if any) and fetch the new one based on the branch name
 
-## Test
+### Fetch new build
+- `source ./scripts/build_loop.dev.sh --fetch-new build-289`
 
-All tests
+### Save existing and fetch new build
+- `source ./scripts/build_loop.dev.sh --save-current build-272 --fetch-new build-289`
 
-`npm run test-all`
+## Tests
 
-## Device Configurations
+### Device Configurations
 
 [Comparison iPhone SE 2 vs iPhone 6 vs iPhone 11 pro](https://www.apple.com/iphone/compare/?device1=iphone6&device2=iphoneSE2ndgen&device3=iphone12)
 
 - iPhone 11 Pro `ios.sim.debug.iphone-11pro`
 - iPhone SE (2nd generation) `ios.sim.debug.iphone-se-2`
-- iPhone Touch (7th generation) `ios.sim.debug.iphone-touch-7`
 
 ### Smoke test
 Accessibility and tests that run through the screen elements making sure the are present
