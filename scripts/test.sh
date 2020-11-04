@@ -14,7 +14,7 @@ TEST_DIRECTORY="${SCRIPT_DIRECTORY}/.."
 
 error() {
   echo "ERROR: ${*}" >&2
-  echo "Usage: ${SCRIPT} <build-root> <configuration>" >&2
+  echo "Usage: ${SCRIPT} <build-root> <configuration> <type>" >&2
   echo "Parameters:" >&2
   echo "  <build-root>      root of the build that contains the app" >&2
   echo "  <configuration>   detox configuration to use" >&2
@@ -43,6 +43,18 @@ fi
 
 if [[ ! ${TEST_TYPE} =~ "functional_" ]] && [[ ! ${TEST_TYPE} =~ "smoke_" ]] && [[ ! ${TEST_TYPE} =~ "guardrails_" ]] && [[ ! ${TEST_TYPE} =~ "error_" ]]; then
   error "Unexpected <type>: ${TEST_TYPE}"
+fi
+
+if [[ ! ${CONFIGURATION} =~ "iphone-11pro" ]] && [[ ! ${CONFIGURATION} =~ "iphone-se-2" ]]; then
+  error "Unexpected <configuration>: ${CONFIGURATION}"
+fi
+
+if [[ ${CONFIGURATION} == "iphone-11pro" ]]; then
+  CONFIGURATION="ios.sim.debug.iphone-11pro"
+fi
+
+if [[ ${CONFIGURATION} == "iphone-se-2" ]]; then
+  CONFIGURATION="ios.sim.debug.iphone-se-2"
 fi
 
 cd "${TEST_DIRECTORY}"

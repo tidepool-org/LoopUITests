@@ -3,24 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest",
-    "test_error_1": "detox test e2e/error_1 -c ios.sim.debug.iphone-11pro",
-    "test_error_1_iphoneSE2": "detox test e2e/error_1 -c ios.sim.debug.iphone-se-2",
-    "test_error_2": "detox test e2e/error_2 -c ios.sim.debug.iphone-11pro",
-    "test_error_2_iphoneSE2": "detox test e2e/error_2 -c ios.sim.debug.iphone-se-2",
-    "test_smoke_1": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-11pro",
-    "test_smoke_1_iphoneSE2": "detox test e2e/smoke_1 -c ios.sim.debug.iphone-se-2",
-    "test_smoke_2": "detox test e2e/smoke_2 -c ios.sim.debug.iphone-11pro",
-    "test_smoke_2_iphoneSE2": "detox test e2e/smoke_2 -c ios.sim.debug.iphone-se-2",
-    "test_smoke_3": "detox test e2e/smoke_3 -c ios.sim.debug.iphone-11pro",
-    "test_smoke_3_iphoneSE2": "detox test e2e/smoke_3 -c ios.sim.debug.iphone-se-2",
-    "test_functional_1": "detox test e2e/functional_1 -c ios.sim.debug.iphone-11pro",
-    "test_functional_1_iphoneSE2": "detox test e2e/functional_1 -c ios.sim.debug.iphone-se-2",
-    "test_guardrail_1": "detox test e2e/guardrails_1 -c ios.sim.debug.iphone-11pro",
-    "test_guardrail_1_iphoneSE2": "detox test e2e/guardrails_1 -c ios.sim.debug.iphone-se-2",
-    "test_guardrail_2": "detox test e2e/guardrails_2 -c ios.sim.debug.iphone-11pro",
-    "test_guardrail_2_iphoneSE2": "detox test e2e/guardrails_2 -c ios.sim.debug.iphone-se-2",
-    "build": "detox build -c ios.sim.debug.iphone-11pro",
-    "fetch_build": "source ./scripts/build_loop.dev.sh --save-current build-272 --fetch-new build-289",
+    "test_e2e": "source ./scripts/test.sh $BUILD_DIR $CONFIG $NAME",
+    "build_loop": "source ./scripts/build_loop.sh $BUILD_TAG",
     "lint": "eslint 'src/**'"
   },
   "devDependencies": {
@@ -48,7 +32,6 @@
     "configurations": {
       "ios.sim.debug.iphone-11pro": {
         "binaryPath": "build/Debug-iphonesimulator/Loop.app",
-        "build": "source ./scripts/build_loop.dev.sh --build-only",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11 Pro"

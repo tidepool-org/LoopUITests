@@ -6,53 +6,50 @@ Loop end-to-end automated tests using `detox`
 
 
 ## Loop Build
-Save the current build (if any) and fetch the new one based on the branch name
+Will either build the version of loop given e.g. `build-289` or if it doesn't already exist will clone the LoopWorkspace for the given tag and then build it
 
-### Fetch new build
-- `source ./scripts/build_loop.dev.sh --fetch-new build-289`
-
-### Save existing and fetch new build
-- `source ./scripts/build_loop.dev.sh --save-current build-272 --fetch-new build-289`
+- `BUILD_TAG=build-289 npm run build_loop`
 
 ## Tests
 
+`BUILD_DIR=build-289 CONFIG=iphone-se-2 NAME=error_1 npm run test_e2e`
+
 ### Device Configurations
 
-[Comparison iPhone SE 2 vs iPhone 6 vs iPhone 11 pro](https://www.apple.com/iphone/compare/?device1=iphone6&device2=iphoneSE2ndgen&device3=iphone12)
+[Comparison iPhone SE 2 vs iPhone 11 pro](https://www.apple.com/iphone/compare/?device1=iphoneSE2ndgen&device2=iphone12)
 
 - iPhone 11 Pro `ios.sim.debug.iphone-11pro`
 - iPhone SE (2nd generation) `ios.sim.debug.iphone-se-2`
 
+
 ### Smoke test
 Accessibility and tests that run through the screen elements making sure the are present
 
-- `npm run test_smoke1`
-- `npm run test_smoke2`
-- `npm run test_smoke3`
+- `smoke_1` accessibility labels for: main screens
+- `smoke_2` accessibility labels for: general settings and therapy settings screens
+- `smoke_3` install, confirgure and go into closed loop mode, then close and reopen loop app
 
 ### Functional test
 Test basic functionality of the app. Opening, closing of screens, adding and removeing devices, clicking buttons etc ...
 
-- `npm run test_functional_1`
-- `npm run test_functional_2`
+- `functional_1`
+- `functional_2`
 
 ### Guardrails test
 Test the loop app settings guardrails limits
 
-- `npm run test_guardrail_1`
-- `npm run test_guardrail_2`
+- `guardrail_1` guardrail tests for: insulin carb ratio, correction range schedule and basal rate schedule
+- `guardrail_2` guardrail tests for: insulin sensitivity schedule, delivery limits and suspend threshold
 
 ### Errors test
 Test the loop app interacts with device errors
 
-- `npm run test_error_1`
-- `npm run test_error_2`
+- `error_1`
+- `error_2`
 
 ## Debugging
 
-`detox test e2e/smoke -c ios.sim.debug 2>&1 | tee ./artifacts/smoketest_output.txt`
-
- - then you can search in `./artifacts/test_output.txt` file for test output including errors or mismatches
+ search in `./artifacts/loopUITests.html` file for test output including errors or mismatches
 
 ## Updates
 `detox clean-framework-cache && detox build-framework-cache`
@@ -80,7 +77,7 @@ Do *not* install `applesimutils` from Homebrew. Use the custom, pre-built binary
 http://pauljadam.com/demos/mobilechecklist.html
 
 
-### Practicle test pyramid
+### Practical test pyramid
 
 [UI Tests](https://martinfowler.com/articles/practical-test-pyramid.html#UiTests)
 
