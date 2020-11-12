@@ -13,5 +13,5 @@ describe('accessibility', () => {
         });
         await test.prepare();
     });
-    settingTests(test, false);
+    settingTests(test, true);
 });

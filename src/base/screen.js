@@ -55,7 +55,7 @@ class Screen {
         this._deviceInfo = _deviceInfo();
     }
     get Header() {
-        return match.accessible.Header(this.screenText.Header);
+        return match.Label(this.screenText.Header);
     }
     get BackButton() {
         return match.accessible.ButtonBarButton(this.backLabel);
@@ -98,11 +98,18 @@ class Screen {
             return true;
         }
     }
+    async IsButtonOn(buttonElement) {
+        const buttonAttributes = await buttonElement.getAttributes();
+        return buttonAttributes.value == 1;
+    }
     async SwipeUpUntilVisible(labelToSee) {
         await action.SwipeUpUntilVisible(labelToSee);
     }
     async SwipeDownUntilVisible(labelToSee) {
         await action.SwipeDownUntilVisible(labelToSee);
+    }
+    async CloseModal() {
+        await action.SwipeDown();
     }
     async DismissAlert(label) {
         await this.Alert(label).tap();
