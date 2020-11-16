@@ -1,33 +1,56 @@
 const match = require("../match");
 
 const GlucoseScreen = require("./glucoseScreen");
-const ActiveInsulinScreen = require("./activeInsulinScreen");
-const InsulinDeliveryScreen = require("./insulinDeliveryScreen");
-const ActiveCarbohydratesScreen = require("./activeCarbohydratesScreen");
+const ActiveInsulinScreen = require("./activeInsulinScreen").Screen;
+const InsulinDeliveryScreen = require("./insulinDeliveryScreen").Screen;
+const ActiveCarbohydratesScreen = require("./activeCarbohydratesScreen").Screen;
 const Header = require("./header");
 const SettingsScreen = require("../settings/index");
-const CarbEntryScreen = require("../carbEntry/index");
+const Meal = require("../carbEntry/index");
 const Bolus = require("../bolus/index");
 
 const CustomPresetScreen = require("../customPreset/index");
-const SimpleMealCalculatorScreen = require("../simpleMealCalculator/index");
 
 const Devices = require("../devices/index");
 
 class StatusScreen {
   constructor(language, settingsScreenDefaults) {
     this._glucoseScreen = new GlucoseScreen(language);
-    this._activeInsulinScreen = new ActiveInsulinScreen(language);
-    this._insulinDeliveryScreen = new InsulinDeliveryScreen(language);
-    this._activeCarbohydratesScreen = new ActiveCarbohydratesScreen(language);
+    this._activeInsulinScreen = new ActiveInsulinScreen({
+      generalText: language.general,
+      screenText: language.statusScreen.ActiveInsulinScreen,
+    });
+    this._insulinDeliveryScreen = new InsulinDeliveryScreen({
+      generalText: language.general,
+      screenText: language.statusScreen.InsulinDeliveryScreen,
+    });
+    this._activeCarbohydratesScreen = new ActiveCarbohydratesScreen({
+      generalText: language.general,
+      screenText: language.statusScreen.ActiveCarbohydratesScreen,
+    });
     this._settingsScreen = new SettingsScreen(
       language,
       new Devices(language, false),
       settingsScreenDefaults
     );
-    this._bolusScreen = new Bolus.BolusScreen(language);
-    this._simpleBolusCalculatorScreen = new Bolus.SimpleBolusCalculatorScreen(language);
-    this._carbEntryScreen = new CarbEntryScreen(language);
+    this._bolusScreen = new Bolus.BolusScreen({
+      generalText: language.general,
+      screenText: language.bolusScreen.MainScreen,
+    });
+    this._simpleBolusCalculatorScreen = new Bolus.SimpleBolusCalculatorScreen({
+      generalText: language.general,
+      screenText: language.bolusScreen.SimpleBolusCalculatorScreen,
+    });
+    this._simpleMealBolusCalculatorScreen = new Bolus.SimpleMealBolusCalculatorScreen(
+      {
+        generalText: language.general,
+        screenText: language.bolusScreen.SimpleMealBolusCalculatorScreen,
+      }
+    );
+    this._carbEntryScreen = new Meal.CarbEntryScreen({
+      generalText: language.general,
+      screenText: language.carbEntryScreen,
+    });
     this._customPresetScreen = new CustomPresetScreen(language);
     this._headerSection = new Header(language, new Devices(language, true));
   }
@@ -77,24 +100,25 @@ class StatusScreen {
     await this.GlucoseLabel.tap();
     return this._glucoseScreen;
   }
+  get SettingsScreen(){
+    return this._settingsScreen;
+  }
   async OpenSettingsScreen() {
     await this.SettingsButton.tap();
-    return this._settingsScreen;
+    return this.SettingsScreen;
   }
   async OpenCarbEntryScreen(looping) {
     await this.AddMealButton.tap();
-    //if (looping) {
+    if (looping) {
       return this._carbEntryScreen;
-    // }
-    // return this._simpleMealCalculatorScreen;
+    }
+    return this._simpleMealBolusCalculatorScreen;
   }
   async OpenBolusScreen(looping) {
     await this.BolusButton.tap();
     if (looping) {
-      console.log('looping so return _bolusScreen');
       return this._bolusScreen;
     }
-    console.log('NOT looping so return _simpleBolusCalculatorScreen');
     return this._simpleBolusCalculatorScreen;
   }
   async OpenCustomPresetScreen() {
@@ -103,4 +127,58 @@ class StatusScreen {
   }
 }
 
-module.exports = StatusScreen;
+var screenTests = (testData) => {
+  //describe("Status Screen", () => {
+    var screen;
+    it("has a Active Carbohydrates Label", async () => {
+      screen = await testData.app.OpenStatusScreen();
+    });
+    it("has a Active Carbohydrates Label", async () => {
+      await expect(screen.ActiveCarbohydratesLabel).toBeVisible();
+    });
+    it("has a Active Insulin Label", async () => {
+      await expect(screen.ActiveInsulinLabel).toBeVisible();
+    });
+    it("has a Insulin Delivery Label", async () => {
+      await expect(screen.InsulinDeliveryLabel).toBeVisible();
+    });
+    it("has a Glucose Label", async () => {
+      await expect(screen.GlucoseLabel).toBeVisible();
+    });
+    it("has a Settings Button", async () => {
+      await expect(screen.SettingsButton).toBeVisible();
+    });
+    it("has a Add Meal Button", async () => {
+      await expect(screen.AddMealButton).toBeVisible();
+    });
+    it("has a Bolus Button", async () => {
+      await expect(screen.BolusButton).toBeVisible();
+    });
+    describe("HUD", () => {
+      it("add pump button", async () => {
+        await expect(screen.HeaderSection.Devices.AddPumpButton).toBeVisible();
+      });
+      it("add CGM button", async () => {
+        await expect(screen.HeaderSection.Devices.AddCGMButton).toBeVisible();
+      });
+      it("Loop button", async () => {
+        await expect(screen.HeaderSection.LoopIcon).toBeVisible();
+      });
+      it("Tap to add blood glucose button", async () => {
+        await expect(
+          screen.HeaderSection.EnterBloodGlucoseButton
+        ).toBeVisible();
+      });
+      it("No recent blood glucose label", async () => {
+        await expect(
+          screen.HeaderSection.NoRecentBloodGlucoseLabel
+        ).toBeVisible();
+      });
+    });
+  //});
+};
+
+module.exports = {
+  Screen: StatusScreen,
+  tests: screenTests,
+};

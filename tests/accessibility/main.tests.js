@@ -1,6 +1,7 @@
 const match = require("../../src/match");
+
 module.exports = (test) => {
-  describe("Status Screen", () => {
+  describe.skip("Status Screen", () => {
     var statusScreen;
     it("has a Active Carbohydrates Label", async () => {
       statusScreen = await test.OpenStatusScreen();
@@ -143,26 +144,54 @@ module.exports = (test) => {
     it("has to open the bolus screen", async () => {
       bolusScreen = await test.OpenBolusScreen();
     });
-    it.skip("has a Header", async () => {
-      await expect(bolusScreen.Header).toBeVisible();
-    });
-    it("has a Cancel Header Button", async () => {
-      await expect(bolusScreen.BackButton).toBeVisible();
-    });
-    it("has a Recommended Bolus Label", async () => {
-      await expect(bolusScreen.RecommendedBolusLabel).toBeVisible();
-    });
-    it.skip("has a Bolus Label", async () => {
-      await expect(bolusScreen.BolusLabel).toBeVisible();
-    });
-    it.skip("has a Current Glucose Label", async () => {
-      await expect(bolusScreen.CurrentGlucoseLabel).toBeVisible();
-    });
-    it.skip("can cancel and then close the bolus screen", async () => {
-      await bolusScreen.BackButton.tap();
-    });
   });
-  describe.skip("Carb Entry Screen", () => {
+  // describe("Bolus Screen when not looping", () => {
+
+    
+  //   let bolusScreen;
+  //   it("has to open the bolus screen", async () => {
+  //     bolusScreen = await test.OpenBolusScreen();
+  //   });
+  //   // it("has a Header", async () => {
+  //   //   await expect(bolusScreen.Header).toBeVisible();
+  //   // });
+  //   it("has a Cancel Header Button", async () => {
+  //     await expect(bolusScreen.BackButton).toBeVisible();
+  //   });
+
+  //   it("has a Recommended Bolus Label", async () => {
+  //     await expect(bolusScreen.RecommendedBolusLabel).toBeVisible();
+  //   });
+  //   it("has a Recommended Bolus Units Label", async () => {
+  //     await expect(bolusScreen.RecommendedBolusUnitsLabel).toBeVisible();
+  //   });
+
+  //   it("has a Bolus Label", async () => {
+  //     await expect(bolusScreen.BolusLabel).toBeVisible();
+  //   });
+  //   it("has a Bolus Units Label", async () => {
+  //     await expect(bolusScreen.BolusUnitsLabel).toBeVisible();
+  //   });
+
+  //   it("has a Current Glucose Label", async () => {
+  //     await expect(bolusScreen.CurrentGlucoseLabel).toBeVisible();
+  //   });
+  //   it("has a Current Glucose Units Label", async () => {
+  //     await expect(bolusScreen.CurrentGlucoseUnitsLabel).toBeVisible();
+  //   });
+
+  //   it("has a Open Loop Info Label", async () => {
+  //     await expect(bolusScreen.OpenLoopInfoLabel).toBeVisible();
+  //   });
+  //   it("has a Open Loop Info Button", async () => {
+  //     await expect(bolusScreen.OpenLoopInfoButton).toBeVisible();
+  //   });
+  //   it.skip("can cancel and then close the bolus screen", async () => {
+  //     await bolusScreen.BackButton.tap();
+  //   });
+  // });
+
+  describe.skip("Carb Entry Screen when not looping", () => {
     let carbEntryScreen;
     it("has to open the Carb Entry screen", async () => {
       carbEntryScreen = await test.OpenCarbEntryScreen();

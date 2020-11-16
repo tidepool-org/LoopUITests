@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const StatusScreen = require("./status/index");
+const StatusScreen = require("./status/index").Screen;
 const { screenName } = require("./properties");
 const Utilities = require("./utilities");
 
@@ -157,9 +157,15 @@ class Test {
   async OpenSettingsScreen() {
     return this.statusScreen.OpenSettingsScreen();
   }
+  get SettingsScreen() {
+    return this.statusScreen.SettingsScreen;
+  }
   async OpenTherapySettingsScreen() {
     let settings = await this.OpenSettingsScreen();
     return settings.OpenTherapySettings();
+  }
+  get TherapySettingsScreen(){
+    return this.SettingsScreen.TherapySettingsScreen;
   }
   async OpenCarbEntryScreen() {
     return this.statusScreen.OpenCarbEntryScreen(this.LoopUtilities.inClosedLoopMode);
@@ -175,6 +181,9 @@ class Test {
   }
   get CGMData() {
     return this._cgmData;
+  }
+  get inClosedLoopMode(){
+    return this.LoopUtilities.inClosedLoopMode;
   }
 }
 

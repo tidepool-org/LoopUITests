@@ -99,8 +99,9 @@ class Screen {
         }
     }
     async IsButtonOn(buttonElement) {
-        const buttonAttributes = await buttonElement.getAttributes();
-        return buttonAttributes.value == 1;
+        return this.IsOn(buttonElement);
+        // const buttonAttributes = await buttonElement.getAttributes();
+        // return buttonAttributes.value == 1;
     }
     async SwipeUpUntilVisible(labelToSee) {
         await action.SwipeUpUntilVisible(labelToSee);

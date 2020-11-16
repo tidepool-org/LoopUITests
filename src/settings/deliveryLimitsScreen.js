@@ -1,7 +1,8 @@
 const match = require('../match');
 const action = require('../action');
 const base = require('../base/index');
-const { numericPartsFromString } = require('./utils');
+const _numericPartsFromString = require("./utils").numericPartsFromString;
+const _baseThreapyScreenTests = require("./utils").baseThreapyScreenTests;
 
 class DeliveryLimitsScreen extends base.EntryScreen {
     constructor(language, config) {
@@ -71,9 +72,9 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     async ApplyBolus(bolus) {
         let currentParts = [this.config.bolus.startWhole];
         if (bolus.current) {
-            currentParts = numericPartsFromString(bolus.current.amount);
+            currentParts = _numericPartsFromString(bolus.current.amount);
         }
-        let expectedParts = numericPartsFromString(bolus.expected.amount);
+        let expectedParts = _numericPartsFromString(bolus.expected.amount);
         await action.ScrollDecimalPicker(
             currentParts[0],
             expectedParts[0],
@@ -87,9 +88,9 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     async ApplyBasal(basal) {
         let currentParts = [this.config.basalRate.startWhole];
         if (basal.current) {
-            currentParts = numericPartsFromString(basal.current.rate);
+            currentParts = _numericPartsFromString(basal.current.rate);
         }
-        let expectedParts = numericPartsFromString(basal.expected.rate);
+        let expectedParts = _numericPartsFromString(basal.expected.rate);
         await action.ScrollDecimalPicker(
             currentParts[0],
             expectedParts[0],
@@ -97,4 +98,20 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     }
 }
 
-module.exports = DeliveryLimitsScreen;
+
+var screenTests = function (testData) {
+    describe("Delivery Limits Screen", () => {
+      var openScreenFunc = async function () {
+        let therapySettingsScreen = testData.app.TherapySettingsScreen;
+        let screen = await therapySettingsScreen.OpenDeliveryLimitsScreen();
+        return screen;
+      };
+      _baseThreapyScreenTests(testData, openScreenFunc);
+    });
+  };
+  
+  module.exports = {
+    Screen: DeliveryLimitsScreen,
+    tests: screenTests,
+  };
+  

@@ -1,58 +1,73 @@
-const match = require('../match');
-const action = require('../action');
-const base = require('../base/index');
+const match = require("../match");
+const action = require("../action");
+const base = require("../base/index");
+const _baseThreapyScreenTests = require("./utils").baseThreapyScreenTests;
 
 class SuspendThresholdScreen extends base.EntryScreen {
-    constructor(language, config) {
-        super({
-            screenText: language.settingsScreen.SuspendThresholdScreen,
-            generalText: language.general,
-            header: {
-                backLabel: language.settingsScreen.TherapySettingsScreen.Header,
-            },
-            open: {
-                isBtn: false,
-                label: language.settingsScreen.SuspendThresholdScreen.Header,
-            },
-        });
-        this.bgUnitsLabel = language.settingsScreen.SuspendThresholdScreen.BGUnits;
-        this.config = config;
+  constructor(language, config) {
+    super({
+      screenText: language.settingsScreen.SuspendThresholdScreen,
+      generalText: language.general,
+      header: {
+        backLabel: language.settingsScreen.TherapySettingsScreen.Header,
+      },
+      open: {
+        isBtn: false,
+        label: language.settingsScreen.SuspendThresholdScreen.Header,
+      },
+    });
+    this.bgUnitsLabel = language.settingsScreen.SuspendThresholdScreen.BGUnits;
+    this.config = config;
+  }
+  get OpenButton() {
+    return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
+  }
+  get InfoLabel() {
+    return match.accessible.TextLabel(this.screenText.Info);
+  }
+  /**
+   * @override so we access the header by label
+   */
+  get Header() {
+    return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
+  }
+  get LowSuspendThresholdGuardrailMessage() {
+    return this.GuardrailMessage(
+      this.screenText.LowSuspendThresholdGuardrailMessage
+    );
+  }
+  get HighSuspendThresholdGuardrailMessage() {
+    return this.GuardrailMessage(
+      this.screenText.HighSuspendThresholdGuardrailMessage
+    );
+  }
+  /**
+   * @param {object} threshold
+   * @param {object} threshold.expected
+   * @param {number} threshold.expected.value
+   * @param {object} threshold.current optional
+   **/
+  async ApplyOne(threshold) {
+    let currentValue = this.config.start;
+    if (threshold.current) {
+      currentValue = threshold.current.value;
     }
-    get OpenButton() {
-        return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
-    }
-    get InfoLabel() {
-        return match.accessible.TextLabel(this.screenText.Info);
-    }
-    /**
-     * @override so we access the header by label
-     */
-    get Header() {
-        return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
-    }
-    get LowSuspendThresholdGuardrailMessage() {
-        return this.GuardrailMessage(this.screenText.LowSuspendThresholdGuardrailMessage);
-    }
-    get HighSuspendThresholdGuardrailMessage() {
-        return this.GuardrailMessage(this.screenText.HighSuspendThresholdGuardrailMessage);
-    }
-    /**
-     * @param {object} threshold
-     * @param {object} threshold.expected
-     * @param {number} threshold.expected.value
-     * @param {object} threshold.current optional
-     **/
-    async ApplyOne(threshold) {
-        let currentValue = this.config.start;
-        if (threshold.current) {
-            currentValue = threshold.current.value;
-        }
-        await action.ScrollIntegerPicker(
-            currentValue,
-            threshold.expected.value,
-        );
-
-    }
+    await action.ScrollIntegerPicker(currentValue, threshold.expected.value);
+  }
 }
 
-module.exports = SuspendThresholdScreen;
+var screenTests = function (testData) {
+  describe("Suspend Threshold Screen", () => {
+    var openScreenFunc = async function () {
+      let therapySettingsScreen = testData.app.TherapySettingsScreen;
+      let screen = await therapySettingsScreen.OpenSuspendThresholdScreen();
+      return screen;
+    };
+    _baseThreapyScreenTests(testData, openScreenFunc);
+  });
+};
+
+module.exports = {
+  Screen: SuspendThresholdScreen,
+  tests: screenTests,
+};
