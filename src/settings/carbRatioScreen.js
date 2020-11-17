@@ -2,7 +2,6 @@ const action = require("../action");
 const match = require("../match");
 const base = require("../base/index");
 const _numericPartsFromString = require("./utils").numericPartsFromString;
-const _baseThreapyScreenTests = require("./utils").baseThreapyScreenTests;
 
 class CarbRatioScreen extends base.EntriesScreen {
   constructor(language, config) {
@@ -20,18 +19,6 @@ class CarbRatioScreen extends base.EntriesScreen {
       },
       config
     );
-  }
-  get OpenButton() {
-    return match.accessible.ClickableLabel(this.openLabel);
-  }
-  get InfoLabel() {
-    return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
-  }
-  get BackButton() {
-    return match.accessible.BackButton(this.backLabel);
-  }
-  get Header() {
-    return match.accessible.TextLabel(this.screenText.Header);
   }
   get HighCarbRatioGuardrailMessage() {
     return this.GuardrailMessage(this.screenText.HighCarbRatioGuardrailMessage);
@@ -88,10 +75,9 @@ var screenTests = function (testData) {
       screen = await therapySettingsScreen.OpenCarbRatioScreen();
       return screen;
     };
-    _baseThreapyScreenTests({
+    base.entriesTests({
       openScreenFunc: openScreen,
       checkEditing: testData.checkEditing,
-      checkInfo: testData.checkInfo,
     });
   });
 };

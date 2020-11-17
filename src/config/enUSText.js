@@ -327,12 +327,12 @@ var SettingsScreen = {
   WorkoutRangeScreen: {
     Header: "Workout Range",
     Info:
-      "Temporarily raise your glucose target before, during, or after physical activity to reduce the risk of low glucose events.",
+      "Temporarily raise your glucose target before, during, or after physical activity to reduce the risk of low glucose events. This range can be set anywhere from the top of your regular correction range on the low end to 180 mg/dL (10 mmol/L) on the high end.",
   },
   PremealRangeScreen: {
     Header: "Pre-Meal Range",
     Info:
-      "Temporarily lower your glucose target before a meal to impact post-meal glucose spikes.",
+      "Temporarily lower your glucose target before a meal to impact post-meal glucose spikes. This range can be set anywhere from your suspend threshold on the low end to the top of your regular correction range on the high end.",
   },
   BasalRatesScreen: {
     Header: "Basal Rates",
@@ -352,7 +352,7 @@ var SettingsScreen = {
   InsulinModelScreen: {
     Header: "Insulin Model",
     Info:
-      "The app assumes insulin is actively working for 6 hours. You can choose from different models for how the app measures the insulin’s peak activity.",
+      "Tidepool Loop assumes insulin is actively working for 6 hours. You can choose from two different models for how the app measures the insulin’s peak activity.",
     Model: {
       RapidAdults: "Rapid-Acting – Adults",
       RapidChildren: "Rapid-Acting – Children",

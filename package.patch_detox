@@ -1,0 +1,69 @@
+{
+  "name": "LoopUITests",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest",
+    "test_e2e": "source ./scripts/test.sh $BUILD_DIR $CONFIG $NAME",
+    "build_loop": "source ./scripts/build_loop.sh $BUILD_TAG",
+    "lint": "eslint 'src/**'"
+  },
+  "devDependencies": {
+    "detox": "file:../Detox/detox",
+    "eslint": "^7.11.0",
+    "jest": "^25.5.4",
+    "jest-html-reporters": "^2.1.0",
+    "jest-junit": "^10.0.0"
+  },
+  "detox": {
+    "artifacts": {
+      "plugins": {
+        "uiHierarchy": "enabled",
+        "screenshot": {
+          "enabled": true,
+          "shouldTakeAutomaticSnapshots": true,
+          "keepOnlyFailedTestsArtifacts": true,
+          "takeWhen": {
+            "testStart": true,
+            "testDone": true,
+            "appNotReady": true
+          }
+        }
+      }
+    },
+    "configurations": {
+      "ios.sim.debug.iphone-11pro": {
+        "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone 11 Pro",
+          "os": "iOS 13.7"
+        }
+      },
+      "ios.sim.debug.iphone-11pro-ios14": {
+        "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone 11 Pro",
+          "os": "iOS 14.1"
+        }
+      },
+      "ios.sim.debug.iphone-se-2": {
+        "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone SE (2nd generation)",
+          "os": "iOS 13.7"
+        }
+      },
+      "ios.sim.debug.iphone-se-2-ios14": {
+        "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone SE (2nd generation)",
+          "os": "iOS 14.1"
+        }
+      }
+    },
+    "test-runner": "jest"
+  }
+}

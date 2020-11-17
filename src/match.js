@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
 const element = require("detox").element;
 
-const staticTextTrait = "staticText";
+//const staticTextTrait = "staticText";
+const staticTextTrait = "text";
 const buttonTrait = "button";
 const imageTrait = "image";
 

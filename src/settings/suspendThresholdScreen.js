@@ -1,7 +1,6 @@
 const match = require("../match");
 const action = require("../action");
 const base = require("../base/index");
-const _baseThreapyScreenTests = require("./utils").baseThreapyScreenTests;
 
 class SuspendThresholdScreen extends base.EntryScreen {
   constructor(language, config) {
@@ -18,18 +17,6 @@ class SuspendThresholdScreen extends base.EntryScreen {
     });
     this.bgUnitsLabel = language.screenText.BGUnits;
     this.config = config;
-  }
-  get OpenButton() {
-    return match.accessible.ClickableLabel(this.openLabel);
-  }
-  get InfoLabel() {
-    return match.accessible.TextLabel(this.screenText.Info);
-  }
-  /**
-   * @override so we access the header by label
-   */
-  get Header() {
-    return match.accessible.TextLabel(this.screenText.Header);
   }
   get LowSuspendThresholdGuardrailMessage() {
     return this.GuardrailMessage(
@@ -64,10 +51,9 @@ var screenTests = function (testData) {
       screen = await therapySettingsScreen.OpenSuspendThresholdScreen();
       return screen;
     };
-    _baseThreapyScreenTests({
+    base.entryTests({
       openScreenFunc: openScreen,
       checkEditing: testData.checkEditing,
-      checkInfo: testData.checkInfo,
     });
   });
 };

@@ -2,7 +2,6 @@ const match = require("../match");
 const action = require("../action");
 const base = require("../base/index");
 const _numericPartsFromString = require("./utils").numericPartsFromString;
-const _baseThreapyScreenTests = require("./utils").baseThreapyScreenTests;
 
 class DeliveryLimitsScreen extends base.EntryScreen {
   constructor(language, config) {
@@ -19,21 +18,21 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     });
     this.config = config;
   }
-  get BackButton() {
-    return match.accessible.BackButton(this.backLabel);
-  }
-  get OpenButton() {
-    return match.accessible.ClickableLabel(this.openLabel);
-  }
-  get InfoLabel() {
-    return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
-  }
-  /**
-   * @override so we access the header by label
-   */
-  get Header() {
-    return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
-  }
+  // get BackButton() {
+  //   return match.accessible.BackButton(this.backLabel);
+  // }
+  // get OpenButton() {
+  //   return match.accessible.ClickableLabel(this.openLabel);
+  // }
+  // get InfoLabel() {
+  //   return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
+  // }
+  // /**
+  //  * @override so we access the header by label
+  //  */
+  // get Header() {
+  //   return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
+  // }
   get MaxBasalRateLabel() {
     return match.accessible.TextLabel(this.screenText.MaxBasalRate);
   }
@@ -108,10 +107,10 @@ var screenTests = function (testData) {
       screen = await therapySettingsScreen.OpenDeliveryLimitsScreen();
       return screen;
     };
-    _baseThreapyScreenTests({
+    base.entryTests({
       openScreenFunc: openScreen,
       checkEditing: testData.checkEditing,
-      checkInfo: testData.checkInfo,
+      skipInfo:true,
       skipClose: true,
     });
     describe("custom", () => {

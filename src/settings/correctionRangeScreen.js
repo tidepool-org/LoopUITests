@@ -1,7 +1,6 @@
 const action = require("../action");
 const match = require("../match");
 const base = require("../base/index");
-const _baseThreapyScreenTests = require("./utils").baseThreapyScreenTests;
 
 class CorrectionRangeScreen extends base.EntriesScreen {
   constructor(language, config) {
@@ -19,21 +18,6 @@ class CorrectionRangeScreen extends base.EntriesScreen {
       },
       config
     );
-  }
-  get BackButton() {
-    return match.accessible.Button(this.backLabel).atIndex(0);
-  }
-  get OpenButton() {
-    return match.accessible.ClickableLabel(this.openLabel);
-  }
-  get InfoLabel() {
-    return match.accessible.TextLabel(this.screenText.Info);
-  }
-  /**
-   * @override so we access the header by label
-   */
-  get Header() {
-    return match.accessible.TextLabel(this.screenText.Header);
   }
   get LowCorrectionValueGuardrailMessage() {
     return this.GuardrailMessage(
@@ -89,10 +73,9 @@ var screenTests = function (testData) {
       screen = await therapySettingsScreen.OpenCorrectionRangeScreen();
       return screen;
     };
-    _baseThreapyScreenTests({
+    base.entriesTests({
       openScreenFunc: openScreen,
       checkEditing: testData.checkEditing,
-      checkInfo: testData.checkInfo,
     });
   });
 };
