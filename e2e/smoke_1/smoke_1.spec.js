@@ -22,13 +22,13 @@ describe("accessibility", () => {
     });
     //NOTE: in order that they appear on the screen to minimise scrolling and time taken
     accessibility.suspendThresholdScreen({ app: test });
-    accessibility.correctionRangeScreen({ app: test });
-    accessibility.premealRangeScreen({ app: test });
-    accessibility.workoutRangeScreen({ app: test });
+    accessibility.correctionRangeScreen({ app: test});
+    accessibility.premealRangeScreen({ app: test, checkInfo: false });
+    accessibility.workoutRangeScreen({ app: test, checkInfo: false });
     accessibility.carbRatioScreen({ app: test });
     accessibility.basalRatesScreen({ app: test });
-    accessibility.deliveryLimitsScreen({ app: test });
-    accessibility.insulinModelScreen({ app: test });
-    accessibility.insulinSensitivitiesScreen({ app: test });
+    accessibility.deliveryLimitsScreen({ app: test,checkInfo: false });
+    accessibility.insulinModelScreen({ app: test ,checkInfo: false});
+    accessibility.insulinSensitivitiesScreen({ app: test});
   });
 });

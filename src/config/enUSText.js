@@ -354,10 +354,8 @@ var SettingsScreen = {
     Info:
       "The app assumes insulin is actively working for 6 hours. You can choose from different models for how the app measures the insulin’s peak activity.",
     Model: {
-      Walsh: "Walsh",
       RapidAdults: "Rapid-Acting – Adults",
       RapidChildren: "Rapid-Acting – Children",
-      Fiasp: "Fiasp",
     },
   },
   CarbRatioScreen: {

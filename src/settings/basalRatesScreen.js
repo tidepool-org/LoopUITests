@@ -76,12 +76,18 @@ class BasalRatesScreen extends base.EntriesScreen {
 
 var screenTests = function (testData) {
   describe("Basal Rates Screen", () => {
-    var openScreenFunc = async function () {
+    let screen;
+    var openScreen = async function () {
       let therapySettingsScreen = testData.app.TherapySettingsScreen;
       screen = await therapySettingsScreen.OpenBasalRateScreen();
       return screen;
     };
-    _baseThreapyScreenTests(testData, openScreenFunc);
+    _baseThreapyScreenTests({
+      openScreenFunc: openScreen,
+      checkEditing: testData.checkEditing,
+      checkInfo: testData.checkInfo,
+    });
+    
   });
 };
 

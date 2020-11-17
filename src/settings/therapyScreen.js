@@ -6,7 +6,8 @@ const CarbRatioScreen = require("./carbRatioScreen").Screen;
 const CorrectionRangeScreen = require("./correctionRangeScreen").Screen;
 const DeliveryLimitsScreen = require("./deliveryLimitsScreen").Screen;
 const InsulinModelScreen = require("./insulinModelScreen").Screen;
-const InsulinSensitivitiesScreen = require("./insulinSensitivitiesScreen").Screen;
+const InsulinSensitivitiesScreen = require("./insulinSensitivitiesScreen")
+  .Screen;
 const PremealRangeScreen = require("./premealRangeScreen").Screen;
 const SuspendThresholdScreen = require("./suspendThresholdScreen").Screen;
 const WorkoutRangeScreen = require("./workoutRangeScreen").Screen;
@@ -51,24 +52,45 @@ module.exports = class TherapyScreen extends base.Screen {
       },
       config.correctionRange
     );
-
     this._deliveryLimitsScreen = new DeliveryLimitsScreen(
-      language,
+      {
+        screenText: language.settingsScreen.DeliveryLimitsScreen,
+        generalText: language.general,
+        backLabel: language.settingsScreen.TherapySettingsScreen.Header,
+      },
       config.deliveryLimit
     );
-    
-    this._insulinModelScreen = new InsulinModelScreen(language);
+    this._insulinModelScreen = new InsulinModelScreen({
+      screenText: language.settingsScreen.InsulinModelScreen,
+      generalText: language.general,
+      backLabel: language.settingsScreen.TherapySettingsScreen.Header,
+    });
     this._insulinSensitivitiesScreen = new InsulinSensitivitiesScreen(
-      language,
+      {
+        screenText: language.settingsScreen.InsulinSensitivitiesScreen,
+        generalText: language.general,
+        backLabel: language.settingsScreen.TherapySettingsScreen.Header,
+      },
       config.insulinSensitivity
     );
     this._suspendThresholdScreen = new SuspendThresholdScreen(
-      language,
+      {
+        screenText: language.settingsScreen.SuspendThresholdScreen,
+        generalText: language.general,
+        backLabel: language.settingsScreen.TherapySettingsScreen.Header,
+      },
       config.suspendThreshold
     );
-    
-    this._workoutRangeScreen = new WorkoutRangeScreen(language);
-    this._premealRangeScreen = new PremealRangeScreen(language);
+    this._workoutRangeScreen = new WorkoutRangeScreen({
+      screenText: language.settingsScreen.WorkoutRangeScreen,
+      generalText: language.general,
+      backLabel: language.settingsScreen.TherapySettingsScreen.Header,
+    });
+    this._premealRangeScreen = new PremealRangeScreen({
+      screenText: language.settingsScreen.PremealRangeScreen,
+      generalText: language.general,
+      backLabel: language.settingsScreen.TherapySettingsScreen.Header,
+    });
   }
   /**
    * @override
@@ -155,10 +177,13 @@ module.exports = class TherapyScreen extends base.Screen {
     await this.InsulinModelLabel.tap();
     return this._insulinModelScreen;
   }
+  get DeliveryLimitsScreen() {
+    return this._deliveryLimitsScreen;
+  }
   async OpenDeliveryLimitsScreen() {
     await this.SwipeUpUntilVisible(this.DeliveryLimitsMaxBolusLabel);
     await this.DeliveryLimitsLabel.tap();
-    return this._deliveryLimitsScreen;
+    return this.DeliveryLimitsScreen;
   }
   async OpenBasalRateScreen() {
     await this.SwipeUpUntilVisible(this.BasalRateLabel);

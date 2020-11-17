@@ -24,7 +24,7 @@ class CorrectionRangeScreen extends base.EntriesScreen {
     return match.accessible.Button(this.backLabel).atIndex(0);
   }
   get OpenButton() {
-    return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
+    return match.accessible.ClickableLabel(this.openLabel);
   }
   get InfoLabel() {
     return match.accessible.TextLabel(this.screenText.Info);
@@ -33,7 +33,7 @@ class CorrectionRangeScreen extends base.EntriesScreen {
    * @override so we access the header by label
    */
   get Header() {
-    return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
+    return match.accessible.TextLabel(this.screenText.Header);
   }
   get LowCorrectionValueGuardrailMessage() {
     return this.GuardrailMessage(
@@ -83,12 +83,17 @@ class CorrectionRangeScreen extends base.EntriesScreen {
 
 var screenTests = function (testData) {
   describe("Correction Range Screen", () => {
-    var openScreenFunc = async function () {
+    let screen;
+    var openScreen = async function () {
       let therapySettingsScreen = testData.app.TherapySettingsScreen;
-      let screen = await therapySettingsScreen.OpenCorrectionRangeScreen();
+      screen = await therapySettingsScreen.OpenCorrectionRangeScreen();
       return screen;
     };
-    _baseThreapyScreenTests(testData, openScreenFunc);
+    _baseThreapyScreenTests({
+      openScreenFunc: openScreen,
+      checkEditing: testData.checkEditing,
+      checkInfo: testData.checkInfo,
+    });
   });
 };
 

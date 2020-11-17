@@ -22,7 +22,7 @@ class CarbRatioScreen extends base.EntriesScreen {
     );
   }
   get OpenButton() {
-    return match.accessible.ClickableLabel(this.openLabel).atIndex(0);
+    return match.accessible.ClickableLabel(this.openLabel);
   }
   get InfoLabel() {
     return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
@@ -31,7 +31,7 @@ class CarbRatioScreen extends base.EntriesScreen {
     return match.accessible.BackButton(this.backLabel);
   }
   get Header() {
-    return match.accessible.TextLabel(this.screenText.Header).atIndex(1);
+    return match.accessible.TextLabel(this.screenText.Header);
   }
   get HighCarbRatioGuardrailMessage() {
     return this.GuardrailMessage(this.screenText.HighCarbRatioGuardrailMessage);
@@ -82,12 +82,17 @@ class CarbRatioScreen extends base.EntriesScreen {
 
 var screenTests = function (testData) {
   describe("Carb Ratio Screen", () => {
-    var openScreenFunc = async function () {
+    let screen;
+    var openScreen = async function () {
       let therapySettingsScreen = testData.app.TherapySettingsScreen;
-      let screen = await therapySettingsScreen.OpenCarbRatioScreen();
+      screen = await therapySettingsScreen.OpenCarbRatioScreen();
       return screen;
     };
-    _baseThreapyScreenTests(testData, openScreenFunc);
+    _baseThreapyScreenTests({
+      openScreenFunc: openScreen,
+      checkEditing: testData.checkEditing,
+      checkInfo: testData.checkInfo,
+    });
   });
 };
 

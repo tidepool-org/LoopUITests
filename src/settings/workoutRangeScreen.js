@@ -6,14 +6,14 @@ class WorkoutRangeScreen extends base.EntriesScreen {
   constructor(language, config) {
     super(
       {
-        screenText: language.settingsScreen.WorkoutRangeScreen,
-        generalText: language.general,
+        screenText: language.screenText,
+        generalText: language.generalText,
         header: {
-          backLabel: language.settingsScreen.TherapySettingsScreen.Header,
+          backLabel: language.backLabel,
         },
         open: {
           isBtn: false,
-          label: language.settingsScreen.WorkoutRangeScreen.Header,
+          label: language.screenText.Header,
         },
       },
       config
@@ -23,7 +23,7 @@ class WorkoutRangeScreen extends base.EntriesScreen {
     return match.accessible.BackButton(this.backLabel);
   }
   get OpenButton() {
-    return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
+    return match.accessible.ClickableLabel(this.openLabel);
   }
   get InfoLabel() {
     return match.accessible.TextLabel(this.screenText.Info);
@@ -37,12 +37,17 @@ class WorkoutRangeScreen extends base.EntriesScreen {
 }
 var screenTests = function (testData) {
   describe("Workout Range Screen", () => {
-    var openScreenFunc = async function () {
+    let screen;
+    var openScreen = async function () {
       let therapySettingsScreen = testData.app.TherapySettingsScreen;
-      let screen = await therapySettingsScreen.OpenWorkoutRangeScreen();
+      screen = await therapySettingsScreen.OpenWorkoutRangeScreen();
       return screen;
     };
-    _baseThreapyScreenTests(testData, openScreenFunc);
+    _baseThreapyScreenTests({
+      openScreenFunc: openScreen,
+      checkEditing: testData.checkEditing,
+      checkInfo: testData.checkInfo,
+    });
   });
 };
 
