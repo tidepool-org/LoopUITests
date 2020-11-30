@@ -18,21 +18,6 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     });
     this.config = config;
   }
-  // get BackButton() {
-  //   return match.accessible.BackButton(this.backLabel);
-  // }
-  // get OpenButton() {
-  //   return match.accessible.ClickableLabel(this.openLabel);
-  // }
-  // get InfoLabel() {
-  //   return match.accessible.TextLabel(this.screenText.Info).atIndex(0);
-  // }
-  // /**
-  //  * @override so we access the header by label
-  //  */
-  // get Header() {
-  //   return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
-  // }
   get MaxBasalRateLabel() {
     return match.accessible.TextLabel(this.screenText.MaxBasalRate);
   }

@@ -15,18 +15,9 @@ class InsulinModelScreen extends base.EntryScreen {
       },
     });
   }
-  // get InfoLabel() {
-  //   return match.accessible.TextLabel(this.screenText.Info);
-  // }
-  // get OpenButton() {
-  //   return match.accessible.ClickableLabel(this.openLabel);
-  // }
-  // /**
-  //  * @override so we access the header by label
-  //  */
-  // get Header() {
-  //   return match.accessible.TextLabel(this.screenText.Header).atIndex(0);
-  // }
+  get BackButton() {
+    return match.accessible.ButtonBarButton(this.backLabel);
+  }
   async Apply(model) {
     if (model) {
       await match.accessible.ClickableLabel(model).tap();

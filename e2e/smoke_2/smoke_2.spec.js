@@ -1,6 +1,5 @@
 const { Test, Config } = require("../../src/index");
 const bolusScreenTests = require("../../src/bolus").tests;
-
 const accessibility = require("../../src/status/tests");
 
 describe("accessibility", () => {
@@ -15,29 +14,20 @@ describe("accessibility", () => {
     });
     await test.prepare();
   });
-  accessibility.statusScreen({
-    app: test,
-  });
-  accessibility.insulinDeliveryScreen({
-    app: test,
-  });
-  accessibility.activeCarbohydratesScreen({
-    app: test,
-  });
-  accessibility.activeInsulinScreen({
-    app: test,
-  });
-
+  // accessibility.statusScreen({ app: test });
+  // accessibility.insulinDeliveryScreen({ app: test });
+  // accessibility.activeCarbohydratesScreen({ app: test });
+  // accessibility.activeInsulinScreen({ app: test });
   bolusScreenTests({
     name: "Simple Bolus Calculator Screen",
     app: test,
     closedLoop: false,
     bolusForMeal: false,
   });
-  bolusScreenTests({
-    name: "Simple Meal Bolus Calculator Screen",
-    app: test,
-    closedLoop: false,
-    bolusForMeal: true,
-  });
+  // bolusScreenTests({
+  //   name: "Simple Meal Bolus Calculator Screen",
+  //   app: test,
+  //   closedLoop: false,
+  //   bolusForMeal: true,
+  // });
 });

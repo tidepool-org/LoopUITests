@@ -59,22 +59,7 @@ class Screen {
     //return match.Label(this.screenText.Header);
   }
   get BackButton() {
-    return match.accessible.ButtonBarButton(this.backLabel);
-  }
-  get AddButton() {
-    return match.accessible.Button(this.generalText.Add);
-  }
-  get PlusButton() {
-    return match.accessible.Button(this.generalText.ButtonLabel.Plus);
-  }
-  get EditButton() {
-    return match.accessible.Button(this.generalText.Edit);
-  }
-  get SaveButton() {
-    return match.accessible.Button(this.generalText.Save);
-  }
-  get ContinueButton() {
-    return match.accessible.ButtonBarButton(this.generalText.Continue);
+    return match.accessible.BackButton(this.backLabel);
   }
   get OpenButton() {
     if (this.openBtn) {
@@ -122,16 +107,12 @@ class Screen {
 }
 
 var _baseScreenTests = async function ({ openScreenFunc, skipClose = false }) {
-  describe("standard", () => {
     let screen;
     it("can open", async () => {
       screen = await openScreenFunc();
     });
     it("has a Header", async () => {
       await expect(screen.Header).toBeVisible();
-    });
-    it("has a Save Button", async () => {
-      await expect(screen.SaveButton).toBeVisible();
     });
     it("has a Back Button", async () => {
       await expect(screen.BackButton).toBeVisible();
@@ -141,7 +122,6 @@ var _baseScreenTests = async function ({ openScreenFunc, skipClose = false }) {
         await screen.BackButton.tap();
       });
     }
-  });
 };
 
 module.exports = {

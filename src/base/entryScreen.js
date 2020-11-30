@@ -6,6 +6,21 @@ class EntryScreen extends base.Screen {
     parentScreen.header.editable = true;
     super(parentScreen);
   }
+  get AddButton() {
+    return match.accessible.Button(this.generalText.Add);
+  }
+  get PlusButton() {
+    return match.accessible.Button(this.generalText.ButtonLabel.Plus);
+  }
+  get EditButton() {
+    return match.accessible.Button(this.generalText.Edit);
+  }
+  get SaveButton() {
+    return match.accessible.Button(this.generalText.Save);
+  }
+  get ContinueButton() {
+    return match.accessible.ButtonBarButton(this.generalText.Continue);
+  }
   get InfoLabel() {
     return match.accessible.TextLabel(this.screenText.Info);
   }

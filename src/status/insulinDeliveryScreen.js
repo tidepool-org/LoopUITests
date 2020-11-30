@@ -15,6 +15,10 @@ class InsulinDeliveryScreen extends base.Screen {
       },
     });
   }
+  //TODO: not accessible
+  get Header() {
+    return match.Label(this.screenText.Header);
+  }
   get IOBLabel() {
     return match.accessible.TextLabel(this.screenText.IOB);
   }
@@ -29,29 +33,33 @@ class InsulinDeliveryScreen extends base.Screen {
   }
 }
 
-var screenTests = (testData) => {
+var _screenTests = function ({ app }) {
   describe("Insulin Delivery Chart", () => {
-    var screen;
-    it("can open", async () => {
-      let statusScreen = await testData.app.OpenStatusScreen();
+    let screen;
+    var openScreen = async function () {
+      let statusScreen = await app.OpenStatusScreen();
       screen = await statusScreen.OpenInsulinDeliveryChart();
+      return screen;
+    };
+    base.screenTests({
+      openScreenFunc: openScreen,
+      skipClose: true,
     });
-    it("has a header", async () => {
-      await expect(screen.Header).toBeVisible();
+    describe("custom", () => {
+      it("has a IOB Label", async () => {
+        await expect(screen.IOBLabel).toBeVisible();
+      });
+      it("has a Total Label", async () => {
+        await expect(screen.TotalLabel).toBeVisible();
+      });
+      it("has an Event History Label", async () => {
+        await expect(screen.EventHistoryLabel).toBeVisible();
+      });
+      it("has a Reservoir Label", async () => {
+        await expect(screen.ReservoirLabel).toBeVisible();
+      });
     });
-    it("has a IOB Label", async () => {
-      await expect(screen.IOBLabel).toBeVisible();
-    });
-    it("has a Total Label", async () => {
-      await expect(screen.TotalLabel).toBeVisible();
-    });
-    it("has an Event History Label", async () => {
-      await expect(screen.EventHistoryLabel).toBeVisible();
-    });
-    it("has a Reservoir Label", async () => {
-      await expect(screen.ReservoirLabel).toBeVisible();
-    });
-    it("close", async () => {
+    it("can close", async () => {
       await screen.BackButton.tap();
     });
   });
@@ -59,5 +67,5 @@ var screenTests = (testData) => {
 
 module.exports = {
   Screen: InsulinDeliveryScreen,
-  tests: screenTests,
+  tests: _screenTests,
 };

@@ -15,8 +15,9 @@ class ActiveCarbohydratesScreen extends base.Screen {
       },
     });
   }
-  get OpenButton() {
-    return match.accessible.TextLabel(this.screenText.ActiveCarbohydrates);
+  //TODO: not accessible
+  get Header() {
+    return match.Label(this.screenText.Header);
   }
   get GramsActiveCarbsLabel() {
     return match.accessible.TextLabel(this.screenText.GramsActiveCarbs);
@@ -34,37 +35,42 @@ class ActiveCarbohydratesScreen extends base.Screen {
     return match.accessible.TextLabel(this.screenText.Predicted);
   }
 }
-var screenTests = (testData) => {
+
+var _screenTests = function ({ app }) {
   describe("Active Carbohydrates Chart", () => {
     let screen;
-    it("can open", async () => {
-      let statusScreen = await testData.app.OpenStatusScreen();
+    var openScreen = async function () {
+      let statusScreen = await app.OpenStatusScreen();
       screen = await statusScreen.OpenActiveCarbohydratesChart();
+      return screen;
+    };
+    base.screenTests({
+      openScreenFunc: openScreen,
+      skipClose: true,
     });
-    it("has a header", async () => {
-      await expect(screen.Header).toBeVisible();
+    describe("custom", () => {
+      it("has a Grams Active Carbs Label", async () => {
+        await expect(screen.GramsActiveCarbsLabel).toBeVisible();
+      });
+      it("has a Grams Total Carbs Label", async () => {
+        await expect(screen.GramsTotalCarbsLabel).toBeVisible();
+      });
+      it("has an Glucose Change Label", async () => {
+        await expect(screen.GlucoseChangeLabel).toBeVisible();
+      });
+      it("has a Observed Label", async () => {
+        await expect(screen.ObservedLabel).toBeVisible();
+      });
+      it("has a Predicted Label", async () => {
+        await expect(screen.PredictedLabel).toBeVisible();
+      });
     });
-    it("has a Grams Active Carbs Label", async () => {
-      await expect(screen.GramsActiveCarbsLabel).toBeVisible();
-    });
-    it("has a Grams Total Carbs Label", async () => {
-      await expect(screen.GramsTotalCarbsLabel).toBeVisible();
-    });
-    it("has an Glucose Change Label", async () => {
-      await expect(screen.GlucoseChangeLabel).toBeVisible();
-    });
-    it("has a Observed Label", async () => {
-      await expect(screen.ObservedLabel).toBeVisible();
-    });
-    it("has a Predicted Label", async () => {
-      await expect(screen.PredictedLabel).toBeVisible();
-    });
-    it("close", async () => {
+    it("can close", async () => {
       await screen.BackButton.tap();
     });
   });
 };
 module.exports = {
   Screen: ActiveCarbohydratesScreen,
-  tests: screenTests,
+  tests: _screenTests,
 };

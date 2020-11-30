@@ -127,8 +127,8 @@ class StatusScreen {
   }
 }
 
-var screenTests = (testData) => {
-  //describe("Status Screen", () => {
+var _screenTests = (testData) => {
+  describe("Status Screen", () => {
     var screen;
     it("has a Active Carbohydrates Label", async () => {
       screen = await testData.app.OpenStatusScreen();
@@ -175,10 +175,10 @@ var screenTests = (testData) => {
         ).toBeVisible();
       });
     });
-  //});
+  });
 };
 
 module.exports = {
   Screen: StatusScreen,
-  tests: screenTests,
+  tests: _screenTests,
 };
