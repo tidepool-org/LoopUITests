@@ -11,6 +11,7 @@
 SCRIPT="$(basename "${0}")"
 SCRIPT_DIRECTORY="$(dirname "${0}")"
 TEST_DIRECTORY="${SCRIPT_DIRECTORY}/.."
+BUILDS_DIR=build
 
 error() {
   echo "ERROR: ${*}" >&2
@@ -30,7 +31,7 @@ if [ ${#} -lt 1 ]; then
   error "Missing arguments"
 fi
 
-BUILD_ROOT="${1}"
+BUILD_ROOT="${BUILDS_DIR}/${1}"
 shift 1
 CONFIGURATION="${1}"
 shift 1
@@ -49,11 +50,11 @@ if [[ ! ${CONFIGURATION} =~ "iphone-11pro" ]] && [[ ! ${CONFIGURATION} =~ "iphon
   error "Unexpected <configuration>: ${CONFIGURATION}"
 fi
 
-if [[ ${CONFIGURATION} == "iphone-11pro" ]]; then
+if [[ ${CONFIGURATION} =~ "iphone-11pro" ]]; then
   CONFIGURATION="ios.sim.debug.iphone-11pro"
 fi
 
-if [[ ${CONFIGURATION} == "iphone-se-2" ]]; then
+if [[ ${CONFIGURATION} =~ "iphone-se-2" ]]; then
   CONFIGURATION="ios.sim.debug.iphone-se-2"
 fi
 

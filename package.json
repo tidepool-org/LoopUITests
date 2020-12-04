@@ -8,7 +8,7 @@
     "lint": "eslint 'src/**'"
   },
   "devDependencies": {
-    "detox": "^16.9.2",
+    "detox": "^17.12.0",
     "eslint": "^7.11.0",
     "jest": "^25.5.4",
     "jest-html-reporters": "^2.1.0",
@@ -17,6 +17,7 @@
   "detox": {
     "artifacts": {
       "plugins": {
+        "uiHierarchy": "enabled",
         "screenshot": {
           "enabled": true,
           "shouldTakeAutomaticSnapshots": true,
@@ -31,17 +32,35 @@
     },
     "configurations": {
       "ios.sim.debug.iphone-11pro": {
-        "binaryPath": "build/Debug-iphonesimulator/Loop.app",
+        "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
         "type": "ios.simulator",
         "device": {
-          "type": "iPhone 11 Pro"
+          "type": "iPhone 11 Pro",
+          "os": "iOS 13.7"
+        }
+      },
+      "ios.sim.debug.iphone-11pro-ios14": {
+        "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone 11 Pro",
+          "os": "iOS 14.1"
         }
       },
       "ios.sim.debug.iphone-se-2": {
-        "binaryPath": "build/Debug-iphonesimulator/Loop.app",
+        "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
         "type": "ios.simulator",
         "device": {
-          "type": "iPhone SE (2nd generation)"
+          "type": "iPhone SE (2nd generation)",
+          "os": "iOS 13.7"
+        }
+      },
+      "ios.sim.debug.iphone-se-2-ios14": {
+        "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone SE (2nd generation)",
+          "os": "iOS 14.1"
         }
       }
     },
