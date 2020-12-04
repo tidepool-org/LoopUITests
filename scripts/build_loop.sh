@@ -50,3 +50,7 @@ LoopWorkspace/Scripts/workspace-prepare.sh Tidepool
 sed -i '' 's/CRITICAL_ALERTS_ENABLED//g' LoopWorkspace/Tidepool/Loop/LoopOverride.xcconfig
 
 LoopWorkspace/Scripts/workspace-build.sh -o "$(pwd)" Tidepool
+
+
+info "Moving the build directory to where detox expects"
+cp -rf "./Build" "../"
