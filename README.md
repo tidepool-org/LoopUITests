@@ -5,42 +5,51 @@ Loop end-to-end automated tests using `detox`
  - [Background reading](https://hackernoon.com/detox-gray-box-end-to-end-testing-framework-for-mobile-apps-196ccd9564ce)
 
 
-## Build
-- `npm run build`
+## Loop Build
+Will either build the version of loop given e.g. `build-289` or if it doesn't already exist will clone the LoopWorkspace for the given tag and then build it
 
-## Test
+- `BUILD_TAG=build-289 npm run build_loop`
 
-All tests
+## Tests
 
-`npm run test-all`
+`BUILD_DIR=build-289 CONFIG=iphone-se-2 NAME=error_1 npm run test_e2e`
 
-## Device Configurations
+### Device Configurations
+
+[Comparison iPhone SE 2 vs iPhone 11 pro](https://www.apple.com/iphone/compare/?device1=iphoneSE2ndgen&device2=iphone12)
 
 - iPhone 11 Pro `ios.sim.debug.iphone-11pro`
-- iPhone 6 `ios.sim.debug.iphone-6`
 - iPhone SE (2nd generation) `ios.sim.debug.iphone-se-2`
 
-### Smoke test
-Accessibility tests that run through the screen elements making sure the are present
 
-- `npm run test-smoke1`
-- `npm run test-smoke2`
+### Smoke test
+Accessibility and tests that run through the screen elements making sure the are present
+
+- `smoke_1` accessibility labels for: main screens
+- `smoke_2` accessibility labels for: general settings and therapy settings screens
+- `smoke_3` install, confirgure and go into closed loop mode, then close and reopen loop app
 
 ### Functional test
 Test basic functionality of the app. Opening, closing of screens, adding and removeing devices, clicking buttons etc ...
 
-- `npm run test-functional`
+- `functional_1`
+- `functional_2`
 
 ### Guardrails test
 Test the loop app settings guardrails limits
 
-- `npm run test-guardrails`
+- `guardrail_1` guardrail tests for: insulin carb ratio, correction range schedule and basal rate schedule
+- `guardrail_2` guardrail tests for: insulin sensitivity schedule, delivery limits and suspend threshold
+
+### Errors test
+Test the loop app interacts with device errors
+
+- `error_1`
+- `error_2`
 
 ## Debugging
 
-`detox test e2e/smoke -c ios.sim.debug 2>&1 | tee ./artifacts/smoketest_output.txt`
-
- - then you can search in `./artifacts/test_output.txt` file for test output including errors or mismatches
+ search in `./artifacts/loopUITests.html` file for test output including errors or mismatches
 
 ## Updates
 `detox clean-framework-cache && detox build-framework-cache`
@@ -58,18 +67,19 @@ Do *not* install `applesimutils` from Homebrew. Use the custom, pre-built binary
 
 [Scenarios Docs](https://github.com/LoopKit/Loop/blob/master/Documentation/Testing/Scenarios.md)
 
-### Scenarios
-
 - `./scenarios/flat_cgm_trace.json` flat cgm trace, no insulin or carb events
 
 ## Testing guidelines
 
-https://developer.mozilla.org/en-US/docs/Web/Accessibility/Mobile_accessibility_checklist
+
+### Mobile
+
 http://pauljadam.com/demos/mobilechecklist.html
 
 
+### Practical test pyramid
 
-https://martinfowler.com/articles/practical-test-pyramid.html#UiTests
+[UI Tests](https://martinfowler.com/articles/practical-test-pyramid.html#UiTests)
 
 > With web interfaces there's multiple aspects that you probably want to test around your UI: behaviour, layout, usability
 
@@ -77,7 +87,7 @@ https://martinfowler.com/articles/practical-test-pyramid.html#UiTests
     - units (mgdL, mgL)
     - device format (touch, )
 
-https://martinfowler.com/articles/practical-test-pyramid.html#End-to-endTests
+[End to end tests](https://martinfowler.com/articles/practical-test-pyramid.html#End-to-endTests)
 
 > Think about the high-value interactions users will have with your application. Try to come up with user journeys that define the core value of your product and translate the most important steps of these user journeys into automated end-to-end tests.
 
@@ -96,8 +106,7 @@ https://martinfowler.com/articles/practical-test-pyramid.html#End-to-endTests
 3)
 - errors
 
-
-https://martinfowler.com/articles/practical-test-pyramid.html#AvoidTestDuplication
+[Avoid duplication](https://martinfowler.com/articles/practical-test-pyramid.html#AvoidTestDuplication)
 
 > If a higher-level test spots an error and there's no lower-level test failing, you need to write a lower-level test
 > Push your tests as far down the test pyramid as you can

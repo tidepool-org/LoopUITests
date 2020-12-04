@@ -9,14 +9,12 @@
 #
 
 SCRIPT="$(basename "${0}")"
-SCRIPT_DIRECTORY="$(dirname "${0}")"
-TEST_DIRECTORY="${SCRIPT_DIRECTORY}/.."
 
 error() {
   echo "ERROR: ${*}" >&2
-  echo "Usage: ${SCRIPT} <build-root> <configuration>" >&2
+  echo "Usage: ${SCRIPT} <build-dir> <configuration> <type>" >&2
   echo "Parameters:" >&2
-  echo "  <build-root>      root of the build that contains the app" >&2
+  echo "  <build-dir>      directory of the build that contains the app" >&2
   echo "  <configuration>   detox configuration to use" >&2
   echo "  <type>            type of tests to run, 'functional' or 'smoke' or 'guardrails' or 'error' " >&2
   exit 1
@@ -30,7 +28,7 @@ if [ ${#} -lt 1 ]; then
   error "Missing arguments"
 fi
 
-BUILD_ROOT="${1}"
+BUILD_DIR="${1}"
 shift 1
 CONFIGURATION="${1}"
 shift 1
@@ -41,11 +39,25 @@ if [ ${#} -ne 0 ]; then
   error "Unexpected arguments: ${*}"
 fi
 
+if [ ! -d "${BUILD_DIR}" ]; then
+  error "Build directory does not exist"
+fi
+
 if [[ ! ${TEST_TYPE} =~ "functional_" ]] && [[ ! ${TEST_TYPE} =~ "smoke_" ]] && [[ ! ${TEST_TYPE} =~ "guardrails_" ]] && [[ ! ${TEST_TYPE} =~ "error_" ]]; then
   error "Unexpected <type>: ${TEST_TYPE}"
 fi
 
-cd "${TEST_DIRECTORY}"
+if [[ ! ${CONFIGURATION} =~ "iphone-11pro" ]] && [[ ! ${CONFIGURATION} =~ "iphone-se-2" ]]; then
+  error "Unexpected <configuration>: ${CONFIGURATION}"
+fi
+
+if [[ ${CONFIGURATION} =~ "iphone-11pro" ]]; then
+  CONFIGURATION="ios.sim.debug.iphone-11pro"
+fi
+
+if [[ ${CONFIGURATION} =~ "iphone-se-2" ]]; then
+  CONFIGURATION="ios.sim.debug.iphone-se-2"
+fi
 
 info "Checking node version..."
 node --version
@@ -58,8 +70,8 @@ fi
 info "Updating PATH..."
 export PATH="${PWD}/bin:${PWD}/node_modules/.bin:${PATH}"
 
-info "Creating build symlink to '${BUILD_ROOT}'..."
-ln -sf "${BUILD_ROOT}" build
+info "Creating build symlink to '${BUILD_DIR}'..."
+ln -sf "${BUILD_DIR}" build
 
 info "Running detox '${TEST_TYPE}' tests with configuration '${CONFIGURATION}'..."
 detox test e2e/${TEST_TYPE} --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup

@@ -9,6 +9,7 @@ describe('accessibility', () => {
         test = test.setup({
             language: config.text,
             screenDefaults: config.screenDefaults,
+            enableTherapySettings: true,
         });
         await test.prepare();
     });

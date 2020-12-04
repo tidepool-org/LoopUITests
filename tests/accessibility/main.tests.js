@@ -1,5 +1,5 @@
 module.exports = (test) => {
-    describe('Status', () => {
+    describe('Status Screen', () => {
         var statusScreen;
         it('has a Active Carbohydrates Label', async () => {
             statusScreen = await test.OpenStatusScreen();
