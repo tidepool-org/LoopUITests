@@ -11,7 +11,7 @@ describe("accessibility", () => {
       language: config.text,
       screenDefaults: config.screenDefaults,
       enableTherapySettings: true,
-      simulators: { pump: true },
+      simulators: { cgm: true, pump: true },
     });
     await test.prepare();
   });

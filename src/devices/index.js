@@ -16,17 +16,10 @@ class Devices {
         }
     }
     get AddPumpButton() {
-        //if (this.isHeader) {
-            //return match.accessible.TextLabel(this.screenText.AddPump);
-            return match.accessible.TextLabel(this.screenText.AddPump);
-        //}
-        //return match.accessible.TextLabel(this.screenText.AddPumpFull);
+        return match.Label(this.screenText.AddPump);
     }
     get AddCGMButton() {
-        //if (this.isHeader) {
-            return match.accessible.TextLabel(this.screenText.AddCGM);
-        // }
-        // return match.accessible.TextLabel(this.screenText.AddCGMFull);
+        return match.Label(this.screenText.AddCGM);
     }
     async AddPump() {
         await this.AddPumpButton.tap();

@@ -81,8 +81,9 @@ module.exports = class Utilities {
     await pumpScreen.BackButton.tap();
   }
   async loadTherapySettings() {
+    await this.dismissTidepoolLogin();
     await device.shake();
-    await match.accessible.TextLabel("Mock Therapy Settings").tap();
+    await match.accessible.Button("Mock Therapy Settings").tap();
   }
   async addConfiguredPump() {
     await this.addUnconfiguredPump();
@@ -95,5 +96,8 @@ module.exports = class Utilities {
   async addCGM() {
     let statusScreen = await this._testApp.OpenStatusScreen();
     await statusScreen.HeaderSection.Devices.AddCGM();
+  }
+  async dismissTidepoolLogin() {
+    await match.accessible.Header("Tidepool").swipe('down', 'fast', 0.8)
   }
 };
