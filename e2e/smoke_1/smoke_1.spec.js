@@ -21,7 +21,7 @@ describe("accessibility", () => {
       await settingsScreen.OpenTherapySettings();
     });
     //NOTE: in order that they appear on the screen to minimise scrolling and time taken
-    accessibility.suspendThresholdScreen({ app: test });
+    accessibility.glucoseSafetyLimitScreen({ app: test });
     accessibility.correctionRangeScreen({ app: test});
     accessibility.premealRangeScreen({ app: test });
     accessibility.workoutRangeScreen({ app: test });

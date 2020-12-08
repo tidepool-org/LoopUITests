@@ -6,7 +6,7 @@ const insulinModelScreen = require("./insulinModelScreen").tests;
 const insulinSensitivitiesScreen = require("./insulinSensitivitiesScreen")
   .tests;
 const premealRangeScreen = require("./premealRangeScreen").tests;
-const suspendThresholdScreen = require("./suspendThresholdScreen").tests;
+const glucoseSafetyLimitScreen = require("./glucoseSafetyLimitScreen").tests;
 const workoutRangeScreen = require("./workoutRangeScreen").tests;
 
 module.exports = {
@@ -17,6 +17,6 @@ module.exports = {
     insulinModelScreen,
     insulinSensitivitiesScreen,
     premealRangeScreen,
-    suspendThresholdScreen,
+    glucoseSafetyLimitScreen,
     workoutRangeScreen,
   };

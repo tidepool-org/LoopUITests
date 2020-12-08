@@ -348,13 +348,13 @@ var SettingsScreen = {
     Info:
       "Temporarily lower your glucose target before a meal to impact post-meal glucose spikes.",
   },
-  SuspendThresholdScreen: {
+  GlucoseSafetyLimitScreen: {
     BGUnits: General.GlucoseUnitLabel,
     Header: "Glucose Safety Limit",
     Info:
       "Tidepool Loop will deliver basal and recommend bolus insulin only if your glucose is predicted to be above this limit for the next three hours.",
-    HighSuspendThresholdGuardrailMessage: "High Glucose Safety Limit",
-    LowSuspendThresholdGuardrailMessage: "Low Glucose Safety Limit",
+    HighGlucoseSafetyLimitGuardrailMessage: "High Glucose Safety Limit",
+    LowGlucoseSafetyLimitGuardrailMessage: "Low Glucose Safety Limit",
   },
   TherapySettingsScreen: {
     Header: "Therapy Settings",

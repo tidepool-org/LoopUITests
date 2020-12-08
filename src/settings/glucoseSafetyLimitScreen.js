@@ -2,7 +2,7 @@ const match = require("../match");
 const action = require("../action");
 const base = require("../base/index");
 
-class SuspendThresholdScreen extends base.EntryScreen {
+class GlucoseSafetyLimitScreen extends base.EntryScreen {
   constructor(language, config) {
     super({
       screenText: language.screenText,
@@ -18,14 +18,14 @@ class SuspendThresholdScreen extends base.EntryScreen {
     this.bgUnitsLabel = language.screenText.BGUnits;
     this.config = config;
   }
-  get LowSuspendThresholdGuardrailMessage() {
+  get LowGlucoseSafetyLimitGuardrailMessage() {
     return this.GuardrailMessage(
-      this.screenText.LowSuspendThresholdGuardrailMessage
+      this.screenText.LowGlucoseSafetyLimitGuardrailMessage
     );
   }
-  get HighSuspendThresholdGuardrailMessage() {
+  get HighGlucoseSafetyLimitGuardrailMessage() {
     return this.GuardrailMessage(
-      this.screenText.HighSuspendThresholdGuardrailMessage
+      this.screenText.HighGlucoseSafetyLimitGuardrailMessage
     );
   }
   /**
@@ -44,11 +44,11 @@ class SuspendThresholdScreen extends base.EntryScreen {
 }
 
 var screenTests = function (testData) {
-  describe("Suspend Threshold Screen", () => {
+  describe("Glucose Safety Limit Screen", () => {
     let screen;
     var openScreen = async function () {
       let therapySettingsScreen = testData.app.TherapySettingsScreen;
-      screen = await therapySettingsScreen.OpenSuspendThresholdScreen();
+      screen = await therapySettingsScreen.OpenGlucoseSafetyLimitScreen();
       return screen;
     };
     base.entryTests({
@@ -59,6 +59,6 @@ var screenTests = function (testData) {
 };
 
 module.exports = {
-  Screen: SuspendThresholdScreen,
+  Screen: GlucoseSafetyLimitScreen,
   tests: screenTests,
 };

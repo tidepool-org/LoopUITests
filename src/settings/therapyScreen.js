@@ -9,7 +9,7 @@ const InsulinModelScreen = require("./insulinModelScreen").Screen;
 const InsulinSensitivitiesScreen = require("./insulinSensitivitiesScreen")
   .Screen;
 const PremealRangeScreen = require("./premealRangeScreen").Screen;
-const SuspendThresholdScreen = require("./suspendThresholdScreen").Screen;
+const GlucoseSafetyLimitScreen = require("./glucoseSafetyLimitScreen").Screen;
 const WorkoutRangeScreen = require("./workoutRangeScreen").Screen;
 
 module.exports = class TherapyScreen extends base.Screen {
@@ -73,13 +73,13 @@ module.exports = class TherapyScreen extends base.Screen {
       },
       config.insulinSensitivity
     );
-    this._suspendThresholdScreen = new SuspendThresholdScreen(
+    this._glucoseSafetyLimitScreen = new GlucoseSafetyLimitScreen(
       {
-        screenText: language.settingsScreen.SuspendThresholdScreen,
+        screenText: language.settingsScreen.GlucoseSafetyLimitScreen,
         generalText: language.general,
         backLabel: language.settingsScreen.TherapySettingsScreen.Header,
       },
-      config.suspendThreshold
+      config.glucoseSafetyLimit
     );
     this._workoutRangeScreen = new WorkoutRangeScreen({
       screenText: language.settingsScreen.WorkoutRangeScreen,
@@ -98,11 +98,11 @@ module.exports = class TherapyScreen extends base.Screen {
   get BackButton() {
     return match.accessible.Button(this.generalText.Done).atIndex(0);
   }
-  get SuspendThresholdLabel() {
-    return this._suspendThresholdScreen.OpenButton;
+  get GlucoseSafetyLimitLabel() {
+    return this._glucoseSafetyLimitScreen.OpenButton;
   }
-  get SuspendThresholdInfo() {
-    return this._suspendThresholdScreen.InfoLabel;
+  get GlucoseSafetyLimitInfo() {
+    return this._glucoseSafetyLimitScreen.InfoLabel;
   }
   get CorrectionRangeLabel() {
     return this._correctionRangeScreen.OpenButton;
@@ -204,8 +204,8 @@ module.exports = class TherapyScreen extends base.Screen {
     await this.CorrectionRangeLabel.tap();
     return this._correctionRangeScreen;
   }
-  async OpenSuspendThresholdScreen() {
-    await this.SuspendThresholdLabel.tap();
-    return this._suspendThresholdScreen;
+  async OpenGlucoseSafetyLimitScreen() {
+    await this.GlucoseSafetyLimitLabel.tap();
+    return this._glucoseSafetyLimitScreen;
   }
 };
