@@ -19,16 +19,16 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     this.config = config;
   }
   get MaxBasalRateLabel() {
-    return match.accessible.TextLabel(this.screenText.MaxBasalRate);
+    return match.Label(this.screenText.MaxBasalRate);
   }
   get MaxBasalRateInfo() {
-    return match.accessible.TextLabel(this.screenText.MaxBasalRateInfo);
+    return match.Label(this.screenText.MaxBasalRateInfo);
   }
   get MaxBolusLabel() {
-    return match.accessible.TextLabel(this.screenText.MaxBolus);
+    return match.Label(this.screenText.MaxBolus);
   }
   get MaxBolusInfo() {
-    return match.accessible.TextLabel(this.screenText.MaxBolusInfo);
+    return match.Label(this.screenText.MaxBolusInfo);
   }
   get LowMaxBasalRateGuardrailMessage() {
     return this.GuardrailMessage(

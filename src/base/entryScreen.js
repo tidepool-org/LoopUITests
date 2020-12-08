@@ -22,7 +22,7 @@ class EntryScreen extends base.Screen {
     return match.accessible.ButtonBarButton(this.generalText.Continue);
   }
   get InfoLabel() {
-    return match.accessible.TextLabel(this.screenText.Info);
+    return match.Label(this.screenText.Info);
   }
   get InfoButton() {
     return match.accessible.Button(this.generalText.ButtonLabel.InfoCircle);

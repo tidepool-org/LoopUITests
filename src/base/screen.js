@@ -55,8 +55,7 @@ class Screen {
     this._deviceInfo = _deviceInfo();
   }
   get Header() {
-    return match.accessible.TextLabel(this.screenText.Header);
-    //return match.Label(this.screenText.Header);
+    return match.Label(this.screenText.Header);
   }
   get BackButton() {
     return match.accessible.BackButton(this.backLabel);
@@ -65,7 +64,7 @@ class Screen {
     if (this.openBtn) {
       return match.accessible.Button(this.openBtn);
     }
-    return match.accessible.ClickableLabel(this.openLabel);
+    return match.Label(this.openLabel);
   }
   async Authenticate() {
     if (this._deviceInfo.useFaceID) {

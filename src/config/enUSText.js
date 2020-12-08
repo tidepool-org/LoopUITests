@@ -289,9 +289,26 @@ var SettingsScreen = {
   Configuration: "Configuration",
   Support: "Support",
   ClosedLoop: "Closed Loop",
-  TherapySettingsScreen: {
-    Header: "Therapy Settings",
-    Info: "Diabetes Treatment",
+  BasalRatesScreen: {
+    Header: "Basal Rates",
+    Info:
+      "Your Basal Rate of insulin is the number of units per hour that you want to use to cover your background insulin needs.",
+    Units: General.InsulinUnitPerHourLabel,
+    NoBasalInsulinGuardrailMessage: "No Basal Insulin",
+  },
+  CarbRatioScreen: {
+    Header: "Carb Ratios",
+    Info:
+      "Your Carb Ratio is the number of grams of carbohydrates covered by one unit of insulin.",
+    HighCarbRatioGuardrailMessage: "High Carb Ratio",
+    LowCarbRatioGuardrailMessage: "Low Carb Ratio",
+  },
+  CorrectionRangeScreen: {
+    Header: "Correction Range",
+    Info:
+      "Correction Range is the glucose value (or range of values) that you want Tidepool Loop to aim for in adjusting your basal insulin and helping you calculate your boluses.",
+    LowCorrectionValueGuardrailMessage: "Low Correction Value",
+    HighCorrectionValueGuardrailMessage: "High Correction Value",
   },
   DeliveryLimitsScreen: {
     Header: "Delivery Limits",
@@ -299,55 +316,16 @@ var SettingsScreen = {
       "Maximum basal rate is the highest temporary basal rate Loop is allowed to set automatically.\n\nMaximum bolus is the highest bolus amount you can deliver at one time to cover carbs or bring down high glucose.",
     MaxBasalRate: "Maximum Basal Rate",
     MaxBasalRateInfo:
-      "Maximum basal rate is the highest temporary basal rate Loop is allowed to set automatically.",
+      "Maximum Basal Rate is the highest temporary basal rate Tidepool Loop is allowed to set automatically.",
     BasalRateUnits: General.InsulinUnitPerHourLabel,
     MaxBolus: "Maximum Bolus",
     MaxBolusInfo:
-      "Maximum bolus is the highest bolus amount you can deliver at one time to cover carbs or bring down high glucose.",
+      "Maximum Bolus is the highest bolus amount you can deliver at one time to cover carbs or bring down high glucose.",
     BolusUnits: General.InsulinUnitLabel,
     LowMaxBasalRateGuardrailMessage: "Low Maximum Basal Rate",
     HighMaxBasalRateGuardrailMessage: "High Maximum Basal Rate",
     LowBolusAmountGuardrailMessage: "Low Bolus Amount",
     HighBolusAmountGuardrailMessage: "High Bolus Amount",
-  },
-  InsulinSensitivitiesScreen: {
-    Header: "Insulin Sensitivities",
-    Info:
-      "Your insulin sensitivities refer to the drop in glucose expected from one unit of insulin.",
-    LowInsulinSensitivityGuardrailMessage: "Low Insulin Sensitivity",
-    HighInsulinSensitivityGuardrailMessage: "High Insulin Sensitivity",
-  },
-  CorrectionRangeScreen: {
-    Header: "Correction Range",
-    Info:
-      "Correction range is the glucose value (or range of values) that you want Loop to aim for in adjusting your basal insulin.",
-    LowCorrectionValueGuardrailMessage: "Low Correction Value",
-    HighCorrectionValueGuardrailMessage: "High Correction Value",
-  },
-  WorkoutRangeScreen: {
-    Header: "Workout Range",
-    Info:
-      "Temporarily raise your glucose target before, during, or after physical activity to reduce the risk of low glucose events. This range can be set anywhere from the top of your regular correction range on the low end to 180 mg/dL (10 mmol/L) on the high end.",
-  },
-  PremealRangeScreen: {
-    Header: "Pre-Meal Range",
-    Info:
-      "Temporarily lower your glucose target before a meal to impact post-meal glucose spikes. This range can be set anywhere from your suspend threshold on the low end to the top of your regular correction range on the high end.",
-  },
-  BasalRatesScreen: {
-    Header: "Basal Rates",
-    Info:
-      "Your basal rate of insulin is the number of units per hour that you want to use to cover your background insulin needs.",
-    Units: General.InsulinUnitPerHourLabel,
-    NoBasalInsulinGuardrailMessage: "No Basal Insulin",
-  },
-  SuspendThresholdScreen: {
-    BGUnits: General.GlucoseUnitLabel,
-    Header: "Suspend Threshold",
-    Info:
-      "When your glucose is predicted to go below this value, the app will recommend a basal rate of 0 U/hr and will not recommend a bolus.",
-    HighSuspendThresholdGuardrailMessage: "High Suspend Threshold",
-    LowSuspendThresholdGuardrailMessage: "Low Suspend Threshold",
   },
   InsulinModelScreen: {
     Header: "Insulin Model",
@@ -358,12 +336,34 @@ var SettingsScreen = {
       RapidChildren: "Rapid-Acting – Children",
     },
   },
-  CarbRatioScreen: {
-    Header: "Carb Ratios",
+  InsulinSensitivitiesScreen: {
+    Header: "Insulin Sensitivities",
     Info:
-      "Your carb ratio is the number of grams of carbohydrate covered by one unit of insulin.",
-    HighCarbRatioGuardrailMessage: "High Carb Ratio",
-    LowCarbRatioGuardrailMessage: "Low Carb Ratio",
+      "Your Insulin Sensitivities refer to the drop in glucose expected from one unit of insulin.",
+    LowInsulinSensitivityGuardrailMessage: "Low Insulin Sensitivity",
+    HighInsulinSensitivityGuardrailMessage: "High Insulin Sensitivity",
+  },
+  PremealRangeScreen: {
+    Header: "Pre-Meal Range",
+    Info:
+      "Temporarily lower your glucose target before a meal to impact post-meal glucose spikes.",
+  },
+  SuspendThresholdScreen: {
+    BGUnits: General.GlucoseUnitLabel,
+    Header: "Glucose Safety Limit",
+    Info:
+      "Tidepool Loop will deliver basal and recommend bolus insulin only if your glucose is predicted to be above this limit for the next three hours.",
+    HighSuspendThresholdGuardrailMessage: "High Glucose Safety Limit",
+    LowSuspendThresholdGuardrailMessage: "Low Glucose Safety Limit",
+  },
+  TherapySettingsScreen: {
+    Header: "Therapy Settings",
+    Info: "Diabetes Treatment",
+  },
+  WorkoutRangeScreen: {
+    Header: "Workout Range",
+    Info:
+      "Temporarily raise your glucose target before, during, or after physical activity to reduce the risk of low glucose events.",
   },
 };
 
