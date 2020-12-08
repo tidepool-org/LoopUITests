@@ -1,31 +1,46 @@
-const match = require('../match');
-const base = require('../base/index');
+const match = require("../match");
+const base = require("../base/index");
 
-class InsulinModelScreen extends base.Screen {
-    constructor(language) {
-        super({
-            screenText: language.settingsScreen.InsulinModelScreen,
-            generalText: language.general,
-            header: {
-                backLabel: language.general.Back,
-            },
-            open: {
-                isBtn: false,
-                label: language.settingsScreen.InsulinModelScreen.Header,
-            },
-        });
+class InsulinModelScreen extends base.EntryScreen {
+  constructor(language) {
+    super({
+      screenText: language.screenText,
+      generalText: language.generalText,
+      header: {
+        backLabel: language.generalText.Back,
+      },
+      open: {
+        isBtn: false,
+        label: language.screenText.Header,
+      },
+    });
+  }
+  get BackButton() {
+    return match.accessible.ButtonBarButton(this.backLabel);
+  }
+  async Apply(model) {
+    if (model) {
+      await match.accessible.ClickableLabel(model).tap();
     }
-    get InfoLabel() {
-        return match.accessible.TextLabel(this.screenText.Info);
-    }
-    get OpenButton() {
-        return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
-    }
-    async Apply(model) {
-        if (model) {
-            await match.accessible.ClickableLabel(model).tap();
-        }
-    }
+  }
 }
 
-module.exports = InsulinModelScreen;
+var screenTests = function (testData) {
+  describe("Insulin Model Screen", () => {
+    let screen;
+    var openScreen = async function () {
+      let therapySettingsScreen = testData.app.TherapySettingsScreen;
+      screen = await therapySettingsScreen.OpenInsulinModelScreen();
+      return screen;
+    };
+    base.entryTests({
+      openScreenFunc: openScreen,
+      checkEditing: testData.checkEditing,
+    });
+  });
+};
+
+module.exports = {
+  Screen: InsulinModelScreen,
+  tests: screenTests,
+};

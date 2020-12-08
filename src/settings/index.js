@@ -24,12 +24,6 @@ class SettingsScreen extends base.Screen {
     get Devices() {
         return this._devices;
     }
-    /**
-     * @override
-     */
-    get BackButton() {
-        return match.accessible.Button(this.generalText.Done);
-    }
     get LoopSwitchButton() {
         return match.accessible.SwitchButton(this.screenText.ClosedLoop);
     }
@@ -45,22 +39,24 @@ class SettingsScreen extends base.Screen {
     get ConfigurationHeader() {
         return match.accessible.Header(this.screenText.Configuration);
     }
-
     async ClosedLoop() {
-        var isOn = await this.IsOn(this.LoopSwitchButton);
-        if (isOn == false) {
+        const isOn = await this.IsButtonOn(this.LoopSwitchButton);
+        if (!isOn) {
             await this.LoopSwitchButton.longPress();
         }
     }
     async OpenLoop() {
-        var isOn = await this.IsOn(this.LoopSwitchButton);
-        if (isOn == true) {
+        const isOn = await this.IsButtonOn(this.LoopSwitchButton);
+        if (isOn) {
             await this.LoopSwitchButton.longPress();
         }
     }
+    get TherapySettingsScreen() {
+        return this._therapyScreen;
+    }
     async OpenTherapySettings() {
         await this._therapyScreen.OpenButton.tap();
-        return this._therapyScreen;
+        return this.TherapySettingsScreen;
     }
     async OpenSupport() {
         await this.SwipeUpUntilVisible(this.SupportLabel);

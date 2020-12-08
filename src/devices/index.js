@@ -15,20 +15,14 @@ class Devices {
             this.isHeader = true;
         }
     }
-    AddPumpButton() {
-        if (this.isHeader) {
-            return match.accessible.TextLabel(this.screenText.AddPump);
-        }
-        return match.accessible.TextLabel(this.screenText.AddPumpFull);
+    get AddPumpButton() {
+        return match.Label(this.screenText.AddPump);
     }
-    AddCGMButton() {
-        if (this.isHeader) {
-            return match.accessible.TextLabel(this.screenText.AddCGM);
-        }
-        return match.accessible.TextLabel(this.screenText.AddCGMFull);
+    get AddCGMButton() {
+        return match.Label(this.screenText.AddCGM);
     }
     async AddPump() {
-        await this.AddPumpButton().tap();
+        await this.AddPumpButton.tap();
         await match.accessible.Button(this.screenText.PumpSimulator).tap();
         await match.accessible.Button(this.generalText.Continue).tap();
     }
@@ -41,11 +35,11 @@ class Devices {
         return this.pumpSimulator;
     }
     async AddCGM() {
-        await this.AddCGMButton().tap();
+        await this.AddCGMButton.tap();
         await match.accessible.Button(this.screenText.CGMSimulator).tap();
     }
     async AddG6() {
-        await this.AddCGMButton().tap();
+        await this.AddCGMButton.tap();
         await match.accessible.Button(this.screenText.G6).tap();
         return this.g6;
     }

@@ -32,7 +32,7 @@ class GlucoseScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
-        let allReadyOn = await this.IsOn(this.InsulinLabel);
+        let allReadyOn = await this.IsButtonOn(this.InsulinLabel);
         if (turnOn == true) {
             if (allReadyOn == false) {
                 await this.InsulinLabel.tap();

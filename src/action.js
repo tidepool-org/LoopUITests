@@ -105,6 +105,9 @@ const action = {
     async SwipeDownUntilVisible(desiredLabel) {
         await _swipeUntilVisible(desiredLabel, 'down');
     },
+    async SwipeDown() {
+        await match.TopScrollableView().swipe('down', 'fast', 0.8);
+    },
 };
 
 module.exports = action;

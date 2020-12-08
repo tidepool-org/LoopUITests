@@ -59,7 +59,7 @@ module.exports = {
     workoutTargetRange: { max: 140.0, min: 160.0 },
     maximumBasalRatePerHour: 5,
     maximumBolus: 10,
-    suspendThreshold: 75,
+    glucoseSafetyLimit: 75,
     carbRatioSchedule: [{ startTime: '0', value: 10 },],
     basalRateSchedule: [{ startTime: '0', value: 1.0 }, { startTime: '15', value: 0.85 },],
     insulinModelSettings: '',

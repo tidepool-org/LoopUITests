@@ -1,32 +1,41 @@
-const match = require('../match');
-const base = require('../base/index');
+const match = require("../match");
+const base = require("../base/index");
 
 class PremealRangeScreen extends base.EntriesScreen {
-    constructor(language, config) {
-        super({
-            screenText: language.settingsScreen.PremealRangeScreen,
-            generalText: language.general,
-            header: {
-                backLabel: language.general.Cancel,
-            },
-            open: {
-                isBtn: false,
-                label: language.settingsScreen.PremealRangeScreen.Header,
-            },
-        }, config);
-    }
-    get OpenButton() {
-        return match.accessible.ClickableLabel(this.openLabel).atIndex(1);
-    }
-    get InfoLabel() {
-        return match.accessible.TextLabel(this.screenText.Info);
-    }
-    /**
-     * @override so we access the header by label
-     */
-    get Header() {
-        return match.accessible.TextLabel(this.screenText.Header);
-    }
+  constructor(language, config) {
+    super(
+      {
+        screenText: language.screenText,
+        generalText: language.generalText,
+        header: {
+          backLabel: language.backLabel,
+        },
+        open: {
+          isBtn: false,
+          label: language.screenText.Header,
+        },
+      },
+      config
+    );
+  }
 }
 
-module.exports = PremealRangeScreen;
+var screenTests = function (testData) {
+  describe("Premeal Range Screen", () => {
+    let screen;
+    var openScreen = async function () {
+      let therapySettingsScreen = testData.app.TherapySettingsScreen;
+      screen = await therapySettingsScreen.OpenPreMealRangeScreen();
+      return screen;
+    };
+    base.entriesTests({
+      openScreenFunc: openScreen,
+      checkEditing: testData.checkEditing,
+    });
+  });
+};
+
+module.exports = {
+  Screen: PremealRangeScreen,
+  tests: screenTests,
+};

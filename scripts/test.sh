@@ -71,7 +71,7 @@ info "Updating PATH..."
 export PATH="${PWD}/bin:${PWD}/node_modules/.bin:${PATH}"
 
 info "Creating build symlink to '${BUILD_DIR}'..."
-ln -sf "${BUILD_DIR}" build
+ln -sf "${PWD}/${BUILD_DIR}/Build" build
 
 info "Running detox '${TEST_TYPE}' tests with configuration '${CONFIGURATION}'..."
 detox test e2e/${TEST_TYPE} --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
