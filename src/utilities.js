@@ -73,7 +73,7 @@ module.exports = class Utilities {
   async updateInsulinReservoir(remainingUnits) {
     let pumpScreen = await this._testApp.OpenPumpScreen();
     await pumpScreen.Apply({ reservoirRemaining: remainingUnits });
-    await pumpScreen.BackButton.tap();
+    await pumpScreen.DoneButton.tap();
   }
   async updatePumpBattery(percentRemaining) {
     let pumpScreen = await this._testApp.OpenPumpScreen();

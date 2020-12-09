@@ -213,6 +213,7 @@ var StatusScreen = {
     PumpNoInsulin: "No Insulin",
     BGTapToAdd: "Tap to Add",
     BGNoRecent: "No Recent Glucose",
+    ClosedLoopGreen: "Closed Loop ON",
   },
 };
 
