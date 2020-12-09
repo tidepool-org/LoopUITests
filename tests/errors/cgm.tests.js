@@ -1,3 +1,5 @@
+const match = require("../../src/match");
+
 /* eslint-disable no-undef */
 module.exports = (test) => {
     describe('signal loss', () => {
@@ -10,12 +12,12 @@ module.exports = (test) => {
         afterAll(async () => {
             cgmScreen = await test.OpenCGMScreen();
             await cgmScreen.Apply(test.CGMData);
-            await cgmScreen.BackButton.tap();
+            await cgmScreen.DoneButton.tap();
         });
         it('dimiss signal loss alert', async () => {
             await waitFor(cgmScreen.Alert(cgmScreen.generalText.Dismiss)).toBeVisible().withTimeout(2000);
             await cgmScreen.DismissAlert(cgmScreen.generalText.Dismiss);
-            await cgmScreen.BackButton.tap();
+            await cgmScreen.DoneButton.tap();
         });
         it('and check error shown on status screen', async () => {
             statusScreen = await test.OpenStatusScreen();
@@ -31,12 +33,12 @@ module.exports = (test) => {
         afterAll(async () => {
             cgmScreen = await test.OpenCGMScreen();
             await cgmScreen.Apply({ alert: { name: cgmScreen.screenText.Alerts.RetractAlertAbove } });
-            await cgmScreen.BackButton.tap();
+            await cgmScreen.DoneButton.tap();
         });
         it('dismiss immediate alert', async () => {
             await waitFor(cgmScreen.Alert('FG OK')).toBeVisible().withTimeout(2000);
             await cgmScreen.DismissAlert('FG OK');
-            await cgmScreen.BackButton.tap();
+            await cgmScreen.DoneButton.tap();
 
         });
         it('and check error shown on status screen', async () => {

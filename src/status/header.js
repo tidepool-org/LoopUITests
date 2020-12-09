@@ -19,7 +19,7 @@ class Header {
     );
   }
   get CGMSignalLossLabel() {
-    return match.accessible.ClickableLabel(
+    return match.Label(
       this._language.statusScreen.HUD.CGMSignalLoss
     );
   }
@@ -39,7 +39,7 @@ class Header {
     );
   }
   get CGMAlertLabel() {
-    return match.accessible.ClickableLabel(
+    return match.Label(
       this._language.statusScreen.HUD.CGMGenericAlert
     );
   }
