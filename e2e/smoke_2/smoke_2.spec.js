@@ -14,20 +14,8 @@ describe("accessibility", () => {
     });
     await test.prepare();
   });
-  // accessibility.statusScreen({ app: test });
-  // accessibility.insulinDeliveryScreen({ app: test });
-  // accessibility.activeCarbohydratesScreen({ app: test });
-  // accessibility.activeInsulinScreen({ app: test });
-  bolusScreenTests({
-    name: "Simple Bolus Calculator Screen",
-    app: test,
-    closedLoop: false,
-    bolusForMeal: false,
-  });
-  // bolusScreenTests({
-  //   name: "Simple Meal Bolus Calculator Screen",
-  //   app: test,
-  //   closedLoop: false,
-  //   bolusForMeal: true,
-  // });
+  accessibility.statusScreen({ app: test });
+  accessibility.insulinDeliveryScreen({ app: test });
+  accessibility.activeCarbohydratesScreen({ app: test });
+  accessibility.activeInsulinScreen({ app: test });
 });
