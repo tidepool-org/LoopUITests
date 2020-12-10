@@ -47,14 +47,10 @@ class Header {
     return match.loop.Icon();
   }
   get EnterBloodGlucoseButton() {
-    return match.accessible
-      .ClickableLabel(this._language.statusScreen.HUD.BGTapToAdd)
-      .atIndex(1);
+    return match.Label(this._language.statusScreen.HUD.BGTapToAdd).atIndex(0);
   }
   get NoRecentBloodGlucoseLabel() {
-    return match.accessible
-      .ClickableLabel(this._language.statusScreen.HUD.BGNoRecent)
-      .atIndex(1);
+    return match.Label(this._language.statusScreen.HUD.BGNoRecent).atIndex(0);
   }
   async Loop() {
     await this.LoopIcon.tap();
