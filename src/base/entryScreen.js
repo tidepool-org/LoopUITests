@@ -39,7 +39,7 @@ class EntryScreen extends base.Screen {
     return match.accessible.TextLabel(text);
   }
   async OpenPicker(value) {
-    await match.accessible.TextLabel(String(value)).tap();
+    await match.Label(String(value)).tap();
   }
 }
 
