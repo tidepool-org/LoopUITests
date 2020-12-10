@@ -203,7 +203,7 @@ var StatusScreen = {
     GlucoseChange: "Glucose Change",
     Predicted: "Predicted",
     Observed: "Observed",
-    GramsActiveCarbs: "g COB",
+    GramsActiveCarbs: "g Active Carbs",
     GramsTotalCarbs: "g Total",
   },
   HUD: {
