@@ -63,6 +63,9 @@ class CorrectionRangeScreen extends base.EntriesScreen {
       await this.AddButton.tap();
     }
   }
+  async SetPickerTime(value) {
+    await match.accessible.PickerLabel(value).atIndex(1).tap();
+  }
 }
 
 var screenTests = function (testData) {

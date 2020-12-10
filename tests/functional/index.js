@@ -12,35 +12,39 @@ module.exports = (test) => {
             describe('correction range', () => {
                 var correctionRangeScreen;
                 var correctionRangeScreenLimits;
-                it('open ', async () => {
+                it('can open ', async () => {
                     correctionRangeScreen = await therapySettingsScreen.OpenCorrectionRangeScreen();
                     correctionRangeScreenLimits = test.getLimitsForSetting('correctionRange');
                 });
+                var startMin = 105;
+                var startMax = 115;
+                var finalMin = startMin-5;
+                var finalMax = startMax-5;
                 it('can change the time ', async () => {
-                    await correctionRangeScreen.OpenPicker('12:00 AM');
-                    //TODO change the time...
+                    await correctionRangeScreen.OpenPicker('8:00 AM');
+                    await correctionRangeScreen.SetPickerTime('8:30 AM');
                 });
                 it('can change the min value', async () => {
                     await correctionRangeScreen.ApplyOne({
                         expected: {
-                            min: correctionRangeScreenLimits.min.limit,
-                            max: 110,
+                            min: finalMin,
+                            max: startMax,
                         },
                         current: {
-                            min: 100,
-                            max: 110,
+                            min: startMin,
+                            max: startMax,
                         }
                     });
                 });
                 it('can change the max value', async () => {
                     await correctionRangeScreen.ApplyOne({
                         expected: {
-                            min: correctionRangeScreenLimits.min.limit,
-                            max: correctionRangeScreenLimits.max.noWarning,
+                            min: finalMin,
+                            max: finalMax,
                         },
                         current: {
-                            min: correctionRangeScreenLimits.min.limit,
-                            max: 110,
+                            min: finalMin,
+                            max: startMax,
                         }
                     });
                 });
@@ -57,20 +61,17 @@ module.exports = (test) => {
     describe('status', () => {
         it('can check loop status', async () => {
             var statusScreen = await test.OpenStatusScreen();
-            await statusScreen.HeaderSection.Loop();
+            await statusScreen.HeaderSection.ExpectClosedLoopGreenAlert();
+        });
+    });
+    describe('carb entry', () => {
+        it('can add carbs and deliver bolus', async () => {
+            await test.LoopUtilities.addCarbohydratesAndDeliverBolus(1);
         });
     });
     describe('bolus', () => {
         it('can be delivered', async () => {
-            await test.LoopUtilities.deliverBolus(0.5);
-        });
-    });
-    describe('carb entry', () => {
-        it('set to open loop', async () => {
-            await test.LoopUtilities.openLoop();
-        });
-        it('can add carbs', async () => {
-            await test.LoopUtilities.addCarbohydrates(5);
+            await test.LoopUtilities.deliverBolus(0.1);
         });
     });
 };

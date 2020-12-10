@@ -74,6 +74,11 @@ const match = {
         by.type("UIPickerTableViewWrapperCell").withDescendant(by.id(itemID))
       );
     },
+    PickerLabel(itemID) {
+      return element(
+        by.type("UIPickerTableViewWrapperCell").withDescendant(by.label(itemID))
+      );
+    },
     AlertLabel(label) {
       return element(
         by

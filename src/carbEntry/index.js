@@ -1,6 +1,7 @@
 const match = require("../match");
 const base = require("../base/index");
 const Bolus = require("../bolus/index");
+const MealBolusScreen = require("./mealBolusScreen");
 
 const _testHasAPrefex = "has a";
 
@@ -17,7 +18,7 @@ class CarbEntryScreen extends base.Screen {
         label: language.screenText.AddMeal,
       },
     });
-    //this._mealBolusScreen = new MealBolusScreen(language);
+    this._mealBolusScreen = new MealBolusScreen({general: language.generalText, screen: language.screenText});
   }
   get AmountConsumedLabel() {
     return match.accessible.TextLabel(this.screenText.AmountConsumed);
@@ -39,7 +40,7 @@ class CarbEntryScreen extends base.Screen {
   }
   async ContinueToBolus() {
     await this.ContinueMainButton.tap();
-    //return this._mealBolusScreen;
+    return this._mealBolusScreen;
   }
   async ExpectAbsorptionTimeMessage() {
     await expect(this.AbsorptionTimeMessage).toExist();

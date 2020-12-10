@@ -3,8 +3,8 @@ var mgdL = {
         start: 500
     },
     correctionRange: {
-        maxStart: 120,
-        minStart: 100
+        maxStart: 115,
+        minStart: 105
     },
     suspendThreshold: {
         start: 80

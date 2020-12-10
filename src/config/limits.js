@@ -3,11 +3,11 @@ var mgdL = {
     correctionRange: {
         max: {
             limit: 180,
-            warning: 121,
-            noWarning: 120,
+            warning: 116,
+            noWarning: 115,
         },
         min: {
-            limit: 75,
+            limit: 87,
         },
     },
     insulinSensitivities: {
