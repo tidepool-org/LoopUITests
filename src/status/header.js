@@ -99,7 +99,7 @@ class Header {
       match.accessible.AlertLabel(
         this._language.general.Alert.MissingGlucoseData
       )
-    ).toExist();
+    ).toBeVisible();
     await this.CloseLoopAlert();
   }
   async ExpectLoopIconAlert() {
