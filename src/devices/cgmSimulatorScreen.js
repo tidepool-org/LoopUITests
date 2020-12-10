@@ -19,40 +19,40 @@ class CGMSimulatorScreen extends base.Screen {
         return match.accessible.Header(this.screenText.Model.Header);
     }
     get _measurementFrequencyLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Frequency.MeasurementFrequency);
+        return match.Label(this.screenText.Frequency.MeasurementFrequency);
     }
     get _sineCurveModelLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Model.SineCurve).atIndex(0);
+        return match.accessible.Button(this.screenText.Model.SineCurve).atIndex(0);
     }
     get _noDataModelLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Model.None).atIndex(0);
+        return match.Label(this.screenText.Model.None).atIndex(0);
     }
     get _signalLossModelLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Model.SignalLoss);
+        return match.Label(this.screenText.Model.SignalLoss);
     }
     get _constantModelLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Model.Constant);
+        return match.Label(this.screenText.Model.Constant);
     }
     get _effectsHeader() {
         return match.accessible.Header(this.screenText.Effect.Header);
     }
     get _randomErrorEffectLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Effect.RandomError);
+        return match.accessible.Button(this.screenText.Effect.RandomError);
     }
     get _glucoseNoiseEffectLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Effect.GlucoseNoise);
+        return match.accessible.Button(this.screenText.Effect.GlucoseNoise);
     }
     get _randomHighOutlierEffectLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Effect.RandomHighOutlier);
+        return match.accessible.Button(this.screenText.Effect.RandomHighOutlier);
     }
     get _randomLowOutlierEffectLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Effect.RandomLowOutlier);
+        return match.accessible.Button(this.screenText.Effect.RandomLowOutlier);
     }
     get _backfillGlucoseHistoryLabel() {
-        return match.accessible.ClickableLabel(this.screenText.History.BackfillGlucose);
+        return match.Label(this.screenText.History.BackfillGlucose);
     }
     get _trendHistoryLabel() {
-        return match.accessible.ClickableLabel(this.screenText.History.Trend).atIndex(0);
+        return match.accessible.Button(this.screenText.History.Trend).atIndex(0);
     }
     get _historyHeader() {
         return match.accessible.Header(this.screenText.History.Header);
@@ -61,10 +61,10 @@ class CGMSimulatorScreen extends base.Screen {
         return match.accessible.Header(this.screenText.Alerts.Header);
     }
     get _issueAlertsLabel() {
-        return match.accessible.ClickableLabel(this.screenText.Alerts.IssueAlerts);
+        return match.accessible.Button(this.screenText.Alerts.IssueAlerts);
     }
     get _deleteCGMLabel() {
-        return match.accessible.ClickableLabel(this.screenText.DeleteCGM);
+        return match.Label(this.screenText.DeleteCGM);
     }
     get _deleteCGMConfirmationLabel() {
         return match.accessible.AlertButton(this.screenText.DeleteCGM);
@@ -157,9 +157,9 @@ class CGMSimulatorScreen extends base.Screen {
         let frequencyText = this.screenText.Frequency;
         await this._measurementFrequencyLabel.tap();
         if (frequency.minutes) {
-            await match.accessible.ClickableLabel(frequencyText.Minutes).tap();
+            await match.Label(frequencyText.Minutes).tap();
         } else if (frequency.seconds) {
-            await match.accessible.ClickableLabel(frequencyText.Seconds).tap();
+            await match.Label(frequencyText.Seconds).tap();
         }
         await match.accessible.ButtonBarButton(this.generalText.Back).tap();
     }
@@ -176,7 +176,7 @@ class CGMSimulatorScreen extends base.Screen {
         }
         if (history.name === historyText.Trend) {
             await this._trendHistoryLabel.tap();
-            await match.accessible.ClickableLabel(history.trend).tap();
+            await match.Label(history.trend).tap();
             await this.SwipeDownUntilVisible(this._modelHeader);
         }
     }

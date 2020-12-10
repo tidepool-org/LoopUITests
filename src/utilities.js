@@ -81,7 +81,6 @@ module.exports = class Utilities {
     await pumpScreen.BackButton.tap();
   }
   async loadTherapySettings() {
-    await this.dismissTidepoolLogin();
     await device.shake();
     await match.accessible.Button("Mock Therapy Settings").tap();
   }
