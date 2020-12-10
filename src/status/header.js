@@ -9,17 +9,17 @@ class Header {
     return this._devices;
   }
   get PumpErrorLabel() {
-    return match.accessible.ClickableLabel(
+    return match.Label(
       this._language.statusScreen.PumpError
     );
   }
   get PumpOcclusionLabel() {
-    return match.accessible.ClickableLabel(
+    return match.Label(
       this._language.statusScreen.PumpOcclusion
     );
   }
   get CGMSignalLossLabel() {
-    return match.accessible.ClickableLabel(
+    return match.Label(
       this._language.statusScreen.HUD.CGMSignalLoss
     );
   }
@@ -29,7 +29,7 @@ class Header {
     );
   }
   get PumpNoInsulinLabel() {
-    return match.accessible.ClickableLabel(
+    return match.Label(
       this._language.statusScreen.HUD.PumpNoInsulin
     );
   }
@@ -39,7 +39,7 @@ class Header {
     );
   }
   get CGMAlertLabel() {
-    return match.accessible.ClickableLabel(
+    return match.Label(
       this._language.statusScreen.HUD.CGMGenericAlert
     );
   }
@@ -112,6 +112,11 @@ class Header {
   async ExpectNoLoopIconAlert() {
     await this.Loop();
     await expect(match.accessible.Alert()).toNotExist();
+  }
+  async ExpectClosedLoopGreenAlert() {
+    await this.Loop();
+    await expect(match.Label(this._language.statusScreen.HUD.ClosedLoopGreen)).toBeVisible();
+    await match.accessible.Button(this._language.general.Dismiss).tap();
   }
 }
 

@@ -15,7 +15,7 @@ class PumpSimulatorScreen extends base.Screen {
         return match.accessible.Header(this.screenText.ConfigurationHeader).atIndex(0);
     }
     get ReservoirRemainingLabel() {
-        return match.accessible.TextLabel(this.screenText.ReservoirRemaining);
+        return match.Label(this.screenText.ReservoirRemaining);
     }
     get BatteryRemainingLabel() {
         return match.accessible.TextLabel(this.screenText.BatteryRemaining);
@@ -54,22 +54,22 @@ class PumpSimulatorScreen extends base.Screen {
         return match.accessible.AlertButton(this.screenText.DeletePump);
     }
     get SuspendDeliveryButton() {
-        return match.accessible.TextLabel(this.screenText.SuspendDelivery);
+        return match.Label(this.screenText.SuspendDelivery);
     }
     get ResumeDeliveryButton() {
         return match.accessible.TextLabel(this.screenText.ResumeDelivery);
     }
     get DetectOcclusionButton() {
-        return match.accessible.TextLabel(this.screenText.DetectOcclusion);
+        return match.Label(this.screenText.DetectOcclusion);
     }
     get ResolveOcclusionButton() {
-        return match.accessible.TextLabel(this.screenText.ResolveOcclusion);
+        return match.Label(this.screenText.ResolveOcclusion);
     }
     get CausePumpErrorButton() {
-        return match.accessible.TextLabel(this.screenText.CausePumpError);
+        return match.Label(this.screenText.CausePumpError);
     }
     get ResolvePumpErrorButton() {
-        return match.accessible.TextLabel(this.screenText.ResolvePumpError);
+        return match.Label(this.screenText.ResolvePumpError);
     }
     /**
      * @param {object} settings
@@ -207,6 +207,9 @@ class PumpSimulatorScreen extends base.Screen {
     }
     get OKDismissAlertButton() {
         return match.accessible.AlertButton(this.generalText.OK);
+    }
+    get DoneButton() {
+        return match.accessible.ButtonBarButton(this.generalText.Done)
     }
 }
 

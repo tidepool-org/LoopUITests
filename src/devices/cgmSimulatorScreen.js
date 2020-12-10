@@ -61,7 +61,7 @@ class CGMSimulatorScreen extends base.Screen {
         return match.accessible.Header(this.screenText.Alerts.Header);
     }
     get _issueAlertsLabel() {
-        return match.accessible.Button(this.screenText.Alerts.IssueAlerts);
+        return match.Label(this.screenText.Alerts.IssueAlerts);
     }
     get _deleteCGMLabel() {
         return match.Label(this.screenText.DeleteCGM);
@@ -71,6 +71,9 @@ class CGMSimulatorScreen extends base.Screen {
     }
     get _backfillSaveAndCloseButton() {
         return match.accessible.ButtonBarButton(this.generalText.Save);
+    }
+    get DoneButton() {
+        return match.accessible.ButtonBarButton(this.generalText.Done);
     }
     /**
      * @param {object} settings
@@ -187,17 +190,7 @@ class CGMSimulatorScreen extends base.Screen {
         let alertText = this.screenText.Alerts;
         await this.SwipeUpUntilVisible(this._issueAlertsLabel);
         await this._issueAlertsLabel.tap();
-        switch (alert.name) {
-            case alertText.DelayedAlert,
-                alertText.ReapeatingAlert,
-                alertText.RetractAlertAbove,
-                alertText.ImmediateAlert:
-                await match.accessible.ClickableLabel(alert.name).tap();
-                break;
-            default:
-                console.log('no match ', alert.name);
-                break;
-        }
+        await match.Label(alert.name).tap();
     }
     async RemoveSimulator() {
         await this.SwipeUpUntilVisible(this._deleteCGMLabel);
