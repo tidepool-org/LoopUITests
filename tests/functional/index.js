@@ -4,7 +4,7 @@ module.exports = (test) => {
         it('can open', async () => {
             settingsScreen = await test.OpenSettingsScreen();
         });
-        describe('threapy settings', () => {
+        describe('therapy settings', () => {
             var therapySettingsScreen;
             it('can open', async () => {
                 therapySettingsScreen = await settingsScreen.OpenTherapySettings();

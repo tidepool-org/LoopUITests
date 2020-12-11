@@ -7,6 +7,8 @@ var mgdL = {
             noWarning: 115,
         },
         min: {
+            noWarning: 100,
+            warning: 99,
             limit: 87,
         },
     },
@@ -44,13 +46,13 @@ var mgdL = {
     insulinCarbRatio: {
         max: {
             limit: 150.0,
-            warning: 28.0,
-            noWarning: 27.0,
+            warning: 29.0,
+            noWarning: 28.0,
         },
         min: {
             noWarning: 4.0,
             warning: 3.0,
-            limit: 1.0,
+            limit: 2.0,
         },
     },
     delivery: {

@@ -10,7 +10,7 @@ module.exports = (test) => {
         await screen.OpenPicker('12:00 AM');
         screenLimit = test.getLimitsForSetting('basalRates');
     });
-    describe(description.MinimumLimit, () => {
+    describe(description.MinimumNoWarning, () => {
         it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { time: '12:00 AM', unitsPerHour: screenLimit.min.limit },
@@ -18,38 +18,24 @@ module.exports = (test) => {
             });
         });
         it(description.GuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toNotExist();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.NoBasalInsulinGuardrailMessage).toBeVisible();
+            await expect(screen.NoBasalInsulinGuardrailMessage).toNotExist();
         });
     });
     describe(description.MaximumNoWarning, () => {
         it(description.SetValue, async () => {
             await screen.ApplyOne({
-                expected: { time: '12:00 AM', unitsPerHour: screenLimit.min.noWarning },
+                expected: { time: '12:00 AM', unitsPerHour: screenLimit.max.limit },
                 current: { time: '12:00 AM', unitsPerHour: screenLimit.min.limit }
             });
         });
         it(description.NoGuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toNotExist();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.NoBasalInsulinGuardrailMessage).toBeNotVisible();
-        });
-    });
-    describe(description.MaximumLimit, () => {
-        it(description.SetValue, async () => {
-            await screen.ApplyOne({
-                expected: { time: '12:00 AM', unitsPerHour: screenLimit.max.limit },
-                current: { time: '12:00 AM', unitsPerHour: screenLimit.min.noWarning }
-            });
-        });
-        it(description.NoGuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeNotVisible();
-        });
-        it(description.NoGuardrailMessage, async () => {
-            await expect(screen.NoBasalInsulinGuardrailMessage).toBeNotVisible();
+            await expect(screen.NoBasalInsulinGuardrailMessage).toNotExist();
         });
     });
     it('can close screen', async () => {
