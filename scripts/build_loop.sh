@@ -29,7 +29,7 @@ fi
 
 BUILD_DIR="${BUILDS_DIR}/${BUILD_TAG}"
 if [ ! -d "${BUILD_DIR}" ]; then
-  mkdir "${BUILD_DIR}"
+  mkdir -p "${BUILD_DIR}"
 fi
 
 cd ${BUILD_DIR}
