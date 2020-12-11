@@ -1,4 +1,20 @@
 module.exports = (test) => {
+    describe('carb entry', () => {
+        it('can add carbs and deliver bolus', async () => {
+            await test.LoopUtilities.addCarbohydratesAndDeliverBolus(1);
+        });
+    });
+    describe('bolus', () => {
+        it('can be delivered', async () => {
+            await test.LoopUtilities.deliverBolus(0.1);
+        });
+    });
+    describe('status', () => {
+        it('can check loop status', async () => {
+            var statusScreen = await test.OpenStatusScreen();
+            await statusScreen.HeaderSection.ExpectClosedLoopGreenAlert();
+        });
+    });
     describe('settings', () => {
         var settingsScreen;
         it('can open', async () => {
@@ -56,22 +72,6 @@ module.exports = (test) => {
             it('can close', async () => {
                 await therapySettingsScreen.ReturnToHomeScreen();
             });
-        });
-    });
-    describe('status', () => {
-        it('can check loop status', async () => {
-            var statusScreen = await test.OpenStatusScreen();
-            await statusScreen.HeaderSection.ExpectClosedLoopGreenAlert();
-        });
-    });
-    describe('carb entry', () => {
-        it('can add carbs and deliver bolus', async () => {
-            await test.LoopUtilities.addCarbohydratesAndDeliverBolus(1);
-        });
-    });
-    describe('bolus', () => {
-        it('can be delivered', async () => {
-            await test.LoopUtilities.deliverBolus(0.1);
         });
     });
 };
