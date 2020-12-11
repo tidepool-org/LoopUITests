@@ -22,7 +22,7 @@ describe('guardrails test', () => {
     describe('delivery limits', () => {
         guardrails.deliveryLimitsTest(test);
     });
-    describe('suspend threshold', () => {
-        guardrails.suspendThresholdTest(test);
+    describe('glucose safety limit', () => {
+        guardrails.glucoseSafetyLimitTest(test);
     });
 });

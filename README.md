@@ -39,7 +39,7 @@ Test basic functionality of the app. Opening, closing of screens, adding and rem
 Test the loop app settings guardrails limits
 
 - `guardrail_1` guardrail tests for: insulin carb ratio, correction range schedule and basal rate schedule
-- `guardrail_2` guardrail tests for: insulin sensitivity schedule, delivery limits and suspend threshold
+- `guardrail_2` guardrail tests for: insulin sensitivity schedule, delivery limits and glucose safety limit
 
 ### Errors test
 Test the loop app interacts with device errors

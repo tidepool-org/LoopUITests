@@ -33,14 +33,14 @@ var mgdL = {
             noWarning: 1.0,
         },
     },
-    suspendThreshold: {
+    glucoseSafetyLimit: {
         max: {
             limit: 80,
         },
         min: {
-            noWarning: 71,
-            warning: 55,
-            limit: 54,
+            noWarning: 74,
+            warning: 73,
+            limit: 67,
         },
     },
     insulinCarbRatio: {
@@ -70,9 +70,11 @@ var mgdL = {
             max: {
                 limit: 25.0,
                 warning: 20.0,
-                noWarning: 19.95,
+                noWarning: 19.0,
             },
             min: {
+                noWarning: 2.0,
+                warning: 0.1,
                 limit: 0.1,
             },
         }
