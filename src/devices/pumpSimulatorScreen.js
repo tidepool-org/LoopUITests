@@ -33,7 +33,7 @@ class PumpSimulatorScreen extends base.Screen {
         return match.accessible.SwitchButton(this.screenText.ErrorOnBolus);
     }
     get ErrorOnSuspendLabel() {
-        return match.accessible.TextLabel(this.screenText.ErrorOnSuspend);
+        return match.Label(this.screenText.ErrorOnSuspend);
     }
     get ErrorOnSuspendSwitch() {
         return match.accessible.SwitchButton(this.screenText.ErrorOnSuspend);
@@ -48,7 +48,7 @@ class PumpSimulatorScreen extends base.Screen {
         return match.accessible.SwitchButton(this.screenText.NextDeliveryCommandUncertain);
     }
     get DeletePumpLabel() {
-        return match.accessible.TextLabel(this.screenText.DeletePump);
+        return match.Label(this.screenText.DeletePump);
     }
     get DeletePumpConfirmationLabel() {
         return match.accessible.AlertButton(this.screenText.DeletePump);
@@ -124,6 +124,7 @@ class PumpSimulatorScreen extends base.Screen {
         if (turnOn == null) {
             return;
         }
+        await this.SwipeUpUntilVisible(this.ErrorOnSuspendSwitch);
         let allReadyOn = await this.IsOn(this.ErrorOnSuspendSwitch);
         if (turnOn == true) {
             if (allReadyOn == false) {
@@ -134,6 +135,7 @@ class PumpSimulatorScreen extends base.Screen {
                 await this.ErrorOnSuspendSwitch.tap();
             }
         }
+        await this.SwipeDownUntilVisible(this.SuspendDeliveryButton)
     }
     async SetErrorOnResume(turnOn) {
         if (turnOn == null) {

@@ -72,8 +72,8 @@ class SettingsScreen extends base.Screen {
     async OpenInsulinSensitivitiesScreen() {
         return this._therapyScreen.OpenInsulinSensitivitiesScreen();
     }
-    async OpenSuspendThresholdScreen() {
-        return this._therapyScreen.OpenSuspendThresholdScreen();
+    async OpenGlucoseSafetyLimitScreen() {
+        return this._therapyScreen.OpenGlucoseSafetyLimitScreen();
     }
     async OpenCarbRatioScreen() {
         return this._therapyScreen.OpenCarbRatioScreen();

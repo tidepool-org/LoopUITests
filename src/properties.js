@@ -13,7 +13,7 @@ var settingType = {
     CarbRatios: 'CarbRatios',
     DeliveryLimits: 'DeliveryLimits',
     InsulinModel: 'InsulinModel',
-    SuspendThreshold: 'SuspendThreshold',
+    GlucoseSafetyLimit: 'GlucoseSafetyLimit',
     InsulinSensitivities: 'InsulinSensitivities',
     CorrectionRanges: 'CorrectionRanges',
     PreMealCorrectionRange: 'PreMealCorrectionRange',

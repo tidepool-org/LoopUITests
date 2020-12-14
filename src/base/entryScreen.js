@@ -36,7 +36,7 @@ class EntryScreen extends base.Screen {
     return match.accessible.Button(this.generalText.Cancel);
   }
   GuardrailMessage(text) {
-    return match.accessible.TextLabel(text);
+    return match.Label(text);
   }
   async OpenPicker(value) {
     await match.Label(String(value)).tap();

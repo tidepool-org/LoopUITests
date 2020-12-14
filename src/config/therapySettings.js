@@ -36,7 +36,7 @@
 //         workoutTargetRange: DoubleRange(minValue: 140.0, maxValue: 160.0),
 //         maximumBasalRatePerHour: 5,
 //         maximumBolus: 10,
-//         suspendThreshold: GlucoseThreshold(unit: .milligramsPerDeciliter, value: 75),
+//         glucoseSafetyLimit: GlucoseThreshold(unit: .milligramsPerDeciliter, value: 75),
 //         insulinSensitivitySchedule: insulinSensitivitySchedule,
 //         carbRatioSchedule: carbRatioSchedule,
 //         basalRateSchedule: basalRateSchedule,

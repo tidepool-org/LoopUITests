@@ -6,8 +6,8 @@ var mgdL = {
         maxStart: 115,
         minStart: 105
     },
-    suspendThreshold: {
-        start: 80
+    glucoseSafetyLimit: {
+        start: 75
     },
     carbRatio: {
         startWhole: 150,

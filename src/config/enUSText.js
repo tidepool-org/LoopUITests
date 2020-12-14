@@ -325,8 +325,8 @@ var SettingsScreen = {
     BolusUnits: General.InsulinUnitLabel,
     LowMaxBasalRateGuardrailMessage: "Low Maximum Basal Rate",
     HighMaxBasalRateGuardrailMessage: "High Maximum Basal Rate",
-    LowBolusAmountGuardrailMessage: "Low Bolus Amount",
-    HighBolusAmountGuardrailMessage: "High Bolus Amount",
+    LowBolusAmountGuardrailMessage: "Low Maximum Bolus",
+    HighBolusAmountGuardrailMessage: "High Maximum Bolus",
   },
   InsulinModelScreen: {
     Header: "Insulin Model",

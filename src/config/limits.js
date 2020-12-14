@@ -7,6 +7,8 @@ var mgdL = {
             noWarning: 115,
         },
         min: {
+            noWarning: 100,
+            warning: 99,
             limit: 87,
         },
     },
@@ -31,26 +33,26 @@ var mgdL = {
             noWarning: 1.0,
         },
     },
-    suspendThreshold: {
+    glucoseSafetyLimit: {
         max: {
             limit: 80,
         },
         min: {
-            noWarning: 71,
-            warning: 55,
-            limit: 54,
+            noWarning: 74,
+            warning: 73,
+            limit: 67,
         },
     },
     insulinCarbRatio: {
         max: {
             limit: 150.0,
-            warning: 28.0,
-            noWarning: 27.0,
+            warning: 29.0,
+            noWarning: 28.0,
         },
         min: {
             noWarning: 4.0,
             warning: 3.0,
-            limit: 1.0,
+            limit: 2.0,
         },
     },
     delivery: {
@@ -68,9 +70,11 @@ var mgdL = {
             max: {
                 limit: 25.0,
                 warning: 20.0,
-                noWarning: 19.95,
+                noWarning: 19.0,
             },
             min: {
+                noWarning: 2.0,
+                warning: 0.1,
                 limit: 0.1,
             },
         }

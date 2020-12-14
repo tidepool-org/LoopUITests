@@ -7,8 +7,8 @@ module.exports = (test) => {
     const therapySettingsValue = 75;
     it('open screen', async () => {
         therapySettingsScreen = await test.OpenTherapySettingsScreen();
-        screen = await therapySettingsScreen.OpenSuspendThresholdScreen();
-        screenLimit = test.getLimitsForSetting('suspendThreshold');
+        screen = await therapySettingsScreen.OpenGlucoseSafetyLimitScreen();
+        screenLimit = test.getLimitsForSetting('glucoseSafetyLimit');
         await screen.OpenPicker(therapySettingsValue);
     });
     describe(description.MinimumLimit, () => {
@@ -22,7 +22,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.LowSuspendThresholdGuardrailMessage).toBeVisible();
+            await expect(screen.LowGlucoseSafetyLimitGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MinimumWarning, () => {
@@ -36,7 +36,7 @@ module.exports = (test) => {
             await expect(screen.GuardrailWarningIconPicker).toBeVisible();
         });
         it(description.GuardrailMessage, async () => {
-            await expect(screen.LowSuspendThresholdGuardrailMessage).toBeVisible();
+            await expect(screen.LowGlucoseSafetyLimitGuardrailMessage).toBeVisible();
         });
     });
     describe(description.MinimumNoWarning, () => {
@@ -47,13 +47,13 @@ module.exports = (test) => {
             });
         });
         it(description.NoGuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker).toBeNotVisible();
+            await expect(screen.GuardrailWarningIconPicker).toNotExist();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.LowSuspendThresholdGuardrailMessage).toBeNotVisible();
+            await expect(screen.LowGlucoseSafetyLimitGuardrailMessage).toNotExist();
         });
     });
-    describe(description.MaximumLimit, () => {
+    describe(description.MaximumNoWarning, () => {
         it(description.SetValue, async () => {
             await screen.ApplyOne({
                 expected: { value: screenLimit.max.limit },
@@ -61,10 +61,10 @@ module.exports = (test) => {
             });
         });
         it(description.NoGuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker).toBeNotVisible();
+            await expect(screen.GuardrailWarningIconPicker).toNotExist();
         });
         it(description.NoGuardrailMessage, async () => {
-            await expect(screen.HighSuspendThresholdGuardrailMessage).toBeNotVisible();
+            await expect(screen.HighGlucoseSafetyLimitGuardrailMessage).toNotExist();
         });
     });
     it('can close screen', async () => {

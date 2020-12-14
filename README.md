@@ -12,7 +12,7 @@ Will either build the version of loop given e.g. `build-289` or if it doesn't al
 
 ## Tests
 
-`BUILD_DIR=build-289 CONFIG=iphone-se-2 NAME=error_1 npm run test_e2e`
+`BUILD_DIR=build/build-289 CONFIG=iphone-se-2 NAME=error_1 npm run test_e2e`
 
 ### Device Configurations
 
@@ -39,7 +39,7 @@ Test basic functionality of the app. Opening, closing of screens, adding and rem
 Test the loop app settings guardrails limits
 
 - `guardrail_1` guardrail tests for: insulin carb ratio, correction range schedule and basal rate schedule
-- `guardrail_2` guardrail tests for: insulin sensitivity schedule, delivery limits and suspend threshold
+- `guardrail_2` guardrail tests for: insulin sensitivity schedule, delivery limits and glucose safety limit
 
 ### Errors test
 Test the loop app interacts with device errors

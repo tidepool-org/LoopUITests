@@ -13,8 +13,8 @@ class Config {
                 time: text.general.TimeSlot[0],
                 unitsPerHour: limits.basalRates.max.noWarning
             }],
-            SuspendThreshold: {
-                value: limits.suspendThreshold.max.noWarning
+            GlucoseSafetyLimit: {
+                value: limits.glucoseSafetyLimit.max.noWarning
             },
             InsulinModel: text.settingsScreen.InsulinModelScreen.Model.RapidAdults,
             CarbRatios: [{
