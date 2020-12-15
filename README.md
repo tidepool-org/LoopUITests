@@ -12,7 +12,7 @@ Will either build the version of loop given e.g. `build-289` or if it doesn't al
 
 ## Tests
 
-`BUILD_DIR=build/build-289 CONFIG=iphone-se-2 NAME=error_1 npm run test_e2e`
+`BUILD_DIR=${PWD}/build/build-289/Build/Products CONFIG=iphone-se-2 NAME=error_1 npm run test_e2e`
 
 ### Device Configurations
 
