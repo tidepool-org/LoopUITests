@@ -11,6 +11,7 @@
 SCRIPT="$(basename "${0}")"
 SCRIPT_DIRECTORY="$(dirname "${0}")"
 TEST_DIRECTORY="${SCRIPT_DIRECTORY}/.."
+LOOPUITEST_DIRECTORY="LoopUITests"
 
 error() {
   echo "ERROR: ${*}" >&2
@@ -57,8 +58,10 @@ if [[ ${CONFIGURATION} =~ "iphone-se-2" ]]; then
   CONFIGURATION="ios.sim.debug.iphone-se-2"
 fi
 
-info "Chaning directory to '${TEST_DIRECTORY}'"
-cd "${TEST_DIRECTORY}"
+if [ "$(basename "${PWD}")" != "${LOOPUITEST_DIRECTORY}" ]; then
+  info "Changing directory to '${TEST_DIRECTORY}'"
+  cd "${TEST_DIRECTORY}"
+fi
 
 info "Checking node version..."
 node --version
