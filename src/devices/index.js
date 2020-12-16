@@ -24,7 +24,6 @@ class Devices {
     async AddPump() {
         await this.AddPumpButton.tap();
         await match.accessible.Button(this.screenText.PumpSimulator).tap();
-        await match.accessible.Button(this.generalText.Continue).tap();
     }
     async OpenPumpScreen() {
         try {
