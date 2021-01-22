@@ -1,5 +1,6 @@
-const match = require("../match");
-const base = require("../base/index");
+/* eslint-disable vars-on-top */
+const match = require('../match');
+const base = require('../base/index');
 
 class InsulinModelScreen extends base.EntryScreen {
   constructor(language) {
@@ -15,9 +16,11 @@ class InsulinModelScreen extends base.EntryScreen {
       },
     });
   }
+
   get BackButton() {
     return match.accessible.ButtonBarButton(this.backLabel);
   }
+
   async Apply(model) {
     if (model) {
       await match.accessible.ClickableLabel(model).tap();
@@ -26,7 +29,7 @@ class InsulinModelScreen extends base.EntryScreen {
 }
 
 var screenTests = function (testData) {
-  describe("Insulin Model Screen", () => {
+  describe('Insulin Model Screen', () => {
     let screen;
     var openScreen = async function () {
       let therapySettingsScreen = testData.app.TherapySettingsScreen;

@@ -1,5 +1,6 @@
-const match = require("../match");
-const base = require("../base/index");
+/* eslint-disable vars-on-top */
+const match = require('../match');
+const base = require('../base/index');
 
 class ActiveInsulinScreen extends base.Screen {
   constructor(language) {
@@ -15,26 +16,31 @@ class ActiveInsulinScreen extends base.Screen {
       },
     });
   }
-  //TODO: not accessible
+
+  // TODO: not accessible
   get Header() {
     return match.Label(this.screenText.Header);
   }
+
   get IOBLabel() {
     return match.Label(this.screenText.IOB);
   }
+
   get TotalLabel() {
     return match.Label(this.screenText.Total);
   }
+
   get EventHistoryLabel() {
     return match.Label(this.screenText.EventHistory).atIndex(0);
   }
+
   get ReservoirLabel() {
     return match.Label(this.screenText.Reservoir).atIndex(0);
   }
 }
 
 var _screenTests = function ({ app }) {
-  describe("Active Insulin Chart", () => {
+  describe('Active Insulin Chart', () => {
     let screen;
     var openScreen = async function () {
       let statusScreen = await app.OpenStatusScreen();
@@ -45,21 +51,21 @@ var _screenTests = function ({ app }) {
       openScreenFunc: openScreen,
       skipClose: true,
     });
-    describe("custom", () => {
-      it("has a IOB Label", async () => {
+    describe('custom', () => {
+      it('has a IOB Label', async () => {
         await expect(screen.IOBLabel).toBeVisible();
       });
-      it("has a Total Label", async () => {
+      it('has a Total Label', async () => {
         await expect(screen.TotalLabel).toBeVisible();
       });
-      it("has an Event History Label", async () => {
+      it('has an Event History Label', async () => {
         await expect(screen.EventHistoryLabel).toBeVisible();
       });
-      it("has a Reservoir Label", async () => {
+      it('has a Reservoir Label', async () => {
         await expect(screen.ReservoirLabel).toBeVisible();
       });
     });
-    it("can close", async () => {
+    it('can close', async () => {
       await screen.BackButton.tap();
     });
   });

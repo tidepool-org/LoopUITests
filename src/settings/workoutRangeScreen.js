@@ -1,5 +1,7 @@
-const match = require("../match");
-const base = require("../base/index");
+/* eslint-disable vars-on-top */
+/* eslint-disable no-unused-vars */
+const match = require('../match');
+const base = require('../base/index');
 
 class WorkoutRangeScreen extends base.EntriesScreen {
   constructor(language, config) {
@@ -15,12 +17,12 @@ class WorkoutRangeScreen extends base.EntriesScreen {
           label: language.screenText.Header,
         },
       },
-      config
+      config,
     );
   }
 }
 var screenTests = function (testData) {
-  describe("Workout Range Screen", () => {
+  describe('Workout Range Screen', () => {
     let screen;
     var openScreen = async function () {
       let therapySettingsScreen = testData.app.TherapySettingsScreen;

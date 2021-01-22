@@ -6,10 +6,10 @@ const correctionRangeScheduleTest = require('./correctionRangeSchedule.tests');
 const insulinCarbRatioTest = require('./insulinCarbRatio.tests');
 
 module.exports = {
-    deliveryLimitsTest,
-    basalRateScheduleTest,
-    insulinSensitivityScheduleTest,
-    correctionRangeScheduleTest,
-    glucoseSafetyLimitTest,
-    insulinCarbRatioTest
+  deliveryLimitsTest,
+  basalRateScheduleTest,
+  insulinSensitivityScheduleTest,
+  correctionRangeScheduleTest,
+  glucoseSafetyLimitTest,
+  insulinCarbRatioTest,
 };

@@ -1,9 +1,11 @@
-const match = require("../match");
-const base = require("../base/index");
-const Bolus = require("../bolus/index");
-const MealBolusScreen = require("./mealBolusScreen");
+/* eslint-disable vars-on-top */
+/* eslint-disable no-unused-vars */
+const match = require('../match');
+const base = require('../base/index');
+const Bolus = require('../bolus/index');
+const MealBolusScreen = require('./mealBolusScreen');
 
-const _testHasAPrefex = "has a";
+const _testHasAPrefex = 'has a';
 
 class CarbEntryScreen extends base.Screen {
   constructor(language) {
@@ -18,45 +20,56 @@ class CarbEntryScreen extends base.Screen {
         label: language.screenText.AddMeal,
       },
     });
-    this._mealBolusScreen = new MealBolusScreen({general: language.generalText, screen: language.screenText});
+    this._mealBolusScreen = new MealBolusScreen({ general: language.generalText, screen: language.screenText });
   }
+
   get AmountConsumedLabel() {
     return match.accessible.TextLabel(this.screenText.AmountConsumed);
   }
+
   get TimeLabel() {
     return match.accessible.ClickableLabel(this.screenText.Time);
   }
+
   get FoodTypeLabel() {
     return match.accessible.ClickableLabel(this.screenText.FoodType);
   }
+
   get AbsorptionTimeLabel() {
     return match.accessible.ClickableLabel(this.screenText.AbsorptionTime);
   }
+
   get ContinueMainButton() {
     return match.accessible.Button(this.generalText.Continue).atIndex(2);
   }
+
   get AbsorptionTimeMessage() {
     return match.accessible.TextLabel(this.screenText.AbsorptionMessage);
   }
+
   async ContinueToBolus() {
     await this.ContinueMainButton.tap();
     return this._mealBolusScreen;
   }
+
   async ExpectAbsorptionTimeMessage() {
     await expect(this.AbsorptionTimeMessage).toExist();
   }
+
   async SetCarbs(amount) {
     var carbsField = match.UITextField();
     await carbsField.clearText();
     await carbsField.typeText(String(amount));
     await carbsField.tapReturnKey();
   }
+
   async SetDate(date) {
     var dateField = match.UITextField();
     await dateField.clearText();
     await dateField.typeText(String(date));
     await dateField.tapReturnKey();
   }
+
   async SetAbsortionTime(hours) {
     var absortionField = match.UITextField();
     await absortionField.clearText();
@@ -66,10 +79,10 @@ class CarbEntryScreen extends base.Screen {
 }
 
 var screenTests = (app) => {
-  describe("Carb Entry Screen", () => {
+  describe('Carb Entry Screen', () => {
     let screen;
     let inClosedLoopMode;
-    it("can open", async () => {
+    it('can open', async () => {
       screen = await app.OpenBolusScreen();
       inClosedLoopMode = await app.inClosedLoopMode;
     });
@@ -89,7 +102,7 @@ var screenTests = (app) => {
       await expect(screen.AbsorptionTimeLabel).toBeVisible();
     });
     if (!inClosedLoopMode) {
-      describe("when in open loop mode", () => {
+      describe('when in open loop mode', () => {
         it(`${_testHasAPrefex} Open Loop Info Label`, async () => {
           await expect(screen.OpenLoopInfoLabel).toBeVisible();
         });
@@ -108,6 +121,6 @@ var screenTests = (app) => {
 };
 
 module.exports = {
-  CarbEntryScreen: CarbEntryScreen,
-  screenTests: screenTests,
+  CarbEntryScreen,
+  screenTests,
 };
