@@ -3,14 +3,28 @@
         "browser": true,
         "commonjs": true,
         "es2021": true,
+        "node": true,
         "jest": true
     },
     "globals": {
-        "device": "off"
+        "device":"off"
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "airbnb-base"
+    ],
     "parserOptions": {
         "ecmaVersion": 12
     },
-    "rules": {}
+    "rules": {
+        "prefer-const":"off",
+        "func-names":"off",
+        "max-len":"off",
+        "no-underscore-dangle":"off",
+        "no-var":"off",
+        "no-undef":"off",
+        "class-methods-use-this":"off",
+        "no-plusplus": "off",
+        "prefer-destructuring":"off",
+        "no-console":"off"
+    }
 }
