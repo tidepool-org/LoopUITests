@@ -1,5 +1,5 @@
 var _parts = function (val) {
-  return String(val).split('.');
+  return String(val).split(".");
 };
 
 module.exports = {

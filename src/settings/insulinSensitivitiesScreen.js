@@ -1,9 +1,6 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable vars-on-top */
-/* eslint-disable no-unused-vars */
-const action = require('../action');
-const match = require('../match');
-const base = require('../base/index');
+const action = require("../action");
+const match = require("../match");
+const base = require("../base/index");
 
 class InsulinSensitivitiesScreen extends base.EntriesScreen {
   constructor(language, config) {
@@ -19,22 +16,19 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
           backLabel: language.backLabel,
         },
       },
-      config,
+      config
     );
   }
-
   get LowInsulinSensitivityGuardrailMessage() {
     return this.GuardrailMessage(
-      this.screenText.LowInsulinSensitivityGuardrailMessage,
+      this.screenText.LowInsulinSensitivityGuardrailMessage
     );
   }
-
   get HighInsulinSensitivityGuardrailMessage() {
     return this.GuardrailMessage(
-      this.screenText.HighInsulinSensitivityGuardrailMessage,
+      this.screenText.HighInsulinSensitivityGuardrailMessage
     );
   }
-
   /**
    * @param {Object} sensitivity
    * @param {Object} sensitivity.expected
@@ -49,10 +43,9 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
     }
     await action.ScrollIntegerPicker(
       currentValuePerInsulinUnit,
-      sensitivity.expected.bgValuePerInsulinUnit,
+      sensitivity.expected.bgValuePerInsulinUnit
     );
   }
-
   /**
    * @param {Array} sensitivities
    */
@@ -71,7 +64,7 @@ class InsulinSensitivitiesScreen extends base.EntriesScreen {
 }
 
 var screenTests = function (testData) {
-  describe('Insulin Sensitivities Screen', () => {
+  describe("Insulin Sensitivities Screen", () => {
     let screen;
     var openScreen = async function () {
       let therapySettingsScreen = testData.app.TherapySettingsScreen;

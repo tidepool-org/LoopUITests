@@ -1,8 +1,6 @@
-/* eslint-disable vars-on-top */
-/* eslint-disable no-unused-vars */
-const match = require('../match');
-const action = require('../action');
-const base = require('../base/index');
+const match = require("../match");
+const action = require("../action");
+const base = require("../base/index");
 
 class GlucoseSafetyLimitScreen extends base.EntryScreen {
   constructor(language, config) {
@@ -20,25 +18,22 @@ class GlucoseSafetyLimitScreen extends base.EntryScreen {
     this.bgUnitsLabel = language.screenText.BGUnits;
     this.config = config;
   }
-
   get LowGlucoseSafetyLimitGuardrailMessage() {
     return this.GuardrailMessage(
-      this.screenText.LowGlucoseSafetyLimitGuardrailMessage,
+      this.screenText.LowGlucoseSafetyLimitGuardrailMessage
     );
   }
-
   get HighGlucoseSafetyLimitGuardrailMessage() {
     return this.GuardrailMessage(
-      this.screenText.HighGlucoseSafetyLimitGuardrailMessage,
+      this.screenText.HighGlucoseSafetyLimitGuardrailMessage
     );
   }
-
   /**
    * @param {object} threshold
    * @param {object} threshold.expected
    * @param {number} threshold.expected.value
    * @param {object} threshold.current optional
-   * */
+   **/
   async ApplyOne(threshold) {
     let currentValue = this.config.start;
     if (threshold.current) {
@@ -49,7 +44,7 @@ class GlucoseSafetyLimitScreen extends base.EntryScreen {
 }
 
 var screenTests = function (testData) {
-  describe('Glucose Safety Limit Screen', () => {
+  describe("Glucose Safety Limit Screen", () => {
     let screen;
     var openScreen = async function () {
       let therapySettingsScreen = testData.app.TherapySettingsScreen;

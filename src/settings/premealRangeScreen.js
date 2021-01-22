@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable vars-on-top */
-const match = require('../match');
-const base = require('../base/index');
+const match = require("../match");
+const base = require("../base/index");
 
 class PremealRangeScreen extends base.EntriesScreen {
   constructor(language, config) {
@@ -17,13 +15,13 @@ class PremealRangeScreen extends base.EntriesScreen {
           label: language.screenText.Header,
         },
       },
-      config,
+      config
     );
   }
 }
 
 var screenTests = function (testData) {
-  describe('Premeal Range Screen', () => {
+  describe("Premeal Range Screen", () => {
     let screen;
     var openScreen = async function () {
       let therapySettingsScreen = testData.app.TherapySettingsScreen;

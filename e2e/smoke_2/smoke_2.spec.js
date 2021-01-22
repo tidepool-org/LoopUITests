@@ -1,11 +1,11 @@
-const { Test, Config } = require('../../src/index');
-// const bolusScreenTests = require('../../src/bolus').tests;
-const accessibility = require('../../src/status/tests');
+const { Test, Config } = require("../../src/index");
+const bolusScreenTests = require("../../src/bolus").tests;
+const accessibility = require("../../src/status/tests");
 
-describe('accessibility', () => {
+describe("accessibility", () => {
   var test = new Test();
   var config = new Config();
-  it('prepare test', async () => {
+  it("prepare test", async () => {
     config = await config.prepare();
     test = test.setup({
       language: config.text,

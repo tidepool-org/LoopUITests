@@ -1,11 +1,9 @@
-/* eslint-disable no-shadow */
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
-const element = require('detox').element;
+const element = require("detox").element;
 
-const staticTextTrait = 'staticText';
-const buttonTrait = 'button';
-const imageTrait = 'image';
+const staticTextTrait = "staticText";
+const buttonTrait = "button";
+const imageTrait = "image";
 
 const match = {
   /**
@@ -15,8 +13,8 @@ const match = {
     ButtonBarButton(label) {
       return element(
         by
-          .type('_UIButtonBarButton')
-          .withDescendant(by.label(label).and(by.traits([buttonTrait]))),
+          .type("_UIButtonBarButton")
+          .withDescendant(by.label(label).and(by.traits([buttonTrait])))
       );
     },
     BackButton(label) {
@@ -26,8 +24,8 @@ const match = {
           .and(
             by
               .traits([buttonTrait])
-              .and(by.type('UIAccessibilityBackButtonElement')),
-          ),
+              .and(by.type("UIAccessibilityBackButtonElement"))
+          )
       );
     },
     Button(label) {
@@ -38,13 +36,13 @@ const match = {
         by
           .label(label)
           .and(
-            by.traits([buttonTrait]).and(by.type('UISwipeActionStandardButton')),
-          ),
+            by.traits([buttonTrait]).and(by.type("UISwipeActionStandardButton"))
+          )
       );
     },
     SwitchButton(label) {
       return element(
-        by.type('UISwitch').and(by.label(label).and(by.traits([buttonTrait]))),
+        by.type("UISwitch").and(by.label(label).and(by.traits([buttonTrait])))
       );
     },
     Id(theId) {
@@ -56,8 +54,8 @@ const match = {
     ClickableLabel(label) {
       return element(
         by
-          .type('UITableViewCellContentView')
-          .withDescendant(by.label(label).and(by.traits([staticTextTrait]))),
+          .type("UITableViewCellContentView")
+          .withDescendant(by.label(label).and(by.traits([staticTextTrait])))
       );
     },
     Image(label) {
@@ -65,20 +63,20 @@ const match = {
     },
     ImageAndId(label, theId) {
       return element(
-        by.label(label).and(by.traits([imageTrait]).and(by.id(theId))),
+        by.label(label).and(by.traits([imageTrait]).and(by.id(theId)))
       );
     },
     Header(label) {
-      return element(by.label(label).and(by.traits(['header'])));
+      return element(by.label(label).and(by.traits(["header"])));
     },
     PickerItem(itemID) {
       return element(
-        by.type('UIPickerTableViewWrapperCell').withDescendant(by.id(itemID)),
+        by.type("UIPickerTableViewWrapperCell").withDescendant(by.id(itemID))
       );
     },
     PickerLabel(itemID) {
       return element(
-        by.type('UIPickerTableViewWrapperCell').withDescendant(by.label(itemID)),
+        by.type("UIPickerTableViewWrapperCell").withDescendant(by.label(itemID))
       );
     },
     AlertLabel(label) {
@@ -86,7 +84,7 @@ const match = {
         by
           .label(label)
           .and(by.traits([staticTextTrait]))
-          .withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView')),
+          .withAncestor(by.type("_UIAlertControllerInterfaceActionGroupView"))
       );
     },
     AlertButton(label) {
@@ -94,11 +92,11 @@ const match = {
         by
           .label(label)
           .and(by.traits([buttonTrait]))
-          .and(by.type('_UIAlertControllerActionView')),
+          .and(by.type("_UIAlertControllerActionView"))
       );
     },
     Alert() {
-      return element(by.type('_UIAlertControllerInterfaceActionGroupView'));
+      return element(by.type("_UIAlertControllerInterfaceActionGroupView"));
     },
   },
   loop: {
@@ -108,7 +106,7 @@ const match = {
      * @example await match.loop.Icon().tap()
      */
     Icon() {
-      return element(by.type('LoopUI.LoopCompletionHUDView'));
+      return element(by.type("LoopUI.LoopCompletionHUDView"));
     },
     /**
      * @summary returns elements that relate to current loop state
@@ -119,9 +117,9 @@ const match = {
     CompletionInfo() {
       return element(
         by
-          .type('UILabel')
+          .type("UILabel")
           .and(by.traits([staticTextTrait]))
-          .withAncestor(by.type('LoopUI.LoopCompletionHUDView')),
+          .withAncestor(by.type("LoopUI.LoopCompletionHUDView"))
       );
     },
     /**
@@ -133,9 +131,9 @@ const match = {
     BatteryLevelInfo() {
       return element(
         by
-          .type('UILabel')
+          .type("UILabel")
           .and(by.traits([staticTextTrait]))
-          .withAncestor(by.type('LoopKitUI.BatteryLevelHUDView')),
+          .withAncestor(by.type("LoopKitUI.BatteryLevelHUDView"))
       );
     },
     /**
@@ -148,9 +146,9 @@ const match = {
     ReservoirVolumeInfo() {
       return element(
         by
-          .type('UILabel')
+          .type("UILabel")
           .and(by.traits([staticTextTrait]))
-          .withAncestor(by.type('LoopKitUI.ReservoirVolumeHUDView')),
+          .withAncestor(by.type("LoopKitUI.ReservoirVolumeHUDView"))
       );
     },
     /**
@@ -163,9 +161,9 @@ const match = {
     BasalRateInfo() {
       return element(
         by
-          .type('UILabel')
+          .type("UILabel")
           .and(by.traits([staticTextTrait]))
-          .withAncestor(by.type('LoopUI.BasalRateHUDView')),
+          .withAncestor(by.type("LoopUI.BasalRateHUDView"))
       );
     },
     /**
@@ -179,20 +177,20 @@ const match = {
     GlucoseInfo() {
       return element(
         by
-          .type('UILabel')
+          .type("UILabel")
           .and(by.traits([staticTextTrait]))
-          .withAncestor(by.type('LoopUI.GlucoseHUDView')),
+          .withAncestor(by.type("LoopUI.GlucoseHUDView"))
       );
     },
   },
   UIEditableTextField() {
-    return element(by.type('LoopKitUI.PaddedTextField'));
+    return element(by.type("LoopKitUI.PaddedTextField"));
   },
   UITextField() {
-    return element(by.type('UITextField'));
+    return element(by.type("UITextField"));
   },
   TopScrollableView() {
-    return element(by.type('UITableView')).atIndex(1);
+    return element(by.type("UITableView")).atIndex(1);
   },
   Text(theText) {
     return element(by.text(theText));
@@ -210,9 +208,9 @@ const match = {
         }
       }
     } else if (itemsAttributes.hittable && itemsAttributes.enabled) {
-      return true;
+        return true;
     }
-    console.log('no clickable element found');
+    console.log("no clickable element found");
     return false;
   },
 };
