@@ -25,12 +25,12 @@ Will either build the version of loop given e.g. `build-289` or if it doesn't al
 ### Smoke test
 Accessibility and tests that run through the screen elements making sure the are present
 
-- `smoke_1` accessibility labels for: main screens
-- `smoke_2` accessibility labels for: general settings and therapy settings screens
-- `smoke_3` install, confirgure and go into closed loop mode, then close and reopen loop app
+- `smoke_1` accessibility labels for: Therapy settings screens
+- `smoke_2` accessibility labels for: Home screen, Home screen Charts
+- `smoke_3` install, configure and go into closed loop mode, then close and reopen loop app
 
 ### Functional test
-Test basic functionality of the app. Opening, closing of screens, adding and removeing devices, clicking buttons etc ...
+Test basic functionality of the app. Opening, closing of screens, adding and removing devices, clicking buttons etc ...
 
 - `functional_1`
 - `functional_2`
