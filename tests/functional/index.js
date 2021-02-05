@@ -11,8 +11,8 @@ module.exports = (test) => {
     });
     describe('status', () => {
         it('can check loop status', async () => {
-            var statusScreen = await test.OpenStatusScreen();
-            await statusScreen.HeaderSection.ExpectClosedLoopGreenAlert();
+            var homeScreen = await test.OpenHomeScreen();
+            await homeScreen.HeaderSection.ExpectClosedLoopGreenAlert();
         });
     });
     describe('settings', () => {

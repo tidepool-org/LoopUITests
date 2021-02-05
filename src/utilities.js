@@ -89,12 +89,12 @@ module.exports = class Utilities {
     await this.loadTherapySettings();
   }
   async addUnconfiguredPump() {
-    let statusScreen = await this._testApp.OpenStatusScreen();
-    await statusScreen.HeaderSection.Devices.AddPump();
+    let homeScreen = await this._testApp.OpenHomeScreen();
+    await homeScreen.HeaderSection.Devices.AddPump();
   }
   async addCGM() {
-    let statusScreen = await this._testApp.OpenStatusScreen();
-    await statusScreen.HeaderSection.Devices.AddCGM();
+    let homeScreen = await this._testApp.OpenHomeScreen();
+    await homeScreen.HeaderSection.Devices.AddCGM();
   }
   async dismissTidepoolLogin() {
     await match.accessible.Header("Tidepool").swipe('down', 'fast', 0.8)

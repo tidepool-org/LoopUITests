@@ -1,4 +1,4 @@
-const base = require('../base/index');
+const base = require('../screens/base/index');
 const AddPresetScreen = require('./addPresetScreen');
 
 class CustomPresetScreen extends base.Screen {
