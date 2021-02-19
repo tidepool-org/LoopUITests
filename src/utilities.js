@@ -104,4 +104,5 @@ module.exports = class Utilities {
     }
     return this;
   }
+  
 };
