@@ -1,5 +1,5 @@
 const {
-  launchLoop, prepareLoop, setLanguage, skipTidepoolLogin,
+  launchLoop, prepareLoop, setLanguage, skipTidepoolOnboarding,
 } = require('../../utilities/prepareTest');
 const action = require('../../utilities/action');
 const match = require('../../utilities/match');
@@ -17,7 +17,7 @@ describe('CGM Errors', () => {
   });
   it('prepares loop', async () => {
     await launchLoop();
-    await skipTidepoolLogin();
+    await skipTidepoolOnboarding(setup);
     await prepareLoop(setup);
   });
   describe('signal loss', () => {
