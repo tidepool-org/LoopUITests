@@ -1,6 +1,6 @@
 /* eslint-disable jest/expect-expect */
 const {
-  launchLoop, prepareLoop, setLanguage, skipTidepoolLogin,
+  launchLoop, prepareLoop, setLanguage, skipTidepoolOnboarding,
 } = require('../../utilities/prepareTest');
 const { HomeScreen } = require('../../screens/exportAllScreens');
 
@@ -10,13 +10,11 @@ describe('Home Screen Accessibility', () => {
     setup = {
       language: 'enUS',
       mockTherapySettings: true,
-      cgmSimulator: true,
-      cgmStandardData: true,
     };
   });
   it('prepares loop', async () => {
     await launchLoop();
-    await skipTidepoolLogin();
+    await skipTidepoolOnboarding(setup);
     await prepareLoop(setup);
   });
   describe('has HUD elements', () => {
