@@ -97,6 +97,7 @@ module.exports = class Utilities {
     await statusScreen.HeaderSection.Devices.AddCGM();
   }
   async dismissTidepoolLogin() {
-    await match.accessible.Header("Tidepool").swipe('down', 'fast', 0.8)
+    let loginElement = await match.Label("Tidepool")
+    await loginElement.swipe('down', 'fast', 0.8)
   }
 };
