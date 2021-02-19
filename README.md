@@ -27,7 +27,6 @@ You will first need to build the version of Loop you would like to run the tests
 
  e.g. `BUILD_TAG=build-1.1.0-2246 npm run build_loop`
 
-
 ### Running the desired test suite
 In order to run the tests you will need to run
 
