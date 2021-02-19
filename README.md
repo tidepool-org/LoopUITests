@@ -8,9 +8,9 @@ Loop end-to-end automated tests using `detox`
 ## Running the Tests Locally
 
 ### Requirements
-node ^12.5
-`npm install -g detox-cli`
-`npm install` 
+node ^12.5<br>
+`npm install -g detox-cli`<br>
+`npm install`<br>
 
 ### Installing apple simulator utilities
 
@@ -37,19 +37,19 @@ where
 
 - `<build-tag>` is the same as the one you chose for building loop in the above command e.g `build-1.1.0-2246`
 - `<device>` is the device you'd like to run it on. either 
- - iPhone 11 Pro `iphone-11pro`
- - iPhone SE (2nd generation) `iphone-se-2`
+    - iPhone 11 Pro `iphone-11pro`
+    - iPhone SE (2nd generation) `iphone-se-2`
 - `<test>` is the suite of the tests you'd like to run. either
- -  `accessibility`
- - `errors`
- - `functional`
- - `smoke`
+    -  `accessibility`
+    - `errors`
+    - `functional`
+    - `smoke`
  
 e.g `BUILD_DIR=${PWD}/build/build-1.1.0-2246/Build/Products CONFIG=iphone-11pro NAME=accessibility npm run test_e2e`
 
 ### Test suite descriptions 
 #### accessibility
-Accessibility tests that run through the accessibility labels of required screen elements making sure the are present
+Accessibility tests that run through the accessibility labels of required screen elements making sure they are present
 
 #### errors
 Tests error generation on the cgm simulator and pump simulator such as 'signal loss' and 'generate error on suspend', respectively.
@@ -105,7 +105,7 @@ the setup object may look something like this
       
 this `setup` object is used by `testPrepare.js` in order to setup the test with the required simulators and loop settings. 
     
-    //testPrepare.js
+    //homescreen.accessibility.spec.js
     it('prepares loop', async () => {
     await launchLoop();
     await prepareLoop(setup);
