@@ -53,6 +53,10 @@ module.exports = class CGMSimulatorScreen {
     return match.Text(this.language.CGMSimulatorScreen.MeasurementFrequency, 0);
   }
 
+  get RetractAlertsButton() {
+    return match.Label(this.language.CGMSimulatorScreen.RetractAlert);
+  }
+
   get SaveButton() {
     return match.accessible.ButtonBarButton(this.language.CGMSimulatorScreen.Save);
   }
