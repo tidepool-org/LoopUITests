@@ -182,6 +182,9 @@ const match = {
       );
     },
   },
+  Id(id) {
+    return element(by.id(id));
+  },
   ByParent(childLabel, parentLabel) {
     return element(by.label(childLabel).withAncestor(by.label(parentLabel)));
   },

@@ -37,6 +37,14 @@ module.exports = class HomeScreen {
     return match.Label(this.language.HomeScreen.HUD.CGMPill);
   }
 
+  get ClosedLoopOnMessage() {
+    return match.Label(this.language.HomeScreen.HUD.ClosedLoopOn);
+  }
+
+  get DismissButton() {
+    return match.accessible.Button(this.language.HomeScreen.HUD.Dismiss);
+  }
+
   get GlucoseChart() {
     return match.Label(this.language.HomeScreen.GlucoseChart);
   }
@@ -45,8 +53,16 @@ module.exports = class HomeScreen {
     return match.Label(this.language.HomeScreen.InsulinDeliveryChart);
   }
 
+  get LoopIcon() {
+    return match.Type(this.language.HomeScreen.HUD.LoopIcon);
+  }
+
   get PreMealTargetsButton() {
     return match.accessible.ButtonBarButton(this.language.HomeScreen.ButtonBar.PreMealTargets);
+  }
+
+  get PodReservoirIcon() {
+    return match.Id(this.language.HomeScreen.HUD.PodReservoirIcon);
   }
 
   get PumpPill() {
