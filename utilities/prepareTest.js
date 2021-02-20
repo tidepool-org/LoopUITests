@@ -5,7 +5,6 @@ const {
   CGMSimulatorScreen, HomeScreen, OnboardingScreen, LoopSettingsScreen,
 } = require('../screens/exportAllScreens');
 const enUSText = require('./translations/enUSText');
-const { waitForElementToBeVisible } = require('./action');
 /**
    *
    * @param {object} setup
@@ -17,8 +16,20 @@ const { waitForElementToBeVisible } = require('./action');
    * @param {boolean} setup.closedLoop
    */
 
-async function launchLoop() {
-  await device.launchApp({ permissions: { notifications: 'YES', health: 'YES' }, launchArgs: { detoxDebugVisibility: 'YES', DTXEnableVerboseSyncSystem: 'YES', DTXEnableVerboseSyncResources: 'YES' } });
+function setFaceID() {
+  const deviceName = device.name;
+  let faceID;
+  if (deviceName.includes('iphone SE')) {
+    faceID = 'NO';
+    return faceID;
+  } else {
+    faceID = 'YES';
+    return faceID;
+  }
+}
+
+async function launchLoop(faceId) {
+  await device.launchApp({ permissions: { notifications: 'YES', health: 'YES', faceid: faceId }, launchArgs: { detoxDebugVisibility: 'YES', DTXEnableVerboseSyncSystem: 'YES', DTXEnableVerboseSyncResources: 'YES' } });
   await device.setBiometricEnrollment(true);
 }
 
@@ -59,12 +70,12 @@ async function prepareLoop(setup) {
   if (setup.closedLoop) {
     const homeScreen = new HomeScreen(setLanguage(setup));
     const loopSettingsScreen = new LoopSettingsScreen(setLanguage(setup));
-    await waitForElementToBeVisible(homeScreen.PodReservoirIcon, 5000);
+    await action.waitForElementToBeVisible(homeScreen.PodReservoirIcon, 5000);
     await homeScreen.SettingsButton.tap();
     await loopSettingsScreen.ClosedLoopToggle.tap();
     await loopSettingsScreen.DoneButton.tap();
     await homeScreen.LoopIcon.tap();
-    await waitForElementToBeVisible(homeScreen.ClosedLoopOnMessage, 5000);
+    await action.waitForElementToBeVisible(homeScreen.ClosedLoopOnMessage, 5000);
     await homeScreen.DismissButton.tap();
   }
 }
@@ -84,4 +95,5 @@ module.exports = {
   launchLoop,
   setLanguage,
   skipTidepoolOnboarding,
+  setFaceID,
 };

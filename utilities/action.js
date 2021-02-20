@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const { element } = require('detox');
+const { element, device } = require('detox');
 const { match } = require('./match');
 
 const nextPickerStep = function (currentValue, expectedValue) {
@@ -18,14 +18,17 @@ const nextPickerStep = function (currentValue, expectedValue) {
 };
 
 const action = {
-  /**
-     *
-     * @param {string} currentValue
-     * @param {string} expectedValue
-     * @param {boolean} isMinValue, optional - default is true
-     */
+  async Authenticate() {
+    const deviceName = device.name;
+    if (deviceName.includes('iphone SE')) {
+      return device.matchFinger();
+    } else {
+      return device.matchFace();
+    }
+  },
+
   async ScrollMaxMinPicker(currentValue, expectedValue, isMinValue = true) {
-    if (currentValue == expectedValue) {
+    if (currentValue === expectedValue) {
       return;
     }
     do {
@@ -40,7 +43,7 @@ const action = {
         await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
       }
     }
-    while (currentValue != expectedValue);
+    while (currentValue !== expectedValue);
   },
   /**
      *
@@ -49,7 +52,7 @@ const action = {
      * @param {boolean} isWholePart, optional - default is true
      */
   async ScrollDecimalPicker(currentValue, expectedValue, isWholePart = true) {
-    if (currentValue == expectedValue) {
+    if (currentValue === expectedValue) {
       return;
     }
     do {
@@ -63,7 +66,7 @@ const action = {
         }
       }
     }
-    while (currentValue != expectedValue);
+    while (currentValue !== expectedValue);
   },
   /**
      *
