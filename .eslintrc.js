@@ -21,5 +21,7 @@ module.exports = {
     'no-throw-literal': 'off',
     'jest/no-standalone-expect': 'off',
     'no-console': 'off',
+    'no-else-return': 'off',
+    'class-methods-use-this': 'off',
   },
 };
