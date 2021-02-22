@@ -57,6 +57,10 @@ module.exports = class HomeScreen {
     return match.Type(this.language.HomeScreen.HUD.LoopIcon);
   }
 
+  get NoInsulinStatus() {
+    return match.ByParent(this.language.HomeScreen.HUD.NoInsulinStatus, this.language.HomeScreen.HUD.PumpPill);
+  }
+
   get PreMealTargetsButton() {
     return match.accessible.ButtonBarButton(this.language.HomeScreen.ButtonBar.PreMealTargets);
   }
@@ -65,12 +69,28 @@ module.exports = class HomeScreen {
     return match.Id(this.language.HomeScreen.HUD.PodReservoirIcon);
   }
 
+  get PumpErrorStatus() {
+    return match.ByParent(this.language.HomeScreen.HUD.PumpErrorStatus, this.language.HomeScreen.HUD.PumpPill);
+  }
+
+  get PumpOcclusionStatus() {
+    return match.ByParent(this.language.HomeScreen.HUD.PumpOcclusionStatus, this.language.HomeScreen.HUD.PumpPill);
+  }
+
   get PumpPill() {
     return match.Label(this.language.HomeScreen.HUD.PumpPill);
   }
 
   get SettingsButton() {
     return match.accessible.ButtonBarButton(this.language.HomeScreen.ButtonBar.Settings);
+  }
+
+  get TempBannerBolus() {
+    return match.Label(this.language.HomeScreen.TempBannerBolus);
+  }
+
+  get TempBannerInsulinSuspended() {
+    return match.Label(this.language.HomeScreen.TempBannerInsulinSuspended);
   }
 
   get WorkoutTargets() {
