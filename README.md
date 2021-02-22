@@ -5,109 +5,182 @@ Loop end-to-end automated tests using `detox`
  - [Background reading](https://hackernoon.com/detox-gray-box-end-to-end-testing-framework-for-mobile-apps-196ccd9564ce)
 
 
-## Loop Build
-Will either build the version of loop given e.g. `build-289` or if it doesn't already exist will clone the LoopWorkspace for the given tag and then build it
+## Running the Tests Locally
 
-- `BUILD_TAG=build-289 npm run build_loop`
+### Requirements
+node ^12.5<br>
+`npm install -g detox-cli`<br>
+`npm install`<br>
 
-## Tests
+### Installing apple simulator utilities
 
-`BUILD_DIR=${PWD}/build/build-289/Build/Products CONFIG=iphone-se-2 NAME=error_1 npm run test_e2e`
+Do **not** install `applesimutils` from Homebrew as it does not have the functionality to automate allowing or disallowing Critical Alert notifications.<br> Use the custom, pre-built binary found at `bin/applesimutils`.<br> This binary was built using Xcode 11.3 from the Tidepool fork found at https://github.com/tidepool-org/AppleSimulatorUtils using the `add-critical-alerts-notification-permission` branch.
 
-### Device Configurations
+When running locally you may need to add a copy of this version of applesimutils to your PATH.<br>e.g. `usr/local/bin`  
 
-[Comparison iPhone SE 2 vs iPhone 11 pro](https://www.apple.com/iphone/compare/?device1=iphoneSE2ndgen&device2=iphone12)
+### Build loop
+You will first need to build the version of Loop you would like to run the tests on. To do this run
 
-- iPhone 11 Pro `ios.sim.debug.iphone-11pro`
-- iPhone SE (2nd generation) `ios.sim.debug.iphone-se-2`
+    BUILD_TAG=<buildtag> npm run build_loop
 
+ e.g. `BUILD_TAG=build-1.1.0-2246 npm run build_loop`
 
-### Smoke test
-Accessibility and tests that run through the screen elements making sure the are present
+### Running the desired test suite
+In order to run the tests you will need to run
 
-- `smoke_1` accessibility labels for: Therapy settings screens
-- `smoke_2` accessibility labels for: Home screen, Home screen Charts
-- `smoke_3` install, configure and go into closed loop mode, then close and reopen loop app
+`BUILD_DIR=${PWD}/build/<buildtag>/Build/Products CONFIG=<device> NAME=<test> npm run test_e2e`
 
-### Functional test
-Test basic functionality of the app. Opening, closing of screens, adding and removing devices, clicking buttons etc ...
+where 
 
-- `functional_1`
-- `functional_2`
+- `<build-tag>` is the same as the one you chose for building loop in the above command e.g `build-1.1.0-2246`
+- `<device>` is the device you'd like to run it on. either 
+    - iPhone 11 Pro `iphone-11pro`
+    - iPhone SE (2nd generation) `iphone-se-2`
+- `<test>` is the suite of the tests you'd like to run. either
+    -  `accessibility`
+    - `errors`
+    - `functional`
+    - `smoke`
+ 
+e.g `BUILD_DIR=${PWD}/build/build-1.1.0-2246/Build/Products CONFIG=iphone-11pro NAME=accessibility npm run test_e2e`
 
-### Guardrails test
-Test the loop app settings guardrails limits
+### Test suite descriptions 
+#### accessibility
+Accessibility tests that run through the accessibility labels of required screen elements making sure they are present
 
-- `guardrail_1` guardrail tests for: insulin carb ratio, correction range schedule and basal rate schedule
-- `guardrail_2` guardrail tests for: insulin sensitivity schedule, delivery limits and glucose safety limit
+#### errors
+Tests error generation on the cgm simulator and pump simulator such as 'signal loss' and 'generate error on suspend', respectively.
 
-### Errors test
-Test the loop app interacts with device errors
+#### functional
+Tests functional behavior within the loop app such as entering carbs, delivering a bolus, and verifying guardrails in the therapy settings.
 
-- `error_1`
-- `error_2`
+#### smoke
+Test the loop app can go through basic functionality at a high level such as opening and delivering a bolus.
 
-## Debugging
+### Debugging
 
  search in `./artifacts/loopUITests.html` file for test output including errors or mismatches
 
-## Updates
+### Updates
 `detox clean-framework-cache && detox build-framework-cache`
 
-## Requirements
-
-A recent version of `node` must be installed to run these tests.
-
-## Apple Simulator Utils
-
-Do *not* install `applesimutils` from Homebrew. Use the custom, pre-built binary found at `bin/applesimutils`. This binary includes additional functionality to automate allowing or disallowing Critical Alert notifications. This binary was built using Xcode 11.3 from the Tidepool fork found at https://github.com/tidepool-org/AppleSimulatorUtils using the `add-critical-alerts-notification-permission` branch.
 
 
-## Scenarios
+### Scenarios
 
 [Scenarios Docs](https://github.com/LoopKit/Loop/blob/master/Documentation/Testing/Scenarios.md)
 
 - `./scenarios/flat_cgm_trace.json` flat cgm trace, no insulin or carb events
 
-## Testing guidelines
+## Developing the tests
 
+### Structure
+These tests are based off of the `page-objects` theory, where different screens in the app are seperated into their own class with `getter` functions used to select UI elements. This is a common practice to provide seperation of concerns in test automation between testing code and selectors, which ultimately make it easier to read and update.
 
-### Mobile
+#### Folders
+**e2e** : this is where the tests live<br>
+**screens**: this is where each loop screen and its corresponding UI elements live<br>
+**scripts**: this is how we build loop and test<br>
+**utilities**: this is where Detox matchers and actions live. This is also where test preparation lives (i.e. turning closed loop on or off or setting up the pump simulators before a test). The translations folder also lives here. 
 
-http://pauljadam.com/demos/mobilechecklist.html
+#### Flow
 
+Test file (<name>.spec.js) creates a `setup` object before the tests begin to run.
+the setup object may look something like this
+ 
+    //homescreen.accessibility.spec.js
+    describe('Home Screen Accessibility', () => {
+      let setup;
+      beforeAll(async () => {
+        setup = {
+          language: 'enUS',
+          mockTherapySettings: true,
+          cgmSimulator: true,
+          cgmStandardData: true,
+        };
+      });
+      
+this `setup` object is used by `testPrepare.js` in order to setup the test with the required simulators and loop settings. 
+    
+    //homescreen.accessibility.spec.js
+    it('prepares loop', async () => {
+    await launchLoop();
+    await prepareLoop(setup);
+    });
 
-### Practical test pyramid
+This setup also includes the language property which is what all the screens use to determine the language of the UI elements to grab. 
+    
+    //homescreen.accessibility.spec.js
+    describe('has HUD elements', () => {
+    let homeScreen;
+    beforeAll(async () => {
+      homeScreen = new HomeScreen(setLanguage(setup));
+    });
+After setup the test file runs the tests. It refers to each screen as opposed to using the raw detox `element(by.label(label))`. 
 
-[UI Tests](https://martinfowler.com/articles/practical-test-pyramid.html#UiTests)
+    //homescreen.accessibility.spec.js
+    describe('has HUD elements', () => {
+     let homeScreen;
+     beforeAll(async () => {
+      homeScreen = new HomeScreen(setLanguage(setup));
+    });
+    it('has a CGM pill', async () => {
+      await expect(homeScreen.CGMPill).toBeVisible();
+    });
+The screen file that coordinates to the test example above is the HomeScreen. In this file we can see the CGMPill getter function that gets the UI matcher of the CGM Pill.
 
-> With web interfaces there's multiple aspects that you probably want to test around your UI: behaviour, layout, usability
+    //HomeScreen.js
+    const match = require('../utilities/match');
 
-1)  - language (enUS, multiple over time ...)
-    - units (mgdL, mgL)
-    - device format (touch, )
+    module.exports = class HomeScreen {
+      constructor(language) {
+        this.language = language;
+      }
 
-[End to end tests](https://martinfowler.com/articles/practical-test-pyramid.html#End-to-endTests)
+      get CGMPill() {
+        return match.Label(this.language.HomeScreen.HUD.CGMPill);
+      }
+The getter function uses `match.label` which is a reference back to `match.js` which is the detox matching functions simplified resulting in more readable code. `action.js` is the detox actions simplified and they both live in the `utilites` folder. this function also uses `this.language` which was passed in from the setup object as `enUS` which correlates to the `enUSText` that lives in the translations folder. So this function is looking in the `enUSText` file for the HomeScreen property. Let's look at that
 
-> Think about the high-value interactions users will have with your application. Try to come up with user journeys that define the core value of your product and translate the most important steps of these user journeys into automated end-to-end tests.
+    //enUsText.js
+    const HomeScreen = {
+     HUD: {
 
-1)
-- initial setup of loop
-    - threapy settings (via persription service)
-    - add CGM
-    - add pump
+        AddCGM: 'Add CGM',
+        CGMPill: 'CGM Status',
 
-2)
-- day to day use of loop
-    - add meal
-    - bolus for meal
-    - update a setting
+The `enUSText` is just a bunch of objects that have properties that relate to their screen labels in English and this where the functions look to find the labels of the UI elements.
 
-3)
-- errors
+#### Creating a test
+1. You'll start off by creating a `spec.js` file. eg. `deliverbolus.spec.js`
+2. You'll then decide if you need to create a screen. Look in the screens folder. If there isn't a screen in there that you'll be working with, you'll need to create a new one. You're screen will be a class that has one constructor `language`. 
+4. In your spec file you'll decide how you want to set up loop. you'll be required to have at least the `language` property in your `setup` object. For right now, the only opton is `enUS` which correlates to English (US). 
+5. You'll then start developing your test. Initalize your screen that you will be working with like so 
+        
+        //deliverbolus.spec.js
+        describe('has HUD elements', () => {
+        let homeScreen;
+        beforeAll(async () => {
+        homeScreen = new HomeScreen(setLanguage(setup));
+        bolusScreen = new BolusScreen(setLanguage(setup));
+         });
+    you may need to initialize more than one screen depending on the test<br>
 
-[Avoid duplication](https://martinfowler.com/articles/practical-test-pyramid.html#AvoidTestDuplication)
+6. start framing out your first test like so. `.tap()` is how you will tap on things and to perform assertions you will use something like `expect(<somelement>).toBeVisible`. look at the `match.js` files and `action.js` files for more options. An example
 
-> If a higher-level test spots an error and there's no lower-level test failing, you need to write a lower-level test
-> Push your tests as far down the test pyramid as you can
+        //deliverbolus.spec.js
+       it('delivers a bolus', async () => {
+          await homeScreen.DeliverBolusButton.tap();
+          await expect(bolusScreen.BolusHeader).toBeVisible();
+        });
+ 7. add getter functions to your screen to retrieve UI elements
+       
+           //BolusScreen.js      
+           get BolusHeader() {
+            return match.Label(this.language.BolusScreen.Header);
+           }
+ 8. Refer to enUSText for Labels and create more if necessary.
 
+        //enUsText.js
+        const BolusScreen = {
+          Header: 'Bolus',

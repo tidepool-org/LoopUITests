@@ -42,7 +42,7 @@ if [ ${#} -ne 0 ]; then
   error "Unexpected arguments: ${*}"
 fi
 
-if [[ ! ${TEST_TYPE} =~ "functional_" ]] && [[ ! ${TEST_TYPE} =~ "smoke_" ]] && [[ ! ${TEST_TYPE} =~ "guardrails_" ]] && [[ ! ${TEST_TYPE} =~ "error_" ]]; then
+if [[ ! ${TEST_TYPE} =~ "accessibility" ]] && [[ ! ${TEST_TYPE} =~ "errors" ]] && [[ ! ${TEST_TYPE} =~ "functional" ]] && [[ ! ${TEST_TYPE} =~ "smoke" ]]; then
   error "Unexpected <type>: ${TEST_TYPE}"
 fi
 
