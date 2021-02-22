@@ -9,6 +9,25 @@ const match = {
    * @summary items that have accessibility traits applied to them
    */
   accessible: {
+    Alert() {
+      return element(by.type('_UIAlertControllerInterfaceActionGroupView'));
+    },
+    AlertButton(label) {
+      return element(
+        by
+          .label(label)
+          .and(by.traits([buttonTrait]))
+          .and(by.type('_UIAlertControllerActionView')),
+      );
+    },
+    AlertLabel(label) {
+      return element(
+        by
+          .label(label)
+          .and(by.traits([staticTextTrait]))
+          .withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView')),
+      );
+    },
     ButtonBarButton(label) {
       return element(
         by
@@ -30,6 +49,24 @@ const match = {
     Button(label) {
       return element(by.label(label).and(by.traits(['button'])));
     },
+    ClickableLabel(label) {
+      return element(
+        by
+          .type('UITableViewCellContentView')
+          .withDescendant(by.label(label).and(by.traits([staticTextTrait]))),
+      );
+    },
+    Header(label) {
+      return element(by.label(label).and(by.traits(['header'])));
+    },
+    Image(label) {
+      return element(by.label(label).and(by.traits([imageTrait])));
+    },
+    ImageAndId(label, theId) {
+      return element(
+        by.label(label).and(by.traits([imageTrait]).and(by.id(theId))),
+      );
+    },
     SwipeButton(label) {
       return element(
         by
@@ -44,29 +81,8 @@ const match = {
         by.type('UISwitch').and(by.label(label).and(by.traits(['button']))),
       );
     },
-    Id(theId) {
-      return element(by.id(theId));
-    },
     TextLabel(label) {
       return element(by.label(label).and(by.traits([staticTextTrait])));
-    },
-    ClickableLabel(label) {
-      return element(
-        by
-          .type('UITableViewCellContentView')
-          .withDescendant(by.label(label).and(by.traits([staticTextTrait]))),
-      );
-    },
-    Image(label) {
-      return element(by.label(label).and(by.traits([imageTrait])));
-    },
-    ImageAndId(label, theId) {
-      return element(
-        by.label(label).and(by.traits([imageTrait]).and(by.id(theId))),
-      );
-    },
-    Header(label) {
-      return element(by.label(label).and(by.traits(['header'])));
     },
     PickerItem(itemID) {
       return element(
@@ -77,25 +93,6 @@ const match = {
       return element(
         by.type('UIPickerTableViewWrapperCell').withDescendant(by.label(itemID)),
       );
-    },
-    AlertLabel(label) {
-      return element(
-        by
-          .label(label)
-          .and(by.traits([staticTextTrait]))
-          .withAncestor(by.type('_UIAlertControllerInterfaceActionGroupView')),
-      );
-    },
-    AlertButton(label) {
-      return element(
-        by
-          .label(label)
-          .and(by.traits([buttonTrait]))
-          .and(by.type('_UIAlertControllerActionView')),
-      );
-    },
-    Alert() {
-      return element(by.type('_UIAlertControllerInterfaceActionGroupView'));
     },
   },
   loop: {
@@ -182,32 +179,32 @@ const match = {
       );
     },
   },
-  Id(id) {
-    return element(by.id(id));
-  },
   ByParent(childLabel, parentLabel) {
     return element(by.label(childLabel).withAncestor(by.label(parentLabel)));
   },
-  UIEditableTextField() {
-    return element(by.type('LoopKitUI.PaddedTextField'));
+  Id(id) {
+    return element(by.id(id));
   },
-  UITextField() {
-    return element(by.type('UITextField'));
-  },
-  TopScrollableView() {
-    return element(by.type('UITableView')).atIndex(1);
+  Label(label) {
+    return element(by.label(label));
   },
   Text(text, index) {
     return element(by.text(text)).atIndex(index);
   },
-  Label(label) {
-    return element(by.label(label));
+  TopScrollableView() {
+    return element(by.type('UITableView')).atIndex(1);
   },
   Trait(trait) {
     return element(by.traits([trait]));
   },
   Type(elementType) {
     return element(by.type(elementType));
+  },
+  UIEditableTextField() {
+    return element(by.type('LoopKitUI.PaddedTextField'));
+  },
+  UITextField() {
+    return element(by.type('UITextField'));
   },
   async CanBeClicked(item) {
     const itemsAttributes = await item.getAttributes();
