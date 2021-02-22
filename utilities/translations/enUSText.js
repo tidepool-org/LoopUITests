@@ -15,11 +15,11 @@ const HomeScreen = {
     CGMPill: 'CGM Status',
     CGMSignalLoss: 'Signal Loss',
     CGMGenericAlert: 'Alert: FG Title',
+    NoInsulinStatus: 'No Insulin',
     PodReservoirIcon: 'pod_reservoir',
     PumpCommsIssue: 'Comms Issue',
-    PumpNoInsulin: 'No Insulin',
-    PumpError: 'Pump Error',
-    PumpOcclusion: 'Pump Occlusion',
+    PumpErrorStatus: 'Pump Error',
+    PumpOcclusionStatus: 'Pump Occlusion',
     PumpPill: 'Pump Status',
   },
   AddCGMMenu: {
@@ -36,6 +36,8 @@ const HomeScreen = {
   ActiveInsulinChart: 'Active Insulin',
   InsulinDeliveryChart: 'Insulin Delivery',
   ActiveCarbohydrates: 'Active Carbohydrates',
+  TempBannerBolus: 'Tap to Stop',
+  TempBannerInsulinSuspended: 'Tap to Resume',
   ButtonBar: {
     AddMeal: 'Add Meal',
     Bolus: 'Bolus',
@@ -52,18 +54,21 @@ const PredictedGlucoseScreen = {
   RetrospectiveCorrection: 'Retrospective Correction',
 };
 const ActiveInsulinScreen = {
+  EventHistory: 'Event History',
   Header: 'Insulin Delivery',
   IOB: 'U IOB',
-  Total: 'U Total',
-  EventHistory: 'Event History',
   Reservoir: 'Reservoir',
+  Total: 'U Total',
 };
 const InsulinDeliveryScreen = {
+  Back: 'Status',
+  BolusEvent: 'Bolus: 0.1 U',
+  EventHistory: 'Event History',
+  InterruptedBolusEvent: 'Interrupted Bolus',
   Header: 'Insulin Delivery',
   IOB: 'U IOB',
-  Total: 'U Total',
-  EventHistory: 'Event History',
   Reservoir: 'Reservoir',
+  Total: 'U Total',
 };
 const ActiveCarbohydratesScreen = {
   ActiveCarbohydrates: 'Active Carbohydrates',
@@ -93,11 +98,16 @@ const CGMSimulatorScreen = {
 };
 const PumpSimulatorScreen = {
   AcceptAlert: 'OK',
+  BackToPumpSettings: 'Pump Settings',
+  CausePumpError: 'Cause Pump Error',
+  DetectOcclusion: 'Detect Occlusion',
   Done: 'Done',
   ErrorOnSuspend: 'Error on Suspend',
   InsulinSuspendedStatus: 'Insulin Suspended',
-  InsulinSuspendedStatusBanner: 'Tap to Resume',
-  SuspendButton: 'Suspend Delivery',
+  ReservoirRemaining: 'Reservoir Remaining',
+  ResolveOcclusion: 'Resolve Occlusion',
+  ResolvePumpError: 'Resolve Pump Error',
+  Suspend: 'Suspend Delivery',
 };
 const General = {
   NewEntry: 'New Entry',
@@ -203,39 +213,39 @@ const CarbEntryScreen = {
   },
 };
 
-const simpleBolusCalculatorScreen = {
+const SimpleBolusCalculatorScreen = {
+  Bolus: 'Bolus',
+  Carbohydrates: 'Carbohydrates',
+  CurrentGlucose: 'Current Glucose',
+  Deliver: 'Deliver',
+  Done: 'Done',
+  EnterBolus: 'Enter Bolus',
   Header: 'Simple Bolus Calculator',
   Info: 'When out of Closed Loop mode, the app uses a simplified bolus calculator like a typical pump.',
   RecommendedBolus: 'Recommended Bolus',
-  Bolus: 'Bolus',
-  EnterBolus: 'Enter Bolus',
-  CurrentGlucose: 'Current Glucose',
-  Deliver: 'Deliver',
-  Carbohydrates: 'Carbohydrates',
+  SaveAndDeliver: 'Save and Deliver',
 };
 
 const simpleMealBolusCalculatorScreen = {
   Header: 'Simple Meal Calculator',
-  Info: simpleBolusCalculatorScreen.Info,
-  RecommendedBolus: simpleBolusCalculatorScreen.RecommendedBolus,
-  Bolus: simpleBolusCalculatorScreen.Bolus,
-  EnterBolus: simpleBolusCalculatorScreen.EnterBolus,
-  CurrentGlucose: simpleBolusCalculatorScreen.CurrentGlucose,
-  Deliver: simpleBolusCalculatorScreen.Deliver,
+  Info: SimpleBolusCalculatorScreen.Info,
+  RecommendedBolus: SimpleBolusCalculatorScreen.RecommendedBolus,
+  Bolus: SimpleBolusCalculatorScreen.Bolus,
+  EnterBolus: SimpleBolusCalculatorScreen.EnterBolus,
+  CurrentGlucose: SimpleBolusCalculatorScreen.CurrentGlucose,
+  Deliver: SimpleBolusCalculatorScreen.Deliver,
   Carbohydrates: 'Carbohydrates',
 };
 
-const BolusScreen = {
-  MainScreen: {
-    Header: 'Bolus',
-    Unit: General.InsulinUnitLabel,
-    RecommendedBolus: 'Recommended Bolus',
-    BolusSummary: 'Bolus Summary',
-    ActiveCarbs: 'Active Carbs',
-    Deliver: 'Deliver',
-    EnterBolus: 'Enter Bolus',
-    Glucose: 'Glucose',
-  },
+const BolusCalculatorScreen = {
+  Header: 'Bolus',
+  Unit: General.InsulinUnitLabel,
+  RecommendedBolus: 'Recommended Bolus',
+  BolusSummary: 'Bolus Summary',
+  ActiveCarbs: 'Active Carbs',
+  Deliver: 'Deliver',
+  EnterBolus: 'Enter Bolus',
+  Glucose: 'Glucose',
   SimpleBolusCalculatorScreen: simpleMealBolusCalculatorScreen,
   SimpleMealBolusCalculatorScreen: simpleMealBolusCalculatorScreen,
 };
@@ -256,7 +266,7 @@ const LoopSettingsScreen = {
 module.exports = {
   General,
   OnboardingScreen,
-  BolusScreen,
+  BolusCalculatorScreen,
   CarbEntryScreen,
   LoopSettingsScreen,
   CustomPresetScreen,
@@ -267,4 +277,5 @@ module.exports = {
   ActiveCarbohydratesScreen,
   CGMSimulatorScreen,
   PumpSimulatorScreen,
+  SimpleBolusCalculatorScreen,
 };
