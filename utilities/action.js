@@ -107,6 +107,9 @@ const action = {
   async waitForElementToBeVisible(label, timeout) {
     await waitFor(label).toBeVisible().withTimeout(timeout);
   },
+  async waitForElementToBeNotVisible(label, timeout) {
+    await waitFor(label).toBeNotVisible().withTimeout(timeout);
+  },
 };
 
 module.exports = action;
