@@ -14,11 +14,9 @@ node ^12.5<br>
 
 ### Installing apple simulator utilities
 
-Do **not** install `applesimutils` from Homebrew. Use the custom, pre-built binary found at `bin/applesimutils`. 
+Do **not** install `applesimutils` from Homebrew as it does not have the functionality to automate allowing or disallowing Critical Alert notifications.<br> Use the custom, pre-built binary found at `bin/applesimutils`.<br> This binary was built using Xcode 11.3 from the Tidepool fork found at https://github.com/tidepool-org/AppleSimulatorUtils using the `add-critical-alerts-notification-permission` branch.
 
 When running locally you may need to add a copy of this version of applesimutils to your PATH.<br>e.g. `usr/local/bin`  
-
-This binary includes additional functionality to automate allowing or disallowing Critical Alert notifications.<br>This binary was built using Xcode 11.3 from the Tidepool fork found at https://github.com/tidepool-org/AppleSimulatorUtils using the `add-critical-alerts-notification-permission` branch.
 
 ### Build loop
 You will first need to build the version of Loop you would like to run the tests on. To do this run
