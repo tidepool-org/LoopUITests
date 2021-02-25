@@ -97,14 +97,11 @@ module.exports = class Utilities {
     await statusScreen.HeaderSection.Devices.AddCGM();
   }
   async dismissTidepoolLogin() {
-    try{
-      await match.accessible.Header("Tidepool").swipe('down', 'fast', 0.8);
+    try {
+      await match.Label("Welcome_1_Top").swipe('down', 'fast', 0.8);
     } catch (e) {
-      try{
-      await match.accessible.Button('Cancel').tap();
-      } catch (e) {
-        return
-      }
+      console.log("onborading is not present on ios 13");
     }
+    return this;
   }
 };
