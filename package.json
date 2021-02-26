@@ -38,7 +38,7 @@
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11 Pro",
-          "os": "iOS 13.7"
+          "os": "iOS 14.2"
         }
       },
       "ios.sim.debug.iphone-11pro-ios14": {
