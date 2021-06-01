@@ -10,6 +10,8 @@ describe("accessibility", () => {
     test = test.setup({
       language: config.text,
       screenDefaults: config.screenDefaults,
+      limits: config.limits,
+      authentication: { faceid: true },
       enableTherapySettings: true,
     });
     await test.prepare();

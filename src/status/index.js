@@ -167,12 +167,12 @@ var _screenTests = (testData) => {
       it("Tap to add blood glucose button", async () => {
         await expect(
           screen.HeaderSection.EnterBloodGlucoseButton
-        ).toBeVisible();
+        ).toExist();
       });
       it("No recent blood glucose label", async () => {
         await expect(
           screen.HeaderSection.NoRecentBloodGlucoseLabel
-        ).toBeVisible();
+        ).toExist();
       });
     });
   });
