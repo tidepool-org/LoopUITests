@@ -8,7 +8,7 @@
     "lint": "eslint 'src/**'"
   },
   "devDependencies": {
-    "detox": "18.8.0",
+    "detox": "18.15.0",
     "eslint": "7.18.0",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-plugin-import": "2.22.1",
@@ -38,7 +38,7 @@
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 12 Pro",
-          "os": "iOS 14.2"
+          "os": "iOS 14.3"
         }
       },
       "ios.sim.debug.iphone-se-2": {
@@ -46,7 +46,7 @@
         "type": "ios.simulator",
         "device": {
           "type": "iPhone SE (2nd generation)",
-          "os": "iOS 14.2"
+          "os": "iOS 14.3"
         }
       }
     },

@@ -108,7 +108,7 @@ class Test {
     this.LoopUtilities = new Utilities(this);
     await this._launchLoop();
     if (this._therapySettings) {
-      await this.LoopUtilities.dismissTidepoolLogin();
+      await this.LoopUtilities.bypassTidepoolOnboarding();
       await this.LoopUtilities.loadTherapySettings();
     }
     await this._setSimulators();

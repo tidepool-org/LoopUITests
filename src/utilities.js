@@ -96,12 +96,22 @@ module.exports = class Utilities {
     let statusScreen = await this._testApp.OpenStatusScreen();
     await statusScreen.HeaderSection.Devices.AddCGM();
   }
-  async dismissTidepoolLogin() {
-    try {
-      await match.Label("Welcome_1_Top").swipe('down', 'fast', 0.8);
-    } catch (e) {
-      console.log("onborading is not present on ios 13");
+  async bypassTidepoolOnboarding() {
+    // TODO figure out why hosting views make contained element not visible (and thus cannot tap)
+    // step through the onboarding screens
+    for (var pageCount = 0; pageCount < 7; pageCount++) {
+      await expect(match.Label("Tidepool Loop Welcome, page " + (pageCount+1) + " of 7")).toBeVisible();
+      if (pageCount == 6) {
+        // last page has different button label
+        await match.accessible.Button("Finish").tap({"x":180,"y":25});
+      } else {
+        await match.accessible.Button('Continue').atIndex(pageCount).tap({"x":180,"y":25});  
+      }
     }
-    return this;
+
+    // by-pass the reminder of the onboarding
+    await expect(match.Label("Getting to Know Tidepool Loop").atIndex(0)).toBeVisible();
+    await match.Label("Getting to Know Tidepool Loop").longPress(4000)
+    await match.accessible.AlertButton("Yes").tap()
   }
 };
