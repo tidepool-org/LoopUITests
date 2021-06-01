@@ -24,7 +24,7 @@ module.exports = class TherapyScreen extends base.Screen {
         isBtn: true,
         label:
           language.settingsScreen.TherapySettingsScreen.Header +
-          "\n" +
+          ", " +
           language.settingsScreen.TherapySettingsScreen.Info,
       },
     });
@@ -164,17 +164,20 @@ module.exports = class TherapyScreen extends base.Screen {
   }
   async OpenInsulinSensitivitiesScreen() {
     await this.SwipeUpUntilVisible(this.InsulinSensitivitiesLabel);
-    await this.InsulinSensitivitiesLabel.tap();
+    // tapping coordinates by-passes visibility check
+    await this.InsulinSensitivitiesLabel.tap({"x":20,"y":20});
     return this._insulinSensitivitiesScreen;
   }
   async OpenCarbRatioScreen() {
     await this.SwipeUpUntilVisible(this.CarbRatiosLabel);
-    await this.CarbRatiosLabel.tap();
+    // tapping coordinates by-passes visibility check
+    await this.CarbRatiosLabel.tap({"x":20,"y":20});
     return this._carbRatioScreen;
   }
   async OpenInsulinModelScreen() {
     await this.SwipeUpUntilVisible(this.InsulinModelLabel);
-    await this.InsulinModelLabel.tap();
+    // tapping coordinates by-passes visibility check
+    await this.InsulinModelLabel.tap({"x":20,"y":20});
     return this._insulinModelScreen;
   }
   get DeliveryLimitsScreen() {
@@ -182,22 +185,26 @@ module.exports = class TherapyScreen extends base.Screen {
   }
   async OpenDeliveryLimitsScreen() {
     await this.SwipeUpUntilVisible(this.DeliveryLimitsMaxBolusLabel);
-    await this.DeliveryLimitsLabel.tap();
+    // tapping coordinates by-passes visibility check
+    await this.DeliveryLimitsLabel.tap({"x":20,"y":20});
     return this.DeliveryLimitsScreen;
   }
   async OpenBasalRateScreen() {
     await this.SwipeUpUntilVisible(this.BasalRateLabel);
-    await this.BasalRateLabel.tap();
+    // tapping coordinates by-passes visibility check
+    await this.BasalRateLabel.tap({"x":20,"y":20});
     return this._basalRatesScreen;
   }
   async OpenWorkoutRangeScreen() {
     await this.SwipeUpUntilVisible(this.WorkoutRangeLabel);
-    await this.WorkoutRangeLabel.tap();
+    // tapping coordinates by-passes visibility check
+    await this.WorkoutRangeLabel.tap({"x":20,"y":20});
     return this._workoutRangeScreen;
   }
   async OpenPreMealRangeScreen() {
     await this.SwipeUpUntilVisible(this.PreMealRangeLabel);
-    await this.PreMealRangeLabel.tap();
+    // tapping coordinates by-passes visibility check
+    await this.PreMealRangeLabel.tap({"x":20,"y":20});
     return this._premealRangeScreen;
   }
   async OpenCorrectionRangeScreen() {
