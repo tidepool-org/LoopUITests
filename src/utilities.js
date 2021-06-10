@@ -105,7 +105,7 @@ module.exports = class Utilities {
         // last page has different button label
         await match.accessible.Button("Finish").tap({"x":180,"y":25});
       } else {
-        await match.accessible.Button('Continue').atIndex(pageCount).tap({"x":180,"y":25});  
+        await match.accessible.Button('Continue').tap({"x":180,"y":25}); 
       }
     }
 
