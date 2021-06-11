@@ -189,8 +189,13 @@ const match = {
   UITextField() {
     return element(by.type("UITextField"));
   },
-  TopScrollableView() {
-    return element(by.type("UITableView")).atIndex(1);
+  async TopScrollableView() {
+    try {
+      await expect(element(by.type("SwiftUI.HostingScrollView"))).toExist();
+      return element(by.type("SwiftUI.HostingScrollView"));
+    } catch (err) {
+      return element(by.type("UITableView")).atIndex(1);
+    }
   },
   Text(theText) {
     return element(by.text(theText));

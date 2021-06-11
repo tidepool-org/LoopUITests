@@ -16,7 +16,7 @@ var General = {
   CarbohydratesUnitLabel: "g",
   ButtonLabel: {
     Plus: "plus",
-    InfoCircle: "info.circle",
+    InfoCircle: "info",
   },
   Alert: {
     ExclamationMark: "exclamationmark.triangle.fill",

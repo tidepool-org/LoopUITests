@@ -25,7 +25,7 @@ class SettingsScreen extends base.Screen {
         return this._devices;
     }
     get LoopSwitchButton() {
-        return match.accessible.SwitchButton(this.screenText.ClosedLoop);
+        return match.Label(this.screenText.ClosedLoop).atIndex(1);
     }
     get TherapySettingsLabel() {
         return this._therapyScreen.OpenButton;
@@ -42,13 +42,15 @@ class SettingsScreen extends base.Screen {
     async ClosedLoop() {
         const isOn = await this.IsButtonOn(this.LoopSwitchButton);
         if (!isOn) {
-            await this.LoopSwitchButton.longPress();
+            // TODO figure out why untargetted tap does not tap on the switch
+            await this.LoopSwitchButton.tap({"x":280,"y":20});
         }
     }
     async OpenLoop() {
         const isOn = await this.IsButtonOn(this.LoopSwitchButton);
         if (isOn) {
-            await this.LoopSwitchButton.longPress();
+            // TODO figure out why untargetted tap does not tap on the switch
+            await this.LoopSwitchButton.tap({"x":280,"y":20});
         }
     }
     get TherapySettingsScreen() {

@@ -46,12 +46,12 @@ if [[ ! ${TEST_TYPE} =~ "functional_" ]] && [[ ! ${TEST_TYPE} =~ "smoke_" ]] && 
   error "Unexpected <type>: ${TEST_TYPE}"
 fi
 
-if [[ ! ${CONFIGURATION} =~ "iphone-11pro" ]] && [[ ! ${CONFIGURATION} =~ "iphone-se-2" ]]; then
+if [[ ! ${CONFIGURATION} =~ "iphone-12pro" ]] && [[ ! ${CONFIGURATION} =~ "iphone-se-2" ]]; then
   error "Unexpected <configuration>: ${CONFIGURATION}"
 fi
 
-if [[ ${CONFIGURATION} =~ "iphone-11pro" ]]; then
-  CONFIGURATION="ios.sim.debug.iphone-11pro"
+if [[ ${CONFIGURATION} =~ "iphone-12pro" ]]; then
+  CONFIGURATION="ios.sim.debug.iphone-12pro"
 fi
 
 if [[ ${CONFIGURATION} =~ "iphone-se-2" ]]; then

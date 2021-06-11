@@ -29,7 +29,8 @@ var _swipeUntilVisible = async function (desiredLabel, direction) {
             await expect(desiredLabel).toBeVisible();
             labelVisible = true;
         } catch (err) {
-            await match.TopScrollableView().swipe(direction, 'slow', 0.2);
+            let topScrollableView = await match.TopScrollableView();
+            await topScrollableView.swipe(direction, 'slow', 0.2);
             ++timesSwiped;
         }
     }
@@ -106,7 +107,8 @@ const action = {
         await _swipeUntilVisible(desiredLabel, 'down');
     },
     async SwipeDown() {
-        await match.TopScrollableView().swipe('down', 'fast', 0.8);
+        let topScrollableView = await match.TopScrollableView();
+        await topScrollableView.swipe('down', 'fast', 0.8);
     },
 };
 

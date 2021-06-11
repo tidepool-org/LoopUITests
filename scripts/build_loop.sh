@@ -44,6 +44,10 @@ else
   cd ..
 fi
 
+## Allow insecure connections for testing
+/usr/libexec/PlistBuddy -c "Add :NSAppTransportSecurity dict" LoopWorkspace/Loop/Loop/Info.plist
+/usr/libexec/PlistBuddy -c "Add :NSAppTransportSecurity:NSAllowsArbitraryLoads bool true" LoopWorkspace/Loop/Loop/Info.plist
+
 LoopWorkspace/Scripts/workspace-prepare.sh Tidepool
 
 ## LoopOverride.xcconfig with no `CRITICAL_ALERTS_ENABLED`
