@@ -39,7 +39,12 @@ class EntryScreen extends base.Screen {
     return match.Label(text);
   }
   async OpenPicker(value) {
-    await match.Label(String(value)).tap();
+    try {
+      await match.Label(String(value)).toBeVisible();
+      await match.Label(String(value)).tap()
+    } catch (e) {
+      await match.Label(String(value)).tap({"x":20,"y":20})
+    }
   }
 }
 

@@ -65,7 +65,7 @@ module.exports = (test) => {
                     });
                 });
                 it('can save and authenticate', async () => {
-                    await correctionRangeScreen.SaveButton.tap();
+                    await correctionRangeScreen.SaveButton.tap({"x":20,"y":20});
                     await correctionRangeScreen.Authenticate();
                 });
             });

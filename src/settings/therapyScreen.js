@@ -159,7 +159,7 @@ module.exports = class TherapyScreen extends base.Screen {
     return this._insulinSensitivitiesScreen.InfoLabel;
   }
   async ReturnToHomeScreen() {
-    await this.BackButton.tap();
+    await this.CloseModal();
     await match.accessible.Button(this.generalText.Done).tap();
   }
   async OpenInsulinSensitivitiesScreen() {
