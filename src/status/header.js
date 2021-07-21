@@ -115,7 +115,7 @@ class Header {
   }
   async ExpectClosedLoopGreenAlert() {
     await this.Loop();
-    await expect(match.Label(this._language.statusScreen.HUD.ClosedLoopGreen)).toBeVisible();
+    await expect(match.Label(this._language.statusScreen.HUD.ClosedLoopGreen)).toExist();
     await match.accessible.Button(this._language.general.Dismiss).tap();
   }
 }
