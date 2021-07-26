@@ -22,7 +22,7 @@ module.exports = (test) => {
                 });
             });
             it(description.GuardrailIcon, async () => {
-                await expect(screen.GuardrailWarningIconPicker).toBeVisible();
+                await expect(screen.GuardrailWarningIconPicker).toExist();
             });
             it(description.GuardrailMessage, async () => {
                 await expect(screen.LowMaxBasalRateGuardrailMessage).toBeVisible();
@@ -50,7 +50,7 @@ module.exports = (test) => {
                 });
             });
             it(description.GuardrailIcon, async () => {
-                await expect(screen.GuardrailWarningIconPicker).toBeVisible();
+                await expect(screen.GuardrailWarningIconPicker).toExist();
             });
             it(description.GuardrailMessage, async () => {
                 await expect(screen.HighMaxBasalRateGuardrailMessage).toBeVisible();
@@ -90,7 +90,7 @@ module.exports = (test) => {
                 });
             });
             it(description.GuardrailIcon, async () => {
-                await expect(screen.GuardrailWarningIconPicker).toBeVisible();
+                await expect(screen.GuardrailWarningIconPicker).toExist();
             });
             it(description.GuardrailMessage, async () => {
                 await expect(screen.HighBolusAmountGuardrailMessage).toBeVisible();
