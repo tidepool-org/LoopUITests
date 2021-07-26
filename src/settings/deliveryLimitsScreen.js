@@ -51,10 +51,10 @@ class DeliveryLimitsScreen extends base.EntryScreen {
     );
   }
   async OpenBasalRatePicker() {
-    await this.MaxBasalRateLabel.tap();
+    await this.MaxBasalRateLabel.tap({"x":20,"y":20});
   }
   async OpenBolusPicker() {
-    await this.MaxBolusLabel.tap();
+    await this.MaxBolusLabel.tap({"x":20,"y":20});
   }
   /**
    * @param {Object} bolus

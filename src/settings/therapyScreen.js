@@ -96,7 +96,7 @@ module.exports = class TherapyScreen extends base.Screen {
    * @override
    */
   get BackButton() {
-    return match.accessible.Button(this.generalText.Done).atIndex(0);
+    return match.accessible.Button(this.generalText.Done).atIndex(1);
   }
   get GlucoseSafetyLimitLabel() {
     return this._glucoseSafetyLimitScreen.OpenButton;
@@ -159,7 +159,8 @@ module.exports = class TherapyScreen extends base.Screen {
     return this._insulinSensitivitiesScreen.InfoLabel;
   }
   async ReturnToHomeScreen() {
-    await this.BackButton.tap();
+    // tapping coordinates by-passes visibility check
+    await this.BackButton.tap({"x":20,"y":20});
     await match.accessible.Button(this.generalText.Done).tap();
   }
   async OpenInsulinSensitivitiesScreen() {

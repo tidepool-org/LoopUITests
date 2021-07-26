@@ -19,7 +19,7 @@ module.exports = (test) => {
             });
         });
         it(description.GuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toExist();
         });
         it(description.GuardrailMessage, async () => {
             await expect(screen.LowCarbRatioGuardrailMessage).toBeVisible();
@@ -33,7 +33,7 @@ module.exports = (test) => {
             });
         });
         it(description.GuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toExist();
         });
         it(description.GuardrailMessage, async () => {
             await expect(screen.LowCarbRatioGuardrailMessage).toBeVisible();
@@ -75,7 +75,7 @@ module.exports = (test) => {
             });
         });
         it(description.GuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toExist();
         });
         it(description.GuardrailMessage, async () => {
             await expect(screen.HighCarbRatioGuardrailMessage).toBeVisible();
@@ -89,7 +89,7 @@ module.exports = (test) => {
             });
         });
         it(description.GuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toExist();
         });
         it(description.GuardrailMessage, async () => {
             await expect(screen.HighCarbRatioGuardrailMessage).toBeVisible();

@@ -6,9 +6,6 @@ var _nextPickerStep = function (currentValue, expectedValue) {
     let current = Number(currentValue);
     let expected = Number(expectedValue);
     let step = 1;
-    if (Math.abs(current - expected) >= 2) {
-        step = 2;
-    }
     if (current > expected) {
         return current - step;
     } else if (current < expected) {
@@ -52,9 +49,9 @@ const action = {
             currentValue = _nextPickerStep(currentValue, expectedValue);
             if (isMinValue) {
                 try {
-                    await match.accessible.PickerItem(`${currentValue}`).atIndex(2).tap();
-                } catch (err) {
                     await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();
+                } catch (err) {
+                    await match.accessible.PickerItem(`${currentValue}`).atIndex(2).tap();
                 }
             } else {
                 await match.accessible.PickerItem(`${currentValue}`).atIndex(1).tap();

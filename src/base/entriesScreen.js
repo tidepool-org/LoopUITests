@@ -17,7 +17,7 @@ class EntriesScreen extends entry.Screen {
   GuardrailWarningIconPicker(entry) {
     let scheduleItemMask = `schedule_item_${entry.index}`;
     return match.accessible.ImageAndId(
-      this.generalText.Alert.ExclamationMark,
+      this.generalText.Alert.Warning,
       scheduleItemMask
     );
   }

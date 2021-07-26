@@ -19,6 +19,7 @@ var General = {
     InfoCircle: "info",
   },
   Alert: {
+    Warning: "warning",
     ExclamationMark: "exclamationmark.triangle.fill",
     MissingCarbEffects: "Missing Data: Carb Effects",
     MissingInsulinEffects: "Missing Data: Insulin Effects",

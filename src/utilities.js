@@ -60,7 +60,7 @@ module.exports = class Utilities {
     let carbEntryScreen = await this._testApp.OpenCarbEntryScreen();
     await carbEntryScreen.SetCarbs(carbohydratesAmount);
     let bolusScreen = await carbEntryScreen.ContinueToBolus();
-    await bolusScreen.SaveAndDeliverButton.tap();
+    await bolusScreen.SaveAndDeliverButton.tap({"x":20,"y":20});
     await bolusScreen.Authenticate();
   }
   async addCarbohydrates(carbohydratesAmount) {
