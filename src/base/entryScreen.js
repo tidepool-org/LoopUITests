@@ -29,7 +29,7 @@ class EntryScreen extends base.Screen {
   }
   get GuardrailWarningIconPicker() {
     return match.accessible
-      .Image(this.generalText.Alert.ExclamationMark)
+      .Image(this.generalText.Alert.Warning)
       .atIndex(0);
   }
   get CancelNewEntryButton() {

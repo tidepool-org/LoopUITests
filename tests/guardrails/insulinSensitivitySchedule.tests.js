@@ -18,7 +18,7 @@ module.exports = (test) => {
             });
         });
         it(description.GuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toExist();
         });
         it(description.GuardrailMessage, async () => {
             await expect(screen.LowInsulinSensitivityGuardrailMessage).toBeVisible();
@@ -32,7 +32,7 @@ module.exports = (test) => {
             });
         });
         it(description.GuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toExist();
         });
         it(description.GuardrailMessage, async () => {
             await expect(screen.LowInsulinSensitivityGuardrailMessage).toBeVisible();
@@ -74,7 +74,7 @@ module.exports = (test) => {
             });
         });
         it(description.GuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toExist();
         });
         it(description.GuardrailMessage, async () => {
             await expect(screen.HighInsulinSensitivityGuardrailMessage).toBeVisible();
@@ -89,7 +89,7 @@ module.exports = (test) => {
             });
         });
         it(description.GuardrailIcon, async () => {
-            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toBeVisible();
+            await expect(screen.GuardrailWarningIconPicker({ index: 0 })).toExist();
         });
         it(description.GuardrailMessage, async () => {
             await expect(screen.HighInsulinSensitivityGuardrailMessage).toBeVisible();
