@@ -1,7 +1,6 @@
-const action = require("../action");
-const match = require("../match");
-const base = require("../base/index");
-const _numericPartsFromString = require("./utils").numericPartsFromString;
+const action = require('../action');
+const base = require('../base/index');
+const _numericPartsFromString = require('./utils').numericPartsFromString;
 
 class BasalRatesScreen extends base.EntriesScreen {
   constructor(language, config) {
@@ -17,13 +16,14 @@ class BasalRatesScreen extends base.EntriesScreen {
           backLabel: language.backLabel,
         },
       },
-      config
+      config,
     );
     this.unitsLabel = language.screenText.Units;
   }
+
   get NoBasalInsulinGuardrailMessage() {
     return this.GuardrailMessage(
-      this.screenText.NoBasalInsulinGuardrailMessage
+      this.screenText.NoBasalInsulinGuardrailMessage,
     );
   }
 
@@ -44,9 +44,10 @@ class BasalRatesScreen extends base.EntriesScreen {
     }
     await action.ScrollDecimalPicker(
       currentValue,
-      Number(expectedParts[wholePart])
+      Number(expectedParts[wholePart]),
     );
   }
+
   /**
    * @param {Array} rates
    */
@@ -55,22 +56,6 @@ class BasalRatesScreen extends base.EntriesScreen {
   }
 }
 
-var screenTests = async function (testData) {
-  describe("Basal Rates Screen", () => {
-    let screen;
-    var openScreen = async function () {
-      let therapySettingsScreen = testData.app.TherapySettingsScreen;
-      screen = await therapySettingsScreen.OpenBasalRateScreen();
-      return screen;
-    };
-    base.entriesTests({
-      openScreenFunc: openScreen,
-      checkEditing: testData.checkEditing,
-    });
-  });
-};
-
 module.exports = {
   Screen: BasalRatesScreen,
-  tests: screenTests,
 };
