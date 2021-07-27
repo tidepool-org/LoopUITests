@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-const StatusScreen = require("./status/index").Screen;
-const { screenName } = require("./properties");
-const Utilities = require("./utilities");
+const StatusScreen = require('./status/index').Screen;
+const { screenName } = require('./properties');
+const Utilities = require('./utilities');
 
 async function _warmup(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
@@ -55,12 +55,14 @@ class Test {
     this._startScreen = screenName.status;
     return this;
   }
+
   async _setupCGMData() {
     if (this._cgmData) {
       let cgmScreen = await this.OpenCGMScreen();
       await cgmScreen.Apply(this._cgmData);
     }
   }
+
   async _setStartScreen() {
     if (this._startScreen) {
       switch (this._startScreen) {
@@ -78,16 +80,18 @@ class Test {
       }
     }
   }
+
   async _launchLoop() {
-    let loopAppPermissions = { notifications: "YES", health: "YES" };
+    let loopAppPermissions = { notifications: 'YES', health: 'YES' };
     let biometricEnrollment = false;
     if (this._authenticate) {
       biometricEnrollment = true;
-      loopAppPermissions.faceid = "YES";
+      loopAppPermissions.faceid = 'YES';
     }
-    await device.launchApp({ permissions: loopAppPermissions,launchArgs: {detoxDebugVisibility: "YES"} });
+    await device.launchApp({ permissions: loopAppPermissions, launchArgs: { detoxDebugVisibility: 'YES' } });
     await device.setBiometricEnrollment(biometricEnrollment);
   }
+
   _filterSettings(values, types) {
     const filtered = values;
     if (types) {
@@ -97,12 +101,13 @@ class Test {
     }
     return filtered;
   }
+
   async prepare() {
     if (!this._language) {
-      throw "language is required!";
+      throw 'language is required!';
     }
     if (!this._screenDefaults) {
-      throw "screenDefaults are required!";
+      throw 'screenDefaults are required!';
     }
     this.statusScreen = new StatusScreen(this._language, this._screenDefaults);
     this.LoopUtilities = new Utilities(this);
@@ -119,15 +124,18 @@ class Test {
     await this._setLoopMode();
     await this._setStartScreen();
   }
+
   async closeAndRelaunch() {
     await device.sendToHome();
     await device.launchApp({ newInstance: false });
   }
+
   async _setLoopMode() {
     if (this._closedLoop) {
       await this.LoopUtilities.closeLoop();
     }
   }
+
   async _setSimulators() {
     if (this._simulators) {
       if (this._simulators.cgm) {
@@ -139,51 +147,65 @@ class Test {
       }
     }
   }
+
   async _holdForWarmup() {
     if (this._warmupPeriod) {
       await _warmup(this._warmupPeriod.milliseconds);
     }
   }
+
   getLimitsForSetting(settingType) {
     return this._limits[settingType];
   }
+
   async OpenPumpScreen() {
     let screen = await this.statusScreen.HeaderSection.Devices.OpenPumpScreen();
     return screen;
   }
+
   async OpenCGMScreen() {
     let screen = await this.statusScreen.HeaderSection.Devices.OpenCGMScreen();
     return screen;
   }
+
   async OpenSettingsScreen() {
     return this.statusScreen.OpenSettingsScreen();
   }
+
   get SettingsScreen() {
     return this.statusScreen.SettingsScreen;
   }
+
   async OpenTherapySettingsScreen() {
     let settings = await this.OpenSettingsScreen();
     return settings.OpenTherapySettings();
   }
-  get TherapySettingsScreen(){
+
+  get TherapySettingsScreen() {
     return this.SettingsScreen.TherapySettingsScreen;
   }
+
   async OpenCarbEntryScreen() {
     return this.statusScreen.OpenCarbEntryScreen(this.LoopUtilities.inClosedLoopMode);
   }
+
   async OpenBolusScreen() {
     return this.statusScreen.OpenBolusScreen(this.LoopUtilities.inClosedLoopMode);
   }
+
   async OpenCustomPresetScreen() {
     return this.statusScreen.OpenCustomPresetScreen();
   }
+
   async OpenStatusScreen() {
     return this.statusScreen;
   }
+
   get CGMData() {
     return this._cgmData;
   }
-  get inClosedLoopMode(){
+
+  get inClosedLoopMode() {
     return this.LoopUtilities.inClosedLoopMode;
   }
 }
