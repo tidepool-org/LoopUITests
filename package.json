@@ -14,7 +14,7 @@
     "jest": "25.5.4",
     "jest-html-reporters": "2.1.0",
     "jest-junit": "10.0.0",
-    "detox-recorder": "^1.0.151"
+    "detox-recorder": "1.0.151"
   },
   "detox": {
     "artifacts": {
