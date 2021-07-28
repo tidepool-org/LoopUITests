@@ -1,6 +1,6 @@
-const action = require("../action");
-const match = require("../match");
-const base = require("../base/index");
+const action = require('../action');
+const match = require('../match');
+const base = require('../base/index');
 
 class CorrectionRangeScreen extends base.EntriesScreen {
   constructor(language, config) {
@@ -16,19 +16,22 @@ class CorrectionRangeScreen extends base.EntriesScreen {
           label: language.screenText.Header,
         },
       },
-      config
+      config,
     );
   }
+
   get LowCorrectionValueGuardrailMessage() {
     return this.GuardrailMessage(
-      this.screenText.LowCorrectionValueGuardrailMessage
+      this.screenText.LowCorrectionValueGuardrailMessage,
     );
   }
+
   get HighCorrectionValueGuardrailMessage() {
     return this.GuardrailMessage(
-      this.screenText.HighCorrectionValueGuardrailMessage
+      this.screenText.HighCorrectionValueGuardrailMessage,
     );
   }
+
   /**
    * @param {Object} range
    * @param {Object} range.expected
@@ -48,6 +51,7 @@ class CorrectionRangeScreen extends base.EntriesScreen {
     await action.ScrollMaxMinPicker(currentMax, range.expected.max, false);
     await action.ScrollMaxMinPicker(currentMin, range.expected.min, true);
   }
+
   /**
    * @param {Array} ranges
    */
@@ -63,27 +67,11 @@ class CorrectionRangeScreen extends base.EntriesScreen {
       await this.AddButton.tap();
     }
   }
+
   async SetPickerTime(value) {
     await match.accessible.PickerLabel(value).atIndex(1).tap();
   }
 }
-
-var screenTests = function (testData) {
-  describe("Correction Range Screen", () => {
-    let screen;
-    var openScreen = async function () {
-      let therapySettingsScreen = testData.app.TherapySettingsScreen;
-      screen = await therapySettingsScreen.OpenCorrectionRangeScreen();
-      return screen;
-    };
-    base.entriesTests({
-      openScreenFunc: openScreen,
-      checkEditing: testData.checkEditing,
-    });
-  });
-};
-
 module.exports = {
   Screen: CorrectionRangeScreen,
-  tests: screenTests,
 };

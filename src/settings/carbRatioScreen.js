@@ -1,7 +1,6 @@
-const action = require("../action");
-const match = require("../match");
-const base = require("../base/index");
-const _numericPartsFromString = require("./utils").numericPartsFromString;
+const action = require('../action');
+const base = require('../base/index');
+const _numericPartsFromString = require('./utils').numericPartsFromString;
 
 class CarbRatioScreen extends base.EntriesScreen {
   constructor(language, config) {
@@ -17,15 +16,18 @@ class CarbRatioScreen extends base.EntriesScreen {
           backLabel: language.backLabel,
         },
       },
-      config
+      config,
     );
   }
+
   get HighCarbRatioGuardrailMessage() {
     return this.GuardrailMessage(this.screenText.HighCarbRatioGuardrailMessage);
   }
+
   get LowCarbRatioGuardrailMessage() {
     return this.GuardrailMessage(this.screenText.LowCarbRatioGuardrailMessage);
   }
+
   /**
    * @param {Object} ratio
    * @param {Object} ratio.expected
@@ -36,20 +38,21 @@ class CarbRatioScreen extends base.EntriesScreen {
   async ApplyOne(ratio) {
     const wholePart = 0;
     let expectedParts = _numericPartsFromString(
-      ratio.expected.carbGramsPerInsulinUnit
+      ratio.expected.carbGramsPerInsulinUnit,
     );
     let currentValue = this.config.startWhole;
     if (ratio.current) {
       let currentParts = _numericPartsFromString(
-        ratio.current.carbGramsPerInsulinUnit
+        ratio.current.carbGramsPerInsulinUnit,
       );
       currentValue = Number(currentParts[wholePart]);
     }
     await action.ScrollDecimalPicker(
       currentValue,
-      Number(expectedParts[wholePart])
+      Number(expectedParts[wholePart]),
     );
   }
+
   /**
    * @param {Array} ratios
    */
@@ -67,22 +70,6 @@ class CarbRatioScreen extends base.EntriesScreen {
   }
 }
 
-var screenTests = function (testData) {
-  describe("Carb Ratio Screen", () => {
-    let screen;
-    var openScreen = async function () {
-      let therapySettingsScreen = testData.app.TherapySettingsScreen;
-      screen = await therapySettingsScreen.OpenCarbRatioScreen();
-      return screen;
-    };
-    base.entriesTests({
-      openScreenFunc: openScreen,
-      checkEditing: testData.checkEditing,
-    });
-  });
-};
-
 module.exports = {
   Screen: CarbRatioScreen,
-  tests: screenTests,
 };

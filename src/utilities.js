@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-const match = require("./match");
-const exec = require("child_process").exec;
+const exec = require('child_process').exec;
+const match = require('./match');
 
 module.exports = class Utilities {
   constructor(testApp) {
@@ -8,61 +8,68 @@ module.exports = class Utilities {
     this._language = testApp._language;
     this._looping = false;
   }
+
   async _loadDeviceScenariosFromDisk() {
     let deviceId = device.id;
     const _loadDeviceScenariosFromDiskShellScript = exec(
-      `${__dirname}/../scripts/load_scenarios.sh ${deviceId}`
+      `${__dirname}/../scripts/load_scenarios.sh ${deviceId}`,
     );
-    _loadDeviceScenariosFromDiskShellScript.stdout.on("data", () => {
-      return null;
-    });
-    _loadDeviceScenariosFromDiskShellScript.stderr.on("data", (data) => {
+    _loadDeviceScenariosFromDiskShellScript.stdout.on('data', () => null);
+    _loadDeviceScenariosFromDiskShellScript.stderr.on('data', (data) => {
       throw Error(data);
     });
   }
+
   async loadScenario(scenarioName) {
     await this._loadDeviceScenariosFromDisk();
     await device.shake();
     await expect(match.accessible.TextLabel(scenarioName)).toExist();
     await match.accessible.TextLabel(scenarioName).tap();
-    await match.accessible.ButtonBarButton("Load").tap();
+    await match.accessible.ButtonBarButton('Load').tap();
   }
+
   get inClosedLoopMode() {
     return this._looping;
   }
+
   async closeLoop() {
     let settingsScreen = await this._testApp.OpenSettingsScreen();
     await settingsScreen.ClosedLoop();
     this._looping = true;
     await settingsScreen.CloseModal();
   }
+
   async openLoop() {
     let settingsScreen = await this._testApp.OpenSettingsScreen();
     await settingsScreen.OpenLoop();
     this._looping = false;
     await settingsScreen.CloseModal();
   }
+
   async advanceScenario(scenarioName, cycles) {
     await device.shake();
     await expect(match.accessible.TextLabel(scenarioName)).toExist();
-    await match.accessible.TextLabel(scenarioName).swipe("left");
-    await match.accessible.SwipeButton("Advance ⏭").tap();
+    await match.accessible.TextLabel(scenarioName).swipe('left');
+    await match.accessible.SwipeButton('Advance ⏭').tap();
     await match.UITextField().typeText(cycles);
     await match.accessible.Button(this._language.general.OK).tap();
   }
+
   async deliverBolus(bolusUnits) {
     let bolusScreen = await this._testApp.OpenBolusScreen(this._looping);
     await bolusScreen.SetBolusAmount(bolusUnits);
     await bolusScreen.Deliver();
     await bolusScreen.Authenticate();
   }
+
   async addCarbohydratesAndDeliverBolus(carbohydratesAmount) {
     let carbEntryScreen = await this._testApp.OpenCarbEntryScreen();
     await carbEntryScreen.SetCarbs(carbohydratesAmount);
     let bolusScreen = await carbEntryScreen.ContinueToBolus();
-    await bolusScreen.SaveAndDeliverButton.tap({"x":20,"y":20});
+    await bolusScreen.SaveAndDeliverButton.tap({ x: 20, y: 20 });
     await bolusScreen.Authenticate();
   }
+
   async addCarbohydrates(carbohydratesAmount) {
     let carbEntryScreen = await this._testApp.OpenCarbEntryScreen();
     await carbEntryScreen.SetCarbs(carbohydratesAmount);
@@ -70,48 +77,55 @@ module.exports = class Utilities {
     await bolusScreen.SaveWithoutBolusButton.tap();
     await bolusScreen.Authenticate();
   }
+
   async updateInsulinReservoir(remainingUnits) {
     let pumpScreen = await this._testApp.OpenPumpScreen();
     await pumpScreen.Apply({ reservoirRemaining: remainingUnits });
     await pumpScreen.DoneButton.tap();
   }
+
   async updatePumpBattery(percentRemaining) {
     let pumpScreen = await this._testApp.OpenPumpScreen();
     await pumpScreen.Apply({ batteryRemaining: percentRemaining });
     await pumpScreen.BackButton.tap();
   }
+
   async loadTherapySettings() {
     await device.shake();
-    await match.accessible.Button("Mock Therapy Settings").tap();
+    await match.accessible.Button('Mock Therapy Settings').tap();
   }
+
   async addConfiguredPump() {
     await this.addUnconfiguredPump();
     await this.loadTherapySettings();
   }
+
   async addUnconfiguredPump() {
     let statusScreen = await this._testApp.OpenStatusScreen();
     await statusScreen.HeaderSection.Devices.AddPump();
   }
+
   async addCGM() {
     let statusScreen = await this._testApp.OpenStatusScreen();
     await statusScreen.HeaderSection.Devices.AddCGM();
   }
+
   async bypassTidepoolOnboarding() {
     // TODO figure out why hosting views make contained element not visible (and thus cannot tap)
     // step through the onboarding screens
-    for (var pageCount = 0; pageCount < 7; pageCount++) {
-      await expect(match.Label("Tidepool Loop Welcome, page " + (pageCount+1) + " of 7")).toBeVisible();
-      if (pageCount == 6) {
+    for (let pageCount = 0; pageCount < 7; pageCount++) {
+      await expect(match.Label(`Tidepool Loop Welcome, page ${pageCount + 1} of 7`)).toBeVisible();
+      if (pageCount === 6) {
         // last page has different button label
-        await match.accessible.Button("Finish").tap({"x":180,"y":25});
+        await match.accessible.Button('Finish').tap({ x: 180, y: 25 });
       } else {
-        await match.accessible.Button('Continue').tap({"x":180,"y":25}); 
+        await match.accessible.Button('Continue').tap({ x: 180, y: 25 });
       }
     }
 
     // by-pass the reminder of the onboarding
-    await expect(match.Label("Getting to Know Tidepool Loop").atIndex(0)).toBeVisible();
-    await match.Label("Getting to Know Tidepool Loop").longPress(4000)
-    await match.accessible.AlertButton("Yes").tap()
+    await expect(match.Label('Getting to Know Tidepool Loop').atIndex(0)).toBeVisible();
+    await match.Label('Getting to Know Tidepool Loop').longPress(4000);
+    await match.accessible.AlertButton('Yes').tap();
   }
 };

@@ -1,5 +1,5 @@
-const match = require("../match");
-const base = require("../base/index");
+const match = require('../match');
+const base = require('../base/index');
 
 class InsulinDeliveryScreen extends base.Screen {
   constructor(language) {
@@ -15,57 +15,28 @@ class InsulinDeliveryScreen extends base.Screen {
       },
     });
   }
-  //TODO: not accessible
+
   get Header() {
     return match.Label(this.screenText.Header);
   }
+
   get IOBLabel() {
     return match.Label(this.screenText.IOB);
   }
+
   get TotalLabel() {
     return match.Label(this.screenText.Total);
   }
+
   get EventHistoryLabel() {
     return match.Label(this.screenText.EventHistory).atIndex(0);
   }
+
   get ReservoirLabel() {
     return match.Label(this.screenText.Reservoir).atIndex(0);
   }
 }
 
-var _screenTests = function ({ app }) {
-  describe("Insulin Delivery Chart", () => {
-    let screen;
-    var openScreen = async function () {
-      let statusScreen = await app.OpenStatusScreen();
-      screen = await statusScreen.OpenInsulinDeliveryChart();
-      return screen;
-    };
-    base.screenTests({
-      openScreenFunc: openScreen,
-      skipClose: true,
-    });
-    describe("custom", () => {
-      it("has a IOB Label", async () => {
-        await expect(screen.IOBLabel).toBeVisible();
-      });
-      it("has a Total Label", async () => {
-        await expect(screen.TotalLabel).toBeVisible();
-      });
-      it("has an Event History Label", async () => {
-        await expect(screen.EventHistoryLabel).toBeVisible();
-      });
-      it("has a Reservoir Label", async () => {
-        await expect(screen.ReservoirLabel).toBeVisible();
-      });
-    });
-    it("can close", async () => {
-      await screen.BackButton.tap();
-    });
-  });
-};
-
 module.exports = {
   Screen: InsulinDeliveryScreen,
-  tests: _screenTests,
 };
