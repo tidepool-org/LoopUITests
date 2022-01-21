@@ -31,7 +31,7 @@
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 12 Pro",
-          "os": "iOS 14.5"
+          "os": "iOS 15.2"
         }
       },
       "ios.sim.debug.iphone-se-2": {
@@ -39,7 +39,7 @@
         "type": "ios.simulator",
         "device": {
           "type": "iPhone SE (2nd generation)",
-          "os": "iOS 14.5"
+          "os": "iOS 15.2"
         }
       }
     },
