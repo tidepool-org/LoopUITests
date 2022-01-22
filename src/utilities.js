@@ -20,9 +20,13 @@ module.exports = class Utilities {
     });
   }
 
+  async _bringUpDebugMenu() {
+      await device.shake();
+  }
+
   async loadScenario(scenarioName) {
     await this._loadDeviceScenariosFromDisk();
-    await device.shake();
+    await this._bringUpDebugMenu();
     await expect(match.accessible.TextLabel(scenarioName)).toExist();
     await match.accessible.TextLabel(scenarioName).tap();
     await match.accessible.ButtonBarButton('Load').tap();
@@ -47,7 +51,7 @@ module.exports = class Utilities {
   }
 
   async advanceScenario(scenarioName, cycles) {
-    await device.shake();
+    await this._bringUpDebugMenu();
     await expect(match.accessible.TextLabel(scenarioName)).toExist();
     await match.accessible.TextLabel(scenarioName).swipe('left');
     await match.accessible.SwipeButton('Advance ⏭').tap();
@@ -91,7 +95,7 @@ module.exports = class Utilities {
   }
 
   async loadTherapySettings() {
-    await device.shake();
+    await this._bringUpDebugMenu();
     await match.accessible.Button('Mock Therapy Settings').tap();
   }
 
@@ -111,21 +115,7 @@ module.exports = class Utilities {
   }
 
   async bypassTidepoolOnboarding() {
-    // TODO figure out why hosting views make contained element not visible (and thus cannot tap)
-    // step through the onboarding screens
-    for (let pageCount = 0; pageCount < 7; pageCount++) {
-      await expect(match.Label(`Tidepool Loop Welcome, page ${pageCount + 1} of 7`)).toBeVisible();
-      if (pageCount === 6) {
-        // last page has different button label
-        await match.accessible.Button('Finish').tap({ x: 180, y: 25 });
-      } else {
-        await match.accessible.Button('Continue').tap({ x: 180, y: 25 });
-      }
-    }
-
-    // by-pass the reminder of the onboarding
-    await expect(match.Label('Getting to Know Tidepool Loop').atIndex(0)).toBeVisible();
-    await match.Label('Getting to Know Tidepool Loop').longPress(4000);
+    await match.accessible.Image('Tidepool Loop Welcome, page 1 of 7').longPress(4000);
     await match.accessible.AlertButton('Yes').tap();
   }
 };
