@@ -78,9 +78,6 @@ describe('accessibility', () => {
     it('has an Event History Label', async () => {
       await expect(screen.EventHistoryLabel).toBeVisible();
     });
-    it('has a Reservoir Label', async () => {
-      await expect(screen.ReservoirLabel).toBeVisible();
-    });
     it('can close', async () => {
       await screen.BackButton.tap();
     });
@@ -123,9 +120,6 @@ describe('accessibility', () => {
     });
     it('has an Event History Label', async () => {
       await expect(screen.EventHistoryLabel).toBeVisible();
-    });
-    it('has a Reservoir Label', async () => {
-      await expect(screen.ReservoirLabel).toBeVisible();
     });
     it('can close', async () => {
       await screen.BackButton.tap();
