@@ -316,11 +316,11 @@ var SettingsScreen = {
     Header: 'Delivery Limits',
     Info:
       'Maximum basal rate is the highest temporary basal rate Loop is allowed to set automatically.\n\nMaximum bolus is the highest bolus amount you can deliver at one time to cover carbs or bring down high glucose.',
-    MaxBasalRate: 'Maximum Basal Rate',
+    MaxBasalRate: 'Maximum Basal Rate, 5, U⁠/⁠hr',
     MaxBasalRateInfo:
       'Maximum Basal Rate is the highest temporary basal rate Tidepool Loop is allowed to set automatically.',
     BasalRateUnits: General.InsulinUnitPerHourLabel,
-    MaxBolus: 'Maximum Bolus',
+    MaxBolus: 'Maximum Bolus, 10, U',
     MaxBolusInfo:
       'Maximum Bolus is the highest bolus amount you can deliver at one time to cover carbs or bring down high glucose.',
     BolusUnits: General.InsulinUnitLabel,
@@ -332,7 +332,7 @@ var SettingsScreen = {
   InsulinModelScreen: {
     Header: 'Insulin Model',
     Info:
-      'Tidepool Loop assumes insulin is actively working for 6 hours. You can choose from two different models for how the app measures the insulin’s peak activity.',
+      'For fast acting insulin, Tidepool Loop assumes it is actively working for 6 hours. You can choose from two different models for how the app measures the insulin’s peak activity.',
     Model: {
       RapidAdults: 'Rapid-Acting – Adults',
       RapidChildren: 'Rapid-Acting – Children',

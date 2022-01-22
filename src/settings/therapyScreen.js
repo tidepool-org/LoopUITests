@@ -212,7 +212,7 @@ module.exports = class TherapyScreen extends base.Screen {
   }
 
   async OpenDeliveryLimitsScreen() {
-    await this.SwipeUpUntilVisible(this.DeliveryLimitsMaxBolusLabel);
+    await this.SwipeUpUntilVisible(this.DeliveryLimitsLabel);
     // tapping coordinates by-passes visibility check
     await this.DeliveryLimitsLabel.tap({ x: 20, y: 20 });
     return this.DeliveryLimitsScreen;
