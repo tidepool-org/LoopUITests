@@ -8,13 +8,13 @@
     "lint": "eslint 'src/**'"
   },
   "devDependencies": {
+    "detox-recorder": "1.0.151",
     "eslint": "7.18.0",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-plugin-import": "2.22.1",
     "jest": "25.5.4",
     "jest-html-reporters": "2.1.0",
-    "jest-junit": "10.0.0",
-    "detox-recorder": "1.0.151"
+    "jest-junit": "10.0.0"
   },
   "detox": {
     "artifacts": {
@@ -31,7 +31,7 @@
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 12 Pro",
-          "os": "iOS 14.5"
+          "os": "iOS 15.2"
         }
       },
       "ios.sim.debug.iphone-se-2": {
@@ -39,13 +39,13 @@
         "type": "ios.simulator",
         "device": {
           "type": "iPhone SE (2nd generation)",
-          "os": "iOS 14.5"
+          "os": "iOS 15.2"
         }
       }
     },
     "test-runner": "jest"
   },
   "dependencies": {
-    "detox": "18.15.0"
+    "detox": "19.4.2"
   }
 }

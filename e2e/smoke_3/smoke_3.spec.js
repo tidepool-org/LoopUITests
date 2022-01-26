@@ -14,7 +14,7 @@ describe('application smoke test', () => {
       history: { name: cgmText.History.BackfillGlucose, backfillHours: 5 },
     };
   });
-  it('can install and initialise loop app', async () => {
+  it('can install and initialize loop app', async () => {
     test = test.setup({
       language: config.text,
       screenDefaults: config.screenDefaults,
