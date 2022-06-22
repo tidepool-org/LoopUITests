@@ -318,7 +318,7 @@ var SettingsScreen = {
       'Maximum basal rate is the highest temporary basal rate Loop is allowed to set automatically.\n\nMaximum bolus is the highest bolus amount you can deliver at one time to cover carbs or bring down high glucose.',
     MaxBasalRate: 'Maximum Basal Rate, 5, U⁠/⁠hr',
     MaxBasalRateInfo:
-      'Maximum Basal Rate is the highest temporary basal rate Tidepool Loop is allowed to set automatically.',
+      'Maximum Basal Rate is the highest temporary basal rate Tidepool Loop is allowed to set.',
     BasalRateUnits: General.InsulinUnitPerHourLabel,
     MaxBolus: 'Maximum Bolus, 10, U',
     MaxBolusInfo:
