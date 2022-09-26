@@ -26,19 +26,19 @@
       }
     },
     "configurations": {
-      "ios.sim.debug.iphone-12pro": {
+      "ios.sim.debug.iphone-13pro": {
         "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
         "type": "ios.simulator",
         "device": {
-          "type": "iPhone 12 Pro",
+          "type": "iPhone 13 Pro",
           "os": "iOS 15.5"
         }
       },
-      "ios.sim.debug.iphone-se-2": {
+      "ios.sim.debug.iphone-se-3": {
         "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
         "type": "ios.simulator",
         "device": {
-          "type": "iPhone SE (2nd generation)",
+          "type": "iPhone SE (3rd generation)",
           "os": "iOS 15.5"
         }
       }
