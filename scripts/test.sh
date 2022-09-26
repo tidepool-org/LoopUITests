@@ -46,16 +46,16 @@ if [[ ! ${TEST_TYPE} =~ "functional_" ]] && [[ ! ${TEST_TYPE} =~ "smoke_" ]] && 
   error "Unexpected <type>: ${TEST_TYPE}"
 fi
 
-if [[ ! ${CONFIGURATION} =~ "iphone-12pro" ]] && [[ ! ${CONFIGURATION} =~ "iphone-se-2" ]]; then
+if [[ ! ${CONFIGURATION} =~ "iphone-13pro" ]] && [[ ! ${CONFIGURATION} =~ "iphone-se-3" ]]; then
   error "Unexpected <configuration>: ${CONFIGURATION}"
 fi
 
-if [[ ${CONFIGURATION} =~ "iphone-12pro" ]]; then
-  CONFIGURATION="ios.sim.debug.iphone-12pro"
+if [[ ${CONFIGURATION} =~ "iphone-13pro" ]]; then
+  CONFIGURATION="ios.sim.debug.iphone-13pro"
 fi
 
-if [[ ${CONFIGURATION} =~ "iphone-se-2" ]]; then
-  CONFIGURATION="ios.sim.debug.iphone-se-2"
+if [[ ${CONFIGURATION} =~ "iphone-se-3" ]]; then
+  CONFIGURATION="ios.sim.debug.iphone-se-3"
 fi
 
 if [ "$(basename "${PWD}")" != "${LOOPUITEST_DIRECTORY}" ]; then
