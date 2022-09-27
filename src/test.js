@@ -114,6 +114,8 @@ class Test {
     await this._launchLoop();
     if (this._therapySettings) {
       await this.LoopUtilities.bypassTidepoolOnboarding();
+      var homeScreen = await this.OpenStatusScreen();
+      await waitFor(homeScreen.HeaderSection.LoopIcon).toBeVisible().withTimeout(5000);
       await this.LoopUtilities.loadTherapySettings();
     }
     await this._setSimulators();
