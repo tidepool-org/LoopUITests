@@ -38,7 +38,6 @@ describe('errors', () => {
     afterAll(async () => {
       cgmScreen = await test.OpenCGMScreen();
       await cgmScreen.Apply(test.CGMData);
-      await cgmScreen.DoneButton.tap();
     });
     it('dimiss signal loss alert', async () => {
       await waitFor(cgmScreen.Alert(cgmScreen.generalText.Dismiss)).toBeVisible().withTimeout(2000);
@@ -47,7 +46,7 @@ describe('errors', () => {
     });
     it('and check error shown on status screen', async () => {
       statusScreen = await test.OpenStatusScreen();
-      expect(statusScreen.HeaderSection.CGMSignalLossLabel).toBeVisible();
+      await expect(statusScreen.HeaderSection.CGMSignalLossLabel).toBeVisible();
     });
   });
   describe('immediate alert', () => {
@@ -68,7 +67,7 @@ describe('errors', () => {
     });
     it('and check error shown on status screen', async () => {
       let statusScreen = await test.OpenStatusScreen();
-      expect(statusScreen.HeaderSection.CGMAlertLabel).toBeVisible();
+      await expect(statusScreen.HeaderSection.CGMAlertLabel).toBeVisible();
     });
   });
 });

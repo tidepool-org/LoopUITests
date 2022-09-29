@@ -12,7 +12,7 @@
     "eslint": "7.18.0",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-plugin-import": "2.22.1",
-    "jest": "25.5.4",
+    "jest": "^28.1.3",
     "jest-html-reporters": "2.1.0",
     "jest-junit": "10.0.0"
   },
@@ -26,26 +26,26 @@
       }
     },
     "configurations": {
-      "ios.sim.debug.iphone-12pro": {
+      "ios.sim.debug.iphone-13pro": {
         "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
         "type": "ios.simulator",
         "device": {
-          "type": "iPhone 12 Pro",
-          "os": "iOS 15.2"
+          "type": "iPhone 13 Pro",
+          "os": "iOS 15.5"
         }
       },
-      "ios.sim.debug.iphone-se-2": {
+      "ios.sim.debug.iphone-se-3": {
         "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
         "type": "ios.simulator",
         "device": {
-          "type": "iPhone SE (2nd generation)",
-          "os": "iOS 15.2"
+          "type": "iPhone SE (3rd generation)",
+          "os": "iOS 15.5"
         }
       }
     },
     "test-runner": "jest"
   },
   "dependencies": {
-    "detox": "19.4.2"
+    "detox": "^19.12.1"
   }
 }
