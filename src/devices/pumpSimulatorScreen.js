@@ -112,6 +112,10 @@ class PumpSimulatorScreen extends base.Screen {
     await this.ApplyReservoirRemaining(settings.reservoirRemaining);
   }
 
+  async OpenPumpControls() {
+    await match.accessible.Image('Pump Simulator').longPress(7000);
+  }
+
   async SetErrorOnBolus(turnOn) {
     if (turnOn == null) {
       return;
@@ -195,7 +199,7 @@ class PumpSimulatorScreen extends base.Screen {
   }
 
   async _backToPumpSimulator() {
-    await match.accessible.ButtonBarButton(this.screenText.PumpSettings).tap();
+    await match.accessible.ButtonBarButton(this.generalText.Back).tap();
   }
 
   async _setValue(val) {
@@ -245,7 +249,11 @@ class PumpSimulatorScreen extends base.Screen {
   }
 
   get DoneButton() {
-    return match.accessible.ButtonBarButton(this.generalText.Done);
+    return match.accessible.Button(this.generalText.Done).atIndex(0);
+  }
+
+  get BackButton() {
+    return match.accessible.ButtonBarButton(this.generalText.Back);
   }
 }
 
