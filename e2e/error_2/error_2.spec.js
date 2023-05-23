@@ -33,6 +33,7 @@ describe('errors', () => {
     let statusScreen;
     beforeAll(async () => {
       pumpScreen = await test.OpenPumpScreen();
+      await pumpScreen.OpenPumpControls();
       await pumpScreen.Apply({ errorOnSuspend: true });
       await pumpScreen.SuspendDeliveryButton.tap();
     });
@@ -44,6 +45,7 @@ describe('errors', () => {
     });
     it('and reset error on suspend', async () => {
       await pumpScreen.Apply({ errorOnSuspend: false });
+      await pumpScreen.BackButton.tap();
       await pumpScreen.DoneButton.tap();
     });
     it('and check no error on status screen', async () => {
@@ -59,13 +61,17 @@ describe('errors', () => {
     let pumpScreen;
     beforeAll(async () => {
       pumpScreen = await test.OpenPumpScreen();
+      await pumpScreen.OpenPumpControls();
       await pumpScreen.CausePumpErrorButton.tap();
+      await pumpScreen.BackButton.tap();
       await pumpScreen.DoneButton.tap();
       statusScreen = await test.OpenStatusScreen();
     });
     afterAll(async () => {
       pumpScreen = await test.OpenPumpScreen();
+      await pumpScreen.OpenPumpControls();
       await pumpScreen.ResolvePumpErrorButton.tap();
+      await pumpScreen.BackButton.tap();
       await pumpScreen.DoneButton.tap();
     });
     it('and check error shown on status screen', async () => {
@@ -80,13 +86,17 @@ describe('errors', () => {
     let pumpScreen;
     beforeAll(async () => {
       pumpScreen = await test.OpenPumpScreen();
+      await pumpScreen.OpenPumpControls();
       await pumpScreen.DetectOcclusionButton.tap();
+      await pumpScreen.BackButton.tap();
       await pumpScreen.DoneButton.tap();
       statusScreen = await test.OpenStatusScreen();
     });
     afterAll(async () => {
       pumpScreen = await test.OpenPumpScreen();
+      await pumpScreen.OpenPumpControls();
       await pumpScreen.ResolveOcclusionButton.tap();
+      await pumpScreen.BackButton.tap();
       await pumpScreen.DoneButton.tap();
     });
     it('and check error shown on status screen', async () => {
