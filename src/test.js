@@ -59,6 +59,7 @@ class Test {
   async _setupCGMData() {
     if (this._cgmData) {
       let cgmScreen = await this.OpenCGMScreen();
+      await cgmScreen.OpenCGMControls();
       await cgmScreen.Apply(this._cgmData);
     }
   }

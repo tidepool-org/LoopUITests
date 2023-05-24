@@ -94,7 +94,11 @@ class CGMSimulatorScreen extends base.Screen {
   }
 
   get DoneButton() {
-    return match.accessible.ButtonBarButton(this.generalText.Done);
+    return match.accessible.Button(this.generalText.Done).atIndex(0);
+  }
+
+  get BackButton() {
+    return match.accessible.ButtonBarButton(this.generalText.Back);
   }
 
   /**
@@ -122,6 +126,10 @@ class CGMSimulatorScreen extends base.Screen {
     await this._setAlerts(settings.alert);
     // last as we have to 'Save' which will close the screen
     await this._setHistory(settings.history);
+  }
+
+  async OpenCGMControls() {
+    await match.accessible.Image('CGM Simulator').longPress(7000);
   }
 
   async _setEffect(effect) {
@@ -154,7 +162,7 @@ class CGMSimulatorScreen extends base.Screen {
       let constantField = match.UIEditableTextField();
       await constantField.clearText();
       await constantField.typeText(String(model.bgValues[0]));
-      await this._cgmSettingsButton.tap();
+      await match.accessible.ButtonBarButton(this.generalText.Back).tap();
     }
     if (model.name === modelText.SineCurve) {
       await this._sineCurveModelLabel.tap();
@@ -168,7 +176,7 @@ class CGMSimulatorScreen extends base.Screen {
       await amplitudeField.clearText();
       await amplitudeField.typeText(String(model.bgValues[1]));
       await match.accessible.ButtonBarButton(modelText.SineCurve).tap();
-      await this._cgmSettingsButton.tap();
+      await match.accessible.ButtonBarButton(this.generalText.Back).tap();
     }
     if (model.name === modelText.None) {
       await this._noDataModelLabel.tap();
