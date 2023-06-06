@@ -87,7 +87,7 @@ var Device = {
   AddPumpFull: 'Add Pump\nTap here to set up a pump',
   PumpStatus: 'Pump Status',
   CGMStatus: 'CGM Status',
-  PumpSimulator: 'Insulin Pump Simulator',
+  PumpSimulator: 'Pump Simulator',
   PumpSimulatorId: 'Simulator Small',
   CGMSimulator: 'CGM Simulator',
   Simulator: 'Simulator',
