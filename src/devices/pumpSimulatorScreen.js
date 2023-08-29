@@ -229,6 +229,7 @@ class PumpSimulatorScreen extends base.Screen {
       console.log('reservoir remaining units must be in the range of 0-200');
       return;
     }
+    await this.SwipeUpUntilVisible(this.ReservoirRemainingLabel);
     await this.ReservoirRemainingLabel.tap();
     await this._setValue(units);
     await this._backToPumpSimulator();
