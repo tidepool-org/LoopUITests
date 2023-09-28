@@ -23,7 +23,7 @@ var _swipeUntilVisible = async function (desiredLabel, direction) {
       throw new Error(`Swiped screen ${direction} maximum times, check setup as there may be an issue`);
     }
     try {
-      await expect(desiredLabel).toBeVisible();
+      await expect(desiredLabel).toBeVisible(100);
       labelVisible = true;
     } catch (err) {
       let topScrollableView = await match.TopScrollableView();
