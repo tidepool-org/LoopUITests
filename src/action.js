@@ -32,6 +32,10 @@ var _swipeUntilVisible = async function (desiredLabel, direction) {
     }
   }
   while (!labelVisible);
+
+  // Swipe up a little to account for home bar
+  let topScrollableView = await match.TopScrollableView();
+  await topScrollableView.swipe(direction, 'slow', 0.1);
 };
 
 const action = {
