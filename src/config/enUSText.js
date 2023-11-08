@@ -346,7 +346,7 @@ var SettingsScreen = {
     HighInsulinSensitivityGuardrailMessage: 'High Insulin Sensitivity',
   },
   PremealRangeScreen: {
-    Header: 'Pre-Meal Range',
+    Header: 'Pre-Meal Preset',
     Info:
       'Temporarily lower your glucose target before a meal to impact post-meal glucose spikes.',
   },
@@ -363,7 +363,7 @@ var SettingsScreen = {
     Info: 'Diabetes Treatment',
   },
   WorkoutRangeScreen: {
-    Header: 'Workout Range',
+    Header: 'Workout Preset',
     Info:
       'Temporarily raise your glucose target before, during, or after physical activity to reduce the risk of low glucose events.',
   },
