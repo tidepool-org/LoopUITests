@@ -47,7 +47,7 @@
     },
     "configurations": {
       "ios.sim.debug.iphone-15-pro": {
-        "device": "ios.simulator.iphone-15pro",
+        "device": "ios.simulator.iphone-15-pro",
         "app": "ios.debug"
       },
       "ios.sim.debug.iphone-se-3": {
