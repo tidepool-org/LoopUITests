@@ -30,8 +30,8 @@
         "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app",
         "type": "ios.simulator",
         "device": {
-          "type": "iPhone 13 Pro",
-          "os": "iOS 15.5"
+          "type": "iPhone 15 Pro",
+          "os": "iOS 17.2"
         }
       },
       "ios.sim.debug.iphone-se-3": {
@@ -39,7 +39,7 @@
         "type": "ios.simulator",
         "device": {
           "type": "iPhone SE (3rd generation)",
-          "os": "iOS 15.5"
+          "os": "iOS 17.2"
         }
       }
     },
