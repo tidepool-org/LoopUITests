@@ -46,6 +46,6 @@
     "test-runner": "jest"
   },
   "dependencies": {
-    "detox": "^19.12.1"
+    "detox": "^20.14.8"
   }
 }
