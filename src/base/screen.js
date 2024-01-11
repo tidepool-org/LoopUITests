@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const { device } = require('detox');
+const detox = require('detox');
 const match = require('../match');
 const action = require('../action');
 

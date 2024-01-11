@@ -16,47 +16,6 @@
     "jest-html-reporters": "2.1.0",
     "jest-junit": "10.0.0"
   },
-  "detox": {
-    "artifacts": {
-      "plugins": {
-        "uiHierarchy": "enabled",
-        "screenshot": {
-          "enabled": false
-        }
-      }
-    },
-    "apps": {
-      "ios.debug": {
-        "type": "ios.app",
-        "binaryPath": "build/Build/Products/Debug-iphonesimulator/Loop.app"
-      }
-    },
-    "devices": {
-      "ios.simulator.iphone-15-pro": {
-        "type": "ios.simulator",
-        "device": { 
-          "type": "iPhone 15 Pro"
-        }
-      },
-      "ios.simulator.iphone-se-3": {
-        "type": "ios.simulator",
-        "device": { 
-          "type": "iPhone SE (3rd generation)"
-        }
-      }
-    },
-    "configurations": {
-      "ios.sim.debug.iphone-15-pro": {
-        "device": "ios.simulator.iphone-15-pro",
-        "app": "ios.debug"
-      },
-      "ios.sim.debug.iphone-se-3": {
-        "device": "ios.simulator.iphone-se-3",
-        "app": "ios.debug"
-      }
-    },
-    "test-runner": "jest"
-  },
   "dependencies": {
     "detox": "^20.14.8"
   }
