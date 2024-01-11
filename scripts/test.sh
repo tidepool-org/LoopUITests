@@ -81,4 +81,4 @@ fi
 ln -sf "${BUILD_ROOT}" "build/Build"
 
 info "Running detox '${TEST_TYPE}' tests with configuration '${CONFIGURATION}'..."
-detox test e2e/${TEST_TYPE} --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup
+detox test e2e/${TEST_TYPE} --configuration "${CONFIGURATION}" --loglevel info --record-logs failing --bail --cleanup --headless
