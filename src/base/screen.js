@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-const detox = require('detox');
 const match = require('../match');
 const action = require('../action');
 
@@ -8,6 +7,7 @@ async function _sleep(time) {
 }
 
 function _deviceInfo() {
+  device.launchApp();
   let deviceName = device.name;
   if (deviceName.includes('iPhone SE')) {
     return {
