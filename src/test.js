@@ -83,7 +83,7 @@ class Test {
   }
 
   async _launchLoop() {
-    let loopAppPermissions = { notifications: 'YES', health: 'YES' };
+    let loopAppPermissions = { notifications: 'critical', health: 'YES' };
     let biometricEnrollment = false;
     if (this._authenticate) {
       biometricEnrollment = true;

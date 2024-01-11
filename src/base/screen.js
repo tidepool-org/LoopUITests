@@ -7,7 +7,6 @@ async function _sleep(time) {
 }
 
 function _deviceInfo() {
-  device.launchApp();
   let deviceName = device.name;
   if (deviceName.includes('iPhone SE')) {
     return {
