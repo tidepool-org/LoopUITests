@@ -20,7 +20,7 @@ module.exports = {
     'ios.simulator.iphone-15-pro': {
       type: 'ios.simulator',
       device: {
-        type: 'iPhone 15'
+        type: 'iPhone 15 Pro'
       }
     },
     'ios.simulator.iphone-se-3': {
